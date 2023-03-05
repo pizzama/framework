@@ -133,9 +133,9 @@ public class ExcelDataReader
             return;
         }
 
-        获取当前程序集
+        // 获取当前程序集
         //Assembly assembly = Assembly.GetExecutingAssembly();
-        创建类的实例，返回为 object 类型，需要强制类型转换，assembly.CreateInstance("类的完全限定名（即包括命名空间）");
+        // 创建类的实例，返回为 object 类型，需要强制类型转换，assembly.CreateInstance("类的完全限定名（即包括命名空间）");
         //object class0bj = assembly.CreateInstance(excelMediumData.excelName + "Assignment",true);
 
         //必须遍历所有程序集来获得类型。当前在Assembly-CSharp-Editor中，目标类型在Assembly-CSharp中，不同程序将无法获取类型
