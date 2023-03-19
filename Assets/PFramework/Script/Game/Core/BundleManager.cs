@@ -19,10 +19,10 @@ namespace PFramework
                 return _instance;
             }
         }
-        private Memory<string, string, IBundle> _bundleMap;
+        private PMemory<string, string, IBundle> _bundleMap;
         private void init()
         {
-            _bundleMap = new Memory<string, string, IBundle>();
+            _bundleMap = new PMemory<string, string, IBundle>();
         }
 
         public IBundle GetBundle(string name, string alias)

@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace PFramework
 {
-    public class Memory<T1, T2, T3>
+    public class PMemory<T1, T2, T3>
     {
         public Dictionary<T1, Dictionary<T2, T3>> values;
-        public Memory()
+        public PMemory()
         {
             values = new Dictionary<T1, Dictionary<T2, T3>>();
         }
