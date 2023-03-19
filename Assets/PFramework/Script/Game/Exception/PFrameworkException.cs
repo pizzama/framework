@@ -13,4 +13,15 @@ namespace PFramework
 
         }
     }
+
+    public class AlreadyHaveException : SystemException
+    {
+        /// <summary>
+        /// Not Found Exception
+        /// </summary>
+        public AlreadyHaveException(string message) : base(message)
+        {
+            
+        }
+    }
 }

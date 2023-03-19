@@ -3,8 +3,9 @@ namespace PFramework
     public interface IBundle
     {
         void Install();
-        void Open();
+
         void Uninstall();
+        void Open();
         void Refresh();
         void Close();
     }
