@@ -23,10 +23,11 @@ namespace PFramework
             _bundleMap = new Dictionary<String, IBundle>();
         }
 
-        public void AddBundle(string name, IBundle bundle)
+        public void AddBundle(IBundle bundle)
         {
             if(bundle == null)
-                throw new NotFoundException("bundle name not be null:" + name);
+                throw new NotFoundException("bundle name not be null");
+            string name = bundle.GetBundleName();
             IBundle value;
             _bundleMap.TryGetValue(name, out value);
             if(value != null)
@@ -34,21 +35,42 @@ namespace PFramework
             _bundleMap[name] = bundle;
         }
 
-        public void DeleteBundle(string name)
+        public IBundle DeleteBundle(string name)
         {
             IBundle value;
             _bundleMap.TryGetValue(name, out value);
             if(value != null)
                 _bundleMap.Remove(name);
+            return value;
         }
 
-        public void InstallBundle(string name, IBundle bundle)
+        public IBundle DeleteBundle(IBundle bundle)
         {
-            AddBundle(name, bundle);
+            return DeleteBundle(bundle.GetBundleName());
+        }
+
+        public void InstallBundle(IBundle bundle)
+        {
+            AddBundle(bundle);
             bundle.Open();
         }
 
+        public void UninstallBundle(string name)
+        {
+            IBundle value = DeleteBundle(name);
+            if (value != null)
+                value.Close();
+        }
 
+        public void UninstallBundle(IBundle bundle)
+        {
+            UninstallBundle(bundle.GetBundleName());
+        }
+
+        public List<IBundle> GetAllBundle()
+        {
+            return null;
+        }
         
     }
 }

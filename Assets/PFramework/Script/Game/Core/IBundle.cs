@@ -8,5 +8,7 @@ namespace PFramework
         void Open();
         void Refresh();
         void Close();
+
+        string GetBundleName();
     }
 }
