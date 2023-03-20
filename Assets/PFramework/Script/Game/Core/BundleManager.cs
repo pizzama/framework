@@ -25,6 +25,13 @@ namespace PFramework
             _bundleMap = new Dictionary<String, IBundle>();
         }
 
+        public IBundle GetBundle(string name)
+        {
+            IBundle value;
+            _bundleMap.TryGetValue(name, out value);
+            return value;
+        }
+
         public IBundle AddBundle(IBundle bundle)
         {
             if(bundle == null)
@@ -86,7 +93,8 @@ namespace PFramework
             string modelName = name + "Model";
             BundleManager manager =  BundleManager.Instance;
             Type tp = ObjectUtils.GetType(modelName);
-            Debug.Log(tp);
+            PModel pmodel = (PModel)Activator.CreateInstance(tp);
+            pmodel.Open();
         }
         
     }
