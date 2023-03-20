@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace PFramework
 {
-    public class MathUtils
+    public class MathTools
     {
         public static float Round(float value, int digits = 1)
         {

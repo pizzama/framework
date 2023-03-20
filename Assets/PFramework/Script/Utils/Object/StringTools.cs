@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace PFramework
 {
-    public class StringUtils
+    public class StringTools
     {
         // static string[] unitList = new string[] { "", "K", "M", "B", "T", "AA", "AB", "AC", "AD" };
         static string[] unitList = new string[] { "", "千", "百万", "十亿", "万亿", "百兆", "十京", "垓", "千垓" };
@@ -25,7 +25,7 @@ namespace PFramework
             }
             else
             {
-                tempNum = MathUtils.Round(tempNum, digit);
+                tempNum = MathTools.Round(tempNum, digit);
                 str = $"{tempNum}{unitList[unitIndex]}";
             }
             return str;

@@ -14,7 +14,9 @@ namespace PFramework
 
         public string GetBundleName()
         {
-            throw new NotImplementedException();
+            
+
+            return "";
         }
 
         public void Install()

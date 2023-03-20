@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace PUtils
 {
-    public class TimeUtils
+    public class TimeTools
     {
         /// <summary>
         /// 获取时间戳-单位秒
