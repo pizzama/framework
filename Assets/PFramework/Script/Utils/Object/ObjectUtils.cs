@@ -6,9 +6,9 @@ using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-namespace PUtils
+namespace PFramework
 {
-    public class ObjectTools
+    public class ObjectUtils
     {
         //you must be add Serializable tag on class which one you want to deepcopy
         public static T SerializableDeepCopy<T>(T obj)

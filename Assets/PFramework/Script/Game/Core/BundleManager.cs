@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
+
 namespace PFramework
 {
     public class BundleManager
@@ -77,6 +79,14 @@ namespace PFramework
             }
 
             return values;
+        }
+
+        public void OpenView(string name,  params object[] paramss)
+        {
+            string modelName = name + "Model";
+            BundleManager manager =  BundleManager.Instance;
+            Type tp = ObjectUtils.GetType(modelName);
+            Debug.Log(tp);
         }
         
     }

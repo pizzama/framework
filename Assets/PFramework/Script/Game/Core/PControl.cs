@@ -38,11 +38,5 @@ namespace PFramework
         {
             throw new NotImplementedException();
         }
-
-        public void OpenView(string name,  params object[] paramss)
-        {
-            string modelName = name + "Model";
-            BundleManager manager =  BundleManager.Instance;
-        }
     }
 }
