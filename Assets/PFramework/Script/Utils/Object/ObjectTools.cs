@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
@@ -24,39 +23,36 @@ namespace PUtils
             return (T)retval;
         }
 
-        // static string[] unitList = new string[] { "", "K", "M", "B", "T", "AA", "AB", "AC", "AD" };
-        static string[] unitList = new string[] { "", "千", "百万", "十亿", "万亿", "百兆", "十京", "垓", "千垓" };
-        public static string FormatCurrency(long num, int digit = 1)
+        public static Type GetType(string TypeName)
         {
-            float tempNum = num;
-            long v = 1000;//几位一个单位
-            int unitIndex = 0;
-            while (tempNum >= v)
+            var type = Type.GetType(TypeName);
+            if (type != null)
+                return type;
+
+            if (TypeName.Contains("."))
             {
-                unitIndex++;
-                tempNum /= v;
+                var assemblyName = TypeName.Substring(0, TypeName.IndexOf('.'));
+                var assembly = Assembly.Load(assemblyName);
+                if (assembly == null)
+                    return null;
+                type = assembly.GetType(TypeName);
+                if (type != null)
+                    return type;
             }
 
-            string str = "";
-            if (unitIndex >= unitList.Length)
+            var currentAssembly = Assembly.GetExecutingAssembly();
+            var referencedAssemblies = currentAssembly.GetReferencedAssemblies();
+            foreach (var assemblyName in referencedAssemblies)
             {
-                Debug.LogError("超出单位表中的最大单位");
-                str = num.ToString();
+                var assembly = Assembly.Load(assemblyName);
+                if (assembly != null)
+                {
+                    type = assembly.GetType(TypeName);
+                    if (type != null)
+                        return type;
+                }
             }
-            else
-            {
-                tempNum = Round(tempNum, digit);
-                str = $"{tempNum}{unitList[unitIndex]}";
-            }
-            return str;
-        }
-
-        public static float Round(float value, int digits = 1)
-        {
-            float multiple = Mathf.Pow(10, digits);
-            float tempValue = value * multiple + 0.5f;
-            tempValue = Mathf.FloorToInt(tempValue);
-            return tempValue / multiple;
+            return null;
         }
 
         public static List<T> GetRandomSequence<T>(T[] array, int count)
@@ -106,24 +102,6 @@ namespace PUtils
             return output;
         }
 
-        public static Vector2 ScreenToUILocalPos(RectTransform targetParentRect, Vector2 mousePos, Camera canvasCam = null)
-        {
-            //targetRect 目标物体，也就是ui物体
-            // Canvas 的RenderMode在Camera和World模式下，传入的camera为UI摄像机，在OverLay，camara参数应该传入null
-            Vector2 uiLocalPos;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(targetParentRect, mousePos, canvasCam, out uiLocalPos);
-            return uiLocalPos; //是当前物体的本地坐标
-        }
-
-        public static Vector3 ScreenToUIWorldPos(RectTransform targetParentRect, Vector2 mousePos, Camera canvasCam = null)
-        {
-            //targetRect 目标物体，也就是ui物体
-            // Canvas 的RenderMode在Camera和World模式下，传入的camera为UI摄像机，在OverLay，camara参数应该传入null
-            Vector3 worldPos;
-            RectTransformUtility.ScreenPointToWorldPointInRectangle(targetParentRect, mousePos, canvasCam, out worldPos);
-            return worldPos; //转换到世界坐标
-        }
-
         public static IEnumerator Shake(Transform baseTransform, float duration, float magnitude)
         {
             Vector3 originalPos = baseTransform.localPosition;
@@ -141,30 +119,6 @@ namespace PUtils
                 yield return null;
             }
             baseTransform.localPosition = originalPos;
-        }
-
-        //计算圆心半径求点
-        public static Vector2 CircularVecotr2(Vector2 center, float radius, float angle)
-        {
-            float x = center.x + radius * Mathf.Cos(angle * Mathf.Deg2Rad); //Mathf.PI / 180f
-            float y = center.y + radius * Mathf.Sin(angle * Mathf.Deg2Rad);
-            return new Vector2(x, y);
-        }
-
-        //计算椭圆半径求点, 分别是xradius, yradius 长短轴
-        public static Vector2 EllipseVector2(Vector2 center, float xradius, float yradius, float angle)
-        {
-            float x = center.x + xradius * Mathf.Cos(angle * Mathf.Deg2Rad);
-            float y = center.y + yradius * Mathf.Sin(angle * Mathf.Deg2Rad);
-            return new Vector2(x, y);
-        }
-
-        //计算双曲线, xradius, yradisu 实轴和虚轴
-        public static Vector2 HyperbolaVector2(float xradius, float yradisu, float angle)
-        {
-           float x =  xradius / Mathf.Cos(angle * Mathf.Deg2Rad);
-           float y = yradisu / Mathf.Tan(angle * Mathf.Deg2Rad);
-           return new Vector2(x, y);
         }
 
         public static T[] CombineArray<T>(T[] a, T[] b)
