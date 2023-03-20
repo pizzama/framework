@@ -19,16 +19,15 @@ namespace PFramework
                 return _instance;
             }
         }
-        private Dictionary<String, IBundle> _bundleMap;
+        private Memory<string, string, IBundle> _bundleMap;
         private void init()
         {
-            _bundleMap = new Dictionary<String, IBundle>();
+            _bundleMap = new Memory<string, string, IBundle>();
         }
 
         public IBundle GetBundle(string name)
         {
-            IBundle value;
-            _bundleMap.TryGetValue(name, out value);
+            IBundle value = _bundleMap.GetValue(name, name);
             return value;
         }
 
@@ -37,21 +36,13 @@ namespace PFramework
             if(bundle == null)
                 throw new NotFoundException("bundle name not be null");
             string name = bundle.GetBundleName();
-            IBundle value;
-            _bundleMap.TryGetValue(name, out value);
-            if(value != null)
-                throw new AlreadyHaveException("bundle name not be null:" + name);
-            _bundleMap[name] = bundle;
+            _bundleMap.SetValue(name, name, bundle);
             return bundle;
         }
 
         public IBundle DeleteBundle(string name)
         {
-            IBundle value;
-            _bundleMap.TryGetValue(name, out value);
-            if(value != null)
-                _bundleMap.Remove(name);
-            return value;
+            return _bundleMap.DeleteValue(name, name);
         }
 
         public IBundle DeleteBundle(IBundle bundle)
@@ -75,17 +66,6 @@ namespace PFramework
         public void UninstallBundle(IBundle bundle)
         {
             UninstallBundle(bundle.GetBundleName());
-        }
-
-        public List<IBundle> GetAllBundle()
-        {
-            List<IBundle> values = new List<IBundle>();
-            foreach (var item in _bundleMap)
-            {
-                values.Add(item.Value);
-            }
-
-            return values;
         }
 
         public void OpenView(string name,  params object[] paramss)

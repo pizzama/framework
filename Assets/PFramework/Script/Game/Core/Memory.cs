@@ -5,22 +5,46 @@ using System.Threading.Tasks;
 
 namespace PFramework
 {
-    public class Memory<T1, T2>
+    public class Memory<T1, T2, T3>
     {
-        public Dictionary<T1, Dictionary<T2, object>> values;
+        public Dictionary<T1, Dictionary<T2, T3>> values;
         public Memory()
         {
-            values = new Dictionary<T1, Dictionary<T2, object>>();
+            values = new Dictionary<T1, Dictionary<T2, T3>>();
         }
 
-        public object GetValue(T1 key1, T2 key2)
+        public T3 GetValue(T1 key1, T2 key2)
         {
-            
+            Dictionary<T2, T3> vv;
+            values.TryGetValue(key1, out vv);
+            T3 result;
+            vv.TryGetValue(key2, out result);
+            return result;
         }
 
-        public object SetValue(T1 key1, T2 key2, object value)
+        public void SetValue(T1 key1, T2 key2, T3 value)
         {
-            
+            Dictionary<T2, T3> vv;
+            values.TryGetValue(key1, out vv);
+            if(vv == null)
+            {
+                vv = new Dictionary<T2, T3>();
+            }
+            vv[key2] = value;
+        }
+
+        public T3 DeleteValue(T1 key1, T2 key2)
+        {
+            Dictionary<T2, T3> vv;
+            values.TryGetValue(key1, out vv);
+            T3 result = default;
+            if(vv != null)
+            {
+                vv.TryGetValue(key2, out result);
+                vv.Remove(key2);
+            }
+
+            return result;
         }
     }
 
