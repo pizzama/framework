@@ -33,7 +33,7 @@ namespace PFramework
 
         public static void PrefixClassName(string classPath, out string nameSpace, out string className)
         {
-            int index = classPath.IndexOf(".");
+            int index = classPath.LastIndexOf(".");
             if(index < 0)
             {
                 nameSpace = "";
@@ -42,7 +42,7 @@ namespace PFramework
             else
             {
                 nameSpace = classPath.Substring(0, index);
-                className = classPath.Substring(index, classPath.Length - 1);
+                className = classPath.Substring(index + 1, classPath.Length - index - 1);
             }
         }
     }

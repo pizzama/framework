@@ -55,7 +55,7 @@ namespace PFramework
             return null;
         }
 
-        public static T CreateInstance<T>(string assemblyName, string nameSpace, string className)
+        public static T CreateInstance<T>(string nameSpace, string className, string assemblyName = "Assembly-CSharp")
         {
             try
             {

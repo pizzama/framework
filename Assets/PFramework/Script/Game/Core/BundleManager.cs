@@ -81,13 +81,11 @@ namespace PFramework
             IBundle bd = manager.GetBundle(className, alias);
             if (bd == null)
             {
-                PModel pmodel = ObjectTools.CreateInstance<PModel>("", nameSpace, className);
+                PModel pmodel = ObjectTools.CreateInstance<PModel>(nameSpace, className);
                 if (pmodel == null)
-                    throw new NotFoundException($"class {nameSpace} {className} is miss!");
+                    throw new NotFoundException($"class {nameSpace}.{className} is miss!");
                 InstallBundle(pmodel, alias);
             }
-            
-
         }
         
     }
