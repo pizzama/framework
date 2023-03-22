@@ -18,8 +18,16 @@ namespace PFramework
             Dictionary<T2, T3> vv;
             values.TryGetValue(key1, out vv);
             T3 result;
-            vv.TryGetValue(key2, out result);
-            return result;
+            if(vv != null)
+            {
+                vv.TryGetValue(key2, out result);
+                return result;
+            }
+            else
+            {
+                return default;
+            }
+
         }
 
         public void SetValue(T1 key1, T2 key2, T3 value)

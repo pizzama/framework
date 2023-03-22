@@ -30,5 +30,20 @@ namespace PFramework
             }
             return str;
         }
+
+        public static void PrefixClassName(string classPath, out string nameSpace, out string className)
+        {
+            int index = classPath.IndexOf(".");
+            if(index < 0)
+            {
+                nameSpace = "";
+                className = classPath;
+            }
+            else
+            {
+                nameSpace = classPath.Substring(0, index);
+                className = classPath.Substring(index, classPath.Length - 1);
+            }
+        }
     }
 }
