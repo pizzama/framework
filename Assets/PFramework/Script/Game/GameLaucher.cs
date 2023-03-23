@@ -33,7 +33,7 @@ namespace PFramework
                 var uiroot = Object.Instantiate(uirootPrefab);
             }
 
-            BundleManager.Instance.OpenView("Game.Test");
+            BundleManager.Instance.OpenView("game.Test");
 
         }
 

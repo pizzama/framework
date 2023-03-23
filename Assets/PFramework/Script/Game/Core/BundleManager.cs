@@ -75,15 +75,16 @@ namespace PFramework
             string className;
             StringTools.PrefixClassName(classpath, out nameSpace, out className);
             string modelName = className + "Model";
+            string fullName = classpath + "Model";
             if (alias == "")
                 alias = className;
             BundleManager manager =  BundleManager.Instance;
-            IBundle bd = manager.GetBundle(className, alias);
+            IBundle bd = manager.GetBundle(modelName, alias);
             if (bd == null)
             {
-                PModel pmodel = ObjectTools.CreateInstance<PModel>(nameSpace, className);
+                PModel pmodel = ObjectTools.CreateInstance<PModel>(nameSpace, modelName);
                 if (pmodel == null)
-                    throw new NotFoundException($"class {nameSpace}.{className} is miss!");
+                    throw new NotFoundException($"class {nameSpace}.{modelName} is miss!");
                 InstallBundle(pmodel, alias);
             }
         }
