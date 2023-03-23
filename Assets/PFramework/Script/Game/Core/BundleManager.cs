@@ -68,25 +68,29 @@ namespace PFramework
             UninstallBundle(bundle.GetBundleName(), alias);
         }
 
-        public void OpenView(string classpath,  string alias="", params object[] paramss)
+        public void OpenControl(string classpath,  string alias="", params object[] paramss)
         {
-            //get prefix name
+            //fix control path
             string nameSpace;
             string className;
             StringTools.PrefixClassName(classpath, out nameSpace, out className);
-            string modelName = className + "Model";
-            string fullName = classpath + "Model";
+            string modelName = className;
             if (alias == "")
                 alias = className;
             BundleManager manager =  BundleManager.Instance;
-            IBundle bd = manager.GetBundle(modelName, alias);
+            IBundle bd = manager.GetBundle(classpath, alias);
             if (bd == null)
             {
-                PModel pmodel = ObjectTools.CreateInstance<PModel>(nameSpace, modelName);
-                if (pmodel == null)
+                PControl ctl = ObjectTools.CreateInstance<PControl>(nameSpace, modelName);
+                if (ctl == null)
                     throw new NotFoundException($"class {nameSpace}.{modelName} is miss!");
-                InstallBundle(pmodel, alias);
+                InstallBundle(ctl, alias);
             }
+            else
+            {
+                bd.Open();
+            }
+
         }
         
     }

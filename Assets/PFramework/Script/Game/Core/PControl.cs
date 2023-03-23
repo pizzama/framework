@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using UnityEngine;
 
 namespace PFramework
 {
@@ -16,12 +14,13 @@ namespace PFramework
 
         public string GetBundleName()
         {
-            throw new NotImplementedException();
+            Type classtype = this.GetType();
+            return classtype.FullName;
         }
 
         public void Install()
         {
-            throw new NotImplementedException();
+
         }
 
         public void Open()
