@@ -12,12 +12,7 @@ namespace PFramework
 
         public string GetBundleName()
         {
-            Type classtype = this.GetType();
-            return classtype.FullName;
-        }
-
-        public string GetClassName()
-        {
+            //return packagename and classname
             Type classtype = this.GetType();
             return classtype.FullName;
         }

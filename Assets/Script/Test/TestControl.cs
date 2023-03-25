@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-namespace PFramework
+using PFramework;
+namespace game
 {
-    public class PModel : PBundle
+    public class TestControl: PControl
     {
-
+        
     }
 }
