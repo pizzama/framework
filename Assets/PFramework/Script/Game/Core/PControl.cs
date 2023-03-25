@@ -42,7 +42,7 @@ namespace PFramework
 
         public void HandleModelCallback()
         {
-
+            _view.Open();
         }
 
         private T createBundle<T>(Type classtype, string name)
