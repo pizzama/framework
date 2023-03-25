@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PFramework
 {
-    public class PView
+    public class PView: PBundle
     {
         
     }
