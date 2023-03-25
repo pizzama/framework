@@ -16,15 +16,18 @@ namespace PFramework
         public override void Install()
         {
             Type classtype = this.GetType();
-            PModel mod = createBundle<PModel>(classtype, "Model");
-            mod.Install();
-            PView view = createBundle<PView>(classtype, "View");
-            view.Install();
+            _model = createBundle<PModel>(classtype, "Model");
+            _model.Control = this;
+            _model.Callback += HandleModelCallback;
+            _model.Install();
+            _view = createBundle<PView>(classtype, "View");
+            _view.Control = this;
+            _model.Install();
         }
 
         public override void Open()
         {
-            throw new NotImplementedException();
+            _model.Open();
         }
 
         public override void Refresh()
@@ -34,7 +37,12 @@ namespace PFramework
 
         public override void Uninstall()
         {
-            throw new NotImplementedException();
+            _model.Callback -= HandleModelCallback;
+        }
+
+        public void HandleModelCallback()
+        {
+
         }
 
         private T createBundle<T>(Type classtype, string name)
