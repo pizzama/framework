@@ -17,6 +17,16 @@ namespace PFramework
             return classtype.FullName;
         }
 
+        public void BroadcastMessage(PMessage message)
+        {
+            
+        }
+
+        public void HandleMessage(PMessage message)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual void Install()
         {
             throw new NotImplementedException();

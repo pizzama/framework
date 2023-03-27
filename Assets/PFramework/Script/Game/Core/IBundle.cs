@@ -10,5 +10,8 @@ namespace PFramework
         void Close();
 
         string GetBundleName();
+
+        void HandleMessage(PMessage message);
+        void BroadcastMessage(PMessage message);
     }
 }
