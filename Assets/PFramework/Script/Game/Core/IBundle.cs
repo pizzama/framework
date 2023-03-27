@@ -11,7 +11,7 @@ namespace PFramework
 
         string GetBundleName();
 
-        void HandleMessage(PMessage message);
-        void BroadcastMessage(PMessage message);
+        void HandleMessage(string messageId, object messageData, object messageSender);
+        void BroadcastMessage(string messageId, object messageData, object messageSender);
     }
 }
