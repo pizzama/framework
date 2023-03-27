@@ -40,6 +40,23 @@ namespace PFramework
             _model.Callback -= HandleModelCallback;
         }
 
+        public override void BroadcastMessage(string messageId, string nameSpace, string className, object messageData, string alias, object messageSender)
+        {
+            string bundleFullName = nameSpace + "." + className;
+            if (alias == "")
+                alias = className;
+            IBundle control =  BundleManager.Instance.GetBundle(bundleFullName, alias);
+            if (control != null)
+                control.HandleMessage(messageId, messageData, messageSender);
+            else
+                Debug.LogWarning($"not found broadcast target{nameSpace}.{className}");
+        }
+
+        public override void HandleMessage(string messageId, object messageData, object messageSender)
+        {
+            
+        }
+
         public void HandleModelCallback()
         {
             _view.Open();

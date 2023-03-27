@@ -17,12 +17,12 @@ namespace PFramework
             return classtype.FullName;
         }
 
-        public void BroadcastMessage(string messageId, object messageData, object messageSender)
+        public virtual void BroadcastMessage(string messageId, string nameSpace, string className, object messageData, string alias, object messageSender)
         {
-            
+            throw new NotImplementedException();
         }
 
-        public void HandleMessage(string messageId, object messageData, object messageSender)
+        public virtual void HandleMessage(string messageId, object messageData, object messageSender)
         {
             throw new NotImplementedException();
         }
