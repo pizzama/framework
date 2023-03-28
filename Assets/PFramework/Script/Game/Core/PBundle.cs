@@ -37,12 +37,22 @@ namespace PFramework
             throw new NotImplementedException();
         }
 
-        public virtual void Refresh()
+        public virtual void Uninstall()
         {
             throw new NotImplementedException();
         }
 
-        public virtual void Uninstall()
+        public virtual void Update()
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void FixUpdate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void LateUpdate()
         {
             throw new NotImplementedException();
         }

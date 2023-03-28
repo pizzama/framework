@@ -6,9 +6,10 @@ namespace PFramework
 
         void Uninstall();
         void Open();
-        void Refresh();
         void Close();
-
+        void Update();
+        void FixUpdate();
+        void LateUpdate();
         string GetBundleName();
 
         void HandleMessage(string messageId, object messageData, object messageSender);

@@ -43,6 +43,20 @@ namespace PFramework
             }
         }
 
+        private void Update()
+        {
+            
+        }
+
+        private void FixUpdate()
+        {
+
+        }
+
+        private void LateUpdate()
+        {
+
+        }
 
         private PMemory<string, string, IBundle> _bundleMap;
         private void init()

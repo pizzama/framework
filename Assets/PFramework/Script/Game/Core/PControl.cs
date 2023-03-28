@@ -7,6 +7,8 @@ namespace PFramework
     {
         private PModel _model;
         private PView _view;
+
+        public BundleManager Root;
         public override void Close()
         {
             throw new NotImplementedException();
@@ -30,7 +32,7 @@ namespace PFramework
             _model.Open();
         }
 
-        public override void Refresh()
+        public override void Update()
         {
             throw new NotImplementedException();
         }
