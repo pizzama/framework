@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PFramework
 {
-    public class BundleManager : MonoBehaviour
+    public class BundleManager : MonoBehaviour, IManager
     {
         private static BundleManager _instance;
         public static BundleManager Instance
@@ -45,7 +45,7 @@ namespace PFramework
 
         private void Update()
         {
-            
+
         }
 
         private void FixUpdate()
@@ -76,6 +76,7 @@ namespace PFramework
                 throw new NotFoundException("bundle name not be null");
             string name = bundle.GetBundleName();
             _bundleMap.SetValue(name, alias, bundle);
+            bundle.Manager = this;
             return bundle;
         }
 

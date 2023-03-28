@@ -5,6 +5,9 @@ namespace PFramework
 {
     public abstract class PBundle : IBundle
     {
+        private IManager _manager;
+        public IManager Manager { get => _manager; set => _manager = value; }
+
         public virtual void Close()
         {
             throw new NotImplementedException();
