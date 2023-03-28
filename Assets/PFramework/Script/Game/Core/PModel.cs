@@ -20,5 +20,9 @@ namespace PFramework
             //request data
             Callback?.Invoke();
         }
+
+        public override void Install()
+        {
+        }
     }
 }

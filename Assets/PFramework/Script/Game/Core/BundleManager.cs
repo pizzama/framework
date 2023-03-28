@@ -4,21 +4,46 @@ using UnityEngine;
 
 namespace PFramework
 {
-    public class BundleManager
+    public class BundleManager : MonoBehaviour
     {
         private static BundleManager _instance;
-        public static BundleManager Instance 
+        public static BundleManager Instance
         {
-            get 
+            get
             {
-                if(_instance == null)
-                {
-                    _instance = new BundleManager();
-                    _instance.init();
-                }
+                if (_instance != null) return _instance;
+                _instance = FindObjectOfType<BundleManager>();
+                if (_instance != null) return _instance;
+                var obj = new GameObject();
+                obj.name = "BundleManager";
+                _instance = obj.AddComponent<BundleManager>();
+                _instance.init();
                 return _instance;
             }
         }
+
+        protected virtual void Awake()
+        {
+            if (!Application.isPlaying)
+            {
+                return;
+            }
+
+            if (_instance == null)
+            {
+                _instance = this as BundleManager;
+                DontDestroyOnLoad(transform.gameObject);
+            }
+            else
+            {
+                if (this != _instance)
+                {
+                    Destroy(this.gameObject);
+                }
+            }
+        }
+
+
         private PMemory<string, string, IBundle> _bundleMap;
         private void init()
         {
@@ -33,7 +58,7 @@ namespace PFramework
 
         public IBundle AddBundle(IBundle bundle, string alias)
         {
-            if(bundle == null)
+            if (bundle == null)
                 throw new NotFoundException("bundle name not be null");
             string name = bundle.GetBundleName();
             _bundleMap.SetValue(name, alias, bundle);
@@ -68,7 +93,7 @@ namespace PFramework
             UninstallBundle(bundle.GetBundleName(), alias);
         }
 
-        public void OpenControl(string classpath,  string alias="", params object[] paramss)
+        public void OpenControl(string classpath, string alias = "", params object[] paramss)
         {
             //fix control path
             string nameSpace;
@@ -77,7 +102,7 @@ namespace PFramework
             string modelName = className;
             if (alias == "")
                 alias = className;
-            BundleManager manager =  BundleManager.Instance;
+            BundleManager manager = BundleManager.Instance;
             IBundle bd = manager.GetBundle(classpath, alias);
             if (bd == null)
             {
@@ -91,6 +116,6 @@ namespace PFramework
                 bd.Open();
             }
         }
-        
+
     }
 }
