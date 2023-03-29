@@ -45,17 +45,35 @@ namespace PFramework
 
         private void Update()
         {
-
+            foreach(KeyValuePair<string, Dictionary<string, IBundle>> result in _bundleMap)
+            {
+                foreach (KeyValuePair<string, IBundle> bundle in result.Value)
+                {
+                    bundle.Value.Update();
+                }
+            }
         }
 
         private void FixUpdate()
         {
-
+            foreach(KeyValuePair<string, Dictionary<string, IBundle>> result in _bundleMap)
+            {
+                foreach (KeyValuePair<string, IBundle> bundle in result.Value)
+                {
+                    bundle.Value.FixUpdate();
+                }
+            }
         }
 
         private void LateUpdate()
         {
-
+            foreach(KeyValuePair<string, Dictionary<string, IBundle>> result in _bundleMap)
+            {
+                foreach (KeyValuePair<string, IBundle> bundle in result.Value)
+                {
+                    bundle.Value.LateUpdate();
+                }
+            }
         }
 
         private PMemory<string, string, IBundle> _bundleMap;

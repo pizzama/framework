@@ -47,17 +47,17 @@ namespace PFramework
 
         public virtual void Update()
         {
-            throw new NotImplementedException();
+           
         }
 
         public virtual void FixUpdate()
         {
-            throw new NotImplementedException();
+            
         }
 
         public virtual void LateUpdate()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
