@@ -35,6 +35,8 @@ namespace PFramework
 
             BundleManager.Instance.OpenControl("game.TestControl");
 
+            BundleManager.Instance.InstallBundle(new game.TestControl());
+
         }
 
         private void Update()

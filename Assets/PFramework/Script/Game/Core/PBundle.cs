@@ -8,16 +8,21 @@ namespace PFramework
         private IManager _manager;
         public IManager Manager { get => _manager; set => _manager = value; }
 
+        public string _aliasName;
+        public string AliasName { get => _aliasName; set => _aliasName = value; }
+
         public virtual void Close()
         {
             throw new NotImplementedException();
         }
 
-        public string GetBundleName()
+        public void GetBundleName(out string fullName, out string nameSpace, out string className)
         {
             //return packagename and classname
             Type classtype = this.GetType();
-            return classtype.FullName;
+            fullName = classtype.FullName;
+            nameSpace = classtype.Namespace;
+            className = classtype.Name;
         }
 
         public virtual void BroadcastMessage(string messageId, string nameSpace, string className, object messageData, string alias, object messageSender)

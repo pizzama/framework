@@ -92,7 +92,13 @@ namespace PFramework
         {
             if (bundle == null)
                 throw new NotFoundException("bundle name not be null");
-            string name = bundle.GetBundleName();
+            string fullName;
+            string className;
+            string nameSpace;
+            bundle.GetBundleName(out fullName, out nameSpace, out className);
+            if (alias == "")
+                alias = className;
+            bundle.AliasName = alias;
             _bundleMap.SetValue(name, alias, bundle);
             bundle.Manager = this;
             return bundle;
@@ -103,12 +109,17 @@ namespace PFramework
             return _bundleMap.DeleteValue(name, alias);
         }
 
-        public IBundle DeleteBundle(IBundle bundle, string alias)
+        public IBundle DeleteBundle(IBundle bundle)
         {
-            return DeleteBundle(bundle.GetBundleName(), alias);
+            string fullName;
+            string className;
+            string nameSpace;
+            bundle.GetBundleName(out fullName, out nameSpace, out className);
+
+            return DeleteBundle(fullName, bundle.AliasName);
         }
 
-        public void InstallBundle(IBundle bundle, string alias)
+        public void InstallBundle(IBundle bundle, string alias="")
         {
             IBundle value = AddBundle(bundle, alias);
             value.Install();
@@ -121,9 +132,13 @@ namespace PFramework
                 value.Uninstall();
         }
 
-        public void UninstallBundle(IBundle bundle, string alias)
+        public void UninstallBundle(IBundle bundle)
         {
-            UninstallBundle(bundle.GetBundleName(), alias);
+            string fullName;
+            string className;
+            string nameSpace;
+            bundle.GetBundleName(out fullName, out nameSpace, out className);
+            UninstallBundle(fullName, bundle.AliasName);
         }
 
         public void OpenControl(string classpath, string alias = "", params object[] paramss)
