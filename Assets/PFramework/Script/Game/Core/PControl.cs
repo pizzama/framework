@@ -8,7 +8,6 @@ namespace PFramework
         private PModel _model;
         private PView _view;
 
-        public BundleManager Root;
         public override void Close()
         {
             throw new NotImplementedException();
