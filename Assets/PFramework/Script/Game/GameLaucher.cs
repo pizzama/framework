@@ -33,7 +33,7 @@ namespace PFramework
                 var uiroot = Object.Instantiate(uirootPrefab);
             }
 
-            BundleManager.Instance.OpenControl("game.TestControl");
+            // BundleManager.Instance.OpenControl("game.TestControl");
 
             BundleManager.Instance.InstallBundle(new game.TestControl());
 
