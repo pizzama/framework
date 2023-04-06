@@ -5,7 +5,6 @@ namespace PFrameWork
 {
     public sealed class ABInfo:System.IDisposable
     {
-        private ABManifest _manifest;
         private AssetBundle _assetBundle;
         private string _bundleName;
         private string _assetName;
