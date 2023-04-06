@@ -29,6 +29,11 @@ namespace PFrameWork
             _allBundles = null;
         }
 
+        public void LoadAssetBundleManifest(string path)
+        {
+            
+        }
+
         public void LoadAssetBundleManifest(byte[] bytes)
         {
             _mainBundle = AssetBundle.LoadFromMemory(bytes);
