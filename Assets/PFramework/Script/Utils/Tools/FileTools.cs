@@ -123,7 +123,6 @@ namespace PFramework
             webRequest.Dispose();
 
             yield return result;
-
         }
 
         /// <summary>
