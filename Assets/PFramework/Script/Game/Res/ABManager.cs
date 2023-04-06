@@ -1,11 +1,10 @@
-using System.Net.Mime;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 
 namespace PFramework
 {
-    public class ABManager: MonoBehaviour
+    public partial class ABManager: MonoBehaviour
     {
         private static ABManager _instance;
         public static ABManager Instance
