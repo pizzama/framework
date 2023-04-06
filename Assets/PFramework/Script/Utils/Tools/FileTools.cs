@@ -6,25 +6,10 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-using UnityEngine.Networking;
-/*
-File Tools
-//test
-//    StartCoroutine(FileManager.LoadXML(FilePathDef.configPath, test));
-//void test()
-//{
-//    XmlDocument configXml = FileManager.getXmlDocument(FilePathDef.configPath);
-//    string sever_ip = XmlManager.readXmlValueBykey(configXml, "sever_ip");
-//    int post = int.Parse(XmlManager.readXmlValueBykey(configXml, "post"));
-//    Singleton<TcpClient>.getSingleton().addListener(this);
-//    Singleton<TcpClient>.getSingleton().connect(sever_ip, post);
-//    m_path = sever_ip + post;
-//}
-*/
 
 namespace PFramework
 {
-    public class FileTools
+    public partial class FileTools
     {
         public delegate void CommonPopDelegate();
         //pc
@@ -100,29 +85,6 @@ namespace PFramework
             {
                 Debug.LogError("saveFile failed:" + e.ToString());
             }
-        }
-
-        public static IEnumerator LoadFileAsync(string path)
-        {
-            UnityWebRequest webRequest = UnityWebRequest.Get(path);
-            webRequest.SendWebRequest();
-            while (!webRequest.isDone)
-            {
-                if (webRequest.result == UnityWebRequest.Result.ConnectionError)
-                {
-                    break;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(webRequest.error))
-            {
-                throw new Exception($"you use Web Request Error.{path} Message{webRequest.error}");
-            }
-
-            var result = webRequest.downloadHandler.data;
-            webRequest.Dispose();
-
-            yield return result;
         }
 
         /// <summary>
