@@ -11,15 +11,15 @@ namespace PFrameWork
     {
         private readonly Dictionary<string, string[]> _cacheDependencies = new Dictionary<string, string[]>();
         private AssetBundleManifest _manifest;
-        private AssetBundle _assetBundle;
+        private AssetBundle _mainBundle;
         private List<string> _allBundleVariants;
         private List<string> _allBundles;
         public void Dispose()
         {
-            if (_assetBundle != null)
+            if (_mainBundle != null)
             {
-                _assetBundle.Unload(true);
-                _assetBundle = null;
+                _mainBundle.Unload(true);
+                _mainBundle = null;
             }
 
             _cacheDependencies.Clear();
@@ -31,19 +31,13 @@ namespace PFrameWork
 
         public void LoadAssetBundleManifest(byte[] bytes)
         {
-#if UNITY_EDITOR
-            if (ResourcesServiceImpl.SimulationInEditor)
-            {
-                return;
-            }
-#endif
-            _assetBundle = AssetBundle.LoadFromMemory(bytes);
-            if (_assetBundle == null)
+            _mainBundle = AssetBundle.LoadFromMemory(bytes);
+            if (_mainBundle == null)
             {
                 throw new Exception($"you load assetBundle is none. Manifest");
             }
 
-            _manifest = _assetBundle.LoadAsset("AssetBundleManifest") as AssetBundleManifest;
+            _manifest = _mainBundle.LoadAsset("AssetBundleManifest") as AssetBundleManifest;
             if (_manifest == null)
             {
                 throw new Exception($"you Manifest is none.");
@@ -56,10 +50,7 @@ namespace PFrameWork
         public bool ExistsBundleWithVariant(string bundleVariant)
         {
 #if UNITY_EDITOR
-            if (ResourcesServiceImpl.SimulationInEditor)
-            {
-                return AssetDatabase.GetAssetPathsFromAssetBundle(bundleVariant).Length != 0;
-            }
+            return AssetDatabase.GetAssetPathsFromAssetBundle(bundleVariant).Length != 0;
 #endif
             if (_allBundleVariants == null || _allBundleVariants.Count <= 0)
             {
@@ -72,10 +63,7 @@ namespace PFrameWork
         public bool ExistsBundle(string bundlePath)
         {
 #if UNITY_EDITOR
-            if (ResourcesServiceImpl.SimulationInEditor)
-            {
-                return AssetDatabase.GetAssetPathsFromAssetBundle(bundlePath).Length != 0;
-            }
+            return AssetDatabase.GetAssetPathsFromAssetBundle(bundlePath).Length != 0;
 #endif
             if (_allBundles == null || _allBundles.Count <= 0)
             {
@@ -103,21 +91,15 @@ namespace PFrameWork
                 return result;
             }
 #if UNITY_EDITOR
-            if (ResourcesServiceImpl.SimulationInEditor)
+            result = AssetDatabase.GetAssetBundleDependencies(bundleName, true);
+#else
+            if (_manifest == null)
             {
-                result = AssetDatabase.GetAssetBundleDependencies(bundleName, true);
+                return default;
             }
-            else
+
+            result = _manifest.GetAllDependencies(bundleName);
 #endif
-            {
-                if (_manifest == null)
-                {
-                    return default;
-                }
-
-                result = _manifest.GetAllDependencies(bundleName);
-            }
-
             _cacheDependencies[bundleName] = result;
             return result;
         }

@@ -1,9 +1,14 @@
-﻿namespace PFrameWork
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+namespace PFrameWork
 {
     public sealed class ABInfo:System.IDisposable
     {
         private ABManifest _manifest;
         private AssetBundle _assetBundle;
+        private string _bundleName;
+        private string _assetName;
 #if UNITY_EDITOR
         public long TotalSize { get; private set; }
 #endif
@@ -43,7 +48,7 @@
         }
 
 #if UNITY_EDITOR
-        public void SetAssetsSize(Dictionary<string, Dictionary<Type,Object>> assets)
+        public void SetAssetsSize(Dictionary<string, Dictionary<System.Type, Object>> assets)
         {
             if (assets == null)
             {
