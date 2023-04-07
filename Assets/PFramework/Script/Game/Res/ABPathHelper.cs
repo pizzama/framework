@@ -57,7 +57,7 @@ namespace PFrameWork
         // 资源路径，优先返回外存资源路径
         public static string GetResPathInPersistentOrStream(string relativePath)
         {
-            string resPersistentPath = string.Format("{0}{1}", PersistentDataPath4Res, relativePath);
+            string resPersistentPath = string.Format("{0}{1}", _persistentDataPathHotFixRes, relativePath);
             if (File.Exists(resPersistentPath))
             {
                 return resPersistentPath;
@@ -72,7 +72,6 @@ namespace PFrameWork
         private static string _persistentDataPath;
         private static string _streamingAssetsPath;
         private static string _persistentDataPathHotFixRes;
-        private static string _persistentDataPath4Photo;
 
         // 外部目录  
         public static string PersistentDataPath
@@ -113,28 +112,8 @@ namespace PFrameWork
             }
         }
 
-
-        // 外部头像缓存目录
-        public static string PersistentDataPath4Photo
-        {
-            get
-            {
-                if (null == _persistentDataPath4Photo)
-                {
-                    _persistentDataPath4Photo = PersistentDataPath + "Photos\\";
-
-                    if (!Directory.Exists(_persistentDataPath4Photo))
-                    {
-                        Directory.CreateDirectory(_persistentDataPath4Photo);
-                    }
-                }
-
-                return _persistentDataPath4Photo;
-            }
-        }
-
         // 外部资源目录
-        public static string PersistentDataPath4Res
+        public static string PersistentDataPathHotFixRes
         {
             get
             {
