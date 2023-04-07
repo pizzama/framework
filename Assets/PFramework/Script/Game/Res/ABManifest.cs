@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace PFrameWork
+namespace PFramework
 {
     public class ABManifest : System.IDisposable
     {
@@ -29,7 +29,7 @@ namespace PFrameWork
             _allBundles = null;
         }
 
-        public void LoadAssetBundleManifest(string path)
+        public void LoadAssetBundleManifest()
         {
             
         }

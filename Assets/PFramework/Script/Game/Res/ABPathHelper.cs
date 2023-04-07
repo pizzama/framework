@@ -71,7 +71,7 @@ namespace PFrameWork
         
         private static string _persistentDataPath;
         private static string _streamingAssetsPath;
-        private static string _persistentDataPath4Res;
+        private static string _persistentDataPathHotFixRes;
         private static string _persistentDataPath4Photo;
 
         // 外部目录  
@@ -138,20 +138,20 @@ namespace PFrameWork
         {
             get
             {
-                if (null == _persistentDataPath4Res)
+                if (null == _persistentDataPathHotFixRes)
                 {
-                    _persistentDataPath4Res = PersistentDataPath + "Res/";
+                    _persistentDataPathHotFixRes = PersistentDataPath + "Res/";
 
-                    if (!Directory.Exists(_persistentDataPath4Res))
+                    if (!Directory.Exists(_persistentDataPathHotFixRes))
                     {
-                        Directory.CreateDirectory(_persistentDataPath4Res);
+                        Directory.CreateDirectory(_persistentDataPathHotFixRes);
 #if UNITY_IPHONE && !UNITY_EDITOR
-						UnityEngine.iOS.Device.SetNoBackupFlag(_persistentDataPath4Res);
+						UnityEngine.iOS.Device.SetNoBackupFlag(_persistentDataPathHotFixRes);
 #endif
                     }
                 }
 
-                return _persistentDataPath4Res;
+                return _persistentDataPathHotFixRes;
             }
         }
         public static string GetPlatformName()
