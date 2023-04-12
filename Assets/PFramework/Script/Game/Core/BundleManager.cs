@@ -158,6 +158,7 @@ namespace PFramework
                 if (ctl == null)
                     throw new NotFoundException($"class {nameSpace}.{modelName} is miss!");
                 InstallBundle(ctl, alias);
+                ctl.Open();
             }
             else
             {
