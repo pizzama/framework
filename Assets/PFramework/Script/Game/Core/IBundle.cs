@@ -2,9 +2,13 @@ namespace PFramework
 {
     public interface IBundle
     {
+        //加载模块
         void Install();
+        //卸载模块
         void Uninstall();
         void Open();
+        void Enter();
+        void Exit();
         void Close();
         void Update();
         void FixUpdate();

@@ -64,5 +64,13 @@ namespace PFramework
         {
             
         }
+
+        public void Enter()
+        {
+        }
+
+        public void Exit()
+        {
+        }
     }
 }
