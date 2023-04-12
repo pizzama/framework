@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using UnityEngine.Networking;
 
 namespace PFramework
 {
@@ -17,12 +14,23 @@ namespace PFramework
         public DelegateModelCallback Callback;
         public override void Open()
         {
-            //request data
-            Callback?.Invoke();
+            // //request data
+            // Callback?.Invoke();
         }
 
         public override void Install()
         {
+            
+        }
+
+        public void GetData(string url, object pars)
+        {
+            UnityWebRequest req = UnityWebRequest.Get(url);
+        }
+
+        public void PostData(string url, object pars)
+        {
+            UnityWebRequest req = UnityWebRequest.Post(url, pars.ToString());
         }
     }
 }

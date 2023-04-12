@@ -23,12 +23,13 @@ namespace PFramework
             _model.Install();
             _view = createBundle<PView>(classtype, "View");
             _view.Control = this;
-            _model.Install();
+            _view.Install();
         }
 
         public override void Open()
         {
             _model.Open();
+            _model.Enter();
         }
 
         public override void Update()

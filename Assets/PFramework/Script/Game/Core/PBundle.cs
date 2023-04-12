@@ -65,11 +65,11 @@ namespace PFramework
             
         }
 
-        public void Enter()
+        public virtual void Enter()
         {
         }
 
-        public void Exit()
+        public virtual void Exit()
         {
         }
     }
