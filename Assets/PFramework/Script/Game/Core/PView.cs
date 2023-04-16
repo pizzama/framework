@@ -13,9 +13,5 @@ namespace PFramework
             set { _control = value; }
             get { return _control; }
         }
-
-        public override void Install()
-        {
-        }
     }
 }

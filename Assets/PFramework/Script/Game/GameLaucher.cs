@@ -15,28 +15,12 @@ namespace PFramework
         {
             //Hold GameLauncher all the time
             DontDestroyOnLoad(transform.gameObject);
-            initUI();
+            initFrameworkBundle();
         }
 
-        private void initUI()
+        private void initFrameworkBundle()
         {
-            //Init root UI
-            const string uiname = "PUIROOT";
-            bool hasUI = GameObject.Find(uiname);
-            if (!hasUI)
-            {
-                var uirootPrefab = Resources.Load<GameObject>(uiname);
-                if(!uirootPrefab)
-                {
-                    throw new NotFoundException(uiname);
-                }
-                var uiroot = Object.Instantiate(uirootPrefab);
-            }
-
-            // BundleManager.Instance.OpenControl("game.TestControl");
-
-            BundleManager.Instance.InstallBundle(new game.TestControl());
-
+            BundleManager.Instance.InstallBundle(new RootUIControl());
         }
 
         private void Update()

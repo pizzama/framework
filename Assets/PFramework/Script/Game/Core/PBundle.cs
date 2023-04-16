@@ -37,7 +37,6 @@ namespace PFramework
 
         public virtual void Install()
         {
-            throw new NotImplementedException();
         }
 
         public virtual void Open()
@@ -47,7 +46,6 @@ namespace PFramework
 
         public virtual void Uninstall()
         {
-            throw new NotImplementedException();
         }
 
         public virtual void Update()
