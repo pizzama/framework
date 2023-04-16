@@ -11,12 +11,13 @@ namespace PFramework
         {
             get
             {
-                if (_instance == null)
-                {
-                    _instance = new ABManager();
-                    DontDestroyOnLoad(_instance.gameObject);
-                    _instance.init();
-                }
+                if (_instance != null) return _instance;
+                _instance = FindObjectOfType<ABManager>();
+                if (_instance != null) return _instance;
+                var obj = new GameObject();
+                obj.name = "ABManager";
+                _instance = obj.AddComponent<ABManager>();
+                _instance.init();
                 return _instance;
             }
         }
