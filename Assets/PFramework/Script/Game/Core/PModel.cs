@@ -15,26 +15,36 @@ namespace PFramework
 
         public delegate void DelegateModelCallback();
         public DelegateModelCallback ModelCallback;
-        public override void Open()
-        {
-
-        }
 
         public override void Install()
         {
 
         }
 
-        public async UniTask<byte[]> GetData(string url, object pars)
+        public async UniTask<byte[]> GetData(string url)
         {
+            if (url == "")
+            {
+                ModelCallback?.Invoke();
+                return null;
+            }
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
-            return await requestData(webRequest);
+            byte[] bytes = await requestData(webRequest);
+            ModelCallback?.Invoke();
+            return bytes;
         }
 
         public async UniTask<byte[]> PostData(string url, object pars)
         {
+            if (url == "")
+            {
+                ModelCallback?.Invoke();
+                return null;
+            }
             UnityWebRequest webRequest = UnityWebRequest.Post(url, pars.ToString());
-            return await requestData(webRequest);
+            byte[] bytes = await requestData(webRequest);
+            ModelCallback?.Invoke();
+            return bytes;
         }
 
         private async UniTask<byte[]> requestData(UnityWebRequest webRequest)

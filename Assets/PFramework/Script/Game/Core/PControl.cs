@@ -31,11 +31,6 @@ namespace PFramework
             _model.Open();
         }
 
-        public override void Update()
-        {
-            throw new NotImplementedException();
-        }
-
         public override void Uninstall()
         {
             _model.ModelCallback -= HandleModelCallback;
