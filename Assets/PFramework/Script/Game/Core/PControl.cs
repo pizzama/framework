@@ -19,7 +19,7 @@ namespace PFramework
             Type classtype = this.GetType();
             _model = createBundle<PModel>(classtype, "Model");
             _model.Control = this;
-            _model.Callback += HandleModelCallback;
+            _model.ModelCallback += HandleModelCallback;
             _model.Install();
             _view = createBundle<PView>(classtype, "View");
             _view.Control = this;
@@ -29,7 +29,6 @@ namespace PFramework
         public override void Open()
         {
             _model.Open();
-            _model.Enter();
         }
 
         public override void Update()
@@ -39,7 +38,7 @@ namespace PFramework
 
         public override void Uninstall()
         {
-            _model.Callback -= HandleModelCallback;
+            _model.ModelCallback -= HandleModelCallback;
         }
 
         public override void BroadcastMessage(string messageId, string nameSpace, string className, object messageData, string alias, object messageSender)
