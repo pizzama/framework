@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
-using PFramework;
 
-namespace PFrameWork
+namespace PFramework
 {
     public partial class ABManager : MonoBehaviour
     {

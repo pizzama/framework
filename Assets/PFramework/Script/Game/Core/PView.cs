@@ -13,5 +13,11 @@ namespace PFramework
             set { _control = value; }
             get { return _control; }
         }
+        protected ABManager abManager;
+
+        public override void Install()
+        {
+            abManager = ABManager.Instance;
+        }
     }
 }

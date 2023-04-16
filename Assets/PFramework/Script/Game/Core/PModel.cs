@@ -16,11 +16,6 @@ namespace PFramework
         public delegate void DelegateModelCallback();
         public DelegateModelCallback ModelCallback;
 
-        public override void Install()
-        {
-
-        }
-
         public async UniTask<byte[]> GetData(string url)
         {
             if (url == "")
