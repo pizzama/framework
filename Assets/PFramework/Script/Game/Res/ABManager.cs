@@ -170,8 +170,6 @@ namespace PFrameWork
             finishLoadObjectHandler(abr.asset as T);
         }
 
-
-        //====================AB包的两种卸载方式=================
         //单个包卸载
         public void UnLoad(string abName)
         {
@@ -191,8 +189,6 @@ namespace PFrameWork
             _abCache.Clear();
             _manifest.Dispose();
         }
-
-
     }
 
 }

@@ -31,14 +31,13 @@ namespace PFramework
 
         public void LoadAssetBundleManifest()
         {
-
+#if !UNITY_EDITOR
+        
+#endif
         }
 
         public void LoadAssetBundleManifest(byte[] bytes)
         {
-#if UNITY_EDITOR
-            return;
-#endif
             _mainBundle = AssetBundle.LoadFromMemory(bytes);
             if (_mainBundle == null)
             {
