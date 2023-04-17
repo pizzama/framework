@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using PFramework;
 
-namespace PFramework
+namespace PFrameWork
 {
     public partial class ABManager : MonoBehaviour
     {
@@ -26,40 +27,9 @@ namespace PFramework
         {
             _abCache = new Dictionary<string, AssetBundle>();
             _manifest = new ABManifest(); //主包的Bundle和依赖关系
+            _manifest.LoadAssetBundleManifest();
         }
 
-        private AssetBundle _mainAB = null;  //main abbundle
-        private AssetBundleManifest _mainManifest = null; // main config get refrence
-
-        //各个平台下的基础路径 --- 利用宏判断当前平台下的streamingAssets路径
-        private string basePath
-        {
-            get
-            {
-                //使用StreamingAssets路径注意AB包打包时 勾选copy to streamingAssets
-#if UNITY_EDITOR || UNITY_STANDALONE
-                return Application.dataPath + "/StreamingAssets/";
-#elif UNITY_IPHONE
-                return Application.dataPath + "/Raw/";
-#elif UNITY_ANDROID
-                return Application.dataPath + "!/assets/";
-#endif
-            }
-        }
-        //各个平台下的主包名称 --- 用以加载主包获取依赖信息
-        private string mainABName
-        {
-            get
-            {
-#if UNITY_EDITOR || UNITY_STANDALONE
-                return "StandaloneWindows";
-#elif UNITY_IPHONE
-                return "IOS";
-#elif UNITY_ANDROID
-                return "Android";
-#endif
-            }
-        }
 
         protected void Init()
         {
@@ -67,38 +37,29 @@ namespace PFramework
             _abCache = new Dictionary<string, AssetBundle>();
         }
 
-
         //加载AB包
         private AssetBundle LoadABPackage(string abName)
         {
             AssetBundle ab;
-            //加载ab包，需一并加载其依赖包。
-            if (_mainAB == null)
-            {
-                //根据各个平台下的基础路径和主包名加载主包
-                _mainAB = AssetBundle.LoadFromFile(basePath + mainABName);
-                //获取主包下的AssetBundleManifest资源文件（存有依赖信息）
-                _mainManifest = _mainAB.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
-            }
             //根据manifest获取所有依赖包的名称 固定API
-            string[] dependencies = _mainManifest.GetAllDependencies(abName);
+            string[] dependencies = _manifest.GetDependencies(abName);
             //循环加载所有依赖包
             for (int i = 0; i < dependencies.Length; i++)
             {
-                //如果不在缓存则加入
+                //如果不在缓存则加入,防止重复加载
                 if (!_abCache.ContainsKey(dependencies[i]))
                 {
-                    //根据依赖包名称进行加载
-                    ab = AssetBundle.LoadFromFile(basePath + dependencies[i]);
+                    //先加载外部地址在加载内部地址
+                    ab = AssetBundle.LoadFromFile(ABPathHelper.GetResPathInPersistentOrStream(dependencies[i]));
                     //注意添加进缓存 防止重复加载AB包
                     _abCache.Add(dependencies[i], ab);
                 }
             }
-            //加载目标包 -- 同理注意缓存问题
+            //加载目标包
             if (_abCache.ContainsKey(abName)) return _abCache[abName];
             else
             {
-                ab = AssetBundle.LoadFromFile(basePath + abName);
+                ab = AssetBundle.LoadFromFile(ABPathHelper.GetResPathInPersistentOrStream(abName));
                 _abCache.Add(abName, ab);
                 return ab;
             }
@@ -228,8 +189,7 @@ namespace PFramework
             AssetBundle.UnloadAllAssetBundles(false);
             //注意清空缓存
             _abCache.Clear();
-            _mainAB = null;
-            _mainManifest = null;
+            _manifest.Dispose();
         }
 
 

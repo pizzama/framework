@@ -94,18 +94,7 @@ namespace PFrameWork
             {
                 if (null == _streamingAssetsPath)
                 {
-#if UNITY_IPHONE && !UNITY_EDITOR
-					_streamingAssetsPath = Application.streamingAssetsPath + "/";
-#elif UNITY_ANDROID && !UNITY_EDITOR
-					_streamingAssetsPath = Application.streamingAssetsPath + "/";
-#elif (UNITY_STANDALONE_WIN) && !UNITY_EDITOR
-					_streamingAssetsPath =
- Application.streamingAssetsPath + "/";//GetParentDir(Application.dataPath, 2) + "/BuildRes/";
-#elif UNITY_STANDALONE_OSX && !UNITY_EDITOR
-					_streamingAssetsPath = Application.streamingAssetsPath + "/";
-#else
                     _streamingAssetsPath = Application.streamingAssetsPath + "/";
-#endif
                 }
 
                 return _streamingAssetsPath;
@@ -167,38 +156,10 @@ namespace PFrameWork
                 default:
                     return null;
             }
-        }
-        
-        public static string[] GetAssetPathsFromAssetBundleAndAssetName(string abRAssetName, string assetName)
-        {
-#if UNITY_EDITOR
-            return AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(abRAssetName, assetName);
-#else
-            return null;
-#endif
-        }
-
-        public static Object LoadAssetAtPath(string assetPath, Type assetType)
-        {
-#if UNITY_EDITOR
-            return AssetDatabase.LoadAssetAtPath(assetPath, assetType);
-#else
-            return null;
-#endif
-        }
-
-        public static T LoadAssetAtPath<T>(string assetPath) where T : Object
-        {
-#if UNITY_EDITOR
-            return AssetDatabase.LoadAssetAtPath<T>(assetPath);
-#else
-            return null;
-#endif
-        }
+        }    
         
         
-        
-// 上一级目录
+        // 上一级目录
         public static string GetParentDir(string dir, int floor = 1)
         {
             string subDir = dir;

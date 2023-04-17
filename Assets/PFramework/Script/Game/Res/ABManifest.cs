@@ -31,11 +31,14 @@ namespace PFramework
 
         public void LoadAssetBundleManifest()
         {
-            
+
         }
 
         public void LoadAssetBundleManifest(byte[] bytes)
         {
+#if UNITY_EDITOR
+            return;
+#endif
             _mainBundle = AssetBundle.LoadFromMemory(bytes);
             if (_mainBundle == null)
             {
@@ -78,16 +81,6 @@ namespace PFramework
             return _allBundles.Contains(bundlePath);
         }
 
-
-        public string[] GetSortedDependencies(string bundleName)
-        {
-            Dictionary<string, int> info = new Dictionary<string, int>();
-            List<string> parents = new List<string>();
-            CollectDependencies(parents, bundleName, info);
-            string[] ss = info.OrderBy(x => x.Value).Select(x => x.Key).ToArray();
-            return ss;
-        }
-
         public string[] GetDependencies(string bundleName)
         {
             string[] result = default;
@@ -107,38 +100,6 @@ namespace PFramework
 #endif
             _cacheDependencies[bundleName] = result;
             return result;
-        }
-
-        private void CollectDependencies(List<string> parents, string assetBundleName, Dictionary<string, int> info)
-        {
-            parents.Add(assetBundleName);
-            string[] deps = GetDependencies(assetBundleName);
-            if (deps == default)
-            {
-                return;
-            }
-
-            foreach (string parent in parents)
-            {
-                if (!info.ContainsKey(parent))
-                {
-                    info[parent] = 0;
-                }
-
-                info[parent] += deps.Length;
-            }
-
-            foreach (string dep in deps)
-            {
-                if (parents.Contains(dep))
-                {
-                    throw new Exception($"包有循环依赖，请重新标记: {assetBundleName} {dep}");
-                }
-
-                CollectDependencies(parents, dep, info);
-            }
-
-            parents.RemoveAt(parents.Count - 1);
         }
     }
 
