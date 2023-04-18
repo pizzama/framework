@@ -28,7 +28,9 @@ namespace PFramework
 
         public override void Open()
         {
+            OpenAsync();
             _model.Open();
+            _model.OpenAsync();
         }
 
         public override void Uninstall()

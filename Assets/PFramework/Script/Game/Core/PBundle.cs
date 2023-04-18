@@ -1,5 +1,5 @@
+using System.Threading.Tasks;
 using System;
-using System.Reflection;
 
 namespace PFramework
 {
@@ -10,11 +10,6 @@ namespace PFramework
 
         public string _aliasName;
         public string AliasName { get => _aliasName; set => _aliasName = value; }
-
-        public virtual void Close()
-        {
-            throw new NotImplementedException();
-        }
 
         public void GetBundleName(out string fullName, out string nameSpace, out string className)
         {
@@ -39,13 +34,23 @@ namespace PFramework
         {
         }
 
+        public virtual void Uninstall()
+        {
+        }
+
         public virtual void Open()
         {
             throw new NotImplementedException();
         }
 
-        public virtual void Uninstall()
+        public virtual async void OpenAsync()
         {
+            await Task.Yield();
+        }
+
+        public virtual void Close()
+        {
+            throw new NotImplementedException();
         }
 
         public virtual void Update()

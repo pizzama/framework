@@ -6,8 +6,8 @@ namespace PFramework
     {
         public override void Open()
         {
-            Sprite sp = abManager.LoadResource<Sprite>("activity_btn_arrow", "activity_btn_arrow");
-            Debug.Log(sp);
+            // Sprite sp = abManager.LoadResource<Sprite>("activity_btn_arrow", "activity_btn_arrow");
+            // Debug.Log(sp);
 
         }
     }
