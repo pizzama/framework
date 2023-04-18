@@ -40,7 +40,15 @@ namespace PFramework
         //加载AB包
         private AssetBundle LoadABPackage(string abName)
         {
-            AssetBundle ab;
+            AssetBundle ab = null;
+#if UNITY_EDITOR
+            string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle(abName);
+            for (int i = 0; i < assetPaths.Length; i++)
+            {
+                ab = UnityEditor.AssetDatabase.LoadAssetAtPath<AssetBundle>(assetPaths[i]);
+            }
+            return ab;
+#else
             //根据manifest获取所有依赖包的名称 固定API
             string[] dependencies = _manifest.GetDependencies(abName);
             //循环加载所有依赖包
@@ -63,8 +71,7 @@ namespace PFramework
                 _abCache.Add(abName, ab);
                 return ab;
             }
-
-
+#endif
         }
 
         //==================三种资源同步加载方式==================

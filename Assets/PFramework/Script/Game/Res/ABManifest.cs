@@ -1,3 +1,4 @@
+using System.IO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,9 +32,10 @@ namespace PFramework
 
         public void LoadAssetBundleManifest()
         {
-#if !UNITY_EDITOR
-        
-#endif
+            _mainBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath,ABPathHelper.GetPlatformName()));
+            _manifest = _mainBundle.LoadAsset<AssetBundleManifest>("AssetBundleMainfest");
+            _allBundleVariants = _manifest.GetAllAssetBundlesWithVariant().ToList();
+            _allBundles = _manifest.GetAllAssetBundles().ToList();
         }
 
         public void LoadAssetBundleManifest(byte[] bytes)
