@@ -32,10 +32,12 @@ namespace PFramework
 
         public void LoadAssetBundleManifest()
         {
+#if !UNITY_EDITOR
             _mainBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath,ABPathHelper.GetPlatformName()));
             _manifest = _mainBundle.LoadAsset<AssetBundleManifest>("AssetBundleMainfest");
             _allBundleVariants = _manifest.GetAllAssetBundlesWithVariant().ToList();
             _allBundles = _manifest.GetAllAssetBundles().ToList();
+#endif
         }
 
         public void LoadAssetBundleManifest(byte[] bytes)
