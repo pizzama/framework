@@ -53,6 +53,11 @@ namespace PFramework
             throw new NotImplementedException();
         }
 
+        public virtual async void CloseAsync()
+        {
+            await Task.Yield();
+        }
+
         public virtual void Update()
         {
            

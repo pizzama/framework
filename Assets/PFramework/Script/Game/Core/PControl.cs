@@ -8,11 +8,6 @@ namespace PFramework
         private PModel _model;
         private PView _view;
 
-        public override void Close()
-        {
-            throw new NotImplementedException();
-        }
-
         //when register control it will find model and view
         public override void Install()
         {
@@ -31,6 +26,15 @@ namespace PFramework
             OpenAsync();
             _model.Open();
             _model.OpenAsync();
+        }
+
+        public override void Close()
+        {
+            CloseAsync();
+            _model.CloseAsync();
+            _model.Close();
+            _view.CloseAsync();
+            _view.Close();
         }
 
         public override void Uninstall()
