@@ -163,22 +163,22 @@ namespace PFramework
         #endregion
 
 
-        //================三种资源异步加载方式======================
+        #region 三种资源异步加载方式
 
         /// <summary>
         /// 提供异步加载----注意 这里加载AB包是同步加载，只是加载资源是异步
         /// </summary>
         /// <param name="abName">ab包名称</param>
         /// <param name="resName">资源名称</param>
-        public void LoadResourceAsync(string abName, string resName, System.Action<Object> finishLoadObjectHandler)
+        public void LoadResourceCoroutine(string abName, string resName, System.Action<Object> finishLoadObjectHandler)
         {
             AssetBundle ab = LoadABPackage(abName);
             //开启协程 提供资源加载成功后的委托
-            StartCoroutine(LoadRes(ab, resName, finishLoadObjectHandler));
+            StartCoroutine(LoadResCoroutine(ab, resName, finishLoadObjectHandler));
         }
 
 
-        private IEnumerator LoadRes(AssetBundle ab, string resName, System.Action<Object> finishLoadObjectHandler)
+        private IEnumerator LoadResCoroutine(AssetBundle ab, string resName, System.Action<Object> finishLoadObjectHandler)
         {
             if (ab == null) yield break;
             //异步加载资源API
@@ -190,14 +190,14 @@ namespace PFramework
 
 
         //根据Type异步加载资源
-        public void LoadResourceAsync(string abName, string resName, System.Type type, System.Action<Object> finishLoadObjectHandler)
+        public void LoadResourceCoroutine(string abName, string resName, System.Type type, System.Action<Object> finishLoadObjectHandler)
         {
             AssetBundle ab = LoadABPackage(abName);
-            StartCoroutine(LoadRes(ab, resName, type, finishLoadObjectHandler));
+            StartCoroutine(LoadResCoroutine(ab, resName, type, finishLoadObjectHandler));
         }
 
 
-        private IEnumerator LoadRes(AssetBundle ab, string resName, System.Type type, System.Action<Object> finishLoadObjectHandler)
+        private IEnumerator LoadResCoroutine(AssetBundle ab, string resName, System.Type type, System.Action<Object> finishLoadObjectHandler)
         {
             if (ab == null) yield break;
             AssetBundleRequest abr = ab.LoadAssetAsync(resName, type);
@@ -206,15 +206,14 @@ namespace PFramework
             finishLoadObjectHandler(abr.asset);
         }
 
-
         //泛型加载
-        public void LoadResourceAsync<T>(string abName, string resName, System.Action<Object> finishLoadObjectHandler) where T : Object
+        public void LoadResourceCoroutine<T>(string abName, string resName, System.Action<Object> finishLoadObjectHandler) where T : Object
         {
             AssetBundle ab = LoadABPackage(abName);
-            StartCoroutine(LoadRes<T>(ab, resName, finishLoadObjectHandler));
+            StartCoroutine(LoadResCoroutine<T>(ab, resName, finishLoadObjectHandler));
         }
 
-        private IEnumerator LoadRes<T>(AssetBundle ab, string resName, System.Action<Object> finishLoadObjectHandler) where T : Object
+        private IEnumerator LoadResCoroutine<T>(AssetBundle ab, string resName, System.Action<Object> finishLoadObjectHandler) where T : Object
         {
             if (ab == null) yield break;
             AssetBundleRequest abr = ab.LoadAssetAsync<T>(resName);
@@ -222,6 +221,8 @@ namespace PFramework
             //委托调用处理逻辑
             finishLoadObjectHandler(abr.asset as T);
         }
+
+        #endregion
 
         //单个包卸载
         public void UnLoad(string abName)
