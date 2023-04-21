@@ -84,7 +84,7 @@ namespace PFramework
                     }
                 }
 
-                if(res == null)
+                if (res == null)
                     Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
 
                 return res;
@@ -115,7 +115,7 @@ namespace PFramework
                     }
                 }
 
-                if(res == null)
+                if (res == null)
                     Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
 
                 return res;
@@ -123,7 +123,7 @@ namespace PFramework
 #endif
             //加载目标包
             AssetBundle ab = LoadABPackage(abName);
-            if(ab == null)
+            if (ab == null)
                 Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
             //返回资源
             return ab.LoadAsset(resName);
@@ -147,7 +147,7 @@ namespace PFramework
                     }
                 }
 
-                if(res == null)
+                if (res == null)
                     Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
 
                 return res;
@@ -162,8 +162,7 @@ namespace PFramework
 
         #endregion
 
-
-        #region 三种资源异步加载方式
+        #region 三种资源协程加载方式
 
         /// <summary>
         /// 提供异步加载----注意 这里加载AB包是同步加载，只是加载资源是异步
