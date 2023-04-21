@@ -65,15 +65,10 @@ namespace PFramework
             }
         }
 
-        //==================三种资源同步加载方式==================
-        //提供多种调用方式 便于其它语言的调用（Lua对泛型支持不好）
-        #region 同步加载的三个重载
 
-        /// <summary>
-        /// 同步加载资源---泛型加载 简单直观 无需显示转换
-        /// </summary>
-        /// <param name="abName">ab包的名称</param>
-        /// <param name="resName">资源名称</param>
+        #region 同步加载的三个重载
+        // 同步加载资源---泛型加载 简单直观 无需显示转换
+        //Sprite sp = abManager.LoadResource<Sprite>("a_png", "a");
         public T LoadResource<T>(string abName, string resName) where T : Object
         {
 #if UNITY_EDITOR
@@ -104,6 +99,7 @@ namespace PFramework
 
 
         //不指定类型 有重名情况下不建议使用 使用时需显示转换类型
+        //Object sp = abManager.LoadResource("a_png", "a");
         public Object LoadResource(string abName, string resName)
         {
 #if UNITY_EDITOR
@@ -135,6 +131,7 @@ namespace PFramework
 
 
         //利用参数传递类型，适合对泛型不支持的语言调用，使用时需强转类型
+        //Object sp = abManager.LoadResource("a_png", "a", typeof(Texture2D));
         public Object LoadResource(string abName, string resName, System.Type type)
         {
 #if UNITY_EDITOR
