@@ -170,5 +170,19 @@ namespace PFramework
                 GetFileInFolder(dinfo.FullName, fileName, outResult);
             }
         }
+
+#if UNITY_EDITOR
+        const string kSimulateAssetBundles = "SimulateAssetBundles"; //此处跟editor中保持统一，不能随意更改
+#endif
+        public static bool SimulationMode
+        {
+#if UNITY_EDITOR
+            get { return UnityEditor.EditorPrefs.GetBool(kSimulateAssetBundles, true); }
+            set { UnityEditor.EditorPrefs.SetBool(kSimulateAssetBundles, value); }
+#else
+            get { return false; }
+            set {  }
+#endif
+        }
     }
 }
