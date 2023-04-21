@@ -119,10 +119,12 @@ namespace PFramework
             return DeleteBundle(fullName, bundle.AliasName);
         }
 
-        public void InstallBundle(IBundle bundle, string alias="")
+        public void InstallBundle(IBundle bundle, string alias="", bool withOpen = false)
         {
             IBundle value = AddBundle(bundle, alias);
             value.Install();
+            if (withOpen)
+                value.Open();
         }
 
         public void UninstallBundle(string name, string alias)

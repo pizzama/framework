@@ -20,9 +20,7 @@ namespace PFramework
 
         private void initFrameworkBundle()
         {
-            var ui = new RootUIControl();
-            BundleManager.Instance.InstallBundle(ui);
-            ui.Open();
+            BundleManager.Instance.InstallBundle(new RootUIControl(), "", true);
         }
 
         private void Update()

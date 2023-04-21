@@ -8,7 +8,6 @@ namespace PFramework
         {
             Sprite sp = await abManager.LoadResourceAsync<Sprite>("a_png", "a");
             Debug.Log("spppp");
-
         }
     }
 }
