@@ -40,7 +40,6 @@ namespace PFramework
 
         public virtual void Open()
         {
-            throw new NotImplementedException();
         }
 
         public virtual async void OpenAsync()

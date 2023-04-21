@@ -4,9 +4,9 @@ namespace PFramework
 {
     public class RootUIView : PView
     {
-        public override void Open()
+        public override async void OpenAsync()
         {
-            Sprite sp = abManager.LoadResource<Sprite>("a_png", "a");
+            Sprite sp = await abManager.LoadResourceAsync<Sprite>("a_png", "a");
             Debug.Log("spppp");
 
         }

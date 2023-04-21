@@ -37,7 +37,7 @@ namespace PFramework
         #region async加载的三个重载
         // 同步加载资源---泛型加载 简单直观 无需显示转换
         //Sprite sp = abManager.LoadResource<Sprite>("a_png", "a");
-        public async UniTask<T> LoadResourceAsync<T>(string abName, string resName, CancellationToken token) where T : Object
+        public async UniTask<T> LoadResourceAsync<T>(string abName, string resName, CancellationToken token = default) where T : Object
         {
             T res = null;
 #if UNITY_EDITOR
@@ -58,9 +58,12 @@ namespace PFramework
                 return res;
             }
 #endif
-            //加载目标包
             AssetBundle ab = await LoadABPackageAsync(abName);
-            res = (T)await ab.LoadAssetAsync<T>(resName).WithCancellation(token);
+            if (ab != null)
+                res = (T)await ab.LoadAssetAsync<T>(resName).WithCancellation(token);
+            else
+                Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
+
             //返回资源
             return res;
         }
@@ -68,12 +71,12 @@ namespace PFramework
 
         //不指定类型 有重名情况下不建议使用 使用时需显示转换类型
         //Object sp = abManager.LoadResource("a_png", "a");
-        public async UniTask<Object> LoadResourceAsync(string abName, string resName)
+        public async UniTask<Object> LoadResourceAsync(string abName, string resName, CancellationToken token = default)
         {
+            Object res = null;
 #if UNITY_EDITOR
             if (ABPathHelper.SimulationMode)
             {
-                Object res = null;
                 string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(abName, resName);
                 for (int i = 0; i < assetPaths.Length; i++)
                 {
@@ -89,23 +92,23 @@ namespace PFramework
                 return res;
             }
 #endif
-            //加载目标包
             AssetBundle ab = await LoadABPackageAsync(abName);
-            if (ab == null)
+            if (ab != null)
+                res = await ab.LoadAssetAsync(resName).WithCancellation(token);
+            else
                 Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
-            //返回资源
-            return await ab.LoadAssetAsync(resName);
+            return res;
         }
 
 
         //利用参数传递类型，适合对泛型不支持的语言调用，使用时需强转类型
         //Object sp = abManager.LoadResource("a_png", "a", typeof(Texture2D));
-        public async UniTask<Object> LoadResourceAsync(string abName, string resName, System.Type type)
+        public async UniTask<Object> LoadResourceAsync(string abName, string resName, System.Type type, CancellationToken token = default)
         {
+            Object res = null;
 #if UNITY_EDITOR
             if (ABPathHelper.SimulationMode)
             {
-                Object res = null;
                 string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(abName, resName);
                 for (int i = 0; i < assetPaths.Length; i++)
                 {
@@ -121,11 +124,12 @@ namespace PFramework
                 return res;
             }
 #endif
-            //加载目标包
             AssetBundle ab = await LoadABPackageAsync(abName);
-
-            //返回资源
-            return await ab.LoadAssetAsync(resName, type);
+            if (ab != null)
+                res = await ab.LoadAssetAsync(resName).WithCancellation(token);
+            else
+                Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
+            return res;
         }
 
         #endregion

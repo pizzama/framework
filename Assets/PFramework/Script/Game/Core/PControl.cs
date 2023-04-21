@@ -62,6 +62,7 @@ namespace PFramework
         public void HandleModelCallback()
         {
             _view.Open();
+            _view.OpenAsync();
         }
 
         private T createBundle<T>(Type classtype, string name)
