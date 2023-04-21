@@ -9,6 +9,7 @@ namespace AssetBundleBrowser
 
     public class AssetBundleBrowserMain : EditorWindow, IHasCustomMenu, ISerializationCallbackReceiver
     {
+        
 
         private static AssetBundleBrowserMain s_instance = null;
         internal static AssetBundleBrowserMain instance
@@ -245,7 +246,5 @@ namespace AssetBundleBrowser
                 //GUILayout.EndArea();
             }
         }
-
-
     }
 }

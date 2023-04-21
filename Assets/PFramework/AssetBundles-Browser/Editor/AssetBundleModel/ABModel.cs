@@ -40,6 +40,13 @@ namespace AssetBundleBrowser.AssetBundleModel
         static private Texture2D s_bundleIcon = null;
         static private Texture2D s_sceneIcon = null;
 
+        const string kSimulateAssetBundles = "SimulateAssetBundles";
+        public static bool SimulationMode
+        {
+            get { return UnityEditor.EditorPrefs.GetBool(kSimulateAssetBundles, true); }
+            set { UnityEditor.EditorPrefs.SetBool(kSimulateAssetBundles, value); }
+        }
+
         /// <summary>
         /// If using a custom source of asset bundles, you can implement your own ABDataSource and set it here as the active
         ///  DataSource.  This will allow you to use the Browser with data that you provide.

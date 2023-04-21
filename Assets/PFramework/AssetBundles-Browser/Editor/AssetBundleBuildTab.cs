@@ -21,7 +21,6 @@ namespace AssetBundleBrowser
         [SerializeField]
         private Vector2 m_ScrollPosition;
 
-
         class ToggleData
         {
             internal ToggleData(bool s,
@@ -180,8 +179,7 @@ namespace AssetBundleBrowser
             GUILayout.BeginVertical();
             using (new EditorGUI.DisabledScope(!AssetBundleModel.Model.DataSource.CanSpecifyBuildOptions))
             {
-                bool rt = UnityEditor.EditorPrefs.GetBool("SimulateAssetBundles", true);
-                GUILayout.Toggle(rt, "Simulation Mode");
+                AssetBundleModel.Model.SimulationMode = GUILayout.Toggle(AssetBundleModel.Model.SimulationMode, "Simulation Mode");
             }
 
             using (new EditorGUI.DisabledScope(!AssetBundleModel.Model.DataSource.CanSpecifyBuildOutputDirectory))
