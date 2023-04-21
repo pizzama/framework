@@ -178,6 +178,11 @@ namespace AssetBundleBrowser
             //basic options
             EditorGUILayout.Space();
             GUILayout.BeginVertical();
+            using (new EditorGUI.DisabledScope(!AssetBundleModel.Model.DataSource.CanSpecifyBuildOptions))
+            {
+                bool rt = UnityEditor.EditorPrefs.GetBool("SimulateAssetBundles", true);
+                GUILayout.Toggle(rt, "Simulation Mode");
+            }
 
             using (new EditorGUI.DisabledScope(!AssetBundleModel.Model.DataSource.CanSpecifyBuildOutputDirectory))
             {
