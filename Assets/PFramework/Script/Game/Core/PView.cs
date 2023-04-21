@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PFramework
 {
-    public class PView : PBundle
+    public abstract class PView : PBundle
     {
         private PControl _control;
         public PControl Control
@@ -19,5 +19,22 @@ namespace PFramework
         {
             abManager = ABManager.Instance;
         }
+    }
+
+    public enum UILayer
+    {
+        Tags,
+        GuidePend,
+        Pend,
+        Hud,
+        Dialog,
+        Popup,
+        Toast,
+        Blocker
+    }
+
+    public abstract class PUIView : PView
+    {
+        public abstract UILayer GetViewLayer();
     }
 }
