@@ -39,7 +39,7 @@ namespace PFramework
         //Sprite sp = abManager.LoadResource<Sprite>("a_png", "a");
         public async UniTask<T> LoadResourceAsync<T>(string abName, string resName, CancellationToken token = default) where T : Object
         {
-            T res = null;
+            T res = default;
 #if UNITY_EDITOR
             if (ABPathHelper.SimulationMode)
             {
@@ -52,6 +52,7 @@ namespace PFramework
                     }
                 }
 
+                await UniTask.Delay(System.TimeSpan.FromSeconds(1), ignoreTimeScale: false);
                 if (res == null)
                     Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
 
@@ -85,7 +86,7 @@ namespace PFramework
                         res = UnityEditor.AssetDatabase.LoadAssetAtPath<Object>(assetPaths[i]);
                     }
                 }
-
+                await UniTask.Delay(System.TimeSpan.FromSeconds(1), ignoreTimeScale: false);
                 if (res == null)
                     Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
 
@@ -117,7 +118,7 @@ namespace PFramework
                         res = UnityEditor.AssetDatabase.LoadAssetAtPath(assetPaths[i], type);
                     }
                 }
-
+                await UniTask.Delay(System.TimeSpan.FromSeconds(1), ignoreTimeScale: false);
                 if (res == null)
                     Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
 
