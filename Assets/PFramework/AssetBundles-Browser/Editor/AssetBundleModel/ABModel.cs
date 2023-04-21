@@ -43,7 +43,7 @@ namespace AssetBundleBrowser.AssetBundleModel
         const string kSimulateAssetBundles = "SimulateAssetBundles";
         public static bool SimulationMode
         {
-            get { return UnityEditor.EditorPrefs.GetBool(kSimulateAssetBundles, true); }
+            get { return UnityEditor.EditorPrefs.GetBool(kSimulateAssetBundles, false); }
             set { UnityEditor.EditorPrefs.SetBool(kSimulateAssetBundles, value); }
         }
 

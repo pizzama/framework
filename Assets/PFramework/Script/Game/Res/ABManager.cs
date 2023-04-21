@@ -41,14 +41,6 @@ namespace PFramework
         private AssetBundle LoadABPackage(string abName)
         {
             AssetBundle ab = null;
-#if UNITY_EDITOR
-            string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle(abName);
-            for (int i = 0; i < assetPaths.Length; i++)
-            {
-                ab = UnityEditor.AssetDatabase.LoadAssetAtPath<AssetBundle>(assetPaths[i]);
-            }
-            return ab;
-#else
             //根据manifest获取所有依赖包的名称 固定API
             string[] dependencies = _manifest.GetDependencies(abName);
             //循环加载所有依赖包
@@ -71,7 +63,6 @@ namespace PFramework
                 _abCache.Add(abName, ab);
                 return ab;
             }
-#endif
         }
 
         //==================三种资源同步加载方式==================
@@ -85,6 +76,25 @@ namespace PFramework
         /// <param name="resName">资源名称</param>
         public T LoadResource<T>(string abName, string resName) where T : Object
         {
+#if UNITY_EDITOR
+            if (ABPathHelper.SimulationMode)
+            {
+                T res = null;
+                string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(abName, resName);
+                for (int i = 0; i < assetPaths.Length; i++)
+                {
+                    if (res == null)
+                    {
+                        res = UnityEditor.AssetDatabase.LoadAssetAtPath<T>(assetPaths[i]);
+                    }
+                }
+
+                if(res == null)
+                    Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
+
+                return res;
+            }
+#endif
             //加载目标包
             AssetBundle ab = LoadABPackage(abName);
 
@@ -96,9 +106,29 @@ namespace PFramework
         //不指定类型 有重名情况下不建议使用 使用时需显示转换类型
         public Object LoadResource(string abName, string resName)
         {
+#if UNITY_EDITOR
+            if (ABPathHelper.SimulationMode)
+            {
+                Object res = null;
+                string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(abName, resName);
+                for (int i = 0; i < assetPaths.Length; i++)
+                {
+                    if (res == null)
+                    {
+                        res = UnityEditor.AssetDatabase.LoadAssetAtPath<Object>(assetPaths[i]);
+                    }
+                }
+
+                if(res == null)
+                    Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
+
+                return res;
+            }
+#endif
             //加载目标包
             AssetBundle ab = LoadABPackage(abName);
-
+            if(ab == null)
+                Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
             //返回资源
             return ab.LoadAsset(resName);
         }
@@ -107,6 +137,25 @@ namespace PFramework
         //利用参数传递类型，适合对泛型不支持的语言调用，使用时需强转类型
         public Object LoadResource(string abName, string resName, System.Type type)
         {
+#if UNITY_EDITOR
+            if (ABPathHelper.SimulationMode)
+            {
+                Object res = null;
+                string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(abName, resName);
+                for (int i = 0; i < assetPaths.Length; i++)
+                {
+                    if (res == null)
+                    {
+                        res = UnityEditor.AssetDatabase.LoadAssetAtPath(assetPaths[i], type);
+                    }
+                }
+
+                if(res == null)
+                    Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
+
+                return res;
+            }
+#endif
             //加载目标包
             AssetBundle ab = LoadABPackage(abName);
 
