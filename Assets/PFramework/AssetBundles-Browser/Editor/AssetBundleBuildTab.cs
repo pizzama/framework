@@ -187,7 +187,7 @@ namespace AssetBundleBrowser
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
-                if (GUILayout.Button("Browse", GUILayout.MaxWidth(75f)))
+                if (GUILayout.Button("Open", GUILayout.MaxWidth(75f)))
                     EditorUtility.RevealInFinder(Application.persistentDataPath);
                 GUILayout.EndHorizontal();
                 EditorGUILayout.Space();
@@ -224,6 +224,8 @@ namespace AssetBundleBrowser
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
+                if (GUILayout.Button("Open", GUILayout.MaxWidth(75f)))
+                    EditorUtility.RevealInFinder(m_UserData.m_OutputPath);
                 if (GUILayout.Button("Browse", GUILayout.MaxWidth(75f)))
                     BrowseForFolder();
                 if (GUILayout.Button("Reset", GUILayout.MaxWidth(75f)))
