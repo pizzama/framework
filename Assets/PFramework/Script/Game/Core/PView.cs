@@ -24,11 +24,10 @@ namespace PFramework
     public enum UILayer
     {
         Tags,
-        GuidePend,
         Pend,
         Hud,
-        Dialog,
         Popup,
+        Dialog,
         Toast,
         Blocker
     }
