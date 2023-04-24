@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class PUIROOT : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Canvas _tags;
+    private Canvas _pend;
+    private Canvas _hud;
+    private Canvas _popUp;
+    private Canvas _toast;
+    private Canvas _blocker;
+
+    public static PUIROOT Instance;
     void Start()
     {
-        
+        PUIROOT.Instance = this;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        
+
     }
 }
