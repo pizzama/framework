@@ -25,6 +25,42 @@ namespace PFramework
         {
 
         }
+
+        public override void Update()
+        {
+            base.Update();
+            viewUpdate();
+
+        }
+
+        public override void FixUpdate()
+        {
+            base.FixUpdate();
+            viewFixUpdate();
+
+        }
+
+        public override void LateUpdate()
+        {
+            base.LateUpdate();
+            viewLastUpdate();
+
+        }
+
+        protected virtual void viewUpdate()
+        {
+
+        }
+
+        protected virtual void viewFixUpdate()
+        {
+
+        }
+
+        protected virtual void viewLastUpdate()
+        {
+
+        }
     }
 
     public enum UILayer

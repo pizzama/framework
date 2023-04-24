@@ -1,3 +1,4 @@
+using System.Reflection;
 using System;
 using UnityEngine;
 
@@ -91,6 +92,45 @@ namespace PFramework
             {
                 throw new NotFoundException("this is not pframework naming rules");
             }
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            controlUpdate();
+            _model.Update();
+            _view.Update();
+        }
+
+        public override void FixUpdate()
+        {
+            base.FixUpdate();
+            controlFixUpdate();
+            _model.FixUpdate();
+            _view.FixUpdate();
+        }
+
+        public override void LateUpdate()
+        {
+            base.LateUpdate();
+            controlLastUpdate();
+            _model.LateUpdate();
+            _view.LateUpdate();
+        }
+
+        protected virtual void controlUpdate()
+        {
+
+        }
+
+        protected virtual void controlFixUpdate()
+        {
+
+        }
+
+        protected virtual void controlLastUpdate()
+        {
+
         }
     }
 }

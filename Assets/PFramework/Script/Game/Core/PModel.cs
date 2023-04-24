@@ -13,6 +13,8 @@ namespace PFramework
             get { return _control; }
         }
 
+        public delegate void DelegateModelCallback();
+        public DelegateModelCallback ModelCallback;
         public override void Install()
         {
             base.Install();
@@ -23,9 +25,41 @@ namespace PFramework
         {
 
         }
+        public override void Update()
+        {
+            base.Update();
+            modelUpdate();
 
-        public delegate void DelegateModelCallback();
-        public DelegateModelCallback ModelCallback;
+        }
+
+        public override void FixUpdate()
+        {
+            base.FixUpdate();
+            modelFixUpdate();
+
+        }
+
+        public override void LateUpdate()
+        {
+            base.LateUpdate();
+            modelLastUpdate();
+
+        }
+
+        protected virtual void modelUpdate()
+        {
+
+        }
+
+        protected virtual void modelFixUpdate()
+        {
+
+        }
+
+        protected virtual void modelLastUpdate()
+        {
+
+        }
 
         public async UniTask<byte[]> GetData(string url)
         {
