@@ -18,6 +18,12 @@ namespace PFramework
         public override void Install()
         {
             abManager = ABManager.Instance;
+            initPView();
+        }
+
+        protected virtual void initPView()
+        {
+
         }
     }
 

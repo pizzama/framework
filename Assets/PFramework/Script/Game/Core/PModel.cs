@@ -13,6 +13,17 @@ namespace PFramework
             get { return _control; }
         }
 
+        public override void Install()
+        {
+            base.Install();
+            initPModel();
+        }
+
+        protected virtual void initPModel()
+        {
+
+        }
+
         public delegate void DelegateModelCallback();
         public DelegateModelCallback ModelCallback;
 

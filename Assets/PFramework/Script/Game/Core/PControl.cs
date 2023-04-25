@@ -11,6 +11,8 @@ namespace PFramework
         //when register control it will find model and view
         public override void Install()
         {
+            base.Install();
+            initPControl();
             Type classtype = this.GetType();
             _model = createBundle<PModel>(classtype, "Model");
             _model.Control = this;
@@ -19,6 +21,11 @@ namespace PFramework
             _view = createBundle<PView>(classtype, "View");
             _view.Control = this;
             _view.Install();
+        }
+
+        protected virtual void initPControl()
+        {
+
         }
 
         public override void Open()
