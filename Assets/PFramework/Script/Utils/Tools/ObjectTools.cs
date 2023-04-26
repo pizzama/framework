@@ -76,6 +76,21 @@ namespace PFramework
             }
         }
 
+        public static T CreateInstance<T>(T classtype)
+        {
+            try
+            {
+                Type o = classtype.GetType();
+                object obj = Activator.CreateInstance(o, true);//根据类型创建实例
+                return (T)obj;//类型转换并返回
+            }
+            catch
+            {
+                //发生异常，返回类型的默认值
+                return default(T);
+            }
+        }
+
         public static List<T> GetRandomSequence<T>(T[] array, int count)
         {
             List<T> output = new List<T>();
