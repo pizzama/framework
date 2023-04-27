@@ -7,7 +7,7 @@ namespace SFramework
     {
         private Dictionary<UILayer, Transform> _rootUIDic;
 
-        protected override void initPView()
+        protected override void init()
         {
             const string uiname = "PUIROOT";
             bool hasUI = GameObject.Find(uiname);

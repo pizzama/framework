@@ -1,8 +1,18 @@
-using PFramework;
+using SFramework;
+using UnityEngine;
+
 namespace game
 {
-    public class TestView : SView
+    public class TestView : SUIView
     {
+        public override UILayer GetViewLayer()
+        {
+            throw new System.NotImplementedException();
+        }
 
+        public override Transform GetViewTransform()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

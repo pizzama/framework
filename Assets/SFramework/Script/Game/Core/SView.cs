@@ -18,12 +18,7 @@ namespace SFramework
         public override void Install()
         {
             abManager = ABManager.Instance;
-            initPView();
-        }
-
-        protected virtual void initPView()
-        {
-
+            init();
         }
 
         public override void Update()

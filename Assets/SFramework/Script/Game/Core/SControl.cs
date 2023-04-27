@@ -1,4 +1,4 @@
-using System.Reflection;
+using System.Threading.Tasks;
 using System;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ namespace SFramework
         public override void Install()
         {
             base.Install();
-            initPControl();
+            init();
             Type classtype = this.GetType();
             _model = createBundle<SModel>(classtype, "Model");
             _model.Control = this;
@@ -24,14 +24,11 @@ namespace SFramework
             _view.Install();
         }
 
-        protected virtual void initPControl()
-        {
-
-        }
-
         public override void Open()
         {
+            enter();
             OpenAsync();
+            enterAsync();
             _model.Open();
             _model.OpenAsync();
         }
@@ -55,7 +52,7 @@ namespace SFramework
             string bundleFullName = nameSpace + "." + className;
             if (alias == "")
                 alias = className;
-            IBundle control =  BundleManager.Instance.GetBundle(bundleFullName, alias);
+            IBundle control = BundleManager.Instance.GetBundle(bundleFullName, alias);
             if (control != null)
                 control.HandleMessage(messageId, messageData, messageSender);
             else
@@ -64,7 +61,7 @@ namespace SFramework
 
         public override void HandleMessage(string messageId, object messageData, object messageSender)
         {
-            
+
         }
 
         public void HandleModelCallback()
@@ -76,12 +73,12 @@ namespace SFramework
         private T createBundle<T>(Type classtype, string name)
         {
             int result = classtype.Name.IndexOf("Control");
-            if(result > 0)
+            if (result > 0)
             {
                 //find model
                 string modelName = classtype.Name.Substring(0, result) + name;
                 T mod = ObjectTools.CreateInstance<T>(classtype.Namespace, modelName, classtype.Assembly.GetName().Name);
-                if(mod != null)
+                if (mod != null)
                 {
                     return mod;
                 }

@@ -59,17 +59,32 @@ namespace SFramework
 
         public virtual void Update()
         {
-           
+
         }
 
         public virtual void FixUpdate()
         {
-            
+
         }
 
         public virtual void LateUpdate()
         {
-            
+
+        }
+
+        protected virtual void init()
+        {
+
+        }
+
+        protected virtual void enter()
+        {
+
+        }
+
+        protected async virtual void enterAsync()
+        {
+            await Task.Yield();
         }
     }
 }

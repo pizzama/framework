@@ -4,7 +4,7 @@ namespace SFramework
 {
     public class RootUIControl : SControl
     {
-        protected override void initPControl()
+        protected override void init()
         {
 
         }

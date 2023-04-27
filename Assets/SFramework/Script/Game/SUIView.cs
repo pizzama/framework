@@ -1,4 +1,12 @@
-public abstract class SUIView : SView
+using UnityEngine;
+
+namespace SFramework
 {
-    public abstract UILayer GetViewLayer();
+    public abstract class SUIView : SView
+    {
+        public abstract UILayer GetViewLayer();
+
+        public abstract Transform GetViewTransform();
+    }
 }
+

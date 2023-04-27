@@ -18,13 +18,9 @@ namespace SFramework
         public override void Install()
         {
             base.Install();
-            initPModel();
+            init();
         }
 
-        protected virtual void initPModel()
-        {
-
-        }
         public override void Update()
         {
             base.Update();
