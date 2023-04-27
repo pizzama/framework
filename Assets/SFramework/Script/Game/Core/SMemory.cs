@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-namespace PFramework
+namespace SFramework
 {
     public class SMemory<T1, T2, T3> : IEnumerable
     {

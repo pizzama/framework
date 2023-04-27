@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PFramework
+namespace SFramework
 {
     public abstract class SView : SBundle
     {
@@ -61,21 +61,5 @@ namespace PFramework
         {
 
         }
-    }
-
-    public enum UILayer
-    {
-        Tags,
-        Pend,
-        Hud,
-        Popup,
-        Dialog,
-        Toast,
-        Blocker
-    }
-
-    public abstract class SUIView : SView
-    {
-        public abstract UILayer GetViewLayer();
     }
 }

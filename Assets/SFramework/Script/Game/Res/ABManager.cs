@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 
-namespace PFramework
+namespace SFramework
 {
     public partial class ABManager : MonoBehaviour
     {

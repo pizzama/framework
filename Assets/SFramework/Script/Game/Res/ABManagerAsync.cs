@@ -2,7 +2,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace PFramework
+namespace SFramework
 {
     public partial class ABManager : MonoBehaviour
     {

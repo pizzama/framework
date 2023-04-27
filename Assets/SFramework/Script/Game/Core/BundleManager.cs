@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PFramework
+namespace SFramework
 {
     public class BundleManager : MonoBehaviour, IManager
     {

@@ -7,7 +7,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
-namespace PFramework
+namespace SFramework
 {
     public partial class FileTools
     {

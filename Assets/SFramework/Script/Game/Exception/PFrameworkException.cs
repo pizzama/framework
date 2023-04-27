@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace PFramework
+namespace SFramework
 {
     public class NotFoundException : SystemException
     {

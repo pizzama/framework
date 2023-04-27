@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace PFramework
+namespace SFramework
 {
     public class ABManifest : System.IDisposable
     {

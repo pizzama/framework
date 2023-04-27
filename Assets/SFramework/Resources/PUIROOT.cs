@@ -1,16 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum UILayer
+{
+    Tags,
+    Pend,
+    Hud,
+    Popup,
+    Dialog,
+    Toast,
+    Blocker
+}
 public class PUIROOT : MonoBehaviour
 {
-    [SerializeField] private Canvas _tags;
-    [SerializeField] private Canvas _pend;
-    [SerializeField] private Canvas _hud;
-    [SerializeField] private Canvas _popUp;
-    [SerializeField] private Canvas _dialog;
-    [SerializeField] private Canvas _toast;
-    [SerializeField] private Canvas _blocker;
+    [SerializeField] private Transform _tags;
+    [SerializeField] private Transform _pend;
+    [SerializeField] private Transform _hud;
+    [SerializeField] private Transform _popUp;
+    [SerializeField] private Transform _dialog;
+    [SerializeField] private Transform _toast;
+    [SerializeField] private Transform _blocker;
 
     private Camera _uiCamera;
 
@@ -25,25 +34,34 @@ public class PUIROOT : MonoBehaviour
         if (_uiCamera == null)
             _uiCamera = this.transform.Find("UICamera").GetComponent<Camera>();
         if (_tags == null)
-            _tags = this.transform.Find("Tags").GetComponent<Canvas>();
+            _tags = this.transform.Find("Tags").GetComponent<Transform>();
         if (_pend == null)
-            _pend = this.transform.Find("Pend").GetComponent<Canvas>();
+            _pend = this.transform.Find("Pend").GetComponent<Transform>();
         if (_hud == null)
-            _hud = this.transform.Find("Hud").GetComponent<Canvas>();
+            _hud = this.transform.Find("Hud").GetComponent<Transform>();
         if (_popUp == null)
-            _popUp = this.transform.Find("PopUp").GetComponent<Canvas>();
+            _popUp = this.transform.Find("PopUp").GetComponent<Transform>();
         if (_dialog == null)
-            _dialog = this.transform.Find("Dialog").GetComponent<Canvas>();
+            _dialog = this.transform.Find("Dialog").GetComponent<Transform>();
         if (_toast == null)
-            _toast = this.transform.Find("Toast").GetComponent<Canvas>();
+            _toast = this.transform.Find("Toast").GetComponent<Transform>();
         if (_blocker == null)
-            _blocker = this.transform.Find("Blocker").GetComponent<Canvas>();
+            _blocker = this.transform.Find("Blocker").GetComponent<Transform>();
     }
 
-    public void OpenUI(string uiName, string prefabPath)
+    public void OpenUI(UILayer layer, Transform trans)
     {
-
+        switch (layer)
+        {
+            case UILayer.Popup:
+                trans.SetParent(_popUp.transform);
+                break;
+        }
     }
 
-
+    public void CloseUI(Transform trans)
+    {
+        if (trans != null)
+            Destroy(trans.gameObject);
+    }
 }

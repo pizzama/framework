@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PFramework
+namespace SFramework
 {
     public class GameLaucher : MonoBehaviour
     {

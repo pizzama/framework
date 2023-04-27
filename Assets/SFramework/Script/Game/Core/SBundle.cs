@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using System;
 
-namespace PFramework
+namespace SFramework
 {
     public abstract class SBundle : IBundle
     {

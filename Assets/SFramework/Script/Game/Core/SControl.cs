@@ -2,7 +2,7 @@ using System.Reflection;
 using System;
 using UnityEngine;
 
-namespace PFramework
+namespace SFramework
 {
     public class SControl : SBundle
     {
@@ -90,7 +90,7 @@ namespace PFramework
             }
             else
             {
-                throw new NotFoundException("this is not pframework naming rules");
+                throw new NotFoundException("this is not SFramework naming rules");
             }
         }
 

@@ -318,13 +318,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5758ad2895aaf48907be92a09f4bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tags: {fileID: 8970407975093327390}
-  _pend: {fileID: 1696406536365087529}
-  _hud: {fileID: 8651567085471054184}
-  _popUp: {fileID: 5296159121004812038}
-  _dialog: {fileID: 6579321436725383909}
-  _toast: {fileID: 7173888745258774586}
-  _blocker: {fileID: 6427148151802736153}
+  _tags: {fileID: 1399960675997336451}
+  _pend: {fileID: 342886680644462193}
+  _hud: {fileID: 6596049902472305411}
+  _popUp: {fileID: 4739383914674274167}
+  _dialog: {fileID: 782270712957273906}
+  _toast: {fileID: 3216291698215560614}
+  _blocker: {fileID: 7403963021968785989}
 --- !u!1 &2963374397798589106
 GameObject:
   m_ObjectHideFlags: 0

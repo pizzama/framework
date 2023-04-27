@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PFramework
+namespace SFramework
 {
     public class RootUIView : SView
     {

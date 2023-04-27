@@ -1,4 +1,4 @@
-namespace PFramework
+namespace SFramework
 {
     public interface IBundle
     {

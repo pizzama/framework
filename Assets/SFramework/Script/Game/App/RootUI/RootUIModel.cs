@@ -2,7 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace PFramework
+namespace SFramework
 {
     public class RootUIModel : SModel
     {
