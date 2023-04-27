@@ -7,6 +7,12 @@ namespace SFramework
         public abstract UILayer GetViewLayer();
 
         public abstract Transform GetViewTransform();
+
+        public override void Open()
+        {
+            UILayer layer = GetViewLayer();
+            Transform trans = GetViewTransform();
+        }
     }
 }
 
