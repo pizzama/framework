@@ -76,10 +76,10 @@ namespace PFramework
             }
         }
 
-        private PMemory<string, string, IBundle> _bundleMap;
+        private SMemory<string, string, IBundle> _bundleMap;
         private void init()
         {
-            _bundleMap = new PMemory<string, string, IBundle>();
+            _bundleMap = new SMemory<string, string, IBundle>();
         }
 
         public IBundle GetBundle(string name, string alias)
@@ -156,7 +156,7 @@ namespace PFramework
             IBundle bd = manager.GetBundle(classpath, alias);
             if (bd == null)
             {
-                PControl ctl = ObjectTools.CreateInstance<PControl>(nameSpace, modelName);
+                SControl ctl = ObjectTools.CreateInstance<SControl>(nameSpace, modelName);
                 if (ctl == null)
                     throw new NotFoundException($"class {nameSpace}.{modelName} is miss!");
                 InstallBundle(ctl, alias);

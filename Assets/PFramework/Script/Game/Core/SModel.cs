@@ -4,10 +4,10 @@ using System;
 
 namespace PFramework
 {
-    public partial class PModel : PBundle
+    public partial class SModel : SBundle
     {
-        private PControl _control;
-        public PControl Control
+        private SControl _control;
+        public SControl Control
         {
             set { _control = value; }
             get { return _control; }

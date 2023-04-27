@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PFramework
 {
-    public class RootUIView : PView
+    public class RootUIView : SView
     {
         private Dictionary<UILayer, Transform> _rootUIDic;
 

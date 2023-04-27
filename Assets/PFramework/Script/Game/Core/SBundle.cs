@@ -3,7 +3,7 @@ using System;
 
 namespace PFramework
 {
-    public abstract class PBundle : IBundle
+    public abstract class SBundle : IBundle
     {
         private IManager _manager;
         public IManager Manager { get => _manager; set => _manager = value; }

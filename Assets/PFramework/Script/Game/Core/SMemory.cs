@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 namespace PFramework
 {
-    public class PMemory<T1, T2, T3> : IEnumerable
+    public class SMemory<T1, T2, T3> : IEnumerable
     {
         public Dictionary<T1, Dictionary<T2, T3>> values;
 
         public object Current => throw new System.NotImplementedException();
 
-        public PMemory()
+        public SMemory()
         {
             values = new Dictionary<T1, Dictionary<T2, T3>>();
         }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace PFramework
 {
-    public class RootUIControl : PControl
+    public class RootUIControl : SControl
     {
         protected override void initPControl()
         {

@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace PFramework
 {
-    public class PControl : PBundle
+    public class SControl : SBundle
     {
-        private PModel _model;
-        private PView _view;
+        private SModel _model;
+        private SView _view;
 
         //when register control it will find model and view
         public override void Install()
@@ -15,11 +15,11 @@ namespace PFramework
             base.Install();
             initPControl();
             Type classtype = this.GetType();
-            _model = createBundle<PModel>(classtype, "Model");
+            _model = createBundle<SModel>(classtype, "Model");
             _model.Control = this;
             _model.ModelCallback += HandleModelCallback;
             _model.Install();
-            _view = createBundle<PView>(classtype, "View");
+            _view = createBundle<SView>(classtype, "View");
             _view.Control = this;
             _view.Install();
         }

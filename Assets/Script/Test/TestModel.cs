@@ -1,7 +1,7 @@
 using PFramework;
 namespace game
 {
-    public class TestModel : PModel
+    public class TestModel : SModel
     {
 
     }

@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace PFramework
 {
-    public abstract class PView : PBundle
+    public abstract class SView : SBundle
     {
-        private PControl _control;
-        public PControl Control
+        private SControl _control;
+        public SControl Control
         {
             set { _control = value; }
             get { return _control; }
@@ -74,7 +74,7 @@ namespace PFramework
         Blocker
     }
 
-    public abstract class PUIView : PView
+    public abstract class SUIView : SView
     {
         public abstract UILayer GetViewLayer();
     }

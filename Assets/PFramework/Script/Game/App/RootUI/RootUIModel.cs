@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PFramework
 {
-    public class RootUIModel : PModel
+    public class RootUIModel : SModel
     {
         public override void Open()
         { 

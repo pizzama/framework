@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace game
 {
-    public class TestControl: PControl
+    public class TestControl: SControl
     {
         public override void Update()
         {
