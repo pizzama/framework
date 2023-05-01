@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 public enum UILayer
 {
     Tags,
@@ -20,8 +22,8 @@ public class SUIROOT : MonoBehaviour
     [SerializeField] private Transform _dialog;
     [SerializeField] private Transform _toast;
     [SerializeField] private Transform _blocker;
-
-    private Camera _uiCamera;
+    [SerializeField] private Camera _uiCamera;
+    [SerializeField] private CanvasScaler _canvasScaler;
 
     public static SUIROOT Instance;
 
@@ -30,6 +32,8 @@ public class SUIROOT : MonoBehaviour
         SUIROOT.Instance = this;
         if (_uiCamera == null)
             _uiCamera = this.transform.Find("UICamera").GetComponent<Camera>();
+        if (_canvasScaler == null)
+            _canvasScaler = this.GetComponent<CanvasScaler>();
         if (_tags == null)
             _tags = this.transform.Find("Tags").GetComponent<Transform>();
         if (_pend == null)
@@ -53,6 +57,7 @@ public class SUIROOT : MonoBehaviour
         {
             case UILayer.Popup:
                 result.SetParent(_popUp.transform);
+                // result.SetPositionAndRotation(postion, rotation);
                 break;
         }
     }
