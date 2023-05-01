@@ -11,7 +11,7 @@ public enum UILayer
     Toast,
     Blocker
 }
-public class PUIROOT : MonoBehaviour
+public class SUIROOT : MonoBehaviour
 {
     [SerializeField] private Transform _tags;
     [SerializeField] private Transform _pend;
@@ -23,14 +23,11 @@ public class PUIROOT : MonoBehaviour
 
     private Camera _uiCamera;
 
-    public static PUIROOT Instance;
-    private void Start()
-    {
-        PUIROOT.Instance = this;
-    }
+    public static SUIROOT Instance;
 
     private void Awake()
     {
+        SUIROOT.Instance = this;
         if (_uiCamera == null)
             _uiCamera = this.transform.Find("UICamera").GetComponent<Camera>();
         if (_tags == null)

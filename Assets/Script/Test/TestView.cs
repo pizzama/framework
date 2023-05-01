@@ -5,14 +5,15 @@ namespace game
 {
     public class TestView : SUIView
     {
-        public override UILayer GetViewLayer()
+        protected override UILayer GetViewLayer()
         {
-            throw new System.NotImplementedException();
+            return UILayer.Popup;
         }
 
-        public override Transform GetViewTransform()
+        protected override Transform GetViewTransform()
         {
-            throw new System.NotImplementedException();
+            RectTransform trans =  abManager.LoadResource<RectTransform>("ss/test", "Test");
+            return trans;  
         }
     }
 }

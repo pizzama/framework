@@ -4,14 +4,15 @@ namespace SFramework
 {
     public abstract class SUIView : SView
     {
-        public abstract UILayer GetViewLayer();
+        protected abstract UILayer GetViewLayer();
 
-        public abstract Transform GetViewTransform();
+        protected abstract Transform GetViewTransform();
 
         public override void Open()
         {
             UILayer layer = GetViewLayer();
             Transform trans = GetViewTransform();
+            SUIROOT.Instance.OpenUI(layer, trans);
         }
     }
 }

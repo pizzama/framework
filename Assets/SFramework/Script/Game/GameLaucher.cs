@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using game;
 
 namespace SFramework
 {
@@ -21,6 +22,7 @@ namespace SFramework
         private void initFrameworkBundle()
         {
             BundleManager.Instance.InstallBundle(new RootUIControl(), "", true);
+            BundleManager.Instance.InstallBundle(new TestControl(), "", true);
         }
 
         private void Update()

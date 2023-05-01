@@ -231,9 +231,9 @@ GameObject:
   - component: {fileID: 6028185829942018387}
   - component: {fileID: 365998956860339299}
   - component: {fileID: 444279960309167449}
-  - component: {fileID: 8751141292181751385}
+  - component: {fileID: 8381755247645289054}
   m_Layer: 5
-  m_Name: PUIROOT
+  m_Name: SUIROOT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -306,7 +306,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8751141292181751385
+--- !u!114 &8381755247645289054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -315,7 +315,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2930897337490550660}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b5758ad2895aaf48907be92a09f4bfd, type: 3}
+  m_Script: {fileID: 11500000, guid: 044e03fd9db601745b30799f25e492e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _tags: {fileID: 1399960675997336451}

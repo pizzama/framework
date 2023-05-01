@@ -9,7 +9,7 @@ namespace SFramework
 
         protected override void init()
         {
-            const string uiname = "PUIROOT";
+            const string uiname = "SUIROOT";
             bool hasUI = GameObject.Find(uiname);
             if (!hasUI)
             {
