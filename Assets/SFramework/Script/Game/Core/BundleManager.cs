@@ -45,7 +45,9 @@ namespace SFramework
 
         private void Update()
         {
-            foreach(KeyValuePair<string, Dictionary<string, IBundle>> result in _bundleMap)
+            if (_bundleMap == null)
+                return;
+            foreach (KeyValuePair<string, Dictionary<string, IBundle>> result in _bundleMap)
             {
                 foreach (KeyValuePair<string, IBundle> bundle in result.Value)
                 {
@@ -56,7 +58,9 @@ namespace SFramework
 
         private void FixUpdate()
         {
-            foreach(KeyValuePair<string, Dictionary<string, IBundle>> result in _bundleMap)
+            if (_bundleMap == null)
+                return;
+            foreach (KeyValuePair<string, Dictionary<string, IBundle>> result in _bundleMap)
             {
                 foreach (KeyValuePair<string, IBundle> bundle in result.Value)
                 {
@@ -67,7 +71,9 @@ namespace SFramework
 
         private void LateUpdate()
         {
-            foreach(KeyValuePair<string, Dictionary<string, IBundle>> result in _bundleMap)
+            if (_bundleMap == null)
+                return;
+            foreach (KeyValuePair<string, Dictionary<string, IBundle>> result in _bundleMap)
             {
                 foreach (KeyValuePair<string, IBundle> bundle in result.Value)
                 {
@@ -119,7 +125,7 @@ namespace SFramework
             return DeleteBundle(fullName, bundle.AliasName);
         }
 
-        public void InstallBundle(IBundle bundle, string alias="", bool withOpen = false)
+        public void InstallBundle(IBundle bundle, string alias = "", bool withOpen = false)
         {
             IBundle value = AddBundle(bundle, alias);
             value.Install();

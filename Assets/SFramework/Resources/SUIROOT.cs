@@ -46,12 +46,13 @@ public class SUIROOT : MonoBehaviour
             _blocker = this.transform.Find("Blocker").GetComponent<Transform>();
     }
 
-    public void OpenUI(UILayer layer, Transform trans)
+    public void OpenUI(UILayer layer, Transform trans, Vector3 postion = default, Quaternion rotation = default)
     {
+        Transform result = Instantiate(trans, postion, rotation);
         switch (layer)
         {
             case UILayer.Popup:
-                trans.SetParent(_popUp.transform);
+                result.SetParent(_popUp.transform);
                 break;
         }
     }
