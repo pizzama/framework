@@ -6,13 +6,16 @@ namespace SFramework
     {
         protected abstract UILayer GetViewLayer();
 
-        protected abstract Transform GetViewTransform();
+        protected abstract void SetViewTransform(out Transform trans, out Vector3 position, out Quaternion rotation);
 
         public override void Open()
         {
             UILayer layer = GetViewLayer();
-            Transform trans = GetViewTransform();
-            SUIROOT.Instance.OpenUI(layer, trans);
+            Transform trans = null;
+            Vector3 position = default;
+            Quaternion rotation = default;
+            SetViewTransform(out trans, out position, out rotation);
+            SUIROOT.Instance.OpenUI(layer, trans, position, rotation);
         }
     }
 }

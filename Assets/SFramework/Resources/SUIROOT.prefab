@@ -349,8 +349,8 @@ MonoBehaviour:
   _dialog: {fileID: 782270712957273906}
   _toast: {fileID: 3216291698215560614}
   _blocker: {fileID: 7403963021968785989}
-  _uiCamera: {fileID: 0}
-  _canvasScaler: {fileID: 0}
+  _uiCamera: {fileID: 5732736043239738598}
+  _canvasScaler: {fileID: -5973217036200991768}
 --- !u!1 &2963374397798589106
 GameObject:
   m_ObjectHideFlags: 0
