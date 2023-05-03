@@ -57,7 +57,6 @@ public class SUIROOT : MonoBehaviour
         {
             case UILayer.Popup:
                 result.SetParent(_popUp.transform);
-                // result.SetPositionAndRotation(postion, rotation);
                 break;
         }
     }
