@@ -55,8 +55,26 @@ public class SUIROOT : MonoBehaviour
         Transform result = Instantiate(trans, postion, rotation);
         switch (layer)
         {
+            case UILayer.Tags:
+                result.SetParent(_tags.transform);
+                break;
+            case UILayer.Pend:
+                result.SetParent(_pend.transform);
+                break;
+            case UILayer.Hud:
+                result.SetParent(_hud.transform);
+                break;
             case UILayer.Popup:
                 result.SetParent(_popUp.transform);
+                break;
+            case UILayer.Dialog:
+                result.SetParent(_dialog.transform);
+                break;
+            case UILayer.Toast:
+                result.SetParent(_toast.transform);
+                break;
+            case UILayer.Blocker:
+                result.SetParent(_blocker.transform);
                 break;
         }
     }
