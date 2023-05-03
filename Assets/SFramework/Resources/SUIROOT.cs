@@ -52,7 +52,7 @@ public class SUIROOT : MonoBehaviour
 
     public void OpenUI(UILayer layer, Transform trans, Vector3 postion = default, Quaternion rotation = default)
     {
-        Transform result = Instantiate(trans, postion, rotation);
+        Transform result = Instantiate(trans);
         switch (layer)
         {
             case UILayer.Tags:
@@ -77,6 +77,9 @@ public class SUIROOT : MonoBehaviour
                 result.SetParent(_blocker.transform);
                 break;
         }
+
+        result.position = postion;
+        result.rotation = rotation;
     }
 
     public void CloseUI(Transform trans)

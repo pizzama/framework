@@ -10,10 +10,11 @@ namespace game
             return UILayer.Popup;
         }
 
-        protected override Transform GetViewTransform()
+        protected override void SetViewTransform(out Transform trans, out Vector3 position, out Quaternion rotation)
         {
-            RectTransform trans =  abManager.LoadResource<RectTransform>("ss/test", "Test");
-            return trans;  
+            trans = abManager.LoadResource<RectTransform>("ss/test", "Test");
+            position = new Vector3(0, 0, 0);
+            rotation = Quaternion.Euler(0, 0, 180);
         }
     }
 }
