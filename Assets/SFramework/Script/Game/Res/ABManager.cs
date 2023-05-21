@@ -25,9 +25,9 @@ namespace SFramework
         private ABManifest _manifest;
         private void init()
         {
-            _abCache = new Dictionary<string, AssetBundle>();
-            _manifest = new ABManifest(); //主包的Bundle和依赖关系
-            _manifest.LoadAssetBundleManifest();
+            // _abCache = new Dictionary<string, AssetBundle>();
+            // _manifest = new ABManifest(); //主包的Bundle和依赖关系
+            // _manifest.LoadAssetBundleManifest();
         }
 
 

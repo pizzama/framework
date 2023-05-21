@@ -62,26 +62,28 @@ namespace SFramework
         {
 #if UNITY_EDITOR
             return AssetDatabase.GetAssetPathsFromAssetBundle(bundleVariant).Length != 0;
-#endif
+#else
             if (_allBundleVariants == null || _allBundleVariants.Count <= 0)
             {
                 return false;
             }
 
             return _allBundleVariants.Contains(bundleVariant);
+#endif      
         }
 
         public bool ExistsBundle(string bundlePath)
         {
 #if UNITY_EDITOR
             return AssetDatabase.GetAssetPathsFromAssetBundle(bundlePath).Length != 0;
-#endif
+#else   
             if (_allBundles == null || _allBundles.Count <= 0)
             {
                 return false;
             }
 
             return _allBundles.Contains(bundlePath);
+#endif
         }
 
         public string[] GetDependencies(string bundleName)

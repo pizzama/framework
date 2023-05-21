@@ -40,10 +40,12 @@ namespace SFramework
 
         public virtual void Open()
         {
+            enter();
         }
 
         public virtual async void OpenAsync()
         {
+            enterAsync();
             await Task.Yield();
         }
 
@@ -82,7 +84,7 @@ namespace SFramework
 
         }
 
-        protected async virtual void enterAsync()
+        protected virtual async void enterAsync()
         {
             await Task.Yield();
         }

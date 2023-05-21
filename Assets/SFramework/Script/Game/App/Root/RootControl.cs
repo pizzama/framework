@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SFramework
 {
-    public class RootUIControl : SControl
+    public class RootControl : SControl
     {
         protected override void init()
         {

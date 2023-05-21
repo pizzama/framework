@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SFramework
 {
-    public class UIManager : MonoBehaviour
+    public class RootManager : MonoBehaviour
     {
         private static BundleManager _instance;
         public static BundleManager Instance

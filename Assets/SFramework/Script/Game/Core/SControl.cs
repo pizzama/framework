@@ -26,9 +26,8 @@ namespace SFramework
 
         public override void Open()
         {
-            enter();
+            base.Open();
             OpenAsync();
-            enterAsync();
             _model.Open();
             _model.OpenAsync();
         }

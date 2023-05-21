@@ -4,8 +4,10 @@ using UnityEngine;
 
 namespace SFramework
 {
-    public class RootUIModel : SModel
+    public class RootModel : SModel
     {
+        public static string SCENEPREFIX = "$s$";
+        public static string UIPREFIX = "$u$";
         public override void Open()
         {
             ModelCallback?.Invoke();
