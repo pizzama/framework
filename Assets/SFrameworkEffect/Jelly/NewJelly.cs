@@ -15,6 +15,7 @@ public class NewJelly : MonoBehaviour
     private void Awake()
     {
         newJellyMat = GetComponent<Image>().material;
+        // newJellyMat = GetComponent<MeshRenderer>().material;
         lastPostion = transform.position;
         abstractPos = transform.position;
     }
@@ -22,7 +23,7 @@ public class NewJelly : MonoBehaviour
     private void FixedUpdate()
     {
         newJellyMat.SetFloat("_SizeY", GetComponent<RectTransform>().rect.max.y);
-
+        // newJellyMat.SetFloat("_SizeY", GetComponent<MeshRenderer>().bounds.max.y);
         Force = (lastPostion - abstractPos) * stiffness;
         velocity = (velocity + Force / mass) * damping;
         abstractPos += velocity;
