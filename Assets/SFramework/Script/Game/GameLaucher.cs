@@ -21,8 +21,7 @@ namespace SFramework
 
         private void initFrameworkBundle()
         {
-            BundleManager.Instance.InstallBundle(new RootControl(), "", true);
-            BundleManager.Instance.InstallBundle(new GameMainControl(), "", true);      
+            BundleManager.Instance.InstallBundle(new RootControl(), "", true);  
         }
 
         private void Update()
