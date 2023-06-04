@@ -86,8 +86,8 @@ namespace SFramework
                 return "";
             }
 
-            if _allBundleVariants.Contains(bundlePath)
-                return bundlePath;
+            if (_allBundleVariants.Contains(bundleVariant))
+                return bundleVariant;
             else
                 return "";
 #endif      
@@ -106,7 +106,7 @@ namespace SFramework
             {
                 return "";
             }
-            if _allBundles.Contains(bundlePath)
+            if (_allBundles.Contains(bundlePath))
                 return bundlePath;
             else
                 return "";
