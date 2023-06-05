@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 
 namespace SFramework
 {
+    /*
+    * ReflectionTools.Call("UnityEditor.EditorGUIUtility, UnityEditor", "DrawHorizontalSplitter", new Rect(0f,0f,100f,100f));
+    * GUIStyle style = ReflectionTools.GetProperty<GUIStyle>("UnityEditor.EditorStyles, UnityEditor", "toolbarSearchField");
+    */
     public class ReflectionTools
     {
         public static void Call(string typeName, string methodName, params object[] args)
@@ -39,7 +43,7 @@ namespace SFramework
             }
             return (T)result;
         }
-        
+
         public static T GetProperty<T>(string typeName, string propertyName)
         {
             return GetProperty<T>(null, typeName, propertyName);
