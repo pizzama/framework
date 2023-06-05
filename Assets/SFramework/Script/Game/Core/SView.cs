@@ -1,7 +1,6 @@
+using Cysharp.Threading.Tasks;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using UnityEngine;
 
 namespace SFramework
 {
@@ -13,11 +12,9 @@ namespace SFramework
             set { _control = value; }
             get { return _control; }
         }
-        protected ABManager abManager;
 
         public override void Install()
         {
-            abManager = ABManager.Instance;
             init();
         }
 
@@ -56,5 +53,6 @@ namespace SFramework
         {
 
         }
+
     }
 }

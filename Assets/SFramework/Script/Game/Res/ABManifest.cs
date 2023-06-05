@@ -32,12 +32,25 @@ namespace SFramework
 
         public void LoadAssetBundleManifest()
         {
-#if !UNITY_EDITOR
-            _mainBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath,ABPathHelper.GetPlatformName()));
-            _manifest = _mainBundle.LoadAsset<AssetBundleManifest>("AssetBundleMainfest");
-            _allBundleVariants = _manifest.GetAllAssetBundlesWithVariant().ToList();
-            _allBundles = _manifest.GetAllAssetBundles().ToList();
-#endif
+            string path = Path.Combine(Application.streamingAssetsPath, ABPathHelper.GetPlatformName());
+            try
+            {
+                _mainBundle = AssetBundle.LoadFromFile(path);
+                if (_mainBundle != null)
+                {
+                    _manifest = _mainBundle.LoadAsset<AssetBundleManifest>("AssetBundleMainfest");
+                    _allBundleVariants = _manifest.GetAllAssetBundlesWithVariant().ToList();
+                    _allBundles = _manifest.GetAllAssetBundles().ToList();
+                }
+                else
+                {
+                    Debug.LogWarning("not found mainBundle at path:" + path);
+                }
+            }
+            catch (System.Exception)
+            {
+                Debug.LogWarning("not found mainBundle at path:" + path);
+            }
         }
 
         public void LoadAssetBundleManifest(byte[] bytes)
@@ -58,31 +71,44 @@ namespace SFramework
             _allBundles = _manifest.GetAllAssetBundles().ToList();
         }
 
-        public bool ExistsBundleWithVariant(string bundleVariant)
+        public string ExistsBundleWithVariant(string bundleVariant)
         {
 #if UNITY_EDITOR
-            return AssetDatabase.GetAssetPathsFromAssetBundle(bundleVariant).Length != 0;
+            string[] result = AssetDatabase.GetAssetPathsFromAssetBundle(bundleVariant);
+            if (result.Length > 0)
+                return result[0];
+            else
+                return "";
 #else
             if (_allBundleVariants == null || _allBundleVariants.Count <= 0)
             {
-                return false;
+                return "";
             }
 
-            return _allBundleVariants.Contains(bundleVariant);
+            if _allBundleVariants.Contains(bundlePath)
+                return bundlePath;
+            else
+                return "";
 #endif      
         }
 
-        public bool ExistsBundle(string bundlePath)
+        public string ExistsBundle(string bundlePath)
         {
 #if UNITY_EDITOR
-            return AssetDatabase.GetAssetPathsFromAssetBundle(bundlePath).Length != 0;
+            string[] result = AssetDatabase.GetAssetPathsFromAssetBundle(bundlePath);
+            if (result.Length > 0)
+                return result[0];
+            else
+                return "";
 #else   
             if (_allBundles == null || _allBundles.Count <= 0)
             {
-                return false;
+                return "";
             }
-
-            return _allBundles.Contains(bundlePath);
+            if _allBundles.Contains(bundlePath)
+                return bundlePath;
+            else
+                return "";
 #endif
         }
 

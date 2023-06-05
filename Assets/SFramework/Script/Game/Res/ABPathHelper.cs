@@ -22,7 +22,15 @@ namespace SFramework
             }
             else
             {
-                return StreamingAssetsPath + relativePath;
+                resPersistentPath = string.Format("{0}{1}", StreamingAssetsPath, relativePath);
+                if(File.Exists(resPersistentPath))
+                {
+                    return resPersistentPath;
+                }
+                else
+                {
+                    throw new NotFoundException("not found file:" + resPersistentPath);
+                }
             }
         }
 

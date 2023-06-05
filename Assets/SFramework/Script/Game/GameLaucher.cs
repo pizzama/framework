@@ -1,28 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using game;
 
 namespace SFramework
 {
-    public class GameLaucher : MonoBehaviour
+    public abstract class GameLaucher : MonoBehaviour
     {
-        private void Start()
-        {
-
-        }
-
         private void Awake()
         {
             //Hold GameLauncher all the time
             DontDestroyOnLoad(transform.gameObject);
             initFrameworkBundle();
+            installBundle();
         }
 
         private void initFrameworkBundle()
         {
-            BundleManager.Instance.InstallBundle(new RootControl(), "", true);  
+            BundleManager.Instance.InstallBundle(new RootControl(), "", true);
         }
+
+        protected abstract void installBundle();
 
         private void Update()
         {

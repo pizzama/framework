@@ -1,7 +1,6 @@
 using UnityEngine.Networking;
 using Cysharp.Threading.Tasks;
 using System;
-using UnityEngine;
 
 namespace SFramework
 {
@@ -20,6 +19,11 @@ namespace SFramework
         {
             base.Install();
             init();
+        }
+
+        public override void Open()
+        {
+            base.Open();
         }
 
         public override void Update()
@@ -113,12 +117,6 @@ namespace SFramework
             {
                 throw new Exception($"you use Web Request Error.{webRequest.url} Message{e.Message}");
             }
-        }
-
-        protected async UniTask<T> ResourceLoad<T>(string name) where T: UnityEngine.Object
-        {
-            var asyncOperation = Resources.LoadAsync<T>(name);
-            return (T)await asyncOperation;
         }
     }
 }

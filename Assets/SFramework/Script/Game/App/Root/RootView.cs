@@ -6,11 +6,13 @@ namespace SFramework
     public class RootView : SView
     {
         public static SUIROOT UIROOT;
-        private Dictionary<string, GameObject> _sceneDict;
-        protected SUIROOT uiRoot;
+        protected static Dictionary<string, GameObject> _sceneDict;
+
+        protected AssetsManager assetManager;
 
         public override void Install()
         {
+            assetManager = AssetsManager.Instance;
             //init ui
             initUI();
             initScene();
@@ -20,44 +22,35 @@ namespace SFramework
         private void initUI()
         {
             const string uiname = "SUIROOT";
-            GameObject uiroot = GameObject.Find(uiname);
-            if (!uiroot)
+            if (!UIROOT)
             {
                 var uirootPrefab = Resources.Load<GameObject>(uiname);
                 if (!uirootPrefab)
                 {
                     throw new NotFoundException(uiname);
                 }
-                uiroot = Object.Instantiate(uirootPrefab);
+                GameObject uiroot = Object.Instantiate(uirootPrefab);
                 Object.DontDestroyOnLoad(uiroot);
-                uiRoot = ComponentTools.GetOrAddComponent<SUIROOT>(uiroot);
-                UIROOT = uiRoot;
+                UIROOT = ComponentTools.GetOrAddComponent<SUIROOT>(uiroot);
             }
         }
 
         private void initScene()
         {
             //init current scene
-            foreach (GameObject obj in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
+            if (_sceneDict != null)
             {
-                //遍历场景中的GameObject 记录需要的object
-                if (obj.name.IndexOf(RootModel.SCENEPREFIX) > 0)
+                _sceneDict = new Dictionary<string, GameObject>();
+                foreach (GameObject obj in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
                 {
-                    _sceneDict[obj.name] = obj;
+                    //遍历场景中的GameObject 记录需要的object
+                    if (obj.name.IndexOf(RootModel.SCENEPREFIX) > 0)
+                    {
+                        _sceneDict[obj.name] = obj;
+                    }
                 }
             }
-        }
-
-        public override void Open()
-        {
 
         }
-
-        // public override async void OpenAsync()
-        // {
-        //     Sprite sp = await abManager.LoadResourceAsync<Sprite>("a_png", "a");
-        //     Debug.Log("spppp");
-        // }
-
     }
 }
