@@ -1,7 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
+using UnityEngine;
 
 namespace SFramework
 {
@@ -93,7 +92,7 @@ namespace SFramework
                 Debug.LogError(string.Format("field {0} does not exist!", fieldName));
                 return defaultValue;
             }
-            object result = field.GetValue(instance, null);
+            object result = field.GetValue(instance);
             if (null == result)
                 return defaultValue;
             if (!(result is T))
