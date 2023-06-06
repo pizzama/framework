@@ -6,7 +6,7 @@ namespace SFramework
     public class RootView : SView
     {
         public static SUIROOT UIROOT;
-        protected static Dictionary<string, GameObject> _sceneDict;
+        protected static Dictionary<string, GameObject> sceneDict;
 
         protected AssetsManager assetManager;
 
@@ -38,19 +38,25 @@ namespace SFramework
         private void initScene()
         {
             //init current scene
-            if (_sceneDict != null)
+            if (sceneDict == null)
             {
-                _sceneDict = new Dictionary<string, GameObject>();
+                sceneDict = new Dictionary<string, GameObject>();
                 foreach (GameObject obj in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
                 {
                     //遍历场景中的GameObject 记录需要的object
-                    if (obj.name.IndexOf(RootModel.SCENEPREFIX) > 0)
+                    if (obj.name.IndexOf(RootModel.SCENEPREFIX) >= 0)
                     {
-                        _sceneDict[obj.name] = obj;
+                        sceneDict[obj.name] = obj;
                     }
                 }
             }
+        }
 
+        public GameObject GetDefineSceneObject(string name)
+        {
+            GameObject go = null;
+            sceneDict.TryGetValue(RootModel.SCENEPREFIX + name, out go);
+            return go;
         }
     }
 }
