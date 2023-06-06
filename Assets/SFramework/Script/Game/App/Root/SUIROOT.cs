@@ -53,33 +53,41 @@ public class SUIROOT : MonoBehaviour
     public void OpenUI(UILayer layer, Transform trans, Vector3 postion = default, Quaternion rotation = default)
     {
         Transform result = Instantiate(trans);
+        Transform parent = null;
         switch (layer)
         {
             case UILayer.Tags:
-                result.SetParent(_tags.transform);
+                parent = _tags.transform;
                 break;
             case UILayer.Pend:
-                result.SetParent(_pend.transform);
+                parent = _pend.transform;
                 break;
             case UILayer.Hud:
-                result.SetParent(_hud.transform);
+                parent = _hud.transform;
                 break;
             case UILayer.Popup:
-                result.SetParent(_popUp.transform);
+                parent = _popUp.transform;
                 break;
             case UILayer.Dialog:
-                result.SetParent(_dialog.transform);
+                parent = _dialog.transform;
                 break;
             case UILayer.Toast:
-                result.SetParent(_toast.transform);
+                parent = _toast.transform;
                 break;
             case UILayer.Blocker:
-                result.SetParent(_blocker.transform);
+                parent = _blocker.transform;
                 break;
         }
-
-        result.position = postion;
-        result.rotation = rotation;
+        if(!parent)
+        {
+            result.SetParent(parent, false);
+            result.position = postion;
+            result.rotation = rotation;
+        }
+        else
+        {
+            Debug.LogWarning("not found ui parent");
+        }
     }
 
     public void CloseUI(Transform trans)
