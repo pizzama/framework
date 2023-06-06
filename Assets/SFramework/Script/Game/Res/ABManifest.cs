@@ -32,9 +32,10 @@ namespace SFramework
 
         public void LoadAssetBundleManifest()
         {
-            string path = Path.Combine(Application.streamingAssetsPath, ABPathHelper.GetPlatformName());
+            // string path = Path.Combine(Application.streamingAssetsPath, ABPathHelper.GetPlatformName());
             try
             {
+                string path = ABPathHelper.GetResPathInPersistentOrStream(ABPathHelper.GetPlatformName());
                 _mainBundle = AssetBundle.LoadFromFile(path);
                 if (_mainBundle != null)
                 {
@@ -47,9 +48,9 @@ namespace SFramework
                     Debug.LogWarning("not found mainBundle at path:" + path);
                 }
             }
-            catch (System.Exception)
+            catch (Exception e)
             {
-                Debug.LogWarning("not found mainBundle at path:" + path);
+                Debug.LogWarning("not found mainBundle at path:" + e.ToString());
             }
         }
 
