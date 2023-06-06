@@ -17,7 +17,7 @@ namespace game
             // trans = assetManager.LoadResource<Transform>("Test");
             trans = assetManager.LoadResource<RectTransform>("ss/test", "Test");
             position = new Vector3(0, 0, 0);
-            rotation = Quaternion.Euler(0, 0, 180);
+            rotation = Quaternion.Euler(0, 0, 0);
             // var tt = assetManager.LoadResource<TextAsset>("test11", "test1");
             // Debug.Log(tt);
         }
