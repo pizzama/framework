@@ -24,8 +24,8 @@ namespace game
 
         protected override void enter()
         {
-            Image img = getGameObjectFromGoDict("Image").GetComponent<Image>();
-            var imgTexture = assetManager.LoadResource<Texture2D>("activity_btn_arrow", "activity_btn_arrow");
+            Image img = getAssetFromGoDict<Image>("image");
+            var imgTexture = assetManager.LoadResource<Texture2D>("arrow");
             Sprite sprite = Sprite.Create(imgTexture, new Rect(0, 0, imgTexture.width, imgTexture.height), new Vector2(0.5f, 0.5f));
             Debug.Log("test view enter:" + sprite);
             img.sprite = sprite;

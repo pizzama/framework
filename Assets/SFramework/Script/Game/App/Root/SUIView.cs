@@ -16,11 +16,14 @@ namespace SFramework
             goDict = new Dictionary<string, GameObject>();
         }
 
-        protected GameObject getGameObjectFromGoDict(string key)
+        protected T getAssetFromGoDict<T>(string key)
         {
             GameObject go = null;
             goDict.TryGetValue(key, out go);
-            return go;
+            if (go != null)
+                return go.GetComponent<T>();
+            else
+                return default(T);
         }
 
         public override void Open()
