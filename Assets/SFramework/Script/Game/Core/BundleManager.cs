@@ -22,6 +22,8 @@ namespace SFramework
             }
         }
 
+        private List<BundleParams> _params;
+
         protected virtual void Awake()
         {
             if (!Application.isPlaying)
@@ -80,12 +82,15 @@ namespace SFramework
                     bundle.Value.LateUpdate();
                 }
             }
+
+            executeBundleParams();
         }
 
         private SMemory<string, string, IBundle> _bundleMap;
         private void init()
         {
             _bundleMap = new SMemory<string, string, IBundle>();
+            _params = new List<BundleParams>();
         }
 
         public IBundle GetBundle(string name, string alias)
@@ -172,6 +177,30 @@ namespace SFramework
             {
                 bd.Open();
             }
+        }
+
+        public void AddBundleParams(BundleParams value)
+        {
+            _params.Add(value);
+        }
+
+        private void executeBundleParams()
+        {
+            for (int i = 0; i < _params.Count; i++)
+            {
+                BundleParams pa = _params[i];
+                _params.Remove(pa);
+                i--;
+
+                IBundle control = BundleManager.Instance.GetBundle(pa.BundleFullName, pa.Alias);
+                if (control != null)
+                    control.HandleMessage(pa.MessageId, pa.MessageData, pa.MessageSender);
+                else
+                    Debug.LogWarning($"not found broadcast target{pa.NameSpace}.{pa.ClassName}");
+            }
+
+
+
         }
     }
 }

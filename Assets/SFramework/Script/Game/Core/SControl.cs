@@ -48,14 +48,8 @@ namespace SFramework
 
         public override void BroadcastMessage(string messageId, string nameSpace, string className, object messageData, string alias, object messageSender)
         {
-            string bundleFullName = nameSpace + "." + className;
-            if (alias == "")
-                alias = className;
-            IBundle control = BundleManager.Instance.GetBundle(bundleFullName, alias);
-            if (control != null)
-                control.HandleMessage(messageId, messageData, messageSender);
-            else
-                Debug.LogWarning($"not found broadcast target{nameSpace}.{className}");
+            BundleParams bparams = new BundleParams();
+            BundleManager.Instance.AddBundleParams(bparams);
         }
 
         public override void HandleMessage(string messageId, object messageData, object messageSender)
