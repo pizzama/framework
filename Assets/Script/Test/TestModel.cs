@@ -1,6 +1,6 @@
-using AccountHeadIconEvent;
 using SFramework;
 using UnityEngine;
+using LanguageData;
 
 namespace game
 {
@@ -9,17 +9,15 @@ namespace game
         protected override void enter()
         {
             Debug.Log("test model enter");
-            GetConfig("AccountHeadIcon_event");
         }
 
         protected override async void enterAsync()
         {
             Debug.Log("test model enterasync");
-            for (int i = 0; i < 100; i++)
-            {
-                AccountHeadIcon_event_datas tt = await ConfigManager.Instance.GetConfigAsync<AccountHeadIcon_event_datas>();
-                Debug.Log(tt.ToString());
-            }
+            Language_data_datas tt = await ConfigManager.Instance.GetConfigAsync<Language_data_datas>();
+            Language_data data = null;
+            tt.Datamap.TryGetValue("24", out data);
+            Debug.Log(tt.ToString());
             await GetData("");
         }
     }

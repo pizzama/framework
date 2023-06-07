@@ -1,6 +1,5 @@
 using System;
 using Cysharp.Threading.Tasks;
-using AccountHeadIconEvent;
 using UnityEngine;
 using Google.Protobuf;
 
@@ -12,32 +11,13 @@ namespace SFramework
         public static string UIPREFIX = "$u$";
 
         protected AssetsManager assetManager;
+        protected ConfigManager configManager;
 
         public override void Install()
         {
             assetManager = AssetsManager.Instance;
+            configManager = ConfigManager.Instance;
             base.Install();
-        }
-
-        public void GetConfig(string name)
-        {
-            // byte[] bytes = assetManager.LoadData($"bytes/{name}.bytes");
-
-            // for (int i = 0; i < 100; i++)
-            // {
-            //     AccountHeadIcon_event_datas tt = ConfigManager.Instance.GetConfig<AccountHeadIcon_event_datas>();
-            //     Debug.Log(tt.ToString());
-            // }
-
-            // AccountHeadIcon_event_datas tt = new AccountHeadIcon_event_datas();
-            // CodedInputStream ss = new CodedInputStream(bytes);
-            // tt.MergeFrom(ss);
-            // for (int i = 0; i < tt.Datas.Count; i++)
-            // {
-            //     AccountHeadIcon_event dt = tt.Datas[i];
-            //     Debug.Log("aaaaaaaa:" + dt.ToString());
-            // }
-
         }
 
         // public override async void OpenAsync()
