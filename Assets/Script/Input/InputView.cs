@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace game
 {
-    public class CenterView : SUIView
+    public class InputView : SUIView
     {
         protected override UILayer GetViewLayer()
         {

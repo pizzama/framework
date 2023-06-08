@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace game
 {
-    public class CenterControl: SControl
+    public class InputControl: SControl
     {
         protected override void enter()
         {

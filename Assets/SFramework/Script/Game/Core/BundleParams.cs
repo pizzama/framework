@@ -10,12 +10,7 @@ namespace SFramework
         private string _alias;
         public string Alias
         {
-            get
-            {
-                if (_alias == "")
-                    return ClassName;
-                return _alias;
-            }
+            get { return _alias == "" ? ClassName : _alias; }
             set { _alias = value; }
         }
         public object MessageSender;

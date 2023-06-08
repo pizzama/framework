@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace game
 {
-    public class CenterModel : RootModel
+    public class InputModel : RootModel
     {
         protected override void enter()
         {
