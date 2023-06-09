@@ -50,7 +50,7 @@ namespace SFramework
             }
             catch (Exception e)
             {
-                Debug.LogWarning("not found mainBundle at path:" + e.ToString());
+                Debug.LogWarning(e.ToString());
             }
         }
 

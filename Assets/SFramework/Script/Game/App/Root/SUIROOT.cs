@@ -52,7 +52,6 @@ public class SUIROOT : MonoBehaviour
 
     public void OpenUI(UILayer layer, Transform trans, Vector3 postion = default, Quaternion rotation = default)
     {
-        Transform result = Instantiate(trans);
         Transform parent = null;
         switch (layer)
         {
@@ -78,9 +77,10 @@ public class SUIROOT : MonoBehaviour
                 parent = _blocker.transform;
                 break;
         }
-        if(!parent)
+        if(parent != null)
         {
-            result.SetParent(parent, false);
+            Transform result = Instantiate(trans, parent, false);
+            // result.SetParent(parent, false);
             result.position = postion;
             result.rotation = rotation;
         }
