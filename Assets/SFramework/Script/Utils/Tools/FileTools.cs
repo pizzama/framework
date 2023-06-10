@@ -6,17 +6,13 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Cysharp.Threading.Tasks;
+using UnityEngine.Networking;
 
 namespace SFramework
 {
-    public partial class FileTools
+    public class FileTools
     {
-        public delegate void CommonPopDelegate();
-        //pc
-        private static string preSavePath = Application.persistentDataPath + "/";
-
-        public static Dictionary<string, XmlDocument> xmlDic = new Dictionary<string, XmlDocument>();
-
         /// <summary>
         /// 把文件写到文档目录存起来
         /// </summary>
@@ -25,7 +21,6 @@ namespace SFramework
         /// <param name="length">Length.</param>
         public static void SaveFile(string path, byte[] info)
         {
-            path = preSavePath + path;
             int length = info.Length;
             Stream sw;
             FileInfo file = new FileInfo(path);
@@ -48,7 +43,6 @@ namespace SFramework
 
         public static void CreateOrOPenFile(string path, string info)
         {
-            path = preSavePath + path;
             //路径、文件名、写入内容
             StreamWriter sw;
             FileInfo fi = new FileInfo(path);
@@ -58,32 +52,49 @@ namespace SFramework
             sw.Dispose();
         }
 
-        /// <summary>
-        /// 把文件写到文档目录存起来
-        /// </summary>
-        /// <param name="path">Path.</param>
-        /// <param name="info">Info.</param>
-        /// <param name="length">Length.</param>
-        public static void LoadFile(string path, byte[] info)
+        public static byte[] ReadFile(string path)
         {
-            path = preSavePath + path;
-            int length = info.Length;
-            Stream sw;
-            FileInfo file = new FileInfo(path);
+            byte[] bytes;
+            using (FileStream fs = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                bytes = new byte[fs.Length];
+                fs.Read(bytes, 0, (int)fs.Length);
+                fs.Close();
+                fs.Dispose();
+            }
+
+            return bytes;
+        }
+
+        public static async UniTask<byte[]> ReadFileAsync(string path)
+        {
             try
             {
-                if (file.Exists)
+                UnityWebRequest webRequest = UnityWebRequest.Get(path);
+                await webRequest.SendWebRequest();
+                while (!webRequest.isDone)
                 {
-                    file.Delete();
+                    if (webRequest.result == UnityWebRequest.Result.ProtocolError)
+                    {
+                        break;
+                    }
+
+                    await UniTask.Yield();
                 }
-                sw = file.Create();
-                sw.Write(info, 0, length);
-                sw.Close();//关闭流
-                sw.Dispose();//销毁流
+
+                if (!string.IsNullOrEmpty(webRequest.error))
+                {
+                    throw new Exception($"you use Web Request Error.{path} Message{webRequest.error}");
+                }
+
+                var result = webRequest.downloadHandler.data;
+                webRequest.Dispose();
+
+                return result;
             }
             catch (Exception e)
             {
-                Debug.LogError("saveFile failed:" + e.ToString());
+                throw new Exception($"you use Web Request Error.{path} Message{e.Message}");
             }
         }
 

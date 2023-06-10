@@ -1,4 +1,4 @@
-﻿Shader "Base/BackBlur"
+﻿Shader "SFramework/Base/BackBlur"
 {
     Properties
     {

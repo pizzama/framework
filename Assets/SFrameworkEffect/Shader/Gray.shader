@@ -1,4 +1,4 @@
-﻿Shader "Base/Gray"
+﻿Shader "SFramework/Base/Gray"
 {
     Properties
     {

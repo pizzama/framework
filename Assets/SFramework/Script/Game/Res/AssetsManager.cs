@@ -100,15 +100,17 @@ namespace SFramework
 
         public byte[] LoadData(string path)
         {
-            path = ABPathHelper.GetResPathInPersistentOrStream(path);
-            byte[] bytes;
-            using (FileStream fs = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            try
             {
-                bytes = new byte[fs.Length];
-                fs.Read(bytes, 0, (int)fs.Length);
+                path = ABPathHelper.GetResPathInPersistentOrStream(path);
+                return FileTools.ReadFile(path);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning(e);
+                return null;
             }
 
-            return bytes;
         }
 
         public async UniTask<byte[]> LoadDataAsync(string path)
@@ -116,31 +118,13 @@ namespace SFramework
             try
             {
                 path = ABPathHelper.GetResPathInPersistentOrStream(path);
-                UnityWebRequest webRequest = UnityWebRequest.Get(path);
-                await webRequest.SendWebRequest();
-                while (!webRequest.isDone)
-                {
-                    if (webRequest.result == UnityWebRequest.Result.ProtocolError)
-                    {
-                        break;
-                    }
-
-                    await UniTask.Yield();
-                }
-
-                if (!string.IsNullOrEmpty(webRequest.error))
-                {
-                    throw new Exception($"you use Web Request Error.{path} Message{webRequest.error}");
-                }
-
-                var result = webRequest.downloadHandler.data;
-                webRequest.Dispose();
-
+                byte[] result = await FileTools.ReadFileAsync(path);
                 return result;
             }
             catch (Exception e)
             {
-                throw new Exception($"you use Web Request Error.{path} Message{e.Message}");
+                Debug.LogWarning(e);
+                return null;
             }
         }
 
