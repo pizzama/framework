@@ -118,6 +118,8 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _Temperature: 0
+    - _Tint: 0
     - _UVSec: 0
     - _UseAoMap: 0
     - _UseColorMap: 0
