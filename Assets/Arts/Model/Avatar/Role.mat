@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Role
-  m_Shader: {fileID: -6465566751694194690, guid: 316f9fed382f0d54dac4ab9753921d24,
+  m_Shader: {fileID: -6465566751694194690, guid: 1073be48bf7d8004883eea9dd5338b07,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -103,7 +103,7 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EdgeWidth: 0.2
+    - _EdgeWidth: 0.02
     - _EnvironmentReflections: 1
     - _FresnelPower: 1
     - _GlossMapScale: 0
@@ -137,7 +137,8 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EdgeColor: {r: 1, g: 1, b: 1, a: 0}
+    - _Direction: {r: 1, g: 1, b: 1, a: 0}
+    - _EdgeColor: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _PresnelColor: {r: 0, g: 0, b: 0, a: 0}
     - _RimColor: {r: 0, g: 0.090218954, b: 0.7924528, a: 0}
