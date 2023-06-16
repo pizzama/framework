@@ -6,6 +6,8 @@ namespace SFramework
 {
     public class RootManager
     {
+        public static string SCENEPREFIX = "$s$";
+        public static string UIPREFIX = "$u$";
         private static RootManager _instance;
         public static RootManager Instance
         {
@@ -52,7 +54,7 @@ namespace SFramework
                 foreach (GameObject obj in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
                 {
                     //遍历场景中的GameObject 记录需要的object
-                    if (obj.name.IndexOf(RootModel.SCENEPREFIX) >= 0)
+                    if (obj.name.IndexOf(RootManager.SCENEPREFIX) >= 0)
                     {
                         _sceneDict[obj.name] = obj;
                     }

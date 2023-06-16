@@ -7,9 +7,6 @@ namespace SFramework
 {
     public class RootModel : SModel
     {
-        public static string SCENEPREFIX = "$s$";
-        public static string UIPREFIX = "$u$";
-
         protected AssetsManager assetManager;
         protected ConfigManager configManager;
 
