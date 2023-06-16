@@ -1,6 +1,12 @@
 
 namespace SFramework
 {
+    public enum OpenType
+    {
+        Sequence,
+        Parallel,
+    }
+
     public struct BundleParams
     {
         public string MessageId;
@@ -8,6 +14,7 @@ namespace SFramework
         public string ClassName;
         public object MessageData;
         private string _alias;
+        
         public string Alias
         {
             get { return _alias == "" ? ClassName : _alias; }
@@ -16,7 +23,7 @@ namespace SFramework
         public object MessageSender;
         public int Sort;
 
-        public string BundleFullName
+        public string ClassPath
         {
             get { return NameSpace + "." + ClassName; }
         }

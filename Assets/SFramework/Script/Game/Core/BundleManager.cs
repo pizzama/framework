@@ -23,7 +23,7 @@ namespace SFramework
         }
 
         private List<BundleParams> _messageParams;
-        private List<BundleParams> _openParams;
+        private List<BundleParams> _openSequenceParams;
 
         protected virtual void Awake()
         {
@@ -92,7 +92,7 @@ namespace SFramework
         {
             _bundleMap = new SMemory<string, string, IBundle>();
             _messageParams = new List<BundleParams>();
-            _openParams = new List<BundleParams>();
+            _openSequenceParams = new List<BundleParams>();
         }
 
         public IBundle GetBundle(string name, string alias)
@@ -182,6 +182,24 @@ namespace SFramework
             }
         }
 
+        public void OpenControl(BundleParams value)
+        {
+            BundleManager manager = BundleManager.Instance;
+            IBundle bd = manager.GetBundle(value.ClassPath, value.Alias);
+            if (bd == null)
+            {
+                SControl ctl = ObjectTools.CreateInstance<SControl>(value.NameSpace, value.ClassName);
+                if (ctl == null)
+                    throw new NotFoundException($"class {value.NameSpace}.{value.ClassName} is miss!");
+                InstallBundle(ctl, value.Alias);
+                ctl.Open();
+            }
+            else
+            {
+                bd.Open();
+            }
+        }
+
         public void AddMessageParams(BundleParams value)
         {
             _messageParams.Add(value);
@@ -189,7 +207,7 @@ namespace SFramework
 
         public void AddOpenParams(BundleParams value)
         {
-            _openParams.Add(value);
+            _openSequenceParams.Add(value);
         }
 
         private void handleMessageParams()
@@ -200,7 +218,7 @@ namespace SFramework
                 _messageParams.Remove(pa);
                 i--;
 
-                IBundle control = BundleManager.Instance.GetBundle(pa.BundleFullName, pa.Alias);
+                IBundle control = BundleManager.Instance.GetBundle(pa.ClassPath, pa.Alias);
                 if (control != null)
                     control.HandleMessage(pa);
                 else

@@ -46,29 +46,41 @@ namespace SFramework
             _model.ModelCallback -= HandleModelCallback;
         }
 
-        public virtual void BroadcastMessage(string messageId, string nameSpace, string className, object messageData, string alias, object messageSender)
+        public virtual void BroadcastMessage(string messageId, string nameSpace, string className, object messageData, string alias = "", int sort = 0)
         {
-            BundleParams bdParams = new BundleParams(){
+            BundleParams bdParams = new BundleParams()
+            {
                 MessageId = messageId,
                 NameSpace = nameSpace,
                 ClassName = className,
                 MessageData = messageData,
                 Alias = alias,
-                MessageSender = messageSender,
+                MessageSender = this,
+                Sort = sort,
             };
             BundleManager.Instance.AddMessageParams(bdParams);
         }
 
-        public virtual void OpenControl(string nameSpace, string className, object messageData, string alias, object messageSender)
+        public virtual void OpenControl(string nameSpace, string className, object messageData, bool isSequence, string alias = "", int sort = 0)
         {
-            BundleParams bdParams = new BundleParams(){
+            BundleParams bdParams = new BundleParams()
+            {
                 MessageId = "",
                 NameSpace = nameSpace,
                 ClassName = className,
                 MessageData = messageData,
                 Alias = alias,
-                MessageSender = messageSender,
+                MessageSender = this,
+                Sort = 0,
             };
+            if (isSequence)
+            {
+                BundleManager.Instance.AddOpenParams(bdParams);
+            }
+            else
+            {
+                BundleManager.Instance.OpenControl(bdParams);
+            }
         }
 
         public override void HandleMessage(BundleParams value)
