@@ -1,16 +1,71 @@
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.Rendering.Universal;
 
 namespace SFramework
 {
-    public class RootManager : MonoBehaviour
+    public class RootManager
     {
-        private static BundleManager _instance;
-        public static BundleManager Instance
+        private static RootManager _instance;
+        public static RootManager Instance
         {
             get
             {
+                if (_instance == null)
+                    _instance = new RootManager();
                 return _instance;
             }
         }
+
+        private SUIROOT _uiRoot;
+        private Dictionary<string, GameObject> _sceneDict;
+
+        private RootManager()
+        {
+            initUI();
+            collectScene();
+            collectCamera();
+        }
+
+        private void initUI()
+        {
+            const string uiName = "SUIROOT";
+            if (!_uiRoot)
+            {
+                var rootPrefab = Resources.Load<GameObject>(uiName);
+                if (!rootPrefab)
+                {
+                    throw new NotFoundException(uiName);
+                }
+                GameObject uiRoot = Object.Instantiate(rootPrefab);
+                Object.DontDestroyOnLoad(uiRoot);
+                _uiRoot = ComponentTools.GetOrAddComponent<SUIROOT>(uiRoot);
+            }
+        }
+
+        private void collectScene()
+        {
+            //init current scene
+            if (_sceneDict == null)
+            {
+                _sceneDict = new Dictionary<string, GameObject>();
+                foreach (GameObject obj in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
+                {
+                    //遍历场景中的GameObject 记录需要的object
+                    if (obj.name.IndexOf(RootModel.SCENEPREFIX) >= 0)
+                    {
+                        _sceneDict[obj.name] = obj;
+                    }
+                }
+            }
+        }
+
+        private void collectCamera()
+        {
+            UniversalAdditionalCameraData cameraData = Camera.main.GetUniversalAdditionalCameraData();
+            cameraData.cameraStack.Add(_uiRoot.UICamera);
+        }
+
+
     }
 }
