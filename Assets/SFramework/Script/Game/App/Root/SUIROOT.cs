@@ -27,6 +27,11 @@ public class SUIROOT : MonoBehaviour
 
     public static SUIROOT Instance;
 
+    public Camera UICamera
+    {
+        get { return _uiCamera; }
+    }
+
     private void Awake()
     {
         SUIROOT.Instance = this;
@@ -77,7 +82,7 @@ public class SUIROOT : MonoBehaviour
                 parent = _blocker.transform;
                 break;
         }
-        if(parent != null)
+        if (parent != null)
         {
             Transform result = Instantiate(trans, parent, false);
             // result.SetParent(parent, false);

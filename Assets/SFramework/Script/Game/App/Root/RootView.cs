@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace SFramework
 {
@@ -49,6 +50,8 @@ namespace SFramework
                         sceneDict[obj.name] = obj;
                     }
                 }
+                UniversalAdditionalCameraData cameraData = Camera.main.GetUniversalAdditionalCameraData();
+                cameraData.cameraStack.Add(UIROOT.UICamera);
             }
         }
 
