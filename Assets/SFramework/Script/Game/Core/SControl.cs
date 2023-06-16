@@ -14,12 +14,12 @@ namespace SFramework
         {
             base.Install();
             init();
-            Type classtype = this.GetType();
-            _model = createBundle<SModel>(classtype, "Model");
+            Type classType = this.GetType();
+            _model = createBundle<SModel>(classType, "Model");
             _model.Control = this;
             _model.ModelCallback += HandleModelCallback;
             _model.Install();
-            _view = createBundle<SView>(classtype, "View");
+            _view = createBundle<SView>(classType, "View");
             _view.Control = this;
             _view.Install();
         }
@@ -48,8 +48,8 @@ namespace SFramework
 
         public override void BroadcastMessage(string messageId, string nameSpace, string className, object messageData, string alias, object messageSender)
         {
-            BundleParams bparams = new BundleParams();
-            BundleManager.Instance.AddBundleParams(bparams);
+            BundleParams bdParams = new BundleParams();
+            BundleManager.Instance.AddMessageParams(bdParams);
         }
 
         public override void HandleMessage(string messageId, object messageData, object messageSender)
@@ -63,20 +63,20 @@ namespace SFramework
             _view.OpenAsync();
         }
 
-        private T createBundle<T>(Type classtype, string name)
+        private T createBundle<T>(Type classType, string name)
         {
-            int result = classtype.Name.IndexOf("Control");
+            int result = classType.Name.IndexOf("Control");
             if (result > 0)
             {
                 //find model
-                string modelName = classtype.Name.Substring(0, result) + name;
-                T mod = ObjectTools.CreateInstance<T>(classtype.Namespace, modelName, classtype.Assembly.GetName().Name);
+                string modelName = classType.Name.Substring(0, result) + name;
+                T mod = ObjectTools.CreateInstance<T>(classType.Namespace, modelName, classType.Assembly.GetName().Name);
                 if (mod != null)
                 {
                     return mod;
                 }
                 else
-                    throw new NotFoundException($"class {classtype.Namespace}.{modelName},{classtype.Assembly.GetName().Name} is miss!");
+                    throw new NotFoundException($"class {classType.Namespace}.{modelName},{classType.Assembly.GetName().Name} is miss!");
             }
             else
             {
