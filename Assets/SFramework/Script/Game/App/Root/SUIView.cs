@@ -35,8 +35,8 @@ namespace SFramework
             SetViewTransform(out trans, out position, out rotation);
             if(trans != null)
             {
-                UIROOT.OpenUI(layer, trans, position, rotation);
-                goDict = ComponentTools.collectAllGameObjects(UIROOT.gameObject);
+                uiRoot.OpenUI(layer, trans, position, rotation);
+                goDict = ComponentTools.collectAllGameObjects(uiRoot.gameObject);
             }
             base.Open();
         }
