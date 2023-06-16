@@ -68,6 +68,17 @@ namespace SFramework
             cameraData.cameraStack.Add(_uiRoot.UICamera);
         }
 
+        public SUIROOT GetUIRoot()
+        {
+            return _uiRoot;
+        }
+
+        public GameObject GetDefineSceneObject(string name)
+        {
+            GameObject go = null;
+            _sceneDict.TryGetValue(RootManager.SCENEPREFIX + name, out go);
+            return go;
+        }
 
     }
 }

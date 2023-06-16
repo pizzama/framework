@@ -21,9 +21,7 @@ namespace SFramework
 
         public GameObject GetDefineSceneObject(string name)
         {
-            GameObject go = null;
-            sceneDict.TryGetValue(RootModel.SCENEPREFIX + name, out go);
-            return go;
+            return rootManager.GetDefineSceneObject(name);
         }
     }
 }
