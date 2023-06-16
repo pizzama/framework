@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Role
-  m_Shader: {fileID: -6465566751694194690, guid: 57e0bd44d05a4d34ab49447f0c4a6ae4,
+  m_Shader: {fileID: -6465566751694194690, guid: db6f1dddf452af744bd9cde293355201,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -117,7 +117,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimPower: 2
+    - _RimPower: 3
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -141,7 +141,7 @@ Material:
     - _EdgeColor: {r: 0.206707, g: 0, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _PresnelColor: {r: 0, g: 0, b: 0, a: 0}
-    - _RimColor: {r: 0, g: 0.090218954, b: 0.7924528, a: 0}
+    - _RimColor: {r: 0.10708821, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _UvOffset: {r: 0, g: 0, b: 0, a: 0}
     - _UvTiling: {r: 1, g: 1, b: 0, a: 0}

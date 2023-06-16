@@ -21,17 +21,17 @@ namespace SFramework
 
         private void initUI()
         {
-            const string uiname = "SUIROOT";
+            const string uiName = "SUIROOT";
             if (!UIROOT)
             {
-                var uirootPrefab = Resources.Load<GameObject>(uiname);
-                if (!uirootPrefab)
+                var rootPrefab = Resources.Load<GameObject>(uiName);
+                if (!rootPrefab)
                 {
-                    throw new NotFoundException(uiname);
+                    throw new NotFoundException(uiName);
                 }
-                GameObject uiroot = Object.Instantiate(uirootPrefab);
-                Object.DontDestroyOnLoad(uiroot);
-                UIROOT = ComponentTools.GetOrAddComponent<SUIROOT>(uiroot);
+                GameObject uiRoot = Object.Instantiate(rootPrefab);
+                Object.DontDestroyOnLoad(uiRoot);
+                UIROOT = ComponentTools.GetOrAddComponent<SUIROOT>(uiRoot);
             }
         }
 
