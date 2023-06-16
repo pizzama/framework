@@ -14,20 +14,10 @@ namespace SFramework
         public void GetBundleName(out string fullName, out string nameSpace, out string className)
         {
             //return packagename and classname
-            Type classtype = this.GetType();
-            fullName = classtype.FullName;
-            nameSpace = classtype.Namespace;
-            className = classtype.Name;
-        }
-
-        public virtual void BroadcastMessage(string messageId, string nameSpace, string className, object messageData, string alias, object messageSender)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual void HandleMessage(string messageId, object messageData, object messageSender)
-        {
-            throw new NotImplementedException();
+            Type classType = this.GetType();
+            fullName = classType.FullName;
+            nameSpace = classType.Namespace;
+            className = classType.Name;
         }
 
         public virtual void Install()

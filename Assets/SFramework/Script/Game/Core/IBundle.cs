@@ -16,8 +16,5 @@ namespace SFramework
         IManager Manager {get; set;}
 
         string AliasName {get; set;}
-
-        void HandleMessage(string messageId, object messageData, object messageSender);
-        void BroadcastMessage(string messageId, string nameSpace, string className, object messageData, string alias, object messageSender);
     }
 }

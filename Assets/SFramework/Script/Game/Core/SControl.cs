@@ -46,13 +46,13 @@ namespace SFramework
             _model.ModelCallback -= HandleModelCallback;
         }
 
-        public override void BroadcastMessage(string messageId, string nameSpace, string className, object messageData, string alias, object messageSender)
+        public virtual void BroadcastMessage(string messageId, string nameSpace, string className, object messageData, string alias, object messageSender)
         {
             BundleParams bdParams = new BundleParams();
             BundleManager.Instance.AddMessageParams(bdParams);
         }
 
-        public override void HandleMessage(string messageId, object messageData, object messageSender)
+        public virtual void HandleMessage(string messageId, object messageData, object messageSender)
         {
 
         }
