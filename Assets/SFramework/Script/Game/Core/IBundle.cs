@@ -16,5 +16,6 @@ namespace SFramework
         IManager Manager {get; set;}
 
         string AliasName {get; set;}
+        void HandleMessage(BundleParams value);
     }
 }

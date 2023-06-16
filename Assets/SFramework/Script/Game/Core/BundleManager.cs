@@ -23,6 +23,7 @@ namespace SFramework
         }
 
         private List<BundleParams> _messageParams;
+        private List<BundleParams> _openParams;
 
         protected virtual void Awake()
         {
@@ -91,6 +92,7 @@ namespace SFramework
         {
             _bundleMap = new SMemory<string, string, IBundle>();
             _messageParams = new List<BundleParams>();
+            _openParams = new List<BundleParams>();
         }
 
         public IBundle GetBundle(string name, string alias)
@@ -185,6 +187,11 @@ namespace SFramework
             _messageParams.Add(value);
         }
 
+        public void AddOpenParams(BundleParams value)
+        {
+            _openParams.Add(value);
+        }
+
         private void handleMessageParams()
         {
             for (int i = 0; i < _messageParams.Count; i++)
@@ -195,7 +202,7 @@ namespace SFramework
 
                 IBundle control = BundleManager.Instance.GetBundle(pa.BundleFullName, pa.Alias);
                 if (control != null)
-                    control.HandleMessage(pa.MessageId, pa.MessageData, pa.MessageSender);
+                    control.HandleMessage(pa);
                 else
                     Debug.LogWarning($"not found broadcast target{pa.NameSpace}.{pa.ClassName}");
             }

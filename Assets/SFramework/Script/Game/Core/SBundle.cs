@@ -78,5 +78,10 @@ namespace SFramework
         {
             await Task.Yield();
         }
+
+        public virtual void HandleMessage(BundleParams value)
+        {
+
+        }
     }
 }

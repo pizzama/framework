@@ -48,11 +48,30 @@ namespace SFramework
 
         public virtual void BroadcastMessage(string messageId, string nameSpace, string className, object messageData, string alias, object messageSender)
         {
-            BundleParams bdParams = new BundleParams();
+            BundleParams bdParams = new BundleParams(){
+                MessageId = messageId,
+                NameSpace = nameSpace,
+                ClassName = className,
+                MessageData = messageData,
+                Alias = alias,
+                MessageSender = messageSender,
+            };
             BundleManager.Instance.AddMessageParams(bdParams);
         }
 
-        public virtual void HandleMessage(string messageId, object messageData, object messageSender)
+        public virtual void OpenControl(string nameSpace, string className, object messageData, string alias, object messageSender)
+        {
+            BundleParams bdParams = new BundleParams(){
+                MessageId = "",
+                NameSpace = nameSpace,
+                ClassName = className,
+                MessageData = messageData,
+                Alias = alias,
+                MessageSender = messageSender,
+            };
+        }
+
+        public override void HandleMessage(BundleParams value)
         {
 
         }
