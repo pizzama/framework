@@ -7,6 +7,7 @@ namespace SFramework
         //卸载模块
         void Uninstall();
         void Open();
+        void Open(BundleParams value);
         void Close();
         void Update();
         void FixUpdate();

@@ -21,9 +21,9 @@ namespace SFramework
             init();
         }
 
-        public override void Open()
+        public override void Open(BundleParams value)
         {
-            base.Open();
+            base.Open(value);
         }
 
         public override void Update()

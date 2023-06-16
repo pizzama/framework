@@ -24,9 +24,9 @@ namespace SFramework
             _view.Install();
         }
 
-        public override void Open()
+        public override void Open(BundleParams value)
         {
-            base.Open();
+            base.Open(value);
             OpenAsync();
             _model.Open();
             _model.OpenAsync();

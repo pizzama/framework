@@ -13,7 +13,7 @@ namespace SFramework
 
         public void GetBundleName(out string fullName, out string nameSpace, out string className)
         {
-            //return packagename and classname
+            //return packageName and className
             Type classType = this.GetType();
             fullName = classType.FullName;
             nameSpace = classType.Namespace;
@@ -29,6 +29,11 @@ namespace SFramework
         }
 
         public virtual void Open()
+        {
+            
+        }
+
+        public virtual void Open(BundleParams value)
         {
             enter();
         }
