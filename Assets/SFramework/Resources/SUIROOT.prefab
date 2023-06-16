@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 114574186442532806}
   - component: {fileID: 114009023594300624}
   - component: {fileID: 114748361275145794}
+  - component: {fileID: 4210724624472533215}
   m_Layer: 5
   m_Name: SUIROOT
   m_TagString: Untagged
@@ -131,6 +132,22 @@ MonoBehaviour:
   _blocker: {fileID: 5801236626685409517}
   _uiCamera: {fileID: 6579511294249325029}
   _canvasScaler: {fileID: 0}
+--- !u!114 &4210724624472533215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012438581554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2eb465d4658984f9b3cf9e9cb42896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _left: 1
+  _right: 1
+  _top: 1
+  _bottom: 1
 --- !u!1 &516937654955307560
 GameObject:
   m_ObjectHideFlags: 0
