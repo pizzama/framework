@@ -154,17 +154,18 @@ namespace SFramework
             UninstallBundle(fullName, bundle.AliasName);
         }
 
-        public void OpenControl(string classpath, string alias = "", params object[] paramss)
+        // classPath is nameSpace + className
+        public void OpenControl(string classPath, string alias = "", params object[] somParams)
         {
             //fix control path
             string nameSpace;
             string className;
-            StringTools.PrefixClassName(classpath, out nameSpace, out className);
+            StringTools.PrefixClassName(classPath, out nameSpace, out className);
             string modelName = className;
             if (alias == "")
                 alias = className;
             BundleManager manager = BundleManager.Instance;
-            IBundle bd = manager.GetBundle(classpath, alias);
+            IBundle bd = manager.GetBundle(classPath, alias);
             if (bd == null)
             {
                 SControl ctl = ObjectTools.CreateInstance<SControl>(nameSpace, modelName);

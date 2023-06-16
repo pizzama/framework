@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SFramework
 {
@@ -47,6 +48,17 @@ namespace SFramework
             {
                 collectAllGameObject(objectMap, gameObject.transform.GetChild(i).gameObject);
             }
+        }
+
+        // Pre Calculate text width and height
+        public UnityEngine.Vector2 GetTextPreferredWidthAndHeight(Text txt, string content)
+        {
+            var tg = new TextGenerator();
+            var settings = txt.GetGenerationSettings(txt.GetComponent<RectTransform>().sizeDelta);
+            float width = tg.GetPreferredWidth(content, settings);
+            float height = tg.GetPreferredHeight(content, settings);
+
+            return new UnityEngine.Vector2(width, height);
         }
     }
 }
