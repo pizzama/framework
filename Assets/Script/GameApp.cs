@@ -2,7 +2,7 @@ using SFramework;
 
 namespace game
 {
-    public class GameApp : GameLaucher
+    public class GameApp : GameLauncher
     {
         protected override void installBundle()
         {

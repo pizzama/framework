@@ -35,12 +35,12 @@ namespace SFramework
 
         public virtual void Open(BundleParams value)
         {
-            enter();
+            opening();
         }
 
         public virtual async void OpenAsync()
         {
-            enterAsync();
+            openingAsync();
             await Task.Yield();
         }
 
@@ -74,12 +74,12 @@ namespace SFramework
 
         }
 
-        protected virtual void enter()
+        protected virtual void opening()
         {
 
         }
 
-        protected virtual async void enterAsync()
+        protected virtual async void openingAsync()
         {
             await Task.Yield();
         }

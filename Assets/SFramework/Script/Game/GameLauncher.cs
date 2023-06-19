@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SFramework
 {
-    public abstract class GameLaucher : MonoBehaviour
+    public abstract class GameLauncher : MonoBehaviour
     {
         private void Awake()
         {
