@@ -91,51 +91,32 @@ namespace SFramework
             }
         }
 
-        public static List<T> GetRandomSequence<T>(T[] array, int count)
+        //Fischer-Yates shuffle
+        public static List<T> RandomArray<T>(List<T> array)
         {
-            List<T> output = new List<T>();
-            int num;
-            for (var i = 0; i < count; i++)
+            for (var i = array.Count; i > 0; --i)
             {
-                num = UnityEngine.Random.Range(0, array.Length);
-                if (output.Contains(array[num]))
-                {
-                    i--;
-                    continue;
-                }
-                output.Add(array[num]);
+                var j = UnityEngine.Random.Range(0, i);
+                var index = array[j];
+                array[j] = array[i - 1];
+                array[i - 1] = index;
             }
-            return output;
+
+            return array;
         }
 
-        public static T[] GetRandomArray<T>(T[] array, int count)
+        //Fischer-Yates shuffle
+        public static T[] RandomArray<T>(T[] array)
         {
-            T[] output = new T[count];
-            for (var i = array.Length - 1; i >= 0 && count > 0; i--)
+            for (var i = array.Length; i > 0; --i)
             {
-                if (UnityEngine.Random.Range(0, i + 1) < count)
-                {
-                    output[count - 1] = array[i];
-                    count--;
-                }
-            }
-            return output;
-        }
-
-        public static T[] GetRandomArray2<T>(T[] array, int count)
-        {
-            T[] output = new T[count];
-            int end = array.Length;
-            int num;
-            for (var i = 0; i < count; i++)
-            {
-                num = UnityEngine.Random.Range(0, end);
-                output[i] = array[num];
-                array[num] = array[end - 1];
-                end--;
+                var j = UnityEngine.Random.Range(0, i);
+                var index = array[j];
+                array[j] = array[i - 1];
+                array[i - 1] = index;
             }
 
-            return output;
+            return array;
         }
 
         public static IEnumerator Shake(Transform baseTransform, float duration, float magnitude)
