@@ -6,6 +6,7 @@ namespace SFramework
 {
     public partial class SModel : SBundle
     {
+        public BundleParams modelParams;
         private SControl _control;
         public SControl Control
         {
@@ -24,6 +25,7 @@ namespace SFramework
         public override void Open(BundleParams value)
         {
             base.Open(value);
+            modelParams = value;
         }
 
         public override void Update()
