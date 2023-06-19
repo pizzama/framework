@@ -30,12 +30,12 @@ namespace SFramework
 
         public virtual void Open()
         {
-            
+            opening();
         }
 
-        public virtual void Open(BundleParams value)
+        public virtual void Open(BundleParams value = default)
         {
-            opening();
+            Open();
         }
 
         public virtual async void OpenAsync()
