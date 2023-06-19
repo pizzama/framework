@@ -6,12 +6,12 @@ namespace game
 {
     public class TestControl: SControl
     {
-        protected override void enter()
+        protected override void opening()
         {
             Debug.Log("test control enter");
         }
 
-        protected override async void enterAsync()
+        protected override async void openingAsync()
         {
             Debug.Log("test control enterasync");
             await UniTask.Yield();

@@ -22,7 +22,7 @@ namespace game
             // Debug.Log(tt);
         }
 
-        protected override void enter()
+        protected override void opening()
         {
             Image img = getAssetFromGoDict<Image>("image");
             var imgTexture = assetManager.LoadResource<Texture2D>("arrow");
@@ -31,7 +31,7 @@ namespace game
             img.sprite = sprite;
         }
 
-        protected override async void enterAsync()
+        protected override async void openingAsync()
         {
             Debug.Log("test view enterasync");
             await UniTask.Yield();

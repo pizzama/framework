@@ -7,7 +7,7 @@ namespace game
     public class GameMainView : SView
     {
         private GameObject _gameRoot;
-        protected override void enter()
+        protected override void opening()
         {
             // Debug.Log("gamemain view enter");
             // const string gamename = "Game";
@@ -24,7 +24,7 @@ namespace game
             // }
         }
 
-        protected override async void enterAsync()
+        protected override async void openingAsync()
         {
             Debug.Log("gamemain view enterasync");
             await UniTask.Yield();
