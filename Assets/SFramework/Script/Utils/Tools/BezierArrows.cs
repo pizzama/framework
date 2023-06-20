@@ -12,7 +12,7 @@ namespace PUtils
         public GameObject ArrowNodePrefab;
         [Tooltip("The number of arrow node")]
         public int ArrowNodeNum;
-        [Tooltip("The scale multipler for arrow nodes")]
+        [Tooltip("The scale multiples for arrow nodes")]
         public float ScaleFactor = 1f;
 
         //The position of P0
@@ -53,18 +53,18 @@ namespace PUtils
             
             for (int i = 0; i < _arrowNodes.Count; i++)
             {
-                //caculate t
+                //calculate t
                 var t = Mathf.Log(1f * i / (this._arrowNodes.Count - 1) + 1f, 2f);
                 //cubic bezier curve
                 // B(t) = (1-t)^3*p0+3*(1-t)^Y2*p1 + 3*(1-t)*t^2*p2+t^3*p3
                 _arrowNodes[i].position = Mathf.Pow(1 - t, 3) * _controlPoints[0] + 3 * Mathf.Pow(1 - t, 2) * t * _controlPoints[1] + 3 * (1 - t) * Mathf.Pow(t, 2) * _controlPoints[2] + Mathf.Pow(t, 3) * _controlPoints[3];
-                // caculates rotations for each arrow node. let direction same
+                // calculates rotations for each arrow node. let direction same
                 if (i > 0)
                 {
                     var euler = new Vector3(0, 0, Vector2.SignedAngle(Vector2.up, _arrowNodes[i].position - _arrowNodes[i-1].position));
                     _arrowNodes[i].rotation = Quaternion.Euler(euler);
                 }
-                //Caculates scales for each arow node.
+                //Calculates scales for each arrow node.
                 var scale = ScaleFactor*(1f-0.03f*(_arrowNodes.Count - 1 - i));
                 _arrowNodes[i].localScale = new Vector3(scale, scale, 1f);
             }
