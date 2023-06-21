@@ -225,5 +225,17 @@ namespace SFramework
                     Debug.LogWarning($"not found broadcast target{pa.NameSpace}.{pa.ClassName}");
             }
         }
+
+        public BundleParams? PopUpOpenParams()
+        {
+            if(_openSequenceParams.Count > 0)
+            {
+                BundleParams value = _openSequenceParams[0];
+                _openSequenceParams.RemoveAt(0);
+                return value;
+            }
+
+            return null;
+        }
     }
 }

@@ -70,7 +70,7 @@ namespace SFramework
         {
             BundleParams bdParams = new BundleParams()
             {
-                MessageId = "",
+                MessageId = "$#$", //特殊id表示打开界面的消息
                 NameSpace = nameSpace,
                 ClassName = className,
                 MessageData = messageData,
@@ -78,6 +78,7 @@ namespace SFramework
                 MessageSender = this,
                 Sort = 0,
             };
+            
             if (isSequence)
             {
                 BundleManager.Instance.AddOpenParams(bdParams);
