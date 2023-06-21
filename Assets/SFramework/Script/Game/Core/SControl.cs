@@ -28,13 +28,14 @@ namespace SFramework
         {
             base.Open(value);
             _model.Open(value);
-            _model.OpenAsync();
         }
 
         public override void Open()
         {
             base.Open();
             OpenAsync();
+            _model.Open();
+            _model.OpenAsync();
         }
 
         public override void Close()

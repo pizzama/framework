@@ -25,7 +25,12 @@ namespace SFramework
         public override void Open(BundleParams value)
         {
             base.Open(value);
-            modelParams = value;
+            OpenParams = value;
+        }
+
+        public override void Open()
+        {
+            base.Open();
         }
 
         public override void Update()
