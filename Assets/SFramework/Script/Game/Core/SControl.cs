@@ -66,29 +66,6 @@ namespace SFramework
             BundleManager.Instance.AddMessageParams(bdParams);
         }
 
-        public virtual void OpenControl(string nameSpace, string className, object messageData, bool isSequence, string alias = "", int sort = 0)
-        {
-            BundleParams bdParams = new BundleParams()
-            {
-                MessageId = "$#$", //特殊id表示打开界面的消息
-                NameSpace = nameSpace,
-                ClassName = className,
-                MessageData = messageData,
-                Alias = alias,
-                MessageSender = this,
-                Sort = 0,
-            };
-            
-            if (isSequence)
-            {
-                BundleManager.Instance.AddOpenParams(bdParams);
-            }
-            else
-            {
-                BundleManager.Instance.OpenControl(bdParams);
-            }
-        }
-
         public override void HandleMessage(BundleParams value)
         {
 
@@ -143,6 +120,18 @@ namespace SFramework
             controlLastUpdate();
             _model.LateUpdate();
             _view.LateUpdate();
+        }
+
+        protected override void closing()
+        {
+            base.closing();
+            if (_model.OpenParams.OpenType == OpenType.Sequence)
+            {
+                BundleParams? value = BundleManager.Instance.PopUpOpenParams();
+                if (value != null)
+                    BundleManager.Instance.OpenControl((BundleParams)value);
+            }
+            
         }
 
         protected virtual void controlUpdate()

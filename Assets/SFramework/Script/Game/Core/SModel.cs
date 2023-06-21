@@ -6,7 +6,7 @@ namespace SFramework
 {
     public partial class SModel : SBundle
     {
-        public BundleParams modelParams;
+        public BundleParams OpenParams;
         private SControl _control;
         public SControl Control
         {

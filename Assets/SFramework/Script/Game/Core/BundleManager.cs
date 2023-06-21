@@ -157,28 +157,27 @@ namespace SFramework
         }
 
         // classPath is nameSpace + className
-        public void OpenControl(string classPath, string alias = "", params object[] somParams)
+        public void OpenControl(string nameSpace, string className, object messageData, bool isSequence, string alias = "", int sort = 0)
         {
-            //fix control path
-            string nameSpace;
-            string className;
-            StringTools.PrefixClassName(classPath, out nameSpace, out className);
-            string modelName = className;
-            if (alias == "")
-                alias = className;
-            BundleManager manager = BundleManager.Instance;
-            IBundle bd = manager.GetBundle(classPath, alias);
-            if (bd == null)
+            BundleParams bdParams = new BundleParams()
             {
-                SControl ctl = ObjectTools.CreateInstance<SControl>(nameSpace, modelName);
-                if (ctl == null)
-                    throw new NotFoundException($"class {nameSpace}.{modelName} is miss!");
-                InstallBundle(ctl, alias);
-                ctl.Open();
+                MessageId = "$#$", //特殊id表示打开界面的消息
+                NameSpace = nameSpace,
+                ClassName = className,
+                MessageData = messageData,
+                Alias = alias,
+                MessageSender = this,
+                Sort = 0,
+            };
+            
+            if (isSequence)
+            {
+                bdParams.OpenType = OpenType.Sequence;
+                AddOpenParams(bdParams);
             }
             else
             {
-                bd.Open();
+                OpenControl(bdParams);
             }
         }
 
@@ -192,11 +191,11 @@ namespace SFramework
                 if (ctl == null)
                     throw new NotFoundException($"class {value.NameSpace}.{value.ClassName} is miss!");
                 InstallBundle(ctl, value.Alias);
-                ctl.Open();
+                ctl.Open(value);
             }
             else
             {
-                bd.Open();
+                bd.Open(value);
             }
         }
 

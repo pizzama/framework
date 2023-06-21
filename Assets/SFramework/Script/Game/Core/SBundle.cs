@@ -84,6 +84,16 @@ namespace SFramework
             await Task.Yield();
         }
 
+        protected virtual void closing()
+        {
+
+        }
+
+        protected virtual async void closingAsync()
+        {
+            await Task.Yield();
+        }
+
         public virtual void HandleMessage(BundleParams value)
         {
 

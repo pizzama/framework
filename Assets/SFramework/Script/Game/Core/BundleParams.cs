@@ -4,8 +4,8 @@ namespace SFramework
 {
     public enum OpenType
     {
+        None,
         Sequence,
-        Parallel,
     }
 
     public struct BundleParams
@@ -23,6 +23,8 @@ namespace SFramework
         }
         public object MessageSender;
         public int Sort;
+
+        public OpenType OpenType;
 
         public string ClassPath
         {
