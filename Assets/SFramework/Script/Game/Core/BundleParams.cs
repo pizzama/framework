@@ -15,7 +15,7 @@ namespace SFramework
         public string ClassName;
         public object MessageData;
         private string _alias;
-        
+
         public string Alias
         {
             get { return _alias == "" ? ClassName : _alias; }
@@ -27,6 +27,11 @@ namespace SFramework
         public string ClassPath
         {
             get { return NameSpace + "." + ClassName; }
+        }
+
+        public void AnalysisClassPath(string classPath)
+        {
+            StringTools.PrefixClassName(classPath, out this.NameSpace, out this.ClassName);
         }
 
     }
