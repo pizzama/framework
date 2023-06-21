@@ -18,7 +18,7 @@ namespace SFramework
             {
                 return null;
             }
-            var progress = Progress.Create<float>(p => Debug.LogFormat("p:{0}", p));
+            var progress = Progress.Create<float>(p => Debug.LogFormat("array p:{0}", p));
             AsyncOperation operation = SceneManager.LoadSceneAsync(sceneFullName, mode);
             await operation.ToUniTask(progress);
             await UniTask.Yield();
