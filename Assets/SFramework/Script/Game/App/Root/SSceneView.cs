@@ -11,11 +11,7 @@ namespace SFramework
 
 
         }
-        public override void Open()
-        {
-
-        }
-
+        
         public async UniTask<AsyncOperation> LoadSceneAsync(string sceneFullName, LoadSceneMode mode)
         {
             if (SceneManager.GetSceneByName(sceneFullName).isLoaded)
