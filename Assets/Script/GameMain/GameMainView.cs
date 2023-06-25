@@ -17,7 +17,9 @@ namespace game
         protected override async void openingAsync()
         {
             Debug.Log("gameMain view enterAsync");
-            await LoadSceneAsync("Scenes/BaseScene", LoadSceneMode.Additive);
+            AsyncOperation operation = await LoadSceneAsync("Scenes/BaseScene", LoadSceneMode.Additive);
+            var progress = Progress.Create<float>(p => Debug.LogFormat("array p:{0}", p));
+            await operation.ToUniTask(progress);
             await UniTask.Yield();
         }
     }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -14,32 +13,43 @@ namespace SFramework
             getBuildInSceneNames(out _buildInSceneNames);
         }
 
-        public async UniTaskVoid LoadSceneAsync(string sceneFullName, LoadSceneMode mode)
+        public async UniTask<AsyncOperation> LoadSceneAsync(string sceneFullName, LoadSceneMode mode)
         {
             Scene sc = SceneManager.GetActiveScene();
             if (sc.name == sceneFullName)
             {
-                return;
+                return null;
             }
 
             sc = SceneManager.GetSceneByName(sceneFullName);
             if (sc.isLoaded)
             {
-                return;
+                return null;
             }
 
+            AsyncOperation operation = null;
             if (!_buildInSceneNames.Contains(sceneFullName))
             {
+#if UNITY_EDITOR
                 //load scene from ab bundle
-
+                Object request = await assetManager.LoadResourceAsync<Object>(sceneFullName);
+                if (request != null)
+                {
+                    string obj_path = UnityEditor.AssetDatabase.GetAssetPath(request);
+                    operation = UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(obj_path, new LoadSceneParameters(mode));
+                }
+                else
+                {
+                    operation = SceneManager.LoadSceneAsync(sceneFullName, mode);
+                }
+#endif
             }
             else
             {
-                var progress = Progress.Create<float>(p => Debug.LogFormat("array p:{0}", p));
-                AsyncOperation operation = SceneManager.LoadSceneAsync(sceneFullName, mode);
-                await operation.ToUniTask(progress);
-                await UniTask.Yield();
+                operation = SceneManager.LoadSceneAsync(sceneFullName, mode);
             }
+
+            return operation;
         }
 
         private void getBuildInSceneNames(out List<string> names)
