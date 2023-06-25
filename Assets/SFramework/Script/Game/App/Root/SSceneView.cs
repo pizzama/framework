@@ -11,7 +11,7 @@ namespace SFramework
         private List<string> _buildInSceneNames;
         protected override void init()
         {
-            ComponentTools.GetBuildInSceneNames(out _buildInSceneNames);
+            getBuildInSceneNames(out _buildInSceneNames);
         }
 
         public async UniTaskVoid LoadSceneAsync(string sceneFullName, LoadSceneMode mode)
@@ -40,6 +40,27 @@ namespace SFramework
                 await operation.ToUniTask(progress);
                 await UniTask.Yield();
             }
+        }
+
+        private void getBuildInSceneNames(out List<string> names)
+        {
+            int i = 0;
+            names = new List<string>();
+            var sceneName = string.Empty;
+            do
+            {
+                sceneName = UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(i);
+                sceneName = System.IO.Path.GetFileNameWithoutExtension(sceneName);
+                if (!string.IsNullOrEmpty(sceneName))
+                {
+                    if (!names.Contains(sceneName))
+                    {
+                        names.Add(sceneName);
+                    }
+                }
+
+                i++;
+            } while (!string.IsNullOrEmpty(sceneName));
         }
     }
 }

@@ -60,26 +60,5 @@ namespace SFramework
 
             return new UnityEngine.Vector2(width, height);
         }
-
-        public static void GetBuildInSceneNames(out List<string> names)
-        {
-            int i = 0;
-            names = new List<string>();
-            var sceneName = string.Empty;
-            do
-            {
-                sceneName = UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(i);
-                sceneName = System.IO.Path.GetFileNameWithoutExtension(sceneName);
-                if (!string.IsNullOrEmpty(sceneName))
-                {
-                    if (!names.Contains(sceneName))
-                    {
-                        names.Add(sceneName);
-                    }
-                }
-
-                i++;
-            } while (!string.IsNullOrEmpty(sceneName));
-        }
     }
 }
