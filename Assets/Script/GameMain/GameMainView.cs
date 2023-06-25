@@ -18,9 +18,11 @@ namespace game
         {
             Debug.Log("gameMain view enterAsync");
             AsyncOperation operation = await LoadSceneAsync("Scenes/BaseScene", LoadSceneMode.Additive);
-            var progress = Progress.Create<float>(p => Debug.LogFormat("array p:{0}", p));
-            await operation.ToUniTask(progress);
-            await UniTask.Yield();
+            if (operation != null)
+            {
+                var progress = Progress.Create<float>(p => Debug.LogFormat("array p:{0}", p));
+                await operation.ToUniTask(progress);
+            }
         }
     }
 }
