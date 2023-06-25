@@ -51,7 +51,7 @@ namespace SFramework
         }
 
         // Pre Calculate text width and height
-        public UnityEngine.Vector2 GetTextPreferredWidthAndHeight(Text txt, string content)
+        public static UnityEngine.Vector2 GetTextPreferredWidthAndHeight(Text txt, string content)
         {
             var tg = new TextGenerator();
             var settings = txt.GetGenerationSettings(txt.GetComponent<RectTransform>().sizeDelta);
@@ -59,6 +59,27 @@ namespace SFramework
             float height = tg.GetPreferredHeight(content, settings);
 
             return new UnityEngine.Vector2(width, height);
+        }
+
+        public static void GetBuildInSceneNames(out List<string> names)
+        {
+            int i = 0;
+            names = new List<string>();
+            var sceneName = string.Empty;
+            do
+            {
+                sceneName = UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(i);
+                sceneName = System.IO.Path.GetFileNameWithoutExtension(sceneName);
+                if (!string.IsNullOrEmpty(sceneName))
+                {
+                    if (!names.Contains(sceneName))
+                    {
+                        names.Add(sceneName);
+                    }
+                }
+
+                i++;
+            } while (!string.IsNullOrEmpty(sceneName));
         }
     }
 }
