@@ -21,7 +21,7 @@ namespace SFramework
 
         private SUIROOT _uiRoot;
         private Dictionary<string, GameObject> _sceneDict; //存储当前场景的元素
-        private Dictionary<string, GameObject> _uiInstances; //缓存打开的ui
+        private Dictionary<string, Transform> _uiCache; //缓存打开的ui
 
         private RootManager()
         {
@@ -45,9 +45,9 @@ namespace SFramework
                 _uiRoot = ComponentTools.GetOrAddComponent<SUIROOT>(uiRoot);
             }
 
-            if(_uiInstances == null)
+            if(_uiCache == null)
             {
-                _uiInstances = new Dictionary<string, GameObject>();
+                _uiCache = new Dictionary<string, Transform>();
             }
         }
 
@@ -84,6 +84,13 @@ namespace SFramework
             GameObject go = null;
             _sceneDict.TryGetValue(RootManager.SCENEPREFIX + name, out go);
             return go;
+        }
+
+        public Transform GetCacheUI(string name)
+        {
+            Transform ta = null;
+            _uiCache.TryGetValue(name, out ta);
+            return ta;
         }
 
     }

@@ -14,12 +14,15 @@ namespace game
 
         protected override void SetViewTransform(out Transform trans, out Vector3 position, out Quaternion rotation)
         {
+            string abPath = "ss/test";
+            trans = rootManager.GetCacheUI(abPath);
+            if (trans == null)
+            {
+                trans = assetManager.LoadResource<RectTransform>(abPath, "Test");
+            }
             // trans = assetManager.LoadResource<Transform>("Test");
-            trans = assetManager.LoadResource<RectTransform>("ss/test", "Test");
             position = new Vector3(0, 0, 0);
             rotation = Quaternion.Euler(0, 0, 0);
-            // var tt = assetManager.LoadResource<TextAsset>("test11", "test1");
-            // Debug.Log(tt);
         }
 
         protected override void opening()
@@ -34,6 +37,8 @@ namespace game
         protected override async void openingAsync()
         {
             Debug.Log("test view enterasync");
+            // var tt = assetManager.LoadResource<TextAsset>("test11", "test1");
+            // Debug.Log(tt);
             await UniTask.Yield();
         }
     }
