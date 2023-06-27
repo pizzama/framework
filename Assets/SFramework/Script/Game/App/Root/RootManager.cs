@@ -20,7 +20,8 @@ namespace SFramework
         }
 
         private SUIROOT _uiRoot;
-        private Dictionary<string, GameObject> _sceneDict;
+        private Dictionary<string, GameObject> _sceneDict; //存储当前场景的元素
+        private Dictionary<string, GameObject> _uiInstances; //缓存打开的ui
 
         private RootManager()
         {
@@ -42,6 +43,11 @@ namespace SFramework
                 GameObject uiRoot = Object.Instantiate(rootPrefab);
                 Object.DontDestroyOnLoad(uiRoot);
                 _uiRoot = ComponentTools.GetOrAddComponent<SUIROOT>(uiRoot);
+            }
+
+            if(_uiInstances == null)
+            {
+                _uiInstances = new Dictionary<string, GameObject>();
             }
         }
 

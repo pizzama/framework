@@ -6,8 +6,6 @@ namespace SFramework
 {
     public class RootView : SView
     {
-        protected static Dictionary<string, GameObject> sceneDict;
-
         protected AssetsManager assetManager;
         protected RootManager rootManager;
 

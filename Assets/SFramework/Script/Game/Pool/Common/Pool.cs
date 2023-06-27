@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace PUtils
+namespace SFramework
 {
     public class Pool<T> where T : new()
     {
