@@ -24,6 +24,10 @@ namespace game
         {
             Image img = getAssetFromGoDict<Image>("image");
             var imgTexture = assetManager.LoadResource<Texture2D>("arrow");
+            if(imgTexture == null)
+            {
+                return;
+            }
             Sprite sprite = Sprite.Create(imgTexture, new Rect(0, 0, imgTexture.width, imgTexture.height), new Vector2(0.5f, 0.5f));
             Debug.Log("test view enter:" + sprite);
             img.sprite = sprite;

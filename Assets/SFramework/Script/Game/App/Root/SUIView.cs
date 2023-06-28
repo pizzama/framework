@@ -26,7 +26,7 @@ namespace SFramework
                 return default(T);
         }
 
-        public override void Open(BundleParams value)
+        public override void Open()
         {
             UILayer layer = GetViewLayer();
             Transform trans = null;

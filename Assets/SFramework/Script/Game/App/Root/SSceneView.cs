@@ -13,26 +13,26 @@ namespace SFramework
             getBuildInSceneNames(out _buildInSceneNames);
         }
 
-        public async UniTask<AsyncOperation> LoadSceneAsync(string sceneFullName, LoadSceneMode mode)
+        public async UniTask<AsyncOperation> LoadSceneAsync(string scenePath, string sceneName ,LoadSceneMode mode)
         {
             Scene sc = SceneManager.GetActiveScene();
-            if (sc.name == sceneFullName)
+            if (sc.name == scenePath)
             {
                 return null;
             }
 
-            sc = SceneManager.GetSceneByName(sceneFullName);
+            sc = SceneManager.GetSceneByName(scenePath);
             if (sc.isLoaded)
             {
                 return null;
             }
 
             AsyncOperation operation = null;
-            if (!_buildInSceneNames.Contains(sceneFullName))
+            if (!_buildInSceneNames.Contains(scenePath))
             {
 #if UNITY_EDITOR
                 //load scene from ab bundle
-                Object request = await assetManager.LoadResourceAsync<Object>(sceneFullName);
+                Object request = await assetManager.LoadResourceAsync<Object>(scenePath, sceneName);
                 if (request != null)
                 {
                     string obj_path = UnityEditor.AssetDatabase.GetAssetPath(request);
@@ -40,13 +40,13 @@ namespace SFramework
                 }
                 else
                 {
-                    operation = SceneManager.LoadSceneAsync(sceneFullName, mode);
+                    operation = SceneManager.LoadSceneAsync(scenePath, mode);
                 }
 #endif
             }
             else
             {
-                operation = SceneManager.LoadSceneAsync(sceneFullName, mode);
+                operation = SceneManager.LoadSceneAsync(scenePath, mode);
             }
 
             return operation;

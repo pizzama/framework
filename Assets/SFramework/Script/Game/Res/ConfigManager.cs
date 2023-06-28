@@ -67,6 +67,8 @@ namespace SFramework
             }
 
             byte[] bytes = await AssetsManager.Instance.LoadDataAsync($"bytes/{name}.bytes");
+            if (bytes == null)
+                return default;
             messageInstance = GetConfig<T>(bytes);
             _configDict[typeof(T)] = messageInstance;
             return (T)messageInstance;
