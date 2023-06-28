@@ -12,15 +12,10 @@ namespace game
             return UILayer.Popup;
         }
 
-        protected override void SetViewTransform(out Transform trans, out Vector3 position, out Quaternion rotation)
+        protected override void SetViewTransformPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
         {
-            string abPath = "ss/test";
-            trans = rootManager.GetCacheUI(abPath);
-            if (trans == null)
-            {
-                trans = assetManager.LoadResource<RectTransform>(abPath, "Test");
-            }
-            // trans = assetManager.LoadResource<Transform>("Test");
+            prefabPath = "ss/Test";
+            prefabName = "Test";
             position = new Vector3(0, 0, 0);
             rotation = Quaternion.Euler(0, 0, 0);
         }

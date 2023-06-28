@@ -8,7 +8,7 @@ namespace SFramework
         //set the ui in which layer
         protected abstract UILayer GetViewLayer();
         //set ui prefab
-        protected abstract void SetViewTransform(out Transform trans, out Vector3 position, out Quaternion rotation);
+        protected abstract void SetViewTransformPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation);
 
         protected Dictionary<string, GameObject> goDict;
         protected override void init()
@@ -33,12 +33,25 @@ namespace SFramework
             Vector3 position = default;
             Quaternion rotation = default;
             SetViewTransform(out trans, out position, out rotation);
-            if(trans != null)
+            if (trans != null)
             {
                 uiRoot.OpenUI(layer, trans, position, rotation);
                 goDict = ComponentTools.collectAllGameObjects(uiRoot.gameObject);
             }
             base.Open();
+        }
+
+        protected virtual void SetViewTransform(out Transform trans, out Vector3 position, out Quaternion rotation)
+        {
+            string abPath;
+            string abName;
+            SetViewTransformPath(out abPath, out abName, out position, out rotation);
+            trans = rootManager.GetCacheUI(abPath);
+            if (trans == null)
+            {
+                trans = assetManager.LoadResource<RectTransform>(abPath, abName);
+            }
+            // trans = assetManager.LoadResource<Transform>("Test");
         }
     }
 }

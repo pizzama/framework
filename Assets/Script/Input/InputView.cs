@@ -12,15 +12,23 @@ namespace game
             return UILayer.Hud;
         }
 
-        protected override void SetViewTransform(out Transform trans, out Vector3 position, out Quaternion rotation)
+        protected override void SetViewTransformPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
         {
-            trans =  assetManager.LoadResource<Transform>("center", "Center");
+            prefabPath = "center";
+            prefabName = "Center";
             position = new Vector3(0, 0, 0);
             rotation = Quaternion.Euler(0, 0, 0);
-            var tt = assetManager.LoadResource<TextAsset>("test11", "test1");
-            Debug.Log(tt);
-            Debug.LogError(trans.localScale);
         }
+
+        // protected override void SetViewTransform(out Transform trans, out Vector3 position, out Quaternion rotation)
+        // {
+        //     trans = assetManager.LoadResource<Transform>("center", "Center");
+        //     position = new Vector3(0, 0, 0);
+        //     rotation = Quaternion.Euler(0, 0, 0);
+        //     var tt = assetManager.LoadResource<TextAsset>("test11", "test1");
+        //     Debug.Log(tt);
+        //     Debug.LogError(trans.localScale);
+        // }
 
         protected override void opening()
         {
