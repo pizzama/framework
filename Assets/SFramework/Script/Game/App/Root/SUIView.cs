@@ -66,7 +66,7 @@ namespace SFramework
 
         public override void Close()
         {
-            GameObjectPoolManager.Instance.ReturnGameObject(abPath, mViewTransform.gameObject);
+            // GameObjectPoolManager.Instance.ReturnGameObject(abPath, mViewTransform.gameObject);
             base.Close();
         }
     }
