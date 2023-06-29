@@ -8,7 +8,7 @@ namespace SFramework
         //set the ui in which layer
         protected abstract UILayer GetViewLayer();
         //set ui prefab
-        protected abstract void SetViewTransformPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation);
+        protected abstract void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation);
 
         protected Dictionary<string, GameObject> goDict;
         protected override void init()
@@ -45,7 +45,7 @@ namespace SFramework
         {
             string abPath;
             string abName;
-            SetViewTransformPath(out abPath, out abName, out position, out rotation);
+            SetViewPrefabPath(out abPath, out abName, out position, out rotation);
             trans = null;
             if (trans == null)
             {
@@ -53,7 +53,7 @@ namespace SFramework
             }
 
             GameObject instance = rootManager.SetCacheUI(abPath, trans.gameObject);
-            Debug.Log(instance);
+            trans = instance.transform;
             // trans = assetManager.LoadResource<Transform>("Test");
         }
     }

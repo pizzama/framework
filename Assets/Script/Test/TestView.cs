@@ -12,7 +12,7 @@ namespace game
             return UILayer.Popup;
         }
 
-        protected override void SetViewTransformPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
+        protected override void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
         {
             prefabPath = "ss/Test";
             prefabName = "Test";

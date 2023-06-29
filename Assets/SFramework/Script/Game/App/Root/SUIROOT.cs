@@ -54,7 +54,7 @@ namespace SFramework
                 _blocker = this.transform.Find("Blocker").GetComponent<Transform>();
         }
 
-        public void OpenUI(UILayer layer, Transform transPrefab, Vector3 position = default, Quaternion rotation = default)
+        public void OpenUI(UILayer layer, Transform result, Vector3 position = default, Quaternion rotation = default)
         {
             Transform parent = null;
             switch (layer)
@@ -83,8 +83,8 @@ namespace SFramework
             }
             if (parent != null)
             {
-                Transform result = Instantiate(transPrefab, parent, false);
-                // result.SetParent(parent, false);
+                // Transform result = Instantiate(transPrefab, parent, false);
+                result.SetParent(parent, false);
                 result.position = position;
                 result.rotation = rotation;
             }
