@@ -22,9 +22,7 @@ namespace SFramework
 
         private SUIROOT _uiRoot;
         private Dictionary<string, GameObject> _sceneDict; //存储当前场景的元素
-        private Dictionary<string, Transform> _uiCache; //缓存打开的ui
-
-        private GameObjectPoolManager _poolManager;
+        private GameObjectPoolManager _poolManager; // ui的对象池
 
         private RootManager()
         {
@@ -46,11 +44,6 @@ namespace SFramework
                 GameObject uiRoot = Object.Instantiate(rootPrefab);
                 Object.DontDestroyOnLoad(uiRoot);
                 _uiRoot = ComponentTools.GetOrAddComponent<SUIROOT>(uiRoot);
-            }
-
-            if (_uiCache == null)
-            {
-                _uiCache = new Dictionary<string, Transform>();
             }
 
             // init ui pool
@@ -93,11 +86,10 @@ namespace SFramework
             return go;
         }
 
-        public Transform GetCacheUI(string name)
+        public BaseGameObjectPool GetUIPool(string name)
         {
-            Transform ta = null;
-            _uiCache.TryGetValue(name, out ta);
-            return ta;
+            ListGameObjectPool pool = _poolManager.CreatGameObjectPool<ListGameObjectPool>(name);
+            return pool;
         }
 
         public GameObject SetCacheUI(string name, GameObject prefab)
@@ -105,6 +97,8 @@ namespace SFramework
             ListGameObjectPool pool = _poolManager.CreatGameObjectPool<ListGameObjectPool>(name);
             if (pool.Prefab == null)
             {
+                if (prefab == null)
+                    throw new NotFoundException("init pool must set prefab first");
                 pool.Prefab = prefab;
             }
             return pool.Request();

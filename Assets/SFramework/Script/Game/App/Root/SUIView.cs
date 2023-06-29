@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using SFramework.Pool;
 
 namespace SFramework
 {
@@ -11,6 +12,8 @@ namespace SFramework
         protected abstract void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation);
 
         protected Dictionary<string, GameObject> goDict;
+
+        protected Transform mViewTransform;
         protected override void init()
         {
             goDict = new Dictionary<string, GameObject>();
@@ -29,13 +32,12 @@ namespace SFramework
         public override void Open()
         {
             UILayer layer = GetViewLayer();
-            Transform trans = null;
             Vector3 position = default;
             Quaternion rotation = default;
-            SetViewTransform(out trans, out position, out rotation);
-            if (trans != null)
+            SetViewTransform(out mViewTransform, out position, out rotation);
+            if (mViewTransform != null)
             {
-                uiRoot.OpenUI(layer, trans, position, rotation);
+                uiRoot.OpenUI(layer, mViewTransform, position, rotation);
                 goDict = ComponentTools.collectAllGameObjects(uiRoot.gameObject);
             }
             base.Open();
@@ -46,15 +48,21 @@ namespace SFramework
             string abPath;
             string abName;
             SetViewPrefabPath(out abPath, out abName, out position, out rotation);
-            trans = null;
-            if (trans == null)
+
+            BaseGameObjectPool pool = rootManager.GetUIPool(abPath);
+            if (pool.Prefab == null)
             {
-                trans = assetManager.LoadResource<RectTransform>(abPath, abName);
+                pool.Prefab = assetManager.LoadResource<GameObject>(abPath, abName);
             }
 
-            GameObject instance = rootManager.SetCacheUI(abPath, trans.gameObject);
-            trans = instance.transform;
+            trans = pool.Request().transform;
             // trans = assetManager.LoadResource<Transform>("Test");
+        }
+
+        public override void Close()
+        {
+
+            base.Close();
         }
     }
 }

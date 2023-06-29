@@ -46,11 +46,13 @@ namespace SFramework
 
         public virtual void Close()
         {
-            throw new NotImplementedException();
+            closing();
+            CloseAsync();
         }
 
         public virtual async void CloseAsync()
         {
+            closingAsync();
             await Task.Yield();
         }
 
