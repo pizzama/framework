@@ -30,7 +30,6 @@ namespace SFramework
             AsyncOperation operation = null;
             if (!_buildInSceneNames.Contains(scenePath))
             {
-#if UNITY_EDITOR
                 //load scene from ab bundle
                 Object request = await assetManager.LoadResourceAsync<Object>(scenePath, sceneName);
                 if (request != null)
@@ -42,7 +41,6 @@ namespace SFramework
                 {
                     operation = SceneManager.LoadSceneAsync(scenePath, mode);
                 }
-#endif
             }
             else
             {
