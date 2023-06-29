@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PUtils
+namespace SFramework.Pool
 {
 	/// <summary>
 	/// Implements the IFactory interface for non-abstract types.

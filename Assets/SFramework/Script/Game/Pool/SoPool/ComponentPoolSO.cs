@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PUtils
+namespace SFramework.Pool
 {
 	/// <summary>
 	/// Implements a Pool for Component types.

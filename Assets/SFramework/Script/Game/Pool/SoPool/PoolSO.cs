@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace PUtils
+namespace SFramework.Pool
 {
 	/// <summary>
 	/// A generic pool that generates members of type T on-demand via a factory.

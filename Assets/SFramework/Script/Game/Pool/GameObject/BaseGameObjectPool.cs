@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PUtils
+namespace SFramework.Pool
 {
     public abstract class BaseGameObjectPool : IPool<GameObject>
     {

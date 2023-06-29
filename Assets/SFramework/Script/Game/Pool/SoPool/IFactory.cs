@@ -1,4 +1,4 @@
-﻿namespace PUtils
+﻿namespace SFramework.Pool
 {
 	/// <summary>
 	/// Represents a factory.

@@ -1,4 +1,4 @@
-﻿namespace PUtils
+﻿namespace SFramework.Pool
 {
 	/// <summary>
 	/// Represents a collection that pools objects of T.

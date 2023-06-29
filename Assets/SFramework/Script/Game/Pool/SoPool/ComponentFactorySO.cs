@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PUtils
+namespace SFramework.Pool
 {
     public abstract class ComponentFactorySO<T> : FactorySO<T>
     {

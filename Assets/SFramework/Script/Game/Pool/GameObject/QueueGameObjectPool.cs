@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PUtils
+namespace SFramework.Pool
 {
     public class QueueGameObjectPool : BaseGameObjectPool
     {

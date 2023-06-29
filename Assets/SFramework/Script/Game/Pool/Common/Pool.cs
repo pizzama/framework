@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SFramework
+namespace SFramework.Pool
 {
     public class Pool<T> where T : new()
     {
