@@ -46,11 +46,14 @@ namespace SFramework
             string abPath;
             string abName;
             SetViewTransformPath(out abPath, out abName, out position, out rotation);
-            trans = rootManager.GetCacheUI(abPath);
+            trans = null;
             if (trans == null)
             {
                 trans = assetManager.LoadResource<RectTransform>(abPath, abName);
             }
+
+            GameObject instance = rootManager.SetCacheUI(abPath, trans.gameObject);
+            Debug.Log(instance);
             // trans = assetManager.LoadResource<Transform>("Test");
         }
     }

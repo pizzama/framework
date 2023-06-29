@@ -46,7 +46,7 @@ namespace SFramework.Pool
 
         public virtual GameObject Request()
         {
-            throw new System.NotImplementedException();
+            return Request(0);
         }
 
         public virtual GameObject Request(float lifetime)
@@ -65,11 +65,16 @@ namespace SFramework.Pool
             mTrans = trans;
         }
 
-        public GameObject prefab
+        public GameObject Prefab
         {
             set
             {
                 mPrefab = value;
+            }
+
+            get
+            {
+                return mPrefab;
             }
         }
 
