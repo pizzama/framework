@@ -23,7 +23,7 @@ namespace SFramework.Pool
         /// <summary>
         /// 存放所有的对象池
         /// </summary>
-        Dictionary<string, BaseGameObjectPool> m_poolDic = new Dictionary<string, BaseGameObjectPool>();
+        private Dictionary<string, BaseGameObjectPool> _poolDic = new Dictionary<string, BaseGameObjectPool>();
         /// <summary>
         /// 对象池在场景中的父控件
         /// </summary>
@@ -38,9 +38,9 @@ namespace SFramework.Pool
         GameObject AllPool;
         public T CreatGameObjectPool<T>(string poolName) where T : BaseGameObjectPool, new()
         {
-            if (m_poolDic.ContainsKey(poolName))
+            if (_poolDic.ContainsKey(poolName))
             {
-                return (T)m_poolDic[poolName];
+                return (T)_poolDic[poolName];
             }
             //生成一个新的GameObject存放所有的对象池对象
             if (AllPool == null)
@@ -50,8 +50,13 @@ namespace SFramework.Pool
             obj.transform.SetParent(m_parentTrans);
             T pool = new T();
             pool.Init(poolName, obj.transform);
-            m_poolDic.Add(poolName, pool);
+            _poolDic.Add(poolName, pool);
             return pool;
+        }
+
+        public bool HasPool(string pooName)
+        {
+            return _poolDic.ContainsKey(pooName);
         }
 
         /// <summary>
@@ -63,9 +68,9 @@ namespace SFramework.Pool
         /// <returns>新对象</returns>
         public GameObject RequestGameObject(string poolName, float lifeTime)
         {
-            if (m_poolDic.ContainsKey(poolName))
+            if (_poolDic.ContainsKey(poolName))
             {
-                return m_poolDic[poolName].Request(lifeTime);
+                return _poolDic[poolName].Request(lifeTime);
             }
             return null;
         }
@@ -77,15 +82,15 @@ namespace SFramework.Pool
         /// <param name="go">对象</param>
         public void ReturnGameObject(string poolName, GameObject go)
         {
-            if (m_poolDic.ContainsKey(poolName))
+            if (_poolDic.ContainsKey(poolName))
             {
-                m_poolDic[poolName].Return(go);
+                _poolDic[poolName].Return(go);
             }
         }
 
         public int GetPoolCount()
         {
-            return m_poolDic.Count;
+            return _poolDic.Count;
         }
 
         /// <summary>
@@ -93,7 +98,7 @@ namespace SFramework.Pool
         /// </summary>
         public void Destroy()
         {
-            m_poolDic.Clear();
+            _poolDic.Clear();
             GameObject.Destroy(m_parentTrans);
         }
     }

@@ -47,21 +47,26 @@ namespace SFramework
         {
             string abPath;
             string abName;
+            trans = null;
             SetViewPrefabPath(out abPath, out abName, out position, out rotation);
 
-            BaseGameObjectPool pool = rootManager.GetUIPool(abPath);
-            if (pool.Prefab == null)
+            if (!string.IsNullOrEmpty(abPath))
             {
-                pool.Prefab = assetManager.LoadResource<GameObject>(abPath, abName);
+                ListGameObjectPool pool = GameObjectPoolManager.Instance.CreatGameObjectPool<ListGameObjectPool>(abPath);
+                if (pool.Prefab == null)
+                {
+                    pool.Prefab = assetManager.LoadResource<GameObject>(abPath, abName);
+                }
+
+                trans = pool.Request().transform;
             }
 
-            trans = pool.Request().transform;
             // trans = assetManager.LoadResource<Transform>("Test");
         }
 
         public override void Close()
         {
-
+            GameObjectPoolManager.Instance.ReturnGameObject(abPath, mViewTransform.gameObject);
             base.Close();
         }
     }
