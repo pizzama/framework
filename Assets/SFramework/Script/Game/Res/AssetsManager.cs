@@ -64,6 +64,7 @@ namespace SFramework
 
         public T LoadResource<T>(string abName, string resName) where T : UnityEngine.Object
         {
+            abName = abName.ToLower();
             string path = abName + "_" + resName;
             if (_cache.ContainsKey(path))
             {
@@ -82,6 +83,7 @@ namespace SFramework
 
         public async UniTask<T> LoadResourceAsync<T>(string abName, string resName, CancellationToken token = default) where T : UnityEngine.Object
         {
+            abName = abName.ToLower();
             string path = abName + "_" + resName;
             if (_cache.ContainsKey(path))
             {
