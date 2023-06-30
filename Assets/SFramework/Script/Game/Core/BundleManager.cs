@@ -97,7 +97,7 @@ namespace SFramework
 
         public IBundle GetBundle(string name, string alias)
         {
-            IBundle value = _bundleMap.GetValue(name, name);
+            IBundle value = _bundleMap.GetValue(name, alias);
             return value;
         }
 
@@ -112,7 +112,7 @@ namespace SFramework
             if (alias == "")
                 alias = className;
             bundle.AliasName = alias;
-            _bundleMap.SetValue(name, alias, bundle);
+            _bundleMap.SetValue(fullName, alias, bundle);
             bundle.Manager = this;
             return bundle;
         }

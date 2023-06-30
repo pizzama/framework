@@ -125,7 +125,7 @@ namespace SFramework
 
         public void OpenControl(string nameSpace, string className, object messageData=null, bool isSequence=false, string alias = "", int sort = 0)
         {
-            BundleManager.Instance.OpenControl(nameSpace, className, messageData, isSequence, alias, sort);
+            Manager.OpenControl(nameSpace, className, messageData, isSequence, alias, sort);
         }
 
         protected override void closing()
