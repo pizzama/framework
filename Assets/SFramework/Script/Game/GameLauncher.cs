@@ -14,8 +14,7 @@ namespace SFramework
 
         private void initFrameworkBundle()
         {
-            // init scene and ui
-            // BundleManager.Instance.InstallBundle(new RootControl(), "", true);
+            // init game framework bundle
         }
 
         protected abstract void installBundle();
