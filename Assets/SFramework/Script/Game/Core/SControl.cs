@@ -123,6 +123,11 @@ namespace SFramework
             _view.LateUpdate();
         }
 
+        public void OpenControl(string nameSpace, string className, object messageData=null, bool isSequence=false, string alias = "", int sort = 0)
+        {
+            BundleManager.Instance.OpenControl(nameSpace, className, messageData, isSequence, alias, sort);
+        }
+
         protected override void closing()
         {
             base.closing();
@@ -132,7 +137,7 @@ namespace SFramework
                 if (value != null)
                     BundleManager.Instance.OpenControl((BundleParams)value);
             }
-            
+
         }
 
         protected virtual void controlUpdate()
