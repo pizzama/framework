@@ -86,23 +86,5 @@ namespace SFramework
             return go;
         }
 
-        public BaseGameObjectPool GetUIPool(string name)
-        {
-            ListGameObjectPool pool = _poolManager.CreatGameObjectPool<ListGameObjectPool>(name);
-            return pool;
-        }
-
-        public GameObject SetCacheUI(string name, GameObject prefab)
-        {
-            ListGameObjectPool pool = _poolManager.CreatGameObjectPool<ListGameObjectPool>(name);
-            if (pool.Prefab == null)
-            {
-                if (prefab == null)
-                    throw new NotFoundException("init pool must set prefab first");
-                pool.Prefab = prefab;
-            }
-            return pool.Request();
-        }
-
     }
 }

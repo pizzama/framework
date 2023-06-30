@@ -14,6 +14,9 @@ namespace SFramework
         protected Dictionary<string, GameObject> goDict;
 
         protected Transform mViewTransform;
+
+        protected string mAbPath; //ui abpath
+        protected string mAbName; //ui abname
         protected override void init()
         {
             goDict = new Dictionary<string, GameObject>();
@@ -45,17 +48,15 @@ namespace SFramework
 
         protected virtual void SetViewTransform(out Transform trans, out Vector3 position, out Quaternion rotation)
         {
-            string abPath;
-            string abName;
             trans = null;
-            SetViewPrefabPath(out abPath, out abName, out position, out rotation);
+            SetViewPrefabPath(out mAbPath, out mAbName, out position, out rotation);
 
-            if (!string.IsNullOrEmpty(abPath))
+            if (!string.IsNullOrEmpty(mAbPath))
             {
-                ListGameObjectPool pool = GameObjectPoolManager.Instance.CreatGameObjectPool<ListGameObjectPool>(abPath);
+                ListGameObjectPool pool = GameObjectPoolManager.Instance.CreatGameObjectPool<ListGameObjectPool>(mAbPath);
                 if (pool.Prefab == null)
                 {
-                    pool.Prefab = assetManager.LoadResource<GameObject>(abPath, abName);
+                    pool.Prefab = assetManager.LoadResource<GameObject>(mAbPath, mAbName);
                 }
 
                 trans = pool.Request().transform;
@@ -66,7 +67,7 @@ namespace SFramework
 
         public override void Close()
         {
-            // GameObjectPoolManager.Instance.ReturnGameObject(abPath, mViewTransform.gameObject);
+            GameObjectPoolManager.Instance.ReturnGameObject(mAbPath, mViewTransform.gameObject);
             base.Close();
         }
     }
