@@ -105,24 +105,30 @@ namespace SFramework
         {
             base.Update();
             controlUpdate();
-            _model.Update();
-            _view.Update();
+            if(_model != null)
+                _model.Update();
+            if(_view != null)
+                _view.Update();
         }
 
         public override void FixUpdate()
         {
             base.FixUpdate();
             controlFixUpdate();
-            _model.FixUpdate();
-            _view.FixUpdate();
+            if(_model != null)
+                _model.FixUpdate();
+            if(_view != null)
+                _view.FixUpdate();
         }
 
         public override void LateUpdate()
         {
             base.LateUpdate();
             controlLastUpdate();
-            _model.LateUpdate();
-            _view.LateUpdate();
+            if(_model != null)
+                _model.LateUpdate();
+            if(_view != null)
+                _view.LateUpdate();
         }
 
         public void OpenControl(string nameSpace, string className, object messageData=null, bool isSequence=false, string alias = "", int sort = 0)

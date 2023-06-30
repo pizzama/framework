@@ -15,7 +15,7 @@ namespace SFramework
         private void initFrameworkBundle()
         {
             // init scene and ui
-            BundleManager.Instance.InstallBundle(new RootControl(), "", true);
+            // BundleManager.Instance.InstallBundle(new RootControl(), "", true);
         }
 
         protected abstract void installBundle();
