@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices.ComTypes;
+using System.IO.Compression;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -195,7 +197,10 @@ namespace SFramework
             }
             else
             {
-                bd.Open(value);
+                if (!bd.IsOpen)
+                {
+                    bd.Open(value);
+                }
             }
         }
 

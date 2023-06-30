@@ -18,5 +18,6 @@ namespace SFramework
 
         string AliasName {get; set;}
         void HandleMessage(BundleParams value);
+        bool IsOpen {get; set;}
     }
 }

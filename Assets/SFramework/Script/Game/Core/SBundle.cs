@@ -11,6 +11,10 @@ namespace SFramework
         public string _aliasName;
         public string AliasName { get => _aliasName; set => _aliasName = value; }
 
+        private bool _isOpen;
+
+        public bool IsOpen { get => _isOpen; set => _isOpen = value; }
+
         public void GetBundleName(out string fullName, out string nameSpace, out string className)
         {
             //return packageName and className
