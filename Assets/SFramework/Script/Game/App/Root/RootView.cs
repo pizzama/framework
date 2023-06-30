@@ -4,8 +4,9 @@ using UnityEngine.Rendering.Universal;
 
 namespace SFramework
 {
-    public class RootView : SView
+    public abstract class RootView : SView
     {
+        protected abstract ViewOpenType GetViewOpenType();
         protected AssetsManager assetManager;
         protected RootManager rootManager;
 

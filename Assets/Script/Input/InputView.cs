@@ -7,6 +7,11 @@ namespace game
 {
     public class InputView : SUIView
     {
+        protected override ViewOpenType GetViewOpenType()
+        {
+            return ViewOpenType.Single;
+        }
+
         protected override UILayer GetViewLayer()
         {
             return UILayer.Hud;

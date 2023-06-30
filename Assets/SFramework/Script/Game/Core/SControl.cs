@@ -6,6 +6,12 @@ namespace SFramework
 {
     public class SControl : SBundle
     {
+        private bool _isOpen;
+        public bool IsOpen {
+            get {
+                return _isOpen;
+            }
+        }
         private SModel _model;
         private SView _view;
 
@@ -28,6 +34,7 @@ namespace SFramework
         {
             base.Open(value);
             _model.Open(value);
+            _isOpen = true;
         }
 
         public override void Open()
@@ -45,6 +52,7 @@ namespace SFramework
             _model.Close();
             _view.CloseAsync();
             _view.Close();
+            _isOpen = false;
         }
 
         public override void Uninstall()
