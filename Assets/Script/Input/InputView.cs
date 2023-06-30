@@ -39,11 +39,9 @@ namespace game
 
         protected override void viewUpdate()
         {
-            Debug.Log("viewupdate");
-            base.viewUpdate();
             if (Input.GetKey(KeyCode.Space))
             {
-                Control.OpenControl("game", "Test");
+                Control.OpenControl("game", "TestControl");
             }
         }
     }

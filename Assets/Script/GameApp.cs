@@ -8,7 +8,7 @@ namespace game
         {
             BundleManager.Instance.InstallBundle(new GameMainControl(), "", true);
             BundleManager.Instance.InstallBundle(new TestControl(), "", true);
-            // BundleManager.Instance.InstallBundle(new CenterControl(), "", true);
+            BundleManager.Instance.InstallBundle(new InputControl(), "", true);
         }
     }
 }
