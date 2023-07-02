@@ -36,7 +36,7 @@ namespace SFramework.Pool
         /// <param name="poolName">对象池名称，唯一id</param>
         /// <returns>对象池对象</returns>
         GameObject AllPool;
-        public T CreatGameObjectPool<T>(string poolName) where T : BaseGameObjectPool, new()
+        public T CreateGameObjectPool<T>(string poolName) where T : BaseGameObjectPool, new()
         {
             if (_poolDic.ContainsKey(poolName))
             {

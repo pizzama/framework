@@ -71,7 +71,8 @@ namespace SFramework
         public void CollectCamera()
         {
             UniversalAdditionalCameraData cameraData = Camera.main.GetUniversalAdditionalCameraData();
-            cameraData.cameraStack.Add(_uiRoot.UICamera);
+            if(cameraData != null && cameraData.cameraStack != null)
+                cameraData.cameraStack.Add(_uiRoot.UICamera);
         }
 
         public SUIROOT GetUIRoot()

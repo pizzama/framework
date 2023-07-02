@@ -15,8 +15,8 @@ namespace SFramework
 
         protected Transform mViewTransform;
 
-        protected string mAbPath; //ui abpath
-        protected string mAbName; //ui abname
+        protected string mAbPath; //ui asset bundle path
+        protected string mAbName; //ui asset bundle name
         protected override void init()
         {
             goDict = new Dictionary<string, GameObject>();
@@ -53,7 +53,7 @@ namespace SFramework
 
             if (!string.IsNullOrEmpty(mAbPath))
             {
-                ListGameObjectPool pool = GameObjectPoolManager.Instance.CreatGameObjectPool<ListGameObjectPool>(mAbPath);
+                ListGameObjectPool pool = GameObjectPoolManager.Instance.CreateGameObjectPool<ListGameObjectPool>(mAbPath);
                 if (pool.Prefab == null)
                 {
                     pool.Prefab = assetManager.LoadResource<GameObject>(mAbPath, mAbName);
