@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
@@ -102,5 +103,81 @@ namespace SFramework
             }
             return (T)result;
         }
+
+
+        /// <summary>
+        /// 从所有的程序集中取到子类  特别费性能
+        /// </summary>
+        /// <param name="baseType"></param>
+        /// <param name="immediate class">是否是直系的类型</param>
+        /// <param name="exception"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static List<Type> GetTypesFormBaseTypeWithAllAssembly(Type baseType, bool immediateClass = false,
+            bool exception = true)
+        {
+            if (baseType == null)
+            {
+                throw new Exception("Type is invalid.");
+            }
+
+            if (string.IsNullOrEmpty(baseType.FullName))
+            {
+                throw new Exception($"Type '{baseType}' full name is invalid");
+            }
+
+
+            List<Type> types = new List<Type>();
+            Assembly[] sAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+            foreach (var assembly in sAssemblies)
+            {
+                var allTypes = assembly.GetTypes();
+                foreach (var type in allTypes)
+                {
+                    if (!baseType.IsAssignableFrom(type))
+                    {
+                        continue;
+                    }
+
+                    if (!type.IsClass)
+                    {
+                        continue;
+                    }
+
+                    if (type.IsInterface)
+                    {
+                        continue;
+                    }
+
+                    if (type.IsAbstract)
+                    {
+                        continue;
+                    }
+
+                    if (type == baseType)
+                    {
+                        continue;
+                    }
+
+                    if (immediateClass && type.BaseType != baseType)
+                    {
+                        continue;
+                    }
+
+                    types.Add(type);
+                }
+            }
+
+            if (types.Count <= 0)
+            {
+                if (exception)
+                {
+                    throw new Exception("you have must to have implementation class . Type :" + baseType.FullName);
+                }
+            }
+
+            return types;
+        }
+        
     }
 }

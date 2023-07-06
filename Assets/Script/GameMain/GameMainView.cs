@@ -24,7 +24,7 @@ namespace game
         protected override async void openingAsync()
         {
             Debug.Log("gameMain view enterAsync");
-            AsyncOperation operation = await LoadSceneAsync("Scenes/BaseScene", "BaseScene", LoadSceneMode.Single);
+            AsyncOperation operation = await LoadSceneAsync("Scenes/BaseScene", "BaseScene", LoadSceneMode.Additive);
             if (operation != null)
             {
                 var progress = Progress.Create<float>(p => Debug.LogFormat("array p:{0}", p));
@@ -32,7 +32,12 @@ namespace game
             }
 
             await UniTask.Delay(TimeSpan.FromSeconds(2));
+
+            Scene sc = SceneManager.GetActiveScene();
+            await SceneManager.UnloadSceneAsync(sc);
+            sc = SceneManager.GetActiveScene();
             rootManager.CollectCamera();
+
         }
     }
 }

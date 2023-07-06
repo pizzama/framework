@@ -13,7 +13,7 @@ namespace SFramework
             getBuildInSceneNames(out _buildInSceneNames);
         }
 
-        public async UniTask<AsyncOperation> LoadSceneAsync(string scenePath, string sceneName ,LoadSceneMode mode)
+        public async UniTask<AsyncOperation> LoadSceneAsync(string scenePath, string sceneName, LoadSceneMode mode)
         {
             Scene sc = SceneManager.GetActiveScene();
             if (sc.name == scenePath)
@@ -48,6 +48,19 @@ namespace SFramework
             }
 
             return operation;
+        }
+
+        public async UniTask<bool> UnloadSceneAsync(string scenePath)
+        {
+            Scene sc = SceneManager.GetSceneByName(scenePath);
+            if (sc != null && sc.isLoaded)
+            {
+                return true;
+            }
+            
+            await SceneManager.UnloadSceneAsync(scenePath);
+
+            return true;
         }
 
         private void getBuildInSceneNames(out List<string> names)
