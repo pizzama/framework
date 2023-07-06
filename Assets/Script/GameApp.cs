@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using SFramework;
@@ -8,10 +9,16 @@ namespace game
     {
         protected override void installBundle()
         {
-            var ss = ReflectionTools.GetTypesFormBaseTypeWithAllAssembly(typeof(SControl));
-            BundleManager.Instance.InstallBundle(new GameMainControl(), "", true);
-            BundleManager.Instance.InstallBundle(new TestControl(), "", true);
-            BundleManager.Instance.InstallBundle(new InputControl(), "", true);
+            List<Type> controls = ReflectionTools.GetTypesFormBaseTypeWithAllAssembly(typeof(SControl));
+            for (int i = 1; i < controls.Count; i++)
+            {
+                Type cType = controls[i];
+                IBundle bd = (IBundle)Activator.CreateInstance(cType, true);
+                BundleManager.Instance.InstallBundle(bd, "", true);
+            }
+            // BundleManager.Instance.InstallBundle(new GameMainControl(), "", true);
+            // BundleManager.Instance.InstallBundle(new TestControl(), "", true);
+            // BundleManager.Instance.InstallBundle(new InputControl(), "", true);
         }
     }
 }
