@@ -15,10 +15,10 @@ namespace SFramework
 
     public interface IFSMState<TBlackBoard> where TBlackBoard : new()
     {
-        void Init(); //创建时执行一次
-        void Enter(); //每次进入状态执行
-        void Update(); //每次更新状态执行
-        void Exit(); //每次退出执行
+        void InitState(); //创建时执行一次
+        void EnterState(); //每次进入状态执行
+        void UpdateState(); //每次更新状态执行
+        void ExitState(); //每次退出执行
         void SetFSM(FSM<TBlackBoard> value);
         List<IFSMTransition<TBlackBoard>> GetTransitions();
         public T AddTransition<T>() where T : IFSMTransition<TBlackBoard>, new();
@@ -51,22 +51,22 @@ namespace SFramework
         protected bool couldTransition = true; //是否可以开始转换检查的开关，默认打开，每帧检查一次
         public FSM<TBlackBoard> Machine;
         private List<IFSMTransition<TBlackBoard>> _transitions = new List<IFSMTransition<TBlackBoard>>();
-        public virtual void Init()
+        public virtual void InitState()
         {
 
         }
 
-        public virtual void Enter()
+        public virtual void EnterState()
         {
 
         }
 
-        public virtual void Update()
+        public virtual void UpdateState()
         {
 
         }
 
-        public virtual void Exit()
+        public virtual void ExitState()
         {
 
         }
@@ -128,7 +128,7 @@ namespace SFramework
             mStates.Add(id, state);
             state.SetFSM(this);
             //添加完管理器之后在初始化状态
-            state.Init();
+            state.InitState();
         }
 
         public IFSMState<TBlackBoard> GetState(string id)
@@ -161,11 +161,11 @@ namespace SFramework
             {
                 if (_activeState != null)
                 {
-                    _activeState.Exit();
+                    _activeState?.ExitState();
                 }
                 _activeState = state;
                 _currentStateId = id;
-                _activeState.Enter();
+                _activeState?.EnterState();
             }
         }
 
@@ -188,7 +188,7 @@ namespace SFramework
         {
             // Debug.Log(_activeState.ToName());
             checkState();
-            _activeState?.Update();
+            _activeState?.UpdateState();
         }
 
         public void Clear()
@@ -212,10 +212,10 @@ namespace SFramework
                     {
                         IFSMState<TBlackBoard> state = tran.GetNextFSMState();
                         Debug.Log("current state change to:" + state.ToName());
-                        _activeState.Exit();
+                        _activeState?.ExitState();
                         tran.Transition();
                         _activeState = state;
-                        _activeState.Enter();
+                        _activeState?.EnterState();
                     }
                 }
             }

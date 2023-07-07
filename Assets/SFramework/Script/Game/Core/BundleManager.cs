@@ -168,7 +168,7 @@ namespace SFramework
         }
 
         // classPath is nameSpace + className
-        public void OpenControl(string nameSpace, string className, object messageData, bool isSequence, string alias = "", int sort = 0)
+        public void OpenControl(string nameSpace, string className, object messageData=null, bool isSequence=false, string alias = "", int sort = 0)
         {
             BundleParams bdParams = new BundleParams()
             {
