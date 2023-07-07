@@ -113,7 +113,7 @@ namespace SFramework
         /// <param name="exception"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static List<Type> GetTypesFormBaseTypeWithAllAssembly(Type baseType, bool immediateClass = false,
+        public static List<Type> GetTypesFormTypeWithAllAssembly(Type baseType, bool immediateClass = false,
             bool exception = true)
         {
             if (baseType == null)

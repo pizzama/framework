@@ -136,10 +136,19 @@ namespace SFramework
 
         public void InstallBundle(IBundle bundle, string alias = "", bool withOpen = false)
         {
-            IBundle value = AddBundle(bundle, alias);
-            value.Install();
-            if (withOpen)
-                value.Open();
+            try
+            {
+                IBundle value = AddBundle(bundle, alias);
+                value.Install();
+                if (withOpen)
+                    value.Open();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning(e.ToString());
+            }
+
+
         }
 
         public void UninstallBundle(string name, string alias)
@@ -171,7 +180,7 @@ namespace SFramework
                 MessageSender = this,
                 Sort = 0,
             };
-            
+
             if (isSequence)
             {
                 bdParams.OpenType = OpenType.Sequence;
@@ -232,7 +241,7 @@ namespace SFramework
 
         public BundleParams? PopUpOpenParams()
         {
-            if(_openSequenceParams.Count > 0)
+            if (_openSequenceParams.Count > 0)
             {
                 BundleParams value = _openSequenceParams[0];
                 _openSequenceParams.RemoveAt(0);

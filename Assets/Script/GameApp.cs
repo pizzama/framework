@@ -9,12 +9,12 @@ namespace game
     {
         protected override void installBundle()
         {
-            List<Type> controls = ReflectionTools.GetTypesFormBaseTypeWithAllAssembly(typeof(SControl));
-            for (int i = 1; i < controls.Count; i++)
+            List<Type> controls = ReflectionTools.GetTypesFormTypeWithAllAssembly(typeof(SControl));
+            for (int i = 0; i < controls.Count; i++)
             {
                 Type cType = controls[i];
                 IBundle bd = (IBundle)Activator.CreateInstance(cType, true);
-                BundleManager.Instance.InstallBundle(bd, "", true);
+                BundleManager.Instance.InstallBundle(bd, "");
             }
             // BundleManager.Instance.InstallBundle(new GameMainControl(), "", true);
             // BundleManager.Instance.InstallBundle(new TestControl(), "", true);
