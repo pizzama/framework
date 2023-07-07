@@ -19,6 +19,7 @@ namespace SFramework
         void EnterState(); //每次进入状态执行
         void UpdateState(); //每次更新状态执行
         void ExitState(); //每次退出执行
+        void HandleInput(); //处理输入操作
         void SetFSM(FSM<TBlackBoard> value);
         List<IFSMTransition<TBlackBoard>> GetTransitions();
         public T AddTransition<T>() where T : IFSMTransition<TBlackBoard>, new();
@@ -69,6 +70,11 @@ namespace SFramework
         public virtual void ExitState()
         {
 
+        }
+
+        public virtual void HandleInput()
+        {
+            
         }
 
         public void SetFSM(FSM<TBlackBoard> value)
