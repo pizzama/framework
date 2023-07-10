@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(ParticleSystem))]
 public class ParticleTargetMove : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem _par;
+    private ParticleSystem _par;
     private ParticleSystem.Particle[] _arrPar;
     private int _arrCount;
     [SerializeField] private float _speed = 0.1f;
@@ -18,8 +18,7 @@ public class ParticleTargetMove : MonoBehaviour
     private Vector3 _wPos;
     private void Awake()
     {
-        if(_par == null)
-            _par = this.GetComponent<ParticleSystem>();
+        _par = this.GetComponent<ParticleSystem>();
         _arrPar = new ParticleSystem.Particle[_par.main.maxParticles];
         _speedAdd = 0f;
         if(OncePar)
