@@ -5,90 +5,91 @@ using UnityEngine;
 [RequireComponent(typeof(ParticleSystem))]
 public class ParticleTargetMove : MonoBehaviour
 {
-    private ParticleSystem par;
-    private ParticleSystem.Particle[] arrPar;
-    private int arrCount;
-    public float speed = 0.1f;
-    public float delayTime = 1f;
-    public float originEmissionRate;
-    public bool isActive;
-    public float speedAdd;
-    public float speedAddDelta = 2f;
-    public bool oncePar = false;
-    private Vector3 wPos;
+    [SerializeField] private ParticleSystem _par;
+    private ParticleSystem.Particle[] _arrPar;
+    private int _arrCount;
+    [SerializeField] private float _speed = 0.1f;
+    [SerializeField] private float _delayTime = 1f;
+    private float _originEmissionRate;
+    private bool _isActive;
+    private float _speedAdd;
+    [SerializeField] private float _speedAddDelta = 2f;
+    public bool OncePar = false;
+    private Vector3 _wPos;
     private void Awake()
     {
-        par = this.GetComponent<ParticleSystem>();
-        arrPar = new ParticleSystem.Particle[par.main.maxParticles];
-        speedAdd = 0f;
-        if(oncePar)
+        if(_par == null)
+            _par = this.GetComponent<ParticleSystem>();
+        _arrPar = new ParticleSystem.Particle[_par.main.maxParticles];
+        _speedAdd = 0f;
+        if(OncePar)
         {
-            originEmissionRate = par.emission.GetBurst(0).count.curveMultiplier;
+            _originEmissionRate = _par.emission.GetBurst(0).count.curveMultiplier;
         }
         else
         {
-            originEmissionRate = par.emission.rateOverTimeMultiplier;
+            _originEmissionRate = _par.emission.rateOverTimeMultiplier;
         }
     }
 
     private void setActive()
     {
-        isActive = true;
+        _isActive = true;
     }
 
     private void Update()
     {
-        if(!isActive || !par)
+        if(!_isActive || !_par)
         {
             return;
         }
-        arrCount = par.GetParticles(arrPar);
-        if(arrCount < 1)
+        _arrCount = _par.GetParticles(_arrPar);
+        if(_arrCount < 1)
         {
-            isActive = false;
-            par.Stop();
-            speedAdd = 0f;
+            _isActive = false;
+            _par.Stop();
+            _speedAdd = 0f;
         }
         else
         {
-            speedAdd += Time.unscaledDeltaTime * speedAddDelta;
+            _speedAdd += Time.unscaledDeltaTime * _speedAddDelta;
         }
 
-        for(int i = 0; i < arrCount; i++)
+        for(int i = 0; i < _arrCount; i++)
         {
-            Vector3 vector = wPos - arrPar[i].position;
-            if (vector.magnitude <= (speed + speedAdd) * Time.unscaledDeltaTime)
+            Vector3 vector = _wPos - _arrPar[i].position;
+            if (vector.magnitude <= (_speed + _speedAdd) * Time.unscaledDeltaTime)
             {
-                arrPar[i].position = wPos;
-                arrPar[i].remainingLifetime = 0f;
-                var emis = par.emission;
+                _arrPar[i].position = _wPos;
+                _arrPar[i].remainingLifetime = 0f;
+                var emis = _par.emission;
                 emis.rateOverTimeMultiplier = 0;
             }
             else
             {
-                arrPar[i].position += vector.normalized * (speed + speedAdd) * Time.unscaledDeltaTime;
+                _arrPar[i].position += vector.normalized * (_speed + _speedAdd) * Time.unscaledDeltaTime;
             }
         }
-        par.SetParticles(arrPar, arrCount);
+        _par.SetParticles(_arrPar, _arrCount);
     }
 
     public  void Play(Vector3 _pos, int emit_count)
     {
-        wPos = _pos;
-        Invoke("setActive", delayTime + 0.0f);
-        if(par == null)
+        _wPos = _pos;
+        Invoke("setActive", _delayTime + 0.0f);
+        if(_par == null)
         {
-            par = this.GetComponent<ParticleSystem>();
+            _par = this.GetComponent<ParticleSystem>();
         }
-        if(oncePar)
+        if(OncePar)
         {
-            var b = par.emission.GetBurst(0);
-            b.count = new ParticleSystem.MinMaxCurve(originEmissionRate);
-            par.emission.SetBurst(0, b);
+            var b = _par.emission.GetBurst(0);
+            b.count = new ParticleSystem.MinMaxCurve(_originEmissionRate);
+            _par.emission.SetBurst(0, b);
         }
-        speedAdd = 0;
-        isActive = false;
-        par.Stop();
-        par.Emit(emit_count);
+        _speedAdd = 0;
+        _isActive = false;
+        _par.Stop();
+        _par.Emit(emit_count);
     }
 }
