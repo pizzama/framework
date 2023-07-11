@@ -51,7 +51,7 @@ namespace SFramework
         }
 
         // Pre Calculate text width and height
-        public static UnityEngine.Vector2 GetTextPreferredWidthAndHeight(Text txt, string content)
+        public static Vector2 GetTextPreferredWidthAndHeight(Text txt, string content)
         {
             var tg = new TextGenerator();
             var settings = txt.GetGenerationSettings(txt.GetComponent<RectTransform>().sizeDelta);

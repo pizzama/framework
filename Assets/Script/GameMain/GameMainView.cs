@@ -37,7 +37,6 @@ namespace game
             await SceneManager.UnloadSceneAsync(sc);
             sc = SceneManager.GetActiveScene();
             rootManager.CollectCamera();
-
         }
     }
 }
