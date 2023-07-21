@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine.Networking;
 using Cysharp.Threading.Tasks;
 using System;
@@ -66,6 +67,37 @@ namespace SFramework
 
         protected virtual void modelLastUpdate()
         {
+
+        }
+
+        public async UniTask<byte[]> GetData(string url, IProgress<float> progress, CancellationTokenSource cancelSource)
+        {
+            if (url == "")
+            {
+                ModelCallback?.Invoke();
+                return null;
+            }
+            try
+            {
+                UnityWebRequest webRequest = UnityWebRequest.Get(url);
+                await webRequest.SendWebRequest().WithCancellation(cancelSource.Token);
+                ModelCallback?.Invoke();
+                return webRequest.downloadHandler.data;
+            }
+            catch (OperationCanceledException ex)
+            {
+                if (cancelSource.IsCancellationRequested)
+                {
+                    UnityEngine.Debug.Log("Timeout.");
+                }
+                else if (cancelSource.IsCancellationRequested)
+                {
+                    UnityEngine.Debug.Log("Cancel clicked.");
+                }
+
+                return null;
+            }
+
 
         }
 

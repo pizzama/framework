@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using System;
+using Cysharp.Threading.Tasks;
 
 namespace SFramework
 {
@@ -42,21 +43,21 @@ namespace SFramework
             Open();
         }
 
-        public virtual async void OpenAsync()
+        public virtual async UniTaskVoid OpenAsync()
         {
-            openingAsync();
+            openingAsync().Forget();
             await Task.Yield();
         }
 
         public virtual void Close()
         {
             closing();
-            CloseAsync();
+            CloseAsync().Forget();
         }
 
-        public virtual async void CloseAsync()
+        public virtual async UniTaskVoid CloseAsync()
         {
-            closingAsync();
+            closingAsync().Forget();
             await Task.Yield();
         }
 
@@ -85,7 +86,7 @@ namespace SFramework
 
         }
 
-        protected virtual async void openingAsync()
+        protected virtual async UniTaskVoid openingAsync()
         {
             await Task.Yield();
         }
@@ -95,7 +96,7 @@ namespace SFramework
 
         }
 
-        protected virtual async void closingAsync()
+        protected virtual async UniTaskVoid closingAsync()
         {
             await Task.Yield();
         }

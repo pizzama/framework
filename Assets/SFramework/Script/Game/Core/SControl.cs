@@ -34,17 +34,17 @@ namespace SFramework
         public override void Open()
         {
             base.Open();
-            OpenAsync();
+            OpenAsync().Forget();
             _model.Open();
-            _model.OpenAsync();
+            _model.OpenAsync().Forget();
         }
 
         public override void Close()
         {
-            CloseAsync();
-            _model.CloseAsync();
+            CloseAsync().Forget();
+            _model.CloseAsync().Forget();
             _model.Close();
-            _view.CloseAsync();
+            _view.CloseAsync().Forget();
             _view.Close();
             IsOpen = false;
         }
@@ -77,7 +77,7 @@ namespace SFramework
         public void HandleModelCallback()
         {
             _view.Open();
-            _view.OpenAsync();
+            _view.OpenAsync().Forget();
         }
 
         private T createBundle<T>(Type classType, string name)

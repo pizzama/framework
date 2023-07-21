@@ -33,7 +33,7 @@ namespace game
             _closeBtn.onClick.AddListener(closeHandle);
         }
 
-        protected override async void openingAsync()
+        protected override async UniTaskVoid openingAsync()
         {
             Debug.Log("test view enterasync");
             // var tt = assetManager.LoadResource<TextAsset>("test11", "test1");

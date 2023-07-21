@@ -34,7 +34,7 @@ namespace game
             // img.sprite = sprite;
         }
 
-        protected override async void openingAsync()
+        protected override async UniTaskVoid openingAsync()
         {
             // Debug.Log("test view enterasync");
             // var tt = await assetManager.LoadResourceAsync<TextAsset>("test11", "test1");

@@ -21,7 +21,7 @@ namespace game
             Debug.Log("GameMainView:" + sc.name);
         }
 
-        protected override async void openingAsync()
+        protected override async UniTaskVoid openingAsync()
         {
             Debug.Log("gameMain view enterAsync");
             AsyncOperation operation = await LoadSceneAsync("Scenes/BaseScene", "BaseScene", LoadSceneMode.Single);

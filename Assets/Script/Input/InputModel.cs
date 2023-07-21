@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using SFramework;
 using UnityEngine;
 
@@ -10,9 +11,8 @@ namespace game
             Debug.Log("test model enter");
         }
 
-        protected override async void openingAsync()
+        protected override async UniTaskVoid openingAsync()
         {
-            Debug.Log("test model enterasync");
             await GetData("");
         }
     }

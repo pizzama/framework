@@ -1,6 +1,7 @@
 using SFramework;
 using UnityEngine;
 using LanguageData;
+using Cysharp.Threading.Tasks;
 
 namespace game
 {
@@ -11,7 +12,7 @@ namespace game
             Debug.Log("test model enter");
         }
 
-        protected override async void openingAsync()
+        protected override async UniTaskVoid openingAsync()
         {
             Debug.Log("test model enterasync");
             Language_data_datas tt = await ConfigManager.Instance.GetConfigAsync<Language_data_datas>();

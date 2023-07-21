@@ -8,12 +8,12 @@ namespace game
     {
         protected override void opening()
         {
-            Debug.Log("gamemain control enter");
+            Debug.Log("gameMain control enter");
         }
 
-        protected override async void openingAsync()
+        protected override async UniTaskVoid openingAsync()
         {
-            Debug.Log("gamemain control enterasync");
+            Debug.Log("gameMain control openingAsync");
             await UniTask.Yield();
         }
     }
