@@ -17,7 +17,15 @@ namespace game
 
         public override void HandleMessage(BundleParams value)
         {
-            
+            switch(value.MessageId)
+            {
+                case "LoadingUpdate":
+                    Debug.Log("loading value:" + value.MessageData);
+                break;
+                case "LoadingEnd":
+                    Debug.Log("loading end:" + value.MessageData);
+                break;
+            }
 
         }
     }

@@ -25,9 +25,12 @@ namespace game
             rotation = Quaternion.Euler(0, 0, 0);
         }
 
+        private Animator animator;
+
         protected override void opening()
         {
-
+            animator = getAssetFromGoDict<Animator>("BaseLoading");
+            Debug.Log(animator);
         }
 
         protected override async UniTaskVoid openingAsync()
@@ -43,6 +46,11 @@ namespace game
         protected override void closing()
         {
             
+        }
+
+        public void FinishLoading()
+        {
+
         }
     }
 }

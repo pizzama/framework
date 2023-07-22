@@ -27,10 +27,10 @@ namespace game
             AsyncOperation operation = await LoadSceneAsync("Scenes/BaseScene", "BaseScene", LoadSceneMode.Single);
             if (operation != null)
             {
-                var progress = Progress.Create<float>(p => Control.BroadcastMessage("updateLoading", "game", "LoadingControl", p));
+                var progress = Progress.Create<float>(p => Control.BroadcastMessage("LoadingUpdate", "game", "LoadingControl", p));
                 await operation.ToUniTask(progress);
             }
-            Control.BroadcastMessage("endLoading", "game", "LoadingControl");
+            Control.BroadcastMessage("LoadingEnd", "game", "LoadingControl");
             await UniTask.Delay(TimeSpan.FromSeconds(2));
 
             Scene sc = SceneManager.GetActiveScene();

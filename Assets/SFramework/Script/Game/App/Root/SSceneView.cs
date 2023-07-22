@@ -34,8 +34,10 @@ namespace SFramework
                 Object request = await assetManager.LoadResourceAsync<Object>(scenePath, sceneName);
                 if (request != null)
                 {
+#if UNITY_EDITOR
                     string obj_path = UnityEditor.AssetDatabase.GetAssetPath(request);
                     operation = UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(obj_path, new LoadSceneParameters(mode));
+#endif
                 }
                 else
                 {
