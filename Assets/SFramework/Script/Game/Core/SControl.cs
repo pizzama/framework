@@ -9,6 +9,9 @@ namespace SFramework
         private SModel _model;
         private SView _view;
 
+        public SView View { get { return _view; } }
+        public SModel Model { get { return _model; } }
+
         //when register control it will find model and view
         public override void Install()
         {

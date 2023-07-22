@@ -23,6 +23,7 @@ namespace game
                     Debug.Log("loading value:" + value.MessageData);
                 break;
                 case "LoadingEnd":
+                    (View as LoadingView).FinishLoading();
                     Debug.Log("loading end:" + value.MessageData);
                 break;
             }

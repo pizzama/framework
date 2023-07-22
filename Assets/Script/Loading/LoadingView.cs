@@ -50,7 +50,7 @@ namespace game
 
         public void FinishLoading()
         {
-
+            animator.SetTrigger("End");
         }
     }
 }
