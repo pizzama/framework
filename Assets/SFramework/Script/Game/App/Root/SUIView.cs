@@ -29,7 +29,15 @@ namespace SFramework
             if (go != null)
                 return go.GetComponent<T>();
             else
-                return default(T);
+            {
+                goDict.TryGetValue(key + "(Clone)", out go);
+                if(go != null)
+                {
+                    return go.GetComponent<T>();
+                }
+            }
+ 
+            return default(T);
         }
 
         public override void Open()

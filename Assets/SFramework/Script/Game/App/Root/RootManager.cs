@@ -43,6 +43,7 @@ namespace SFramework
                 }
                 GameObject uiRoot = Object.Instantiate(rootPrefab);
                 Object.DontDestroyOnLoad(uiRoot);
+                uiRoot.name = uiName;
                 _uiRoot = ComponentTools.GetOrAddComponent<SUIROOT>(uiRoot);
             }
 
