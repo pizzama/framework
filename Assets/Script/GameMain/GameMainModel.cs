@@ -7,7 +7,6 @@ namespace game
     {
         protected override void opening()
         {
-            Debug.Log("gamemain model enter");
         }
 
         protected override async UniTaskVoid openingAsync()

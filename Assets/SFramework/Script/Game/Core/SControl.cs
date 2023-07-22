@@ -54,7 +54,7 @@ namespace SFramework
             _model.ModelCallback -= HandleModelCallback;
         }
 
-        public virtual void BroadcastMessage(string messageId, string nameSpace, string className, object messageData, string alias = "", int sort = 0)
+        public virtual void BroadcastMessage(string messageId, string nameSpace, string className, object messageData = null, string alias = "", int sort = 0)
         {
             BundleParams bdParams = new BundleParams()
             {
@@ -105,9 +105,9 @@ namespace SFramework
         {
             base.Update();
             controlUpdate();
-            if(_model != null)
+            if (_model != null)
                 _model.Update();
-            if(_view != null)
+            if (_view != null)
                 _view.Update();
         }
 
@@ -115,9 +115,9 @@ namespace SFramework
         {
             base.FixUpdate();
             controlFixUpdate();
-            if(_model != null)
+            if (_model != null)
                 _model.FixUpdate();
-            if(_view != null)
+            if (_view != null)
                 _view.FixUpdate();
         }
 
@@ -125,13 +125,13 @@ namespace SFramework
         {
             base.LateUpdate();
             controlLastUpdate();
-            if(_model != null)
+            if (_model != null)
                 _model.LateUpdate();
-            if(_view != null)
+            if (_view != null)
                 _view.LateUpdate();
         }
 
-        public void OpenControl(string nameSpace, string className, object messageData=null, bool isSequence=false, string alias = "", int sort = 0)
+        public void OpenControl(string nameSpace, string className, object messageData = null, bool isSequence = false, string alias = "", int sort = 0)
         {
             Manager.OpenControl(nameSpace, className, messageData, isSequence, alias, sort);
         }

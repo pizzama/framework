@@ -4,17 +4,21 @@ using UnityEngine;
 
 namespace game
 {
-    public class LoadingControl: SControl
+    public class LoadingControl : SControl
     {
         protected override void opening()
         {
-            Debug.Log("test control enter");
         }
 
         protected override async UniTaskVoid openingAsync()
         {
-            Debug.Log("test control enterasync");
             await UniTask.Yield();
+        }
+
+        public override void HandleMessage(BundleParams value)
+        {
+            
+
         }
     }
 }

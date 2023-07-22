@@ -17,20 +17,20 @@ namespace game
 
         protected override void opening()
         {
-            Scene sc = SceneManager.GetActiveScene();
-            Debug.Log("GameMainView:" + sc.name);
+            // Scene sc = SceneManager.GetActiveScene();
+            // Debug.Log("GameMainView:" + sc.name);
         }
 
         protected override async UniTaskVoid openingAsync()
         {
-            Debug.Log("gameMain view enterAsync");
+            Control.OpenControl("game", "LoadingControl");
             AsyncOperation operation = await LoadSceneAsync("Scenes/BaseScene", "BaseScene", LoadSceneMode.Single);
             if (operation != null)
             {
-                var progress = Progress.Create<float>(p => Debug.LogFormat("array p:{0}", p));
+                var progress = Progress.Create<float>(p => Control.BroadcastMessage("updateLoading", "game", "LoadingControl", p));
                 await operation.ToUniTask(progress);
             }
-
+            Control.BroadcastMessage("endLoading", "game", "LoadingControl");
             await UniTask.Delay(TimeSpan.FromSeconds(2));
 
             Scene sc = SceneManager.GetActiveScene();

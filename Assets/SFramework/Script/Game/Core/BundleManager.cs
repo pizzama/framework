@@ -37,6 +37,7 @@ namespace SFramework
             if (_instance == null)
             {
                 _instance = this as BundleManager;
+                _instance.init();
                 DontDestroyOnLoad(transform.gameObject);
             }
             else

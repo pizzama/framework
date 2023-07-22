@@ -14,28 +14,24 @@ namespace game
 
         protected override UILayer GetViewLayer()
         {
-            return UILayer.Popup;
+            return UILayer.Toast;
         }
 
         protected override void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
         {
-            prefabPath = "ss/Test";
-            prefabName = "Test";
+            prefabPath = "Loading/BaseLoading";
+            prefabName = "BaseLoading";
             position = new Vector3(0, 0, 0);
             rotation = Quaternion.Euler(0, 0, 0);
         }
 
-        private Button _closeBtn;
-
         protected override void opening()
         {
-            _closeBtn = getAssetFromGoDict<Button>("Button");
-            _closeBtn.onClick.AddListener(closeHandle);
+
         }
 
         protected override async UniTaskVoid openingAsync()
         {
-            Debug.Log("test view enterasync");
             await UniTask.Yield();
         }
 
@@ -46,8 +42,7 @@ namespace game
 
         protected override void closing()
         {
-            base.closing();
-            _closeBtn.onClick.RemoveAllListeners();
+            
         }
     }
 }
