@@ -19,8 +19,8 @@ namespace game
 
         protected override void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
         {
-            prefabPath = "Loading/BaseLoading";
-            prefabName = "BaseLoading";
+            prefabPath = "Loading/BarLoading";
+            prefabName = "BarLoading";
             position = new Vector3(0, 0, 0);
             rotation = Quaternion.Euler(0, 0, 0);
         }
@@ -29,7 +29,7 @@ namespace game
 
         protected override void opening()
         {
-            animator = getAssetFromGoDict<Animator>("BaseLoading");
+            animator = getAssetFromGoDict<Animator>("BarLoading");
             Debug.Log(animator);
         }
 
@@ -50,6 +50,7 @@ namespace game
 
         public void FinishLoading()
         {
+            //Debug.Log("FinishLoading");
             animator.SetTrigger("End");
         }
     }
