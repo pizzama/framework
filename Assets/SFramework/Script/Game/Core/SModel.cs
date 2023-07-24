@@ -88,11 +88,11 @@ namespace SFramework
             {
                 if (cancelSource.IsCancellationRequested)
                 {
-                    UnityEngine.Debug.Log("Timeout.");
+                    UnityEngine.Debug.Log("Timeout." + ex.ToString());
                 }
                 else if (cancelSource.IsCancellationRequested)
                 {
-                    UnityEngine.Debug.Log("Cancel clicked.");
+                    UnityEngine.Debug.Log("Cancel clicked." + ex.ToString());
                 }
 
                 return null;

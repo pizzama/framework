@@ -20,7 +20,7 @@ namespace game
                 BundleManager.Instance.InstallBundle(bd, "");
             }
 
-            BundleManager.Instance.OpenControl("game", "GameMainControl");
+            //BundleManager.Instance.OpenControl("game", "GameMainControl");
             BundleManager.Instance.OpenControl("game", "TestControl");
             BundleManager.Instance.OpenControl("game", "InputControl");
         }
