@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-namespace PUtils
+namespace SFramework.UI
 {
     [ExecuteInEditMode]
     [RequireComponent(typeof(Camera))]

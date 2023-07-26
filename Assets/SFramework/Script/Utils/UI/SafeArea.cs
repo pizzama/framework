@@ -2,34 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SafeArea : MonoBehaviour
+namespace SFramework.UI
 {
-    [SerializeField] private bool _left;
-    [SerializeField] private bool _right;
-    [SerializeField] private bool _top;
-    [SerializeField] private bool _bottom;
-
-    private void Start()
+    public class SafeArea : MonoBehaviour
     {
-        var panel = GetComponent<RectTransform>();
-        var area = Screen.safeArea;
+        [SerializeField] private bool _left;
+        [SerializeField] private bool _right;
+        [SerializeField] private bool _top;
+        [SerializeField] private bool _bottom;
 
-        var anchorMin = area.position;
-        var anchorMax = area.position + area.size;
+        private void Start()
+        {
+            var panel = GetComponent<RectTransform>();
+            var area = Screen.safeArea;
 
-        if (_left) anchorMin.x /= Screen.width;
-        else anchorMin.x = 0;
+            var anchorMin = area.position;
+            var anchorMax = area.position + area.size;
 
-        if (_right) anchorMax.x /= Screen.width;
-        else anchorMax.x = 1;
+            if (_left) anchorMin.x /= Screen.width;
+            else anchorMin.x = 0;
 
-        if (_bottom) anchorMin.y /= Screen.height;
-        else anchorMin.y = 0;
+            if (_right) anchorMax.x /= Screen.width;
+            else anchorMax.x = 1;
 
-        if (_top) anchorMax.y /= Screen.height;
-        else anchorMax.y = 1;
+            if (_bottom) anchorMin.y /= Screen.height;
+            else anchorMin.y = 0;
 
-        panel.anchorMin = anchorMin;
-        panel.anchorMax = anchorMax;
+            if (_top) anchorMax.y /= Screen.height;
+            else anchorMax.y = 1;
+
+            panel.anchorMin = anchorMin;
+            panel.anchorMax = anchorMax;
+        }
     }
 }

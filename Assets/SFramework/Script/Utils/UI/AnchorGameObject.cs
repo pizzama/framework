@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace PUtils
+namespace SFramework.UI
 {
     [ExecuteInEditMode]
     public class AnchorGameObject : MonoBehaviour
