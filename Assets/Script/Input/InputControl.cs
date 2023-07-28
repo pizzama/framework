@@ -8,7 +8,7 @@ namespace game
     {
         protected override void opening()
         {
-            Debug.Log("test control enter");
+            BundleManager.Instance.GetControl<InputControl>();
         }
 
         protected override async UniTaskVoid openingAsync()

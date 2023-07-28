@@ -3,6 +3,7 @@ using System.IO.Compression;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using game;
 
 namespace SFramework
 {
@@ -148,8 +149,6 @@ namespace SFramework
             {
                 Debug.LogWarning(e.ToString());
             }
-
-
         }
 
         public void UninstallBundle(string name, string alias)
@@ -169,7 +168,7 @@ namespace SFramework
         }
 
         // classPath is nameSpace + className
-        public void OpenControl(string nameSpace, string className, object messageData=null, bool isSequence=false, string alias = "", int sort = 0)
+        public void OpenControl(string nameSpace, string className, object messageData = null, bool isSequence = false, string alias = "", int sort = 0)
         {
             BundleParams bdParams = new BundleParams()
             {
@@ -212,6 +211,12 @@ namespace SFramework
                     bd.Open(value);
                 }
             }
+        }
+        public T GetControl<T>() where T : IBundle
+        {
+            T result = _bundleMap.GetValue<T>();
+            return result;
+
         }
 
         public void AddMessageParams(BundleParams value)

@@ -83,6 +83,11 @@ namespace SFramework
             _view.OpenAsync().Forget();
         }
 
+        public T GetControl<T>() where T : SControl
+        {
+            return BundleManager.Instance.GetControl<T>();
+        }
+
         private T createBundle<T>(Type classType, string name)
         {
             int result = classType.Name.IndexOf("Control");

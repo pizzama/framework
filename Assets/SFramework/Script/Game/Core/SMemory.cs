@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+
 namespace SFramework
 {
     public class SMemory<T1, T2, T3> : IEnumerable
@@ -54,6 +56,38 @@ namespace SFramework
             }
 
             return result;
+        }
+
+        public T GetValue<T>()
+        {
+            foreach (var map in values)
+            {
+                foreach (var item in map.Value)
+                {
+                    if (item.Value.GetType() == typeof(T))
+                    {
+                        return (T)(object)item.Value;
+                    }
+                }
+            }
+            return default;
+        }
+
+        public List<T> GetAllValue<T>()
+        {
+            List<T> temp = new List<T>();
+            foreach (var map in values)
+            {
+                foreach (var item in map.Value)
+                {
+                    if (item.Value.GetType() == typeof(T))
+                    {
+                        temp.Add((T)(object)item.Value);
+                    }
+                }
+            }
+
+            return temp;
         }
 
         public IEnumerator GetEnumerator()
