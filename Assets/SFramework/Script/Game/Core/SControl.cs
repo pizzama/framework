@@ -57,7 +57,7 @@ namespace SFramework
             _model.ModelCallback -= HandleModelCallback;
         }
 
-        public virtual void BroadcastMessage(string messageId, string nameSpace, string className, object messageData = null, string alias = "", int sort = 0)
+        public void BroadcastMessage(string messageId, string nameSpace, string className, object messageData = null, string alias = "", int sort = 0)
         {
             BundleParams bdParams = new BundleParams()
             {
