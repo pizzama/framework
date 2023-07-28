@@ -8,7 +8,8 @@ namespace game
     {
         protected override void opening()
         {
-            BundleManager.Instance.GetControl<InputControl>();
+           TestControl test = GetControl<TestControl>();
+           Debug.Log(test.TestFunc());
         }
 
         protected override async UniTaskVoid openingAsync()
