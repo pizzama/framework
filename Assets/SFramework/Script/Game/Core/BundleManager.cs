@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using game;
+using static UnityEditor.Rendering.FilterWindow;
+using Unity.VisualScripting;
 
 namespace SFramework
 {
@@ -25,8 +27,11 @@ namespace SFramework
             }
         }
 
-        private List<BundleParams> _messageParams;
-        private List<BundleParams> _openSequenceParams;
+        private List<BundleParams> _messageParams; //通知的消息队列
+        private List<BundleParams> _openSequenceParams; //执行打开操作的消息队列
+        private SMemory<string, string, IBundle> _bundleMap; //已经启动了的所有模块的管理器
+        private Dictionary<string, List<IBundle>> _bundleObserverMap; //注册消息管理器
+
 
         protected virtual void Awake()
         {
@@ -90,13 +95,12 @@ namespace SFramework
 
             handleMessageParams();
         }
-
-        private SMemory<string, string, IBundle> _bundleMap;
         private void init()
         {
             _bundleMap = new SMemory<string, string, IBundle>();
             _messageParams = new List<BundleParams>();
             _openSequenceParams = new List<BundleParams>();
+            _bundleObserverMap = new Dictionary<string, List<IBundle>>();
         }
 
         public IBundle GetBundle(string name, string alias)
@@ -240,8 +244,19 @@ namespace SFramework
                 IBundle control = BundleManager.Instance.GetBundle(pa.ClassPath, pa.Alias);
                 if (control != null)
                     control.HandleMessage(pa);
-                else
-                    Debug.LogWarning($"not found broadcast target{pa.NameSpace}.{pa.ClassName}");
+                else 
+                {
+                    //如果不是指向的消息则广播给所有注册的用户
+                    if (_bundleObserverMap.ContainsKey(pa.MessageId))
+                    {
+                        List<IBundle> bundles = _bundleObserverMap[pa.MessageId];
+                        for (int j = 0; j < bundles.Count; j++)
+                        {
+                            control = bundles[j];
+                            control.HandleMessage(pa);    
+                        }
+                    }
+                }
             }
         }
 
@@ -255,6 +270,30 @@ namespace SFramework
             }
 
             return null;
+        }
+
+        public void SubscribeMessage(string messageId, IBundle bundle)
+        {
+
+            if (!_bundleObserverMap.ContainsKey(messageId))
+            {
+                _bundleObserverMap[messageId] = new List<IBundle>();
+            }
+
+            if (!_bundleObserverMap[messageId].Contains(bundle))
+            {
+                _bundleObserverMap[messageId].Add(bundle);
+            }
+        }
+
+        public void UnSubscribeMessage(string messageId, IBundle bundle)
+        {
+            if (_bundleObserverMap.ContainsKey(messageId))
+            {
+                _bundleObserverMap[messageId].RemoveAll((value) => {
+                    return value == bundle;
+                });
+            }
         }
     }
 }
