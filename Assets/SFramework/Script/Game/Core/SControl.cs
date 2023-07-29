@@ -12,6 +12,16 @@ namespace SFramework
         public SView View { get { return _view; } }
         public SModel Model { get { return _model; } }
 
+        public T GetModel<T>() where T : SModel
+        {
+            return (T)_model;
+        }
+
+        public T GetView<T>() where T : SView
+        {
+            return (T)_view;
+        }
+
         //when register control it will find model and view
         public override void Install()
         {

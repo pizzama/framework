@@ -15,6 +15,11 @@ namespace SFramework
             get { return _control; }
         }
 
+        public T GetControl<T>() where T : SControl
+        {
+            return (T)_control;
+        }
+
         public delegate void DelegateModelCallback();
         public DelegateModelCallback ModelCallback;
         public override void Install()

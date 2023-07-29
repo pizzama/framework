@@ -17,5 +17,10 @@ namespace game
             Debug.Log("test control enterasync");
             await UniTask.Yield();
         }
+
+        public void Refresh()
+        {
+            Debug.Log("test refresh");
+        }
     }
 }

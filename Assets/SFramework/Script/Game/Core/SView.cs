@@ -19,6 +19,11 @@ namespace SFramework
             get { return _control; }
         }
 
+        public T GetControl<T>() where T : SControl
+        {
+            return (T)_control;
+        }
+
         public override void Install()
         {
             init();

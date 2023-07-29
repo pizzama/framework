@@ -15,5 +15,10 @@ namespace game
         {
             await GetData("");
         }
+
+        public void Refresh()
+        {
+            Debug.Log("test refresh model");
+        }
     }
 }
