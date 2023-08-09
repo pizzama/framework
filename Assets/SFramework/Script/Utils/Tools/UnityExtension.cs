@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SFramework
+namespace SFramework.Tools
 {
     public static class UnityExtension
     {

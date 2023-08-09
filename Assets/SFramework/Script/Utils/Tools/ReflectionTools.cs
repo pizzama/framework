@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-namespace SFramework
+namespace SFramework.Tools
 {
     /*
     * ReflectionTools.Call("UnityEditor.EditorGUIUtility, UnityEditor", "DrawHorizontalSplitter", new Rect(0f,0f,100f,100f));

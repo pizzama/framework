@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Networking;
 
-namespace SFramework
+namespace SFramework.Tools
 {
     public class FileTools
     {

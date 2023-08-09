@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-namespace SFramework
+namespace SFramework.Tools
 {
     public class ObjectTools
     {
