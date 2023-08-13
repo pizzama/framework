@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace SFramework
+namespace SFramework.Game
 {
     public abstract class SSCENEView : RootView
     {

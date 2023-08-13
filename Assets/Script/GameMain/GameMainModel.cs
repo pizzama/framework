@@ -8,10 +8,5 @@ namespace game
         protected override void opening()
         {
         }
-
-        protected override async UniTaskVoid openingAsync()
-        {
-            await GetData("");
-        }
     }
 }

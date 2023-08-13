@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SFramework
+namespace SFramework.Game
 {
     public class RootControl : SControl
     {

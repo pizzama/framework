@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SFramework
+namespace SFramework.Game
 {
     public enum UILayer
     {

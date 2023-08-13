@@ -10,11 +10,6 @@ namespace game
         {
         }
 
-        protected override async UniTaskVoid openingAsync()
-        {
-            await UniTask.Yield();
-        }
-
         public override void HandleMessage(BundleParams value)
         {
             

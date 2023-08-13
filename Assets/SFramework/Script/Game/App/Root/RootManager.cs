@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SFramework.Tools;
 using SFramework.Pool;
 
-namespace SFramework
+namespace SFramework.Game
 {
     public class RootManager
     {

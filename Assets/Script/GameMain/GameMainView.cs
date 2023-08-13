@@ -1,10 +1,8 @@
-using System;
-using Cysharp.Threading.Tasks;
 using SFramework;
+using SFramework.Game;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-namespace game
+namespace Game
 {
     public class GameMainView : SSCENEView
     {
@@ -21,22 +19,22 @@ namespace game
             // Debug.Log("GameMainView:" + sc.name);
         }
 
-        protected override async UniTaskVoid openingAsync()
-        {
-            Control.OpenControl("game", "LoadingControl");
-            AsyncOperation operation = await LoadSceneAsync("Scenes/BaseScene", "BaseScene", LoadSceneMode.Single);
-            if (operation != null)
-            {
-                var progress = Progress.Create<float>(p => Control.BroadcastMessage("LoadingUpdate", "game", "LoadingControl", p));
-                await operation.ToUniTask(progress);
-            }
-            Control.BroadcastMessage("LoadingEnd", "game", "LoadingControl");
-            await UniTask.Delay(TimeSpan.FromSeconds(2));
+        //protected override async UniTaskVoid openingAsync()
+        //{
+        //    Control.OpenControl("game", "LoadingControl");
+        //    AsyncOperation operation = await LoadSceneAsync("Scenes/BaseScene", "BaseScene", LoadSceneMode.Single);
+        //    if (operation != null)
+        //    {
+        //        var progress = Progress.Create<float>(p => Control.BroadcastMessage("LoadingUpdate", "game", "LoadingControl", p));
+        //        await operation.ToUniTask(progress);
+        //    }
+        //    Control.BroadcastMessage("LoadingEnd", "game", "LoadingControl");
+        //    await UniTask.Delay(TimeSpan.FromSeconds(2));
 
-            Scene sc = SceneManager.GetActiveScene();
-            await SceneManager.UnloadSceneAsync(sc);
-            sc = SceneManager.GetActiveScene();
-            rootManager.CollectCamera();
-        }
+        //    Scene sc = SceneManager.GetActiveScene();
+        //    await SceneManager.UnloadSceneAsync(sc);
+        //    sc = SceneManager.GetActiveScene();
+        //    rootManager.CollectCamera();
+        //}
     }
 }

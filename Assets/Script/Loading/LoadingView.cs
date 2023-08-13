@@ -1,9 +1,9 @@
 using Cysharp.Threading.Tasks;
+using SFramework.Game;
 using SFramework;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace game
+namespace Game
 {
     public class LoadingView : SUIView
     {
@@ -31,11 +31,6 @@ namespace game
         {
             animator = getAssetFromGoDict<Animator>("BarLoading");
             Debug.Log(animator);
-        }
-
-        protected override async UniTaskVoid openingAsync()
-        {
-            await UniTask.Yield();
         }
 
         private void closeHandle()

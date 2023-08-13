@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-namespace SFramework
+namespace SFramework.Game
 {
     public abstract class RootView : SView
     {

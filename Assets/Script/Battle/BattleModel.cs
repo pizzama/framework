@@ -1,9 +1,7 @@
-using SFramework;
+using SFramework.Game;
 using UnityEngine;
-using LanguageData;
-using Cysharp.Threading.Tasks;
 
-namespace game
+namespace Game
 {
     public class BattleModel : RootModel
     {
@@ -12,17 +10,17 @@ namespace game
             Debug.Log("test model enter");
         }
 
-        protected override async UniTaskVoid openingAsync()
-        {
-            Debug.Log("test model enterasync");
-            Language_data_datas tt = await ConfigManager.Instance.GetConfigAsync<Language_data_datas>();
-            Language_data data = null;
-            if (tt != null)
-            {
-                tt.Datamap.TryGetValue("24", out data);
-                Debug.Log(tt.ToString());
-            }
-            await GetData("");
-        }
+        //protected override async UniTaskVoid openingAsync()
+        //{
+        //    Debug.Log("test model enterasync");
+        //    Language_data_datas tt = await ConfigManager.Instance.GetConfigAsync<Language_data_datas>();
+        //    Language_data data = null;
+        //    if (tt != null)
+        //    {
+        //        tt.Datamap.TryGetValue("24", out data);
+        //        Debug.Log(tt.ToString());
+        //    }
+        //    await GetData("");
+        //}
     }
 }

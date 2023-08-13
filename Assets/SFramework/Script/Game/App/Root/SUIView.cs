@@ -2,16 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using SFramework.Pool;
 using SFramework.Tools;
+using System;
 
-namespace SFramework
+namespace SFramework.Game
 {
     public abstract class SUIView : RootView
     {
         //set the ui in which layer
         protected abstract UILayer GetViewLayer();
-        //set ui prefab
-        protected abstract void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation);
-
         protected Dictionary<string, GameObject> goDict;
 
         protected Transform mViewTransform;
@@ -55,6 +53,17 @@ namespace SFramework
             base.Open();
         }
 
+        protected virtual void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
+        {
+            Type tp = GetType();
+            string path = tp.FullName;
+            path = path.Replace('.', '/');
+            prefabPath = path;
+            prefabName = tp.Name;
+            position = new Vector3(0, 0, 0);
+            rotation = Quaternion.Euler(0, 0, 0);
+        }
+
         protected virtual void SetViewTransform(out Transform trans, out Vector3 position, out Quaternion rotation)
         {
             trans = null;
@@ -70,8 +79,6 @@ namespace SFramework
 
                 trans = pool.Request().transform;
             }
-
-            // trans = assetManager.LoadResource<Transform>("Test");
         }
 
         public override void Close()

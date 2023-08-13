@@ -43,20 +43,9 @@ namespace SFramework
             IsOpen = true;
         }
 
-        public override void Open()
-        {
-            base.Open();
-            OpenAsync().Forget();
-            _model.Open();
-            _model.OpenAsync().Forget();
-        }
-
         public override void Close()
         {
-            CloseAsync().Forget();
-            _model.CloseAsync().Forget();
             _model.Close();
-            _view.CloseAsync().Forget();
             _view.Close();
             IsOpen = false;
         }
@@ -89,7 +78,6 @@ namespace SFramework
         public void HandleModelCallback()
         {
             _view.Open();
-            _view.OpenAsync().Forget();
         }
 
         public T GetControl<T>() where T : SControl

@@ -43,22 +43,9 @@ namespace SFramework
             Open();
         }
 
-        public virtual async UniTaskVoid OpenAsync()
-        {
-            openingAsync().Forget();
-            await Task.Yield();
-        }
-
         public virtual void Close()
         {
             closing();
-            CloseAsync().Forget();
-        }
-
-        public virtual async UniTaskVoid CloseAsync()
-        {
-            closingAsync().Forget();
-            await Task.Yield();
         }
 
         public virtual void Update()
@@ -86,19 +73,9 @@ namespace SFramework
 
         }
 
-        protected virtual async UniTaskVoid openingAsync()
-        {
-            await Task.Yield();
-        }
-
         protected virtual void closing()
         {
 
-        }
-
-        protected virtual async UniTaskVoid closingAsync()
-        {
-            await Task.Yield();
         }
 
         public virtual void HandleMessage(BundleParams value)

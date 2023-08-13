@@ -1,19 +1,13 @@
-using Cysharp.Threading.Tasks;
-using SFramework;
+using SFramework.Game;
 using UnityEngine;
 
-namespace game
+namespace Game
 {
     public class InputModel : RootModel
     {
         protected override void opening()
         {
             Debug.Log("test model enter");
-        }
-
-        protected override async UniTaskVoid openingAsync()
-        {
-            await GetData("");
         }
 
         public void Refresh()

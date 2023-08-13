@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SFramework;
 using SFramework.Tools;
 
-namespace game
+namespace Game
 {
     public class GameApp : GameLauncher
     {
@@ -21,8 +21,8 @@ namespace game
             }
 
             //BundleManager.Instance.OpenControl("game", "GameMainControl");
-            BundleManager.Instance.OpenControl("game", "TestControl");
-            BundleManager.Instance.OpenControl("game", "InputControl");
+            BundleManager.Instance.OpenControl("Game", "TestControl");
+            BundleManager.Instance.OpenControl("Game", "InputControl");
         }
     }
 }

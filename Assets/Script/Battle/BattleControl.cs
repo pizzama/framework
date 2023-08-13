@@ -11,10 +11,5 @@ namespace game
             Debug.Log("test control enter");
         }
 
-        protected override async UniTaskVoid openingAsync()
-        {
-            Debug.Log("test control enterasync");
-            await UniTask.Yield();
-        }
     }
 }
