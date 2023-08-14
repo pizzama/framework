@@ -1,4 +1,7 @@
+using System;
 using UnityEngine;
+using SFramework.Tools;
+using System.Collections.Generic;
 
 namespace SFramework
 {
@@ -15,6 +18,19 @@ namespace SFramework
         private void initFrameworkBundle()
         {
             // init game framework bundle
+        }
+
+        protected void initAllControl()
+        {
+            List<Type> controls = ReflectionTools.GetTypesFormTypeWithAllAssembly(typeof(SControl));
+            for (int i = 0; i < controls.Count; i++)
+            {
+                Type cType = controls[i];
+                if (cType.Name == "RootControl")
+                    continue;
+                IBundle bd = (IBundle)Activator.CreateInstance(cType, true);
+                BundleManager.Instance.InstallBundle(bd, "");
+            }
         }
 
         protected abstract void installBundle();

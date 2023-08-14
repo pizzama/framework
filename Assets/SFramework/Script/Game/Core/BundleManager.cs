@@ -148,6 +148,7 @@ namespace SFramework
             catch (System.Exception e)
             {
                 Debug.LogWarning(e.ToString());
+                DeleteBundle(bundle);
             }
         }
 
