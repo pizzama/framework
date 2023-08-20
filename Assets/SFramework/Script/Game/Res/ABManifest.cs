@@ -32,6 +32,8 @@ namespace SFramework
 
         public void LoadAssetBundleManifest()
         {
+            if (ABPathHelper.SimulationMode)
+                return;
             // string path = Path.Combine(Application.streamingAssetsPath, ABPathHelper.GetPlatformName());
             try
             {

@@ -18,14 +18,14 @@ namespace SFramework
             string resPersistentPath = string.Format("{0}{1}", PersistentDataPath, relativePath);
             if (File.Exists(resPersistentPath))
             {
-                return resPersistentPath;
+                return "file://" + resPersistentPath;
             }
             else
             {
                 resPersistentPath = string.Format("{0}{1}", StreamingAssetsPath, relativePath);
                 if(File.Exists(resPersistentPath))
                 {
-                    return resPersistentPath;
+                    return "file://" + resPersistentPath;
                 }
                 else
                 {
