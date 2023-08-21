@@ -17,7 +17,7 @@ public class SFGridGenerate : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (_grid == null)
+        if (_grid != null)
         {
             foreach (SFVertexHex vertex in _grid.Hexes)
             {
