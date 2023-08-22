@@ -25,6 +25,7 @@ namespace SFramework.Game
         [SerializeField] private Transform _blocker;
         [SerializeField] private Camera _uiCamera;
         [SerializeField] private CanvasScaler _canvasScaler;
+        const string uiName = "SUIROOT";
         public static SUIROOT Instance;
         public Camera UICamera
         {
@@ -33,6 +34,7 @@ namespace SFramework.Game
 
         private void Awake()
         {
+            this.name = uiName;
             SUIROOT.Instance = this;
             if (_uiCamera == null)
                 _uiCamera = this.transform.Find("UICamera").GetComponent<Camera>();

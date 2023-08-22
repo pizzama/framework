@@ -168,6 +168,14 @@ namespace SFramework
             UninstallBundle(fullName, bundle.AliasName);
         }
 
+        public void OpenControl(string fullPath, object messageData = null, bool isSequence = false, string alias = "", int sort = 0)
+        {
+            string nameSpace;
+            string className;
+            StringTools.PrefixClassName(fullPath, out nameSpace, out className);
+            this.OpenControl(nameSpace, className, messageData, isSequence, alias, sort);
+        }
+
         // classPath is nameSpace + className
         public void OpenControl(string nameSpace, string className, object messageData = null, bool isSequence = false, string alias = "", int sort = 0)
         {

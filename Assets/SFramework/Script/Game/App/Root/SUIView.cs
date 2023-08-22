@@ -8,6 +8,7 @@ namespace SFramework.Game
 {
     public abstract class SUIView : RootView
     {
+        public static string UIPREFIX = "$u$";
         //set the ui in which layer
         protected abstract UILayer GetViewLayer();
         protected Dictionary<string, GameObject> goDict;
@@ -16,9 +17,12 @@ namespace SFramework.Game
 
         protected string mAbPath; //ui asset bundle path
         protected string mAbName; //ui asset bundle name
+
+        protected GameObjectPoolManager poolManager; // uiµÄ¶ÔÏó³Ø
         protected override void init()
         {
             goDict = new Dictionary<string, GameObject>();
+            poolManager = GameObjectPoolManager.Instance;
         }
 
         protected T getAssetFromGoDict<T>(string key)
@@ -47,8 +51,8 @@ namespace SFramework.Game
             SetViewTransform(out mViewTransform, out position, out rotation);
             if (mViewTransform != null)
             {
-                uiRoot.OpenUI(layer, mViewTransform, position, rotation);
-                goDict = ComponentTools.collectAllGameObjects(uiRoot.gameObject);
+                UIRoot.OpenUI(layer, mViewTransform, position, rotation);
+                goDict = ComponentTools.collectAllGameObjects(mViewTransform.gameObject);
             }
             base.Open();
         }
@@ -71,7 +75,7 @@ namespace SFramework.Game
 
             if (!string.IsNullOrEmpty(mAbPath))
             {
-                ListGameObjectPool pool = GameObjectPoolManager.Instance.CreateGameObjectPool<ListGameObjectPool>(mAbPath);
+                ListGameObjectPool pool = poolManager.CreateGameObjectPool<ListGameObjectPool>(mAbPath);
                 if (pool.Prefab == null)
                 {
                     pool.Prefab = assetManager.LoadResource<GameObject>(mAbPath, mAbName);
@@ -83,7 +87,7 @@ namespace SFramework.Game
 
         public override void Close()
         {
-            GameObjectPoolManager.Instance.ReturnGameObject(mAbPath, mViewTransform.gameObject);
+            poolManager.ReturnGameObject(mAbPath, mViewTransform.gameObject);
             base.Close();
         }
     }
