@@ -7,6 +7,7 @@ namespace Game
     {
         protected override void opening()
         {
+            GetData("").Forget();   
         }
     }
 }

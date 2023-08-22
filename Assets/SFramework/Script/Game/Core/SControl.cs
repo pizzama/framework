@@ -55,6 +55,14 @@ namespace SFramework
             _model.ModelCallback -= HandleModelCallback;
         }
 
+        public void BroadcastMessage(string messageId, string fullPath, object messageData = null, string alias = "", int sort = 0)
+        {
+            string nameSpace;
+            string className;
+            StringTools.PrefixClassName(fullPath, out nameSpace, out className);
+            this.BroadcastMessage(messageId, nameSpace, className, messageData, alias, sort);
+        }
+
         public void BroadcastMessage(string messageId, string nameSpace, string className, object messageData = null, string alias = "", int sort = 0)
         {
             BundleParams bdParams = new BundleParams()
@@ -134,6 +142,11 @@ namespace SFramework
                 _model.LateUpdate();
             if (_view != null)
                 _view.LateUpdate();
+        }
+
+        public void OpenControl(string fullPath, object messageData = null, bool isSequence = false, string alias = "", int sort = 0)
+        {
+            Manager.OpenControl(fullPath, messageData, isSequence, alias, sort);
         }
 
         public void OpenControl(string nameSpace, string className, object messageData = null, bool isSequence = false, string alias = "", int sort = 0)

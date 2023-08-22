@@ -7,7 +7,6 @@ namespace SFramework.Game
 {
     public abstract class SSCENEView : RootView
     {
-        public static string SCENEPREFIX = "$s$";
         private List<string> _buildInSceneNames;
         private Dictionary<string, GameObject> _sceneDict; //存储当前场景的元素
         protected override void init()
@@ -90,14 +89,17 @@ namespace SFramework.Game
 
         protected void collectScene()
         {
+            _sceneDict = new Dictionary<string, GameObject>();
             //init current scene
             if (_sceneDict == null)
             {
-                _sceneDict = new Dictionary<string, GameObject>();
                 foreach (GameObject obj in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
-                {
-                    //遍历场景中的GameObject 记录需要的object
-                    if (obj.name.IndexOf(SSCENEView.SCENEPREFIX) >= 0)
+                { 
+                    if(_sceneDict.ContainsKey(obj.name))
+                    {
+                        Debug.LogWarning("Scene has same name:" + obj.name);
+                    }
+                    else
                     {
                         _sceneDict[obj.name] = obj;
                     }
@@ -108,7 +110,7 @@ namespace SFramework.Game
         protected GameObject getDefineSceneObject(string name)
         {
             GameObject go = null;
-            _sceneDict.TryGetValue(SSCENEView.SCENEPREFIX + name, out go);
+            _sceneDict.TryGetValue(name, out go);
             return go;
         }
     }

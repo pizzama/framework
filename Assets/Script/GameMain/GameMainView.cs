@@ -1,6 +1,9 @@
+using Cysharp.Threading.Tasks;
 using SFramework;
 using SFramework.Game;
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -15,26 +18,25 @@ namespace Game
 
         protected override void opening()
         {
-            // Scene sc = SceneManager.GetActiveScene();
-            // Debug.Log("GameMainView:" + sc.name);
+            openScene().Forget();
         }
 
-        //protected override async UniTaskVoid openingAsync()
-        //{
-        //    Control.OpenControl("game", "LoadingControl");
-        //    AsyncOperation operation = await LoadSceneAsync("Scenes/BaseScene", "BaseScene", LoadSceneMode.Single);
-        //    if (operation != null)
-        //    {
-        //        var progress = Progress.Create<float>(p => Control.BroadcastMessage("LoadingUpdate", "game", "LoadingControl", p));
-        //        await operation.ToUniTask(progress);
-        //    }
-        //    Control.BroadcastMessage("LoadingEnd", "game", "LoadingControl");
-        //    await UniTask.Delay(TimeSpan.FromSeconds(2));
+        private async UniTaskVoid openScene()
+        {
+            Control.OpenControl("Game.LoadingControl");
+            AsyncOperation operation = await LoadSceneAsync("Scenes/BaseScene", "BaseScene", LoadSceneMode.Single);
+            if (operation != null)
+            {
+                var progress = Progress.Create<float>(p => Control.BroadcastMessage("LoadingUpdate", "Game.LoadingControl", p));
+                await operation.ToUniTask(progress);
+            }
+            Control.BroadcastMessage("LoadingEnd", "Game.LoadingControl");
+            await UniTask.Delay(TimeSpan.FromSeconds(2));
 
-        //    Scene sc = SceneManager.GetActiveScene();
-        //    await SceneManager.UnloadSceneAsync(sc);
-        //    sc = SceneManager.GetActiveScene();
-        //    rootManager.CollectCamera();
-        //}
+            //Scene sc = SceneManager.GetActiveScene();
+            //await SceneManager.UnloadSceneAsync(sc);
+            //sc = SceneManager.GetActiveScene();
+            //rootManager.CollectCamera();
+        }
     }
 }
