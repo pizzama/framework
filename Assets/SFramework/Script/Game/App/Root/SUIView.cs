@@ -18,7 +18,7 @@ namespace SFramework.Game
         protected string mAbPath; //ui asset bundle path
         protected string mAbName; //ui asset bundle name
 
-        protected GameObjectPoolManager poolManager; // uiµÄ¶ÔÏó³Ø
+        protected GameObjectPoolManager poolManager; // uiï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
         protected override void init()
         {
             goDict = new Dictionary<string, GameObject>();
@@ -87,8 +87,11 @@ namespace SFramework.Game
 
         public override void Close()
         {
-            poolManager.ReturnGameObject(mAbPath, mViewTransform.gameObject);
-            base.Close();
+            if(mViewTransform != null && poolManager != null)
+            {
+                poolManager.ReturnGameObject(mAbPath, mViewTransform.gameObject);
+                base.Close();
+            }
         }
     }
 }
