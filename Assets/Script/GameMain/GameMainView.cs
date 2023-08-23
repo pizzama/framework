@@ -1,9 +1,6 @@
-using Cysharp.Threading.Tasks;
 using SFramework;
 using SFramework.Game;
-using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -16,8 +13,15 @@ namespace Game
             return ViewOpenType.Single;
         }
 
+        protected override void SetViewPrefabPath(out string prefabPath, out string prefabName)
+        {
+            prefabPath = "Scenes/BaseScene";
+            prefabName = "BaseScene";
+        }
+
         protected override void opening()
         {
+
         }
 
 

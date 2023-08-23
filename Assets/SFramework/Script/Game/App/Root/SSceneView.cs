@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using SFramework.Pool;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +8,7 @@ namespace SFramework.Game
     public abstract class SSCENEView : RootView
     {
         private List<string> _buildInSceneNames;
-        private Dictionary<string, GameObject> _sceneDict; //存储当前场景的元素
+        private Dictionary<string, GameObject> _sceneDict; //record scene gameobject
 
         protected string mAbPath; //scene asset bundle path
         protected string mAbName; //scene asset bundle name
@@ -21,7 +20,8 @@ namespace SFramework.Game
 
         public override void Open()
         {
-
+            SetScenePath(out mAbPath, out mAbName);
+            LoadSceneAsync(mAbPath, mAbName, (LoadSceneMode)GetViewOpenType()).Forget();
         }
 
         public async UniTask<AsyncOperation> LoadSceneAsync(string scenePath, string sceneName, LoadSceneMode mode)
@@ -85,21 +85,10 @@ namespace SFramework.Game
             prefabName = tp.Name;
         }
 
-        protected virtual void SetViewTransform(out Transform trans)
+        private void SetScenePath(out string prefabPath, out string prefabName)
         {
-            trans = null;
-            SetViewPrefabPath(out mAbPath, out mAbName);
-
-            if (!string.IsNullOrEmpty(mAbPath))
-            {
-                ListGameObjectPool pool = poolManager.CreateGameObjectPool<ListGameObjectPool>(mAbPath);
-                if (pool.Prefab == null)
-                {
-                    pool.Prefab = assetManager.LoadResource<GameObject>(mAbPath, mAbName);
-                }
-
-                trans = pool.Request().transform;
-            }
+            SetViewPrefabPath(out prefabPath, out prefabName);
+            
         }
 
         private void getBuildInSceneNames(out List<string> names)
