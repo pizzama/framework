@@ -21,7 +21,13 @@ namespace SFramework.Game
         public override void Open()
         {
             SetScenePath(out mAbPath, out mAbName);
-            LoadSceneAsync(mAbPath, mAbName, (LoadSceneMode)GetViewOpenType()).Forget();
+            loadScene(mAbPath, mAbName, (LoadSceneMode)GetViewOpenType()).Forget();
+        }
+
+        private async UniTaskVoid loadScene(string scenePath, string sceneName, LoadSceneMode mode)
+        {
+            await LoadSceneAsync(mAbPath, mAbName, (LoadSceneMode)GetViewOpenType());
+            collectScene();
         }
 
         public async UniTask<AsyncOperation> LoadSceneAsync(string scenePath, string sceneName, LoadSceneMode mode)
@@ -115,24 +121,28 @@ namespace SFramework.Game
         protected void collectScene()
         {
             _sceneDict = new Dictionary<string, GameObject>();
+            GameObject[] all = Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[];
             //init current scene
-            if (_sceneDict == null)
+            foreach (GameObject obj in all)
             {
-                foreach (GameObject obj in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
+                switch(obj.name)
                 {
-                    if (_sceneDict.ContainsKey(obj.name))
-                    {
-                        Debug.LogWarning("Scene has same name:" + obj.name);
-                    }
-                    else
-                    {
-                        _sceneDict[obj.name] = obj;
-                    }
+                    case "BundleManager":
+                    case "GameLaucher":
+                        continue;
+                }
+                if (_sceneDict.ContainsKey(obj.name))
+                {
+                    Debug.LogWarning("Scene has same name:" + obj.name);
+                }
+                else
+                {
+                    _sceneDict[obj.name] = obj;
                 }
             }
         }
 
-        protected GameObject getDefineSceneObject(string name)
+        protected GameObject getSceneObject(string name)
         {
             GameObject go = null;
             _sceneDict.TryGetValue(name, out go);
