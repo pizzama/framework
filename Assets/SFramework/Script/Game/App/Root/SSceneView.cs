@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using SFramework.Pool;
-using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,6 +17,11 @@ namespace SFramework.Game
         protected override void init()
         {
             getBuildInSceneNames(out _buildInSceneNames);
+        }
+
+        public override void Open()
+        {
+
         }
 
         public async UniTask<AsyncOperation> LoadSceneAsync(string scenePath, string sceneName, LoadSceneMode mode)
@@ -66,27 +70,25 @@ namespace SFramework.Game
             {
                 return true;
             }
-            
+
             await SceneManager.UnloadSceneAsync(scenePath);
 
             return true;
         }
 
-        protected virtual void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
+        protected virtual void SetViewPrefabPath(out string prefabPath, out string prefabName)
         {
-            Type tp = GetType();
+            System.Type tp = GetType();
             string path = tp.FullName;
             path = path.Replace('.', '/');
             prefabPath = path;
             prefabName = tp.Name;
-            position = new Vector3(0, 0, 0);
-            rotation = Quaternion.Euler(0, 0, 0);
         }
 
-        protected virtual void SetViewTransform(out Transform trans, out Vector3 position, out Quaternion rotation)
+        protected virtual void SetViewTransform(out Transform trans)
         {
             trans = null;
-            SetViewPrefabPath(out mAbPath, out mAbName, out position, out rotation);
+            SetViewPrefabPath(out mAbPath, out mAbName);
 
             if (!string.IsNullOrEmpty(mAbPath))
             {
@@ -128,8 +130,8 @@ namespace SFramework.Game
             if (_sceneDict == null)
             {
                 foreach (GameObject obj in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
-                { 
-                    if(_sceneDict.ContainsKey(obj.name))
+                {
+                    if (_sceneDict.ContainsKey(obj.name))
                     {
                         Debug.LogWarning("Scene has same name:" + obj.name);
                     }
