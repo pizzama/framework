@@ -12,8 +12,6 @@ namespace Game
 
         public override void HandleMessage(BundleParams value)
         {
-            
-
         }
     }
 }

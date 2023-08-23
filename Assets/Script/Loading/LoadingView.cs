@@ -1,52 +1,35 @@
-using Cysharp.Threading.Tasks;
 using SFramework.Game;
 using SFramework;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System;
 
 namespace Game
 {
-    public class LoadingView : SUIView
+    public class LoadingView : SSCENEView
     {
         protected override ViewOpenType GetViewOpenType()
         {
             return ViewOpenType.Single;
         }
 
-        protected override UILayer GetViewLayer()
-        {
-            return UILayer.Toast;
-        }
-
-        protected override void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
-        {
-            prefabPath = "Loading/BarLoading";
-            prefabName = "BarLoading";
-            position = new Vector3(0, 0, 0);
-            rotation = Quaternion.Euler(0, 0, 0);
-        }
-
-        private Animator animator;
-
         protected override void opening()
         {
-            animator = getAssetFromGoDict<Animator>("BarLoading");
-            Debug.Log(animator);
+            openScene().Forget();
         }
 
-        private void closeHandle()
+        private async UniTaskVoid openScene()
         {
-            Close();
-        }
-
-        protected override void closing()
-        {
-            
-        }
-
-        public void FinishLoading()
-        {
-            //Debug.Log("FinishLoading");
-            animator.SetTrigger("End");
+            Control.OpenControl("Game.LoadingControl");
+            AsyncOperation operation = await LoadSceneAsync("Scenes/BaseScene", "BaseScene", LoadSceneMode.Single);
+            if (operation != null)
+            {
+                var progress = Progress.Create<float>(p => Control.BroadcastMessage("LoadingUpdate", "", p));
+                await operation.ToUniTask(progress);
+            }
+            Control.BroadcastMessage("LoadingEnd", "Game.LoadingControl");
+            await UniTask.Delay(TimeSpan.FromSeconds(2));
         }
     }
 }

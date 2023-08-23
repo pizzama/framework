@@ -8,7 +8,6 @@ namespace SFramework.Game
 {
     public abstract class SUIView : RootView
     {
-        public static string UIPREFIX = "$u$";
         //set the ui in which layer
         protected abstract UILayer GetViewLayer();
         protected Dictionary<string, GameObject> goDict;
@@ -18,7 +17,7 @@ namespace SFramework.Game
         protected string mAbPath; //ui asset bundle path
         protected string mAbName; //ui asset bundle name
 
-        protected GameObjectPoolManager poolManager; // ui�Ķ����
+        protected GameObjectPoolManager poolManager; // ui pool manager
         protected override void init()
         {
             goDict = new Dictionary<string, GameObject>();

@@ -11,16 +11,6 @@ namespace Game
 
         public override void HandleMessage(BundleParams value)
         {
-            switch(value.MessageId)
-            {
-                case "LoadingUpdate":
-                    Debug.Log("loading value:" + value.MessageData);
-                break;
-                case "LoadingEnd":
-                    (View as LoadingView).FinishLoading();
-                    Debug.Log("loading end:" + value.MessageData);
-                break;
-            }
 
         }
     }

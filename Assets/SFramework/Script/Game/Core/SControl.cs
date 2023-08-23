@@ -55,6 +55,16 @@ namespace SFramework
             _model.ModelCallback -= HandleModelCallback;
         }
 
+        public void SubscribeMessage(string messageId, IBundle bundle)
+        {
+            Manager.SubscribeMessage(messageId, bundle);
+        }
+
+        public void UnSubscribeMessage(string messageId, IBundle bundle)
+        {
+            Manager.UnSubscribeMessage(messageId, bundle);
+        }
+
         public void BroadcastMessage(string messageId, string fullPath, object messageData = null, string alias = "", int sort = 0)
         {
             string nameSpace;
