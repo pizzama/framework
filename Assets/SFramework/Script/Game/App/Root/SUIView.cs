@@ -17,11 +17,9 @@ namespace SFramework.Game
         protected string mAbPath; //ui asset bundle path
         protected string mAbName; //ui asset bundle name
 
-        protected GameObjectPoolManager poolManager; // ui pool manager
         protected override void init()
         {
             goDict = new Dictionary<string, GameObject>();
-            poolManager = GameObjectPoolManager.Instance;
         }
 
         protected T getAssetFromGoDict<T>(string key)

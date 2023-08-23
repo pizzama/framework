@@ -8,4 +8,10 @@ namespace Game
         {
         }
     }
+
+    public class LoadingParams
+    {
+        public string AbPath;
+        public string AbName;
+    }
 }

@@ -12,7 +12,6 @@ namespace Game
             // BundleManager.Instance.InstallBundle(new GameMainControl(), "", true);
             initAllControl();
             BundleManager.Instance.OpenControl("Game.GameMainControl");
-            BundleManager.Instance.OpenControl("Game.LoadingControl");
         }
     }
 }

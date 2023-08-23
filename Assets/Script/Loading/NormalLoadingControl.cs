@@ -17,7 +17,7 @@ namespace Game
                     Debug.Log("loading value:" + value.MessageData);
                 break;
                 case "LoadingEnd":
-                    (View as NormalLoadingView).FinishLoading();
+                    GetView<NormalLoadingView>().FinishLoading();
                     Debug.Log("loading end:" + value.MessageData);
                 break;
             }

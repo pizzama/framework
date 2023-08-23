@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using SFramework.Pool;
+using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +11,10 @@ namespace SFramework.Game
     {
         private List<string> _buildInSceneNames;
         private Dictionary<string, GameObject> _sceneDict; //存储当前场景的元素
+
+        protected string mAbPath; //scene asset bundle path
+        protected string mAbName; //scene asset bundle name
+
         protected override void init()
         {
             getBuildInSceneNames(out _buildInSceneNames);
@@ -64,6 +70,34 @@ namespace SFramework.Game
             await SceneManager.UnloadSceneAsync(scenePath);
 
             return true;
+        }
+
+        protected virtual void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
+        {
+            Type tp = GetType();
+            string path = tp.FullName;
+            path = path.Replace('.', '/');
+            prefabPath = path;
+            prefabName = tp.Name;
+            position = new Vector3(0, 0, 0);
+            rotation = Quaternion.Euler(0, 0, 0);
+        }
+
+        protected virtual void SetViewTransform(out Transform trans, out Vector3 position, out Quaternion rotation)
+        {
+            trans = null;
+            SetViewPrefabPath(out mAbPath, out mAbName, out position, out rotation);
+
+            if (!string.IsNullOrEmpty(mAbPath))
+            {
+                ListGameObjectPool pool = poolManager.CreateGameObjectPool<ListGameObjectPool>(mAbPath);
+                if (pool.Prefab == null)
+                {
+                    pool.Prefab = assetManager.LoadResource<GameObject>(mAbPath, mAbName);
+                }
+
+                trans = pool.Request().transform;
+            }
         }
 
         private void getBuildInSceneNames(out List<string> names)
