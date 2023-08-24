@@ -6,8 +6,6 @@ namespace Game
 {
     public class GameMainView : SSCENEView
     {
-        private GameObject _gameRoot;
-
         protected override ViewOpenType GetViewOpenType()
         {
             return ViewOpenType.Single;
