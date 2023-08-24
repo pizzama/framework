@@ -30,8 +30,8 @@ namespace SFramework
 
         public override void Open(BundleParams value)
         {
-            base.Open(value);
             OpenParams = value;
+            base.Open(value);
         }
 
         public override void Open()

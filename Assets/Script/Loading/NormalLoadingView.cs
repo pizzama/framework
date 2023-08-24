@@ -30,7 +30,10 @@ namespace Game
         protected override void opening()
         {
             animator = getAssetFromGoDict<Animator>("BarLoading");
-            Debug.Log(animator);
+            if(animator)
+            {
+                animator.SetTrigger(Control.Model.OpenParams.MessageData.ToString());
+            }
         }
 
         private void closeHandle()
@@ -41,15 +44,6 @@ namespace Game
         protected override void closing()
         {
             
-        }
-
-        public void FinishLoading()
-        {
-            Debug.Log("FinishLoading");
-            if(animator)
-            {
-                animator.SetTrigger("End");
-            }
         }
     }
 }
