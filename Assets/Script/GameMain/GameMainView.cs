@@ -19,9 +19,13 @@ namespace Game
 
         protected override void opening()
         {
-
+            //open loading ui
+            Control.OpenControl("Game.NormalLoadingControl");
         }
 
-
+        protected override void loadSceneComplete()
+        {
+            Debug.Log("gamemainview loading finish");
+        }
     }
 }

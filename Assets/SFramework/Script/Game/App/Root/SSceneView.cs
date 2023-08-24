@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -11,16 +12,17 @@ namespace SFramework.Game
         private Dictionary<string, GameObject> goDict;
         protected string mAbPath; //scene asset bundle path
         protected string mAbName; //scene asset bundle name
-
+        protected abstract void loadSceneComplete();
         protected override void init()
         {
-            getBuildInSceneNames(out _buildInSceneNames);
+            getBuildInSceneNames(out _buildInSceneNames);// init scene int editor buiding settings
         }
 
         public override void Open()
         {
             SetScenePath(out mAbPath, out mAbName);
             loadScene(mAbPath, mAbName, (LoadSceneMode)GetViewOpenType()).Forget();
+            base.Open();
         }
 
         protected virtual async UniTaskVoid loadScene(string scenePath, string sceneName, LoadSceneMode mode)
@@ -28,11 +30,15 @@ namespace SFramework.Game
             AsyncOperation operation = await LoadSceneAsync(mAbPath, mAbName, (LoadSceneMode)GetViewOpenType());
             if (operation != null)
             {
-                var progress = Progress.Create<float>(p => Control.BroadcastMessage("LoadingUpdate", "", p));
+                var progress = Progress.Create<float>(p =>
+                {
+                    Control.BroadcastMessage("LoadingUpdate", "Game.NormalLoadingControl", p);
+                });
                 await operation.ToUniTask(progress);
             }
 
             collectScene<Transform>();
+            loadSceneComplete();
         }
 
         public async UniTask<AsyncOperation> LoadSceneAsync(string scenePath, string sceneName, LoadSceneMode mode)
@@ -53,7 +59,7 @@ namespace SFramework.Game
             if (!_buildInSceneNames.Contains(scenePath))
             {
                 //load scene from ab bundle
-                Object request = await assetManager.LoadResourceAsync<Object>(scenePath, sceneName);
+                UnityEngine.Object request = await assetManager.LoadResourceAsync<UnityEngine.Object>(scenePath, sceneName);
                 if (request != null)
                 {
 #if UNITY_EDITOR
@@ -99,7 +105,7 @@ namespace SFramework.Game
         private void SetScenePath(out string prefabPath, out string prefabName)
         {
             SetViewPrefabPath(out prefabPath, out prefabName);
-            
+
         }
 
         private void getBuildInSceneNames(out List<string> names)
@@ -123,10 +129,10 @@ namespace SFramework.Game
             } while (!string.IsNullOrEmpty(sceneName));
         }
 
-        protected Dictionary<string, T> collectScene<T>() where T : Object
+        protected Dictionary<string, T> collectScene<T>() where T : UnityEngine.Object
         {
-            Dictionary<string, T>  sceneDict = new Dictionary<string, T>();
-            T[] all = Object.FindObjectsOfType<T>(true);
+            Dictionary<string, T> sceneDict = new Dictionary<string, T>();
+            T[] all = UnityEngine.Object.FindObjectsOfType<T>(true);
             foreach (T obj in all)
             {
                 if (sceneDict.ContainsKey(obj.name))

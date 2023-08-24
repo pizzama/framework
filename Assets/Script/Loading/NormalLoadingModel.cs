@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using SFramework.Game;
 
 namespace Game
@@ -6,6 +7,7 @@ namespace Game
     {
         protected override void opening()
         {
+            GetData("").Forget();
         }
     }
 }
