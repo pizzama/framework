@@ -8,8 +8,6 @@ namespace SFramework.Game
     public abstract class SSCENEView : RootView
     {
         private List<string> _buildInSceneNames;
-        private Dictionary<string, GameObject> _sceneDict; //record scene gameobject
-
         protected string mAbPath; //scene asset bundle path
         protected string mAbName; //scene asset bundle name
 
@@ -27,7 +25,6 @@ namespace SFramework.Game
         private async UniTaskVoid loadScene(string scenePath, string sceneName, LoadSceneMode mode)
         {
             await LoadSceneAsync(mAbPath, mAbName, (LoadSceneMode)GetViewOpenType());
-            collectScene();
         }
 
         public async UniTask<AsyncOperation> LoadSceneAsync(string scenePath, string sceneName, LoadSceneMode mode)
@@ -118,19 +115,12 @@ namespace SFramework.Game
             } while (!string.IsNullOrEmpty(sceneName));
         }
 
-        protected void collectScene()
+        protected Dictionary<string, T> collectScene<T>() where T : Object
         {
-            _sceneDict = new Dictionary<string, GameObject>();
-            GameObject[] all = Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[];
-            //init current scene
-            foreach (GameObject obj in all)
+            Dictionary<string, T>  _sceneDict = new Dictionary<string, T>();
+            T[] all = Object.FindObjectsOfType<T>(true);
+            foreach (T obj in all)
             {
-                switch(obj.name)
-                {
-                    case "BundleManager":
-                    case "GameLaucher":
-                        continue;
-                }
                 if (_sceneDict.ContainsKey(obj.name))
                 {
                     Debug.LogWarning("Scene has same name:" + obj.name);
@@ -140,13 +130,8 @@ namespace SFramework.Game
                     _sceneDict[obj.name] = obj;
                 }
             }
-        }
 
-        protected GameObject getSceneObject(string name)
-        {
-            GameObject go = null;
-            _sceneDict.TryGetValue(name, out go);
-            return go;
+            return _sceneDict;
         }
     }
 }
