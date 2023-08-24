@@ -225,7 +225,6 @@ namespace SFramework
         {
             T result = _bundleMap.GetValue<T>();
             return result;
-
         }
 
         public void AddMessageParams(BundleParams value)
@@ -249,7 +248,7 @@ namespace SFramework
                 IBundle control = BundleManager.Instance.GetBundle(pa.ClassPath, pa.Alias);
                 if (control != null)
                     control.HandleMessage(pa);
-                else 
+                else
                 {
                     //如果不是指向的消息则广播给所有注册的用户
                     if (_bundleObserverMap.ContainsKey(pa.MessageId))
@@ -258,7 +257,7 @@ namespace SFramework
                         for (int j = 0; j < bundles.Count; j++)
                         {
                             control = bundles[j];
-                            control.HandleMessage(pa);    
+                            control.HandleMessage(pa);
                         }
                     }
                 }
@@ -295,9 +294,28 @@ namespace SFramework
         {
             if (_bundleObserverMap.ContainsKey(messageId))
             {
-                _bundleObserverMap[messageId].RemoveAll((value) => {
+                _bundleObserverMap[messageId].RemoveAll((value) =>
+                {
                     return value == bundle;
                 });
+            }
+        }
+
+        public void CloseAllControl(List<IBundle> excludeBundles)
+        {
+            foreach (KeyValuePair<string, Dictionary<string, IBundle>> result in _bundleMap)
+            {
+                foreach (KeyValuePair<string, IBundle> bundle in result.Value)
+                {
+                    if (excludeBundles.Exists(t => bundle.Value == t))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        bundle.Value.Close();
+                    }
+                }
             }
         }
     }

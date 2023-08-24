@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using SFramework.Tools;
 
 namespace SFramework
@@ -162,6 +163,11 @@ namespace SFramework
         public void OpenControl(string nameSpace, string className, object messageData = null, bool isSequence = false, string alias = "", int sort = 0)
         {
             Manager.OpenControl(nameSpace, className, messageData, isSequence, alias, sort);
+        }
+
+        public void CloseAllControl(List<IBundle> excludeBundles)
+        {
+            Manager.CloseAllControl(excludeBundles);
         }
 
         protected override void closing()

@@ -1,5 +1,7 @@
+using Cysharp.Threading.Tasks;
 using SFramework;
 using SFramework.Game;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -23,9 +25,23 @@ namespace Game
             Control.OpenControl("Game.NormalLoadingControl");
         }
 
+        //if you need control the loading progress you will override the method
+        //protected override async UniTask<bool> loadingScene(float progress)
+        //{
+        //    if(progress >= 0.9f)
+        //    {
+        //        Control.BroadcastMessage("LoadingEnd", "Game.NormalLoadingControl");
+        //        await UniTask.Delay(300);
+        //        return true;
+
+        //    }
+        //    return false;
+        //}
+
         protected override void loadSceneComplete()
         {
-            Debug.Log("gamemainview loading finish");
+            //Debug.Log("gamemainview loading finish");
+            Control.OpenControl("Game.NormalLoadingControl");
         }
     }
 }

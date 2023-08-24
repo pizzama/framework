@@ -48,8 +48,16 @@ namespace SFramework.Game
             SetViewTransform(out mViewTransform, out position, out rotation);
             if (mViewTransform != null)
             {
-                UIRoot.OpenUI(layer, mViewTransform, position, rotation);
-                goDict = ComponentTools.collectAllGameObjects(mViewTransform.gameObject);
+                if(UIRoot)
+                {
+                    UIRoot.OpenUI(layer, mViewTransform, position, rotation);
+                    goDict = ComponentTools.collectAllGameObjects(mViewTransform.gameObject);
+                }
+                else
+                {
+                    throw new NotFoundException("not found SUIROOT please check the scene");
+                }
+
             }
             base.Open();
         }

@@ -101,5 +101,10 @@ namespace SFramework.Game
             if (trans != null)
                 Destroy(trans.gameObject);
         }
+
+        private void OnDestroy()
+        {
+            SUIROOT.Instance = null;
+        }
     }
 }

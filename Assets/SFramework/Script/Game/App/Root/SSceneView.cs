@@ -25,18 +25,32 @@ namespace SFramework.Game
             base.Open();
         }
 
+        //if you need control the loading progress you will override the method
+        protected virtual async UniTask<bool> loadingScene(float progress)
+        {
+            await UniTask.Yield();
+            return true;
+        }
+
         protected virtual async UniTaskVoid loadScene(string scenePath, string sceneName, LoadSceneMode mode)
         {
             AsyncOperation operation = await LoadSceneAsync(mAbPath, mAbName, (LoadSceneMode)GetViewOpenType());
+            operation.allowSceneActivation = false;
             if (operation != null)
             {
-                var progress = Progress.Create<float>(p =>
+                var progress = Progress.Create<float>((p) =>
                 {
-                    Control.BroadcastMessage("LoadingUpdate", "Game.NormalLoadingControl", p);
+                    UniTask.Void(
+                        async () =>
+                        {
+                            operation.allowSceneActivation = await loadingScene(p);
+                        }
+                    );
                 });
                 await operation.ToUniTask(progress);
             }
 
+            Control.CloseAllControl(new List<IBundle>() { Control });
             collectScene<Transform>();
             loadSceneComplete();
         }
@@ -105,7 +119,6 @@ namespace SFramework.Game
         private void SetScenePath(out string prefabPath, out string prefabName)
         {
             SetViewPrefabPath(out prefabPath, out prefabName);
-
         }
 
         private void getBuildInSceneNames(out List<string> names)
