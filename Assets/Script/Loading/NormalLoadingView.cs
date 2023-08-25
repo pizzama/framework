@@ -19,8 +19,8 @@ namespace Game
 
         protected override void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
         {
-            prefabPath = "Loading/BarLoading";
-            prefabName = "BarLoading";
+            prefabPath = "Loading/BaseLoading";
+            prefabName = "BaseLoading";
             position = new Vector3(0, 0, 0);
             rotation = Quaternion.Euler(0, 0, 0);
         }
