@@ -15,7 +15,7 @@ namespace SFramework
         void UninstallBundle(string name, string alias);
         void UninstallBundle(IBundle bundle);
         void OpenControl(string fullPath, object messageData, bool isSequence, string alias = "", int sort = 0);
-        void OpenControl(string nameSpace, string className, object messageData, bool isSequence, string alias = "", int sort = 0);
+        void CloseControl(string fullPath, string alias = "");
         void CloseAllControl(List<IBundle> excludeBundles);
         void SubscribeMessage(string messageId, IBundle bundle);
         void UnSubscribeMessage(string messageId, IBundle bundle);

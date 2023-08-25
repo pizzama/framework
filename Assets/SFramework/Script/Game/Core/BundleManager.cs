@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SFramework.Tools;
+using Unity.VisualScripting;
 
 
 namespace SFramework
@@ -170,20 +171,10 @@ namespace SFramework
 
         public void OpenControl(string fullPath, object messageData = null, bool isSequence = false, string alias = "", int sort = 0)
         {
-            string nameSpace;
-            string className;
-            StringTools.PrefixClassName(fullPath, out nameSpace, out className);
-            this.OpenControl(nameSpace, className, messageData, isSequence, alias, sort);
-        }
-
-        // classPath is nameSpace + className
-        public void OpenControl(string nameSpace, string className, object messageData = null, bool isSequence = false, string alias = "", int sort = 0)
-        {
             BundleParams bdParams = new BundleParams()
             {
                 MessageId = "$#$", //特殊id表示打开界面的消息
-                NameSpace = nameSpace,
-                ClassName = className,
+                ClassPath = fullPath,
                 MessageData = messageData,
                 Alias = alias,
                 MessageSender = this,
@@ -317,6 +308,20 @@ namespace SFramework
                     }
                 }
             }
+        }
+
+        public void CloseControl(string fullPath, string alias = "")
+        {
+            string nameSpace;
+            string className;
+            if(alias == string.Empty)
+            {
+                StringTools.PrefixClassName(fullPath, out nameSpace, out className);
+                alias = className;
+            }
+
+            IBundle bundle = GetBundle(fullPath, alias);
+            bundle.Close();
         }
     }
 }

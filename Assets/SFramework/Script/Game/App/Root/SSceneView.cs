@@ -161,11 +161,22 @@ namespace SFramework.Game
             return sceneDict;
         }
 
-        protected GameObject getSceneObject(string name)
+        protected T getSceneObject<T>(string key)
         {
             GameObject go = null;
-            goDict.TryGetValue(name, out go);
-            return go;
+            goDict.TryGetValue(key, out go);
+            if (go != null)
+                return go.GetComponent<T>();
+            else
+            {
+                goDict.TryGetValue(key + "(Clone)", out go);
+                if (go != null)
+                {
+                    return go.GetComponent<T>();
+                }
+            }
+
+            return default(T);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace SFramework.Game
             goDict = new Dictionary<string, GameObject>();
         }
 
-        protected T getAssetFromGoDict<T>(string key)
+        protected T getUIObject<T>(string key)
         {
             GameObject go = null;
             goDict.TryGetValue(key, out go);

@@ -22,7 +22,7 @@ namespace Game
         protected override void opening()
         {
             //open loading ui
-            Control.OpenControl("Game", "NormalLoadingControl", "Start");
+            Control.OpenControl("Game.NormalLoadingControl", "Start");
         }
 
         //if you need control the loading progress you will override the method
@@ -41,7 +41,7 @@ namespace Game
         protected override void loadSceneComplete()
         {
             //Debug.Log("gamemainview loading finish");
-            Control.OpenControl("Game", "NormalLoadingControl", "End");
+            Control.OpenControl("Game.NormalLoadingControl", "End");
         }
     }
 }

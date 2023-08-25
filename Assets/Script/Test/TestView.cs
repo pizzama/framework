@@ -30,7 +30,7 @@ namespace Game
 
         protected override void opening()
         {
-            _closeBtn = getAssetFromGoDict<Button>("Button");
+            _closeBtn = getUIObject<Button>("Button");
             _closeBtn.onClick.AddListener(closeHandle);
         }
 

@@ -29,12 +29,10 @@ namespace SFramework
         public string ClassPath
         {
             get { return NameSpace + "." + ClassName; }
+            set
+            {
+                StringTools.PrefixClassName(value, out this.NameSpace, out this.ClassName);
+            }
         }
-
-        public void AnalysisClassPath(string classPath)
-        {
-            StringTools.PrefixClassName(classPath, out this.NameSpace, out this.ClassName);
-        }
-
     }
 }

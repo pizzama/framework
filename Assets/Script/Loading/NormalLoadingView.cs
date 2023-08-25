@@ -29,7 +29,7 @@ namespace Game
 
         protected override void opening()
         {
-            animator = getAssetFromGoDict<Animator>("BarLoading");
+            animator = getUIObject<Animator>("BarLoading");
             if(animator)
             {
                 animator.SetTrigger(Control.Model.OpenParams.MessageData.ToString());

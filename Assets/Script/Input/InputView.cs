@@ -26,7 +26,7 @@ namespace Game
 
         protected override void opening()
         {
-            // Image img = getAssetFromGoDict<Image>("image");
+            // Image img = getUIObject<Image>("image");
             // var imgTexture = assetManager.LoadResource<Texture2D>("arrow");
             // Sprite sprite = Sprite.Create(imgTexture, new Rect(0, 0, imgTexture.width, imgTexture.height), new Vector2(0.5f, 0.5f));
             // Debug.Log("test view enter:" + sprite);
