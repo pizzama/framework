@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SFramework.Game.Actor
 {
-    public interface IEntity
+    public interface ISFEntity
     {
         /// <summary>
         /// 获取实体编号。
@@ -58,21 +58,21 @@ namespace SFramework.Game.Actor
         /// </summary>
         /// <param name="childEntity">解除的子实体。</param>
         /// <param name="userData">用户自定义数据。</param>
-        void Detached(IEntity childEntity, object userData);
+        void Detached(ISFEntity childEntity, object userData);
 
         /// <summary>
         /// 实体附加子实体。
         /// </summary>
         /// <param name="parentEntity">被附加的父实体。</param>
         /// <param name="userData">用户自定义数据。</param>
-        void AttachTo(IEntity parentEntity, object userData);
+        void AttachTo(ISFEntity parentEntity, object userData);
 
         /// <summary>
         /// 实体解除子实体。
         /// </summary>
         /// <param name="parentEntity">被解除的父实体。</param>
         /// <param name="userData">用户自定义数据。</param>
-        void DetachFrom(IEntity parentEntity, object userData);
+        void DetachFrom(ISFEntity parentEntity, object userData);
 
         /// <summary>
         /// 实体轮询。

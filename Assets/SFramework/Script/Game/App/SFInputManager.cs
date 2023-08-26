@@ -13,6 +13,7 @@ public class FSInputManager : SSingleton<FSInputManager>
     public Vector2 PrimaryMovement { get { return _primaryMovement; } }
     private Vector2 _primaryMovement = Vector2.zero;
     public bool SmoothMovement = true;
+    [Tooltip("set this to false to prevent the InputManager from reading input")]
     public bool InputDetectionActive = true;
 
     public virtual void SetMovement()
@@ -29,6 +30,14 @@ public class FSInputManager : SSingleton<FSInputManager>
                 _primaryMovement.x = Input.GetAxisRaw(axisHorizontal);
                 _primaryMovement.y = Input.GetAxisRaw(axisVertical);
             }
+        }
+    }
+    public virtual void SetMovement(Vector2 movement)
+    {
+        if (InputDetectionActive)
+        {
+            _primaryMovement.x = movement.x;
+            _primaryMovement.y = movement.y;
         }
     }
 
