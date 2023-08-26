@@ -6,30 +6,57 @@ namespace SFramework.Game.Actor
 {
     public interface ISFEntity
     {
-        string Id{get;}
+        string EntityId{get;}
         string EntityAssetName{get;}
         GameObject Instance{get;}
-        void Init(int entityId, string entityAssetName);
+        void Init(string entityId, string entityAssetName);
         void Recycle();
         void Show();
-        void Hide(bool isDestory);
+        void Destory(bool isDestory);
         void Attached(ISFEntity childEntity);
         void Detached(ISFEntity childEntity);
         void Update(float tickTime);
     }
 
-    public class SFEntity : MonoBehaviour
+    public class SFEntity : MonoBehaviour, ISFEntity
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        private string _entityId;
+        public string EntityId { get => _entityId; }
 
+        private string _entityAssetName;
+        public string EntityAssetName { get => _entityAssetName; }
+
+        public GameObject Instance => throw new System.NotImplementedException();
+
+        public void Attached(ISFEntity childEntity)
+        {
         }
 
-        // Update is called once per frame
-        void Update()
+        public void Detached(ISFEntity childEntity)
         {
+        }
 
+        public void Destory()
+        {
+        }
+
+        public void Init(string entityId, string entityAssetName)
+        {
+            _entityId = entityId;
+            _entityAssetName = entityAssetName;
+        }
+
+        public void Recycle()
+        {
+        }
+
+        public void Show()
+        {
+        }
+
+        public void Update(float tickTime)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
