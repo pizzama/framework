@@ -29,10 +29,14 @@ namespace Game
 
         protected override void opening()
         {
-            animator = getUIObject<Animator>("BarLoading");
-            if(animator)
+            animator = getUIObject<Animator>("BaseLoading");
+        }
+
+        public void PlayAnimator(string name)
+        {
+            if (animator)
             {
-                animator.SetTrigger(Control.Model.OpenParams.MessageData.ToString());
+                animator.SetTrigger(name);
             }
         }
 

@@ -37,11 +37,9 @@ namespace SFramework
             _view.Install();
         }
 
-        public override void Open(BundleParams value = default)
+        public override void Open(BundleParams value)
         {
-            base.Open(value);
             _model.Open(value);
-            IsOpen = true;
         }
 
         public override void Close()
@@ -97,6 +95,8 @@ namespace SFramework
         public void HandleModelCallback()
         {
             _view.Open();
+            IsOpen = true;
+            this.Open();
         }
 
         public T GetControl<T>() where T : SControl

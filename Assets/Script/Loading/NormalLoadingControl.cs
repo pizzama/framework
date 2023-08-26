@@ -7,6 +7,7 @@ namespace Game
     {
         protected override void opening()
         {
+            GetView<NormalLoadingView>().PlayAnimator(Model.OpenParams.MessageData.ToString());
         }
 
         public override void HandleMessage(BundleParams value)
@@ -15,7 +16,6 @@ namespace Game
             //{
 
             //}
-
         }
     }
 }
