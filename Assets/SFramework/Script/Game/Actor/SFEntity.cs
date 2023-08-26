@@ -51,7 +51,7 @@ namespace SFramework.Game.Actor
         /// </summary>
         /// <param name="childEntity">附加的子实体。</param>
         /// <param name="userData">用户自定义数据。</param>
-        void Attached(IEntity childEntity, object userData);
+        void Attached(ISFEntity childEntity, object userData);
 
         /// <summary>
         /// 实体解除子实体。
