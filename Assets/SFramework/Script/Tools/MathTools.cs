@@ -4,6 +4,12 @@ namespace SFramework.Tools
 {
     public class MathTools
     {
+        //remap value from t1,t2 to s1 s2
+        public static float Remap(float value, float t1, float t2, float s1, float s2)
+        {
+            return (value - t1) / (t2 - t1) * (s2 - s1) + s1;
+        }
+
         public static float Round(float value, int digits = 1)
         {
             float multiple = Mathf.Pow(10, digits);
