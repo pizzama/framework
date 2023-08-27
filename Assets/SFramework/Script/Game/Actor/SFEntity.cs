@@ -12,10 +12,9 @@ namespace SFramework.Game.Actor
         void Init(string entityId, string entityAssetName);
         void Recycle();
         void Show();
-        void Destory(bool isDestory);
+        void Destory();
         void Attached(ISFEntity childEntity);
         void Detached(ISFEntity childEntity);
-        void Update(float tickTime);
     }
 
     public class SFEntity : MonoBehaviour, ISFEntity
@@ -52,11 +51,6 @@ namespace SFramework.Game.Actor
 
         public void Show()
         {
-        }
-
-        public void Update(float tickTime)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
