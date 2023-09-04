@@ -89,8 +89,7 @@ namespace SFramework
             if (ABPathHelper.SimulationMode)
             {
                 T rt = editorLoadResource<T>(abName, resName);
-                if (rt != null)
-                    return rt;
+                return rt;
             }
             //加载目标包
             ABInfo ab = LoadABPackage(abName);
@@ -291,8 +290,8 @@ namespace SFramework
                 }
             }
 
-            if (res == null)
-                Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
+            //if (res == null)
+            //    Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
 
             return res;
 #else

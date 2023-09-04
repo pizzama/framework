@@ -121,7 +121,7 @@ namespace SFramework
         }
     }
 
-    public class FSM<TBlackBoard> where TBlackBoard : new()
+    public abstract class FSM<TBlackBoard> where TBlackBoard : new()
     {
         protected Dictionary<string, IFSMState<TBlackBoard>> mStates = new Dictionary<string, IFSMState<TBlackBoard>>();
         //状态id，可以定义成枚举
@@ -147,12 +147,10 @@ namespace SFramework
         }
 
         private IFSMState<TBlackBoard> _activeState;
-        private string _currentStateId;
 
         public TBlackBoard BlackBoard; //状态机黑板
 
         public IFSMState<TBlackBoard> CurrentState => _activeState;
-        public string CurrentStateId => _currentStateId;
 
         public FSM()
         {
@@ -162,7 +160,7 @@ namespace SFramework
         //状态机有两种切换模式。 一种是状态机强制切换。另一种是每一个状态自己检查切换
         public void ChangeState(string id)
         {
-            if (id.Equals(CurrentStateId)) return;
+            if (id.Equals(CurrentState.ToName())) return;
             if (mStates.TryGetValue(id, out var state))
             {
                 if (_activeState != null)
@@ -170,14 +168,13 @@ namespace SFramework
                     _activeState?.ExitState();
                 }
                 _activeState = state;
-                _currentStateId = id;
                 _activeState?.EnterState();
             }
         }
 
         public void ChangeState(IFSMState<TBlackBoard> state)
         {
-            if (state.ToName().Equals(CurrentStateId)) return;
+            if (state.ToName().Equals(_activeState.ToName())) return;
             if (mStates.ContainsKey(state.ToName()))
             {
                 mStates[state.ToName()] = state;
@@ -190,6 +187,11 @@ namespace SFramework
             ChangeState(state.ToName());
         }
 
+        public void HandleInput()
+        {
+            _activeState?.HandleInput();
+        }
+
         public void Update()
         {
             // Debug.Log(_activeState.ToName());
@@ -200,7 +202,6 @@ namespace SFramework
         public void Clear()
         {
             _activeState = null;
-            _currentStateId = default;
             mStates.Clear();
         }
 

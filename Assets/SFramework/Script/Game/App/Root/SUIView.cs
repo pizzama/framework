@@ -85,8 +85,9 @@ namespace SFramework.Game
                 {
                     pool.Prefab = assetManager.LoadResource<GameObject>(mAbPath, mAbName);
                 }
-
-                trans = pool.Request().transform;
+                trans = null;
+                if(pool.Prefab != null)
+                    trans = pool.Request().transform;
             }
         }
 
