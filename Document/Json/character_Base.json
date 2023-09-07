@@ -1,0 +1,352 @@
+[
+    {
+        "ID": "int32",
+        "Name": "string",
+        "Unnamed: 2": null,
+        "quality": "sint32",
+        "country": "sint32",
+        "career": "sint32",
+        "Icon": "string",
+        "Story": "string"
+    },
+    {
+        "ID": null,
+        "Name": null,
+        "Unnamed: 2": null,
+        "quality": null,
+        "country": null,
+        "career": null,
+        "Icon": null,
+        "Story": null
+    },
+    {
+        "ID": "卡牌id",
+        "Name": "名称",
+        "Unnamed: 2": "名称备注",
+        "quality": "品质",
+        "country": "种族",
+        "career": "特长",
+        "Icon": "图标",
+        "Story": "角色简介"
+    },
+    {
+        "ID": 10001,
+        "Name": "card_name_10001",
+        "Unnamed: 2": "迷谷",
+        "quality": 2,
+        "country": 4,
+        "career": 4,
+        "Icon": "card_detail_name_10001",
+        "Story": "card_detail_story10001"
+    },
+    {
+        "ID": 10002,
+        "Name": "card_name_10002",
+        "Unnamed: 2": "明槐",
+        "quality": 2,
+        "country": 3,
+        "career": 2,
+        "Icon": "card_detail_name_10002",
+        "Story": "card_detail_story10002"
+    },
+    {
+        "ID": 10003,
+        "Name": "card_name_10003",
+        "Unnamed: 2": "晴诵",
+        "quality": 2,
+        "country": 2,
+        "career": 3,
+        "Icon": "card_detail_name_10003",
+        "Story": "card_detail_story10003"
+    },
+    {
+        "ID": 10004,
+        "Name": "card_name_10004",
+        "Unnamed: 2": "玉柏",
+        "quality": 2,
+        "country": 1,
+        "career": 1,
+        "Icon": "card_detail_name_10004",
+        "Story": "card_detail_story10004"
+    },
+    {
+        "ID": 10005,
+        "Name": "card_name_10005",
+        "Unnamed: 2": "宝玉",
+        "quality": 3,
+        "country": 4,
+        "career": 1,
+        "Icon": "card_detail_name_10005",
+        "Story": "card_detail_story10005"
+    },
+    {
+        "ID": 10006,
+        "Name": "card_name_10006",
+        "Unnamed: 2": "娇娇",
+        "quality": 3,
+        "country": 1,
+        "career": 1,
+        "Icon": "card_detail_name_10006",
+        "Story": "card_detail_story10006"
+    },
+    {
+        "ID": 10007,
+        "Name": "card_name_10007",
+        "Unnamed: 2": "骨雨",
+        "quality": 3,
+        "country": 2,
+        "career": 4,
+        "Icon": "card_detail_name_10007",
+        "Story": "card_detail_story10007"
+    },
+    {
+        "ID": 10008,
+        "Name": "card_name_10008",
+        "Unnamed: 2": "姑焉",
+        "quality": 3,
+        "country": 3,
+        "career": 1,
+        "Icon": "card_detail_name_10008",
+        "Story": "card_detail_story10008"
+    },
+    {
+        "ID": 10009,
+        "Name": "card_name_10009",
+        "Unnamed: 2": "赤凰",
+        "quality": 4,
+        "country": 4,
+        "career": 2,
+        "Icon": "card_detail_name_10009",
+        "Story": "card_detail_story10009"
+    },
+    {
+        "ID": 10010,
+        "Name": "card_name_10010",
+        "Unnamed: 2": "呦鸣",
+        "quality": 4,
+        "country": 3,
+        "career": 4,
+        "Icon": "card_detail_name_10010",
+        "Story": "card_detail_story10010"
+    },
+    {
+        "ID": 10011,
+        "Name": "card_name_10011",
+        "Unnamed: 2": "阿澈",
+        "quality": 4,
+        "country": 2,
+        "career": 2,
+        "Icon": "card_detail_name_10011",
+        "Story": "card_detail_story10011"
+    },
+    {
+        "ID": 10012,
+        "Name": "card_name_10012",
+        "Unnamed: 2": "琢光",
+        "quality": 4,
+        "country": 1,
+        "career": 1,
+        "Icon": "card_detail_name_10012",
+        "Story": "card_detail_story10012"
+    },
+    {
+        "ID": 10013,
+        "Name": "card_name_10013",
+        "Unnamed: 2": "云浮",
+        "quality": 4,
+        "country": 1,
+        "career": 2,
+        "Icon": "card_detail_name_10013",
+        "Story": "card_detail_story10013"
+    },
+    {
+        "ID": 10014,
+        "Name": "card_name_10014",
+        "Unnamed: 2": "鬼镰",
+        "quality": 4,
+        "country": 4,
+        "career": 3,
+        "Icon": "card_detail_name_10014",
+        "Story": "card_detail_story10014"
+    },
+    {
+        "ID": 10015,
+        "Name": "card_name_10015",
+        "Unnamed: 2": "棠眠",
+        "quality": 4,
+        "country": 3,
+        "career": 3,
+        "Icon": "card_detail_name_10015",
+        "Story": "card_detail_story10015"
+    },
+    {
+        "ID": 10016,
+        "Name": "card_name_10016",
+        "Unnamed: 2": "花铃",
+        "quality": 4,
+        "country": 1,
+        "career": 2,
+        "Icon": "card_detail_name_10016",
+        "Story": "card_detail_story10016"
+    },
+    {
+        "ID": 10017,
+        "Name": "card_name_10017",
+        "Unnamed: 2": "寻机",
+        "quality": 4,
+        "country": 4,
+        "career": 4,
+        "Icon": "card_detail_name_10017",
+        "Story": "card_detail_story10017"
+    },
+    {
+        "ID": 10018,
+        "Name": "card_name_10018",
+        "Unnamed: 2": "乌羽",
+        "quality": 4,
+        "country": 2,
+        "career": 4,
+        "Icon": "card_detail_name_10018",
+        "Story": "card_detail_story10018"
+    },
+    {
+        "ID": 10019,
+        "Name": "card_name_10019",
+        "Unnamed: 2": "秦朔",
+        "quality": 4,
+        "country": 2,
+        "career": 1,
+        "Icon": "card_detail_name_10019",
+        "Story": "card_detail_story10019"
+    },
+    {
+        "ID": 10020,
+        "Name": "card_name_10020",
+        "Unnamed: 2": "子月",
+        "quality": 4,
+        "country": 2,
+        "career": 4,
+        "Icon": "card_detail_name_10020",
+        "Story": "card_detail_story10020"
+    },
+    {
+        "ID": 10021,
+        "Name": "card_name_10021",
+        "Unnamed: 2": "高阳煜",
+        "quality": 4,
+        "country": 4,
+        "career": 4,
+        "Icon": "card_detail_name_10021",
+        "Story": "card_detail_story10021"
+    },
+    {
+        "ID": 10022,
+        "Name": "card_name_10022",
+        "Unnamed: 2": "长笙",
+        "quality": 5,
+        "country": 4,
+        "career": 3,
+        "Icon": "card_detail_name_10022",
+        "Story": "card_detail_story10022"
+    },
+    {
+        "ID": 10023,
+        "Name": "card_name_10023",
+        "Unnamed: 2": "帝瑶",
+        "quality": 5,
+        "country": 3,
+        "career": 4,
+        "Icon": "card_detail_name_10023",
+        "Story": "card_detail_story10023"
+    },
+    {
+        "ID": 10024,
+        "Name": "card_name_10024",
+        "Unnamed: 2": "于鹑",
+        "quality": 5,
+        "country": 2,
+        "career": 4,
+        "Icon": "card_detail_name_10024",
+        "Story": "card_detail_story10024"
+    },
+    {
+        "ID": 10025,
+        "Name": "card_name_10025",
+        "Unnamed: 2": "独苏",
+        "quality": 5,
+        "country": 1,
+        "career": 4,
+        "Icon": "card_detail_name_10025",
+        "Story": "card_detail_story10025"
+    },
+    {
+        "ID": 10026,
+        "Name": "card_name_10026",
+        "Unnamed: 2": "风傀",
+        "quality": 5,
+        "country": 4,
+        "career": 3,
+        "Icon": "card_detail_name_10026",
+        "Story": "card_detail_story10026"
+    },
+    {
+        "ID": 10027,
+        "Name": "card_name_10027",
+        "Unnamed: 2": "千鸢",
+        "quality": 5,
+        "country": 4,
+        "career": 3,
+        "Icon": "card_detail_name_10027",
+        "Story": "card_detail_story10027"
+    },
+    {
+        "ID": 10028,
+        "Name": "card_name_10028",
+        "Unnamed: 2": "樱澜",
+        "quality": 5,
+        "country": 2,
+        "career": 2,
+        "Icon": "card_detail_name_10028",
+        "Story": "card_detail_story10028"
+    },
+    {
+        "ID": 10029,
+        "Name": "card_name_10029",
+        "Unnamed: 2": "相霜",
+        "quality": 5,
+        "country": 1,
+        "career": 2,
+        "Icon": "card_detail_name_10029",
+        "Story": "card_detail_story10029"
+    },
+    {
+        "ID": 10030,
+        "Name": "card_name_10030",
+        "Unnamed: 2": "伯虑",
+        "quality": 5,
+        "country": 1,
+        "career": 4,
+        "Icon": "card_detail_name_10030",
+        "Story": "card_detail_story10030"
+    },
+    {
+        "ID": 10031,
+        "Name": "card_name_10031",
+        "Unnamed: 2": "阿狸",
+        "quality": 5,
+        "country": 2,
+        "career": 2,
+        "Icon": "card_detail_name_10031",
+        "Story": "card_detail_story10031"
+    },
+    {
+        "ID": 10032,
+        "Name": "card_name_10032",
+        "Unnamed: 2": "共工·白",
+        "quality": 5,
+        "country": 1,
+        "career": 3,
+        "Icon": "card_detail_name_10032",
+        "Story": "card_detail_story10032"
+    }
+]

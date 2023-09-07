@@ -1,0 +1,352 @@
+[
+    {
+        "ID": "int32",
+        "Name": "string",
+        "Unnamed: 2": null,
+        "quality": "sint32",
+        "Icon": "string",
+        "Story": "string",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": null,
+        "Name": null,
+        "Unnamed: 2": null,
+        "quality": null,
+        "Icon": null,
+        "Story": null,
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": "卡牌id",
+        "Name": "名称",
+        "Unnamed: 2": "名称备注",
+        "quality": "品质",
+        "Icon": "图标",
+        "Story": "角色简介",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20001,
+        "Name": "card_name_20001",
+        "Unnamed: 2": "杀",
+        "quality": 2,
+        "Icon": "card_detail_name_20001",
+        "Story": "card_detail_story20001",
+        "Unnamed: 6": null,
+        "Unnamed: 7": "造成1点伤害"
+    },
+    {
+        "ID": 20002,
+        "Name": "card_name_20002",
+        "Unnamed: 2": "连杀",
+        "quality": 2,
+        "Icon": "card_detail_name_20002",
+        "Story": "card_detail_story20002",
+        "Unnamed: 6": null,
+        "Unnamed: 7": "造成2点伤害"
+    },
+    {
+        "ID": 20003,
+        "Name": "card_name_20003",
+        "Unnamed: 2": "金钟罩",
+        "quality": 2,
+        "Icon": "card_detail_name_20003",
+        "Story": "card_detail_story20003",
+        "Unnamed: 6": null,
+        "Unnamed: 7": "增加1点防御"
+    },
+    {
+        "ID": 20004,
+        "Name": "card_name_20004",
+        "Unnamed: 2": "卜卦",
+        "quality": 2,
+        "Icon": "card_detail_name_20004",
+        "Story": "card_detail_story20004",
+        "Unnamed: 6": null,
+        "Unnamed: 7": "随机造成2点伤害2次"
+    },
+    {
+        "ID": 20005,
+        "Name": "card_name_20005",
+        "Unnamed: 2": "宝玉",
+        "quality": 3,
+        "Icon": "card_detail_name_20005",
+        "Story": "card_detail_story20005",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20006,
+        "Name": "card_name_20006",
+        "Unnamed: 2": "娇娇",
+        "quality": 3,
+        "Icon": "card_detail_name_20006",
+        "Story": "card_detail_story20006",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20007,
+        "Name": "card_name_20007",
+        "Unnamed: 2": "骨雨",
+        "quality": 3,
+        "Icon": "card_detail_name_20007",
+        "Story": "card_detail_story20007",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20008,
+        "Name": "card_name_20008",
+        "Unnamed: 2": "姑焉",
+        "quality": 3,
+        "Icon": "card_detail_name_20008",
+        "Story": "card_detail_story20008",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20009,
+        "Name": "card_name_20009",
+        "Unnamed: 2": "赤凰",
+        "quality": 4,
+        "Icon": "card_detail_name_20009",
+        "Story": "card_detail_story20009",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20010,
+        "Name": "card_name_20010",
+        "Unnamed: 2": "呦鸣",
+        "quality": 4,
+        "Icon": "card_detail_name_20010",
+        "Story": "card_detail_story20010",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20011,
+        "Name": "card_name_20011",
+        "Unnamed: 2": "阿澈",
+        "quality": 4,
+        "Icon": "card_detail_name_20011",
+        "Story": "card_detail_story20011",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20012,
+        "Name": "card_name_20012",
+        "Unnamed: 2": "琢光",
+        "quality": 4,
+        "Icon": "card_detail_name_20012",
+        "Story": "card_detail_story20012",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20013,
+        "Name": "card_name_20013",
+        "Unnamed: 2": "云浮",
+        "quality": 4,
+        "Icon": "card_detail_name_20013",
+        "Story": "card_detail_story20013",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20014,
+        "Name": "card_name_20014",
+        "Unnamed: 2": "鬼镰",
+        "quality": 4,
+        "Icon": "card_detail_name_20014",
+        "Story": "card_detail_story20014",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20015,
+        "Name": "card_name_20015",
+        "Unnamed: 2": "棠眠",
+        "quality": 4,
+        "Icon": "card_detail_name_20015",
+        "Story": "card_detail_story20015",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20016,
+        "Name": "card_name_20016",
+        "Unnamed: 2": "花铃",
+        "quality": 4,
+        "Icon": "card_detail_name_20016",
+        "Story": "card_detail_story20016",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20017,
+        "Name": "card_name_20017",
+        "Unnamed: 2": "寻机",
+        "quality": 4,
+        "Icon": "card_detail_name_20017",
+        "Story": "card_detail_story20017",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20018,
+        "Name": "card_name_20018",
+        "Unnamed: 2": "乌羽",
+        "quality": 4,
+        "Icon": "card_detail_name_20018",
+        "Story": "card_detail_story20018",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20019,
+        "Name": "card_name_20019",
+        "Unnamed: 2": "秦朔",
+        "quality": 4,
+        "Icon": "card_detail_name_20019",
+        "Story": "card_detail_story20019",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20020,
+        "Name": "card_name_20020",
+        "Unnamed: 2": "子月",
+        "quality": 4,
+        "Icon": "card_detail_name_20020",
+        "Story": "card_detail_story20020",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20021,
+        "Name": "card_name_20021",
+        "Unnamed: 2": "高阳煜",
+        "quality": 4,
+        "Icon": "card_detail_name_20021",
+        "Story": "card_detail_story20021",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20022,
+        "Name": "card_name_20022",
+        "Unnamed: 2": "长笙",
+        "quality": 5,
+        "Icon": "card_detail_name_20022",
+        "Story": "card_detail_story20022",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20023,
+        "Name": "card_name_20023",
+        "Unnamed: 2": "帝瑶",
+        "quality": 5,
+        "Icon": "card_detail_name_20023",
+        "Story": "card_detail_story20023",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20024,
+        "Name": "card_name_20024",
+        "Unnamed: 2": "于鹑",
+        "quality": 5,
+        "Icon": "card_detail_name_20024",
+        "Story": "card_detail_story20024",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20025,
+        "Name": "card_name_20025",
+        "Unnamed: 2": "独苏",
+        "quality": 5,
+        "Icon": "card_detail_name_20025",
+        "Story": "card_detail_story20025",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20026,
+        "Name": "card_name_20026",
+        "Unnamed: 2": "风傀",
+        "quality": 5,
+        "Icon": "card_detail_name_20026",
+        "Story": "card_detail_story20026",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20027,
+        "Name": "card_name_20027",
+        "Unnamed: 2": "千鸢",
+        "quality": 5,
+        "Icon": "card_detail_name_20027",
+        "Story": "card_detail_story20027",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20028,
+        "Name": "card_name_20028",
+        "Unnamed: 2": "樱澜",
+        "quality": 5,
+        "Icon": "card_detail_name_20028",
+        "Story": "card_detail_story20028",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20029,
+        "Name": "card_name_20029",
+        "Unnamed: 2": "相霜",
+        "quality": 5,
+        "Icon": "card_detail_name_20029",
+        "Story": "card_detail_story20029",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20030,
+        "Name": "card_name_20030",
+        "Unnamed: 2": "伯虑",
+        "quality": 5,
+        "Icon": "card_detail_name_20030",
+        "Story": "card_detail_story20030",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20031,
+        "Name": "card_name_20031",
+        "Unnamed: 2": "阿狸",
+        "quality": 5,
+        "Icon": "card_detail_name_20031",
+        "Story": "card_detail_story20031",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    },
+    {
+        "ID": 20032,
+        "Name": "card_name_20032",
+        "Unnamed: 2": "共工·白",
+        "quality": 5,
+        "Icon": "card_detail_name_20032",
+        "Story": "card_detail_story20032",
+        "Unnamed: 6": null,
+        "Unnamed: 7": null
+    }
+]

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package character_Base;
+
+message character_Base {
+  int32 ID = 1;
+  string Name = 2;
+  sint32 quality = 3;
+  sint32 country = 4;
+  sint32 career = 5;
+  string Icon = 6;
+  string Story = 7;
+}
+
+message character_Base_datas {
+  map<int32, character_Base> datamap = 1; 
+  repeated character_Base datas = 2; 
+}
+

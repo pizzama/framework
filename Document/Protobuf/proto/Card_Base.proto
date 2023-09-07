@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package Card_Base;
+
+message Card_Base {
+  int32 ID = 1;
+  string Name = 2;
+  sint32 quality = 3;
+  string Icon = 4;
+  string Story = 5;
+}
+
+message Card_Base_datas {
+  map<int32, Card_Base> datamap = 1; 
+  repeated Card_Base datas = 2; 
+}
+

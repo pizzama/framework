@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package test_event;
+
+message test_event {
+  int32 ID = 1;
+  int64 UnlockPlayerLevel = 2;
+  uint32 Type = 3;
+  uint64 CharacterID = 4;
+  sint32 Sort1 = 5;
+  sint64 Sort2 = 6;
+  fixed32 Sort3 = 7;
+  fixed64 Sort4 = 8;
+  sfixed32 Sort5 = 9;
+  sfixed64 Sort6 = 10;
+  string Name = 11;
+  bool Introduce = 12;
+  float JumpKey = 13;
+  double JumpParams = 14;
+repeated uint32 ReminderInformation = 15;
+}
+
+message test_event_datas {
+  map<int32, test_event> datamap = 1; 
+  repeated test_event datas = 2; 
+}
+
