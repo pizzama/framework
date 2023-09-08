@@ -20,15 +20,17 @@ namespace SFramework.Coordinate
 
         private Vector3 _worldPosition;
 
+        public Vector3 WorldPosition { get { return _worldPosition; } }
+
         public SFCoord(int q, int r, int s)
         {
             _q = q;
             _r = r;
             _s = s;
-            _worldPosition = WorldPosition();
+            _worldPosition = CaculateWorldPosition();
         }
 
-        public Vector3 WorldPosition()
+        public Vector3 CaculateWorldPosition()
         {
             return new Vector3(q * Mathf.Sqrt(3) / 2, 0, -(float)r - ((float)q / 2)) * 2 * SFGrid.CellSize;
         }
@@ -92,10 +94,15 @@ namespace SFramework.Coordinate
             List<SFCoord> result = new List<SFCoord>();
             for (int i = 0; i <= radius; i++)
             {
-                result.AddRange(CoordRing(radius));
+                result.AddRange(CoordRing(i));
             }
 
             return result;
+        }
+
+        public override string ToString()
+        {
+            return q + "," + r + "," + s + ":" + _worldPosition;
         }
     }
 

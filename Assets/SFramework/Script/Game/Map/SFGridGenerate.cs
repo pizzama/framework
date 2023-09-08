@@ -19,9 +19,11 @@ public class SFGridGenerate : MonoBehaviour
     {
         if (_grid != null)
         {
+            Debug.Log(_grid.Hexes.Count);
             foreach (SFVertexHex vertex in _grid.Hexes)
             {
-                Gizmos.DrawSphere(vertex.Coord.WorldPosition(), 0.3f);    
+                Debug.Log(vertex.Coord.ToString());
+                Gizmos.DrawSphere(vertex.Coord.WorldPosition, 0.3f);    
             }
         }
     }
