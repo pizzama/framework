@@ -18,21 +18,20 @@ namespace SFramework.Coordinate
         private int _s;
         public int s { get { return _s; } }
 
-        private Vector3 _worldPosition;
+        //private Vector3 _worldPosition;
 
-        public Vector3 WorldPosition { get { return _worldPosition; } }
+        //public Vector3 WorldPosition { get { return _worldPosition; } }
 
         public SFCoord(int q, int r, int s)
         {
             _q = q;
             _r = r;
             _s = s;
-            _worldPosition = CaculateWorldPosition();
         }
 
-        public Vector3 CaculateWorldPosition()
+        public Vector3 CaculateWorldPosition(float cellSize)
         {
-            return new Vector3(q * Mathf.Sqrt(3) / 2, 0, -(float)r - ((float)q / 2)) * 2 * SFGrid.CellSize;
+            return new Vector3(q * Mathf.Sqrt(3) / 2, 0, -(float)r - ((float)q / 2)) * 2 * cellSize;
         }
 
         public static SFCoord[] Directions = new SFCoord[]
@@ -102,7 +101,7 @@ namespace SFramework.Coordinate
 
         public override string ToString()
         {
-            return q + "," + r + "," + s + ":" + _worldPosition;
+            return q + "," + r + "," + s;
         }
     }
 
