@@ -9,7 +9,7 @@ namespace SFramework.Game
     public abstract class SSCENEView : RootView
     {
         private List<string> _buildInSceneNames;
-        private Dictionary<string, GameObject> goDict;
+        private Dictionary<string, Transform> goDict;
         protected string mAbPath; //scene asset bundle path
         protected string mAbName; //scene asset bundle name
         protected abstract void loadSceneComplete();
@@ -35,6 +35,10 @@ namespace SFramework.Game
         protected virtual async UniTaskVoid loadScene(string scenePath, string sceneName, LoadSceneMode mode)
         {
             AsyncOperation operation = await LoadSceneAsync(mAbPath, mAbName, (LoadSceneMode)GetViewOpenType());
+            if (operation == null)
+            {
+                return;
+            }
             operation.allowSceneActivation = false;
             if (operation != null)
             {
@@ -51,7 +55,7 @@ namespace SFramework.Game
             }
 
             Control.CloseAllControl(new List<IBundle>() { Control });
-            collectScene<Transform>();
+            goDict = collectScene<Transform>();
             loadSceneComplete();
         }
 
@@ -77,9 +81,16 @@ namespace SFramework.Game
                 if (request != null)
                 {
 #if UNITY_EDITOR
+                    if (request is not UnityEditor.SceneAsset)//check current assets is or not scene assets
+                    {
+                        return null;
+                    }
                     string obj_path = UnityEditor.AssetDatabase.GetAssetPath(request);
                     operation = UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(obj_path, new LoadSceneParameters(mode));
+#else
+
 #endif
+
                 }
                 else
                 {
@@ -163,7 +174,7 @@ namespace SFramework.Game
 
         protected T getSceneObject<T>(string key)
         {
-            GameObject go = null;
+            Transform go = null;
             goDict.TryGetValue(key, out go);
             if (go != null)
                 return go.GetComponent<T>();

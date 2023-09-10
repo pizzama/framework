@@ -1,7 +1,5 @@
-using Cysharp.Threading.Tasks;
 using SFramework;
 using SFramework.Game;
-using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game
@@ -16,14 +14,6 @@ namespace Game
         protected override UILayer GetViewLayer()
         {
             return UILayer.Popup;
-        }
-
-        protected override void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
-        {
-            prefabPath = "ss/Test";
-            prefabName = "Test";
-            position = new Vector3(0, 0, 0);
-            rotation = Quaternion.Euler(0, 0, 0);
         }
 
         private Button _closeBtn;
