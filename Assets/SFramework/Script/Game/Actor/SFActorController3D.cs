@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace SFramework.Actor
+namespace SFramework.Game.Actor
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Collider))]
@@ -61,7 +61,7 @@ namespace SFramework.Actor
             }
         }
 
-        //¼ÆËãÐÂµÄÎ»ÒÆ£¬²¢ÒÆ¶¯½ÇÉ«
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½Î»ï¿½Æ£ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½É«
         protected virtual void processUpdate()
         {
             if (transform == null)

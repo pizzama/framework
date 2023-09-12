@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SFramework.Tools;
-using Unity.VisualScripting;
+using SFramework.Tools.Attributes;
 
 
 namespace SFramework
@@ -27,7 +27,10 @@ namespace SFramework
         private List<BundleParams> _messageParams; //通知的消息队列
         private List<BundleParams> _openSequenceParams; //执行打开操作的消息队列
         private SMemory<string, string, IBundle> _bundleMap; //已经启动了的所有模块的管理器
-        private Dictionary<string, List<IBundle>> _bundleObserverMap; //注册消息管理器
+        private Dictionary<string, List<IBundle>> _bundleObserverMap; //注册消息管理器 
+        [SerializeField]
+        [SFInformation("Inspector bundle state is open or not", SFInformationAttribute.InformationType.Info, false)]  
+        private List<string> _bundleInspector;
 
 
         protected virtual void Awake()
@@ -119,12 +122,15 @@ namespace SFramework
             bundle.AliasName = alias;
             _bundleMap.SetValue(fullName, alias, bundle);
             bundle.Manager = this;
+            bundleInspector();
             return bundle;
         }
 
         public IBundle DeleteBundle(string name, string alias)
         {
-            return _bundleMap.DeleteValue(name, alias);
+            IBundle bundle = _bundleMap.DeleteValue(name, alias);
+            bundleInspector();
+            return bundle;
         }
 
         public IBundle DeleteBundle(IBundle bundle)
@@ -322,6 +328,22 @@ namespace SFramework
 
             IBundle bundle = GetBundle(fullPath, alias);
             bundle.Close();
+        }
+
+        private void bundleInspector()
+        {
+            if (_bundleInspector == null)
+                _bundleInspector = new List<string>();
+            else
+                _bundleInspector.Clear();
+
+            foreach (KeyValuePair<string, Dictionary<string, IBundle>> result in _bundleMap)
+            {
+                foreach (KeyValuePair<string, IBundle> bundle in result.Value)
+                {
+                    _bundleInspector.Add(bundle.Value.AliasName + ":" + bundle.Value.IsOpen);
+                }
+            }
         }
     }
 }

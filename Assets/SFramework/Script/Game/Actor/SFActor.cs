@@ -1,9 +1,9 @@
 using SFramework.Tools.Attributes;
 using UnityEngine;
 
-namespace SFramework.Actor
+namespace SFramework.Game.Actor
 {
-    public class SFActor : MonoBehaviour
+    public class SFActor : SFEntity
     {
         public enum SFActorFacingDirections { Default, Left, Right, Up, Down }
 
