@@ -84,11 +84,18 @@ namespace SFramework
         {
             if (_bundleMap == null)
                 return;
+            //record bundel inspector
+            if (_bundleInspector == null)
+                _bundleInspector = new List<string>();
+            else
+                _bundleInspector.Clear();
+
             foreach (KeyValuePair<string, Dictionary<string, IBundle>> result in _bundleMap)
             {
                 foreach (KeyValuePair<string, IBundle> bundle in result.Value)
                 {
                     bundle.Value.LateUpdate();
+                    _bundleInspector.Add(bundle.Value.AliasName + ":" + bundle.Value.IsOpen);
                 }
             }
 
@@ -121,14 +128,12 @@ namespace SFramework
             bundle.AliasName = alias;
             _bundleMap.SetValue(fullName, alias, bundle);
             bundle.Manager = this;
-            bundleInspector();
             return bundle;
         }
 
         public IBundle DeleteBundle(string name, string alias)
         {
             IBundle bundle = _bundleMap.DeleteValue(name, alias);
-            bundleInspector();
             return bundle;
         }
 
@@ -327,22 +332,6 @@ namespace SFramework
 
             IBundle bundle = GetBundle(fullPath, alias);
             bundle.Close();
-        }
-
-        private void bundleInspector()
-        {
-            if (_bundleInspector == null)
-                _bundleInspector = new List<string>();
-            else
-                _bundleInspector.Clear();
-
-            foreach (KeyValuePair<string, Dictionary<string, IBundle>> result in _bundleMap)
-            {
-                foreach (KeyValuePair<string, IBundle> bundle in result.Value)
-                {
-                    _bundleInspector.Add(bundle.Value.AliasName + ":" + bundle.Value.IsOpen);
-                }
-            }
         }
     }
 }

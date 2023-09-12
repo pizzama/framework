@@ -35,10 +35,11 @@ namespace SFramework.Pool
         }
 
         private void Update()
-        {//需要自动回收的在这里回收
+        {
+            //check is auto recyle
             if (returnTransform.Count > 0)
             {
-                int c = returnTransform.Count - 1;//ֱ倒序删除list
+                int c = returnTransform.Count - 1;
                 for (int i = c; i > -1; i--)
                 {
                     var pd = returnTime[i];

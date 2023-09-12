@@ -8,6 +8,7 @@ namespace SFramework.Game
 {
     public abstract class SUIView : RootView
     {
+        private const string UIPOOLNAME = "UI";
         //set the ui in which layer
         protected abstract UILayer GetViewLayer();
         protected Dictionary<string, GameObject> goDict;
@@ -80,7 +81,7 @@ namespace SFramework.Game
 
             if (!string.IsNullOrEmpty(mAbPath))
             {
-                ListGameObjectPool pool = poolManager.CreateGameObjectPool<ListGameObjectPool>(mAbPath);
+                ListGameObjectPool pool = poolManager.CreateGameObjectPool<ListGameObjectPool>(UIPOOLNAME);
                 if (pool.Prefab == null)
                 {
                     pool.Prefab = assetManager.LoadResource<GameObject>(mAbPath, mAbName);

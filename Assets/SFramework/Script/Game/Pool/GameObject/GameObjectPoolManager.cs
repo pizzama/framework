@@ -27,7 +27,7 @@ namespace SFramework.Pool
         /// <summary>
         /// 对象池在场景中的父控件
         /// </summary>
-        Transform m_parentTrans;
+        private Transform _parentTrans;
 
         /// <summary>
         /// 创建一个新的对象池
@@ -35,7 +35,7 @@ namespace SFramework.Pool
         /// <typeparam name="T">对象池类型</typeparam>
         /// <param name="poolName">对象池名称，唯一id</param>
         /// <returns>对象池对象</returns>
-        GameObject AllPool;
+        private GameObject _allPool;
         public T CreateGameObjectPool<T>(string poolName) where T : BaseGameObjectPool, new()
         {
             if (_poolDic.ContainsKey(poolName))
@@ -43,11 +43,11 @@ namespace SFramework.Pool
                 return (T)_poolDic[poolName];
             }
             //生成一个新的GameObject存放所有的对象池对象
-            if (AllPool == null)
-                AllPool = new GameObject("AllPool");
-            m_parentTrans = AllPool.transform;
+            if (_allPool == null)
+                _allPool = new GameObject("[AllPool]");
+            _parentTrans = _allPool.transform;
             GameObject obj = new GameObject(poolName);
-            obj.transform.SetParent(m_parentTrans);
+            obj.transform.SetParent(_parentTrans);
             T pool = new T();
             pool.Init(poolName, obj.transform);
             _poolDic.Add(poolName, pool);
@@ -99,7 +99,7 @@ namespace SFramework.Pool
         public void Destroy()
         {
             _poolDic.Clear();
-            GameObject.Destroy(m_parentTrans);
+            GameObject.Destroy(_parentTrans);
         }
     }
 }
