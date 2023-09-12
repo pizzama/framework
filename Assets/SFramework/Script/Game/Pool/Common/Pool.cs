@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 namespace SFramework.Pool
 {
+    //简单的单个对象池，管理单一对象
     public class Pool<T> where T : new()
     {
         public struct Node
