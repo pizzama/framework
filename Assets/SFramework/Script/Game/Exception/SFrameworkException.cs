@@ -24,4 +24,15 @@ namespace SFramework
             
         }
     }
+
+    public class DataErrorException : SystemException
+    {
+        /// <summary>
+        /// Not Found Exception
+        /// </summary>
+        public DataErrorException(string message) : base(message)
+        {
+
+        }
+    }
 }

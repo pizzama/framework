@@ -64,7 +64,7 @@ namespace SFramework
         public T LoadResource<T>(string abName, string resName) where T : UnityEngine.Object
         {
             abName = abName.ToLower();
-            string path = abName + "_" + resName;
+            string path = FullPath(abName, resName);
             if (_cache.ContainsKey(path))
             {
                 return (T)_cache[path];
@@ -83,7 +83,7 @@ namespace SFramework
         public async UniTask<T> LoadResourceAsync<T>(string abName, string resName, CancellationToken token = default) where T : UnityEngine.Object
         {
             abName = abName.ToLower();
-            string path = abName + "_" + resName;
+            string path = FullPath(abName, resName);
             if (_cache.ContainsKey(path))
             {
                 return (T)_cache[path];
@@ -127,6 +127,20 @@ namespace SFramework
                 Debug.LogWarning(e);
                 return null;
             }
+        }
+
+        public string FullPath(string abName, string resName)
+        {
+            return abName + "$$$" + resName;
+        }
+
+        public void SplitPath(string fullPath, out string abName, out string resName)
+        {
+            string[] arr = fullPath.Split("$$$");
+            if (arr.Length != 2)
+                throw new DataErrorException("fullPath is error:" + fullPath);
+            abName = arr[0];
+            resName = arr[1];
         }
 
     }

@@ -15,8 +15,8 @@ namespace SFramework.Game
 
         protected Transform mViewTransform;
 
-        protected string mAbPath; //ui asset bundle path
-        protected string mAbName; //ui asset bundle name
+        protected string mAbName; //ui asset bundle path
+        protected string mResName; //ui asset bundle name
 
         protected override void init()
         {
@@ -77,12 +77,13 @@ namespace SFramework.Game
         protected virtual void SetViewTransform(out Transform trans, out Vector3 position, out Quaternion rotation)
         {
             trans = null;
-            SetViewPrefabPath(out mAbPath, out mAbName, out position, out rotation);
+            SetViewPrefabPath(out mAbName, out mResName, out position, out rotation);
 
-            if (!string.IsNullOrEmpty(mAbPath))
+            if (!string.IsNullOrEmpty(mAbName))
             {
-                GameObject prefab = assetManager.LoadResource<GameObject>(mAbPath, mAbName);
-                GameObject ob = poolManager.Request<ListGameObjectPool>(mAbPath, prefab);
+                GameObject prefab = assetManager.LoadResource<GameObject>(mAbName, mResName);
+                string fullPath = assetManager.FullPath(mAbName, mResName);
+                GameObject ob = poolManager.Request<ListGameObjectPool>(fullPath, prefab);
                 trans = ob.transform;
             }
         }
@@ -91,7 +92,8 @@ namespace SFramework.Game
         {
             if(mViewTransform != null && poolManager != null)
             {
-                poolManager.Return(mAbPath, mViewTransform.gameObject);
+                string fullPath = assetManager.FullPath(mAbName, mResName);
+                poolManager.Return(fullPath, mViewTransform.gameObject);
                 base.Close();
             }
         }

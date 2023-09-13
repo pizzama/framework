@@ -105,6 +105,12 @@ namespace SFramework.Pool
             }
         }
 
+        public void Return(GameObject go)
+        {
+            GameObjectPoolInfo info = go.GetComponent<GameObjectPoolInfo>();
+            Return(info.PoolName, go);
+        }
+
         public int GetPoolCount()
         {
             return _poolDic.Count;

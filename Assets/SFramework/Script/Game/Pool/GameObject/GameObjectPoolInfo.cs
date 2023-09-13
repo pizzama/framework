@@ -9,17 +9,17 @@ namespace SFramework.Pool
         /// <summary>
         /// 对象显示的持续时间，若=0，则不隐藏
         /// </summary>
-        [HideInInspector] public float lifetime = 0;
+        [HideInInspector] public float Lifetime = 0;
         /// <summary>
         /// 所属对象池的唯一id
         /// </summary>
-        [HideInInspector] public string poolName;
+        [HideInInspector] public string PoolName;
 
         void OnEnable()
         {
-            if (lifetime > 0)
+            if (Lifetime > 0)
             {
-                StartCoroutine(CountDown(lifetime));
+                StartCoroutine(CountDown(Lifetime));
             }
         }
 
@@ -27,7 +27,7 @@ namespace SFramework.Pool
         {
             yield return new WaitForSeconds(lifetime);
             //将对象加入对象池
-            GameObjectPoolManager.Instance.Return(poolName, gameObject);
+            GameObjectPoolManager.Instance.Return(PoolName, gameObject);
         }
     }
 }

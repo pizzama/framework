@@ -86,10 +86,10 @@ namespace SFramework.Pool
             {
                 info = returnObj.AddComponent<GameObjectPoolInfo>();
             }
-            info.poolName = mPoolName;
+            info.PoolName = mPoolName;
             if (lifetime > 0)
             {
-                info.lifetime = lifetime;
+                info.Lifetime = lifetime;
             }
 
             return returnObj;
