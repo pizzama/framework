@@ -15,16 +15,6 @@ namespace SFramework.Pool
         /// </summary>
         [HideInInspector] public string poolName;
 
-        WaitForSeconds m_waitTime;
-
-        void Awake()
-        {
-            if (lifetime > 0)
-            {
-                m_waitTime = new WaitForSeconds(lifetime);
-            }
-        }
-
         void OnEnable()
         {
             if (lifetime > 0)
@@ -35,9 +25,9 @@ namespace SFramework.Pool
 
         IEnumerator CountDown(float lifetime)
         {
-            yield return m_waitTime;
+            yield return new WaitForSeconds(lifetime);
             //将对象加入对象池
-            GameObjectPoolManager.Instance.ReturnGameObject(poolName, gameObject);
+            GameObjectPoolManager.Instance.Return(poolName, gameObject);
         }
     }
 }

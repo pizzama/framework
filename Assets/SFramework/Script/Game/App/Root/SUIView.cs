@@ -81,14 +81,9 @@ namespace SFramework.Game
 
             if (!string.IsNullOrEmpty(mAbPath))
             {
-                ListGameObjectPool pool = poolManager.CreateGameObjectPool<ListGameObjectPool>(UIPOOLNAME);
-                if (pool.Prefab == null)
-                {
-                    pool.Prefab = assetManager.LoadResource<GameObject>(mAbPath, mAbName);
-                }
-                trans = null;
-                if(pool.Prefab != null)
-                    trans = pool.Request().transform;
+                GameObject prefab = assetManager.LoadResource<GameObject>(mAbPath, mAbName);
+                GameObject ob = poolManager.Request<ListGameObjectPool>(mAbPath, prefab);
+                trans = ob.transform;
             }
         }
 
@@ -96,7 +91,7 @@ namespace SFramework.Game
         {
             if(mViewTransform != null && poolManager != null)
             {
-                poolManager.ReturnGameObject(mAbPath, mViewTransform.gameObject);
+                poolManager.Return(mAbPath, mViewTransform.gameObject);
                 base.Close();
             }
         }

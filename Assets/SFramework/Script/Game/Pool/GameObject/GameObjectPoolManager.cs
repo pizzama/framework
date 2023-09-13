@@ -66,7 +66,7 @@ namespace SFramework.Pool
         /// <param name="position">对象新坐标</param>
         /// <param name="lifeTime">对象显示时间</param>
         /// <returns>新对象</returns>
-        public GameObject RequestGameObject(string poolName, float lifeTime)
+        public GameObject Request(string poolName, float lifeTime = -1)
         {
             if (_poolDic.ContainsKey(poolName))
             {
@@ -75,12 +75,29 @@ namespace SFramework.Pool
             return null;
         }
 
+        public GameObject Request<T>(string poolName, GameObject prefab, float lifeTime = -1) where T : BaseGameObjectPool, new()
+        {
+            if (prefab == null)
+                throw new NotFoundException("Prefab Not be null");
+            GameObject ob = Request(poolName, lifeTime);
+            if(ob == null)
+            {
+                T pool = CreateGameObjectPool<T>(poolName);
+                pool.Prefab = prefab;
+                return pool.Request(lifeTime);
+            }
+            else
+            {
+                return ob;
+            }
+        }
+
         /// <summary>
         /// 将对象存入对象池中
         /// </summary>
         /// <param name="poolName">对象池名称</param>
         /// <param name="go">对象</param>
-        public void ReturnGameObject(string poolName, GameObject go)
+        public void Return(string poolName, GameObject go)
         {
             if (_poolDic.ContainsKey(poolName))
             {
