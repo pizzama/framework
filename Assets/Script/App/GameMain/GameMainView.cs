@@ -43,6 +43,9 @@ namespace Game
             //Debug.Log("gamemainview loading finish");
             Control.OpenControl("Game.NormalLoadingControl", "End");
 
+            Texture tx = assetManager.LoadResource<Texture>("pic/cha", "haipa");
+            Debug.Log(tx);
+
             
         }
     }

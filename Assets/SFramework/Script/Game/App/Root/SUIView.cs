@@ -83,7 +83,7 @@ namespace SFramework.Game
             {
                 GameObject prefab = assetManager.LoadResource<GameObject>(mAbName, mResName);
                 string fullPath = assetManager.FullPath(mAbName, mResName);
-                GameObject ob = poolManager.Request<ListGameObjectPool>(fullPath, prefab);
+                GameObject ob = poolManager.Request<ListGameObjectPool>(fullPath, prefab, -1);
                 trans = ob.transform;
             }
         }

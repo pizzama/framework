@@ -19,5 +19,13 @@ namespace SFramework.Game
             //init ui
             base.Install();
         }
+
+        protected GameObject CreateGameObjectUsingPool(string abName, string resName, float lifeTime = -1)
+        {
+            UnityEngine.GameObject prefab = assetManager.LoadResource<UnityEngine.GameObject>(abName, resName);
+            string poolName = assetManager.FullPath(abName, resName);
+            return poolManager.Request<ListGameObjectPool>(poolName, prefab, lifeTime);
+
+        }
     }
 }
