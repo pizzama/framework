@@ -23,14 +23,15 @@ namespace SFramework.Pool
     }
 
 
-    public class MonoPool : MonoBehaviour
+    public class MonosPool : MonoBehaviour
     {
-        public static Dictionary<int, Stack<Component>> pool_go = new Dictionary<int, Stack<Component>>();
+        public static Dictionary<int, Stack<Component>> _poolGo = new Dictionary<int, Stack<Component>>();
         public static List<Component> returnTransform = new List<Component>();
         public static List<PoolID> returnTime = new List<PoolID>();
         // Use this for initialization
         void Awake()
         {
+            this.name = "[MonosPool]";
             DontDestroyOnLoad(this);
         }
 
@@ -46,7 +47,7 @@ namespace SFramework.Pool
                     if (pd.time < Time.time)
                     {
                         Component C = returnTransform[i];
-                        pool_go[pd.id].Push(C);
+                        _poolGo[pd.id].Push(C);
                         C.gameObject.SetActive(false);
                         returnTransform.RemoveAt(i);
                         returnTime.RemoveAt(i);
@@ -61,10 +62,11 @@ namespace SFramework.Pool
         {
             Stack<Component> temp;
             int name = key.GetHashCode();
-            if (!pool_go.TryGetValue(name, out temp))
+            //int name = key.GetInstanceID();
+            if (!_poolGo.TryGetValue(name, out temp))
             {
                 temp = new Stack<Component>(count);
-                pool_go.Add(name, temp);
+                _poolGo.Add(name, temp);
             }
 
             for (int i = 0; i < count; i++)
@@ -80,58 +82,17 @@ namespace SFramework.Pool
 
         public static T Request<T>(T key, Vector3 pos, Quaternion rot) where T : Component
         {
-            Stack<Component> qc;
-            T go;
-            int name = key.GetHashCode();
-            if (pool_go.TryGetValue(name, out qc))
-            {
-                if (qc.Count > 0)
-                {
-                    go = (T)qc.Pop();
-                    go.transform.SetPositionAndRotation(pos, rot);
-                }
-                else
-                {
-                    go = Instantiate<T>(key, pos, rot);
-                }
-            }
-            else
-            {
-                qc = new Stack<Component>();
-                pool_go.Add(name, qc);
-                go = Instantiate<T>(key, pos, rot);
-                // go.hideFlags = HideFlags.HideInHierarchy;
-            }
-
-            go.gameObject.SetActive(true);
+            T go = Request(key);
+            go.transform.SetPositionAndRotation(pos, rot);
+            //go = Instantiate<T>(key, pos, rot);
             return go;
         }
 
         //可以自动回收  设置自动回收的时间
         public static T Request<T>(T key, Vector3 pos, Quaternion rot, float t) where T : Component
         {
-            Stack<Component> qc;
-            T go;
             int name = key.GetHashCode();
-            if (pool_go.TryGetValue(name, out qc))
-            {
-                if (qc.Count > 0)
-                {
-                    go = (T)qc.Pop();
-                    go.transform.SetPositionAndRotation(pos, rot);
-                }
-                else
-                {
-                    go = Instantiate<T>(key, pos, rot);
-                }
-            }
-            else
-            {
-                qc = new Stack<Component>();
-                pool_go.Add(name, qc);
-                go = Instantiate<T>(key, pos, rot);
-                // go.hideFlags = HideFlags.HideInHierarchy;
-            }
+            T go = Request(key, pos, rot);
             returnTransform.Add(go);
             returnTime.Add(new PoolID(name, Time.time + t));
             go.gameObject.SetActive(true);
@@ -139,14 +100,14 @@ namespace SFramework.Pool
         }
 
         // 使用示例
-        // Transform tf=MonoPool.GetComponent<Transform>(keyTf);
+        // Transform tf=MonoPool.Request<Transform>(keyTf);
 
         public static T Request<T>(T key) where T : Component
         {
             Stack<Component> qc;
             T go;
             int name = key.GetHashCode();
-            if (pool_go.TryGetValue(name, out qc))
+            if (_poolGo.TryGetValue(name, out qc))
             {
                 if (qc.Count > 0)
                     go = (T)qc.Pop();
@@ -156,7 +117,7 @@ namespace SFramework.Pool
             else
             {
                 qc = new Stack<Component>();
-                pool_go.Add(name, qc);
+                _poolGo.Add(name, qc);
                 go = Instantiate<T>(key);
                 // go.hideFlags = HideFlags.HideInHierarchy;
             }
@@ -169,12 +130,24 @@ namespace SFramework.Pool
             if (act != null)
                 act();
             int name = key.GetHashCode();
-            if (!pool_go.ContainsKey(name))
+            if (!_poolGo.ContainsKey(name))
             {
-                pool_go.Add(name, new Stack<Component>());
+                _poolGo.Add(name, new Stack<Component>());
             }
-            pool_go[name].Push(go);
+            _poolGo[name].Push(go);
             go.gameObject.SetActive(false);
+        }
+
+        public ulong CombineTwoInt(int a, int b)
+        {
+            uint ua = (uint)a;
+            ulong ub = (uint)b;
+            return ub << 32 | ua;
+        }
+        public void DecombineTwoInt(ulong c, out int a, out int b)
+        {
+            a = (int)(c & 0xFFFFFFFFUL);
+            b = (int)(c >> 32);
         }
     }
 }

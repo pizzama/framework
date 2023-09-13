@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace SFramework.Pool
 {
     //简单的单个对象池，管理单一对象
-    public class Pool<T> where T : new()
+    public class SimplePool<T> where T : new()
     {
         public struct Node
         {
@@ -28,7 +28,7 @@ namespace SFramework.Pool
             get { return Available.Count; }
         }
 
-        public Pool(int capacity)
+        public SimplePool(int capacity)
         {
             Nodes = new Node[capacity];
             Available = new Queue<int>(capacity);

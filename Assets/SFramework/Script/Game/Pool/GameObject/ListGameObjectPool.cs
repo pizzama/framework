@@ -6,6 +6,7 @@ namespace SFramework.Pool
 {
     public class ListGameObjectPool : BaseGameObjectPool
     {
+        //可以管理所有对象池里边的对象。
         private List<GameObject> _goList = new List<GameObject>();
 
         public override GameObject Request(float lifetime)
@@ -21,24 +22,26 @@ namespace SFramework.Pool
 
             for (int i = _goList.Count - 1; i >= 0; i--)
             {
-                returnObj = _goList[i];
-                if (returnObj == null)
+                var temp = _goList[i];
+                if (temp == null)
                 {
-                    _goList.Remove(returnObj);
+                    _goList.Remove(temp);
                     continue;
                 }
-                if (returnObj.activeSelf == false)
+                if (temp.activeSelf == false)
                 {
-                    returnObj.SetActive(true);
-                    return returnObj;
+                    returnObj = temp;
                 }
             }
 
-            //池中没有可分配对象了，新生成一个
-            returnObj = GameObject.Instantiate(mPrefab) as GameObject;
-            returnObj.transform.SetParent(mTrans);
-            returnObj.SetActive(false);
-            _goList.Add(returnObj);
+            if(returnObj == null)
+            {
+                //池中没有可分配对象了，新生成一个
+                returnObj = GameObject.Instantiate(mPrefab) as GameObject;
+                returnObj.transform.SetParent(mTrans);
+                returnObj.SetActive(false);
+                _goList.Add(returnObj);
+            }
 
             returnObj = addLifeTimeInfo(returnObj, lifetime);
             returnObj.SetActive(true);

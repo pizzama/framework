@@ -46,17 +46,7 @@ namespace SFramework.Pool
                 returnObj.transform.SetParent(mTrans);
                 returnObj.SetActive(false);
             }
-            //使用PrefabInfo脚本保存returnObj的一些信息
-            GameObjectPoolInfo info = returnObj.GetComponent<GameObjectPoolInfo>();
-            if (info == null)
-            {
-                info = returnObj.AddComponent<GameObjectPoolInfo>();
-            }
-            info.poolName = mPoolName;
-            if (lifetime > 0)
-            {
-                info.lifetime = lifetime;
-            }
+            addLifeTimeInfo(returnObj, lifetime);
             returnObj.SetActive(true);
             return returnObj;
         }
