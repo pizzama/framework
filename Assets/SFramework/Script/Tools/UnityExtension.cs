@@ -4,6 +4,21 @@ namespace SFramework.Tools
 {
     public static class UnityExtension
     {
+        public static bool IsPrefab(this GameObject gameObject)
+        {
+            if (gameObject == null)
+            {
+                throw new NotFoundException("not found Gameobject");
+            }
+
+            return
+                !gameObject.scene.IsValid() &&
+                !gameObject.scene.isLoaded &&
+                gameObject.GetInstanceID() >= 0 &&
+                // I noticed that ones with IDs under 0 were objects I didn't recognize
+                !gameObject.hideFlags.HasFlag(HideFlags.HideInHierarchy);
+                // I don't care about GameObjects *inside* prefabs, just the overall prefab.
+        }
         // UI本地坐标转屏幕坐标
         public static Vector2 UILocal2ScreenPoint(this Transform transform, Canvas canvas, Vector2 localPos)
         {

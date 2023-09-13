@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using SFramework;
 using SFramework.Game;
+using SFramework.Tools;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -46,7 +47,15 @@ namespace Game
             Texture tx = assetManager.LoadResource<Texture>("pic/cha", "haipa");
             Debug.Log(tx);
 
-            
+            Transform ga = getSceneObject<Transform>("Env");
+
+            GameObject ab = assetManager.LoadResource<GameObject>("model/avatar", "Role_CarrotA_Skin");
+            bool rt = ab.IsPrefab();
+            Debug.Log(ab);
+
+            GameObject aa = CreateGameObjectUsingPool("model/avatar", "Role_CarrotA_Skin");
+            rt = aa.IsPrefab();
+            Debug.Log(aa);
         }
     }
 }
