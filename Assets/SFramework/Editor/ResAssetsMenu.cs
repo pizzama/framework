@@ -33,8 +33,8 @@ namespace SFramework
 					int index = sceneDirectory.LastIndexOf("/");
 					string sceneName = sceneDirectory.Substring(index + 1);
 					OnSceneFileSystemInfo(sceneDirectoryInfo, sceneName, namePathDictionary);
-					OnWriteConfig(sceneName, namePathDictionary);
-				}
+					//OnWriteConfig(sceneName, namePathDictionary);// write template file
+                }
 			}
 			AssetDatabase.Refresh();
 			AssetDatabase.RemoveUnusedAssetBundleNames();
