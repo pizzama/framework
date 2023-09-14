@@ -61,9 +61,9 @@ namespace SFramework
             }
         }
 
-        public T LoadResource<T>(string abName, string resName) where T : UnityEngine.Object
+        public T LoadResource<T>(string abName, string resName, string variantName = "sf") where T : UnityEngine.Object
         {
-            abName = abName.ToLower();
+            abName = (abName + variantName).ToLower();
             string path = FullPath(abName, resName);
             if (_cache.ContainsKey(path))
             {
@@ -80,9 +80,9 @@ namespace SFramework
             }
         }
 
-        public async UniTask<T> LoadResourceAsync<T>(string abName, string resName, CancellationToken token = default) where T : UnityEngine.Object
+        public async UniTask<T> LoadResourceAsync<T>(string abName, string resName, string variantName = "sf", CancellationToken token = default) where T : UnityEngine.Object
         {
-            abName = abName.ToLower();
+            abName = (abName + variantName).ToLower();
             string path = FullPath(abName, resName);
             if (_cache.ContainsKey(path))
             {

@@ -44,17 +44,12 @@ namespace Game
             //Debug.Log("gamemainview loading finish");
             Control.OpenControl("Game.NormalLoadingControl", "End");
 
-            Texture tx = assetManager.LoadResource<Texture>("pic/cha", "haipa");
+            Texture tx = assetManager.LoadResource<Texture>("pic", "haipa");
             Debug.Log(tx);
 
             Transform ga = getSceneObject<Transform>("Env");
 
-            GameObject ab = assetManager.LoadResource<GameObject>("model/avatar", "Role_CarrotA_Skin");
-            bool rt = ab.IsPrefab();
-            Debug.Log(ab);
-
-            GameObject aa = CreateGameObjectUsingPool("model/avatar", "Role_CarrotA_Skin");
-            rt = aa.IsPrefab();
+            GameObject aa = CreateGameObjectUsingPool("model/avatar", "Role_CarrotA_Skin.sf");
             Debug.Log(aa);
         }
     }

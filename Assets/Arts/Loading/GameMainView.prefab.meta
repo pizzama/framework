@@ -3,5 +3,5 @@ guid: c7bf21e15dd48e447a6b186a4c47239f
 PrefabImporter:
   externalObjects: {}
   userData: 
-  assetBundleName: game/gamemainview
-  assetBundleVariant: 
+  assetBundleName: loading
+  assetBundleVariant: sf
