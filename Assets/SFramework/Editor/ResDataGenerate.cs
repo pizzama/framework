@@ -1,11 +1,3 @@
-/****************************************************************************
- * Copyright (c) 2015 - 2022 liangxiegame UNDER MIT License
- * 
- * http://qframework.cn
- * https://github.com/liangxiegame/QFramework
- * https://gitee.com/liangxiegame/QFramework
- ****************************************************************************/
-
 using System.CodeDom;
 using System.IO;
 using System.CodeDom.Compiler;
@@ -28,7 +20,11 @@ namespace SFramework
             {
                 var assetPaths = AssetDatabase.GetAssetPathsFromAssetBundle(assetName);
                 if (!assetBundleInfos.ContainsKey(assetName))
-                    assetBundleInfos[assetName] = assetPaths.Select(assetName => Path.GetFileNameWithoutExtension(assetName)).ToArray();
+                {
+                    assetBundleInfos[assetName] = assetPaths;
+                }
+                else
+                    Debug.LogWarning("have the same bundle path:" + assetName);
             }
 
             var compileUnit = new CodeCompileUnit();
@@ -66,17 +62,8 @@ namespace SFramework
                     var assetField = new CodeMemberField
                     { Attributes = MemberAttributes.Const | MemberAttributes.Public };
 
-                    var content = Path.GetFileNameWithoutExtension(asset);
-
-                    //if (ResKitView.GenerateClassNameStyle == ResKitView.GENERATE_NAME_STYLE_UPPERCASE)
-                    //{
-                    //    assetField.Name = content.ToUpperInvariant()
-                    //        .RemoveInvalidateChars();
-                    //}
-                    //else if (ResKitView.GenerateClassNameStyle == ResKitView.GENERATE_NAME_STYLE_KeepOriginal)
-                    //{
-                    //    assetField.Name = content.RemoveInvalidateChars();
-                    //}
+                    var content = Path.GetFileName(asset);
+                    assetField.Name = content.RemoveInvalidateChars();
 
                     assetField.Type = new CodeTypeReference(typeof(System.String));
                     if (!assetField.Name.StartsWith("[") && !assetField.Name.StartsWith(" [") &&
@@ -115,7 +102,8 @@ namespace SFramework
                 .Replace("-", "")
                 .Replace("(", "")
                 .Replace(")", "")
-                .Replace("#", "");
+                .Replace("#", "")
+                .Replace(".", "_");
         }
     }
 }
