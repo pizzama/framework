@@ -33,12 +33,22 @@ namespace SFramework
 					int index = sceneDirectory.LastIndexOf("/");
 					string sceneName = sceneDirectory.Substring(index + 1);
 					OnSceneFileSystemInfo(sceneDirectoryInfo, sceneName, namePathDictionary);
+					WriteDataConfig();
 					//OnWriteConfig(sceneName, namePathDictionary);// write template file
-                }
+				}
 			}
 			AssetDatabase.Refresh();
 			AssetDatabase.RemoveUnusedAssetBundleNames();
 			Debug.Log("设置标记成功...");
+		}
+
+		private static void WriteDataConfig()
+        {
+			var path = Path.GetFullPath(Application.dataPath + Path.DirectorySeparatorChar + "AssetBundles/SFAssets.cs");
+			var writer = new StreamWriter(File.Open(path, FileMode.Create));
+			ResDataCodeGenerator.WriteClass(writer, "SFAssetsBundle");
+			writer.Close();
+			AssetDatabase.Refresh();
 		}
 
 		/// <summary>
