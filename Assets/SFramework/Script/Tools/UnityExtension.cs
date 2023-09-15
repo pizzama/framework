@@ -41,5 +41,22 @@ namespace SFramework.Tools
             Vector2 worldPos = transform.TransformPoint(localPos);
             return camera.WorldToScreenPoint(worldPos);
         }
+
+        public static string RemoveInvalidateChars(this string name)
+        {
+            return name.Replace("/", "")
+                .Replace("@", "")
+                .Replace("!", "")
+                .Replace(" ", "_")
+                .Replace("__", "_")
+                .Replace("__", "_")
+                .Replace("__", "_")
+                .Replace("&", "")
+                .Replace("-", "")
+                .Replace("(", "")
+                .Replace(")", "")
+                .Replace("#", "")
+                .Replace(".", "_");
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace SFramework
 	[InitializeOnLoad]
 	public class ResAssetsMenu
 	{
-		public const string AssetBundlesOutputPath = "AssetBundles";
+		private const string StaticlNameSpace = "SFramework.Statics";
 		private const string Mark_AssetBundle = "Assets/SFramework/AssetBundle Folder";
 
 		[MenuItem(Mark_AssetBundle)]
@@ -44,11 +44,11 @@ namespace SFramework
 
 		private static void WriteDataConfig()
         {
-			var path = Path.GetFullPath(Application.dataPath + Path.DirectorySeparatorChar + "SFAssetBundles");
+			var path = Path.GetFullPath(Application.dataPath + Path.DirectorySeparatorChar + "SFStaticAsset");
 			if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 			path = path + "/SFAssets.cs";
 			var writer = new StreamWriter(File.Open(path, FileMode.Create));
-			ResDataCodeGenerator.WriteClass(writer, "SFAssetsBundle");
+			ResDataCodeGenerator.WriteClass(writer, StaticlNameSpace);
 			writer.Close();
 			AssetDatabase.Refresh();
 		}

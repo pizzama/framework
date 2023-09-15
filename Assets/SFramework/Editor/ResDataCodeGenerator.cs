@@ -3,9 +3,9 @@ using System.IO;
 using System.CodeDom.Compiler;
 using Microsoft.CSharp;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using SFramework.Tools;
 
 namespace SFramework
 {
@@ -87,23 +87,6 @@ namespace SFramework
             };
 
             provider.GenerateCodeFromCompileUnit(compileUnit, writer, options);
-        }
-
-        static string RemoveInvalidateChars(this string name)
-        {
-            return name.Replace("/", "")
-                .Replace("@", "")
-                .Replace("!", "")
-                .Replace(" ", "_")
-                .Replace("__", "_")
-                .Replace("__", "_")
-                .Replace("__", "_")
-                .Replace("&", "")
-                .Replace("-", "")
-                .Replace("(", "")
-                .Replace(")", "")
-                .Replace("#", "")
-                .Replace(".", "_");
         }
     }
 }
