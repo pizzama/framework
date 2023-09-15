@@ -11,6 +11,7 @@ namespace SFramework
 	{
 		private const string StaticlNameSpace = "SFramework.Statics";
 		private const string Mark_AssetBundle = "Assets/SFramework/AssetBundle Folder";
+		private const string StaticClassName = "SFResAssets";
 
 		[MenuItem(Mark_AssetBundle)]
 		public static void MarkPTABDir()
@@ -46,7 +47,7 @@ namespace SFramework
         {
 			var path = Path.GetFullPath(Application.dataPath + Path.DirectorySeparatorChar + "SFStaticAsset");
 			if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-			path = path + "/SFAssets.cs";
+			path = path + "/" + StaticClassName + ".cs";
 			var writer = new StreamWriter(File.Open(path, FileMode.Create));
 			ResDataCodeGenerator.WriteClass(writer, StaticlNameSpace);
 			writer.Close();
