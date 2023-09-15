@@ -63,6 +63,7 @@ namespace SFramework
                     { Attributes = MemberAttributes.Const | MemberAttributes.Public };
 
                     var content = Path.GetFileName(asset);
+                    var noContent = Path.GetFileNameWithoutExtension(asset);
                     assetField.Name = content.RemoveInvalidateChars();
 
                     assetField.Type = new CodeTypeReference(typeof(System.String));
@@ -73,7 +74,7 @@ namespace SFramework
                         codeType.Members.Add(assetField);
                     }
 
-                    assetField.InitExpression = new CodePrimitiveExpression(content);
+                    assetField.InitExpression = new CodePrimitiveExpression(noContent);
                 }
 
                 checkRepeatDict.Clear();
