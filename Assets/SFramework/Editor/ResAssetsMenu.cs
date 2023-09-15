@@ -40,7 +40,7 @@ namespace SFramework
 			WriteDataConfig();
 			AssetDatabase.Refresh();
 			AssetDatabase.RemoveUnusedAssetBundleNames();
-			Debug.Log("设置标记成功...");
+			Debug.Log("bundle setting over...");
 		}
 
 		private static void WriteDataConfig()

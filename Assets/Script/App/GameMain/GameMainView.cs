@@ -1,9 +1,7 @@
-using Cysharp.Threading.Tasks;
 using SFramework;
 using SFramework.Game;
-using SFramework.Tools;
-using System.Collections.Generic;
 using UnityEngine;
+using SFramework.Statics;
 
 namespace Game
 {
@@ -44,12 +42,12 @@ namespace Game
             //Debug.Log("gamemainview loading finish");
             Control.OpenControl("Game.NormalLoadingControl", "End");
 
-            Texture tx = assetManager.LoadResource<Texture>("pic", "haipa");
+            Texture tx = assetManager.LoadResource<Texture>(Pic_sf.BundleName, Pic_sf.haipa_png);
             Debug.Log(tx);
 
             Transform ga = getSceneObject<Transform>("Env");
 
-            GameObject aa = CreateGameObjectUsingPool("model/avatar", "Role_CarrotA_Skin.sf");
+            GameObject aa = CreateGameObjectUsingPool(Modelavatar_sf.BundleName, Modelavatar_sf.Role_CarrotA_Skin_prefab);
             Debug.Log(aa);
         }
     }
