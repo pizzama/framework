@@ -22,7 +22,7 @@ namespace SFramework.Game
 
         protected GameObject CreateGameObjectUsingPool(string abName, string resName, float lifeTime = -1)
         {
-            UnityEngine.GameObject prefab = assetManager.LoadResource<UnityEngine.GameObject>(abName, resName);
+            UnityEngine.GameObject prefab = assetManager.LoadFromBundle<UnityEngine.GameObject>(abName, resName);
             string poolName = assetManager.FullPath(abName, resName);
             return poolManager.Request<ListGameObjectPool>(poolName, prefab, lifeTime);
 

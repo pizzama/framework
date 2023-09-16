@@ -26,7 +26,7 @@ namespace SFramework
             _cache = new Dictionary<string, UnityEngine.Object>();
         }
 
-        public T LoadResource<T>(string path) where T : UnityEngine.Object
+        public T LoadFromResources<T>(string path) where T : UnityEngine.Object
         {
             if (_cache.ContainsKey(path))
             {
@@ -43,7 +43,7 @@ namespace SFramework
             }
         }
 
-        public async UniTask<T> LoadResourceAsync<T>(string path) where T : UnityEngine.Object
+        public async UniTask<T> LoadFromResourcesAsync<T>(string path) where T : UnityEngine.Object
         {
             if (_cache.ContainsKey(path))
             {
@@ -61,7 +61,21 @@ namespace SFramework
             }
         }
 
-        public T LoadResource<T>(string abName, string resName) where T : UnityEngine.Object
+        public T LoadFromBundle<T>(string path) where T : UnityEngine.Object
+        {
+            int index = path.LastIndexOf("/");
+            if(index > 0)
+            {
+                string abName = path.Substring(0, index);
+                string resName = path.Substring(index - 1, path.Length - index - 1);
+                return LoadFromBundle<T>(abName, resName);
+            }
+
+            return default;
+            
+        }
+
+        public T LoadFromBundle<T>(string abName, string resName) where T : UnityEngine.Object
         {
             abName = abName.ToLower();
             if (_cache.ContainsKey(abName))
@@ -79,16 +93,30 @@ namespace SFramework
             }
         }
 
-        public T LoadResource<T>(string abName, string resName, string variantName) where T : UnityEngine.Object
+        public T LoadFromBundle<T>(string abName, string resName, string variantName) where T : UnityEngine.Object
         {
             abName = (abName + variantName).ToLower();
             string path = FullPath(abName, resName);
 
-            return LoadResource<T>(path, resName);
+            return LoadFromBundle<T>(path, resName);
             
         }
 
-        public async UniTask<T> LoadResourceAsync<T>(string abName, string resName, CancellationToken token = default) where T : UnityEngine.Object
+        public async UniTask<T> LoadFromBundleAsync<T>(string path) where T : UnityEngine.Object
+        {
+            int index = path.LastIndexOf("/");
+            if(index > 0)
+            {
+                string abName = path.Substring(0, index);
+                string resName = path.Substring(index - 1, path.Length - index - 1);
+                return await LoadFromBundleAsync<T>(abName, resName);
+            }
+
+            return default;
+        }
+
+
+        public async UniTask<T> LoadFromBundleAsync<T>(string abName, string resName, CancellationToken token = default) where T : UnityEngine.Object
         {
             abName = abName.ToLower();
             if (_cache.ContainsKey(abName))
@@ -106,12 +134,12 @@ namespace SFramework
             }
         }
 
-        public async UniTask<T> LoadResourceAsync<T>(string abName, string resName, string variantName, CancellationToken token = default) where T : UnityEngine.Object
+        public async UniTask<T> LoadFromBundleAsync<T>(string abName, string resName, string variantName, CancellationToken token = default) where T : UnityEngine.Object
         {
             abName = (abName + variantName).ToLower();
             string path = FullPath(abName, resName);
 
-            return await LoadResourceAsync<T>(path, resName, token);
+            return await LoadFromBundleAsync<T>(path, resName, token);
         }
 
         public byte[] LoadData(string path)

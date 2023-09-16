@@ -77,7 +77,7 @@ namespace SFramework.Game
             if (!_buildInSceneNames.Contains(scenePath))
             {
                 //load scene from ab bundle
-                UnityEngine.Object request = await assetManager.LoadResourceAsync<UnityEngine.Object>(scenePath, sceneName);
+                UnityEngine.Object request = await assetManager.LoadFromBundleAsync<UnityEngine.Object>(scenePath, sceneName);
                 if (request != null)
                 {
 #if UNITY_EDITOR

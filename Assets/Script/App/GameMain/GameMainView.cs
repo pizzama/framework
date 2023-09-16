@@ -42,7 +42,7 @@ namespace Game
             //Debug.Log("gamemainview loading finish");
             Control.OpenControl("Game.NormalLoadingControl", "End");
 
-            Texture tx = assetManager.LoadResource<Texture>(Pic_sf.BundleName, Pic_sf.haipa_png);
+            Texture tx = assetManager.LoadFromBundle<Texture>(Pic_sf.BundleName, Pic_sf.haipa_png);
             Debug.Log(tx);
 
             Transform ga = getSceneObject<Transform>("Env");

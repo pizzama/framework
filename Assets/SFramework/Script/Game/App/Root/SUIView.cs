@@ -8,7 +8,7 @@ namespace SFramework.Game
 {
     public abstract class SUIView : RootView
     {
-        private const string UIPOOLNAME = "UI";
+        private const string defaultVariantName = "sf";
         //set the ui in which layer
         protected abstract UILayer GetViewLayer();
         protected Dictionary<string, GameObject> goDict;
@@ -68,7 +68,7 @@ namespace SFramework.Game
             Type tp = GetType();
             string path = tp.FullName;
             path = path.Replace('.', '/');
-            prefabPath = path;
+            prefabPath = path + "." + defaultVariantName;
             prefabName = tp.Name;
             position = new Vector3(0, 0, 0);
             rotation = Quaternion.Euler(0, 0, 0);
@@ -81,7 +81,7 @@ namespace SFramework.Game
 
             if (!string.IsNullOrEmpty(mAbName))
             {
-                GameObject prefab = assetManager.LoadResource<GameObject>(mAbName, mResName);
+                GameObject prefab = assetManager.LoadFromBundle<GameObject>(mAbName, mResName);
                 if(prefab == null)
                     throw new NotFoundException("not found uiview prefab:" + mAbName + ";" + mResName);
                 string fullPath = assetManager.FullPath(mAbName, mResName);
