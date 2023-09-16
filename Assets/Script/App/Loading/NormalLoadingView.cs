@@ -1,7 +1,7 @@
-using Cysharp.Threading.Tasks;
 using SFramework.Game;
 using SFramework;
 using UnityEngine;
+using SFramework.Statics;
 
 namespace Game
 {
@@ -19,8 +19,8 @@ namespace Game
 
         protected override void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
         {
-            prefabPath = "Loading/BaseLoading";
-            prefabName = "BaseLoading";
+            prefabPath = Loading_sf.BundleName; //"Loading/BaseLoading";
+            prefabName = Loading_sf.BaseLoading_prefab;
             position = new Vector3(0, 0, 0);
             rotation = Quaternion.Euler(0, 0, 0);
         }

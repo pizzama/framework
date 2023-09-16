@@ -61,42 +61,57 @@ namespace SFramework
             }
         }
 
-        public T LoadResource<T>(string abName, string resName, string variantName = "sf") where T : UnityEngine.Object
+        public T LoadResource<T>(string abName, string resName) where T : UnityEngine.Object
         {
-            abName = (abName + variantName).ToLower();
-            string path = FullPath(abName, resName);
-            if (_cache.ContainsKey(path))
+            abName = abName.ToLower();
+            if (_cache.ContainsKey(abName))
             {
-                return (T)_cache[path];
+                return (T)_cache[abName];
             }
             else
             {
                 T t = ABManager.Instance.LoadResource<T>(abName, resName);
                 if (t != null)
                 {
-                    _cache[path] = t;
+                    _cache[abName] = t;
                 }
                 return t;
             }
         }
 
-        public async UniTask<T> LoadResourceAsync<T>(string abName, string resName, string variantName = "sf", CancellationToken token = default) where T : UnityEngine.Object
+        public T LoadResource<T>(string abName, string resName, string variantName) where T : UnityEngine.Object
         {
             abName = (abName + variantName).ToLower();
             string path = FullPath(abName, resName);
-            if (_cache.ContainsKey(path))
+
+            return LoadResource<T>(path, resName);
+            
+        }
+
+        public async UniTask<T> LoadResourceAsync<T>(string abName, string resName, CancellationToken token = default) where T : UnityEngine.Object
+        {
+            abName = abName.ToLower();
+            if (_cache.ContainsKey(abName))
             {
-                return (T)_cache[path];
+                return (T)_cache[abName];
             }
             else
             {
                 T t = await ABManager.Instance.LoadResourceAsync<T>(abName, resName, token);
                 if (t != null)
                 {
-                    _cache[path] = t;
+                    _cache[abName] = t;
                 }
                 return t;
             }
+        }
+
+        public async UniTask<T> LoadResourceAsync<T>(string abName, string resName, string variantName, CancellationToken token = default) where T : UnityEngine.Object
+        {
+            abName = (abName + variantName).ToLower();
+            string path = FullPath(abName, resName);
+
+            return await LoadResourceAsync<T>(path, resName, token);
         }
 
         public byte[] LoadData(string path)

@@ -21,7 +21,7 @@ namespace Game
         protected override void opening()
         {
             //open loading ui
-            Control.OpenControl("Game.NormalLoadingControl", "Start");
+            Control.OpenControl(SFStaticsControl.Game_NormalLoadingControl, "Start");
         }
 
         //if you need control the loading progress you will override the method
