@@ -67,7 +67,7 @@ namespace SFramework
             if(index > 0)
             {
                 string abName = path.Substring(0, index);
-                string resName = path.Substring(index - 1, path.Length - index - 1);
+                string resName = path.Substring(index + 1, path.Length - index - 1);
                 return LoadFromBundle<T>(abName, resName);
             }
 
@@ -108,7 +108,7 @@ namespace SFramework
             if(index > 0)
             {
                 string abName = path.Substring(0, index);
-                string resName = path.Substring(index - 1, path.Length - index - 1);
+                string resName = path.Substring(index + 1, path.Length - index - 1);
                 return await LoadFromBundleAsync<T>(abName, resName);
             }
 
