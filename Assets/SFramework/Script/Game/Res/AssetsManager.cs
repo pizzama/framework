@@ -20,24 +20,26 @@ namespace SFramework
             }
         }
 
-        private Dictionary<string, UnityEngine.Object> _cache;
+        private Dictionary<string, UnityEngine.Object> _resCache;
+        private SMemory<string, string, UnityEngine.Object> _bundleCache;
         private AssetsManager()
         {
-            _cache = new Dictionary<string, UnityEngine.Object>();
+            _resCache = new Dictionary<string, UnityEngine.Object>();
+            _bundleCache = new SMemory<string, string, UnityEngine.Object>();
         }
 
         public T LoadFromResources<T>(string path) where T : UnityEngine.Object
         {
-            if (_cache.ContainsKey(path))
+            if (_resCache.ContainsKey(path))
             {
-                return (T)_cache[path];
+                return (T)_resCache[path];
             }
             else
             {
                 T t = Resources.Load<T>(path);
                 if (t != null)
                 {
-                    _cache[path] = t;
+                    _resCache[path] = t;
                 }
                 return t;
             }
@@ -45,9 +47,9 @@ namespace SFramework
 
         public async UniTask<T> LoadFromResourcesAsync<T>(string path) where T : UnityEngine.Object
         {
-            if (_cache.ContainsKey(path))
+            if (_resCache.ContainsKey(path))
             {
-                return (T)_cache[path];
+                return (T)_resCache[path];
             }
             else
             {
@@ -55,7 +57,7 @@ namespace SFramework
                 T t = await asyncOperation as T;
                 if (t != null)
                 {
-                    _cache[path] = t;
+                    _resCache[path] = t;
                 }
                 return t;
             }
@@ -78,16 +80,16 @@ namespace SFramework
         public T LoadFromBundle<T>(string abName, string resName) where T : UnityEngine.Object
         {
             abName = abName.ToLower();
-            if (_cache.ContainsKey(abName))
+            if (_bundleCache.GetValue(abName, resName))
             {
-                return (T)_cache[abName];
+                return (T)_bundleCache.GetValue(abName, resName);
             }
             else
             {
                 T t = ABManager.Instance.LoadResource<T>(abName, resName);
                 if (t != null)
                 {
-                    _cache[abName] = t;
+                    _bundleCache.SetValue(abName, resName, t);
                 }
                 return t;
             }
@@ -119,16 +121,16 @@ namespace SFramework
         public async UniTask<T> LoadFromBundleAsync<T>(string abName, string resName, CancellationToken token = default) where T : UnityEngine.Object
         {
             abName = abName.ToLower();
-            if (_cache.ContainsKey(abName))
+            if (_bundleCache.GetValue(abName, resName))
             {
-                return (T)_cache[abName];
+                return (T)_bundleCache.GetValue(abName, resName);
             }
             else
             {
                 T t = await ABManager.Instance.LoadResourceAsync<T>(abName, resName, token);
                 if (t != null)
                 {
-                    _cache[abName] = t;
+                    _bundleCache.SetValue(abName, resName, t);
                 }
                 return t;
             }

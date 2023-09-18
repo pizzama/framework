@@ -27,5 +27,18 @@ namespace SFramework.Game
             return poolManager.Request<ListGameObjectPool>(poolName, prefab, lifeTime);
 
         }
+
+        protected GameObject CreateGameObjectUsingPool(string path, float lifeTime = -1)
+        {
+            int index = path.LastIndexOf("/");
+            if(index > 0)
+            {
+                string abName = path.Substring(0, index);
+                string resName = path.Substring(index + 1, path.Length - index - 1);
+                return CreateGameObjectUsingPool(abName, resName, lifeTime);
+            }
+
+            return null;
+        }
     }
 }
