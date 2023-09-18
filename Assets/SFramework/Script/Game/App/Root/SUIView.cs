@@ -66,7 +66,7 @@ namespace SFramework.Game
         protected virtual void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
         {
             Type tp = GetType();
-            string path = tp.FullName;
+            string path = tp.Namespace;
             path = path.Replace('.', '/');
             prefabPath = path + "." + defaultVariantName;
             prefabName = tp.Name;

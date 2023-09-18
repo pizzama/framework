@@ -114,8 +114,13 @@ namespace SFramework
 			if (bundlePath.Contains("/"))
 			{
 				string[] tmp = bundlePath.Split('/');
+				string all = sceneName;
+				for (int i = 0; i < tmp.Length - 1; i++)
+				{
+					all += "/" + tmp[i];
+				}
 
-				return sceneName + "/" + tmp[0];
+				return all;
 			}
 			return sceneName;
 		}

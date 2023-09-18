@@ -19,10 +19,8 @@ public class SFGridGenerate : MonoBehaviour
     {
         if (_grid != null)
         {
-            Debug.Log(_grid.Hexes.Count);
             foreach (SFVertexHex vertex in _grid.Hexes)
             {
-                Debug.Log(vertex.Coord.ToString());
                 Gizmos.DrawSphere(vertex.Coord.CaculateWorldPosition(SFGrid.CellSize), 0.3f);    
             }
         }
