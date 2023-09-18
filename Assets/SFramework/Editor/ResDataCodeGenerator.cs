@@ -11,7 +11,7 @@ namespace SFramework
 {
     public static class ResDataCodeGenerator
     {
-        public static void WriteClass(TextWriter writer, string ns)
+        public static void WriteClass(TextWriter writer, string ns, string publicClassName)
         {
             var assetBundleInfos = new Dictionary<string, string[]>();
 
@@ -30,6 +30,10 @@ namespace SFramework
             var compileUnit = new CodeCompileUnit();
             var codeNamespace = new CodeNamespace(ns);
             compileUnit.Namespaces.Add(codeNamespace);
+
+            //create public class
+            var publicCodeType = new CodeTypeDeclaration(publicClassName);
+            codeNamespace.Types.Add(publicCodeType);
 
             foreach (var assetBundleInfo in assetBundleInfos)
             {
@@ -75,6 +79,13 @@ namespace SFramework
                     }
 
                     assetField.InitExpression = new CodePrimitiveExpression(noContent);
+
+                    //define public memebers
+                    var pubAssetField = new CodeMemberField { Attributes = MemberAttributes.Const | MemberAttributes.Public };
+                    pubAssetField.Type = new CodeTypeReference(typeof(System.String));
+                    pubAssetField.Name = className + "_" + content.RemoveInvalidateChars();
+                    pubAssetField.InitExpression = new CodePrimitiveExpression(bundleName.ToLowerInvariant() + "/" + noContent);
+                    publicCodeType.Members.Add(pubAssetField);
                 }
 
                 checkRepeatDict.Clear();

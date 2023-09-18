@@ -11,6 +11,77 @@
 namespace SFramework.Statics
 {
     
+    public class SFResAssets
+    {
+        public const string Activity_btn_arrow_activity_btn_arrow_png = "activity_btn_arrow/activity_btn_arrow";
+        public const string Battle_sf_ArrowBody_prefab = "battle.sf/ArrowBody";
+        public const string Battle_sf_ArrowHead_prefab = "battle.sf/ArrowHead";
+        public const string Battle_sf_BattleView_prefab = "battle.sf/BattleView";
+        public const string Loading_sf_BarLoading_overrideController = "loading.sf/BarLoading";
+        public const string Loading_sf_BarLoading_prefab = "loading.sf/BarLoading";
+        public const string Loading_sf_BarLoadingEnd_anim = "loading.sf/BarLoadingEnd";
+        public const string Loading_sf_BarLoadingStart_anim = "loading.sf/BarLoadingStart";
+        public const string Loading_sf_BaseLoading_controller = "loading.sf/BaseLoading";
+        public const string Loading_sf_BaseLoading_prefab = "loading.sf/BaseLoading";
+        public const string Loading_sf_effect_jpg = "loading.sf/effect";
+        public const string Loading_sf_effect1_png = "loading.sf/effect1";
+        public const string Loading_sf_GameMainView_prefab = "loading.sf/GameMainView";
+        public const string Loading_sf_LoadingEnd_anim = "loading.sf/LoadingEnd";
+        public const string Loading_sf_LoadingStart_anim = "loading.sf/LoadingStart";
+        public const string Modelavatar_sf_Role_CarrotA_Appearance_FBX = "model/avatar.sf/Role_CarrotA_Appearance";
+        public const string Modelavatar_sf_Role_CarrotA_EatingIdle_FBX = "model/avatar.sf/Role_CarrotA_EatingIdle";
+        public const string Modelavatar_sf_Role_CarrotA_falldown_fbx = "model/avatar.sf/Role_CarrotA_falldown";
+        public const string Modelavatar_sf_Role_CarrotA_Feedback_fbx = "model/avatar.sf/Role_CarrotA_Feedback";
+        public const string Modelavatar_sf_Role_CarrotA_happy02_fbx = "model/avatar.sf/Role_CarrotA_happy02";
+        public const string Modelavatar_sf_Role_CarrotA_retreat_fbx = "model/avatar.sf/Role_CarrotA_retreat";
+        public const string Modelavatar_sf_Role_CarrotA_Story_Angry_FBX = "model/avatar.sf/Role_CarrotA_Story_Angry";
+        public const string Modelavatar_sf_Role_CarrotA_Story_Depressed_fbx = "model/avatar.sf/Role_CarrotA_Story_Depressed";
+        public const string Modelavatar_sf_Role_CarrotA_Story_Feedback_fbx = "model/avatar.sf/Role_CarrotA_Story_Feedback";
+        public const string Modelavatar_sf_Role_CarrotA_Story_Happy_fbx = "model/avatar.sf/Role_CarrotA_Story_Happy";
+        public const string Modelavatar_sf_Role_CarrotA_Story_Run_FBX = "model/avatar.sf/Role_CarrotA_Story_Run";
+        public const string Modelavatar_sf_Role_CarrotA_Story_Serious_FBX = "model/avatar.sf/Role_CarrotA_Story_Serious";
+        public const string Modelavatar_sf_Role_CarrotA_Story_Surprised_FBX = "model/avatar.sf/Role_CarrotA_Story_Surprised";
+        public const string Modelavatar_sf_Role_CarrotA_Story_Talk01_FBX = "model/avatar.sf/Role_CarrotA_Story_Talk01";
+        public const string Modelavatar_sf_Role_CarrotA_Story_Talk02_FBX = "model/avatar.sf/Role_CarrotA_Story_Talk02";
+        public const string Modelavatar_sf_Role_CarrotA_Story_Walk_FBX = "model/avatar.sf/Role_CarrotA_Story_Walk";
+        public const string Modelavatar_sf_Role_CarrotA_work_stone_FBX = "model/avatar.sf/Role_CarrotA_work_stone";
+        public const string Modelavatar_sf_Role_CarrotA_work_wood_FBX = "model/avatar.sf/Role_CarrotA_work_wood";
+        public const string Modelavatar_sf_Role_CarrotA_Attack_FBX = "model/avatar.sf/Role_CarrotA_Attack";
+        public const string Modelavatar_sf_Role_CarrotA_CasualState_FBX = "model/avatar.sf/Role_CarrotA_CasualState";
+        public const string Modelavatar_sf_Role_CarrotA_eat_fbx = "model/avatar.sf/Role_CarrotA_eat";
+        public const string Modelavatar_sf_Role_CarrotA_Hit_FBX = "model/avatar.sf/Role_CarrotA_Hit";
+        public const string Modelavatar_sf_Role_CarrotA_IdleState_FBX = "model/avatar.sf/Role_CarrotA_IdleState";
+        public const string Modelavatar_sf_Role_CarrotA_MoveState_FBX = "model/avatar.sf/Role_CarrotA_MoveState";
+        public const string Modelavatar_sf_Role_CarrotA_Skill_FBX = "model/avatar.sf/Role_CarrotA_Skill";
+        public const string Modelavatar_sf_Role_CarrotA_vertigo_fbx = "model/avatar.sf/Role_CarrotA_vertigo";
+        public const string Modelavatar_sf_Role_CarrotA_work_Cave_fbx = "model/avatar.sf/Role_CarrotA_work_Cave";
+        public const string Modelavatar_sf_Role_CarrotA_yuanditiao_fbx = "model/avatar.sf/Role_CarrotA_yuanditiao";
+        public const string Modelavatar_sf_Carrot_BaseColor_mat = "model/avatar.sf/Carrot_BaseColor";
+        public const string Modelavatar_sf_Carrot_BaseColor_png = "model/avatar.sf/Carrot_BaseColor";
+        public const string Modelavatar_sf_Role_mat = "model/avatar.sf/Role";
+        public const string Modelavatar_sf_Role_CarrotA_controller = "model/avatar.sf/Role_CarrotA";
+        public const string Modelavatar_sf_Role_CarrotA_Skin_FBX = "model/avatar.sf/Role_CarrotA_Skin";
+        public const string Modelavatar_sf_Role_CarrotA_Skin_prefab = "model/avatar.sf/Role_CarrotA_Skin";
+        public const string Modelmaterial_sf_DirectionDissolve_shadergraph = "model/material.sf/DirectionDissolve";
+        public const string Modelmaterial_sf_HoloGraphic_shadergraph = "model/material.sf/HoloGraphic";
+        public const string Modelmaterial_sf_RimPower_shadergraph = "model/material.sf/RimPower";
+        public const string Modelmaterial_sf_Role_shadergraph = "model/material.sf/Role";
+        public const string Modelmaterial_sf_RoleBlinn_shader = "model/material.sf/RoleBlinn";
+        public const string Modelmaterial_sf_RoleBlinnPhong_shader = "model/material.sf/RoleBlinnPhong";
+        public const string Modelmaterial_sf_SimpleDissolve_shadergraph = "model/material.sf/SimpleDissolve";
+        public const string Modelmaterial_sf_Test_shader = "model/material.sf/Test";
+        public const string Pic_sf_haipa_png = "pic.sf/haipa";
+        public const string Pic_sf_haipa_normal_png = "pic.sf/haipa_normal";
+        public const string Pic_sf_jusang_png = "pic.sf/jusang";
+        public const string Scenesbasescene_BaseScene_unity = "scenes/basescene/BaseScene";
+        public const string Sstest_Test_prefab = "ss/test/Test";
+        public const string Texture_sf_Grass_mat = "texture.sf/Grass";
+        public const string Texture_sf_grass_png = "texture.sf/grass";
+        public const string Textureeffect_sf_FlashCard_mat = "texture/effect.sf/FlashCard";
+        public const string Textureeffect_sf_FlashCard_shader = "texture/effect.sf/FlashCard";
+        public const string Textureeffect_sf_FlashCard1_mat = "texture/effect.sf/FlashCard1";
+        public const string Textureeffect_sf_FlashCard1_shader = "texture/effect.sf/FlashCard1";
+    }
     public class Activity_btn_arrow
     {
         public const string BundleName = "activity_btn_arrow";
@@ -26,14 +97,6 @@ namespace SFramework.Statics
         public const string ArrowBody_prefab = "ArrowBody";
         public const string ArrowHead_prefab = "ArrowHead";
         public const string BattleView_prefab = "BattleView";
-    }
-    public class Effect_sf
-    {
-        public const string BundleName = "effect.sf";
-        public const string FlashCard_mat = "FlashCard";
-        public const string FlashCard_shader = "FlashCard";
-        public const string FlashCard1_mat = "FlashCard1";
-        public const string FlashCard1_shader = "FlashCard1";
     }
     public class Loading_sf
     {
@@ -116,5 +179,19 @@ namespace SFramework.Statics
     {
         public const string BundleName = "ss/test";
         public const string Test_prefab = "Test";
+    }
+    public class Texture_sf
+    {
+        public const string BundleName = "texture.sf";
+        public const string Grass_mat = "Grass";
+        public const string grass_png = "grass";
+    }
+    public class Textureeffect_sf
+    {
+        public const string BundleName = "texture/effect.sf";
+        public const string FlashCard_mat = "FlashCard";
+        public const string FlashCard_shader = "FlashCard";
+        public const string FlashCard1_mat = "FlashCard1";
+        public const string FlashCard1_shader = "FlashCard1";
     }
 }

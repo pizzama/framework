@@ -12,6 +12,7 @@ namespace SFramework
 		private const string StaticlNameSpace = "SFramework.Statics";
 		private const string Mark_AssetBundle = "Assets/SFramework/AssetBundle Folder";
 		private const string StaticClassName = "SFResAssets";
+		private const string StaticPath = "SFStaticAsset";
 
 		[MenuItem(Mark_AssetBundle)]
 		public static void MarkPTABDir()
@@ -45,39 +46,15 @@ namespace SFramework
 
 		private static void WriteDataConfig()
         {
-			var path = Path.GetFullPath(Application.dataPath + Path.DirectorySeparatorChar + "SFStaticAsset");
+			var path = Path.GetFullPath(Application.dataPath + Path.DirectorySeparatorChar + StaticPath);
 			if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 			path = path + "/" + StaticClassName + ".cs";
 			var writer = new StreamWriter(File.Open(path, FileMode.Create));
-			ResDataCodeGenerator.WriteClass(writer, StaticlNameSpace);
+			ResDataCodeGenerator.WriteClass(writer, StaticlNameSpace, StaticClassName);
 			writer.Close();
 			AssetDatabase.Refresh();
 		}
 
-		/// <summary>
-		/// ¼ÇÂ¼ÅäÖÃÎÄ¼þ
-		/// </summary>
-		/// <param name="sceneDirectory"></param>
-		/// <param name="namePathDictionary"></param>
-		private static void OnWriteConfig(string sceneName, Dictionary<string, string> namePathDictionary)
-		{
-			string path = Application.dataPath + "/AssetBundles/" + sceneName;
-
-			if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-			Debug.Log(path);
-			using (FileStream fs = new FileStream(path + "/Record.txt", FileMode.OpenOrCreate, FileAccess.Write))
-			{
-				using (StreamWriter sw = new StreamWriter(fs))
-				{
-					sw.WriteLine(namePathDictionary.Count);
-					foreach (KeyValuePair<string, string> kv in namePathDictionary)
-					{
-						Debug.Log(kv.Value);
-						sw.WriteLine(kv.Key + "/" + kv.Value);
-					}
-				}
-			}
-		}
 
 		private static void OnSceneFileSystemInfo(FileSystemInfo fileSystemInfo, string sceneNama, Dictionary<string, string> namePathDictionary)
 		{
