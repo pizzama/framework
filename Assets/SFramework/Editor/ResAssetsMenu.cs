@@ -91,10 +91,10 @@ namespace SFramework
 			string assetPath = fileInfo.FullName.Substring(index);
 			AssetImporter assetImporter = AssetImporter.GetAtPath(assetPath);
 			assetImporter.assetBundleName = bundleName;
-			if (fileInfo.Extension == ".unity")
-				assetImporter.assetBundleVariant = "u3d";
-			else
-				assetImporter.assetBundleVariant = "sf";
+            //if (fileInfo.Extension == ".unity")
+            //    assetImporter.assetBundleVariant = "u3d";
+            //else
+            assetImporter.assetBundleVariant = "sf";
 			string folderName;
 			if (bundleName.Contains("/"))
 				folderName = bundleName.Split('/')[1];

@@ -14,8 +14,8 @@ namespace Game
 
         protected override void SetViewPrefabPath(out string prefabPath, out string prefabName)
         {
-            prefabPath = "Scenes/BaseScene";
-            prefabName = "BaseScene";
+            prefabPath = Scenes_sf.BundleName;
+            prefabName = Scenes_sf.BaseScene_unity;
         }
 
         protected override void opening()

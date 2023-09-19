@@ -44,7 +44,7 @@ namespace SFramework.Tools
 
         public static string RemoveInvalidateChars(this string name)
         {
-            return name.Replace("/", "")
+            return name.Replace("/", "_")
                 .Replace("@", "")
                 .Replace("!", "")
                 .Replace(" ", "_")
