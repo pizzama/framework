@@ -17,6 +17,8 @@ namespace SFramework.Statics
         public const string Battle_sf_ArrowBody_prefab = "battle.sf/ArrowBody";
         public const string Battle_sf_ArrowHead_prefab = "battle.sf/ArrowHead";
         public const string Battle_sf_BattleView_prefab = "battle.sf/BattleView";
+        public const string Game_scenes_sf_BaseScene_unity = "game/scenes.sf/BaseScene";
+        public const string Game_scenes_sf_BattleView_unity = "game/scenes.sf/BattleView";
         public const string Loading_sf_BarLoading_overrideController = "loading.sf/BarLoading";
         public const string Loading_sf_BarLoading_prefab = "loading.sf/BarLoading";
         public const string Loading_sf_BarLoadingEnd_anim = "loading.sf/BarLoadingEnd";
@@ -80,8 +82,6 @@ namespace SFramework.Statics
         public const string Pic_tree_sf_5104413_png = "pic/tree.sf/5104413";
         public const string Pic_tree_sf_5103524_mat = "pic/tree.sf/5103524";
         public const string Pic_tree_sf_5104413_mat = "pic/tree.sf/5104413";
-        public const string Scenes_sf_BaseScene_unity = "scenes.sf/BaseScene";
-        public const string Scenes_sf_BattleView_unity = "scenes.sf/BattleView";
         public const string Ss_test_Test_prefab = "ss/test/Test";
         public const string Texture_sf_Grass_mat = "texture.sf/Grass";
         public const string Texture_sf_grass_png = "texture.sf/grass";
@@ -105,6 +105,12 @@ namespace SFramework.Statics
         public const string RES_ArrowBody_prefab = "ArrowBody";
         public const string RES_ArrowHead_prefab = "ArrowHead";
         public const string RES_BattleView_prefab = "BattleView";
+    }
+    public class Game_scenes_sf
+    {
+        public const string BundleName = "game/scenes.sf";
+        public const string RES_BaseScene_unity = "BaseScene";
+        public const string RES_BattleView_unity = "BattleView";
     }
     public class Loading_sf
     {
@@ -188,12 +194,6 @@ namespace SFramework.Statics
         public const string RES_5104413_png = "5104413";
         public const string RES_5103524_mat = "5103524";
         public const string RES_5104413_mat = "5104413";
-    }
-    public class Scenes_sf
-    {
-        public const string BundleName = "scenes.sf";
-        public const string RES_BaseScene_unity = "BaseScene";
-        public const string RES_BattleView_unity = "BattleView";
     }
     public class Ss_test
     {

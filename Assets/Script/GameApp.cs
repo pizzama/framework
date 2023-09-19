@@ -7,21 +7,23 @@ namespace Game
 {
     public class GameApp : GameLauncher
     {
-         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)] //not load unity logo
-        // [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        // private static void Initialize()
-        // {
-        //     Scene scene = SceneManager.GetActiveScene();
-        //     if (!scene.name.Equals("Persistent"))
-        //     {
-        //         SceneManager.LoadScene("Persistent");
-        //     }
-        // }
+        //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)] //not load unity logo
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void Initialize()
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            if (!scene.name.Equals("Persistent"))
+            {
+                SceneManager.LoadScene("Persistent");
+            }
+        }
+
         protected override void installBundle()
         {
             // BundleManager.Instance.InstallBundle(new GameMainControl(), "", true);
             initAllControl();
             //BundleManager.Instance.OpenControl(SFStaticsControl.Game_GameMainControl);
+            BundleManager.Instance.OpenControl(SFStaticsControl.Game_Scenes_BattleControl);
         }
     }
 }

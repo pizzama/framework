@@ -1,7 +1,7 @@
 using SFramework.Game;
 using UnityEngine;
 
-namespace Game
+namespace Game.Scenes
 {
     public class BattleModel : RootModel
     {

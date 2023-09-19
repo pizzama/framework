@@ -1,8 +1,7 @@
-using Cysharp.Threading.Tasks;
 using SFramework;
 using UnityEngine;
 
-namespace Game
+namespace Game.Scenes
 {
     public class BattleControl : SControl
     {
