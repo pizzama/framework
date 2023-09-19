@@ -15,7 +15,7 @@ namespace Game
         protected override void SetViewPrefabPath(out string prefabPath, out string prefabName)
         {
             prefabPath = Scenes_sf.BundleName;
-            prefabName = Scenes_sf.BaseScene_unity;
+            prefabName = Scenes_sf.RES_BaseScene_unity;
         }
 
         protected override void opening()
@@ -47,8 +47,8 @@ namespace Game
 
             Transform ga = getSceneObject<Transform>("Env");
 
-            GameObject aa = CreateGameObjectUsingPool(Modelavatar_sf.BundleName, Modelavatar_sf.Role_CarrotA_Skin_prefab);
-            Debug.Log(aa);
+            //GameObject aa = CreateGameObjectUsingPool(Modelavatar_sf.BundleName, Modelavatar_sf.Role_CarrotA_Skin_prefab);
+            //Debug.Log(aa);
         }
     }
 }

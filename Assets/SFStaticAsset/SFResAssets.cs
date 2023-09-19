@@ -81,6 +81,7 @@ namespace SFramework.Statics
         public const string Pic_tree_sf_5103524_mat = "pic/tree.sf/5103524";
         public const string Pic_tree_sf_5104413_mat = "pic/tree.sf/5104413";
         public const string Scenes_sf_BaseScene_unity = "scenes.sf/BaseScene";
+        public const string Scenes_sf_BattleView_unity = "scenes.sf/BattleView";
         public const string Ss_test_Test_prefab = "ss/test/Test";
         public const string Texture_sf_Grass_mat = "texture.sf/Grass";
         public const string Texture_sf_grass_png = "texture.sf/grass";
@@ -92,7 +93,7 @@ namespace SFramework.Statics
     public class Activity_btn_arrow
     {
         public const string BundleName = "activity_btn_arrow";
-        public const string activity_btn_arrow_png = "activity_btn_arrow";
+        public const string RES_activity_btn_arrow_png = "activity_btn_arrow";
     }
     public class Arts
     {
@@ -101,119 +102,116 @@ namespace SFramework.Statics
     public class Battle_sf
     {
         public const string BundleName = "battle.sf";
-        public const string ArrowBody_prefab = "ArrowBody";
-        public const string ArrowHead_prefab = "ArrowHead";
-        public const string BattleView_prefab = "BattleView";
+        public const string RES_ArrowBody_prefab = "ArrowBody";
+        public const string RES_ArrowHead_prefab = "ArrowHead";
+        public const string RES_BattleView_prefab = "BattleView";
     }
     public class Loading_sf
     {
         public const string BundleName = "loading.sf";
-        public const string BarLoading_overrideController = "BarLoading";
-        public const string BarLoading_prefab = "BarLoading";
-        public const string BarLoadingEnd_anim = "BarLoadingEnd";
-        public const string BarLoadingStart_anim = "BarLoadingStart";
-        public const string BaseLoading_controller = "BaseLoading";
-        public const string BaseLoading_prefab = "BaseLoading";
-        public const string effect_jpg = "effect";
-        public const string effect1_png = "effect1";
-        public const string GameMainView_prefab = "GameMainView";
-        public const string LoadingEnd_anim = "LoadingEnd";
-        public const string LoadingStart_anim = "LoadingStart";
+        public const string RES_BarLoading_overrideController = "BarLoading";
+        public const string RES_BarLoading_prefab = "BarLoading";
+        public const string RES_BarLoadingEnd_anim = "BarLoadingEnd";
+        public const string RES_BarLoadingStart_anim = "BarLoadingStart";
+        public const string RES_BaseLoading_controller = "BaseLoading";
+        public const string RES_BaseLoading_prefab = "BaseLoading";
+        public const string RES_effect_jpg = "effect";
+        public const string RES_effect1_png = "effect1";
+        public const string RES_GameMainView_prefab = "GameMainView";
+        public const string RES_LoadingEnd_anim = "LoadingEnd";
+        public const string RES_LoadingStart_anim = "LoadingStart";
     }
     public class Model_avatar_sf
     {
         public const string BundleName = "model/avatar.sf";
-        public const string Role_CarrotA_Appearance_FBX = "Role_CarrotA_Appearance";
-        public const string Role_CarrotA_EatingIdle_FBX = "Role_CarrotA_EatingIdle";
-        public const string Role_CarrotA_falldown_fbx = "Role_CarrotA_falldown";
-        public const string Role_CarrotA_Feedback_fbx = "Role_CarrotA_Feedback";
-        public const string Role_CarrotA_happy02_fbx = "Role_CarrotA_happy02";
-        public const string Role_CarrotA_retreat_fbx = "Role_CarrotA_retreat";
-        public const string Role_CarrotA_Story_Angry_FBX = "Role_CarrotA_Story_Angry";
-        public const string Role_CarrotA_Story_Depressed_fbx = "Role_CarrotA_Story_Depressed";
-        public const string Role_CarrotA_Story_Feedback_fbx = "Role_CarrotA_Story_Feedback";
-        public const string Role_CarrotA_Story_Happy_fbx = "Role_CarrotA_Story_Happy";
-        public const string Role_CarrotA_Story_Run_FBX = "Role_CarrotA_Story_Run";
-        public const string Role_CarrotA_Story_Serious_FBX = "Role_CarrotA_Story_Serious";
-        public const string Role_CarrotA_Story_Surprised_FBX = "Role_CarrotA_Story_Surprised";
-        public const string Role_CarrotA_Story_Talk01_FBX = "Role_CarrotA_Story_Talk01";
-        public const string Role_CarrotA_Story_Talk02_FBX = "Role_CarrotA_Story_Talk02";
-        public const string Role_CarrotA_Story_Walk_FBX = "Role_CarrotA_Story_Walk";
-        public const string Role_CarrotA_work_stone_FBX = "Role_CarrotA_work_stone";
-        public const string Role_CarrotA_work_wood_FBX = "Role_CarrotA_work_wood";
-        public const string Role_CarrotA_Attack_FBX = "Role_CarrotA_Attack";
-        public const string Role_CarrotA_CasualState_FBX = "Role_CarrotA_CasualState";
-        public const string Role_CarrotA_eat_fbx = "Role_CarrotA_eat";
-        public const string Role_CarrotA_Hit_FBX = "Role_CarrotA_Hit";
-        public const string Role_CarrotA_IdleState_FBX = "Role_CarrotA_IdleState";
-        public const string Role_CarrotA_MoveState_FBX = "Role_CarrotA_MoveState";
-        public const string Role_CarrotA_Skill_FBX = "Role_CarrotA_Skill";
-        public const string Role_CarrotA_vertigo_fbx = "Role_CarrotA_vertigo";
-        public const string Role_CarrotA_work_Cave_fbx = "Role_CarrotA_work_Cave";
-        public const string Role_CarrotA_yuanditiao_fbx = "Role_CarrotA_yuanditiao";
-        public const string Carrot_BaseColor_mat = "Carrot_BaseColor";
-        public const string Carrot_BaseColor_png = "Carrot_BaseColor";
-        public const string Role_mat = "Role";
-        public const string Role_CarrotA_controller = "Role_CarrotA";
-        public const string Role_CarrotA_Skin_FBX = "Role_CarrotA_Skin";
-        public const string Role_CarrotA_Skin_prefab = "Role_CarrotA_Skin";
+        public const string RES_Role_CarrotA_Appearance_FBX = "Role_CarrotA_Appearance";
+        public const string RES_Role_CarrotA_EatingIdle_FBX = "Role_CarrotA_EatingIdle";
+        public const string RES_Role_CarrotA_falldown_fbx = "Role_CarrotA_falldown";
+        public const string RES_Role_CarrotA_Feedback_fbx = "Role_CarrotA_Feedback";
+        public const string RES_Role_CarrotA_happy02_fbx = "Role_CarrotA_happy02";
+        public const string RES_Role_CarrotA_retreat_fbx = "Role_CarrotA_retreat";
+        public const string RES_Role_CarrotA_Story_Angry_FBX = "Role_CarrotA_Story_Angry";
+        public const string RES_Role_CarrotA_Story_Depressed_fbx = "Role_CarrotA_Story_Depressed";
+        public const string RES_Role_CarrotA_Story_Feedback_fbx = "Role_CarrotA_Story_Feedback";
+        public const string RES_Role_CarrotA_Story_Happy_fbx = "Role_CarrotA_Story_Happy";
+        public const string RES_Role_CarrotA_Story_Run_FBX = "Role_CarrotA_Story_Run";
+        public const string RES_Role_CarrotA_Story_Serious_FBX = "Role_CarrotA_Story_Serious";
+        public const string RES_Role_CarrotA_Story_Surprised_FBX = "Role_CarrotA_Story_Surprised";
+        public const string RES_Role_CarrotA_Story_Talk01_FBX = "Role_CarrotA_Story_Talk01";
+        public const string RES_Role_CarrotA_Story_Talk02_FBX = "Role_CarrotA_Story_Talk02";
+        public const string RES_Role_CarrotA_Story_Walk_FBX = "Role_CarrotA_Story_Walk";
+        public const string RES_Role_CarrotA_work_stone_FBX = "Role_CarrotA_work_stone";
+        public const string RES_Role_CarrotA_work_wood_FBX = "Role_CarrotA_work_wood";
+        public const string RES_Role_CarrotA_Attack_FBX = "Role_CarrotA_Attack";
+        public const string RES_Role_CarrotA_CasualState_FBX = "Role_CarrotA_CasualState";
+        public const string RES_Role_CarrotA_eat_fbx = "Role_CarrotA_eat";
+        public const string RES_Role_CarrotA_Hit_FBX = "Role_CarrotA_Hit";
+        public const string RES_Role_CarrotA_IdleState_FBX = "Role_CarrotA_IdleState";
+        public const string RES_Role_CarrotA_MoveState_FBX = "Role_CarrotA_MoveState";
+        public const string RES_Role_CarrotA_Skill_FBX = "Role_CarrotA_Skill";
+        public const string RES_Role_CarrotA_vertigo_fbx = "Role_CarrotA_vertigo";
+        public const string RES_Role_CarrotA_work_Cave_fbx = "Role_CarrotA_work_Cave";
+        public const string RES_Role_CarrotA_yuanditiao_fbx = "Role_CarrotA_yuanditiao";
+        public const string RES_Carrot_BaseColor_mat = "Carrot_BaseColor";
+        public const string RES_Carrot_BaseColor_png = "Carrot_BaseColor";
+        public const string RES_Role_mat = "Role";
+        public const string RES_Role_CarrotA_controller = "Role_CarrotA";
+        public const string RES_Role_CarrotA_Skin_FBX = "Role_CarrotA_Skin";
+        public const string RES_Role_CarrotA_Skin_prefab = "Role_CarrotA_Skin";
     }
     public class Model_material_sf
     {
         public const string BundleName = "model/material.sf";
-        public const string DirectionDissolve_shadergraph = "DirectionDissolve";
-        public const string HoloGraphic_shadergraph = "HoloGraphic";
-        public const string RimPower_shadergraph = "RimPower";
-        public const string Role_shadergraph = "Role";
-        public const string RoleBlinn_shader = "RoleBlinn";
-        public const string RoleBlinnPhong_shader = "RoleBlinnPhong";
-        public const string SimpleDissolve_shadergraph = "SimpleDissolve";
-        public const string Test_shader = "Test";
+        public const string RES_DirectionDissolve_shadergraph = "DirectionDissolve";
+        public const string RES_HoloGraphic_shadergraph = "HoloGraphic";
+        public const string RES_RimPower_shadergraph = "RimPower";
+        public const string RES_Role_shadergraph = "Role";
+        public const string RES_RoleBlinn_shader = "RoleBlinn";
+        public const string RES_RoleBlinnPhong_shader = "RoleBlinnPhong";
+        public const string RES_SimpleDissolve_shadergraph = "SimpleDissolve";
+        public const string RES_Test_shader = "Test";
     }
     public class Pic_sf
     {
         public const string BundleName = "pic.sf";
-        public const string haipa_png = "haipa";
-        public const string haipa_normal_png = "haipa_normal";
-        public const string jusang_png = "jusang";
-    }
-    public class Pic_tree
-    {
-        public const string BundleName = "pic/tree";
+        public const string RES_haipa_png = "haipa";
+        public const string RES_haipa_normal_png = "haipa_normal";
+        public const string RES_jusang_png = "jusang";
     }
     public class Pic_tree_sf
     {
         public const string BundleName = "pic/tree.sf";
-        public const string 5101410_png = "5101410";
-        public const string 5103524_png = "5103524";
-        public const string 5104206_png = "5104206";
-        public const string 5104309_png = "5104309";
-        public const string 5104413_png = "5104413";
-        public const string 5103524_mat = "5103524";
-        public const string 5104413_mat = "5104413";
+        public const string RES_5101410_png = "5101410";
+        public const string RES_5103524_png = "5103524";
+        public const string RES_5104206_png = "5104206";
+        public const string RES_5104309_png = "5104309";
+        public const string RES_5104413_png = "5104413";
+        public const string RES_5103524_mat = "5103524";
+        public const string RES_5104413_mat = "5104413";
     }
     public class Scenes_sf
     {
         public const string BundleName = "scenes.sf";
-        public const string BaseScene_unity = "BaseScene";
+        public const string RES_BaseScene_unity = "BaseScene";
+        public const string RES_BattleView_unity = "BattleView";
     }
     public class Ss_test
     {
         public const string BundleName = "ss/test";
-        public const string Test_prefab = "Test";
+        public const string RES_Test_prefab = "Test";
     }
     public class Texture_sf
     {
         public const string BundleName = "texture.sf";
-        public const string Grass_mat = "Grass";
-        public const string grass_png = "grass";
+        public const string RES_Grass_mat = "Grass";
+        public const string RES_grass_png = "grass";
     }
     public class Texture_effect_sf
     {
         public const string BundleName = "texture/effect.sf";
-        public const string FlashCard_mat = "FlashCard";
-        public const string FlashCard_shader = "FlashCard";
-        public const string FlashCard1_mat = "FlashCard1";
-        public const string FlashCard1_shader = "FlashCard1";
+        public const string RES_FlashCard_mat = "FlashCard";
+        public const string RES_FlashCard_shader = "FlashCard";
+        public const string RES_FlashCard1_mat = "FlashCard1";
+        public const string RES_FlashCard1_shader = "FlashCard1";
     }
 }

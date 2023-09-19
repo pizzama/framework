@@ -11,6 +11,8 @@ namespace SFramework
 {
     public static class ResDataCodeGenerator
     {
+        private const string BUNDLENAME = "BundleName";
+        private const string PREFIX = "RES_";//using prefix fix the first number character
         public static void WriteClass(TextWriter writer, string ns, string publicClassName)
         {
             var assetBundleInfos = new Dictionary<string, string[]>();
@@ -54,7 +56,7 @@ namespace SFramework
                 var bundleNameField = new CodeMemberField
                 {
                     Attributes = MemberAttributes.Public | MemberAttributes.Const,
-                    Name = "BundleName",
+                    Name = BUNDLENAME,
                     Type = new CodeTypeReference(typeof(System.String))
                 };
                 codeType.Members.Add(bundleNameField);
@@ -68,7 +70,7 @@ namespace SFramework
 
                     var content = Path.GetFileName(asset);
                     var noContent = Path.GetFileNameWithoutExtension(asset);
-                    assetField.Name = content.RemoveInvalidateChars();
+                    assetField.Name = PREFIX + content.RemoveInvalidateChars();
 
                     assetField.Type = new CodeTypeReference(typeof(System.String));
                     if (!assetField.Name.StartsWith("[") && !assetField.Name.StartsWith(" [") &&
