@@ -42,13 +42,13 @@ namespace Game
             //Debug.Log("gamemainview loading finish");
             Control.OpenControl("Game.NormalLoadingControl", "End");
 
-            Texture tx = assetManager.LoadFromBundle<Texture>(Pic_sf.BundleName, Pic_sf.haipa_png);
+            Texture tx = assetManager.LoadFromBundle<Texture>(Pic_sf.BundleName, Pic_sf.RES_haipa_png);
             Debug.Log(tx);
 
             Transform ga = getSceneObject<Transform>("Env");
 
-            //GameObject aa = CreateGameObjectUsingPool(Modelavatar_sf.BundleName, Modelavatar_sf.Role_CarrotA_Skin_prefab);
-            //Debug.Log(aa);
+            GameObject aa = CreateGameObjectUsingPool(Model_avatar_sf.BundleName, Model_avatar_sf.RES_Role_CarrotA_Skin_prefab);
+            Debug.Log(aa);
         }
     }
 }
