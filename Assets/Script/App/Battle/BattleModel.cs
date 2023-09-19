@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using SFramework.Game;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace Game.Scenes
     {
         protected override void opening()
         {
-            Debug.Log("test model enter");
+            GetData("").Forget();
         }
 
         //protected override async UniTaskVoid openingAsync()

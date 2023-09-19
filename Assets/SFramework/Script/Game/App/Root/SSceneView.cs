@@ -120,9 +120,9 @@ namespace SFramework.Game
         protected virtual void SetViewPrefabPath(out string prefabPath, out string prefabName)
         {
             System.Type tp = GetType();
-            string path = tp.FullName;
+            string path = tp.Namespace;
             path = path.Replace('.', '/');
-            prefabPath = path;
+            prefabPath = path + ".sf";
             prefabName = tp.Name;
         }
 
