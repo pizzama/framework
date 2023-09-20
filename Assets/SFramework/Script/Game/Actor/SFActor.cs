@@ -12,6 +12,14 @@ namespace SFramework.Game.Actor
         private SFActorFacingDirections _direction;
         [SerializeField]
         private Animator _animator;
+
+        private FSM _fsm;
+
+        public FSM GetFSM()
+        {
+            return _fsm;
+        }
+
         protected virtual void Awake()
         {
             init();
@@ -23,6 +31,21 @@ namespace SFramework.Game.Actor
             {
                 _animator = GetComponent<Animator>();
             }
+
+            if (_fsm == null)
+            {
+                _fsm = new FSM();
+            }
+        }
+
+        public void AddFSMState(IFSMState state)
+        {
+            _fsm.AddState(state);
+        }
+
+        public void Update()
+        {
+            _fsm.Update();
         }
     }
 }

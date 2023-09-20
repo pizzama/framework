@@ -113,7 +113,11 @@ namespace SFramework
             return default;
         }
 
-        public abstract string ToName();
+        public virtual string ToName()
+        {
+            Type classType = this.GetType();
+            return classType.Name;
+        }
 
         public bool CouldTransition()
         {
@@ -121,7 +125,7 @@ namespace SFramework
         }
     }
 
-    public abstract class FSM
+    public class FSM
     {
         protected Dictionary<string, IFSMState> mStates = new Dictionary<string, IFSMState>();
         //状态id，可以定义成枚举
@@ -148,14 +152,12 @@ namespace SFramework
 
         private IFSMState _activeState;
 
-        public UnityEngine.Object BlackBoard; //状态机黑板
+        public UnityEngine.Object BlackBoard { get; set; } //状态机黑板
 
         public IFSMState CurrentState => _activeState;
 
-        public FSM(UnityEngine.Object value)
-        {
-            BlackBoard = value;
-        }
+        public FSM()
+        {}
 
         //状态机有两种切换模式。 一种是状态机强制切换。另一种是每一个状态自己检查切换
         public void ChangeState(string id)
