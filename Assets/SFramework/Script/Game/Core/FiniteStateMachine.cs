@@ -209,7 +209,7 @@ namespace SFramework
 
         private void checkState()
         {
-            if (!_activeState.CouldTransition())
+            if (_activeState == null || !_activeState.CouldTransition())
                 return;
             List<IFSMTransition> trans = _activeState.GetTransitions();
             if (trans != null)

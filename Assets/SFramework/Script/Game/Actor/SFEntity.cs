@@ -19,9 +19,10 @@ namespace SFramework.Game.Actor
 
     public class SFEntity : MonoBehaviour, ISFEntity
     {
+        [SerializeField]
         private string _entityId;
         public string EntityId { get => _entityId; }
-
+        [SerializeField]
         private string _entityAssetName;
         public string EntityAssetName { get => _entityAssetName; }
 

@@ -16,11 +16,17 @@ namespace SFramework.Game.Actor
             _entitys = new List<ISFEntity>();
         }
 
-        public SFEntity Create<T>(string id, string prefabFullPath, float lifeTime = -1) where T : SFEntity
+        public T Create<T>(string id, string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1) where T : SFEntity
         {
+            if(parent == null)
+                Debug.LogWarning("parent is null");
             GameObject obj = _view.CreateGameObjectUsingPool(prefabFullPath, lifeTime);
-            obj.GetOrAddComponent<T>();
-            return null;
+            T result = obj.GetOrAddComponent<T>();
+            result.transform.SetParent(parent, false);
+            result.transform.localPosition = pos;
+            result.SetData(id, prefabFullPath);
+            _entitys.Add(result);
+            return result;
         }
 
     }

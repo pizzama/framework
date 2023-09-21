@@ -41,12 +41,12 @@ namespace SFramework.Game.Actor
 
         public void AddFSMState(IFSMState state)
         {
-            _fsm.AddState(state);
+            _fsm?.AddState(state);
         }
 
         public void Update()
         {
-            _fsm.Update();
+            _fsm?.Update();
         }
     }
 }
