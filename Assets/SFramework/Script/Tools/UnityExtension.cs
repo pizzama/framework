@@ -58,5 +58,16 @@ namespace SFramework.Tools
                 .Replace("#", "")
                 .Replace(".", "_");
         }
+
+        internal static T GetOrAddComponent<T>(this GameObject go) where T : UnityEngine.Component
+        {
+            if (go == null)
+            {
+                return null;
+            }
+
+            var result = go.GetComponent<T>();
+            return result != null ? result : go.AddComponent<T>();
+        }
     }
 }

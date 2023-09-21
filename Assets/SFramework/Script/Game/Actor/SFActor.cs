@@ -35,6 +35,7 @@ namespace SFramework.Game.Actor
             if (_fsm == null)
             {
                 _fsm = new FSM();
+                _fsm.BlackBoard = this;
             }
         }
 

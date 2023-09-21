@@ -20,15 +20,14 @@ namespace SFramework.Game
             base.Install();
         }
 
-        protected GameObject CreateGameObjectUsingPool(string abName, string resName, float lifeTime = -1)
+        public GameObject CreateGameObjectUsingPool(string abName, string resName, float lifeTime = -1)
         {
             UnityEngine.GameObject prefab = assetManager.LoadFromBundle<UnityEngine.GameObject>(abName, resName);
             string poolName = assetManager.FullPath(abName, resName);
             return poolManager.Request<ListGameObjectPool>(poolName, prefab, lifeTime);
-
         }
 
-        protected GameObject CreateGameObjectUsingPool(string path, float lifeTime = -1)
+        public GameObject CreateGameObjectUsingPool(string path, float lifeTime = -1)
         {
             int index = path.LastIndexOf("/");
             if(index > 0)

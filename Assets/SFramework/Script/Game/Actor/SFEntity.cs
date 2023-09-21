@@ -9,7 +9,7 @@ namespace SFramework.Game.Actor
         string EntityId{get;}
         string EntityAssetName{get;}
         GameObject Instance{get;}
-        void Init(string entityId, string entityAssetName);
+        void SetData(string entityId, string entityAssetName);
         void Recycle();
         void Show();
         void Destory();
@@ -39,7 +39,7 @@ namespace SFramework.Game.Actor
         {
         }
 
-        public void Init(string entityId, string entityAssetName)
+        public void SetData(string entityId, string entityAssetName)
         {
             _entityId = entityId;
             _entityAssetName = entityAssetName;
