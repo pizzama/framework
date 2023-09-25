@@ -162,7 +162,8 @@ namespace SFramework
         //状态机有两种切换模式。 一种是状态机强制切换。另一种是每一个状态自己检查切换
         public void ChangeState(string id)
         {
-            if (id.Equals(CurrentState.ToName())) return;
+            if (_activeState != null && id.Equals(_activeState.ToName())) 
+                return;
             if (mStates.TryGetValue(id, out var state))
             {
                 if (_activeState != null)
@@ -187,6 +188,20 @@ namespace SFramework
             }
 
             ChangeState(state.ToName());
+        }
+
+        public void ChangeState<T>() where T : IFSMState
+        {
+            foreach(var istate in mStates)
+            {
+                if(istate.Value.GetType() == typeof(T))
+                {
+                    ChangeState(istate.ToString());
+                    return;
+                }
+            }
+
+            throw new NotFoundException("not found the state:" + typeof(T));
         }
 
         public void HandleInput()
