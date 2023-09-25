@@ -30,40 +30,39 @@ namespace SFramework.Statics
         public const string Loading_sf_GameMainView_prefab = "loading.sf/GameMainView";
         public const string Loading_sf_LoadingEnd_anim = "loading.sf/LoadingEnd";
         public const string Loading_sf_LoadingStart_anim = "loading.sf/LoadingStart";
-        public const string Model_avatar_sf_Role_CarrotA_Appearance_FBX = "model/avatar.sf/Role_CarrotA_Appearance";
-        public const string Model_avatar_sf_Role_CarrotA_EatingIdle_FBX = "model/avatar.sf/Role_CarrotA_EatingIdle";
-        public const string Model_avatar_sf_Role_CarrotA_falldown_fbx = "model/avatar.sf/Role_CarrotA_falldown";
-        public const string Model_avatar_sf_Role_CarrotA_Feedback_fbx = "model/avatar.sf/Role_CarrotA_Feedback";
-        public const string Model_avatar_sf_Role_CarrotA_happy02_fbx = "model/avatar.sf/Role_CarrotA_happy02";
-        public const string Model_avatar_sf_Role_CarrotA_retreat_fbx = "model/avatar.sf/Role_CarrotA_retreat";
-        public const string Model_avatar_sf_Role_CarrotA_Story_Angry_FBX = "model/avatar.sf/Role_CarrotA_Story_Angry";
-        public const string Model_avatar_sf_Role_CarrotA_Story_Depressed_fbx = "model/avatar.sf/Role_CarrotA_Story_Depressed";
-        public const string Model_avatar_sf_Role_CarrotA_Story_Feedback_fbx = "model/avatar.sf/Role_CarrotA_Story_Feedback";
-        public const string Model_avatar_sf_Role_CarrotA_Story_Happy_fbx = "model/avatar.sf/Role_CarrotA_Story_Happy";
-        public const string Model_avatar_sf_Role_CarrotA_Story_Run_FBX = "model/avatar.sf/Role_CarrotA_Story_Run";
-        public const string Model_avatar_sf_Role_CarrotA_Story_Serious_FBX = "model/avatar.sf/Role_CarrotA_Story_Serious";
-        public const string Model_avatar_sf_Role_CarrotA_Story_Surprised_FBX = "model/avatar.sf/Role_CarrotA_Story_Surprised";
-        public const string Model_avatar_sf_Role_CarrotA_Story_Talk01_FBX = "model/avatar.sf/Role_CarrotA_Story_Talk01";
-        public const string Model_avatar_sf_Role_CarrotA_Story_Talk02_FBX = "model/avatar.sf/Role_CarrotA_Story_Talk02";
-        public const string Model_avatar_sf_Role_CarrotA_Story_Walk_FBX = "model/avatar.sf/Role_CarrotA_Story_Walk";
-        public const string Model_avatar_sf_Role_CarrotA_work_stone_FBX = "model/avatar.sf/Role_CarrotA_work_stone";
-        public const string Model_avatar_sf_Role_CarrotA_work_wood_FBX = "model/avatar.sf/Role_CarrotA_work_wood";
-        public const string Model_avatar_sf_Role_CarrotA_Attack_FBX = "model/avatar.sf/Role_CarrotA_Attack";
-        public const string Model_avatar_sf_Role_CarrotA_CasualState_FBX = "model/avatar.sf/Role_CarrotA_CasualState";
-        public const string Model_avatar_sf_Role_CarrotA_eat_fbx = "model/avatar.sf/Role_CarrotA_eat";
-        public const string Model_avatar_sf_Role_CarrotA_Hit_FBX = "model/avatar.sf/Role_CarrotA_Hit";
-        public const string Model_avatar_sf_Role_CarrotA_IdleState_FBX = "model/avatar.sf/Role_CarrotA_IdleState";
-        public const string Model_avatar_sf_Role_CarrotA_MoveState_FBX = "model/avatar.sf/Role_CarrotA_MoveState";
-        public const string Model_avatar_sf_Role_CarrotA_Skill_FBX = "model/avatar.sf/Role_CarrotA_Skill";
-        public const string Model_avatar_sf_Role_CarrotA_vertigo_fbx = "model/avatar.sf/Role_CarrotA_vertigo";
-        public const string Model_avatar_sf_Role_CarrotA_work_Cave_fbx = "model/avatar.sf/Role_CarrotA_work_Cave";
-        public const string Model_avatar_sf_Role_CarrotA_yuanditiao_fbx = "model/avatar.sf/Role_CarrotA_yuanditiao";
-        public const string Model_avatar_sf_Carrot_BaseColor_mat = "model/avatar.sf/Carrot_BaseColor";
-        public const string Model_avatar_sf_Carrot_BaseColor_png = "model/avatar.sf/Carrot_BaseColor";
-        public const string Model_avatar_sf_Role_mat = "model/avatar.sf/Role";
-        public const string Model_avatar_sf_Role_CarrotA_controller = "model/avatar.sf/Role_CarrotA";
-        public const string Model_avatar_sf_Role_CarrotA_Skin_FBX = "model/avatar.sf/Role_CarrotA_Skin";
-        public const string Model_avatar_sf_Role_CarrotA_Skin_prefab = "model/avatar.sf/Role_CarrotA_Skin";
+        public const string Model_avatar_role_carrota_sf_Carrot_BaseColor_mat = "model/avatar/role_carrota.sf/Carrot_BaseColor";
+        public const string Model_avatar_role_carrota_sf_Carrot_BaseColor_png = "model/avatar/role_carrota.sf/Carrot_BaseColor";
+        public const string Model_avatar_role_carrota_sf_Role_mat = "model/avatar/role_carrota.sf/Role";
+        public const string Model_avatar_role_carrota_sf_Role_CarrotA_controller = "model/avatar/role_carrota.sf/Role_CarrotA";
+        public const string Model_avatar_role_carrota_sf_Role_CarrotA_Skin_prefab = "model/avatar/role_carrota.sf/Role_CarrotA_Skin";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_Appearance_FBX = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_Appearance";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_EatingIdle_FBX = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_EatingIdle";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_falldown_fbx = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_falldown";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_Feedback_fbx = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_Feedback";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_happy02_fbx = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_happy02";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_retreat_fbx = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_retreat";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_Story_Angry_FBX = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_Story_Angry";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_Story_Depressed_fbx = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_Story_Depressed";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_Story_Feedback_fbx = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_Story_Feedback";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_Story_Happy_fbx = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_Story_Happy";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_Story_Run_FBX = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_Story_Run";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_Story_Serious_FBX = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_Story_Serious";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_Story_Surprised_FBX = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_Story_Surprised";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_Story_Talk01_FBX = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_Story_Talk01";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_Story_Talk02_FBX = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_Story_Talk02";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_Story_Walk_FBX = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_Story_Walk";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_work_stone_FBX = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_work_stone";
+        public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_work_wood_FBX = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_work_wood";
+        public const string Model_avatar_role_carrota_ani_role_carrota_normal_sf_Role_CarrotA_Attack_FBX = "model/avatar/role_carrota/ani/role_carrota/normal.sf/Role_CarrotA_Attack";
+        public const string Model_avatar_role_carrota_ani_role_carrota_normal_sf_Role_CarrotA_CasualState_FBX = "model/avatar/role_carrota/ani/role_carrota/normal.sf/Role_CarrotA_CasualState";
+        public const string Model_avatar_role_carrota_ani_role_carrota_normal_sf_Role_CarrotA_eat_fbx = "model/avatar/role_carrota/ani/role_carrota/normal.sf/Role_CarrotA_eat";
+        public const string Model_avatar_role_carrota_ani_role_carrota_normal_sf_Role_CarrotA_Hit_FBX = "model/avatar/role_carrota/ani/role_carrota/normal.sf/Role_CarrotA_Hit";
+        public const string Model_avatar_role_carrota_ani_role_carrota_normal_sf_Role_CarrotA_IdleState_FBX = "model/avatar/role_carrota/ani/role_carrota/normal.sf/Role_CarrotA_IdleState";
+        public const string Model_avatar_role_carrota_ani_role_carrota_normal_sf_Role_CarrotA_MoveState_FBX = "model/avatar/role_carrota/ani/role_carrota/normal.sf/Role_CarrotA_MoveState";
+        public const string Model_avatar_role_carrota_ani_role_carrota_normal_sf_Role_CarrotA_Skill_FBX = "model/avatar/role_carrota/ani/role_carrota/normal.sf/Role_CarrotA_Skill";
+        public const string Model_avatar_role_carrota_ani_role_carrota_normal_sf_Role_CarrotA_vertigo_fbx = "model/avatar/role_carrota/ani/role_carrota/normal.sf/Role_CarrotA_vertigo";
+        public const string Model_avatar_role_carrota_ani_role_carrota_normal_sf_Role_CarrotA_work_Cave_fbx = "model/avatar/role_carrota/ani/role_carrota/normal.sf/Role_CarrotA_work_Cave";
+        public const string Model_avatar_role_carrota_ani_role_carrota_normal_sf_Role_CarrotA_yuanditiao_fbx = "model/avatar/role_carrota/ani/role_carrota/normal.sf/Role_CarrotA_yuanditiao";
         public const string Model_material_sf_DirectionDissolve_shadergraph = "model/material.sf/DirectionDissolve";
         public const string Model_material_sf_HoloGraphic_shadergraph = "model/material.sf/HoloGraphic";
         public const string Model_material_sf_RimPower_shadergraph = "model/material.sf/RimPower";
@@ -80,8 +79,8 @@ namespace SFramework.Statics
         public const string Pic_tree_sf_5104206_png = "pic/tree.sf/5104206";
         public const string Pic_tree_sf_5104309_png = "pic/tree.sf/5104309";
         public const string Pic_tree_sf_5104413_png = "pic/tree.sf/5104413";
-        public const string Pic_tree_sf_5103524_mat = "pic/tree.sf/5103524";
-        public const string Pic_tree_sf_5104413_mat = "pic/tree.sf/5104413";
+        public const string Pic_tree_materials_sf_5103524_mat = "pic/tree/materials.sf/5103524";
+        public const string Pic_tree_materials_sf_5104413_mat = "pic/tree/materials.sf/5104413";
         public const string Ss_test_Test_prefab = "ss/test/Test";
         public const string Texture_sf_Grass_mat = "texture.sf/Grass";
         public const string Texture_sf_grass_png = "texture.sf/grass";
@@ -112,6 +111,10 @@ namespace SFramework.Statics
         public const string RES_BaseScene_unity = "BaseScene";
         public const string RES_BattleView_unity = "BattleView";
     }
+    public class Loading
+    {
+        public const string BundleName = "loading";
+    }
     public class Loading_sf
     {
         public const string BundleName = "loading.sf";
@@ -127,9 +130,18 @@ namespace SFramework.Statics
         public const string RES_LoadingEnd_anim = "LoadingEnd";
         public const string RES_LoadingStart_anim = "LoadingStart";
     }
-    public class Model_avatar_sf
+    public class Model_avatar_role_carrota_sf
     {
-        public const string BundleName = "model/avatar.sf";
+        public const string BundleName = "model/avatar/role_carrota.sf";
+        public const string RES_Carrot_BaseColor_mat = "Carrot_BaseColor";
+        public const string RES_Carrot_BaseColor_png = "Carrot_BaseColor";
+        public const string RES_Role_mat = "Role";
+        public const string RES_Role_CarrotA_controller = "Role_CarrotA";
+        public const string RES_Role_CarrotA_Skin_prefab = "Role_CarrotA_Skin";
+    }
+    public class Model_avatar_role_carrota_ani_role_carrota_farm_sf
+    {
+        public const string BundleName = "model/avatar/role_carrota/ani/role_carrota/farm.sf";
         public const string RES_Role_CarrotA_Appearance_FBX = "Role_CarrotA_Appearance";
         public const string RES_Role_CarrotA_EatingIdle_FBX = "Role_CarrotA_EatingIdle";
         public const string RES_Role_CarrotA_falldown_fbx = "Role_CarrotA_falldown";
@@ -148,6 +160,10 @@ namespace SFramework.Statics
         public const string RES_Role_CarrotA_Story_Walk_FBX = "Role_CarrotA_Story_Walk";
         public const string RES_Role_CarrotA_work_stone_FBX = "Role_CarrotA_work_stone";
         public const string RES_Role_CarrotA_work_wood_FBX = "Role_CarrotA_work_wood";
+    }
+    public class Model_avatar_role_carrota_ani_role_carrota_normal_sf
+    {
+        public const string BundleName = "model/avatar/role_carrota/ani/role_carrota/normal.sf";
         public const string RES_Role_CarrotA_Attack_FBX = "Role_CarrotA_Attack";
         public const string RES_Role_CarrotA_CasualState_FBX = "Role_CarrotA_CasualState";
         public const string RES_Role_CarrotA_eat_fbx = "Role_CarrotA_eat";
@@ -158,12 +174,6 @@ namespace SFramework.Statics
         public const string RES_Role_CarrotA_vertigo_fbx = "Role_CarrotA_vertigo";
         public const string RES_Role_CarrotA_work_Cave_fbx = "Role_CarrotA_work_Cave";
         public const string RES_Role_CarrotA_yuanditiao_fbx = "Role_CarrotA_yuanditiao";
-        public const string RES_Carrot_BaseColor_mat = "Carrot_BaseColor";
-        public const string RES_Carrot_BaseColor_png = "Carrot_BaseColor";
-        public const string RES_Role_mat = "Role";
-        public const string RES_Role_CarrotA_controller = "Role_CarrotA";
-        public const string RES_Role_CarrotA_Skin_FBX = "Role_CarrotA_Skin";
-        public const string RES_Role_CarrotA_Skin_prefab = "Role_CarrotA_Skin";
     }
     public class Model_material_sf
     {
@@ -192,6 +202,10 @@ namespace SFramework.Statics
         public const string RES_5104206_png = "5104206";
         public const string RES_5104309_png = "5104309";
         public const string RES_5104413_png = "5104413";
+    }
+    public class Pic_tree_materials_sf
+    {
+        public const string BundleName = "pic/tree/materials.sf";
         public const string RES_5103524_mat = "5103524";
         public const string RES_5104413_mat = "5104413";
     }

@@ -21,7 +21,7 @@ namespace Game.Scenes
             Debug.Log("load complete");
             Transform parent = getSceneObject<Transform>("Actors");
             _factory = new SFActorFactory(this);
-            Hero rt = _factory.Create<Hero>("1", SFResAssets.Model_avatar_sf_Role_CarrotA_Skin_prefab, parent);
+            Hero rt = _factory.Create<Hero>("1", SFResAssets.Model_avatar_role_carrota_sf_Role_CarrotA_Skin_prefab, parent);
         }
     }
 }
