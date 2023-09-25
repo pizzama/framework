@@ -34,6 +34,7 @@ namespace SFramework.Statics
         public const string Model_avatar_role_carrota_sf_Carrot_BaseColor_png = "model/avatar/role_carrota.sf/Carrot_BaseColor";
         public const string Model_avatar_role_carrota_sf_Role_mat = "model/avatar/role_carrota.sf/Role";
         public const string Model_avatar_role_carrota_sf_Role_CarrotA_controller = "model/avatar/role_carrota.sf/Role_CarrotA";
+        public const string Model_avatar_role_carrota_sf_Role_CarrotA_Skin_FBX = "model/avatar/role_carrota.sf/Role_CarrotA_Skin";
         public const string Model_avatar_role_carrota_sf_Role_CarrotA_Skin_prefab = "model/avatar/role_carrota.sf/Role_CarrotA_Skin";
         public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_Appearance_FBX = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_Appearance";
         public const string Model_avatar_role_carrota_ani_role_carrota_farm_sf_Role_CarrotA_EatingIdle_FBX = "model/avatar/role_carrota/ani/role_carrota/farm.sf/Role_CarrotA_EatingIdle";
@@ -111,10 +112,6 @@ namespace SFramework.Statics
         public const string RES_BaseScene_unity = "BaseScene";
         public const string RES_BattleView_unity = "BattleView";
     }
-    public class Loading
-    {
-        public const string BundleName = "loading";
-    }
     public class Loading_sf
     {
         public const string BundleName = "loading.sf";
@@ -130,6 +127,10 @@ namespace SFramework.Statics
         public const string RES_LoadingEnd_anim = "LoadingEnd";
         public const string RES_LoadingStart_anim = "LoadingStart";
     }
+    public class Model_avatar_role_carrota
+    {
+        public const string BundleName = "model/avatar/role_carrota";
+    }
     public class Model_avatar_role_carrota_sf
     {
         public const string BundleName = "model/avatar/role_carrota.sf";
@@ -137,6 +138,7 @@ namespace SFramework.Statics
         public const string RES_Carrot_BaseColor_png = "Carrot_BaseColor";
         public const string RES_Role_mat = "Role";
         public const string RES_Role_CarrotA_controller = "Role_CarrotA";
+        public const string RES_Role_CarrotA_Skin_FBX = "Role_CarrotA_Skin";
         public const string RES_Role_CarrotA_Skin_prefab = "Role_CarrotA_Skin";
     }
     public class Model_avatar_role_carrota_ani_role_carrota_farm_sf
