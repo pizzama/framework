@@ -177,7 +177,7 @@ namespace SFramework
 
         public void ChangeState(IFSMState state)
         {
-            if (state.ToName().Equals(_activeState.ToName())) return;
+            if (_activeState != null && state.ToName().Equals(_activeState.ToName())) return;
             if (mStates.ContainsKey(state.ToName()))
             {
                 mStates[state.ToName()] = state;
@@ -196,7 +196,7 @@ namespace SFramework
             {
                 if(istate.Value.GetType() == typeof(T))
                 {
-                    ChangeState(istate.ToString());
+                    ChangeState(istate.Value.ToName());
                     return;
                 }
             }
