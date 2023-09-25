@@ -6,6 +6,14 @@ namespace SFramework.Pool
 {
     public abstract class BaseGameObjectPool : IPool<GameObject>
     {
+        //设置物体的隐藏位置
+        private float _defaultPosX = 10000f;
+        private float _defaultPosY = 10000f;
+        private float _defaultPosZ = 10000f;
+
+        public float DefaultPosX { get { return _defaultPosX; } set { _defaultPosX = value; } }
+        public float DefaultPosY { get { return _defaultPosY; } set { _defaultPosY = value; } }
+        public float DefaultPosZ { get { return _defaultPosZ; } set { _defaultPosZ = value; } }
         /// <summary>
         /// 默认最大容量
         /// </summary>
@@ -93,6 +101,11 @@ namespace SFramework.Pool
             }
 
             return returnObj;
+        }
+
+        protected void SetDefaultPosition(Transform ta)
+        {
+            ta.localPosition = new Vector3(_defaultPosX, _defaultPosY, _defaultPosZ);
         }
 
     }

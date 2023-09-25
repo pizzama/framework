@@ -44,10 +44,9 @@ namespace SFramework.Pool
                 //池中没有可分配对象了，新生成一个
                 returnObj = GameObject.Instantiate(mPrefab) as GameObject;
                 returnObj.transform.SetParent(mTrans);
-                returnObj.SetActive(false);
             }
             addLifeTimeInfo(returnObj, lifetime);
-            returnObj.SetActive(true);
+            SetDefaultPosition(returnObj.transform);
             return returnObj;
         }
 
