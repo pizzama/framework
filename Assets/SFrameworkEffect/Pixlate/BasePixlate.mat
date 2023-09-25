@@ -9,7 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: BasePixlate
   m_Shader: {fileID: 4800000, guid: 4a34e21f3ae3bf7438c8726c08362cd6, type: 3}
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _PIXELATESWITCH_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -20,7 +21,23 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Base:
+        m_Texture: {fileID: 2800000, guid: 94c2bf5145e3bc848a0266b88a7e681f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 70f39a256d247d04b98e7e02d458891f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: 9a5901f49cb773b4f91135562986b895, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Sprite:
+        m_Texture: {fileID: 2800000, guid: 2c32f0d6c821ed942bddd8d5b3b2cd32, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -39,7 +56,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.5
-    - _PixelateSwitch: 0
+    - _PixelateSwitch: 1
+    - _PixelsXY: 10
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
