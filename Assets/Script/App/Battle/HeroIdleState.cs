@@ -14,7 +14,7 @@ public class HeroIdleState : FSMState
     {
         base.EnterState();
         Hero hero = (Hero)Machine.BlackBoard;
-        var mator = hero.GetComponent<Animator>();
-        Debug.Log(mator);
+        var animator = hero.GetComponent<Animator>();
+        Debug.Log(animator);
     }
 }

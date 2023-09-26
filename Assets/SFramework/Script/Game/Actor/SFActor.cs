@@ -48,5 +48,36 @@ namespace SFramework.Game.Actor
         {
             _fsm?.Update();
         }
+
+        private void ForceCrossFade(Animator animator, string name, float transitionDuration, int layer = 0, float normalizedTime = float.NegativeInfinity, bool changeImmediately = false)
+        {
+            if (changeImmediately)
+            {
+                animator.Play(animator.GetNextAnimatorStateInfo(layer).fullPathHash, layer);
+                animator.Update(0);
+                animator.CrossFade(name, transitionDuration, layer, normalizedTime);
+                return;
+            }
+            animator.Update(0);
+            if (animator.GetNextAnimatorStateInfo(layer).fullPathHash == 0)
+            {
+                animator.CrossFade(name, transitionDuration, layer, normalizedTime);
+            }
+            else
+            {
+                animator.Play(animator.GetNextAnimatorStateInfo(layer).fullPathHash, layer);
+                animator.Update(0);
+                animator.CrossFade(name, transitionDuration, layer, normalizedTime);
+            }
+        }
+
+        public AnimatorStateInfo GetAnimatorStateInfo
+        {
+            get
+            {
+                AnimatorStateInfo info = _animator.GetCurrentAnimatorStateInfo(0);
+                return info;
+            }
+        }
     }
 }
