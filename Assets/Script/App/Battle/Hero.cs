@@ -11,6 +11,7 @@ namespace Game.Character
         private void Start()
         {
             AddFSMState(new HeroIdleState());
+            AddFSMState(new HeroMoveState());
             GetFSM().ChangeState<HeroIdleState>();
         }
     }
