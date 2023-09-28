@@ -13,6 +13,12 @@ public class HeroMoveState : FSMState
     private float _baseSpeed = 5f;
     private float _speedModifier = 1f; // change the running speed not change the base speed  
 
+    public override void InitState()
+    {
+        base.InitState();
+        _inputManager = SFInputManager.Instance;
+    }
+
     public override void EnterState()
     {
         base.EnterState();
@@ -32,6 +38,8 @@ public class HeroMoveState : FSMState
     public override void UpdateState()
     {
         base.UpdateState();
+        HandleInput();
+        move();
     }
 
     private void move()
@@ -40,6 +48,11 @@ public class HeroMoveState : FSMState
             return;
 
         Vector3 movementDirection = getMovementInputDirection();
+        float movementSpeed = getMovementSpeed();
+        Vector3 currentHorizontalVelocity = getHorizontalVelocity();
+        Hero hero = (Hero)Machine.BlackBoard;
+        hero.ActorRigidBody.AddForce(movementSpeed * movementDirection - currentHorizontalVelocity, ForceMode.VelocityChange);
+
     }
 
     #region Resuable Methods
@@ -51,6 +64,14 @@ public class HeroMoveState : FSMState
     protected float getMovementSpeed()
     {
         return _baseSpeed * _speedModifier;
+    }
+
+    protected Vector3 getHorizontalVelocity()
+    {
+        Hero hero = (Hero)Machine.BlackBoard;
+        Vector3 vec = hero.ActorRigidBody.velocity;
+        vec.y = 0f;
+        return vec;
     }
     #endregion
 }

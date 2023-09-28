@@ -6,7 +6,7 @@ using SFramework.Game.Actor;
 
 namespace Game.Character
 {
-    public class Hero : SFActor
+    public class Hero : SFActor3D
     {
         private void Start()
         {
