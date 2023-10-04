@@ -45,7 +45,8 @@ namespace SFramework.UI
             //p0 is at the arrow emitter point
             _controlPoints[0] = new Vector2(_origin.position.x, _origin.position.y);
             //p3 is at the mouse position
-            _controlPoints[3] = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            Vector2 localPos = MathTools.ScreenToUIWorldPos(_origin, Input.mousePosition, SUIROOT.Instance.UICamera);
+            _controlPoints[3] = localPos;//new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             //p1, p2 determines by p0 and p3
             _controlPoints[1] = _controlPoints[0] + (_controlPoints[3] - _controlPoints[0]) * _controlPointFactors[0];
             _controlPoints[2] = _controlPoints[0] + (_controlPoints[3] - _controlPoints[0]) * _controlPointFactors[1];
