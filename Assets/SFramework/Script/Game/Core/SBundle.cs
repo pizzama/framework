@@ -63,7 +63,7 @@ namespace SFramework
 
         }
 
-        protected virtual void init()
+        protected virtual void initing()
         {
 
         }

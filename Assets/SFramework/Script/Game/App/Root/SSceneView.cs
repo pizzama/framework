@@ -13,7 +13,7 @@ namespace SFramework.Game
         protected string mAbPath; //scene asset bundle path
         protected string mAbName; //scene asset bundle name
         protected abstract void loadSceneComplete();
-        protected override void init()
+        protected override void initing()
         {
             getBuildInSceneNames(out _buildInSceneNames);// init scene int editor buiding settings
         }

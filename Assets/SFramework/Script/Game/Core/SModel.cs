@@ -25,7 +25,7 @@ namespace SFramework
         public override void Install()
         {
             base.Install();
-            init();
+            initing();
         }
 
         public override void Open(BundleParams value)

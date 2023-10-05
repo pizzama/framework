@@ -26,7 +26,7 @@ namespace SFramework
 
         public override void Install()
         {
-            init();
+            initing();
         }
 
         public override void Update()

@@ -26,7 +26,7 @@ namespace SFramework
         public override void Install()
         {
             base.Install();
-            init();
+            initing();
             Type classType = this.GetType();
             _model = createBundle<SModel>(classType, "Model");
             _model.Control = this;

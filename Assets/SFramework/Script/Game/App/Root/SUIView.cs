@@ -18,7 +18,7 @@ namespace SFramework.Game
         protected string mAbName; //ui asset bundle path
         protected string mResName; //ui asset bundle name
 
-        protected override void init()
+        protected override void initing()
         {
             goDict = new Dictionary<string, GameObject>();
         }
