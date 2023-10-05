@@ -13,7 +13,7 @@ namespace SFramework.Tools
         /// 获取时间戳-单位秒
         /// </summary>
         /// <returns></returns>
-        public long GetTimeStampSecond()
+        public static long GetTimeStampSecond()
         {
             TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
             try
@@ -31,7 +31,7 @@ namespace SFramework.Tools
         /// 获取时间戳-单位毫秒
         /// </summary>
         /// <returns></returns>
-        public long GetTimeStampMilliSecond()
+        public static long GetTimeStampMilliSecond()
         {
             TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
             try
@@ -47,7 +47,7 @@ namespace SFramework.Tools
         /// <summary>
         /// 显示当前时间，显示的格式为20220506-11:09:30
         /// </summary>
-        public void GetTime()
+        public static string GetTime()
         {
             string year = DateTime.Now.Year.ToString();
             string month = DateTime.Now.Month < 10 ? "0" + DateTime.Now.Month.ToString() : DateTime.Now.Month.ToString();
@@ -66,8 +66,8 @@ namespace SFramework.Tools
             stringBuilder.Append(minute);
             stringBuilder.Append(":");
             stringBuilder.Append(second);
-
             Debug.Log($"当前时间 = {stringBuilder.ToString()}");
+            return stringBuilder.ToString();
         }
     }
 }

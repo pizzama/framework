@@ -18,21 +18,47 @@ namespace SFramework.Game
 
         protected void SaveData<T>(T data, string fileName) where T : Google.Protobuf.IMessage
         {
-            byte[] bytes = GetBytesFromProtoObject(data);
-            FileStream stream = new FileStream(Application.persistentDataPath + "/" + fileName, FileMode.Create);
-            stream.Write(bytes);
-            stream.Close();
+            try
+            {
+                byte[] bytes = GetBytesFromProtoObject(data);
+                FileStream stream = null;
+                string fileFullPath = Application.persistentDataPath + "/" + fileName;
+                if (File.Exists(fileFullPath))
+                {
+                    stream = new FileStream(fileFullPath, FileMode.Open);
+                }
+                else
+                {
+                    stream = new FileStream(fileFullPath, FileMode.Create);
+                }
+
+                stream.Write(bytes);
+                stream.Close();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError(e);
+            }
         }
 
         public T ReadData<T>(string fileName) where T : Google.Protobuf.IMessage, new()
         {
-            if (File.Exists(Application.persistentDataPath + "/user.dat"))
+            try
             {
-                FileStream stream = new FileStream((Application.persistentDataPath + "/user.dat"), FileMode.Open);
-                byte[] bytes = new byte[stream.Length];
-                stream.Read(bytes, 0, bytes.Length);
-                T dt = GetProtobufObjectFromBytes<T>(bytes);
-                return dt;
+                string fileFullPath = Application.persistentDataPath + "/" + fileName;
+                if (File.Exists(fileFullPath))
+                {
+                    FileStream stream = new FileStream(fileFullPath, FileMode.Open);
+                    byte[] bytes = new byte[stream.Length];
+                    stream.Read(bytes, 0, bytes.Length);
+                    T dt = GetProtobufObjectFromBytes<T>(bytes);
+                    stream.Close();
+                    return dt;
+                }
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError(e);
             }
 
             return default;
@@ -59,5 +85,5 @@ namespace SFramework.Game
         }
     }
 
-    
+
 }

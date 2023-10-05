@@ -43,6 +43,8 @@ namespace SFramework.UI
 
         private void Update()
         {
+            if(_origin == null || SUIROOT.Instance == null)
+                return;
             //p0 is at the arrow emitter point
             _controlPoints[0] = new Vector2(_origin.position.x, _origin.position.y);
             //p3 is at the mouse position
