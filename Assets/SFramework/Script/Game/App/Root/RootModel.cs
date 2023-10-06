@@ -51,8 +51,8 @@ namespace SFramework.Game
                     FileStream stream = new FileStream(fileFullPath, FileMode.Open);
                     byte[] bytes = new byte[stream.Length];
                     stream.Read(bytes, 0, bytes.Length);
-                    T dt = GetProtobufObjectFromBytes<T>(bytes);
                     stream.Close();
+                    T dt = GetProtobufObjectFromBytes<T>(bytes);
                     return dt;
                 }
             }
