@@ -1,13 +1,16 @@
 using UnityEngine;
+using SFramework.Tools.Attributes;
+using Google.Protobuf.WellKnownTypes;
 
 namespace SFramework.Game.Animation
 {
     /*
     * control the transform moving as phase method
     */
-    public class Transform2DAnimation: MonoBehaviour
+    public class TransformAnimation: MonoBehaviour
     {
         [Header("Vertical Shrink")]
+        [SFInformation("Velocity and Phase only calculate Phase as result", SFInformationAttribute.InformationType.Info, false)] 
         [SerializeField] private float _verticalShrinkVelocity = 0;
         [SerializeField] private float _verticalShrinkPhase = 0;
         [SerializeField] private float _verticalShrink = 0;
@@ -20,7 +23,7 @@ namespace SFramework.Game.Animation
         [SerializeField] private float _verticalLevitationVelocity = 0;
         [SerializeField] private float _verticalLevitationPhase = 0;
         [SerializeField] private float _verticalLevitation = 0;
-        [Header("Horizontal Levitation")]
+        [Header("Horizontal Rotate")]
         [SerializeField] private float _horizontalRotateVelocity = 0;
         [SerializeField] private float _horizontalRotatePhase = 0;
         [SerializeField] private float _horizontalRotate = 0; 
@@ -34,8 +37,6 @@ namespace SFramework.Game.Animation
         private float _baseScaleX;
         private float _baseScaleY;
 
-        private bool _initialized = false;
-
         private void Awake()
         {
             if (transform.localScale.x == -1)
@@ -47,11 +48,66 @@ namespace SFramework.Game.Animation
                 _randomPhase = Random.Range(0, 360f);
         }
 
+        public void SetVerticalShrink(float value, float velocity, float phase)
+        {
+            _verticalShrink = value;
+            _verticalShrinkVelocity = velocity;
+            _verticalShrinkPhase = phase;
+        }
+
+        public void CleanVerticalShrink()
+        {
+            _verticalShrink = 0;
+            _verticalShrinkVelocity = 0;
+            _verticalShrinkPhase = 0;
+        }
+
+        public void SetHorizontalShrink(float value, float velocity, float phase)
+        {
+            _horizontalShrink = value;
+            _horizontalShrinkVelocity = velocity;
+            _horizontalShrinkPhase = phase;
+        }
+
+        public void CleanHorizontalShrink()
+        {
+            _horizontalShrink = 0;
+            _horizontalShrinkVelocity = 0;
+            _horizontalShrinkPhase = 0;
+        }
+
+        public void SetLevitation(float value, float velocity, float phase)
+        {
+            _verticalLevitation = value;
+            _verticalLevitationVelocity = velocity;
+            _verticalLevitationPhase = phase;
+        }
+
+        public void CleanLevitation()
+        {
+            _verticalLevitation = 0;
+            _verticalLevitationVelocity = 0;
+            _verticalLevitationPhase = 0;            
+        }
+
+        public void SetRotate(float value, float velocity, float phase)
+        {
+            _horizontalRotate = value;
+            _horizontalRotateVelocity = velocity;
+            _horizontalRotatePhase = phase;
+        }
+
+        public void CleanRotate()
+        {
+            _horizontalRotate = 0;
+            _horizontalRotateVelocity = 0;
+            _horizontalRotatePhase = 0;            
+        }
+
         private float getValue(float velocity, float phase)
         {
             float angle = velocity * Time.fixedTime;
             float v = -Mathf.Cos((angle + phase + _randomPhase) * Mathf.Deg2Rad);
-
             return v;
         } 
 
