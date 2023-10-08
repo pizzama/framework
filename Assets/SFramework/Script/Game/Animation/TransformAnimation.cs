@@ -1,6 +1,5 @@
 using UnityEngine;
 using SFramework.Tools.Attributes;
-using Google.Protobuf.WellKnownTypes;
 
 namespace SFramework.Game.Animation
 {
