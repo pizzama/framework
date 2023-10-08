@@ -14,6 +14,9 @@ namespace SFramework.Game.Actor
         private SFActorFacingDirections _direction;
         [SerializeField]
         private Animator _animator;
+        [SerializeField]
+        private Transform _mainCameraTransform;
+        public Transform MainCameraTransform {get {return _mainCameraTransform;} private set {_mainCameraTransform = value;}}
 
         private FSM _fsm;
 
@@ -38,6 +41,11 @@ namespace SFramework.Game.Actor
             {
                 _fsm = new FSM();
                 _fsm.BlackBoard = this;
+            }
+
+            if(_mainCameraTransform == null)
+            {
+                _mainCameraTransform = Camera.main.transform;
             }
         }
 

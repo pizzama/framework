@@ -52,7 +52,29 @@ public class HeroMoveState : FSMState
         Vector3 currentHorizontalVelocity = getHorizontalVelocity();
         Hero hero = (Hero)Machine.BlackBoard;
         hero.ActorRigidBody.AddForce(movementSpeed * movementDirection - currentHorizontalVelocity, ForceMode.VelocityChange);
+    }
 
+    private float rotate(Vector3 direction)
+    {
+        // control the degree between 0-360
+        // get direction angle 
+        float directionAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        // keep the degree is positive, -90 equal 270, -180 equal 180
+        if(directionAngle < 0f)
+        {
+            directionAngle += 360f;
+        }
+
+        // add camera rotation to angle
+        Hero hero = (Hero)Machine.BlackBoard;
+        directionAngle += hero.MainCameraTransform.eulerAngles.y;
+
+        if(directionAngle > 360f)
+        {
+            directionAngle -= 360f;
+        }
+
+        return directionAngle;
     }
 
     #region Resuable Methods

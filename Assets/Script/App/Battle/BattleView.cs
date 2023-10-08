@@ -22,6 +22,7 @@ namespace Game.Scenes
             Transform parent = getSceneObject<Transform>("Actors");
             _factory = new SFActorFactory(this);
             Hero rt = _factory.Create<Hero>("1", SFResAssets.Model_avatar_role_carrota_sf_Role_CarrotA_Skin_prefab, parent);
+            rt.transform.localPosition = new Vector3(0f, 0.5f, 0f);
         }
     }
 }
