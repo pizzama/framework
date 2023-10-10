@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SFramework
+namespace SFramework.StateMachine
 {
     //State切换条件，每一个状态都会持有一组切换到其它状态的条件
     public interface IFSMTransition

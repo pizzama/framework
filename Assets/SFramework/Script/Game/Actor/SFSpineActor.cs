@@ -6,7 +6,7 @@ using UnityEngine;
 using Spine;
 using Spine.Unity;
 
-namespace SFramework.Game.Actor
+namespace SFramework.Actor
 {
     public class SFSpineActor : SFEntity
     {

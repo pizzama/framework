@@ -2,7 +2,7 @@ using SFramework.Game;
 using SFramework;
 using UnityEngine;
 using UnityEngine.UI;
-using SFramework.Game.Actor;
+using SFramework.Actor;
 using SFramework.Statics;
 using Game.Character;
 

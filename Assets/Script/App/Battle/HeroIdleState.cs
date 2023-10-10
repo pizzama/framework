@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SFramework;
+using SFramework.StateMachine;
 using SFramework.Game.App;
 using Game.Character;
 

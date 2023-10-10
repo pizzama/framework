@@ -2,8 +2,9 @@ using SFramework.Tools.Attributes;
 using System;
 using System.Collections;
 using UnityEngine;
+using SFramework.StateMachine;
 
-namespace SFramework.Game.Actor
+namespace SFramework.Actor
 {
     public class SFActor : SFEntity
     {

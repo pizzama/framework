@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 
-namespace SFramework.Game.Actor
+namespace SFramework.Actor
 {
     public enum SFActorUpdateModes { Update, FixedUpdate }
     public class SFActorController : MonoBehaviour

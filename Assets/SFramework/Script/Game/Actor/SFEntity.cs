@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SFramework.Game.Actor
+namespace SFramework.Actor
 {
     public interface ISFEntity
     {
