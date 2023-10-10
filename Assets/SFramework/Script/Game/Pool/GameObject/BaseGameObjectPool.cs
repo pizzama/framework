@@ -7,9 +7,9 @@ namespace SFramework.Pool
     public abstract class BaseGameObjectPool : IPool<GameObject>
     {
         //设置物体的隐藏位置
-        private float _defaultPosX = 10000f;
-        private float _defaultPosY = 10000f;
-        private float _defaultPosZ = 10000f;
+        private float _defaultPosX = 99999f;
+        private float _defaultPosY = 99999f;
+        private float _defaultPosZ = 99999f;
 
         public float DefaultPosX { get { return _defaultPosX; } set { _defaultPosX = value; } }
         public float DefaultPosY { get { return _defaultPosY; } set { _defaultPosY = value; } }

@@ -32,7 +32,7 @@ namespace SFramework.Game
         public GameObject CreateGameObjectUsingPool(string path, float lifeTime = -1)
         {
             int index = path.LastIndexOf("/");
-            if(index > 0)
+            if (index > 0)
             {
                 string abName = path.Substring(0, index);
                 string resName = path.Substring(index + 1, path.Length - index - 1);
@@ -40,6 +40,21 @@ namespace SFramework.Game
             }
 
             return null;
+        }
+
+        public T CreateComponent<T>(string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1) where T: Component 
+        {
+            GameObject obj = CreateGameObjectUsingPool(prefabFullPath, lifeTime);
+            T result = obj.GetComponent<T>();
+            if (result != null)
+            {
+                if (parent != null)
+                {
+                    result.transform.SetParent(parent, false);
+                }
+                result.transform.localPosition = pos;
+            }
+            return result;
         }
     }
 }
