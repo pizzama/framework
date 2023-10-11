@@ -25,6 +25,7 @@ namespace SFramework.Statics
         public const string Loading_sf_effect1_png = "loading.sf/effect1";
         public const string Loading_sf_GameMainView_prefab = "loading.sf/GameMainView";
         public const string Model_avatar_role_carrota_sf_Carrot_BaseColor_png = "model/avatar/role_carrota.sf/Carrot_BaseColor";
+        public const string Model_avatar_role_carrota_sf_Character_Carrot_prefab = "model/avatar/role_carrota.sf/Character_Carrot";
         public const string Model_avatar_role_carrota_sf_Role_CarrotA_Skin_prefab = "model/avatar/role_carrota.sf/Role_CarrotA_Skin";
         public const string Pic_sf_haipa_png = "pic.sf/haipa";
         public const string Pic_sf_haipa_normal_png = "pic.sf/haipa_normal";
@@ -68,10 +69,15 @@ namespace SFramework.Statics
         public const string RES_effect1_png = "effect1";
         public const string RES_GameMainView_prefab = "GameMainView";
     }
+    public class Model_avatar_role_carrota
+    {
+        public const string BundleName = "model/avatar/role_carrota";
+    }
     public class Model_avatar_role_carrota_sf
     {
         public const string BundleName = "model/avatar/role_carrota.sf";
         public const string RES_Carrot_BaseColor_png = "Carrot_BaseColor";
+        public const string RES_Character_Carrot_prefab = "Character_Carrot";
         public const string RES_Role_CarrotA_Skin_prefab = "Role_CarrotA_Skin";
     }
     public class Pic_sf
