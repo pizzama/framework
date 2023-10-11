@@ -8,8 +8,9 @@ namespace SFramework.Game
 {
     public abstract class SSCENEView : RootView
     {
+        private const string findTag = "$SCENE$";
         private List<string> _buildInSceneNames;
-        private Dictionary<string, Transform> goDict;
+        private Dictionary<string, GameObject> goDict;
         protected string mAbPath; //scene asset bundle path
         protected string mAbName; //scene asset bundle name
         protected abstract void loadSceneComplete();
@@ -55,7 +56,7 @@ namespace SFramework.Game
             }
 
             Control.CloseAllControl(new List<IBundle>() { Control });
-            goDict = collectScene<Transform>();
+            goDict = collectSceneByTag();
             loadSceneComplete();
         }
 
@@ -152,6 +153,19 @@ namespace SFramework.Game
             } while (!string.IsNullOrEmpty(sceneName));
         }
 
+        private Dictionary<string, GameObject> collectSceneByTag()
+        {
+            Dictionary<string, GameObject> sceneDict = new Dictionary<string, GameObject>();
+            GameObject[] alls = GameObject.FindGameObjectsWithTag(findTag);
+            for (int i = 0; i < alls.Length; i++)
+            {
+                var go = alls[i];
+                sceneDict[go.name] = go;
+            }
+
+            return sceneDict;
+        }
+
         protected Dictionary<string, T> collectScene<T>() where T : UnityEngine.Object
         {
             Dictionary<string, T> sceneDict = new Dictionary<string, T>();
@@ -173,7 +187,7 @@ namespace SFramework.Game
 
         protected T getSceneObject<T>(string key)
         {
-            Transform go = null;
+            GameObject go = null;
             goDict.TryGetValue(key, out go);
             if (go != null)
                 return go.GetComponent<T>();

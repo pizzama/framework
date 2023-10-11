@@ -8,6 +8,7 @@ namespace SFramework.Game
 {
     public abstract class SUIView : RootView
     {
+        private const string findTag = "$UI$";
         private const string defaultVariantName = "sf";
         //set the ui in which layer
         protected abstract UILayer GetViewLayer();
@@ -52,7 +53,13 @@ namespace SFramework.Game
                 if(UIRoot)
                 {
                     UIRoot.OpenUI(layer, mViewTransform, position, rotation);
-                    goDict = ComponentTools.collectAllGameObjects(mViewTransform.gameObject);
+                    GameObject[] alls = GameObject.FindGameObjectsWithTag(findTag);
+                    for (int i = 0; i < alls.Length; i++)
+                    {
+                        var go = alls[i];
+                        goDict[go.name] = go;
+                    }
+                    // goDict = ComponentTools.collectAllGameObjects(mViewTransform.gameObject); 
                 }
                 else
                 {

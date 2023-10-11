@@ -33,11 +33,7 @@ namespace SFramework.Actor
 
         protected virtual void init()
         {
-            if (_animator == null)
-            {
-                _animator = GetComponent<Animator>();
-            }
-
+            findAnimator();
             if (_fsm == null)
             {
                 _fsm = new FSM();
@@ -48,6 +44,13 @@ namespace SFramework.Actor
             {
                 _mainCameraTransform = Camera.main.transform;
             }
+        }
+
+        private void findAnimator()
+        {
+            _animator = GetComponent<Animator>();
+            if(_animator == null)
+                _animator = FindFirstObjectByType<Animator>();
         }
 
         public void AddFSMState(IFSMState state)

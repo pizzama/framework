@@ -32,6 +32,7 @@ namespace SFramework.Tools
             return result;
         }
 
+        // this method is too heavy, fist using FindGameObjectsWithTag instead
         public static void collectAllGameObject(Dictionary<string, GameObject> objectMap, GameObject gameObject)
         {
             if (objectMap.ContainsKey(gameObject.name))

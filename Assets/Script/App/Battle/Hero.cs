@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using SFramework;
 using SFramework.Actor;
 
 namespace Game.Character
