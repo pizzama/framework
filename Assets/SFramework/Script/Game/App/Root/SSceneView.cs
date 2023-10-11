@@ -198,6 +198,10 @@ namespace SFramework.Game
                 {
                     return go.GetComponent<T>();
                 }
+                else
+                {
+                    Debug.LogWarning("scene not found object by key:" + key);
+                }
             }
 
             return default(T);
