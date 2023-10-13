@@ -60,7 +60,10 @@ namespace SFramework.Actor
         }
         protected virtual void computeSpeed()
         {
-            speed = (this.transform.position - lastUpdatePosition) / Time.deltaTime;
+            if (Time.deltaTime != 0f)
+            {
+                speed = (this.transform.position - lastUpdatePosition) / Time.deltaTime;
+            }
             // we round the speed to 2 decimals
             speed.x = Mathf.Round(speed.x * 100f) / 100f;
             speed.y = Mathf.Round(speed.y * 100f) / 100f;
