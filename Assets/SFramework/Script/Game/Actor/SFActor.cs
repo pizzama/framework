@@ -8,7 +8,7 @@ namespace SFramework.Actor
 {
     public class SFActor : SFEntity
     {
-        public enum SFActorFacingDirections { Default, Left, Right, Up, Down }
+        public enum SFActorFacingDirections {Left, Right, Up, Down }
 
         [SerializeField]
         [SFInformation("Actor's direction", SFInformationAttribute.InformationType.Info, false)] 

@@ -6,26 +6,29 @@ using UnityEngine;
 
 namespace SFramework.Actor
 {
-    public enum SFActorUpdateModes { Update, FixedUpdate }
     public class SFActorController : MonoBehaviour
     {
-        [SerializeField] protected Vector3 currentDirection;
         [SFReadOnly][SerializeField] protected bool isGrounded;
         [SerializeField] protected Vector3 speed;
         [Header("Gravity")]
         [SerializeField] protected float gravity = -30f;
         [SerializeField] protected bool isActiveGravity = true;
-        [SerializeField] protected Vector3 currentMovement;
         [SerializeField] protected Vector3 velocity;
-        /// whether or not the character is in free movement mode or not
-        [SerializeField] protected bool freeMovement = true;
-
-        protected Vector3 acceleration;
-        protected Vector3 lastUpdateVelocity;
-        protected Vector3 lastUpdatePosition;
+        [SerializeField] protected Vector3 acceleration;
+        [SerializeField] protected bool freeMovement = true; /// whether or not the character is in free movement mode or not
+        public Vector3 CurrentMovement {get; set;}
+        public Vector3 CurrentDirection {get; set;}
+        public bool Grounded { get; private set; } // whether or not the character is grounded
+        public bool JustGotGrounded { get; private set; } // whether or not the character got grounded this frame
+        public float Friction;
+        public Vector3 AddedForce;
+        protected Vector3 lastUpdateVelocity; // last frame velocity
+        protected Vector3 lastUpdatePosition; // last frame position
+        protected Vector3 impact;
+        private bool _groundedLastFrame;
         protected virtual void Awake()
         {
-            currentDirection = transform.forward;
+            CurrentDirection = transform.forward;
         }
         protected virtual void Update()
         {
@@ -40,12 +43,25 @@ namespace SFramework.Actor
         }
         protected virtual void FixedUpdate()
         {
-            computeSpeed();
+
         }
         protected void checkIsGrounded()
         {
-
+            JustGotGrounded = (!_groundedLastFrame && Grounded);
+            _groundedLastFrame = Grounded;
         }
+
+        // Use this to apply an impact to a controller, moving it in the specified direction at the specified force
+        public virtual void Impact(Vector3 direction, float force) 
+		{
+
+		}
+        // Adds the specified force to the controller
+        public virtual void AddForce(Vector3 movement)
+		{
+
+		}
+
         protected virtual void handleFriction()
         {
 
@@ -73,11 +89,16 @@ namespace SFramework.Actor
 
         public virtual void Reset()
         {
-            currentDirection = Vector3.zero;
-            isGrounded = true;
-            speed = Vector3.zero;
-            isActiveGravity = true;
-            currentMovement = Vector3.zero;
+			impact = Vector3.zero;
+			speed = Vector3.zero;
+			velocity = Vector3.zero;
+			lastUpdateVelocity = Vector3.zero;
+			acceleration = Vector3.zero;
+			Grounded = true;
+			JustGotGrounded = false;
+			CurrentMovement = Vector3.zero;
+			CurrentDirection = Vector3.zero;
+			AddedForce = Vector3.zero;
         }
     }
 }

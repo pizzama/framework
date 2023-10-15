@@ -1,152 +1,89 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace SFramework.Actor
 {
     public class SFActorController2D : SFActorController
     {
+        [Header("Base Property")]
         [SerializeField] private CharacterController _characterController;
         [SerializeField]private Rigidbody2D _rigidBody;
-        [SerializeField]private BoxCollider2D _collider;
-        [SerializeField] private SFActorUpdateModes _updateMode;
-
-        [Header("Steep Surfaces")]
-        /// whether or not the character should slide while standing on steep surfaces
-        public bool SlideOnSteepSurfaces = true;
-        /// the speed at which the character should slide
-        public float SlidingSpeed = 15f;
-        /// the control the player has on the speed while sliding down
-        public float SlidingSpeedControl = 0.4f;
-        /// the control the player has on the direction while sliding down
-        public float SlidingDirectionControl = 1f;
-
-        private Vector3 _groundNormal = Vector3.zero;
-        private Vector3 _lastGroundNormal = Vector3.zero;
-        private Vector3 _inputMoveDirection;
-
-        // char movement
-        private CollisionFlags _collisionFlags;
-        private Vector3 _frameVelocity = Vector3.zero;
-        private Vector3 _hitPoint = Vector3.zero;
-        private Vector3 _lastHitPoint = new Vector3(Mathf.Infinity, 0, 0);
-
-        // velocity
-        private Vector3 _newVelocity;
-        private Vector3 _lastHorizontalVelocity;
-        private Vector3 _newHorizontalVelocity;
-        private Vector3 _motion;
-        private Vector3 _idealVelocity;
-        private Vector3 _idealDirection;
-        private Vector3 _idealLocalDirection;
-        private Vector3 _horizontalVelocityDelta;
-        private float _stickyOffset;
+        [SerializeField]private Collider2D _collider;
+        private Vector3 _orientedMovement;
 
         protected override void Awake()
         {
             base.Awake();
             _characterController = GetComponent<CharacterController>();
-            _rigidBody = GetComponent<Rigidbody>();
-            _collider = GetComponent<Collider>();
+            _rigidBody = GetComponent<Rigidbody2D>();
+            _collider = GetComponent<Collider2D>();
         }
 
         protected override void Update()
         {
             base.Update();
-            if (_updateMode == SFActorUpdateModes.Update)
-            {
-                processUpdate();
-            }
+			velocity = (_rigidBody.transform.position - lastUpdatePosition) / Time.deltaTime;
+			acceleration = (velocity - lastUpdateVelocity) / Time.deltaTime;
+            
         }
 
-        //�����µ�λ�ƣ����ƶ���ɫ
-        protected virtual void processUpdate()
+        protected override void LateUpdate()
         {
-            if (transform == null)
-            {
-                return;
-            }
-
+            base.LateUpdate();
+            lastUpdateVelocity = velocity;
+			computeSpeed();
+        }
+        
+        protected override void FixedUpdate()
+		{
+            base.FixedUpdate();
             if (!freeMovement)
-            {
-                return;
-            }
+			{
+				return;
+			}
 
-            addInput();
-            moveCharacterController();
+			if (Friction > 1)
+			{
+				CurrentMovement = CurrentMovement / Friction;
+			}
+            
+			// if we have a low friction (ice, marbles...) we lerp the speed accordingly
+			if (Friction > 0 && Friction < 1)
+			{
+				CurrentMovement = Vector3.Lerp(speed, CurrentMovement, Time.deltaTime * Friction);
+			}
+            
+			Vector2 newMovement = _rigidBody.position + (Vector2)(CurrentMovement + AddedForce) * Time.fixedDeltaTime;
+			Debug.Log(newMovement);
+			_rigidBody.MovePosition(newMovement);
         }
 
-        public bool TooSteep() { return (_groundNormal.y <= Mathf.Cos(_characterController.slopeLimit * Mathf.Deg2Rad)); }
+        public override void Impact(Vector3 direction, float force)
+		{
+			direction = direction.normalized;
+			impact += direction.normalized * force;
+		}
 
-        public override void SetMovement(Vector3 movement)
-        {
-            currentMovement = movement;
+        protected virtual void ApplyImpact()
+		{
+			if (impact.magnitude > 0.2f)
+			{
+				_rigidBody.AddForce(impact);
+			}
+			impact = Vector3.Lerp(impact, Vector3.zero, 5f * Time.deltaTime);
+		}
 
-            Vector3 directionVector;
-            directionVector = movement;
-            if (directionVector != Vector3.zero)
-            {
-                float directionLength = directionVector.magnitude;
-                directionVector = directionVector / directionLength;
-                directionLength = Mathf.Min(1, directionLength);
-                directionLength = directionLength * directionLength;
-                directionVector = directionVector * directionLength;
-            }
-            _inputMoveDirection = transform.rotation * directionVector;
-        }
+        public override void AddForce(Vector3 movement)
+		{
+			Impact(movement.normalized, movement.magnitude);
+		}
 
-        protected virtual void addInput()
-        {
-            if (isGrounded && TooSteep())
-            {
-                _idealVelocity.x = _groundNormal.x;
-                _idealVelocity.y = 0;
-                _idealVelocity.z = _groundNormal.z;
-                _idealVelocity = _idealVelocity.normalized;
-                _idealDirection = Vector3.Project(_inputMoveDirection, _idealVelocity);
-                _idealVelocity = _idealVelocity + (_idealDirection * SlidingSpeedControl) + (_inputMoveDirection - _idealDirection) * SlidingDirectionControl;
-                _idealVelocity = _idealVelocity * SlidingSpeed;
-            }
-            else
-            {
-                _idealVelocity = currentMovement;
-            }
+		public override void SetMovement(Vector3 movement)
+		{
+			_orientedMovement = movement;
+			_orientedMovement.y = _orientedMovement.z;
+			_orientedMovement.z = 0f;
+			CurrentMovement = _orientedMovement;
+		}
 
-            if (isGrounded)
-            {
-                Vector3 sideways = Vector3.Cross(Vector3.up, _idealVelocity);
-                _idealVelocity = Vector3.Cross(sideways, _groundNormal).normalized * _idealVelocity.magnitude;
-            }
-
-            _newVelocity = _idealVelocity;
-            _newVelocity.y = isGrounded ? Mathf.Min(_newVelocity.y, 0) : _newVelocity.y;
-        }
-
-        protected virtual void ComputeVelocityDelta()
-        {
-            _motion = _newVelocity * Time.deltaTime;
-            _horizontalVelocityDelta.x = _motion.x;
-            _horizontalVelocityDelta.y = 0f;
-            _horizontalVelocityDelta.z = _motion.z;
-            _stickyOffset = Mathf.Max(_characterController.stepOffset, _horizontalVelocityDelta.magnitude);
-            if (isGrounded)
-            {
-                _motion -= _stickyOffset * Vector3.up;
-            }
-        }
-
-        protected virtual void addGravity()
-        {
-
-        }
-
-        protected virtual void moveCharacterController()
-        {
-            _groundNormal = Vector3.zero;
-
-            _collisionFlags = _characterController.Move(_motion); // controller move
-
-            _lastHitPoint = _hitPoint;
-            _lastGroundNormal = _groundNormal;
-        }
     }
 }

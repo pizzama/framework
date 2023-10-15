@@ -11,7 +11,6 @@ namespace SFramework.Actor
         [SerializeField] private CharacterController _characterController;
         [SerializeField] protected Rigidbody _rigidBody;
         [SerializeField] protected Collider _collider;
-        [SerializeField] private SFActorUpdateModes _updateMode;
 
         [Header("Steep Surfaces")]
         /// whether or not the character should slide while standing on steep surfaces
@@ -55,10 +54,8 @@ namespace SFramework.Actor
         protected override void Update()
         {
             base.Update();
-            if (_updateMode == SFActorUpdateModes.Update)
-            {
-                processUpdate();
-            }
+            processUpdate();
+
         }
 
         //�����µ�λ�ƣ����ƶ���ɫ
@@ -82,7 +79,7 @@ namespace SFramework.Actor
 
         public override void SetMovement(Vector3 movement)
         {
-            currentMovement = movement;
+            CurrentMovement = movement;
 
             Vector3 directionVector;
             directionVector = movement;
@@ -111,7 +108,7 @@ namespace SFramework.Actor
             }
             else
             {
-                _idealVelocity = currentMovement;
+                _idealVelocity = CurrentMovement;
             }
 
             if (isGrounded)

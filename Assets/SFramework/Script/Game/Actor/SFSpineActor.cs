@@ -1,7 +1,6 @@
 #if SPINE_ANIMATION
 using SFramework.Tools.Attributes;
-using System;
-using System.Collections;
+using SFramework.StateMachine;
 using UnityEngine;
 using Spine;
 using Spine.Unity;
