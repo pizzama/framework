@@ -10,6 +10,7 @@ namespace SFramework.Actor.Ability
         public bool InterpolateMovementSpeed = false; /// whether or not to interpolate movement speed
         public bool InputAuthorized = false; // whether or not need inputmanager input;
         public MovementsType Movemens = MovementsType.Free;
+        [Header("Property Value")]
         public float IdleThreshold = 0.05f; // the speed threshold after which the character is not considered idle anymore
         public float Acceleration = 10f; //the acceleration to apply to the current speed / 0f : no acceleration, instant full speed
         public float Deceleration = 10f; //the deceleration to apply to the current speed / 0f : no deceleration, instant stop
