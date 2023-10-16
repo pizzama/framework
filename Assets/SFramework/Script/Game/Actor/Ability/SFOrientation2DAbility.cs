@@ -7,10 +7,12 @@ namespace SFramework.Actor.Ability
     {
         public enum FacingModes { None, MovementDirection, WeaponDirection, Both }
         public enum FacingBases { WeaponAngle, MousePositionX, SceneReticlePositionX }
+        public bool ModelShouldFlip = false;
+        public bool ModelShouldRotate = false;
+        public bool IsFacingRight = true; /// whether or not this character is facing right
         public float AbsoluteThresholdMovement = 0.5f;/// the threshold at which movement is considered
         public SFActor.SFActorFacingDirections InitialFacingDirection = SFActor.SFActorFacingDirections.Right;
         public SFActor.SFActorFacingDirections CurrentFacingDirection = SFActor.SFActorFacingDirections.Right;
-        public bool IsFacingRight = true; /// whether or not this character is facing right
         private int _direction;
         private int _directionLastFrame = 0;
         private float _lastDirectionX;
@@ -18,9 +20,8 @@ namespace SFramework.Actor.Ability
         private float _horizontalDirection;
         private float _verticalDirection;
         private float _directionFloat;
-        public override void InitAbility()
+        protected override void init()
         {
-            base.InitAbility();
             actControl.CurrentDirection = Vector3.zero;
             if (InitialFacingDirection == SFActor.SFActorFacingDirections.Left)
             {

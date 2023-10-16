@@ -24,6 +24,7 @@ namespace SFramework
                     {
                         GameObject obj = new GameObject();
                         _instance = obj.AddComponent<T>();
+                        obj.name = typeof(T).Name;
                     }
                 }
                 return _instance;

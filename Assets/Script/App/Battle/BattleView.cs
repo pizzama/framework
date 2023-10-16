@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using SFramework.Actor;
 using SFramework.Statics;
 using Game.Character;
+using SFramework.Game.App;
 
 namespace Game.Scenes
 {
@@ -18,6 +19,7 @@ namespace Game.Scenes
 
         protected override void loadSceneComplete()
         {
+            var input = SFInputManager.Instance;
             Debug.Log("load complete");
             Transform parent = getSceneObject<Transform>("Actors");
             _factory = new SFActorFactory(this);

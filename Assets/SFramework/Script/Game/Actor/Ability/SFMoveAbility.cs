@@ -9,7 +9,7 @@ namespace SFramework.Actor.Ability
         public bool AnalogInput = false; /// whether or not input should be analog
         public bool InterpolateMovementSpeed = false; /// whether or not to interpolate movement speed
         public bool InputAuthorized = false; // whether or not need inputmanager input;
-        public MovementsType Movemens = MovementsType.Free;
+        public MovementsType Movements = MovementsType.Free;
         [Header("Property Value")]
         public float IdleThreshold = 0.05f; // the speed threshold after which the character is not considered idle anymore
         public float Acceleration = 10f; //the acceleration to apply to the current speed / 0f : no acceleration, instant full speed
@@ -20,20 +20,14 @@ namespace SFramework.Actor.Ability
         public float VerticalMovement;
         private Vector2 _lerpedInput = Vector2.zero;
         private float _acceleration = 0f;
-        public override void InitAbility()
+        protected override void init()
         {
-            base.InitAbility();
             MovementSpeed = WalkSpeed;
-        }
-
-        public override void EnterAbility()
-        {
-
         }
 
         public override void UpdateAbility()
         {
-            if (AbilityAuthorized)
+            if (AbilityAuthorized && conditionMachine != null && movementMachine != null)
             {
                 if (handleFrozen())
                     return;
@@ -46,14 +40,9 @@ namespace SFramework.Actor.Ability
             }
         }
 
-        public override void ExitAbility()
-        {
-
-        }
-
         protected virtual void handleDirection()
         {
-            switch (Movemens)
+            switch (Movements)
             {
                 case MovementsType.Free:
                     // do nothing

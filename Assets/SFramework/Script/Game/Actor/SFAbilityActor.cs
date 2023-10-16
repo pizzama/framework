@@ -36,5 +36,10 @@ public class SFAbilityActor : SFEntity
     {
         // we grab all abilities at our level
         _abilities = gameObject.GetComponents<SFAbility>();
+        for (int i = 0; i < _abilities.Length; i++)
+        {
+            SFAbility ab = _abilities[i];
+            ab.InitAbility();
+        }
     }
 }

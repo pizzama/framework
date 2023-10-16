@@ -3,7 +3,7 @@ using SFramework.StateMachine;
 
 namespace SFramework.Actor.Ability
 {
-    public class SFAbility : MonoBehaviour
+    public abstract class SFAbility : MonoBehaviour
     {
         [Header("Permission")]
         public bool AbilityPermitted = true;
@@ -17,31 +17,20 @@ namespace SFramework.Actor.Ability
         /// an array containing all the blocking condition states. If the Character is in one of these states and tries to trigger this ability, it won't be permitted. Useful to prevent this ability from being used while dead, for example.
         public SFAbilityStates.AbilityConditions[] BlockingConditionStates;
 
-        protected virtual void Start()
-        {
-            InitAbility();
-            AbilityInitialized = true;
-        }
-
         public virtual void InitAbility()
         {
             actControl = GetComponent<SFActorController>();
             act = GetComponent<SFAbilityActor>();
             movementMachine = act.MovementMachine;
             conditionMachine = act.ConditionMachine;
+            init();
+            AbilityInitialized = true;
         }
 
-        public virtual void EnterAbility()
-        {
+        protected abstract void init();
 
-        }
 
         public virtual void UpdateAbility()
-        {
-
-        }
-
-        public virtual void ExitAbility()
         {
 
         }
