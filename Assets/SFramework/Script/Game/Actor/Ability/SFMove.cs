@@ -20,10 +20,6 @@ namespace SFramework.Actor.Ability
         public float VerticalMovement;
         private Vector2 _lerpedInput = Vector2.zero;
         private float _acceleration = 0f;
-        private void Start()
-        {
-            
-        }
         protected override void init()
         {
             MovementSpeed = WalkSpeed;

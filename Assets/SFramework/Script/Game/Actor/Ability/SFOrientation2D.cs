@@ -29,23 +29,16 @@ namespace SFramework.Actor.Ability
         private float _directionFloat;
         private Vector3 _targetModelRotation;
         private float _lastNonNullXMovement;
-        private void Start()
-        {
-            
-        }
-
         protected override void init()
         {
             actControl.CurrentDirection = Vector3.zero;
-            if (InitialFacingDirection == SFActor.SFActorFacingDirections.Left)
+            if (IsFacingRight)
             {
-                IsFacingRight = false;
-                _direction = -1;
+                _direction = 1;
             }
             else
             {
-                IsFacingRight = true;
-                _direction = 1;
+                _direction = -1;
             }
             Face(InitialFacingDirection);
             _directionLastFrame = 0;
@@ -74,12 +67,12 @@ namespace SFramework.Actor.Ability
         public override void UpdateAbility()
         {
             base.UpdateAbility();
-            if (conditionMachine.CurrentState != SFAbilityStates.AbilityConditions.Normal)
+            if (!AbilityAuthorized)
             {
                 return;
             }
 
-            if (!AbilityAuthorized)
+            if (conditionMachine.CurrentState != SFAbilityStates.AbilityConditions.Normal)
             {
                 return;
             }
@@ -98,14 +91,8 @@ namespace SFramework.Actor.Ability
         {
             CurrentFacingDirection = direction;
             applyCurrentDirection();
-            if (direction == SFActor.SFActorFacingDirections.Right)
-            {
-                FaceDirection(-1);
-            }
-            if (direction == SFActor.SFActorFacingDirections.Left)
-            {
-                FaceDirection(1);
-            }
+            FaceDirection(_direction);
+
         }
 
         public virtual void FaceDirection(int direction)
@@ -119,16 +106,13 @@ namespace SFramework.Actor.Ability
             {
                 rotateModel(direction);
             }
-
-            _direction = direction;
-            IsFacingRight = _direction == 1;
         }
 
         public virtual void FlipModel(int direction)
         {
             if (act != null)
             {
-                act.transform.localScale = (direction == 1) ? ModelFlipValueRight : ModelFlipValueLeft;
+                act.transform.localScale = (direction == _direction) ? ModelFlipValueRight : ModelFlipValueLeft;
             }
         }
 
