@@ -81,6 +81,7 @@ namespace SFramework.Actor.Ability
 
             determineFacingDirection();
             flipToFaceMovementDirection();
+            flipToFaceWeaponDirection();
             applyModelRotation();
             flipAbilities();
 

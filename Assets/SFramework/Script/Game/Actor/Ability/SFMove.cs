@@ -3,7 +3,7 @@ using SFramework.Game.App;
 using UnityEngine;
 namespace SFramework.Actor.Ability
 {
-    public class SFMoveAbility : SFAbility
+    public class SFMove:SFAbility
     {
         public enum MovementsType { Free, Strict2DirectionsHorizontal, Strict2DirectionsVertical, Strict4Directions, Strict8Directions }
         public bool AnalogInput = false; // whether or not input should be analog
