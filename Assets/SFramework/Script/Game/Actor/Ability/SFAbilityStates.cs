@@ -8,7 +8,8 @@ namespace SFramework.Actor.Ability
 	/// </summary>    
 	public class SFAbilityStates 
 	{
-		/// The possible character conditions
+		// The possible character conditions
+		
 		public enum AbilityConditions
 		{
 			Normal,
@@ -19,8 +20,8 @@ namespace SFramework.Actor.Ability
 			Stunned
 		}
 
-		/// The possible Movement States the character can be in. These usually correspond to their own class, 
-		/// but it's not mandatory
+		// The possible Movement States the character can be in. These usually correspond to their own class, 
+		// but it's not mandatory
 		public enum AbilityStates 
 		{
 			Null,

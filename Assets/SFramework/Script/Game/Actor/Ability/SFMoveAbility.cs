@@ -6,8 +6,8 @@ namespace SFramework.Actor.Ability
     public class SFMoveAbility : SFAbility
     {
         public enum MovementsType { Free, Strict2DirectionsHorizontal, Strict2DirectionsVertical, Strict4Directions, Strict8Directions }
-        public bool AnalogInput = false; /// whether or not input should be analog
-        public bool InterpolateMovementSpeed = false; /// whether or not to interpolate movement speed
+        public bool AnalogInput = false; // whether or not input should be analog
+        public bool InterpolateMovementSpeed = false; // whether or not to interpolate movement speed
         public bool InputAuthorized = false; // whether or not need inputmanager input;
         public MovementsType Movements = MovementsType.Free;
         [Header("Property Value")]
