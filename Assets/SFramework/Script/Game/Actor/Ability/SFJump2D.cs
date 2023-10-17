@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SFramework.Event;
 
 namespace SFramework.Actor.Ability
 {
@@ -9,6 +10,7 @@ namespace SFramework.Actor.Ability
 	/// </summary>
 	public class SFJump2D : SFAbility
 	{
+		public bool InputAuthorized = false; // whether or not need inputmanager input;
 		public bool JumpProportionalToPress = true; // whether or not the jump should be proportional to press (if yes, releasing the button will stop the jump)
 		public float MinimumPressTime = 0.4f;// the minimum amount of time after the jump's start before releasing the jump button has any effect
 		public float JumpForce = 800f; // the force to apply to the jump, the higher the jump, the faster the jump
@@ -25,6 +27,10 @@ namespace SFramework.Actor.Ability
 
 		public override void UpdateAbility()
 		{
+			if (InputAuthorized)
+			{
+				handleInput();
+			}
 			// On process ability, we stop the jump if needed
 			if (movementMachine.CurrentState == SFAbilityStates.AbilityStates.Jumping)
 			{
@@ -60,6 +66,16 @@ namespace SFramework.Actor.Ability
 		public virtual void JumpStop()
 		{
 			_jumpStopped = true;
+		}
+
+		protected void handleInput()
+		{
+			// if movement is prevented, or if the character is dead/frozen/can't move, we exit and do nothing
+			if (!AbilityAuthorized
+			    || (conditionMachine.CurrentState != SFAbilityStates.AbilityConditions.Normal))
+			{
+				return;
+			}
 		}
 	}
 }

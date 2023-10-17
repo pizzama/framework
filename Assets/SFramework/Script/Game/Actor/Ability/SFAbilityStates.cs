@@ -40,4 +40,9 @@ namespace SFramework.Actor.Ability
 			FallingDownHole
 		}
 	}
+
+	public struct JumpEvent
+	{
+		string name;
+	}
 }
