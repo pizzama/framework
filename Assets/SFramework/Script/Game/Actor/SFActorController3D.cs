@@ -54,13 +54,6 @@ namespace SFramework.Actor
         protected override void Update()
         {
             base.Update();
-            processUpdate();
-
-        }
-
-        //�����µ�λ�ƣ����ƶ���ɫ
-        protected virtual void processUpdate()
-        {
             if (transform == null)
             {
                 return;
@@ -73,6 +66,7 @@ namespace SFramework.Actor
 
             addInput();
             moveCharacterController();
+
         }
 
         public bool TooSteep() { return (_groundNormal.y <= Mathf.Cos(_characterController.slopeLimit * Mathf.Deg2Rad)); }
