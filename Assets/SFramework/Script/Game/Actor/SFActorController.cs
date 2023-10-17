@@ -1,7 +1,4 @@
 using SFramework.Tools.Attributes;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Collections;
 using UnityEngine;
 
 namespace SFramework.Actor
@@ -16,8 +13,8 @@ namespace SFramework.Actor
         [SerializeField] protected Vector3 velocity;
         [SerializeField] protected Vector3 acceleration;
         [SerializeField] protected bool freeMovement = true; /// whether or not the character is in free movement mode or not
-        public Vector3 CurrentMovement {get; set;}
-        public Vector3 CurrentDirection {get; set;}
+        public Vector3 CurrentMovement { get; set; }
+        public Vector3 CurrentDirection { get; set; }
         public bool Grounded { get; private set; } // whether or not the character is grounded
         public bool JustGotGrounded { get; private set; } // whether or not the character got grounded this frame
         public float Friction;
@@ -52,15 +49,26 @@ namespace SFramework.Actor
         }
 
         // Use this to apply an impact to a controller, moving it in the specified direction at the specified force
-        public virtual void Impact(Vector3 direction, float force) 
-		{
+        public virtual void Impact(Vector3 direction, float force)
+        {
 
-		}
+        }
         // Adds the specified force to the controller
         public virtual void AddForce(Vector3 movement)
-		{
+        {
 
-		}
+        }
+
+        // Sets the current movement of the controller to the specified Vector3
+        public virtual void SetMovement(Vector3 movement)
+        {
+
+        }
+        // Moves the controller to the specified position (in world space)
+        public virtual void MovePosition(Vector3 newPosition)
+        {
+
+        }
 
         protected virtual void handleFriction()
         {
@@ -70,10 +78,7 @@ namespace SFramework.Actor
         {
 
         }
-        public virtual void SetMovement(Vector3 movement)
-        {
 
-        }
         protected virtual void computeSpeed()
         {
             if (Time.deltaTime != 0f)
@@ -89,16 +94,16 @@ namespace SFramework.Actor
 
         public virtual void Reset()
         {
-			impact = Vector3.zero;
-			speed = Vector3.zero;
-			velocity = Vector3.zero;
-			lastUpdateVelocity = Vector3.zero;
-			acceleration = Vector3.zero;
-			Grounded = true;
-			JustGotGrounded = false;
-			CurrentMovement = Vector3.zero;
-			CurrentDirection = Vector3.zero;
-			AddedForce = Vector3.zero;
+            impact = Vector3.zero;
+            speed = Vector3.zero;
+            velocity = Vector3.zero;
+            lastUpdateVelocity = Vector3.zero;
+            acceleration = Vector3.zero;
+            Grounded = true;
+            JustGotGrounded = false;
+            CurrentMovement = Vector3.zero;
+            CurrentDirection = Vector3.zero;
+            AddedForce = Vector3.zero;
         }
     }
 }
