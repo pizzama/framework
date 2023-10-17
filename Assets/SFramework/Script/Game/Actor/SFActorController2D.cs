@@ -23,7 +23,6 @@ namespace SFramework.Actor
             base.Update();
 			velocity = (_rigidBody.transform.position - lastUpdatePosition) / Time.deltaTime;
 			acceleration = (velocity - lastUpdateVelocity) / Time.deltaTime;
-            
         }
 
         protected override void LateUpdate()
@@ -36,6 +35,7 @@ namespace SFramework.Actor
         protected override void FixedUpdate()
 		{
             base.FixedUpdate();
+			applyImpact();
             if (!freeMovement)
 			{
 				return;
@@ -63,13 +63,21 @@ namespace SFramework.Actor
 			impact += direction.normalized * force;
 		}
 
-        protected virtual void ApplyImpact()
+        protected virtual void applyImpact()
 		{
 			if (impact.magnitude > 0.2f)
 			{
 				_rigidBody.AddForce(impact);
 			}
 			impact = Vector3.Lerp(impact, Vector3.zero, 5f * Time.deltaTime);
+		}
+
+		protected override void determineDirection()
+		{
+			if (CurrentMovement != Vector3.zero)
+			{
+				CurrentDirection = CurrentMovement.normalized;
+			}
 		}
 
         public override void AddForce(Vector3 movement)

@@ -3,7 +3,7 @@ using SFramework.Game.App;
 using UnityEngine;
 namespace SFramework.Actor.Ability
 {
-    public class SFOrientation2DAbility : SFAbility
+    public class SFOrientation2D : SFAbility
     {
         public enum FacingModes { None, MovementDirection, WeaponDirection, Both }
         public enum FacingBases { WeaponAngle, MousePositionX, SceneReticlePositionX }
@@ -29,6 +29,11 @@ namespace SFramework.Actor.Ability
         private float _directionFloat;
         private Vector3 _targetModelRotation;
         private float _lastNonNullXMovement;
+        private void Start()
+        {
+            
+        }
+
         protected override void init()
         {
             actControl.CurrentDirection = Vector3.zero;
@@ -213,7 +218,7 @@ namespace SFramework.Actor.Ability
         {
             // if we're not supposed to face our direction, we do nothing and exit
             if ((FacingMode != FacingModes.MovementDirection) && (FacingMode != FacingModes.Both)) { return; }
-
+            Debug.Log(actControl.CurrentDirection.normalized);
             if (actControl.CurrentDirection.normalized.magnitude >= AbsoluteThresholdMovement)
             {
                 float checkedDirection = (Mathf.Abs(actControl.CurrentDirection.normalized.x) > 0) ? actControl.CurrentDirection.normalized.x : _lastNonNullXMovement;

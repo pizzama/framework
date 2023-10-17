@@ -539,7 +539,7 @@ MonoBehaviour:
   AbilityPermitted: 1
   BlockingMovementStates: 
   BlockingConditionStates: 
-  FacingMode: 0
+  FacingMode: 1
   ModelShouldFlip: 1
   ModelShouldRotate: 0
   IsFacingRight: 1
@@ -1047,7 +1047,7 @@ Transform:
   m_GameObject: {fileID: 1609088178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.56223786, y: 5, z: -3.89}
-  m_LocalScale: {x: 0.6682256, y: 0.9259259, z: 1}
+  m_LocalScale: {x: 0.37485826, y: 0.9259259, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

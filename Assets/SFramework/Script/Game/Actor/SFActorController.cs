@@ -34,7 +34,7 @@ namespace SFramework.Actor
         {
             checkIsGrounded();
             handleFriction();
-            determineDirection();
+            determineDirection(); //collect direction info;
         }
 
         protected virtual void LateUpdate()
