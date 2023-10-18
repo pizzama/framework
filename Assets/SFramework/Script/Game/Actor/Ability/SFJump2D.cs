@@ -21,11 +21,19 @@ namespace SFramework.Actor.Ability
 
 		private bool _jumpStopped = false;
 		private float _jumpStartedAt = 0f;
+
 		protected override void init()
 		{
+			SFEventManager.AddListener(this);
 		}
 
-		public override void UpdateAbility()
+        public override void DestroyAbility()
+        {
+            base.DestroyAbility();
+			SFEventManager.RemoveListener(this);
+        }
+
+        public override void UpdateAbility()
 		{
 			if (InputAuthorized)
 			{
@@ -68,14 +76,19 @@ namespace SFramework.Actor.Ability
 			_jumpStopped = true;
 		}
 
+		public override void TriggerEvent(SFGameEvent eventObject)
+		{
+			Debug.Log(eventObject);
+		}
+
 		protected void handleInput()
 		{
 			// if movement is prevented, or if the character is dead/frozen/can't move, we exit and do nothing
 			if (!AbilityAuthorized
-			    || (conditionMachine.CurrentState != SFAbilityStates.AbilityConditions.Normal))
+				|| (conditionMachine.CurrentState != SFAbilityStates.AbilityConditions.Normal))
 			{
 				return;
 			}
 		}
-	}
+    }
 }

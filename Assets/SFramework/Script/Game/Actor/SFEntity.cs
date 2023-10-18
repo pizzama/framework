@@ -6,13 +6,14 @@ namespace SFramework.Actor
 {
     public interface ISFEntity
     {
-        string EntityId{get;}
-        string EntityAssetName{get;}
-        GameObject Instance{get;}
+        string EntityId { get; }
+        string EntityAssetName { get; }
+        GameObject Instance { get; }
         void SetData(string entityId, string entityAssetName);
+        void InitEntity();
         void Recycle();
         void Show();
-        void Destory();
+        void DestroyEntity();
         void Attached(ISFEntity childEntity);
         void Detached(ISFEntity childEntity);
     }
@@ -27,6 +28,20 @@ namespace SFramework.Actor
         public string EntityAssetName { get => _entityAssetName; }
 
         public GameObject Instance => throw new System.NotImplementedException();
+        protected virtual void Start()
+        {
+            InitEntity();
+        }
+
+        private void OnDestroy()
+        {
+            DestroyEntity();
+        }
+
+        public virtual void InitEntity()
+        {
+
+        }
 
         public void Attached(ISFEntity childEntity)
         {
@@ -36,7 +51,7 @@ namespace SFramework.Actor
         {
         }
 
-        public void Destory()
+        public virtual void DestroyEntity()
         {
         }
 

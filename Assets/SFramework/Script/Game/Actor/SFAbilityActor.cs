@@ -8,10 +8,6 @@ public class SFAbilityActor : SFEntity
     [SerializeField] protected SFAbility[] _abilities;
     public SimpleStateMachine<SFAbilityStates.AbilityStates> MovementMachine;
     public SimpleStateMachine<SFAbilityStates.AbilityConditions> ConditionMachine;
-    protected virtual void Start()
-    {
-        initialization();
-    }
 
     protected virtual void Update()
     {
@@ -24,15 +20,22 @@ public class SFAbilityActor : SFEntity
         }
     }
 
-    private void initialization()
+    public override void InitEntity()
     {
+        base.DestroyEntity();
         actControl = GetComponent<SFActorController>();
         MovementMachine = new SimpleStateMachine<SFAbilityStates.AbilityStates>(gameObject, false);
         ConditionMachine = new SimpleStateMachine<SFAbilityStates.AbilityConditions>(gameObject, false);
-        cacheAbilities();
+        initAbilities();
     }
 
-    protected void cacheAbilities()
+    public override void DestroyEntity()
+    {
+        base.DestroyEntity();
+
+    }
+
+    protected void initAbilities()
     {
         // we grab all abilities at our level
         _abilities = gameObject.GetComponents<SFAbility>();
@@ -40,6 +43,16 @@ public class SFAbilityActor : SFEntity
         {
             SFAbility ab = _abilities[i];
             ab.InitAbility();
+        }
+    }
+
+    protected void destroyAbilities()
+    {
+        _abilities = gameObject.GetComponents<SFAbility>();
+        for (int i = 0; i < _abilities.Length; i++)
+        {
+            SFAbility ab = _abilities[i];
+            ab.DestroyAbility();
         }
     }
 }

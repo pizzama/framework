@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: 430748047}
   - component: {fileID: 430748046}
   - component: {fileID: 430748049}
+  - component: {fileID: 430748050}
   m_Layer: 0
   m_Name: 5104309
   m_TagString: Untagged
@@ -551,6 +552,29 @@ MonoBehaviour:
   ModelFlipValueRight: {x: 1, y: 1, z: 1}
   InitialFacingDirection: 1
   CurrentFacingDirection: 1
+--- !u!114 &430748050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430748041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64a49ac56a419341a5ea1f3b34c0ebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AbilityPermitted: 1
+  BlockingMovementStates: 
+  BlockingConditionStates: 
+  InputAuthorized: 0
+  JumpProportionalToPress: 1
+  MinimumPressTime: 0.4
+  JumpForce: 800
+  JumpHeight: 4
+  JumpDuration: 1
+  CanJumpOnTooSteepSlopes: 1
+  ResetJumpsOnTooSteepSlopes: 0
 --- !u!1 &574068549
 GameObject:
   m_ObjectHideFlags: 0
@@ -1047,7 +1071,7 @@ Transform:
   m_GameObject: {fileID: 1609088178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.56223786, y: 5, z: -3.89}
-  m_LocalScale: {x: 0.37485826, y: 0.9259259, z: 1}
+  m_LocalScale: {x: 0.53075397, y: 0.9259259, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

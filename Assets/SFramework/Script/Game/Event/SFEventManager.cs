@@ -10,7 +10,7 @@ namespace SFramework.Event
 
     public interface ISFEventListener<T> : ISFEventListenerBase
     {
-        void TriggerEvent(T eventType);
+        void TriggerEvent(T eventObject);
     }
 
     public struct SFGameEvent
