@@ -4,7 +4,7 @@ using SFramework.Event;
 
 namespace SFramework.Actor.Ability
 {
-    public abstract class SFAbility : MonoBehaviour, ISFEventListener<SFGameEvent>
+    public abstract class SFAbility : MonoBehaviour
     {
         [Header("Permission")]
         public bool AbilityPermitted = true;
@@ -39,11 +39,6 @@ namespace SFramework.Actor.Ability
         public virtual void UpdateAbility()
         {
 
-        }
-
-        public virtual void TriggerEvent(SFGameEvent eventObject)
-        {
-            throw new System.NotImplementedException();
         }
 
         public virtual bool AbilityAuthorized
