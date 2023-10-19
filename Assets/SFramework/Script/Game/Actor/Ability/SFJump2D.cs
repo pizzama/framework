@@ -8,7 +8,7 @@ namespace SFramework.Actor.Ability
 	/// <summary>
 	/// Add this ability to a character and it'll be able to jump in 2D. This means no actual movement, only the collider turned off and on. Movement will be handled by the animation itself.
 	/// </summary>
-	public class SFJump2D : SFAbility, ISFEventListener<JumpEvent>
+	public class SFJump2D : SFAbility
 	{
 		public bool InputAuthorized = false; // whether or not need inputmanager input;
 		public bool JumpProportionalToPress = true; // whether or not the jump should be proportional to press (if yes, releasing the button will stop the jump)
@@ -24,13 +24,16 @@ namespace SFramework.Actor.Ability
 
 		protected override void init()
 		{
-			SFEventManager.AddListener(this);
+			AddListener("start", () =>
+			{
+
+			});
 		}
 
         public override void DestroyAbility()
         {
             base.DestroyAbility();
-			SFEventManager.RemoveListener(this);
+			RemoveListener("start");
         }
 
         public override void UpdateAbility()
@@ -74,11 +77,6 @@ namespace SFramework.Actor.Ability
 		public virtual void JumpStop()
 		{
 			_jumpStopped = true;
-		}
-
-		public void TriggerEvent(JumpEvent eventObject)
-		{
-			Debug.Log(eventObject);
 		}
 
 		protected void handleInput()

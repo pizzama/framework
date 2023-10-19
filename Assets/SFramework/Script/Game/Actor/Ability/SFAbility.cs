@@ -1,6 +1,6 @@
 using UnityEngine;
 using SFramework.StateMachine;
-using SFramework.Event;
+using System;
 
 namespace SFramework.Actor.Ability
 {
@@ -33,10 +33,25 @@ namespace SFramework.Actor.Ability
             
         }
 
+        public void AddListener(string name, Action callback)
+        {
+            act.AddListener(this, name, callback);
+        }
+
+        public void RemoveListener(string name)
+        {
+            act.RemoveListener(this, name);
+        }
+
         protected abstract void init();
 
 
         public virtual void UpdateAbility()
+        {
+
+        }
+
+        public virtual void TriggerAction(string name, object value)
         {
 
         }

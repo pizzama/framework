@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 namespace SFramework.Actor.Ability
 {	
@@ -41,8 +42,9 @@ namespace SFramework.Actor.Ability
 		}
 	}
 
-	public struct JumpEvent
+	public struct AbilityEvent
 	{
-		string name;
+		public string Name;
+		public Action Callback;
 	}
 }
