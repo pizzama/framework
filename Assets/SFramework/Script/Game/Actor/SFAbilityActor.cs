@@ -2,11 +2,11 @@ using SFramework.Actor;
 using UnityEngine;
 using SFramework.Actor.Ability;
 using SFramework.StateMachine;
-using System.Collections.Generic;
-using System;
+using SFramework.Game.App;
 
 public class SFAbilityActor : SFEntity
 {
+    public bool InputAuthorized = false; // whether or not need inputmanager input;
     [SerializeField] protected SFActorController actControl;
     [SerializeField] protected SFAbility[] _abilities;
     public SimpleStateMachine<AbilityStates> MovementMachine;
@@ -20,6 +20,11 @@ public class SFAbilityActor : SFEntity
             {
                 ability.UpdateAbility();
             }
+        }
+
+        if(InputAuthorized)
+        {
+            handleInput();
         }
     }
 
@@ -66,6 +71,14 @@ public class SFAbilityActor : SFEntity
         {
             SFAbility ab = _abilities[i];
             ab.DestroyAbility();
+        }
+    }
+
+    protected virtual void handleInput()
+    {
+        if(SFInputManager.Instance.IsMove())
+        {
+            TriggerEvent(AbilityAction.Move, SFInputManager.Instance.PrimaryMovement);
         }
     }
 }

@@ -8,7 +8,6 @@ namespace SFramework.Actor.Ability
         public enum MovementsType { Free, Strict2DirectionsHorizontal, Strict2DirectionsVertical, Strict4Directions, Strict8Directions }
         public bool AnalogInput = false; // whether or not input should be analog
         public bool InterpolateMovementSpeed = false; // whether or not to interpolate movement speed
-        public bool InputAuthorized = false; // whether or not need inputmanager input;
         public MovementsType Movements = MovementsType.Free;
         [Header("Property Value")]
         public float IdleThreshold = 0.05f; // the speed threshold after which the character is not considered idle anymore
@@ -31,10 +30,7 @@ namespace SFramework.Actor.Ability
             {
                 if (handleFrozen())
                     return;
-                if (InputAuthorized)
-                {
-                    handleInput();
-                }
+
                 handleDirection();
                 handleMovement();
             }
@@ -124,12 +120,6 @@ namespace SFramework.Actor.Ability
             }
 
             return false;
-        }
-
-        protected void handleInput()
-        {
-            HorizontalMovement = SFInputManager.Instance.PrimaryMovement.x;
-            VerticalMovement = SFInputManager.Instance.PrimaryMovement.y;
         }
 
         public override void HandleEvent(AbilityAction name, object value)

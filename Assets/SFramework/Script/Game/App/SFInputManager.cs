@@ -40,6 +40,11 @@ namespace SFramework.Game.App
             }
         }
 
+        public bool IsMove()
+        {
+            return _primaryMovement != Vector2.zero;
+        }    
+
         // Update is called once per frame
         void Update()
         {
