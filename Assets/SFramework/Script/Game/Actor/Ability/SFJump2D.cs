@@ -24,16 +24,11 @@ namespace SFramework.Actor.Ability
 
 		protected override void init()
 		{
-			AddListener("start", () =>
-			{
-
-			});
 		}
 
         public override void DestroyAbility()
         {
             base.DestroyAbility();
-			RemoveListener("start");
         }
 
         public override void UpdateAbility()
@@ -43,7 +38,7 @@ namespace SFramework.Actor.Ability
 				handleInput();
 			}
 			// On process ability, we stop the jump if needed
-			if (movementMachine.CurrentState == SFAbilityStates.AbilityStates.Jumping)
+			if (movementMachine.CurrentState == AbilityStates.Jumping)
 			{
 				if (!_jumpStopped)
 				{
@@ -53,7 +48,7 @@ namespace SFramework.Actor.Ability
 					}
 					else
 					{
-						movementMachine.ChangeState(SFAbilityStates.AbilityStates.Jumping);
+						movementMachine.ChangeState(AbilityStates.Jumping);
 					}
 				}
 				if (!_jumpStopped && JumpProportionalToPress && (Time.time - _jumpStartedAt > MinimumPressTime))
@@ -69,7 +64,7 @@ namespace SFramework.Actor.Ability
 			{
 				return;
 			}
-			movementMachine.ChangeState(SFAbilityStates.AbilityStates.Jumping);
+			movementMachine.ChangeState(AbilityStates.Jumping);
 			_jumpStopped = false;
 			_jumpStartedAt = Time.time;
 		}
@@ -83,7 +78,7 @@ namespace SFramework.Actor.Ability
 		{
 			// if movement is prevented, or if the character is dead/frozen/can't move, we exit and do nothing
 			if (!AbilityAuthorized
-				|| (conditionMachine.CurrentState != SFAbilityStates.AbilityConditions.Normal))
+				|| (conditionMachine.CurrentState != AbilityConditions.Normal))
 			{
 				return;
 			}

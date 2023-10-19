@@ -72,7 +72,7 @@ namespace SFramework.Actor.Ability
                 return;
             }
 
-            if (conditionMachine.CurrentState != SFAbilityStates.AbilityConditions.Normal)
+            if (conditionMachine.CurrentState != AbilityConditions.Normal)
             {
                 return;
             }

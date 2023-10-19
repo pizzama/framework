@@ -74,7 +74,7 @@ namespace SFramework.Actor.Ability
         {
             // if movement is prevented, or if the character is dead/frozen/can't move, we exit and do nothing
             if (!AbilityInitialized
-                 || (conditionMachine.CurrentState != SFAbilityStates.AbilityConditions.Normal))
+                 || (conditionMachine.CurrentState != AbilityConditions.Normal))
             {
                 return;
             }
@@ -82,31 +82,31 @@ namespace SFramework.Actor.Ability
             CheckJustGotGrounded();
 
             if (!actControl.Grounded
-                && (conditionMachine.CurrentState == SFAbilityStates.AbilityConditions.Normal)
+                && (conditionMachine.CurrentState == AbilityConditions.Normal)
                 && (
-                    (movementMachine.CurrentState == SFAbilityStates.AbilityStates.Walking)
-                    || (movementMachine.CurrentState == SFAbilityStates.AbilityStates.Idle)
+                    (movementMachine.CurrentState == AbilityStates.Walking)
+                    || (movementMachine.CurrentState == AbilityStates.Idle)
                 ))
             {
-                movementMachine.ChangeState(SFAbilityStates.AbilityStates.Falling);
+                movementMachine.ChangeState(AbilityStates.Falling);
             }
 
-            if (actControl.Grounded && (movementMachine.CurrentState == SFAbilityStates.AbilityStates.Falling))
+            if (actControl.Grounded && (movementMachine.CurrentState == AbilityStates.Falling))
             {
-                movementMachine.ChangeState(SFAbilityStates.AbilityStates.Idle);
+                movementMachine.ChangeState(AbilityStates.Idle);
             }
 
             if (actControl.Grounded
                  && (actControl.CurrentMovement.magnitude > IdleThreshold)
-                 && (movementMachine.CurrentState == SFAbilityStates.AbilityStates.Idle))
+                 && (movementMachine.CurrentState == AbilityStates.Idle))
             {
-                movementMachine.ChangeState(SFAbilityStates.AbilityStates.Walking);
+                movementMachine.ChangeState(AbilityStates.Walking);
             }
 
-            if ((movementMachine.CurrentState == SFAbilityStates.AbilityStates.Walking)
+            if ((movementMachine.CurrentState == AbilityStates.Walking)
                 && (actControl.CurrentMovement.magnitude <= IdleThreshold))
             {
-                movementMachine.ChangeState(SFAbilityStates.AbilityStates.Idle);
+                movementMachine.ChangeState(AbilityStates.Idle);
             }
 
             SetMovement();
@@ -114,7 +114,7 @@ namespace SFramework.Actor.Ability
 
         protected virtual bool handleFrozen()
         {
-            if (conditionMachine.CurrentState == SFAbilityStates.AbilityConditions.Frozen)
+            if (conditionMachine.CurrentState == AbilityConditions.Frozen)
             {
                 HorizontalMovement = 0f;
                 VerticalMovement = 0f;
@@ -137,7 +137,7 @@ namespace SFramework.Actor.Ability
             // if the character just got grounded
             if (actControl.JustGotGrounded)
             {
-                movementMachine.ChangeState(SFAbilityStates.AbilityStates.Idle);
+                movementMachine.ChangeState(AbilityStates.Idle);
             }
         }
 

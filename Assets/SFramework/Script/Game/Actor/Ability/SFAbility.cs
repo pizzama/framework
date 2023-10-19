@@ -1,6 +1,5 @@
 using UnityEngine;
 using SFramework.StateMachine;
-using System;
 
 namespace SFramework.Actor.Ability
 {
@@ -11,12 +10,12 @@ namespace SFramework.Actor.Ability
         public bool AbilityInitialized { get; private set; }
         protected SFActorController actControl;
         protected SFAbilityActor act;
-        protected SimpleStateMachine<SFAbilityStates.AbilityStates> movementMachine;
-        protected SimpleStateMachine<SFAbilityStates.AbilityConditions> conditionMachine;
+        protected SimpleStateMachine<AbilityStates> movementMachine;
+        protected SimpleStateMachine<AbilityConditions> conditionMachine;
         /// an array containing all the blocking movement states. If the Character is in one of these states and tries to trigger this ability, it won't be permitted. Useful to prevent this ability from being used while Idle or Swimming, for example.
-        public SFAbilityStates.AbilityStates[] BlockingMovementStates;
+        public AbilityStates[] BlockingMovementStates;
         /// an array containing all the blocking condition states. If the Character is in one of these states and tries to trigger this ability, it won't be permitted. Useful to prevent this ability from being used while dead, for example.
-        public SFAbilityStates.AbilityConditions[] BlockingConditionStates;
+        public AbilityConditions[] BlockingConditionStates;
 
         public virtual void InitAbility()
         {
@@ -33,16 +32,6 @@ namespace SFramework.Actor.Ability
             
         }
 
-        public void AddListener(string name, Action callback)
-        {
-            act.AddListener(this, name, callback);
-        }
-
-        public void RemoveListener(string name)
-        {
-            act.RemoveListener(this, name);
-        }
-
         protected abstract void init();
 
 
@@ -51,7 +40,7 @@ namespace SFramework.Actor.Ability
 
         }
 
-        public virtual void TriggerAction(string name, object value)
+        public virtual void HandleEvent(string name, object value)
         {
 
         }
