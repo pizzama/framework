@@ -24,6 +24,7 @@ namespace SFramework.Actor.Ability
 
 		protected override void init()
 		{
+
 		}
 
         public override void DestroyAbility()
@@ -58,7 +59,17 @@ namespace SFramework.Actor.Ability
 			}
 		}
 
-		public virtual void JumpStart()
+        public override void HandleEvent(AbilityAction name, object value)
+        {
+            base.HandleEvent(name, value);
+			switch (name)
+			{
+				case AbilityAction.Jump:
+					break;
+			}
+		}
+
+        public virtual void JumpStart()
 		{
 			if (!AbilityAuthorized)
 			{

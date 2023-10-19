@@ -40,7 +40,7 @@ namespace SFramework.Actor.Ability
 
         }
 
-        public virtual void HandleEvent(string name, object value)
+        public virtual void HandleEvent(AbilityAction name, object value)
         {
 
         }

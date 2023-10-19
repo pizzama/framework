@@ -43,7 +43,7 @@ public class SFAbilityActor : SFEntity
         {
             if (ability.enabled && ability.AbilityInitialized)
             {
-                ability.HandleEvent(name, value);
+                ability.HandleEvent(actionName, value);
             }
         }
     }
