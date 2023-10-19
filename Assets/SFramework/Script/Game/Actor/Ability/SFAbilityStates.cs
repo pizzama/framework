@@ -38,6 +38,7 @@ namespace SFramework.Actor.Ability
 
     public enum AbilityAction
     {
+        Move,
         Jump,
     }
 }

@@ -132,6 +132,17 @@ namespace SFramework.Actor.Ability
             VerticalMovement = SFInputManager.Instance.PrimaryMovement.y;
         }
 
+        public override void HandleEvent(AbilityAction name, object value)
+        {
+            base.HandleEvent(name, value);
+            switch (name)
+            {
+                case AbilityAction.Move:
+                    break;
+            }
+            
+        }
+
         protected virtual void CheckJustGotGrounded()
         {
             // if the character just got grounded
