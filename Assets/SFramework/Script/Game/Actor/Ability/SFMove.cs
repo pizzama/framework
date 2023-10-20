@@ -128,6 +128,9 @@ namespace SFramework.Actor.Ability
             switch (name)
             {
                 case AbilityAction.Move:
+                    Vector2 moveVector2 = (Vector2)value;
+                    HorizontalMovement = moveVector2.x;
+                    VerticalMovement = moveVector2.y;
                     break;
             }
             
