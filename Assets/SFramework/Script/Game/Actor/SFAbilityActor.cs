@@ -74,6 +74,7 @@ public class SFAbilityActor : SFEntity
         }
     }
 
+    // use system input
     protected virtual void handleInput()
     {
         if(SFInputManager.Instance.IsMove())
