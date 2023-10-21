@@ -42,22 +42,6 @@ namespace SFramework.Extension
             return camera.WorldToScreenPoint(worldPos);
         }
 
-        public static string RemoveInvalidateChars(this string name)
-        {
-            return name.Replace("/", "_")
-                .Replace("@", "")
-                .Replace("!", "")
-                .Replace(" ", "_")
-                .Replace("__", "_")
-                .Replace("__", "_")
-                .Replace("__", "_")
-                .Replace("&", "")
-                .Replace("-", "")
-                .Replace("(", "")
-                .Replace(")", "")
-                .Replace("#", "")
-                .Replace(".", "_");
-        }
 
         internal static T GetOrAddComponent<T>(this GameObject go) where T : UnityEngine.Component
         {
