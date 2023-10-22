@@ -173,21 +173,21 @@ namespace SFramework.Game.App
 
         protected virtual void GetInputButtons()
         {
-            foreach (SFInputButton button in _buttonList)
-            {
-                if (Input.GetButton(button.ButtonID))
-                {
-                    button.TriggerButtonPressed();
-                }
-                if (Input.GetButtonDown(button.ButtonID))
-                {
-                    button.TriggerButtonDown();
-                }
-                if (Input.GetButtonUp(button.ButtonID))
-                {
-                    button.TriggerButtonUp();
-                }
-            }
+            //foreach (SFInputButton button in _buttonList)
+            //{
+            //    if (Input.GetButton(button.ButtonID))
+            //    {
+            //        button.TriggerButtonPressed();
+            //    }
+            //    if (Input.GetButtonDown(button.ButtonID))
+            //    {
+            //        button.TriggerButtonDown();
+            //    }
+            //    if (Input.GetButtonUp(button.ButtonID))
+            //    {
+            //        button.TriggerButtonUp();
+            //    }
+            //}
         }
     }
 }
