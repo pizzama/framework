@@ -1,5 +1,6 @@
 using SFramework.Pool;
 using UnityEngine;
+using SFramework.Extension;
 
 namespace SFramework.Game
 {
@@ -44,30 +45,24 @@ namespace SFramework.Game
         public T CreateComponent<T>(string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1) where T: Component 
         {
             GameObject obj = CreateGameObjectUsingPool(prefabFullPath, lifeTime);
-            T result = obj.GetComponent<T>();
+            T result = obj.GetOrAddComponent<T>();
+            if (result == null)
+                throw new DataErrorException("Could not add component:" + typeof(T));
             if (result != null)
             {
-                if (parent != null)
-                {
-                    result.transform.SetParent(parent, false);
-                }
+                if (parent == null)
+                    throw new NotFoundException("Couldn't find parent will as parent");
+         
+                result.transform.SetParent(parent, false);    
                 result.transform.localPosition = pos;
             }
             return result;
         }
 
-        public T CreateSEntity<T>(string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1) where T: SEntity
+        public T CreateSEntity<T>(string id, string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1) where T: SEntity
         {
-            GameObject obj = CreateGameObjectUsingPool(prefabFullPath, lifeTime);
-            T result = obj.GetComponent<T>();
-            if (result != null)
-            {
-                if (parent != null)
-                {
-                    result.transform.SetParent(parent, false);
-                }
-                result.transform.localPosition = pos;
-            }
+            T result = CreateComponent<T>(prefabFullPath, parent, pos, lifeTime);
+            result.SetEntityData(id, this);
             return result;
         }
     }

@@ -11,7 +11,6 @@ namespace Game.Scenes
 {
     public class BattleView : SSCENEView
     {
-        private SFActorFactory _factory;
         protected override ViewOpenType GetViewOpenType()
         {
             return ViewOpenType.Single;
@@ -22,11 +21,13 @@ namespace Game.Scenes
             var input = SFInputManager.Instance;
             Debug.Log("load complete");
             Transform parent = getSceneObject<Transform>("Actors");
-            _factory = new SFActorFactory(this);
-            Hero rt = _factory.Create<Hero>("1", SFResAssets.Model_avatar_role_carrota_sf_Character_Carrot_prefab, parent);
-            if(rt != null)
+            if (parent != null)
             {
-                rt.transform.localPosition = new Vector3(0f, 0.5f, 0f);
+                Hero rt = CreateSEntity<Hero>("1", SFResAssets.Model_avatar_role_carrota_sf_Character_Carrot_prefab, parent);
+                if (rt != null)
+                {
+                    rt.transform.localPosition = new Vector3(0f, 0.5f, 0f);
+                }
             }
 
         }
