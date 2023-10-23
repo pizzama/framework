@@ -3,10 +3,11 @@ using System;
 using System.Collections;
 using UnityEngine;
 using SFramework.StateMachine;
+using SFramework;
 
 namespace SFramework.Actor
 {
-    public class SFActor : SFEntity
+    public class SFActor : SEntity
     {
         public enum SFActorFacingDirections {Left, Right, Up, Down }
 

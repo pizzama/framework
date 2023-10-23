@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using SFramework.Tools;
 using SFramework.Game;
-using Unity.VisualScripting;
+using SFramework.Extension;
+using SFramework;
 
 
 namespace SFramework.Actor
@@ -12,15 +13,15 @@ namespace SFramework.Actor
     //using composite pattern let factory and view manager actor or other entities
     public class SFActorFactory
     {
-        private List<ISFEntity> _entities;
+        private List<ISEntity> _entities;
         private RootView _view; //base scene create actor
         public SFActorFactory(RootView view)
         {
             _view = view;
-            _entities = new List<ISFEntity>();
+            _entities = new List<ISEntity>();
         }
 
-        public T Create<T>(string id, string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1) where T : SFEntity
+        public T Create<T>(string id, string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1) where T : SEntity
         {
             GameObject obj = _view.CreateGameObjectUsingPool(prefabFullPath, lifeTime);
             T result = obj.GetOrAddComponent<T>();

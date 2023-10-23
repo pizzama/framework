@@ -55,5 +55,20 @@ namespace SFramework.Game
             }
             return result;
         }
+
+        public T CreateSEntity<T>(string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1) where T: SEntity
+        {
+            GameObject obj = CreateGameObjectUsingPool(prefabFullPath, lifeTime);
+            T result = obj.GetComponent<T>();
+            if (result != null)
+            {
+                if (parent != null)
+                {
+                    result.transform.SetParent(parent, false);
+                }
+                result.transform.localPosition = pos;
+            }
+            return result;
+        }
     }
 }

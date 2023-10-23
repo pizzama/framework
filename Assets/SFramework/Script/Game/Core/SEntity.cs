@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SFramework.Actor
+namespace SFramework
 {
-    public interface ISFEntity
+    public interface ISEntity
     {
         string EntityId { get; }
         GameObject Instance { get; }
@@ -13,11 +13,11 @@ namespace SFramework.Actor
         void Recycle();
         void Show();
         void DestroyEntity();
-        void Attached(ISFEntity childEntity);
-        void Detached(ISFEntity childEntity);
+        void Attached(ISEntity childEntity);
+        void Detached(ISEntity childEntity);
     }
 
-    public class SFEntity : MonoBehaviour, ISFEntity
+    public class SEntity : MonoBehaviour, ISEntity
     {
         [SerializeField]
         private string _entityId;
@@ -44,11 +44,11 @@ namespace SFramework.Actor
 
         }
 
-        public void Attached(ISFEntity childEntity)
+        public void Attached(ISEntity childEntity)
         {
         }
 
-        public void Detached(ISFEntity childEntity)
+        public void Detached(ISEntity childEntity)
         {
         }
 

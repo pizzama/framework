@@ -1,10 +1,11 @@
+using SFramework;
 using SFramework.Actor;
 using UnityEngine;
 using SFramework.Actor.Ability;
 using SFramework.StateMachine;
 using SFramework.Game.App;
 
-public class SFAbilityActor : SFEntity
+public class SFAbilityActor : SEntity
 {
     public bool InputAuthorized = false; // whether or not need inputmanager input;
     [SerializeField] protected SFActorController actControl;
