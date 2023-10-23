@@ -31,7 +31,7 @@ namespace SFramework.Actor
                 result.transform.SetParent(parent, false);
                 result.transform.localPosition = pos;
             }
-            result.SetData(id, prefabFullPath);
+            result.SetEntityData(id, _view);
             _entities.Add(result);
             return result;
         }

@@ -7,9 +7,8 @@ namespace SFramework.Actor
     public interface ISFEntity
     {
         string EntityId { get; }
-        string EntityAssetName { get; }
         GameObject Instance { get; }
-        void SetData(string entityId, string entityAssetName);
+        void SetEntityData(string entityId, SView view);
         void InitEntity();
         void Recycle();
         void Show();
@@ -23,9 +22,11 @@ namespace SFramework.Actor
         [SerializeField]
         private string _entityId;
         public string EntityId { get => _entityId; }
+
         [SerializeField]
-        private string _entityAssetName;
-        public string EntityAssetName { get => _entityAssetName; }
+        private SView _parentView;
+
+        public SView ParentView { get => _parentView; }
 
         public GameObject Instance => throw new System.NotImplementedException();
         protected virtual void Start()
@@ -55,10 +56,10 @@ namespace SFramework.Actor
         {
         }
 
-        public void SetData(string entityId, string entityAssetName)
+        public void SetEntityData(string entityId, SView view)
         {
             _entityId = entityId;
-            _entityAssetName = entityAssetName;
+            _parentView = view;
         }
 
         public void Recycle()
