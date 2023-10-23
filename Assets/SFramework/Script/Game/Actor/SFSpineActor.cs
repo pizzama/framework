@@ -7,7 +7,7 @@ using Spine.Unity;
 
 namespace SFramework.Actor
 {
-    public class SFSpineActor : SFEntity
+    public class SFSpineActor : SEntity
     {
         public enum SFActorFacingDirections { Default, Left, Right, Up, Down }
 

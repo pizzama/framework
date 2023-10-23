@@ -1,14 +1,28 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SFramework.Extension
 {
     public static class UnityExtension
     {
+        //Fischer-Yates shuffle
+        public static void ShuffleList<T>(this List<T> list)
+        {
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = Random.Range(0, n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
         public static bool IsPrefab(this GameObject gameObject)
         {
             if (gameObject == null)
             {
-                throw new NotFoundException("not found Gameobject");
+                throw new NotFoundException("not found GameObject");
             }
 
             return
