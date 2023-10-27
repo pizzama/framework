@@ -53,7 +53,6 @@ namespace SFramework.Actor
 			}
 
 			Vector2 newMovement = _rigidBody.position + (Vector2)(CurrentMovement + AddedForce) * Time.fixedDeltaTime;
-			Debug.Log(newMovement);
 			_rigidBody.MovePosition(newMovement);
 		}
 

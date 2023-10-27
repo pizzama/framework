@@ -72,6 +72,9 @@ namespace SFramework.Actor.Ability
                 return;
             }
 
+            if (conditionMachine == null)
+                return;
+
             if (conditionMachine.CurrentState != AbilityConditions.Normal)
             {
                 return;
@@ -202,7 +205,6 @@ namespace SFramework.Actor.Ability
         {
             // if we're not supposed to face our direction, we do nothing and exit
             if ((FacingMode != FacingModes.MovementDirection) && (FacingMode != FacingModes.Both)) { return; }
-            Debug.Log(actControl.CurrentDirection.normalized);
             if (actControl.CurrentDirection.normalized.magnitude >= AbsoluteThresholdMovement)
             {
                 float checkedDirection = (Mathf.Abs(actControl.CurrentDirection.normalized.x) > 0) ? actControl.CurrentDirection.normalized.x : _lastNonNullXMovement;
