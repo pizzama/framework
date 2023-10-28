@@ -6,21 +6,21 @@ using UnityEngine;
 namespace SFramework.Event
 {
 
-    public interface ISFEventListenerBase { };
+    public interface ISEventListenerBase { };
 
-    public interface ISFEventListener<T> : ISFEventListenerBase
+    public interface ISEventListener<T> : ISEventListenerBase
     {
         void TriggerEvent(T eventObject);
     }
 
-    public struct SFGameEvent
+    public struct SGameEvent
     {
         public object EventObj;
-        public SFGameEvent(object newObject)
+        public SGameEvent(object newObject)
         {
             EventObj = newObject;
         }
-        static SFGameEvent e;
+        static SGameEvent e;
         public static void Trigger(object newObject)
         {
             e.EventObj = newObject;
@@ -30,19 +30,19 @@ namespace SFramework.Event
 
     public class SFEventManager
     {
-        private static Dictionary<Type, List<ISFEventListenerBase>> _subscribersList;
+        private static Dictionary<Type, List<ISEventListenerBase>> _subscribersList;
         static SFEventManager()
         {
-            _subscribersList = new Dictionary<Type, List<ISFEventListenerBase>>();
+            _subscribersList = new Dictionary<Type, List<ISEventListenerBase>>();
         }
 
-        public static void AddListener<TEvent>(ISFEventListener<TEvent> listener) where TEvent : struct
+        public static void AddListener<TEvent>(ISEventListener<TEvent> listener) where TEvent : struct
         {
             Type eventType = typeof(TEvent);
 
             if (!_subscribersList.ContainsKey(eventType))
             {
-                _subscribersList[eventType] = new List<ISFEventListenerBase>();
+                _subscribersList[eventType] = new List<ISEventListenerBase>();
             }
 
             if (!SubscriptionExists(eventType, listener))
@@ -51,7 +51,7 @@ namespace SFramework.Event
             }
         }
 
-        public static void RemoveListener<TEvent>(ISFEventListener<TEvent> listener) where TEvent : struct
+        public static void RemoveListener<TEvent>(ISEventListener<TEvent> listener) where TEvent : struct
         {
             Type eventType = typeof(TEvent);
 
@@ -60,7 +60,7 @@ namespace SFramework.Event
                 return;
             }
 
-            List<ISFEventListenerBase> subscriberList = _subscribersList[eventType];
+            List<ISEventListenerBase> subscriberList = _subscribersList[eventType];
 
             for (int i = subscriberList.Count - 1; i >= 0; i--)
             {
@@ -79,19 +79,19 @@ namespace SFramework.Event
 
         public static void TriggerEvent<TEvent>(TEvent newEvent) where TEvent : struct
         {
-            List<ISFEventListenerBase> list;
+            List<ISEventListenerBase> list;
             if (!_subscribersList.TryGetValue(typeof(TEvent), out list))
                 return;
 
             for (int i = list.Count - 1; i >= 0; i--)
             {
-                (list[i] as ISFEventListener<TEvent>).TriggerEvent(newEvent);
+                (list[i] as ISEventListener<TEvent>).TriggerEvent(newEvent);
             }
         }
 
-        private static bool SubscriptionExists(Type type, ISFEventListenerBase receiver)
+        private static bool SubscriptionExists(Type type, ISEventListenerBase receiver)
         {
-            List<ISFEventListenerBase> receivers;
+            List<ISEventListenerBase> receivers;
 
             if (!_subscribersList.TryGetValue(type, out receivers)) return false;
 
