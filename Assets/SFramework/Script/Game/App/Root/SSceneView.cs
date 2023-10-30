@@ -21,7 +21,7 @@ namespace SFramework.Game
         public override void Open()
         {
             SetScenePath(out mAbPath, out mAbName);
-            loadScene(mAbPath, mAbName, (LoadSceneMode)GetViewOpenType()).Forget();
+            loadSceneProcessAsync(mAbPath, mAbName, (LoadSceneMode)GetViewOpenType()).Forget();
         }
 
         //if you need control the loading progress you will override the method
@@ -31,7 +31,7 @@ namespace SFramework.Game
             return true;
         }
 
-        protected virtual async UniTaskVoid loadScene(string scenePath, string sceneName, LoadSceneMode mode)
+        protected virtual async UniTaskVoid loadSceneProcessAsync(string scenePath, string sceneName, LoadSceneMode mode)
         {
             AsyncOperation operation = await LoadSceneAsync(scenePath, sceneName, (LoadSceneMode)GetViewOpenType());
             if (operation == null)
