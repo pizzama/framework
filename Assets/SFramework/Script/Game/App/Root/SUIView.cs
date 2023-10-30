@@ -49,7 +49,7 @@ namespace SFramework.Game
             Quaternion rotation;
             SetViewPrefabPath(out mAbName, out mResName, out position, out rotation);
             //SetViewTransform(out mViewTransform, position, rotation);
-            SetViewTransform(position, rotation).Forget();
+            SetViewTransformAsync(position, rotation).Forget();
         }
 
         protected virtual void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
@@ -63,9 +63,8 @@ namespace SFramework.Game
             rotation = Quaternion.Euler(0, 0, 0);
         }
 
-        protected virtual void SetViewTransform(out Transform trans, Vector3 position, Quaternion rotation)
+        protected virtual void SetViewTransform(Vector3 position, Quaternion rotation)
         {
-            trans = null;
             if (!string.IsNullOrEmpty(mAbName) && !string.IsNullOrEmpty(mResName))
             {
                 GameObject prefab = assetManager.LoadFromBundle<GameObject>(mAbName, mResName);
@@ -73,12 +72,12 @@ namespace SFramework.Game
                     throw new NotFoundException("not found uiview prefab:" + mAbName + ";" + mResName);
                 string fullPath = assetManager.FullPath(mAbName, mResName);
                 GameObject ob = poolManager.Request<ListGameObjectPool>(fullPath, prefab, -1);
-                trans = ob.transform;
+                mViewTransform = ob.transform;
             }
-            openUI(position, rotation);
+            openUI(mViewTransform, position, rotation);
         }
 
-        protected async UniTaskVoid SetViewTransform(Vector3 position, Quaternion rotation)
+        protected async UniTaskVoid SetViewTransformAsync(Vector3 position, Quaternion rotation)
         {
             if (!string.IsNullOrEmpty(mAbName) && !string.IsNullOrEmpty(mResName))
             {
@@ -90,17 +89,17 @@ namespace SFramework.Game
                 mViewTransform = ob.transform;
             }
 
-            openUI(position, rotation);
+            openUI(mViewTransform, position, rotation);
         }
 
-        protected virtual void openUI(Vector3 position, Quaternion rotation)
+        protected virtual void openUI(Transform trans, Vector3 position, Quaternion rotation)
         {
-            if (mViewTransform != null)
+            if (trans != null)
             {
                 if (UIRoot)
                 {
                     UILayer layer = GetViewLayer();
-                    UIRoot.OpenUI(layer, mViewTransform, position, rotation);
+                    UIRoot.OpenUI(layer, trans, position, rotation);
                     GameObject[] alls = GameObject.FindGameObjectsWithTag(findTag);
                     for (int i = 0; i < alls.Length; i++)
                     {
