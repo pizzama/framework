@@ -15,6 +15,13 @@ namespace Game.App.Battle
         private List<BattleCard> _cardHands;
         private float angle = 5.5f;
         private float distance = 2000;
+        private float overSidePosition = 50f;
+        private float overUpPosition = 200f;
+        private float overScale = 1.3f;
+
+        public bool IsDrag = false;
+        public BattleCard SelectCard;
+
         protected override UILayer GetViewLayer()
         {
             return UILayer.Hud;
@@ -37,10 +44,10 @@ namespace Game.App.Battle
             }
 
 
-            relocation();
+            Relocation();
         }
 
-        private void relocation()
+        public void Relocation()
         {
             float startTheta = GetStartTheta();
             for (int i = 0; i < _cardHands.Count; i++)
@@ -67,5 +74,59 @@ namespace Game.App.Battle
 
             return startTheta;
         }
+
+        public void OverCard(BattleCard card)
+        {
+            float startTheta = GetStartTheta();
+
+            int index = GetCardIndex(card);
+
+            if (index == -1)
+                return;
+
+            for (int i = 0; i < _cardHands.Count; i++)
+            {
+                _cardHands[i].transform.SetAsFirstSibling();
+
+                float theta = startTheta + angle * i;
+                Vector3 targetPos = mViewTransform.transform.position + new Vector3(Mathf.Cos(theta * Mathf.Deg2Rad), Mathf.Sin(theta * Mathf.Deg2Rad), 0) * distance;
+                Vector3 targetRot = new Vector3(0f, 0f, theta - 90);
+                Vector3 targetScl = Vector3.one;
+
+                if (i < index)
+                {
+                    targetPos += Vector3.right * overSidePosition;
+                }
+                else if (i > index)
+                {
+                    targetPos -= Vector3.right * overSidePosition;
+                }
+                else
+                {
+                    targetPos += Vector3.up * overUpPosition;
+                    targetRot = Vector3.zero;
+                    targetScl = Vector3.one * overScale;
+                }
+
+                _cardHands[i].MoveCard(targetPos, targetRot, targetScl);
+                _cardHands[i].transform.SetAsFirstSibling();
+            }
+
+            _cardHands[index].transform.SetAsLastSibling();
+        }
+
+        private int GetCardIndex(BattleCard card)
+        {
+            for (int i = 0; i < _cardHands.Count; i++)
+            {
+                if (card == _cardHands[i])
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
     }
+
+    
 }

@@ -19,6 +19,8 @@ namespace Game.App.Battle
 
         private Coroutine _coMove;
 
+        public bool IsBezierCurve { get; set; }
+
         public void MoveCard(Vector3 targetPos, Vector3 targetRot, Vector3 targetScl)
         {
             _targetPos = targetPos;
@@ -69,15 +71,32 @@ namespace Game.App.Battle
         {
             throw new System.NotImplementedException();
         }
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            BattleUIView uiView = (BattleUIView)ParentView;
+            if (uiView.IsDrag)
+                return;
+            uiView.OverCard(this);
+        }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            throw new System.NotImplementedException();
+            BattleUIView uiView = (BattleUIView)ParentView;
+            if (uiView.IsDrag)
+                return;
+            uiView.Relocation();
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            throw new System.NotImplementedException();
+            BattleUIView uiView = (BattleUIView)ParentView;
+            uiView.IsDrag = true;
+
+            uiView.SelectCard = this;
+            StopAllCoroutines();
+
+            transform.SetAsLastSibling();
+
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -86,11 +105,6 @@ namespace Game.App.Battle
         }
 
         public void OnEndDrag(PointerEventData eventData)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void OnPointerEnter(PointerEventData eventData)
         {
             throw new System.NotImplementedException();
         }
