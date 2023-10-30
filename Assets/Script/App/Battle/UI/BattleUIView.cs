@@ -12,7 +12,7 @@ namespace Game.App.Battle
     public class BattleUIView : SUIView
     {
         private RectTransform _cardHandsTransform;
-        private List<CardControl> _cardHands;
+        private List<BattleCard> _cardHands;
         private float angle = 5.5f;
         private float distance = 2000;
         protected override UILayer GetViewLayer()
@@ -28,11 +28,11 @@ namespace Game.App.Battle
         protected override void opening()
         {
             _cardHandsTransform = getUIObject<RectTransform>("CardHands");
-            _cardHands = new List<CardControl>();
+            _cardHands = new List<BattleCard>();
 
             for (int i = 0; i < 6; i++)
             {
-                CardControl ctl = CreateSEntity<CardControl>(i.ToString(), SFResAssets.Game_app_battle_sf_Card_prefab, _cardHandsTransform);
+                BattleCard ctl = CreateSEntity<BattleCard>(i.ToString(), SFResAssets.Game_app_battle_sf_Card_prefab, _cardHandsTransform);
                 _cardHands.Add(ctl);
             }
 
