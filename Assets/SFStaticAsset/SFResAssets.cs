@@ -18,6 +18,8 @@ namespace SFramework.Statics
         public const string Game_app_battle_sf_ArrowHead_prefab = "game/app/battle.sf/ArrowHead";
         public const string Game_app_battle_sf_BattleUIView_prefab = "game/app/battle.sf/BattleUIView";
         public const string Game_app_battle_sf_BattleView_unity = "game/app/battle.sf/BattleView";
+        public const string Game_app_battle_sf_Card_prefab = "game/app/battle.sf/Card";
+        public const string Game_app_battle_sf_cardbg_png = "game/app/battle.sf/cardbg";
         public const string Game_scenes_sf_BaseScene_unity = "game/scenes.sf/BaseScene";
         public const string Loading_sf_BarLoading_prefab = "loading.sf/BarLoading";
         public const string Loading_sf_BaseLoading_prefab = "loading.sf/BaseLoading";
@@ -43,9 +45,9 @@ namespace SFramework.Statics
         public const string BundleName = "activity_btn_arrow";
         public const string RES_activity_btn_arrow_png = "activity_btn_arrow";
     }
-    public class App_battle_sf
+    public class Game_app_battle
     {
-        public const string BundleName = "app/battle.sf";
+        public const string BundleName = "game/app/battle";
     }
     public class Game_app_battle_sf
     {
@@ -54,6 +56,8 @@ namespace SFramework.Statics
         public const string RES_ArrowHead_prefab = "ArrowHead";
         public const string RES_BattleUIView_prefab = "BattleUIView";
         public const string RES_BattleView_unity = "BattleView";
+        public const string RES_Card_prefab = "Card";
+        public const string RES_cardbg_png = "cardbg";
     }
     public class Game_scenes_sf
     {
