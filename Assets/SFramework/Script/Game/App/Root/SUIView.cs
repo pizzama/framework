@@ -45,8 +45,8 @@ namespace SFramework.Game
 
         public override void Open()
         {
-            Vector3 position = default;
-            Quaternion rotation = default;
+            Vector3 position;
+            Quaternion rotation;
             SetViewPrefabPath(out mAbName, out mResName, out position, out rotation);
             //SetViewTransform(out mViewTransform, position, rotation);
             SetViewTransform(position, rotation).Forget();
