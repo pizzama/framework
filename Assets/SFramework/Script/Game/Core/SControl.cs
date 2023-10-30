@@ -37,7 +37,7 @@ namespace SFramework
             _view.Install();
         }
 
-        public override void Open(BundleParams value)
+        public override void Open(SBundleParams value)
         {
             _model.Open(value);
         }
@@ -54,12 +54,12 @@ namespace SFramework
             _model.ModelCallback -= HandleModelCallback;
         }
 
-        public void SubscribeMessage(string messageId, IBundle bundle)
+        public void SubscribeMessage(string messageId, ISBundle bundle)
         {
             Manager.SubscribeMessage(messageId, bundle);
         }
 
-        public void UnSubscribeMessage(string messageId, IBundle bundle)
+        public void UnSubscribeMessage(string messageId, ISBundle bundle)
         {
             Manager.UnSubscribeMessage(messageId, bundle);
         }
@@ -74,7 +74,7 @@ namespace SFramework
 
         public void BroadcastMessage(string messageId, string nameSpace, string className, object messageData = null, string alias = "", int sort = 0)
         {
-            BundleParams bdParams = new BundleParams()
+            SBundleParams bdParams = new SBundleParams()
             {
                 MessageId = messageId,
                 NameSpace = nameSpace,
@@ -84,10 +84,10 @@ namespace SFramework
                 MessageSender = this,
                 Sort = sort,
             };
-            BundleManager.Instance.AddMessageParams(bdParams);
+            SBundleManager.Instance.AddMessageParams(bdParams);
         }
 
-        public override void HandleMessage(BundleParams value)
+        public override void HandleMessage(SBundleParams value)
         {
 
         }
@@ -101,7 +101,7 @@ namespace SFramework
 
         public T GetControl<T>() where T : SControl
         {
-            return BundleManager.Instance.GetControl<T>();
+            return SBundleManager.Instance.GetControl<T>();
         }
 
         private T createBundle<T>(Type classType, string name)
@@ -160,7 +160,7 @@ namespace SFramework
             Manager.OpenControl(fullPath, messageData, isSequence, alias, sort);
         }
 
-        public void CloseAllControl(List<IBundle> excludeBundles)
+        public void CloseAllControl(List<ISBundle> excludeBundles)
         {
             Manager.CloseAllControl(excludeBundles);
         }
@@ -170,9 +170,9 @@ namespace SFramework
             base.closing();
             if (_model.OpenParams.OpenType == OpenType.Sequence)
             {
-                BundleParams? value = BundleManager.Instance.PopUpOpenParams();
+                SBundleParams? value = SBundleManager.Instance.PopUpOpenParams();
                 if (value != null)
-                    BundleManager.Instance.OpenControl((BundleParams)value);
+                    SBundleManager.Instance.OpenControl((SBundleParams)value);
             }
 
         }

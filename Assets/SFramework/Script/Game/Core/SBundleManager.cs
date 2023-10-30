@@ -1,33 +1,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SFramework.Tools;
-using SFramework.Tools.Attributes;
 
 
 namespace SFramework
 {
-    public class BundleManager : MonoBehaviour, IManager
+    public class SBundleManager : MonoBehaviour, ISManager
     {
-        private static BundleManager _instance;
-        public static BundleManager Instance
+        private static SBundleManager _instance;
+        public static SBundleManager Instance
         {
             get
             {
                 if (_instance != null) return _instance;
-                _instance = FindObjectOfType<BundleManager>();
+                _instance = FindObjectOfType<SBundleManager>();
                 if (_instance != null) return _instance;
                 var obj = new GameObject();
                 obj.name = "BundleManager";
-                _instance = obj.AddComponent<BundleManager>();
+                _instance = obj.AddComponent<SBundleManager>();
                 _instance.init();
                 return _instance;
             }
         }
 
-        private List<BundleParams> _messageParams; //通知的消息队列
-        private List<BundleParams> _openSequenceParams; //执行打开操作的消息队列
-        private SMemory<string, string, IBundle> _bundleMap; //已经启动了的所有模块的管理器
-        private Dictionary<string, List<IBundle>> _bundleObserverMap; //注册消息管理器 
+        private List<SBundleParams> _messageParams; //通知的消息队列
+        private List<SBundleParams> _openSequenceParams; //执行打开操作的消息队列
+        private SMemory<string, string, ISBundle> _bundleMap; //已经启动了的所有模块的管理器
+        private Dictionary<string, List<ISBundle>> _bundleObserverMap; //注册消息管理器 
         [SerializeField]
         private List<string> _bundleInspector;
 
@@ -41,7 +40,7 @@ namespace SFramework
 
             if (_instance == null)
             {
-                _instance = this as BundleManager;
+                _instance = this as SBundleManager;
                 _instance.init();
                 DontDestroyOnLoad(transform.gameObject);
             }
@@ -58,9 +57,9 @@ namespace SFramework
         {
             if (_bundleMap == null)
                 return;
-            foreach (KeyValuePair<string, Dictionary<string, IBundle>> result in _bundleMap)
+            foreach (KeyValuePair<string, Dictionary<string, ISBundle>> result in _bundleMap)
             {
-                foreach (KeyValuePair<string, IBundle> bundle in result.Value)
+                foreach (KeyValuePair<string, ISBundle> bundle in result.Value)
                 {
                     bundle.Value.Update();
                 }
@@ -71,9 +70,9 @@ namespace SFramework
         {
             if (_bundleMap == null)
                 return;
-            foreach (KeyValuePair<string, Dictionary<string, IBundle>> result in _bundleMap)
+            foreach (KeyValuePair<string, Dictionary<string, ISBundle>> result in _bundleMap)
             {
-                foreach (KeyValuePair<string, IBundle> bundle in result.Value)
+                foreach (KeyValuePair<string, ISBundle> bundle in result.Value)
                 {
                     bundle.Value.FixUpdate();
                 }
@@ -90,9 +89,9 @@ namespace SFramework
             else
                 _bundleInspector.Clear();
 
-            foreach (KeyValuePair<string, Dictionary<string, IBundle>> result in _bundleMap)
+            foreach (KeyValuePair<string, Dictionary<string, ISBundle>> result in _bundleMap)
             {
-                foreach (KeyValuePair<string, IBundle> bundle in result.Value)
+                foreach (KeyValuePair<string, ISBundle> bundle in result.Value)
                 {
                     bundle.Value.LateUpdate();
                     _bundleInspector.Add(bundle.Value.AliasName + ":" + bundle.Value.IsOpen);
@@ -103,19 +102,19 @@ namespace SFramework
         }
         private void init()
         {
-            _bundleMap = new SMemory<string, string, IBundle>();
-            _messageParams = new List<BundleParams>();
-            _openSequenceParams = new List<BundleParams>();
-            _bundleObserverMap = new Dictionary<string, List<IBundle>>();
+            _bundleMap = new SMemory<string, string, ISBundle>();
+            _messageParams = new List<SBundleParams>();
+            _openSequenceParams = new List<SBundleParams>();
+            _bundleObserverMap = new Dictionary<string, List<ISBundle>>();
         }
 
-        public IBundle GetBundle(string name, string alias)
+        public ISBundle GetBundle(string name, string alias)
         {
-            IBundle value = _bundleMap.GetValue(name, alias);
+            ISBundle value = _bundleMap.GetValue(name, alias);
             return value;
         }
 
-        public IBundle AddBundle(IBundle bundle, string alias)
+        public ISBundle AddBundle(ISBundle bundle, string alias)
         {
             if (bundle == null)
                 throw new NotFoundException("bundle name not be null");
@@ -131,13 +130,13 @@ namespace SFramework
             return bundle;
         }
 
-        public IBundle DeleteBundle(string name, string alias)
+        public ISBundle DeleteBundle(string name, string alias)
         {
-            IBundle bundle = _bundleMap.DeleteValue(name, alias);
+            ISBundle bundle = _bundleMap.DeleteValue(name, alias);
             return bundle;
         }
 
-        public IBundle DeleteBundle(IBundle bundle)
+        public ISBundle DeleteBundle(ISBundle bundle)
         {
             string fullName;
             string className;
@@ -147,11 +146,11 @@ namespace SFramework
             return DeleteBundle(fullName, bundle.AliasName);
         }
 
-        public void InstallBundle(IBundle bundle, string alias = "", bool withOpen = false)
+        public void InstallBundle(ISBundle bundle, string alias = "", bool withOpen = false)
         {
             try
             {
-                IBundle value = AddBundle(bundle, alias);
+                ISBundle value = AddBundle(bundle, alias);
                 value.Install();
                 if (withOpen)
                     value.Open();
@@ -165,12 +164,12 @@ namespace SFramework
 
         public void UninstallBundle(string name, string alias)
         {
-            IBundle value = DeleteBundle(name, alias);
+            ISBundle value = DeleteBundle(name, alias);
             if (value != null)
                 value.Uninstall();
         }
 
-        public void UninstallBundle(IBundle bundle)
+        public void UninstallBundle(ISBundle bundle)
         {
             string fullName;
             string className;
@@ -181,7 +180,7 @@ namespace SFramework
 
         public void OpenControl(string fullPath, object messageData = null, bool isSequence = false, string alias = "", int sort = 0)
         {
-            BundleParams bdParams = new BundleParams()
+            SBundleParams bdParams = new SBundleParams()
             {
                 MessageId = "$#$", //特殊id表示打开界面的消息
                 ClassPath = fullPath,
@@ -202,10 +201,10 @@ namespace SFramework
             }
         }
 
-        public void OpenControl(BundleParams value)
+        public void OpenControl(SBundleParams value)
         {
-            BundleManager manager = BundleManager.Instance;
-            IBundle bd = manager.GetBundle(value.ClassPath, value.Alias);
+            SBundleManager manager = SBundleManager.Instance;
+            ISBundle bd = manager.GetBundle(value.ClassPath, value.Alias);
             if (bd == null)
             {
                 SControl ctl = ObjectTools.CreateInstance<SControl>(value.NameSpace, value.ClassName);
@@ -222,18 +221,18 @@ namespace SFramework
                 }
             }
         }
-        public T GetControl<T>() where T : IBundle
+        public T GetControl<T>() where T : ISBundle
         {
             T result = _bundleMap.GetValue<T>();
             return result;
         }
 
-        public void AddMessageParams(BundleParams value)
+        public void AddMessageParams(SBundleParams value)
         {
             _messageParams.Add(value);
         }
 
-        public void AddOpenParams(BundleParams value)
+        public void AddOpenParams(SBundleParams value)
         {
             _openSequenceParams.Add(value);
         }
@@ -242,11 +241,11 @@ namespace SFramework
         {
             for (int i = 0; i < _messageParams.Count; i++)
             {
-                BundleParams pa = _messageParams[i];
+                SBundleParams pa = _messageParams[i];
                 _messageParams.Remove(pa);
                 i--;
 
-                IBundle control = BundleManager.Instance.GetBundle(pa.ClassPath, pa.Alias);
+                ISBundle control = SBundleManager.Instance.GetBundle(pa.ClassPath, pa.Alias);
                 if (control != null)
                     control.HandleMessage(pa);
                 else
@@ -254,7 +253,7 @@ namespace SFramework
                     //如果不是指向的消息则广播给所有注册的用户
                     if (_bundleObserverMap.ContainsKey(pa.MessageId))
                     {
-                        List<IBundle> bundles = _bundleObserverMap[pa.MessageId];
+                        List<ISBundle> bundles = _bundleObserverMap[pa.MessageId];
                         for (int j = 0; j < bundles.Count; j++)
                         {
                             control = bundles[j];
@@ -265,11 +264,11 @@ namespace SFramework
             }
         }
 
-        public BundleParams? PopUpOpenParams()
+        public SBundleParams? PopUpOpenParams()
         {
             if (_openSequenceParams.Count > 0)
             {
-                BundleParams value = _openSequenceParams[0];
+                SBundleParams value = _openSequenceParams[0];
                 _openSequenceParams.RemoveAt(0);
                 return value;
             }
@@ -277,12 +276,12 @@ namespace SFramework
             return null;
         }
 
-        public void SubscribeMessage(string messageId, IBundle bundle)
+        public void SubscribeMessage(string messageId, ISBundle bundle)
         {
 
             if (!_bundleObserverMap.ContainsKey(messageId))
             {
-                _bundleObserverMap[messageId] = new List<IBundle>();
+                _bundleObserverMap[messageId] = new List<ISBundle>();
             }
 
             if (!_bundleObserverMap[messageId].Contains(bundle))
@@ -291,7 +290,7 @@ namespace SFramework
             }
         }
 
-        public void UnSubscribeMessage(string messageId, IBundle bundle)
+        public void UnSubscribeMessage(string messageId, ISBundle bundle)
         {
             if (_bundleObserverMap.ContainsKey(messageId))
             {
@@ -302,11 +301,11 @@ namespace SFramework
             }
         }
 
-        public void CloseAllControl(List<IBundle> excludeBundles)
+        public void CloseAllControl(List<ISBundle> excludeBundles)
         {
-            foreach (KeyValuePair<string, Dictionary<string, IBundle>> result in _bundleMap)
+            foreach (KeyValuePair<string, Dictionary<string, ISBundle>> result in _bundleMap)
             {
-                foreach (KeyValuePair<string, IBundle> bundle in result.Value)
+                foreach (KeyValuePair<string, ISBundle> bundle in result.Value)
                 {
                     if (excludeBundles.Exists(t => bundle.Value == t))
                     {
@@ -330,7 +329,7 @@ namespace SFramework
                 alias = className;
             }
 
-            IBundle bundle = GetBundle(fullPath, alias);
+            ISBundle bundle = GetBundle(fullPath, alias);
             bundle.Close();
         }
     }

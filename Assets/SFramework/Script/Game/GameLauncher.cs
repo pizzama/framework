@@ -29,8 +29,8 @@ namespace SFramework
                 Type cType = controls[i];
                 if (cType.Name == "RootControl")
                     continue;
-                IBundle bd = (IBundle)Activator.CreateInstance(cType, true);
-                BundleManager.Instance.InstallBundle(bd, "");
+                ISBundle bd = (ISBundle)Activator.CreateInstance(cType, true);
+                SBundleManager.Instance.InstallBundle(bd, "");
             }
         }
 

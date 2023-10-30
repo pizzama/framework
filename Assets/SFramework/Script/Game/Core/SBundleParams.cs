@@ -8,7 +8,7 @@ namespace SFramework
         Sequence,
     }
 
-    public struct BundleParams
+    public struct SBundleParams
     {
         public string MessageId;
         public string NameSpace;

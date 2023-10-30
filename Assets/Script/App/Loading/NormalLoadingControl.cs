@@ -10,7 +10,7 @@ namespace Game
             GetView<NormalLoadingView>().PlayAnimator(Model.OpenParams.MessageData.ToString());
         }
 
-        public override void HandleMessage(BundleParams value)
+        public override void HandleMessage(SBundleParams value)
         {
             //switch(value.MessageId)
             //{

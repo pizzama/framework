@@ -23,7 +23,7 @@ namespace Game
             // BundleManager.Instance.InstallBundle(new GameMainControl(), "", true);
             initAllControl();
             //BundleManager.Instance.OpenControl(SFStaticsControl.Game_GameMainControl);
-            BundleManager.Instance.OpenControl(SFStaticsControl.Game_Scenes_BattleControl);
+            SBundleManager.Instance.OpenControl(SFStaticsControl.Game_Scenes_BattleControl);
         }
     }
 }

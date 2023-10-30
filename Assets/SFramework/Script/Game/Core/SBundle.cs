@@ -4,10 +4,10 @@ using Cysharp.Threading.Tasks;
 
 namespace SFramework
 {
-    public abstract class SBundle : IBundle
+    public abstract class SBundle : ISBundle
     {
-        private IManager _manager;
-        public IManager Manager { get => _manager; set => _manager = value; }
+        private ISManager _manager;
+        public ISManager Manager { get => _manager; set => _manager = value; }
 
         public string _aliasName;
         public string AliasName { get => _aliasName; set => _aliasName = value; }
@@ -38,7 +38,7 @@ namespace SFramework
             opening();
         }
 
-        public virtual void Open(BundleParams value = default)
+        public virtual void Open(SBundleParams value = default)
         {
             Open();
         }
@@ -78,7 +78,7 @@ namespace SFramework
 
         }
 
-        public virtual void HandleMessage(BundleParams value)
+        public virtual void HandleMessage(SBundleParams value)
         {
 
         }

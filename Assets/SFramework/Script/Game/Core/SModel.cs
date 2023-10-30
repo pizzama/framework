@@ -7,7 +7,7 @@ namespace SFramework
 {
     public partial class SModel : SBundle
     {
-        public BundleParams OpenParams;
+        public SBundleParams OpenParams;
         private SControl _control;
         public SControl Control
         {
@@ -28,7 +28,7 @@ namespace SFramework
             initing();
         }
 
-        public override void Open(BundleParams value)
+        public override void Open(SBundleParams value)
         {
             OpenParams = value;
             base.Open(value);

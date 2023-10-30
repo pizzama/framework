@@ -10,7 +10,7 @@ namespace Game
         {
         }
 
-        public override void HandleMessage(BundleParams value)
+        public override void HandleMessage(SBundleParams value)
         {
         }
     }

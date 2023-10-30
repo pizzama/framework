@@ -55,7 +55,7 @@ namespace SFramework.Game
                 await operation.ToUniTask(progress);
             }
 
-            Control.CloseAllControl(new List<IBundle>() { Control });
+            Control.CloseAllControl(new List<ISBundle>() { Control });
             goDict = collectSceneByTag();
             loadSceneComplete();
         }
