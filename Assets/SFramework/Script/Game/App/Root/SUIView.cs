@@ -3,6 +3,7 @@ using UnityEngine;
 using SFramework.Pool;
 using SFramework.Tools;
 using System;
+using Cysharp.Threading.Tasks;
 
 namespace SFramework.Game
 {
@@ -44,14 +45,61 @@ namespace SFramework.Game
 
         public override void Open()
         {
-            UILayer layer = GetViewLayer();
             Vector3 position = default;
             Quaternion rotation = default;
-            SetViewTransform(out mViewTransform, out position, out rotation);
+            SetViewPrefabPath(out mAbName, out mResName, out position, out rotation);
+            //SetViewTransform(out mViewTransform, position, rotation);
+            SetViewTransform(position, rotation).Forget();
+        }
+
+        protected virtual void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
+        {
+            Type tp = GetType();
+            string path = tp.Namespace;
+            path = path.Replace('.', '/');
+            prefabPath = path + "." + defaultVariantName;
+            prefabName = tp.Name;
+            position = new Vector3(0, 0, 0);
+            rotation = Quaternion.Euler(0, 0, 0);
+        }
+
+        protected virtual void SetViewTransform(out Transform trans, Vector3 position, Quaternion rotation)
+        {
+            trans = null;
+            if (!string.IsNullOrEmpty(mAbName) && !string.IsNullOrEmpty(mResName))
+            {
+                GameObject prefab = assetManager.LoadFromBundle<GameObject>(mAbName, mResName);
+                if(prefab == null)
+                    throw new NotFoundException("not found uiview prefab:" + mAbName + ";" + mResName);
+                string fullPath = assetManager.FullPath(mAbName, mResName);
+                GameObject ob = poolManager.Request<ListGameObjectPool>(fullPath, prefab, -1);
+                trans = ob.transform;
+            }
+            openUI(position, rotation);
+        }
+
+        protected async UniTaskVoid SetViewTransform(Vector3 position, Quaternion rotation)
+        {
+            if (!string.IsNullOrEmpty(mAbName) && !string.IsNullOrEmpty(mResName))
+            {
+                GameObject prefab = await assetManager.LoadFromBundleAsync<GameObject>(mAbName, mResName);
+                if (prefab == null)
+                    throw new NotFoundException("not found uiview prefab:" + mAbName + ";" + mResName);
+                string fullPath = assetManager.FullPath(mAbName, mResName);
+                GameObject ob = poolManager.Request<ListGameObjectPool>(fullPath, prefab, -1);
+                mViewTransform = ob.transform;
+            }
+
+            openUI(position, rotation);
+        }
+
+        protected virtual void openUI(Vector3 position, Quaternion rotation)
+        {
             if (mViewTransform != null)
             {
-                if(UIRoot)
+                if (UIRoot)
                 {
+                    UILayer layer = GetViewLayer();
                     UIRoot.OpenUI(layer, mViewTransform, position, rotation);
                     GameObject[] alls = GameObject.FindGameObjectsWithTag(findTag);
                     for (int i = 0; i < alls.Length; i++)
@@ -69,33 +117,6 @@ namespace SFramework.Game
             }
             base.Open();
             ViewCallback?.Invoke();
-        }
-
-        protected virtual void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
-        {
-            Type tp = GetType();
-            string path = tp.Namespace;
-            path = path.Replace('.', '/');
-            prefabPath = path + "." + defaultVariantName;
-            prefabName = tp.Name;
-            position = new Vector3(0, 0, 0);
-            rotation = Quaternion.Euler(0, 0, 0);
-        }
-
-        protected virtual void SetViewTransform(out Transform trans, out Vector3 position, out Quaternion rotation)
-        {
-            trans = null;
-            SetViewPrefabPath(out mAbName, out mResName, out position, out rotation);
-
-            if (!string.IsNullOrEmpty(mAbName))
-            {
-                GameObject prefab = assetManager.LoadFromBundle<GameObject>(mAbName, mResName);
-                if(prefab == null)
-                    throw new NotFoundException("not found uiview prefab:" + mAbName + ";" + mResName);
-                string fullPath = assetManager.FullPath(mAbName, mResName);
-                GameObject ob = poolManager.Request<ListGameObjectPool>(fullPath, prefab, -1);
-                trans = ob.transform;
-            }
         }
 
         public override void Close()
