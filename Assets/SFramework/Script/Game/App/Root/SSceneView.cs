@@ -33,7 +33,7 @@ namespace SFramework.Game
 
         protected virtual async UniTaskVoid loadScene(string scenePath, string sceneName, LoadSceneMode mode)
         {
-            AsyncOperation operation = await LoadSceneAsync(mAbPath, mAbName, (LoadSceneMode)GetViewOpenType());
+            AsyncOperation operation = await LoadSceneAsync(scenePath, sceneName, (LoadSceneMode)GetViewOpenType());
             if (operation == null)
             {
                 return;
