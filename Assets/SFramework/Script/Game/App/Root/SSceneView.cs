@@ -13,7 +13,6 @@ namespace SFramework.Game
         private Dictionary<string, GameObject> goDict;
         protected string mAbPath; //scene asset bundle path
         protected string mAbName; //scene asset bundle name
-        protected abstract void loadSceneComplete();
         protected override void initing()
         {
             getBuildInSceneNames(out _buildInSceneNames);// init scene int editor buiding settings
@@ -23,7 +22,6 @@ namespace SFramework.Game
         {
             SetScenePath(out mAbPath, out mAbName);
             loadScene(mAbPath, mAbName, (LoadSceneMode)GetViewOpenType()).Forget();
-            base.Open();
         }
 
         //if you need control the loading progress you will override the method
@@ -57,7 +55,9 @@ namespace SFramework.Game
 
             Control.CloseAllControl(new List<ISBundle>() { Control });
             goDict = collectSceneByTag();
-            loadSceneComplete();
+            //loading scene success the view is open
+            base.Open();
+            ViewCallback?.Invoke();
         }
 
         public async UniTask<AsyncOperation> LoadSceneAsync(string scenePath, string sceneName, LoadSceneMode mode)

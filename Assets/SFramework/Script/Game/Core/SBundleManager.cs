@@ -157,7 +157,7 @@ namespace SFramework
             }
             catch (System.Exception e)
             {
-                Debug.LogWarning(e.ToString());
+                Debug.LogError(e.ToString());
                 DeleteBundle(bundle);
             }
         }

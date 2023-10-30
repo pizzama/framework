@@ -18,8 +18,9 @@ namespace Game
             prefabName = Game_scenes_sf.RES_BaseScene_unity;
         }
 
-        protected override void opening()
+        public override void Open()
         {
+            base.Open();
             //open loading ui
             Control.OpenControl(SFStaticsControl.Game_NormalLoadingControl, "Start");
         }
@@ -37,7 +38,7 @@ namespace Game
         //    return false;
         //}
 
-        protected override void loadSceneComplete()
+        protected override void opening()
         {
             //Debug.Log("gamemainview loading finish");
             Control.OpenControl("Game.NormalLoadingControl", "End");

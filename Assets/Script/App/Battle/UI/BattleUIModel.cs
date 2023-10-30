@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.App.Battle
 {
-    public class BattleModel : RootModel
+    public class BattleUIModel : RootModel
     {
         protected override void opening()
         {

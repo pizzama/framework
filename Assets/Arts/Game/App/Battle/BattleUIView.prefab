@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4317371611200910350}
   - component: {fileID: 6616440173550295360}
   m_Layer: 0
-  m_Name: BattleView
+  m_Name: BattleUIView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

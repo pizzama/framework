@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: a4011a7371521a34482cd7390c5a26af
+guid: 959d99304842d594284549e2be0ceff5
 PrefabImporter:
   externalObjects: {}
   userData: 
-  assetBundleName: battle
+  assetBundleName: game/app/battle
   assetBundleVariant: sf

@@ -24,6 +24,9 @@ namespace SFramework
             return (T)_control;
         }
 
+        public delegate void DelegateViewCallback();
+        public DelegateViewCallback ViewCallback;
+
         public override void Install()
         {
             initing();

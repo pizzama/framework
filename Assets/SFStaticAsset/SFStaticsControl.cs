@@ -18,6 +18,7 @@ namespace SFramework.Statics
         public const string Game_InputControl = "Game.InputControl";
         public const string Game_NormalLoadingControl = "Game.NormalLoadingControl";
         public const string Game_TestControl = "Game.TestControl";
-        public const string Game_Scenes_BattleControl = "Game.Scenes.BattleControl";
+        public const string Game_App_Battle_BattleControl = "Game.App.Battle.BattleControl";
+        public const string Game_App_Battle_BattleUIControl = "Game.App.Battle.BattleUIControl";
     }
 }

@@ -34,6 +34,7 @@ namespace SFramework.Actor.Ability
 
         public override void UpdateAbility()
 		{
+			base.UpdateAbility();
 			if (InputAuthorized)
 			{
 				handleInput();

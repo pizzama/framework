@@ -14,11 +14,11 @@ namespace SFramework.Statics
     public class SFResAssets
     {
         public const string Activity_btn_arrow_activity_btn_arrow_png = "activity_btn_arrow/activity_btn_arrow";
-        public const string Battle_sf_ArrowBody_prefab = "battle.sf/ArrowBody";
-        public const string Battle_sf_ArrowHead_prefab = "battle.sf/ArrowHead";
-        public const string Battle_sf_BattleView_prefab = "battle.sf/BattleView";
+        public const string Game_app_battle_sf_ArrowBody_prefab = "game/app/battle.sf/ArrowBody";
+        public const string Game_app_battle_sf_ArrowHead_prefab = "game/app/battle.sf/ArrowHead";
+        public const string Game_app_battle_sf_BattleUIView_prefab = "game/app/battle.sf/BattleUIView";
+        public const string Game_app_battle_sf_BattleView_unity = "game/app/battle.sf/BattleView";
         public const string Game_scenes_sf_BaseScene_unity = "game/scenes.sf/BaseScene";
-        public const string Game_scenes_sf_BattleView_unity = "game/scenes.sf/BattleView";
         public const string Loading_sf_BarLoading_prefab = "loading.sf/BarLoading";
         public const string Loading_sf_BaseLoading_prefab = "loading.sf/BaseLoading";
         public const string Loading_sf_effect_jpg = "loading.sf/effect";
@@ -43,22 +43,22 @@ namespace SFramework.Statics
         public const string BundleName = "activity_btn_arrow";
         public const string RES_activity_btn_arrow_png = "activity_btn_arrow";
     }
-    public class Arts
+    public class App_battle_sf
     {
-        public const string BundleName = "arts";
+        public const string BundleName = "app/battle.sf";
     }
-    public class Battle_sf
+    public class Game_app_battle_sf
     {
-        public const string BundleName = "battle.sf";
+        public const string BundleName = "game/app/battle.sf";
         public const string RES_ArrowBody_prefab = "ArrowBody";
         public const string RES_ArrowHead_prefab = "ArrowHead";
-        public const string RES_BattleView_prefab = "BattleView";
+        public const string RES_BattleUIView_prefab = "BattleUIView";
+        public const string RES_BattleView_unity = "BattleView";
     }
     public class Game_scenes_sf
     {
         public const string BundleName = "game/scenes.sf";
         public const string RES_BaseScene_unity = "BaseScene";
-        public const string RES_BattleView_unity = "BattleView";
     }
     public class Loading_sf
     {
@@ -68,10 +68,6 @@ namespace SFramework.Statics
         public const string RES_effect_jpg = "effect";
         public const string RES_effect1_png = "effect1";
         public const string RES_GameMainView_prefab = "GameMainView";
-    }
-    public class Model_avatar_role_carrota
-    {
-        public const string BundleName = "model/avatar/role_carrota";
     }
     public class Model_avatar_role_carrota_sf
     {

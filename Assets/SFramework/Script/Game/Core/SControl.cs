@@ -30,10 +30,11 @@ namespace SFramework
             Type classType = this.GetType();
             _model = createBundle<SModel>(classType, "Model");
             _model.Control = this;
-            _model.ModelCallback += HandleModelCallback;
+            _model.ModelCallback = HandleModelCallback;
             _model.Install();
             _view = createBundle<SView>(classType, "View");
             _view.Control = this;
+            _view.ViewCallback = HandleViewCallback;
             _view.Install();
         }
 
@@ -51,7 +52,7 @@ namespace SFramework
 
         public override void Uninstall()
         {
-            _model.ModelCallback -= HandleModelCallback;
+            _model.ModelCallback = null;
         }
 
         public void SubscribeMessage(string messageId, ISBundle bundle)
@@ -95,6 +96,10 @@ namespace SFramework
         public void HandleModelCallback()
         {
             _view.Open();
+        }
+
+        public void HandleViewCallback()
+        {
             IsOpen = true;
             this.Open();
         }

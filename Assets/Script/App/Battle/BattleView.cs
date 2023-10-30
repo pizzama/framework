@@ -7,7 +7,7 @@ using SFramework.Statics;
 using Game.Character;
 using SFramework.Game.App;
 
-namespace Game.Scenes
+namespace Game.App.Battle
 {
     public class BattleView : SSCENEView
     {
@@ -16,7 +16,7 @@ namespace Game.Scenes
             return ViewOpenType.Single;
         }
 
-        protected override void loadSceneComplete()
+        protected override void opening()
         {
             var input = SFInputManager.Instance;
             Debug.Log("load complete");

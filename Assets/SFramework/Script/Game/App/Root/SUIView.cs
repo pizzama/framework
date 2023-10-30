@@ -68,6 +68,7 @@ namespace SFramework.Game
 
             }
             base.Open();
+            ViewCallback?.Invoke();
         }
 
         protected virtual void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
