@@ -6,7 +6,7 @@ namespace SFramework.Extension
 {
     public static class GameObjectExtensions
     {
-        public static Dictionary<string, GameObject> CollectAllGameObjects(this GameObject rootGameObject, string careTagName)
+        public static Dictionary<string, GameObject> CollectAllGameObjects(this GameObject rootGameObject, string careTagName = "Untagged")
         {
             Dictionary<string, GameObject> result = new Dictionary<string, GameObject>();
             rootGameObject.CollectAllGameObject(ref result, careTagName);
@@ -14,7 +14,7 @@ namespace SFramework.Extension
         }
 
         // this method is too heavy, fist using FindGameObjectsWithTag instead
-        public static void CollectAllGameObject(this GameObject gameObject, ref Dictionary<string, GameObject> objectMap, string careTagName)
+        public static void CollectAllGameObject(this GameObject gameObject, ref Dictionary<string, GameObject> objectMap, string careTagName = "Untagged")
         {
             if (objectMap.ContainsKey(gameObject.name))
             {

@@ -99,7 +99,7 @@ namespace SFramework.Game
                 {
                     UILayer layer = GetViewLayer();
                     UIRoot.OpenUI(layer, trans, position, rotation);
-                    goDict = mViewTransform.gameObject.CollectAllGameObjects();
+                    goDict = mViewTransform.gameObject.CollectAllGameObjects(findTag);
                 }
                 else
                 {

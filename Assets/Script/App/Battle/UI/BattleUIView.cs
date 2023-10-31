@@ -129,10 +129,10 @@ namespace Game.App.Battle
             _bezierCurve.gameObject.SetActive(false);
         }
 
-        public void SetBezierCurveTransform(Vector3 p0, Vector3 p1)
+        public void SetBezierCurveTransform(Vector3 p0, Vector3 p2)
         {
             _bezierCurve.p0.position = p0;
-            _bezierCurve.p1.position = p1;
+            _bezierCurve.p2.position = p2;
         }
 
         private float GetStartTheta()

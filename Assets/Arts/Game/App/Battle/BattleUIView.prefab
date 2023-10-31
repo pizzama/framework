@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 5259577380544642636}
   m_Layer: 0
   m_Name: CardHands
-  m_TagString: $UI$
+  m_TagString: $EXPORT$
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,7 +116,7 @@ PrefabInstance:
     - target: {fileID: 3816414031075396575, guid: 77334dcac65cfce4582aa841a1544f61,
         type: 3}
       propertyPath: m_TagString
-      value: $UI$
+      value: $EXPORT$
       objectReference: {fileID: 0}
     - target: {fileID: 5731962145649707961, guid: 77334dcac65cfce4582aa841a1544f61,
         type: 3}

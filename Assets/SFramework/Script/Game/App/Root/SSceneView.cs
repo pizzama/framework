@@ -160,7 +160,7 @@ namespace SFramework.Game
             for (int i = 0; i < alls.Length; i++)
             {
                 GameObject go = alls[i];
-                go.CollectAllGameObject(ref sceneDict);
+                go.CollectAllGameObject(ref sceneDict, findTag);
             }
 
             return sceneDict;
