@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SFramework.Pool;
-using SFramework.Tools;
 using System;
 using Cysharp.Threading.Tasks;
+using SFramework.Extension;
 
 namespace SFramework.Game
 {
@@ -106,8 +106,8 @@ namespace SFramework.Game
                     //    var go = alls[i];
                     //    goDict[go.name] = go;
                     //}
-                    goDict = trans.gameObject.CollectAllGameObjects();
-                    // goDict = ComponentTools.collectAllGameObjects(mViewTransform.gameObject); 
+                    goDict = mViewTransform.gameObject.CollectAllGameObjects();
+                     //goDict = ComponentTools.collectAllGameObjects(mViewTransform.gameObject); 
                 }
                 else
                 {
