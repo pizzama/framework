@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using SFramework.StateMachine;
+using SFramework.Extension;
 
 namespace Game.App.Battle
 {
@@ -69,7 +69,7 @@ namespace Game.App.Battle
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("click");
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -96,7 +96,7 @@ namespace Game.App.Battle
             StopAllCoroutines();//stop all card coroutines
 
             transform.SetAsLastSibling();
-
+            IsBezierCurve = true;
             if (IsBezierCurve) //if the card is directivity
             {
                 uiView.ShowBezierCurve();
@@ -107,14 +107,17 @@ namespace Game.App.Battle
 
         public void OnDrag(PointerEventData eventData)
         {
+            // covert screen position to world position 
+            BattleUIView uiView = (BattleUIView)ParentView;
+            var pos = uiView.UIRoot.UICamera.ScreenToWorldPoint(eventData.position);
+            pos.z = 0; // keep z axis is zero
             if (IsBezierCurve)
             {
-                BattleUIView uiView = (BattleUIView)ParentView;
-                uiView.SetBezierCurveTransform(transform.position, eventData.position);
+                uiView.SetBezierCurveTransform(transform.position, pos);
             }
             else
             {
-                transform.position = eventData.position;
+                transform.position = pos;
             }
         }
 

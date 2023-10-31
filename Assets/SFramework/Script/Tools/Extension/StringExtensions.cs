@@ -2,7 +2,7 @@ using System;
 
 namespace SFramework.Extension
 {
-    public static class StringExtension
+    public static class StringExtensions
     {
         public static T ParseEnum<T>(string value)
         {

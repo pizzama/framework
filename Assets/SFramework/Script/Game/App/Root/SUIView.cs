@@ -100,12 +100,13 @@ namespace SFramework.Game
                 {
                     UILayer layer = GetViewLayer();
                     UIRoot.OpenUI(layer, trans, position, rotation);
-                    GameObject[] alls = GameObject.FindGameObjectsWithTag(findTag);
-                    for (int i = 0; i < alls.Length; i++)
-                    {
-                        var go = alls[i];
-                        goDict[go.name] = go;
-                    }
+                    //GameObject[] alls = GameObject.FindGameObjectsWithTag(findTag);
+                    //for (int i = 0; i < alls.Length; i++)
+                    //{
+                    //    var go = alls[i];
+                    //    goDict[go.name] = go;
+                    //}
+                    goDict = trans.gameObject.CollectAllGameObjects();
                     // goDict = ComponentTools.collectAllGameObjects(mViewTransform.gameObject); 
                 }
                 else
