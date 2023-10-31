@@ -6,15 +6,15 @@ namespace SFramework.Extension
 {
     public static class GameObjectExtensions
     {
-        public static Dictionary<string, GameObject> CollectAllGameObjects(this GameObject rootGameObject)
+        public static Dictionary<string, GameObject> CollectAllGameObjects(this GameObject rootGameObject, string careTagName)
         {
             Dictionary<string, GameObject> result = new Dictionary<string, GameObject>();
-            rootGameObject.CollectAllGameObject(ref result);
+            rootGameObject.CollectAllGameObject(ref result, careTagName);
             return result;
         }
 
         // this method is too heavy, fist using FindGameObjectsWithTag instead
-        public static void CollectAllGameObject(this GameObject gameObject, ref Dictionary<string, GameObject> objectMap)
+        public static void CollectAllGameObject(this GameObject gameObject, ref Dictionary<string, GameObject> objectMap, string careTagName)
         {
             if (objectMap.ContainsKey(gameObject.name))
             {
@@ -28,7 +28,11 @@ namespace SFramework.Extension
 
             for (int i = 0; i < gameObject.transform.childCount; i++)
             {
-                gameObject.transform.GetChild(i).gameObject.CollectAllGameObject(ref objectMap);
+                GameObject go = gameObject.transform.GetChild(i).gameObject;
+                if(go.tag == careTagName)
+                {
+                    go.CollectAllGameObject(ref objectMap, careTagName);
+                }
             }
         }
     }

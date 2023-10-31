@@ -6,6 +6,7 @@ namespace SFramework.Game
 {
     public abstract class RootView : SView
     {
+        protected const string findTag = "$EXPORT$";
         protected abstract ViewOpenType GetViewOpenType();
         protected AssetsManager assetManager;
         protected GameObjectPoolManager poolManager; //pool manager

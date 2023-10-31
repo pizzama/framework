@@ -9,7 +9,6 @@ namespace SFramework.Game
 {
     public abstract class SUIView : RootView
     {
-        private const string findTag = "$UI$";
         private const string defaultVariantName = "sf";
         //set the ui in which layer
         protected abstract UILayer GetViewLayer();

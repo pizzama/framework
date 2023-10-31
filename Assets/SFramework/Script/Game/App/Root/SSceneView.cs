@@ -9,7 +9,6 @@ namespace SFramework.Game
 {
     public abstract class SSCENEView : RootView
     {
-        private const string findTag = "$SCENE$";
         private List<string> _buildInSceneNames;
         private Dictionary<string, GameObject> goDict;
         protected string mAbPath; //scene asset bundle path
