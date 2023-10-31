@@ -501,7 +501,6 @@ MonoBehaviour:
   BlockingConditionStates: 
   AnalogInput: 0
   InterpolateMovementSpeed: 0
-  InputAuthorized: 1
   Movements: 0
   IdleThreshold: 0.05
   Acceleration: 10
@@ -522,7 +521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityId: 
-  _entityAssetName: 
+  InputAuthorized: 0
   actControl: {fileID: 0}
   _abilities: []
 --- !u!114 &430748049
@@ -1071,7 +1070,7 @@ Transform:
   m_GameObject: {fileID: 1609088178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.56223786, y: 5, z: -3.89}
-  m_LocalScale: {x: 0.53075397, y: 0.9259259, z: 1}
+  m_LocalScale: {x: 0.5646695, y: 0.9259259, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1340,11 +1339,11 @@ GameObject:
   - component: {fileID: 1919236063}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: $SCENE$
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1919236063
 MeshCollider:
   m_ObjectHideFlags: 0

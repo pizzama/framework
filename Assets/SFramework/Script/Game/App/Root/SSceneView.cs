@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using SFramework.Extension;
 
 namespace SFramework.Game
 {
@@ -156,11 +157,11 @@ namespace SFramework.Game
         private Dictionary<string, GameObject> collectSceneByTag()
         {
             Dictionary<string, GameObject> sceneDict = new Dictionary<string, GameObject>();
-            GameObject[] alls = GameObject.FindGameObjectsWithTag(findTag);
+            GameObject[] alls = SceneManager.GetActiveScene().GetRootGameObjects(); //collect all gameobject from scene root
             for (int i = 0; i < alls.Length; i++)
             {
-                var go = alls[i];
-                sceneDict[go.name] = go;
+                GameObject go = alls[i];
+                go.CollectAllGameObject(ref sceneDict);
             }
 
             return sceneDict;

@@ -9,12 +9,12 @@ namespace SFramework.Extension
         public static Dictionary<string, GameObject> CollectAllGameObjects(this GameObject rootGameObject)
         {
             Dictionary<string, GameObject> result = new Dictionary<string, GameObject>();
-            collectAllGameObject(result, rootGameObject);
+            rootGameObject.CollectAllGameObject(ref result);
             return result;
         }
 
         // this method is too heavy, fist using FindGameObjectsWithTag instead
-        private static void collectAllGameObject(Dictionary<string, GameObject> objectMap, GameObject gameObject)
+        public static void CollectAllGameObject(this GameObject gameObject, ref Dictionary<string, GameObject> objectMap)
         {
             if (objectMap.ContainsKey(gameObject.name))
             {
@@ -28,7 +28,7 @@ namespace SFramework.Extension
 
             for (int i = 0; i < gameObject.transform.childCount; i++)
             {
-                collectAllGameObject(objectMap, gameObject.transform.GetChild(i).gameObject);
+                gameObject.transform.GetChild(i).gameObject.CollectAllGameObject(ref objectMap);
             }
         }
     }
