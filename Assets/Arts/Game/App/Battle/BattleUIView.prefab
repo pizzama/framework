@@ -108,6 +108,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BezierCurve
       objectReference: {fileID: 0}
+    - target: {fileID: 3816414031075396575, guid: 77334dcac65cfce4582aa841a1544f61,
+        type: 3}
+      propertyPath: m_TagString
+      value: $UI$
+      objectReference: {fileID: 0}
     - target: {fileID: 5731962145649707961, guid: 77334dcac65cfce4582aa841a1544f61,
         type: 3}
       propertyPath: m_Pivot.x

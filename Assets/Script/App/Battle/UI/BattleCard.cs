@@ -89,24 +89,61 @@ namespace Game.App.Battle
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            // current card will be selected and uiview will know what happened
             BattleUIView uiView = (BattleUIView)ParentView;
             uiView.IsDrag = true;
-
             uiView.SelectCard = this;
-            StopAllCoroutines();
+            StopAllCoroutines();//stop all card coroutines
 
             transform.SetAsLastSibling();
+
+            if (IsBezierCurve) //if the card is directivity
+            {
+                uiView.ShowBezierCurve();
+                uiView.MoveCenter(this);
+            }
 
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            throw new System.NotImplementedException();
+            if (IsBezierCurve)
+            {
+                BattleUIView uiView = (BattleUIView)ParentView;
+                uiView.SetBezierCurveTransform(transform.position, eventData.position);
+            }
+            else
+            {
+                transform.position = eventData.position;
+            }
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            throw new System.NotImplementedException();
+            BattleUIView uiView = (BattleUIView)ParentView;
+            uiView.IsDrag = false;
+
+            if (IsBezierCurve)
+            {
+                SetActiveRaycast(false);
+                uiView.HideBezierCurve();
+                UseCard();
+            }
+            else
+            {
+                if (eventData.position.y > 300f)
+                {
+                    SetActiveRaycast(false);
+                    UseCard();
+                }
+            }
+
+            uiView.SelectCard = null;
+            uiView.Relocation(); //all card reset position
+        }
+
+        private void UseCard()
+        {
         }
     }
 }

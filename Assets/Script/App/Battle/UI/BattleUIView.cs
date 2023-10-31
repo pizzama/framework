@@ -12,6 +12,7 @@ namespace Game.App.Battle
     public class BattleUIView : SUIView
     {
         private RectTransform _cardHandsTransform;
+        private BezierCurve _bezierCurve;
         private List<BattleCard> _cardHands;
         private float angle = 5.5f;
         private float distance = 2000;
@@ -20,7 +21,12 @@ namespace Game.App.Battle
         private float overScale = 1.3f;
 
         public bool IsDrag = false;
-        public BattleCard SelectCard;
+        private BattleCard _selectCard;
+        public BattleCard SelectCard
+        {
+            get { return _selectCard; }
+            set { _selectCard = value; }
+        }
 
         protected override UILayer GetViewLayer()
         {
@@ -35,6 +41,7 @@ namespace Game.App.Battle
         protected override void opening()
         {
             _cardHandsTransform = getUIObject<RectTransform>("CardHands");
+            _bezierCurve = getUIObject<BezierCurve>("BezierCurve");
             _cardHands = new List<BattleCard>();
 
             for (int i = 0; i < 6; i++)
@@ -42,7 +49,6 @@ namespace Game.App.Battle
                 BattleCard ctl = CreateSEntity<BattleCard>(i.ToString(), SFResAssets.Game_app_battle_sf_Card_prefab, _cardHandsTransform);
                 _cardHands.Add(ctl);
             }
-
 
             Relocation();
         }
@@ -62,17 +68,6 @@ namespace Game.App.Battle
                 _cardHands[i].MoveCard(targetPos, targetRot, targetScl);
                 _cardHands[i].transform.SetAsFirstSibling();
             }
-        }
-
-        private float GetStartTheta()
-        {
-            float startTheta = 0;
-            if (_cardHands.Count % 2 == 0)
-                startTheta -= _cardHands.Count / 2 * angle - (angle / 2) - 90;
-            else
-                startTheta -= (_cardHands.Count / 2) * angle - 90;
-
-            return startTheta;
         }
 
         public void OverCard(BattleCard card)
@@ -114,6 +109,43 @@ namespace Game.App.Battle
 
             _cardHands[index].transform.SetAsLastSibling();
         }
+
+        public void MoveCenter(BattleCard card)
+        {
+            Vector3 targetPos = Vector3.up * (-Screen.height / 2 + overUpPosition / 2);
+            Vector3 targetRot = Vector3.zero;
+            Vector3 targetScl = Vector3.one * overScale;
+
+            card.MoveCard(targetPos, targetRot, targetScl);
+        }
+
+        public void ShowBezierCurve()
+        {
+            _bezierCurve.gameObject.SetActive(true);
+        }
+
+        public void HideBezierCurve()
+        {
+            _bezierCurve.gameObject.SetActive(false);
+        }
+
+        public void SetBezierCurveTransform(Vector3 p0, Vector3 p1)
+        {
+            _bezierCurve.p0.position = p0;
+            _bezierCurve.p1.position = p1;
+        }
+
+        private float GetStartTheta()
+        {
+            float startTheta = 0;
+            if (_cardHands.Count % 2 == 0)
+                startTheta -= _cardHands.Count / 2 * angle - (angle / 2) - 90;
+            else
+                startTheta -= (_cardHands.Count / 2) * angle - 90;
+
+            return startTheta;
+        }
+        
 
         private int GetCardIndex(BattleCard card)
         {
