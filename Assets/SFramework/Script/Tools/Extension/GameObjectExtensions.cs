@@ -18,8 +18,8 @@ namespace SFramework.Extension
         {
             if (objectMap.ContainsKey(gameObject.name))
             {
-                Debug.LogWarning($"collect gameobject {gameObject.name} has already collected, it will be ignore:");
-                // objectMap[gameObject.name] = gameObject;
+                //Debug.LogWarning($"collect gameobject {gameObject.name} has already collected, it will be ignore:");
+                 objectMap[gameObject.name] = gameObject;
             }
             else
             {

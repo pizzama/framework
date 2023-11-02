@@ -52,7 +52,7 @@ namespace SFramework.Game
             if (result != null)
             {
                 if (parent == null)
-                    throw new NotFoundException("Couldn't find parent will as parent");
+                    throw new NotFoundException("Couldn't find parent as " + prefabFullPath);
          
                 result.transform.SetParent(parent, false);    
                 result.transform.localPosition = pos;

@@ -34,8 +34,12 @@ namespace SFramework.Actor.Ability
 
         public override void UpdateAbility()
 		{
-			base.UpdateAbility();
-			if (InputAuthorized)
+            if (movementMachine == null || conditionMachine == null)
+            {
+                return;
+            }
+
+            if (InputAuthorized)
 			{
 				handleInput();
 			}

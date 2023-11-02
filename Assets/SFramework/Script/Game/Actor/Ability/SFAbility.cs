@@ -36,10 +36,7 @@ namespace SFramework.Actor.Ability
 
         public virtual void UpdateAbility()
         {
-            if (movementMachine == null || conditionMachine == null)
-            {
-                return;
-            }
+
         }
 
         public virtual void HandleEvent(AbilityAction name, object value)
