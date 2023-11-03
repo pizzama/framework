@@ -10,7 +10,7 @@ namespace SFramework
 	public class ResCleanAssetsMenu
 	{
 		private const string StaticlNameSpace = "SFramework.Statics";
-		private const string Mark_AssetBundle = "Assets/SFramework/AssetBundle Clean Folder";
+		private const string Mark_AssetBundle = "Assets/SFramework/AssetBundle Clean ALL Folder";
 		private const string StaticClassName = "SFResAssets";
 		private const string StaticPath = "SFStaticAsset";
 

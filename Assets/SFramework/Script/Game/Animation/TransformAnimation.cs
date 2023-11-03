@@ -5,6 +5,7 @@ namespace SFramework.Game.Animation
 {
     /*
     * control the transform moving as phase method
+    * you could change image pivot
     */
     public class TransformAnimation: MonoBehaviour
     {

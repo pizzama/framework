@@ -12,15 +12,18 @@ namespace SFramework
 		private static List<string> noticeExtension = new List<string> { ".prefab", ".unity", ".png", ".jpg" };
 		private static List<string> ignoreExtension = new List<string> { ".meta" };
 		private const string StaticlNameSpace = "SFramework.Statics";
-		private const string Mark_AssetBundle = "Assets/SFramework/AssetBundle Folder";
+		private const string Mark_AssetBundle = "Assets/SFramework/AssetBundle All Folder On Assets_Arts";
 		private const string StaticClassName = "SFResAssets";
 		private const string StaticPath = "SFStaticAsset";
 
 		[MenuItem(Mark_AssetBundle)]
 		public static void MarkPTABDir()
 		{
-			string assetDirectory = "Assets/Arts";
-			DirectoryInfo directoryInfo = new DirectoryInfo(assetDirectory);
+			var selectedObject = Selection.activeObject;
+			string assetPath = AssetDatabase.GetAssetPath(selectedObject);
+			//string assetDirectory = Path.GetDirectoryName(assetPath);
+            string assetDirectory = "Assets/Arts";
+            DirectoryInfo directoryInfo = new DirectoryInfo(assetDirectory);
 			DirectoryInfo[] scenesDirectories = directoryInfo.GetDirectories();
 			foreach (var tempDir in scenesDirectories)
 			{
