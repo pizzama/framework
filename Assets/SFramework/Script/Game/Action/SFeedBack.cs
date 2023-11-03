@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SFeedBack : MonoBehaviour
+namespace SFramework.Action
 {
-    // Start is called before the first frame update
-    void Start()
+    public class SFeedBack : MonoBehaviour
     {
-        
-    }
+        public enum SafeModes { Nope, EditorOnly, RuntimeOnly, Full }
+        void Start()
+        {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
     }
 }
