@@ -82,12 +82,11 @@ namespace SFramework.Game
             {
                 GameObject prefab = await assetManager.LoadFromBundleAsync<GameObject>(mAbName, mResName);
                 if (prefab == null)
-                    throw new NotFoundException("not found uiview prefab:" + mAbName + ";" + mResName);
+                    throw new NotFoundException("not found uiView prefab:" + mAbName + ";" + mResName);
                 string fullPath = assetManager.FullPath(mAbName, mResName);
                 GameObject ob = poolManager.Request<ListGameObjectPool>(fullPath, prefab, -1);
                 mViewTransform = ob.transform;
             }
-
             openUI(mViewTransform, position, rotation);
         }
 

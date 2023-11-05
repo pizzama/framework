@@ -23,16 +23,15 @@ namespace SFramework.Extension
             }
             else
             {
-                objectMap.Add(gameObject.name, gameObject);
+                if(gameObject.tag == careTagName)
+                    objectMap.Add(gameObject.name, gameObject);
             }
 
             for (int i = 0; i < gameObject.transform.childCount; i++)
             {
                 GameObject go = gameObject.transform.GetChild(i).gameObject;
-                if(go.tag == careTagName)
-                {
-                    go.CollectAllGameObject(ref objectMap, careTagName);
-                }
+                go.CollectAllGameObject(ref objectMap, careTagName);
+                
             }
         }
     }
