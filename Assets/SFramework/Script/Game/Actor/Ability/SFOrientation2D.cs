@@ -18,8 +18,8 @@ namespace SFramework.Actor.Ability
         public Vector3 ModelRotationValueRight = new Vector3(0f, 0f, 0f); // the threshold at which movement is considered
         public Vector3 ModelFlipValueLeft = new Vector3(-1, 1, 1); // the scale value to apply to the model when facing left
         public Vector3 ModelFlipValueRight = new Vector3(1, 1, 1); // the scale value to apply to the model when facing right
-        public SFActor.SFActorFacingDirections InitialFacingDirection = SFActor.SFActorFacingDirections.Right;
-        public SFActor.SFActorFacingDirections CurrentFacingDirection = SFActor.SFActorFacingDirections.Right;
+        public SActor.SFActorFacingDirections InitialFacingDirection = SActor.SFActorFacingDirections.Right;
+        public SActor.SFActorFacingDirections CurrentFacingDirection = SActor.SFActorFacingDirections.Right;
         private int _direction;
         private int _directionLastFrame = 0;
         private float _lastDirectionX;
@@ -45,19 +45,19 @@ namespace SFramework.Actor.Ability
             CurrentFacingDirection = InitialFacingDirection;
             switch (InitialFacingDirection)
             {
-                case SFActor.SFActorFacingDirections.Right:
+                case SActor.SFActorFacingDirections.Right:
                     _lastDirectionX = 1f;
                     _lastDirectionY = 0f;
                     break;
-                case SFActor.SFActorFacingDirections.Left:
+                case SActor.SFActorFacingDirections.Left:
                     _lastDirectionX = -1f;
                     _lastDirectionY = 0f;
                     break;
-                case SFActor.SFActorFacingDirections.Up:
+                case SActor.SFActorFacingDirections.Up:
                     _lastDirectionX = 0f;
                     _lastDirectionY = 1f;
                     break;
-                case SFActor.SFActorFacingDirections.Down:
+                case SActor.SFActorFacingDirections.Down:
                     _lastDirectionX = 0f;
                     _lastDirectionY = -1f;
                     break;
@@ -90,7 +90,7 @@ namespace SFramework.Actor.Ability
             _lastNonNullXMovement = (Mathf.Abs(actControl.CurrentDirection.x) > 0) ? actControl.CurrentDirection.x : _lastNonNullXMovement;
         }
 
-        public virtual void Face(SFActor.SFActorFacingDirections direction)
+        public virtual void Face(SActor.SFActorFacingDirections direction)
         {
             CurrentFacingDirection = direction;
             applyCurrentDirection();
@@ -130,11 +130,11 @@ namespace SFramework.Actor.Ability
             {
                 if (Mathf.Abs(actControl.CurrentDirection.y) > Mathf.Abs(actControl.CurrentDirection.x))
                 {
-                    CurrentFacingDirection = (actControl.CurrentDirection.y > 0) ? SFActor.SFActorFacingDirections.Up : SFActor.SFActorFacingDirections.Down;
+                    CurrentFacingDirection = (actControl.CurrentDirection.y > 0) ? SActor.SFActorFacingDirections.Up : SActor.SFActorFacingDirections.Down;
                 }
                 else
                 {
-                    CurrentFacingDirection = (actControl.CurrentDirection.x > 0) ? SFActor.SFActorFacingDirections.Right : SFActor.SFActorFacingDirections.Left;
+                    CurrentFacingDirection = (actControl.CurrentDirection.x > 0) ? SActor.SFActorFacingDirections.Right : SActor.SFActorFacingDirections.Left;
                 }
                 _horizontalDirection = Mathf.Abs(actControl.CurrentDirection.x) >= AbsoluteThresholdMovement ? actControl.CurrentDirection.x : 0f;
                 _verticalDirection = Mathf.Abs(actControl.CurrentDirection.y) >= AbsoluteThresholdMovement ? actControl.CurrentDirection.y : 0f;
@@ -147,16 +147,16 @@ namespace SFramework.Actor.Ability
 
             switch (CurrentFacingDirection)
             {
-                case SFActor.SFActorFacingDirections.Left:
+                case SActor.SFActorFacingDirections.Left:
                     _directionFloat = 0f;
                     break;
-                case SFActor.SFActorFacingDirections.Up:
+                case SActor.SFActorFacingDirections.Up:
                     _directionFloat = 1f;
                     break;
-                case SFActor.SFActorFacingDirections.Right:
+                case SActor.SFActorFacingDirections.Right:
                     _directionFloat = 2f;
                     break;
-                case SFActor.SFActorFacingDirections.Down:
+                case SActor.SFActorFacingDirections.Down:
                     _directionFloat = 3f;
                     break;
             }
@@ -169,16 +169,16 @@ namespace SFramework.Actor.Ability
         {
             switch (CurrentFacingDirection)
             {
-                case SFActor.SFActorFacingDirections.Right:
+                case SActor.SFActorFacingDirections.Right:
                     actControl.CurrentDirection = Vector3.right;
                     break;
-                case SFActor.SFActorFacingDirections.Left:
+                case SActor.SFActorFacingDirections.Left:
                     actControl.CurrentDirection = Vector3.left;
                     break;
-                case SFActor.SFActorFacingDirections.Up:
+                case SActor.SFActorFacingDirections.Up:
                     actControl.CurrentDirection = Vector3.up;
                     break;
-                case SFActor.SFActorFacingDirections.Down:
+                case SActor.SFActorFacingDirections.Down:
                     actControl.CurrentDirection = Vector3.down;
                     break;
             }

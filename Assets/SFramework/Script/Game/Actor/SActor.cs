@@ -7,7 +7,7 @@ using SFramework;
 
 namespace SFramework.Actor
 {
-    public class SFActor : SEntity
+    public class SActor : SEntity
     {
         public enum SFActorFacingDirections {Left, Right, Up, Down }
 

@@ -6,7 +6,7 @@ namespace SFramework.Actor
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Collider))]
-    public class SFActor3D : SFActor
+    public class SFActor3D : SActor
     {
         public Rigidbody ActorRigidBody { get; private set; }
         protected override void init()
