@@ -5,15 +5,15 @@ using UnityEngine;
 using Spine;
 using Spine.Unity;
 
-namespace SFramework.Actor
+namespace SFramework.SActor
 {
-    public class SFSpineActor : SEntity
+    public class SSpineActor : SEntity
     {
-        public enum SFActorFacingDirections { Default, Left, Right, Up, Down }
+        public enum SActorFacingDirections { Default, Left, Right, Up, Down }
 
         [SerializeField]
         [SFInformation("Actor's direction", SFInformationAttribute.InformationType.Info, false)] 
-        private SFActorFacingDirections _direction;
+        private SActorFacingDirections _direction;
 
         [SerializeField]
         private SkeletonAnimation _skeletonanimation;
