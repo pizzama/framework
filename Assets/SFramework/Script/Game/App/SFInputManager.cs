@@ -86,7 +86,7 @@ namespace SFramework.Game.App
             }
         }
     }
-    public class SFInputManager : SSingleton<SFInputManager>
+    public class SFInputManager : SSingletonMonoBehaviour<SFInputManager>
     {
         //control the system under the same rules.when using old or new input system
         protected const string axisHorizontal = "Horizontal";

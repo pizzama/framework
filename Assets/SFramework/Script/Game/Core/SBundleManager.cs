@@ -23,6 +23,8 @@ namespace SFramework
             }
         }
 
+        private SBundleManager() { }
+
         private List<SBundleParams> _messageParams; //通知的消息队列
         private List<SBundleParams> _openSequenceParams; //执行打开操作的消息队列
         private SMemory<string, string, ISBundle> _bundleMap; //已经启动了的所有模块的管理器

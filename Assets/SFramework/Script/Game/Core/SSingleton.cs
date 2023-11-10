@@ -5,7 +5,7 @@ namespace SFramework
     /// <summary>
     /// Singleton pattern.
     /// </summary>
-    public class SSingleton<T> : MonoBehaviour where T : Component
+    public abstract class SSingletonMonoBehaviour<T> : MonoBehaviour where T : Component
     {
         protected static T _instance;
 
@@ -41,7 +41,15 @@ namespace SFramework
                 return;
             }
 
-            _instance = this as T;
+            if (null == _instance)
+            {
+                _instance = this as T;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
