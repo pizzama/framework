@@ -10,36 +10,21 @@ namespace SFramework.Game.SActor.Skill
             new Lazy<SkillFactory>(() => new SkillFactory());
         public static SkillFactory Instance { get { return lazy.Value; } }
 
-        private Dictionary<string, Type> _skills;
+        private IOCContainer _skills;
         private SkillFactory()
         {
-            _skills = new Dictionary<string, Type>();
+            _skills = new IOCContainer();
         }
 
 
-        public void RegisterSkill<T>(T value)where T : ISkillScript
+        public void RegisterSkillScript(ISkillScript value)
         {
-            _skills.Add(value.GetSkillID(), value.GetType());
+            _skills.Register(value);
         }
 
-        public IEnumerable<T> GetInstancesByType<T>()
+        public ISkillScript GetSkillScript(string key)
         {
-            var type = typeof(T);
-            return _skills.Values.Where(Instance => type.IsInstanceOfType(Instance)).Cast<T>();
-        }
-
-        public ISkillScript CreateSkill(SEntity source, string skillID, List<SEntity> targets = default, List<SEntity> sources = default)
-        {
-            Type skillScript = null;
-            _skills.TryGetValue(skillID, out skillScript);
-            if (skillScript != null)
-            {
-                ISkillScript script = (ISkillScript)Activator.CreateInstance(skillScript);
-                script.Create(source, skillID, targets, sources);
-                return script;
-            }
-
-            return null;
+            return _skills.Get<ISkillScript>(key);
         }
 
     }
