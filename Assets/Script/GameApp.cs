@@ -21,6 +21,10 @@ namespace Game
         protected override void installBundle()
         {
             var ioc = new IOCFactory();
+            ioc.Register<SkillStrike>("test");
+            var ii = ioc.Resolve<SkillStrike>("test");
+            ii.Create(new SEntity(), "11");
+            Debug.Log(ii);
             // BundleManager.Instance.InstallBundle(new GameMainControl(), "", true);
             initAllControl();
             //BundleManager.Instance.OpenControl(SFStaticsControl.Game_GameMainControl);

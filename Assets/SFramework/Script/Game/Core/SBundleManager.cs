@@ -164,13 +164,6 @@ namespace SFramework
             }
         }
 
-        public void UninstallBundle(string name, string alias)
-        {
-            ISBundle value = DeleteBundle(name, alias);
-            if (value != null)
-                value.Uninstall();
-        }
-
         public void UninstallBundle(ISBundle bundle)
         {
             string fullName;
@@ -180,11 +173,18 @@ namespace SFramework
             UninstallBundle(fullName, bundle.AliasName);
         }
 
+        public void UninstallBundle(string name, string alias)
+        {
+            ISBundle value = DeleteBundle(name, alias);
+            if (value != null)
+                value.Uninstall();
+        }
+
         public void OpenControl(string fullPath, object messageData = null, bool isSequence = false, string alias = "", int sort = 0)
         {
             SBundleParams bdParams = new SBundleParams()
             {
-                MessageId = "$#$", //特殊id表示打开界面的消息
+                MessageId = "$#$", //This's a special id using opening message.
                 ClassPath = fullPath,
                 MessageData = messageData,
                 Alias = alias,
@@ -303,19 +303,41 @@ namespace SFramework
             }
         }
 
-        public void CloseAllControl(List<ISBundle> excludeBundles)
+        public void CloseAllControl(List<ISBundle> excludeBundles = default)
         {
             foreach (KeyValuePair<string, Dictionary<string, ISBundle>> result in _bundleMap)
             {
                 foreach (KeyValuePair<string, ISBundle> bundle in result.Value)
                 {
-                    if (excludeBundles.Exists(t => bundle.Value == t))
+                    if (excludeBundles != null && excludeBundles.Exists(t => bundle.Value == t))
                     {
                         continue;
                     }
                     else
                     {
                         bundle.Value.Close();
+                    }
+                }
+            }
+        }
+
+        public void UninstallAllBundle(List<ISBundle> excludeBundles = default)
+        {
+            //first close bundle
+            SBundleManager.Instance.CloseAllControl(excludeBundles);
+            foreach (KeyValuePair<string, Dictionary<string, ISBundle>> result in _bundleMap)
+            {
+                List<ISBundle> bundles = new List<ISBundle>(result.Value.Values);
+                for (int i = bundles.Count - 1; i >= 0; i--)
+                {
+                    ISBundle bundle = bundles[i];
+                    if (excludeBundles != null && excludeBundles.Exists(t => bundle == t))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        UninstallBundle(bundle);
                     }
                 }
             }
