@@ -343,6 +343,16 @@ namespace SFramework
             }
         }
 
+        public void OnDestroy()
+        {
+            UninstallAllBundle();
+            _bundleObserverMap.Clear();
+            _bundleMap.Clear();
+            _messageParams.Clear();
+            _bundleInspector.Clear();
+            _openSequenceParams.Clear();
+        }
+
         public void CloseControl(string fullPath, string alias = "")
         {
             string nameSpace;

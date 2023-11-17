@@ -94,6 +94,17 @@ namespace SFramework
         {
            return values.GetEnumerator();
         }
+
+        public void Clear()
+        {
+            foreach (var item in values)
+            {
+                item.Value.Clear();
+            }
+
+            values.Clear();
+        }
+
     }
 
 }

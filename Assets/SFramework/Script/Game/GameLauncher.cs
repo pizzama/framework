@@ -48,7 +48,6 @@ namespace SFramework
 
         private void OnApplicationQuit()
         {
-            SBundleManager.Instance.UninstallAllBundle();
             Debug.Log("quit");
         }
 
