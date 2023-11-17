@@ -20,6 +20,7 @@ namespace Game
 
         protected override void installBundle()
         {
+            var ioc = new IOCFactory();
             // BundleManager.Instance.InstallBundle(new GameMainControl(), "", true);
             initAllControl();
             //BundleManager.Instance.OpenControl(SFStaticsControl.Game_GameMainControl);
