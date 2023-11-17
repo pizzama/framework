@@ -324,7 +324,7 @@ namespace SFramework
         public void UninstallAllBundle(List<ISBundle> excludeBundles = default)
         {
             //first close bundle
-            SBundleManager.Instance.CloseAllControl(excludeBundles);
+            CloseAllControl(excludeBundles);
             foreach (KeyValuePair<string, Dictionary<string, ISBundle>> result in _bundleMap)
             {
                 List<ISBundle> bundles = new List<ISBundle>(result.Value.Values);
