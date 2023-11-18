@@ -13,14 +13,15 @@ namespace AmplifyShaderEditor
 	{
 		private static readonly Tuple<string, int>[] SRPVersionList = new Tuple<string, int>[]
 		{
-			new Tuple<string, int>( "Standard", -1 ),
+			new Tuple<string, int>( "None", -1 ),
 			new Tuple<string, int>( "10.x", 100000 ),
 			new Tuple<string, int>( "11.x", 110000 ),
 			new Tuple<string, int>( "12.x", 120000 ),
 			new Tuple<string, int>( "13.x", 130000 ),
 			new Tuple<string, int>( "14.x", 140000 ),
-			new Tuple<string, int>( "15.x", 150000 )
-		};
+			new Tuple<string, int>( "15.x", 150000 ),
+            new Tuple<string, int>( "16.x", 160000 )
+        };
 
 		private static readonly string[] SRPTypeNames =
 		{
@@ -85,7 +86,7 @@ namespace AmplifyShaderEditor
 		{
 			if ( ContainerGraph != null )
 			{
-				int srpVersion = ASEPackageManagerHelper.CurrentSRPVersion();
+				int srpVersion = ASEPackageManagerHelper.CurrentSRPVersion;
 				for ( int i = SRPVersionList.Length - 1; i >= 0; i-- )
 				{
 					if ( srpVersion > SRPVersionList[ i ].Item2 )

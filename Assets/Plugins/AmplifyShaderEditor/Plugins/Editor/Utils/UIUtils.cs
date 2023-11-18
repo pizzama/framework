@@ -29,7 +29,8 @@ namespace AmplifyShaderEditor
 		WORLD_POS,
 		WORLD_REFL,
 		WORLD_NORMAL,
-		VFACE,
+		FRONT_FACING,
+		FRONT_FACING_VFACE,
 		INTERNALDATA
 	}
 
@@ -447,7 +448,7 @@ namespace AmplifyShaderEditor
 			"Constants And Properties",
 			"Functions",
 			"Image Effects",
-			"Light",
+			"Lighting",
 			"Logical Operators",
 			"Math Operators",
 			"Matrix Operators",
@@ -573,21 +574,22 @@ namespace AmplifyShaderEditor
 		{
 			{ "Master",                             new Color( 0.6f, 0.52f, 0.43f, 1.0f )},
 			{ "Default",                            new Color( 0.26f, 0.35f, 0.44f, 1.0f )},
-			{ "Vertex Data",                        new Color( 0.8f, 0.07f, 0.18f, 1.0f)},//new Color( 0.75f, 0.10f, 0.30f, 1.0f )},
-			{ "Math Operators",                     new Color( 0.26f, 0.35f, 0.44f, 1.0f )},//new Color( 0.10f, 0.27f, 0.45f, 1.0f) },
-			{ "Logical Operators",                  new Color( 0.0f, 0.55f, 0.45f, 1.0f)},//new Color( 0.11f, 0.28f, 0.47f, 1.0f) },
-			{ "Trigonometry Operators",             new Color( 0.1f, 0.20f, 0.35f, 1.0f)},//new Color( 0.8f, 0.07f, 0.18f, 1.0f)},
-			{ "Image Effects",                      new Color( 0.5f, 0.2f, 0.90f, 1.0f)},//new Color( 0.12f, 0.47f, 0.88f, 1.0f)},
+			{ "Vertex Data",                        new Color( 0.8f, 0.07f, 0.18f, 1.0f)},
+			{ "Primitive",							new Color( 0.8f, 0.07f, 0.18f, 1.0f)},
+			{ "Math Operators",                     new Color( 0.26f, 0.35f, 0.44f, 1.0f )},
+			{ "Logical Operators",                  new Color( 0.0f, 0.55f, 0.45f, 1.0f)},
+			{ "Trigonometry Operators",             new Color( 0.1f, 0.20f, 0.35f, 1.0f)},
+			{ "Image Effects",                      new Color( 0.5f, 0.2f, 0.90f, 1.0f)},
 			{ "Miscellaneous",                      new Color( 0.49f, 0.32f, 0.60f, 1.0f)},
-			{ "Camera And Screen",                  new Color( 0.75f, 0.10f, 0.30f, 1.0f )},//new Color( 0.17f, 0.22f, 0.07f, 1.0f) },
+			{ "Camera And Screen",                  new Color( 0.75f, 0.10f, 0.30f, 1.0f )},
 			{ "Constants And Properties",           new Color( 0.42f, 0.70f, 0.22f, 1.0f) },
 			{ "Surface Data",                       new Color( 0.92f, 0.73f, 0.03f, 1.0f)},
 			{ "Matrix Transform",                   new Color( 0.09f, 0.43f, 0.2f, 1.0f) },
-			{ "Time",                               new Color( 0.25f, 0.25f, 0.25f, 1.0f)},//new Color( 0.89f, 0.59f, 0.0f, 1.0f) },
+			{ "Time",                               new Color( 0.25f, 0.25f, 0.25f, 1.0f)},
 			{ "Functions",                          new Color( 1.00f, 0.4f, 0.0f, 1.0f) },
 			{ "Vector Operators",                   new Color( 0.22f, 0.20f, 0.45f, 1.0f)},
 			{ "Matrix Operators",                   new Color( 0.45f, 0.9f, 0.20f, 1.0f) },
-			{ "Light",                              new Color( 1.0f, 0.9f, 0.0f, 1.0f) },
+			{ "Lighting",                           new Color( 1.0f, 0.9f, 0.0f, 1.0f) },
 			{ "Textures",                           new Color( 0.15f, 0.40f, 0.8f, 1.0f)},
 			{ "Commentary",                         new Color( 0.7f, 0.7f, 0.7f, 1.0f)},
 			{ "UV Coordinates",                     new Color( 0.89f, 0.59f, 0.0f, 1.0f) },
@@ -662,7 +664,8 @@ namespace AmplifyShaderEditor
 			{ SurfaceInputs.WORLD_POS, "{0}3 worldPos"},
 			{ SurfaceInputs.WORLD_REFL, "{0}3 worldRefl"},
 			{ SurfaceInputs.WORLD_NORMAL,"{0}3 worldNormal"},
-			{ SurfaceInputs.VFACE, Constants.VFaceInput},
+			{ SurfaceInputs.FRONT_FACING, Constants.IsFrontFacingInput},
+			{ SurfaceInputs.FRONT_FACING_VFACE, Constants.IsFrontFacingInputVFACE},
 			{ SurfaceInputs.INTERNALDATA, Constants.InternalData}
 		};
 
@@ -677,7 +680,7 @@ namespace AmplifyShaderEditor
 			{ SurfaceInputs.WORLD_POS, "worldPos"},
 			{ SurfaceInputs.WORLD_REFL, "worldRefl"},
 			{ SurfaceInputs.WORLD_NORMAL, "worldNormal"},
-			{ SurfaceInputs.VFACE, Constants.VFaceVariable},
+			{ SurfaceInputs.FRONT_FACING, Constants.IsFrontFacingVariable},
 		};
 
 		private static Dictionary<PrecisionType , string> m_precisionTypeToCg = new Dictionary<PrecisionType , string>()
@@ -1218,8 +1221,14 @@ namespace AmplifyShaderEditor
 			MinusStyle.imagePosition = ImagePosition.ImageOnly;
 			MinusStyle.overflow = new RectOffset( -2 , 0 , -4 , 0 );
 
-			ToolbarSearchTextfield = new GUIStyle( (GUIStyle)"ToolbarSeachTextField" );
-			ToolbarSearchCancelButton = new GUIStyle( (GUIStyle)"ToolbarSeachCancelButton" );
+		#if UNITY_2022_3_OR_NEWER
+			ToolbarSearchTextfield = new GUIStyle((GUIStyle)"ToolbarSearchTextField");
+			ToolbarSearchCancelButton = new GUIStyle((GUIStyle)"ToolbarSearchCancelButton");
+		#else
+			ToolbarSearchTextfield = new GUIStyle( ( GUIStyle )"ToolbarSeachTextField" );
+			ToolbarSearchCancelButton = new GUIStyle( ( GUIStyle )"ToolbarSeachCancelButton" );
+		#endif
+
 		}
 
 		public static void UpdateMainSkin( DrawInfo drawInfo )
@@ -2758,14 +2767,10 @@ namespace AmplifyShaderEditor
 
 		public static void MarkToRepaint() { if( CurrentWindow != null ) CurrentWindow.MarkToRepaint(); }
 		public static void RequestSave() { if( CurrentWindow != null ) CurrentWindow.RequestSave(); }
-		public static string FloatToString( float value )
+
+		public static string PropertyFloatToString( float value )
 		{
-			string floatStr = value.ToString();
-			if( value % 1 == 0 )
-			{
-				floatStr += ".0";
-			}
-			return floatStr;
+			return value.ToString( "0.####################" );
 		}
 
 		public static int CurrentShaderVersion()
@@ -3067,12 +3072,12 @@ namespace AmplifyShaderEditor
 			return false;
 		}
 
-		public static int GetKeywordId( string keyword , TemplateSRPType type = TemplateSRPType.BuiltIn )
+		public static int GetKeywordId( string keyword , TemplateSRPType type = TemplateSRPType.BiRP )
 		{
 			switch( type )
 			{
 				default:
-				case TemplateSRPType.BuiltIn:
+				case TemplateSRPType.BiRP:
 				{
 					if( AvailableKeywordsDict.Count != AvailableKeywords.Length )
 					{
@@ -3089,8 +3094,8 @@ namespace AmplifyShaderEditor
 					}
 				}
 				break;
-				case TemplateSRPType.HD:
-				case TemplateSRPType.Lightweight:
+				case TemplateSRPType.HDRP:
+				case TemplateSRPType.URP:
 				{
 					if( AvailableURPKeywordsDict.Count != AvailableURPKeywords.Length )
 					{

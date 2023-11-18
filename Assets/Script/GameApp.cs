@@ -2,6 +2,7 @@ using SFramework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using SFramework.Statics;
+using SFramework.Game.SActor.Skill;
 
 namespace Game
 {
@@ -22,8 +23,8 @@ namespace Game
         {
             var ioc = new IOCFactory();
             ioc.Register<SkillStrike>("test");
-            var ii = ioc.Resolve<SkillStrike>("test");
-            ii.Create(new SEntity(), "11");
+            var ii = ioc.Resolve<ISkillScript>("test");
+            ii.Create(null, "11");
             Debug.Log(ii);
             // BundleManager.Instance.InstallBundle(new GameMainControl(), "", true);
             initAllControl();
