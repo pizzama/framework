@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace SFramework
 {
@@ -68,6 +67,18 @@ namespace SFramework
                     {
                         return (T)(object)item.Value;
                     }
+                }
+            }
+            return default;
+        }
+
+        public T3 FindT2First(T2 key2)
+        {
+            foreach(var map in values)
+            {
+                if(map.Value.ContainsKey(key2))
+                {
+                    return map.Value[key2];
                 }
             }
             return default;
