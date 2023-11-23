@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class SEnum
+
+namespace SFramework.SData
 {
-    public enum SafeModes { Nope, EditorOnly, RuntimeOnly, Full }
+    public class SEnum
+    {
+        public enum SafeModes { Nope, EditorOnly, RuntimeOnly, Full }
+    }
 }

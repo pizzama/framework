@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SFramework.SAction
 {
-    public class SFeedBackManager : MonoBehaviour
+    public class SFeedBacksMonoBehaviour : MonoBehaviour
     {
         public List<SFeedBack> Feedbacks = new List<SFeedBack>();
         void Start()
