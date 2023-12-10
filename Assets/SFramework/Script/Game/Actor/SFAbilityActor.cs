@@ -29,7 +29,7 @@ public class SFAbilityActor : SEntity
         }
     }
 
-    public override void InitEntity()
+    protected override void InitEntity()
     {
         base.InitEntity();
         actControl = GetComponent<SFActorController>();

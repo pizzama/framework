@@ -9,7 +9,6 @@ namespace SFramework
         string EntityId { get; }
         GameObject Instance { get; }
         void SetEntityData(string entityId, SView view);
-        void InitEntity();
         void Recycle();
         void Show();
         void DestroyEntity();
@@ -39,7 +38,7 @@ namespace SFramework
             DestroyEntity();
         }
 
-        public virtual void InitEntity()
+        protected virtual void InitEntity()
         {
 
         }

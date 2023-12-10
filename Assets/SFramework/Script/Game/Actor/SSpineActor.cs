@@ -31,12 +31,7 @@ namespace SFramework.SActor
             return _skeletonanimation;
         }
 
-        protected virtual void Awake()
-        {
-            init();
-        }
-
-        protected virtual void init()
+        protected override void InitEntity()
         {
 
             if (_skeletonanimation == null)

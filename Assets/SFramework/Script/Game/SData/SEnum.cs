@@ -1,9 +1,4 @@
-
-
-namespace SFramework.SData
+public class SEnum
 {
-    public class SEnum
-    {
-        public enum SafeModes { Nope, EditorOnly, RuntimeOnly, Full }
-    }
+    public enum SafeModes { Nope, EditorOnly, RuntimeOnly, Full }
 }

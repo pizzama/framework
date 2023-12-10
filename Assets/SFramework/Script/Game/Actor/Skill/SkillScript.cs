@@ -8,8 +8,6 @@ namespace SFramework.Game.SActor.Skill
         public void PreExecute();
         public void Execute();
         public void AfterExecute();
-
-        public abstract string GetSkillID();
     }
 
     public abstract class SkillScript : ISkillScript
@@ -18,6 +16,8 @@ namespace SFramework.Game.SActor.Skill
         protected string attackSkillId; // 
         private List<SEntity> _targets; //the enemies which will be attacked;
         private List<SEntity> _sources; //my friends
+
+        public string SkillID { get {return attackSkillId; } }
         public SkillScript()
         {
 
@@ -33,6 +33,5 @@ namespace SFramework.Game.SActor.Skill
         public abstract void Execute();
         public abstract void AfterExecute();
 
-        public abstract string GetSkillID();
     }
 }
