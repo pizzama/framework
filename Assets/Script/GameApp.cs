@@ -23,7 +23,7 @@ namespace Game
         {
             var ioc = new IOCFactory();
             ioc.Register<SkillStrike>("test");
-            var ii = ioc.Resolve<ISkillScript>("test");
+            var ii = ioc.Resolve<ISSkillScript>("test");
             ii.Create(null, "11");
             Debug.Log(ii);
             // BundleManager.Instance.InstallBundle(new GameMainControl(), "", true);

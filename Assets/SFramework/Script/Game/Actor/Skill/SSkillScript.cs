@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace SFramework.Game.SActor.Skill
 {
-    public interface ISkillScript
+    public interface ISSkillScript
     {
         public void Create(SEntity source, string skillId, List<SEntity> targets = default, List<SEntity> sources = default);
         public void PreExecute();
@@ -10,7 +10,7 @@ namespace SFramework.Game.SActor.Skill
         public void AfterExecute();
     }
 
-    public abstract class SkillScript : ISkillScript
+    public abstract class SSkillScript : ISSkillScript
     {
         protected SEntity attackSource; // the source of the attack
         protected string attackSkillId; // 
@@ -18,7 +18,7 @@ namespace SFramework.Game.SActor.Skill
         private List<SEntity> _sources; //my friends
 
         public string SkillID { get {return attackSkillId; } }
-        public SkillScript()
+        public SSkillScript()
         {
 
         }

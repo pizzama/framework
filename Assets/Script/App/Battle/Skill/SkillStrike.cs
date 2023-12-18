@@ -4,7 +4,7 @@ using UnityEngine;
 using SFramework.Game.SActor.Skill;
 
 //namespace 
-public class SkillStrike : SkillScript
+public class SkillStrike : SSkillScript
 {
     public override void AfterExecute()
     {
@@ -14,11 +14,6 @@ public class SkillStrike : SkillScript
     public override void Execute()
     {
 
-    }
-
-    public override string GetSkillID()
-    {
-        return "skillstrike";
     }
 
     public override void PreExecute()
