@@ -6,19 +6,19 @@ using SFramework.Game.SActor.Skill;
 //namespace 
 public class SkillStrike : SSkillScript
 {
-    public override void AfterExecute()
-    {
-        
-    }
-
     public override void Execute()
     {
 
     }
+    public override void Tick()
+    {
+        
+    }
 
-    public override void PreExecute()
+    public override void Finish()
     {
 
     }
+
 
 }

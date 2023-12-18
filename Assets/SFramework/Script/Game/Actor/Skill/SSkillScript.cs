@@ -5,9 +5,9 @@ namespace SFramework.Game.SActor.Skill
     public interface ISSkillScript
     {
         public void Create(SEntity source, string skillId, List<SEntity> targets = default, List<SEntity> sources = default);
-        public void PreExecute();
         public void Execute();
-        public void AfterExecute();
+        public void Tick();
+        public void Finish();
     }
 
     public abstract class SSkillScript : ISSkillScript
@@ -29,9 +29,10 @@ namespace SFramework.Game.SActor.Skill
             _targets = targets;
             _sources = sources;
         }
-        public abstract void PreExecute();
+
         public abstract void Execute();
-        public abstract void AfterExecute();
+        public abstract void Tick();
+        public abstract void Finish();
 
     }
 }
