@@ -53,6 +53,7 @@ namespace SFramework
         public override void Uninstall()
         {
             _model.ModelCallback = null;
+            _view.ViewCallback = null;
         }
 
         public void SubscribeMessage(string messageId, ISBundle bundle)

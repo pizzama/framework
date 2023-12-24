@@ -106,7 +106,6 @@ namespace SFramework.Game
                 }
 
             }
-            base.Open();
             ViewCallback?.Invoke();
         }
 
