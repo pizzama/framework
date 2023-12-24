@@ -18,6 +18,7 @@ namespace Game.App.Battle
 
         protected override void opening()
         {
+            BattleModel mode = GetControl<BattleControl>().GetModel<BattleModel>();
             var input = SFInputManager.Instance;
             Debug.Log("load complete");
             Transform parent = getSceneObject<Transform>("Actors");

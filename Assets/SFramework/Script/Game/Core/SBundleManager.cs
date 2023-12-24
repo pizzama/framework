@@ -355,6 +355,7 @@ namespace SFramework
             _messageParams.Clear();
             _bundleInspector.Clear();
             _openSequenceParams.Clear();
+            _instance = null;
         }
 
         public void CloseControl(string fullPath, string alias = "")

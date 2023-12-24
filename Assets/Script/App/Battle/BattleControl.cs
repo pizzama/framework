@@ -8,7 +8,7 @@ namespace Game.App.Battle
     {
         protected override void opening()
         {
-            OpenControl(SFStaticsControl.Game_App_Battle_BattleUIControl);   
+            //OpenControl(SFStaticsControl.Game_App_Battle_BattleUIControl);   
         }
 
     }
