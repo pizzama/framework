@@ -46,6 +46,8 @@ namespace SFramework.Game
         public T CreateComponent<T>(string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1) where T: Component 
         {
             GameObject obj = CreateGameObjectUsingPool(prefabFullPath, lifeTime);
+            if (obj == null)
+                throw new DataErrorException("Could not found component path is:" + prefabFullPath);
             T result = obj.GetOrAddComponent<T>();
             if (result == null)
                 throw new DataErrorException("Could not add component:" + typeof(T));

@@ -305,6 +305,8 @@ namespace SFramework
 
         public void CloseAllControl(List<ISBundle> excludeBundles = default)
         {
+            if(_bundleMap == null)
+                return;
             foreach (KeyValuePair<string, Dictionary<string, ISBundle>> result in _bundleMap)
             {
                 foreach (KeyValuePair<string, ISBundle> bundle in result.Value)
@@ -323,6 +325,8 @@ namespace SFramework
 
         public void UninstallAllBundle(List<ISBundle> excludeBundles = default)
         {
+            if(_bundleMap == null)
+                return;
             //first close bundle
             CloseAllControl(excludeBundles);
             foreach (KeyValuePair<string, Dictionary<string, ISBundle>> result in _bundleMap)

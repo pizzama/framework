@@ -4,7 +4,7 @@ namespace SFramework.Game.SActor.Skill
 {
     public interface ISSkillScript
     {
-        public void Create(SEntity source, string skillId, List<SEntity> targets = default, List<SEntity> sources = default);
+        public void Create(SEntity source, List<SEntity> targets = default, List<SEntity> sources = default);
         public void Execute();
         public void Tick();
         public void Finish();
@@ -13,21 +13,18 @@ namespace SFramework.Game.SActor.Skill
     public abstract class SSkillScript : ISSkillScript
     {
         protected SEntity attackSource; // the source of the attack
-        protected string attackSkillId; // 
-        private List<SEntity> _targets; //the enemies which will be attacked;
-        private List<SEntity> _sources; //my friends
+        protected List<SEntity> targets; //the enemies which will be attacked;
+        protected List<SEntity> sources; //my friends
 
-        public string SkillID { get {return attackSkillId; } }
         public SSkillScript()
         {
 
         }
-        public void Create(SEntity source, string skillId, List<SEntity> targets = default, List<SEntity> sources = default)
+        public void Create(SEntity source, List<SEntity> targetValues = default, List<SEntity> sourceValues = default)
         {
             attackSource = source;
-            attackSkillId = skillId;
-            _targets = targets;
-            _sources = sources;
+            targets = targetValues;
+            sources = sourceValues;
         }
 
         public abstract void Execute();
