@@ -1,0 +1,86 @@
+[
+    {
+        "ID": "int32",
+        "Name": "string",
+        "Description": "string",
+        "Icon": "string",
+        "Priority": "int32",
+        "MaxStack": "int32",
+        "Tags": "string",
+        "IsForever": "bool",
+        "Duration": "float",
+        "TickTime": "float"
+    },
+    {
+        "ID": null,
+        "Name": null,
+        "Description": null,
+        "Icon": null,
+        "Priority": null,
+        "MaxStack": null,
+        "Tags": "repeated",
+        "IsForever": null,
+        "Duration": null,
+        "TickTime": null
+    },
+    {
+        "ID": "主键",
+        "Name": "Buff名字",
+        "Description": "描述",
+        "Icon": "icon路径",
+        "Priority": "优先级",
+        "MaxStack": "最大层数",
+        "Tags": "Tags",
+        "IsForever": "持续",
+        "Duration": "持续时间",
+        "TickTime": "心跳检查时间"
+    },
+    {
+        "ID": 1,
+        "Name": null,
+        "Description": null,
+        "Icon": null,
+        "Priority": 0,
+        "MaxStack": null,
+        "Tags": null,
+        "IsForever": null,
+        "Duration": null,
+        "TickTime": null
+    },
+    {
+        "ID": 2,
+        "Name": null,
+        "Description": null,
+        "Icon": null,
+        "Priority": 0,
+        "MaxStack": null,
+        "Tags": null,
+        "IsForever": null,
+        "Duration": null,
+        "TickTime": null
+    },
+    {
+        "ID": 3,
+        "Name": null,
+        "Description": null,
+        "Icon": null,
+        "Priority": 0,
+        "MaxStack": null,
+        "Tags": null,
+        "IsForever": null,
+        "Duration": null,
+        "TickTime": null
+    },
+    {
+        "ID": 4,
+        "Name": null,
+        "Description": null,
+        "Icon": null,
+        "Priority": 0,
+        "MaxStack": null,
+        "Tags": null,
+        "IsForever": null,
+        "Duration": null,
+        "TickTime": null
+    }
+]

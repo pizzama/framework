@@ -14,7 +14,6 @@ namespace Game.App.Battle
         protected override void opening()
         {
             getConfig().Forget();
-            
         }
 
         private async UniTaskVoid getConfig()
@@ -23,7 +22,7 @@ namespace Game.App.Battle
                 ConfigManager.Instance.GetConfigAsync<Language_data_datas>(),
                 ConfigManager.Instance.GetConfigAsync<test_event_datas>(),
                 GetData(""));
-            Debug.Log(_languageConfig + ";" + _testConfig);
+            Debug.Log("aaaa:" + _languageConfig + ";" + _testConfig);
         }
 
         //protected override async UniTaskVoid openingAsync()
