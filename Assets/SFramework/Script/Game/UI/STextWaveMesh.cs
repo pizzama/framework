@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 namespace SFramework.UI
 {
-    public class TextWaveMesh : MonoBehaviour
+    public class STextWaveMesh : MonoBehaviour
     {
         [SerializeField] TMP_Text _tmpText;
         [SerializeField] private float _offsetX = 3.5f;

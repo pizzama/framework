@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace SFramework.UI
 {
-	public class CircleText : BaseMeshEffect
+	public class STextCircle : BaseMeshEffect
 	{
 		public int radius = 100;
 		public float spaceCoff = 1f;
