@@ -6,6 +6,7 @@ using UnityEditor.UI;
 
 namespace SFramework.UI
 {
+    // you cold using 9 slice in image filed mode, you must be select SlicedClipMode toggle
     [AddComponentMenu("UI/ExtendImage")]
     public class SExtendImage : Image
     {
