@@ -20,7 +20,6 @@ public class SControlCreator : EditorWindow
         EditorGUILayout.BeginVertical();
         EditorGUILayout.Space();
         bool pathFold = true;
-        pathText = ""; //output parent path
         pathFold = EditorGUILayout.BeginFoldoutHeaderGroup(pathFold, "Set Out Path");
         if (pathFold)
         {
@@ -49,10 +48,14 @@ public class SControlCreator : EditorWindow
 
     private void createFolder()
     {
-        string parentPath = Application.dataPath + "/Script/" + pathText;
+        int index = pathText.LastIndexOf("/");
+        string path = pathText.Substring(0, index);
+        string name = pathText.Substring(index + 1, pathText.Length - index - 1);
+        string parentPath = Application.dataPath + "/Script/" + path;
         if (!Directory.Exists(parentPath))
         {
-            Directory.CreateDirectory(parentPath);
+            DirectoryInfo info = Directory.CreateDirectory(parentPath);
+            Debug.Log("Success Create Folder:" + parentPath);
         }
     }
 }
