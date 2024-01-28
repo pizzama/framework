@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 
 namespace Game
 {
-    public class TestModel : RootModel
+    public class {@1@} : RootModel
     {
         protected override void opening()
         {
