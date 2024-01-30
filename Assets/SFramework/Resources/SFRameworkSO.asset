@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa907ea2300ca96428d1eb43719b0d15, type: 3}
+  m_Name: SFRameworkSO
+  m_EditorClassIdentifier: 
+  _isSimulator: 0
+  _controlTemplate: 'using SFramework; using UnityEngine;  namespace Game {     public
+    class {@0@}: SControl     {         protected override void opening()        
+    {             Debug.Log("test control enter");         }     } }'
+  _modelTemplate: 'using SFramework.Game; using Cysharp.Threading.Tasks;  namespace
+    Game {     public class {@1@} : RootModel     {         protected override void
+    opening()         {             GetData("").Forget();         }     } } '
+  _viewTemplate: 'using SFramework; using SFramework.Game; using UnityEngine.UI; 
+    namespace Game {     public class {@0@} : {@1@}     {         protected override
+    ViewOpenType GetViewOpenType()         {             return ViewOpenType.Single;        
+    }          protected override UILayer GetViewLayer()         {             return
+    UILayer.Popup;         }          protected override void opening()         {        
+    }          protected override void closing()         {         }     } }'

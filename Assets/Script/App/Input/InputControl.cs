@@ -7,8 +7,8 @@ namespace Game
     {
         protected override void opening()
         {
-           TestControl test = GetControl<TestControl>();
-           Debug.Log(test.TestFunc());
+        //    TestControl test = GetControl<TestControl>();
+        //    Debug.Log(test.TestFunc());
         }
 
         public void Refresh()
