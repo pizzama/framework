@@ -43,6 +43,7 @@ public class SControlCreator : EditorWindow
     {
         try
         {
+            SFRameworkSO so = AssetDatabase.LoadAssetAtPath<SFRameworkSO>(@"Assets/SFramework/Script/Template/SFRameworkSO.asset");
             int index = pathText.LastIndexOf("/");
             string path = pathText.Substring(0, index);
             string name = pathText.Substring(index + 1, pathText.Length - index - 1);
