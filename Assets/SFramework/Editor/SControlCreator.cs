@@ -1,9 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using SFramework.Extension;
 
 public class SControlCreator : EditorWindow
 {
@@ -54,7 +54,7 @@ public class SControlCreator : EditorWindow
             //    logInfo("Success Create Folder:" + parentPath);
             //}
 
-            createControl(parentPath, path, name);
+            createControl(parentPath, name, so.GetControlTemplate());
         }
         catch(Exception err)
         {
@@ -96,16 +96,16 @@ public class SControlCreator : EditorWindow
         return "";
     }
 
-    private void createControl(string parentPath, string path, string name)
+    private void createControl(string parentPath, string name, string content)
     {
-        var filePath = parentPath + "/" + name + ".cs";
-        if (!File.Exists(filePath))
+        var scriptFile = string.Format(parentPath + "/{0}.cs", (name));
+
+        string rt = string.Format(content, name);
+        
+        if (!File.Exists(scriptFile))
         {
-            AssetDatabase.CreateAsset(this, filePath);
-        }
-        else
-        {
-            EditorUtility.DisplayDialog("error", "Scrip has Create:{0}", filePath, "OK");
+            scriptFile.GetFolderPath().CreateDirIfNotExists();
+            File.WriteAllText(scriptFile, rt);
         }
 
         EditorUtility.SetDirty(this);
