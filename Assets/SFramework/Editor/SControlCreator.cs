@@ -43,18 +43,25 @@ public class SControlCreator : EditorWindow
     {
         try
         {
-            SFRameworkSO so = AssetDatabase.LoadAssetAtPath<SFRameworkSO>(@"Assets/SFramework/Script/Template/SFRameworkSO.asset");
             int index = pathText.LastIndexOf("/");
             string path = pathText.Substring(0, index);
             string name = pathText.Substring(index + 1, pathText.Length - index - 1);
             string parentPath = Application.dataPath + "/Script/" + path;
+            string nameSpace = path.Replace("/", ".");
+
+            SCreateTemplateScript sc = new SCreateTemplateScript(nameSpace, name);
             //if (!Directory.Exists(parentPath))
             //{
             //    DirectoryInfo info = Directory.CreateDirectory(parentPath);
             //    logInfo("Success Create Folder:" + parentPath);
             //}
 
-            createControl(parentPath, name, so.GetControlTemplate());
+            createControl(parentPath, sc);
+            createModel(parentPath, sc);
+
+            EditorUtility.SetDirty(this);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
         }
         catch(Exception err)
         {
@@ -96,20 +103,42 @@ public class SControlCreator : EditorWindow
         return "";
     }
 
-    private void createControl(string parentPath, string name, string content)
+    private void createControl(string parentPath, SCreateTemplateScript script)
     {
-        var scriptFile = string.Format(parentPath + "/{0}.cs", (name));
-
-        string rt = string.Format(content, name);
+        var scriptFile = string.Format(parentPath + "/{0}Control.cs", (script.GetName()));
+            
+        string content = script.CreateTemplateControl();
         
         if (!File.Exists(scriptFile))
         {
             scriptFile.GetFolderPath().CreateDirIfNotExists();
-            File.WriteAllText(scriptFile, rt);
+            File.WriteAllText(scriptFile, content);
         }
+    }
 
-        EditorUtility.SetDirty(this);
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
+    private void createModel(string parentPath, SCreateTemplateScript script)
+    {
+        var scriptFile = string.Format(parentPath + "/{0}Model.cs", (script.GetName()));
+
+        string content = script.CreateTemplateModel();
+
+        if (!File.Exists(scriptFile))
+        {
+            scriptFile.GetFolderPath().CreateDirIfNotExists();
+            File.WriteAllText(scriptFile, content);
+        }
+    }
+
+    private void createView(string parentPath, SCreateTemplateScript script, int index)
+    {
+        var scriptFile = string.Format(parentPath + "/{0}View.cs", (script.GetName()));
+
+        string content = script.CreateTemplateView();
+
+        if (!File.Exists(scriptFile))
+        {
+            scriptFile.GetFolderPath().CreateDirIfNotExists();
+            File.WriteAllText(scriptFile, content);
+        }
     }
 }
