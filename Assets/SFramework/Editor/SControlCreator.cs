@@ -8,7 +8,10 @@ using SFramework.Extension;
 public class SControlCreator : EditorWindow
 {
     private string pathText = "";
-    private List<string> logTxts = new List<string>();
+    private List<string> _logTxts = new List<string>();
+    private int _selectIndex;
+    string[] options = { "SceneView", "UIView" };
+
     [MenuItem("SFrameWork/Editor/SFramework Control Creator", false, 100)]
     public static void Open()
     {
@@ -19,6 +22,12 @@ public class SControlCreator : EditorWindow
 
     private void OnGUI()
     {
+        _selectIndex = EditorGUI.Popup(
+            new Rect(0, 0, position.width, 40),
+            "ViewType:",
+            _selectIndex,
+            options);
+        EditorGUILayout.Space();
         EditorGUILayout.BeginVertical();
         EditorGUILayout.Space();
         bool pathFold = true;
@@ -32,7 +41,7 @@ public class SControlCreator : EditorWindow
         EditorGUILayout.Space();
         if (GUILayout.Button("Create"))
         {
-            createFolder(1);
+            createFolder(_selectIndex);
         }
 
         layoutLogInfo();
@@ -50,12 +59,6 @@ public class SControlCreator : EditorWindow
             string nameSpace = path.Replace("/", ".");
 
             SCreateTemplateScript sc = new SCreateTemplateScript(nameSpace, name);
-            //if (!Directory.Exists(parentPath))
-            //{
-            //    DirectoryInfo info = Directory.CreateDirectory(parentPath);
-            //    logInfo("Success Create Folder:" + parentPath);
-            //}
-
             createControl(parentPath, sc);
             createModel(parentPath, sc);
             createView(parentPath, sc, viewType);
@@ -74,15 +77,15 @@ public class SControlCreator : EditorWindow
 
     private void layoutLogInfo()
     {
-        if (logTxts.Count > 0)
+        if (_logTxts.Count > 0)
         {
-            bool outFolder = logTxts.Count > 0;
+            bool outFolder = _logTxts.Count > 0;
             outFolder = EditorGUILayout.BeginFoldoutHeaderGroup(outFolder, "Log Info");
             if (outFolder)
             {
                 Vector2 scrollPosition = Vector2.zero;
                 scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, true, true);
-                foreach (var text in logTxts)
+                foreach (var text in _logTxts)
                 {
                     EditorGUILayout.TextArea(text);
                     EditorGUILayout.Space();
@@ -96,7 +99,7 @@ public class SControlCreator : EditorWindow
     private void logInfo(string content)
     {
         string rt = string.Format("[{0:F}] {1}", System.DateTime.Now, content);
-        logTxts.Add(rt);
+        _logTxts.Add(rt);
     }
 
     private string readTemplateFile()
