@@ -44,14 +44,14 @@ public class SCreateTemplateScript
     public string CreateTemplateModel()
     {
         var writer = new StringBuilder();
-        writer.AppendLine("using UnityEngine;");
         writer.AppendLine("using SFramework;");
+        writer.AppendLine("using Cysharp.Threading.Tasks;");
         writer.AppendLine();
 
         writer.AppendLine(
             $"namespace {((string.IsNullOrWhiteSpace(_nameSpace)) ? "Game" : _nameSpace)}");
         writer.AppendLine("{");
-        writer.AppendLine($"\tpublic class {_name}Model : SControl");
+        writer.AppendLine($"\tpublic class {_name}Model : SModel");
         writer.AppendLine("\t{");
         writer.AppendLine("\t\tprotected override void opening()");
         writer.AppendLine("\t\t{");
@@ -67,7 +67,9 @@ public class SCreateTemplateScript
     {
         var writer = new StringBuilder();
         writer.AppendLine("using UnityEngine;");
+        writer.AppendLine("using SFramework;");
         writer.AppendLine("using SFramework.Game;");
+        writer.AppendLine("using UnityEngine.UI;");
         writer.AppendLine();
 
         writer.AppendLine(
@@ -91,11 +93,13 @@ public class SCreateTemplateScript
         writer.AppendLine("\t\t\treturn ViewOpenType.Single;");
         writer.AppendLine("\t\t}");
 
-        writer.AppendLine("\t{");
-        writer.AppendLine("\t\tprotected override UILayer GetViewLayer()");
-        writer.AppendLine("\t\t{");
-        writer.AppendLine("\t\t\treturn UILayer.Popup;");
-        writer.AppendLine("\t\t}");
+        if (index == 2)
+        {
+            writer.AppendLine("\t\tprotected override UILayer GetViewLayer()");
+            writer.AppendLine("\t\t{");
+            writer.AppendLine("\t\t\treturn UILayer.Popup;");
+            writer.AppendLine("\t\t}");
+        }
 
         writer.AppendLine("\t\tprotected override void opening()");
         writer.AppendLine("\t\t{");
