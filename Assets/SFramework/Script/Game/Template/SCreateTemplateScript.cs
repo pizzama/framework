@@ -67,18 +67,46 @@ public class SCreateTemplateScript
     {
         var writer = new StringBuilder();
         writer.AppendLine("using UnityEngine;");
-        writer.AppendLine("using SFramework;");
+        writer.AppendLine("using SFramework.Game;");
         writer.AppendLine();
 
         writer.AppendLine(
             $"namespace {((string.IsNullOrWhiteSpace(_nameSpace)) ? "Game" : _nameSpace)}");
         writer.AppendLine("{");
-        writer.AppendLine($"\tpublic class {_name}View : SView");
+        if(index == 1)
+        {
+            writer.AppendLine($"\tpublic class {_name}View : SSCENEView");
+        }
+        else if(index == 2)
+        {
+            writer.AppendLine($"\tpublic class {_name}View : SUIView");
+        }
+        else
+        {
+            writer.AppendLine($"\tpublic class {_name}View : SView");
+        }
         writer.AppendLine("\t{");
+        writer.AppendLine("\t\tprotected override ViewOpenType GetViewOpenType()");
+        writer.AppendLine("\t\t{");
+        writer.AppendLine("\t\t\treturn ViewOpenType.Single;");
+        writer.AppendLine("\t\t}");
+
+        writer.AppendLine("\t{");
+        writer.AppendLine("\t\tprotected override UILayer GetViewLayer()");
+        writer.AppendLine("\t\t{");
+        writer.AppendLine("\t\t\treturn UILayer.Popup;");
+        writer.AppendLine("\t\t}");
+
         writer.AppendLine("\t\tprotected override void opening()");
         writer.AppendLine("\t\t{");
         writer.AppendLine("\t\t\t// Code Here");
         writer.AppendLine("\t\t}");
+
+        writer.AppendLine("\t\tprotected override void closing()");
+        writer.AppendLine("\t\t{");
+        writer.AppendLine("\t\t\t// Code Here");
+        writer.AppendLine("\t\t}");
+
         writer.AppendLine("\t}");
         writer.AppendLine("}");
 

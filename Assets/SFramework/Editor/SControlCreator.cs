@@ -32,14 +32,14 @@ public class SControlCreator : EditorWindow
         EditorGUILayout.Space();
         if (GUILayout.Button("Create"))
         {
-            createFolder();
+            createFolder(1);
         }
 
         layoutLogInfo();
         EditorGUILayout.EndVertical();
     }
 
-    private void createFolder()
+    private void createFolder(int viewType)
     {
         try
         {
@@ -58,6 +58,7 @@ public class SControlCreator : EditorWindow
 
             createControl(parentPath, sc);
             createModel(parentPath, sc);
+            createView(parentPath, sc, viewType);
 
             EditorUtility.SetDirty(this);
             AssetDatabase.SaveAssets();
@@ -133,7 +134,7 @@ public class SControlCreator : EditorWindow
     {
         var scriptFile = string.Format(parentPath + "/{0}View.cs", (script.GetName()));
 
-        string content = script.CreateTemplateView();
+        string content = script.CreateTemplateView(index);
 
         if (!File.Exists(scriptFile))
         {
