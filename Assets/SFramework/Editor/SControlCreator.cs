@@ -23,21 +23,15 @@ public class SControlCreator : EditorWindow
     private void OnGUI()
     {
         _selectIndex = EditorGUI.Popup(
-            new Rect(0, 0, position.width, 40),
+            new Rect(0, 0, position.width, 120),
             "ViewType:",
             _selectIndex,
             options);
         EditorGUILayout.Space();
         EditorGUILayout.BeginVertical();
         EditorGUILayout.Space();
-        bool pathFold = true;
-        pathFold = EditorGUILayout.BeginFoldoutHeaderGroup(pathFold, "Set Out Path");
-        if (pathFold)
-        {
-            EditorGUILayout.LabelField("Input Path");
-            pathText = EditorGUILayout.TextArea(pathText);
-        }
-        EditorGUILayout.EndFoldoutHeaderGroup();
+        EditorGUILayout.HelpBox("Input path example:App/Test", MessageType.Info);
+        pathText = EditorGUILayout.TextField("Input path£º", "");
         EditorGUILayout.Space();
         if (GUILayout.Button("Create"))
         {
