@@ -4,7 +4,7 @@ namespace Game.Character
 {
     public class Hero : SFActor3D
     {
-        private void Start()
+        protected override void Start()
         {
             AddFSMState(new HeroIdleState());
             AddFSMState(new HeroMoveState());

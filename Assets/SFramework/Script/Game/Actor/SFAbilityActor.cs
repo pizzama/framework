@@ -10,8 +10,8 @@ public class SFAbilityActor : SEntity
     public bool InputAuthorized = false; // whether or not need inputmanager input;
     [SerializeField] protected SFActorController actControl;
     [SerializeField] protected SFAbility[] _abilities;
-    public SimpleStateMachine<AbilityStates> MovementMachine;
-    public SimpleStateMachine<AbilityConditions> ConditionMachine;
+    public SimpleStateMachine<ActorStates> MovementMachine;
+    public SimpleStateMachine<ActorConditions> ConditionMachine;
 
     protected virtual void Update()
     {
@@ -33,8 +33,8 @@ public class SFAbilityActor : SEntity
     {
         base.InitEntity();
         actControl = GetComponent<SFActorController>();
-        MovementMachine = new SimpleStateMachine<AbilityStates>(gameObject, false);
-        ConditionMachine = new SimpleStateMachine<AbilityConditions>(gameObject, false);
+        MovementMachine = new SimpleStateMachine<ActorStates>(gameObject, false);
+        ConditionMachine = new SimpleStateMachine<ActorConditions>(gameObject, false);
         initAbilities();
     }
 
@@ -43,7 +43,7 @@ public class SFAbilityActor : SEntity
         base.DestroyEntity();
     }
 
-    public void TriggerEvent(AbilityAction actionName, object value)
+    public void TriggerEvent(ActorAction actionName, object value)
     {
         foreach (SFAbility ability in _abilities)
         {
@@ -80,7 +80,7 @@ public class SFAbilityActor : SEntity
     {
         if(SFInputManager.Instance.IsMove())
         {
-            TriggerEvent(AbilityAction.Move, SFInputManager.Instance.PrimaryMovement);
+            TriggerEvent(ActorAction.Move, SFInputManager.Instance.PrimaryMovement);
         }
     }
 }

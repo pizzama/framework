@@ -10,12 +10,12 @@ namespace SFramework.Actor.Ability
         public bool AbilityInitialized { get; private set; }
         protected SFActorController actControl;
         protected SFAbilityActor act;
-        protected SimpleStateMachine<AbilityStates> movementMachine;
-        protected SimpleStateMachine<AbilityConditions> conditionMachine;
+        protected SimpleStateMachine<ActorStates> movementMachine;
+        protected SimpleStateMachine<ActorConditions> conditionMachine;
         /// an array containing all the blocking movement states. If the Character is in one of these states and tries to trigger this ability, it won't be permitted. Useful to prevent this ability from being used while Idle or Swimming, for example.
-        public AbilityStates[] BlockingMovementStates;
+        public ActorStates[] BlockingMovementStates;
         /// an array containing all the blocking condition states. If the Character is in one of these states and tries to trigger this ability, it won't be permitted. Useful to prevent this ability from being used while dead, for example.
-        public AbilityConditions[] BlockingConditionStates;
+        public ActorConditions[] BlockingConditionStates;
 
         public virtual void InitAbility()
         {
@@ -39,7 +39,7 @@ namespace SFramework.Actor.Ability
 
         }
 
-        public virtual void HandleEvent(AbilityAction name, object value)
+        public virtual void HandleEvent(ActorAction name, object value)
         {
 
         }

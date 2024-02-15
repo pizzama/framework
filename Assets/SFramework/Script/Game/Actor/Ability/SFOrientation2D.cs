@@ -75,7 +75,7 @@ namespace SFramework.Actor.Ability
             if (conditionMachine == null)
                 return;
 
-            if (conditionMachine.CurrentState != AbilityConditions.Normal)
+            if (conditionMachine.CurrentState != ActorConditions.Normal)
             {
                 return;
             }
@@ -159,6 +159,7 @@ namespace SFramework.Actor.Ability
                 case SActor.SFActorFacingDirections.Down:
                     _directionFloat = 3f;
                     break;
+                
             }
 
             _lastDirectionX = _horizontalDirection;
