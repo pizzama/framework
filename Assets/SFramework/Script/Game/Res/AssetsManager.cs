@@ -20,6 +20,14 @@ namespace SFramework
             }
         }
 
+        public void Destroy()
+        {
+            ABManager.Instance.Destroy();
+            _resCache.Clear();
+            _bundleCache.Clear();
+            _instance = null;
+        }
+
         private Dictionary<string, UnityEngine.Object> _resCache;
         private SMemory<string, string, UnityEngine.Object> _bundleCache;
         private AssetsManager()

@@ -19,6 +19,14 @@ namespace SFramework
                 return _instance;
             }
         }
+
+        public void Destroy()
+        {
+            UnloadAllAssets();
+            _abCache.Clear();
+            _instance = null;
+        }
+
         private Dictionary<string, ABInfo> _abCache;
         private ABManager()
         {
