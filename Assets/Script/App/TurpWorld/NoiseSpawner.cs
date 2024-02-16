@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SFramework.Tools.Math;
+using SFramework;
 
 public abstract class NoiseSpawner : MonoBehaviour
 {
@@ -26,67 +27,66 @@ public abstract class NoiseSpawner : MonoBehaviour
 
     public void Spawn(WorldGridData worldGridData, WorldSpawnerController controller)
     {
-//         TurfData[,] turfData = controller.TurfData;
-//         int turfSizeX = controller.TurfData.GetLength(0);
-//         int turfSizeY = controller.TurfData.GetLength(1);
-//         int worldSizeX = worldGridData.WorldSize.x;
-//         int worldSizeY = worldGridData.WorldSize.y;
-//         Vector3 worldMaxPos = worldGridData.MaxWorldPos;
-//         Vector3 worldMinPos = worldGridData.MinWorldPos;
-//         float objectCellSize = objectCellSizeInMeters;
+        TurfData[,] turfData = controller.TurfData;
+        int turfSizeX = controller.TurfData.GetLength(0);
+        int turfSizeY = controller.TurfData.GetLength(1);
+        int worldSizeX = worldGridData.WorldSize.x;
+        int worldSizeY = worldGridData.WorldSize.y;
+        Vector3 worldMaxPos = worldGridData.MaxWorldPos;
+        Vector3 worldMinPos = worldGridData.MinWorldPos;
+        float objectCellSize = objectCellSizeInMeters;
 
-//         AsyncOperationHandle<IList<GameObject>> prefabsTask = Addressables.LoadAssetsAsync<GameObject>(prefabFolder, null);
-//         float[,] noiseGrid = WorldGen.GenerateNoiseGrid(worldSizeX, worldSizeY, noiseScale, noiseOffset);
+        //synology load prefab from path；
+        List<GameObject> prefabs = ABManager.Instance.LoadResourceWithSubResource<GameObject>(prefabFolder);
+        float[,] noiseGrid = WorldGen.GenerateNoiseGrid(worldSizeX, worldSizeY, noiseScale, noiseOffset);
 
-// #if UNITY_EDITOR
-//         noiseTexture = new Texture2D(turfSizeX, turfSizeY);
-//         Color[] colors = new Color[turfSizeX * turfSizeY];
-//         noiseGrid.ForEachParallel((x, y, noise) =>
-//         {
-//             colors[x + y * turfSizeY] = new Color(noise, noise, noise);
-//         });
-//         noiseTexture.SetPixels(colors);
-//         noiseTexture.Apply();
-// #endif
+#if UNITY_EDITOR
+        noiseTexture = new Texture2D(turfSizeX, turfSizeY);
+        Color[] colors = new Color[turfSizeX * turfSizeY];
+        noiseGrid.ForEachParallel((x, y, noise) =>
+        {
+            colors[x + y * turfSizeY] = new Color(noise, noise, noise);
+        });
+        noiseTexture.SetPixels(colors);
+        noiseTexture.Apply();
+#endif
 
+        foreach (var prefab in prefabs)
+            nameToPrefab[prefab.name.ToLower()] = prefab;
 
-//         IList<GameObject> prefabs = prefabsTask.WaitForCompletion();
-//         foreach (var prefab in prefabs)
-//             nameToPrefab[prefab.name.ToLower()] = prefab;
+        int total = worldSizeX * worldSizeY;
+        if (total > 1_000_000)
+        {
+            Debug.LogError("Too many prefabs to spawn");
+            return;
+        }
 
-//         int total = worldSizeX * worldSizeY;
-//         if (total > 1_000_000)
-//         {
-//             Debug.LogError("Too many prefabs to spawn");
-//             return;
-//         }
+        float min = float.PositiveInfinity;
+        float max = float.NegativeInfinity;
+        for (float y = worldMinPos.y; y < worldMaxPos.y; y += objectCellSize)
+        {
+            for (float x = worldMinPos.x; x < worldMaxPos.x; x += objectCellSize)
+            {
+                if (controller.WorldCellIsOccupide(x, y, worldGridData))
+                    continue;
 
-//         float min = float.PositiveInfinity;
-//         float max = float.NegativeInfinity;
-//         for (float y = worldMinPos.y; y < worldMaxPos.y; y += objectCellSize)
-//         {
-//             for (float x = worldMinPos.x; x < worldMaxPos.x; x += objectCellSize)
-//             {
-//                 if (controller.WorldCellIsOccupide(x, y, worldGridData))
-//                     continue;
+                int noiseX = (int)MathTools.MapToRange(x, worldMinPos.x, worldMaxPos.x, 0, worldSizeX);
+                int noiseY = (int)MathTools.MapToRange(y, worldMinPos.y, worldMaxPos.y, 0, worldSizeY);
+                float noise = noiseGrid[noiseX, noiseY];
+                int mx = (int)MathTools.MapToRange(x, worldMinPos.x, worldMaxPos.x, 0, turfSizeX);
+                int my = (int)MathTools.MapToRange(y, worldMinPos.y, worldMaxPos.y, 0, turfSizeY);
+                TurfData turf = turfData[mx, my];
+                min = Mathf.Min(noise, min);
+                max = Mathf.Max(noise, max);
+                GameObject prefab = TryGetPrefab(turf, noise);
+                if (prefab == null)
+                    continue;
 
-//                 int noiseX = (int)MathTools.MapToRange(x, worldMinPos.x, worldMaxPos.x, 0, worldSizeX);
-//                 int noiseY = (int)MathTools.MapToRange(y, worldMinPos.y, worldMaxPos.y, 0, worldSizeY);
-//                 float noise = noiseGrid[noiseX, noiseY];
-//                 int mx = (int)MathTools.MapToRange(x, worldMinPos.x, worldMaxPos.x, 0, turfSizeX);
-//                 int my = (int)MathTools.MapToRange(y, worldMinPos.y, worldMaxPos.y, 0, turfSizeY);
-//                 TurfData turf = turfData[mx, my];
-//                 min = Mathf.Min(noise, min);
-//                 max = Mathf.Max(noise, max);
-//                 GameObject prefab = TryGetPrefab(turf, noise);
-//                 if (prefab == null)
-//                     continue;
-
-//                 prefab.transform.SetParent(controller.WorldObjects.transform, false);
-//                 prefab.transform.position = new Vector3(x + offset.Random(), y + offset.Random(), 0);
-//                 controller.SetWorldCellOccupide(x, y, worldGridData);
-//             }
-//         }
+                prefab.transform.SetParent(controller.WorldObjects.transform, false);
+                prefab.transform.position = new Vector3(x + offset.Random(), y + offset.Random(), 0);
+                controller.SetWorldCellOccupide(x, y, worldGridData);
+            }
+        }
     }
 
     protected abstract GameObject TryGetPrefab(TurfData turf, float noise);

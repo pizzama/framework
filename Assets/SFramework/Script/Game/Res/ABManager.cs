@@ -98,7 +98,6 @@ namespace SFramework
             return ab.AssetBundle.LoadAsset<T>(resName);
         }
 
-
         //不指定类型 有重名情况下不建议使用 使用时需显示转换类型
         //Object sp = abManager.LoadResource("a_png", "a");
         public Object LoadResource(string abName, string resName)
@@ -133,6 +132,18 @@ namespace SFramework
 
             //返回资源
             return ab.AssetBundle.LoadAsset(resName, type);
+        }
+
+        public List<T> LoadResourceWithSubResource<T>(string abName) where T : Object
+        {
+            if (ABPathHelper.SimulationMode)
+            {
+                List<T> rt = editorLoadResourceWithSubResource<T>(abName);
+                return rt;
+            }
+            //加载目标包
+            ABInfo ab = LoadABPackage(abName);
+            return new List<T>(ab.AssetBundle.LoadAllAssets<T>());
         }
 
         //加载AB包
@@ -213,7 +224,6 @@ namespace SFramework
             return res;
         }
 
-
         //不指定类型 有重名情况下不建议使用 使用时需显示转换类型
         //Object sp = abManager.LoadResource("a_png", "a");
         public async UniTask<Object> LoadResourceAsync(string abName, string resName, CancellationToken token = default)
@@ -277,6 +287,7 @@ namespace SFramework
             }
         }
 
+        #region 编辑器处理资源
         private T editorLoadResource<T>(string abName, string resName) where T : Object
         {
 #if UNITY_EDITOR
@@ -290,8 +301,8 @@ namespace SFramework
                 }
             }
 
-            //if (res == null)
-            //    Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
+            if (res == null)
+                Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
 
             return res;
 #else
@@ -367,6 +378,22 @@ namespace SFramework
 #endif
         }
 
+        private List<T> editorLoadResourceWithSubResource<T>(string abName) where T : Object
+        {
+            List<T> Ress = new List<T>();
+#if UNITY_EDITOR
+            string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle(abName);
+            for (int i = 0; i < assetPaths.Length; i++)
+            {
+                T res = UnityEditor.AssetDatabase.LoadAssetAtPath<T>(assetPaths[i]);
+                if(res != null)
+                    Ress.Add(res);
+            }
+#endif
+            return Ress;
+        }
+
+        #endregion
 
         #region 三种资源协程加载方式
 
