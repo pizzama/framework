@@ -101,7 +101,13 @@ namespace SFramework
             string path = FullPath(abName, resName);
 
             return LoadFromBundle<T>(path, resName);
-            
+        }
+
+        public List<T> LoadFromBundleWithSubResources<T>(string abName) where T : UnityEngine.Object
+        {
+            abName = abName.ToLower();
+            List<T> result = ABManager.Instance.LoadResourceWithSubResource<T>(abName);
+            return result;
         }
 
         public async UniTask<T> LoadFromBundleAsync<T>(string path) where T : UnityEngine.Object

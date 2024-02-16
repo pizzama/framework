@@ -3,5 +3,5 @@ guid: 00d3b511dc1d8c14ab8afe17d4ba7bdb
 PrefabImporter:
   externalObjects: {}
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  assetBundleName: game/turpworld/map
+  assetBundleVariant: sf

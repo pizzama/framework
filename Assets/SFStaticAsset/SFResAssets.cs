@@ -22,6 +22,11 @@ namespace SFramework.Statics
         public const string Game_app_battle_sf_Card_prefab = "game/app/battle.sf/Card";
         public const string Game_app_battle_sf_cardbg_png = "game/app/battle.sf/cardbg";
         public const string Game_scenes_sf_BaseScene_unity = "game/scenes.sf/BaseScene";
+        public const string Game_turpworld_sf_TurpWorld_unity = "game/turpworld.sf/TurpWorld";
+        public const string Game_turpworld_map_sf_dirt_prefab = "game/turpworld/map.sf/dirt";
+        public const string Game_turpworld_map_sf_forrest_prefab = "game/turpworld/map.sf/forrest";
+        public const string Game_turpworld_map_sf_meadow_prefab = "game/turpworld/map.sf/meadow";
+        public const string Game_turpworld_map_sf_rock_prefab = "game/turpworld/map.sf/rock";
         public const string Loading_sf_BarLoading_prefab = "loading.sf/BarLoading";
         public const string Loading_sf_BaseLoading_prefab = "loading.sf/BaseLoading";
         public const string Loading_sf_effect_jpg = "loading.sf/effect";
@@ -29,7 +34,6 @@ namespace SFramework.Statics
         public const string Loading_sf_GameMainView_prefab = "loading.sf/GameMainView";
         public const string Model_avatar_role_carrota_sf_Carrot_BaseColor_png = "model/avatar/role_carrota.sf/Carrot_BaseColor";
         public const string Model_avatar_role_carrota_sf_Character_Carrot_prefab = "model/avatar/role_carrota.sf/Character_Carrot";
-        public const string Model_avatar_role_carrota_sf_Role_CarrotA_Skin_prefab = "model/avatar/role_carrota.sf/Role_CarrotA_Skin";
         public const string Pic_sf_haipa_png = "pic.sf/haipa";
         public const string Pic_sf_haipa_normal_png = "pic.sf/haipa_normal";
         public const string Pic_sf_jusang_png = "pic.sf/jusang";
@@ -62,6 +66,27 @@ namespace SFramework.Statics
         public const string BundleName = "game/scenes.sf";
         public const string RES_BaseScene_unity = "BaseScene";
     }
+    public class Game_turpworld
+    {
+        public const string BundleName = "game/turpworld";
+    }
+    public class Game_turpworld_sf
+    {
+        public const string BundleName = "game/turpworld.sf";
+        public const string RES_TurpWorld_unity = "TurpWorld";
+    }
+    public class Game_turpworld_map_sf
+    {
+        public const string BundleName = "game/turpworld/map.sf";
+        public const string RES_dirt_prefab = "dirt";
+        public const string RES_forrest_prefab = "forrest";
+        public const string RES_meadow_prefab = "meadow";
+        public const string RES_rock_prefab = "rock";
+    }
+    public class Game_turpworld_scene_sf
+    {
+        public const string BundleName = "game/turpworld/scene.sf";
+    }
     public class Loading_sf
     {
         public const string BundleName = "loading.sf";
@@ -76,7 +101,6 @@ namespace SFramework.Statics
         public const string BundleName = "model/avatar/role_carrota.sf";
         public const string RES_Carrot_BaseColor_png = "Carrot_BaseColor";
         public const string RES_Character_Carrot_prefab = "Character_Carrot";
-        public const string RES_Role_CarrotA_Skin_prefab = "Role_CarrotA_Skin";
     }
     public class Pic_sf
     {

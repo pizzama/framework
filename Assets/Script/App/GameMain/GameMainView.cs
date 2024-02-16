@@ -48,7 +48,7 @@ namespace Game
 
             Transform ga = getSceneObject<Transform>("Env");
 
-            GameObject aa = CreateGameObjectUsingPool(Model_avatar_role_carrota_sf.BundleName, Model_avatar_role_carrota_sf.RES_Role_CarrotA_Skin_prefab);
+            GameObject aa = CreateGameObjectUsingPool(Model_avatar_role_carrota_sf.BundleName, Model_avatar_role_carrota_sf.RES_Character_Carrot_prefab);
             Debug.Log(aa);
         }
     }

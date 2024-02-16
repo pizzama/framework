@@ -6,6 +6,7 @@ using SFramework.Actor;
 using SFramework.Statics;
 using Game.Character;
 using SFramework.Game.App;
+using System.Collections.Generic;
 
 namespace Game.App.Battle
 {
@@ -20,6 +21,7 @@ namespace Game.App.Battle
         {
             BattleModel mode = GetControl<BattleControl>().GetModel<BattleModel>();
             var input = SFInputManager.Instance;
+            List<GameObject> results = assetManager.LoadFromBundleWithSubResources<GameObject>(Game_turpworld_map_sf.BundleName);
             Debug.Log("load complete");
             Transform parent = getSceneObject<Transform>("Actors");
             if (parent != null)
