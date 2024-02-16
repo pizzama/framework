@@ -1,9 +1,39 @@
+using System;
 using UnityEngine;
 
-namespace SFramework.Tools
+namespace SFramework.Tools.Math
 {
+    [Serializable]
+    public struct MinMax
+    {
+        public float min;
+        public float max;
+
+        public MinMax(float min, float max)
+        {
+            this.min = min;
+            this.max = max;
+        }
+
+        public bool Contains(float value)
+        {
+            return min <= value && value <= max;
+        }
+
+        private static System.Random random = new System.Random();
+        public float Random()
+        {
+            return (float)(min + random.NextDouble() * (max - min));
+        }
+
+        public Vector2 RandomVector2()
+        {
+            return new Vector2(Random(), Random());
+        }
+    }
     public class MathTools
     {
+        private static readonly System.Random random = new System.Random();
         //remap value from t1,t2 to s1 s2
         public static float Remap(float value, float t1, float t2, float s1, float s2)
         {
@@ -58,6 +88,17 @@ namespace SFramework.Tools
             Vector3 worldPos;
             RectTransformUtility.ScreenPointToWorldPointInRectangle(targetParentRect, mousePos, canvasCam, out worldPos);
             return worldPos; //转换到世界坐标
+        }
+
+        public static float GetRandomFloat(float minValue, float maxValue)
+        {
+            return (float)(random.NextDouble() * (maxValue - minValue + 1) + minValue);
+        }
+
+        public static float MapToRange(float dvalue, float dmin, float dmax, float tmin, float tmax)
+        {
+            //tmin + (DVALUE - DMIN)(tmax - tmin) / (DMAX - DMIN)
+            return tmin + (dvalue - dmin) * (tmax - tmin) / (dmax - dmin);
         }
     }
 }

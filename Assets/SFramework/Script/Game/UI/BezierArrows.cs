@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SFramework.Game;
-using SFramework.Tools;
+using SFramework.Tools.Math;
 
 namespace SFramework.UI
 {

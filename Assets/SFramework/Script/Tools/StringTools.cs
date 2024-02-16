@@ -1,4 +1,5 @@
 using UnityEngine;
+using SFramework.Tools.Math;
 
 namespace SFramework.Tools
 {
