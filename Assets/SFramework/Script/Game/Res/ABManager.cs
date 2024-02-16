@@ -274,6 +274,15 @@ namespace SFramework
             }
         }
 
+        public void UnloadAllAssets()
+        {
+            foreach (var item in _abCache)
+            {
+                ABInfo info = item.Value;
+                info.Unload();
+            }
+        }
+
         public void UnloadUnusedAssets()
         {
             foreach (var item in _abCache)
@@ -386,7 +395,7 @@ namespace SFramework
             for (int i = 0; i < assetPaths.Length; i++)
             {
                 T res = UnityEditor.AssetDatabase.LoadAssetAtPath<T>(assetPaths[i]);
-                if(res != null)
+                if (res != null)
                     Ress.Add(res);
             }
 #endif

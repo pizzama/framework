@@ -350,6 +350,7 @@ namespace SFramework
         public void OnDestroy()
         {
             UninstallAllBundle();
+            ABManager.Instance.UnloadAllAssets();
             _bundleObserverMap.Clear();
             _bundleMap.Clear();
             _messageParams.Clear();
