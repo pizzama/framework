@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using SFramework;
+using SFramework.Statics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -30,8 +31,8 @@ namespace App.TurfWorld
 
             for (int i = childCount - 1; i >= 0; i--)
                 DestroyImmediate(grid.transform.GetChild(i).gameObject);
-
-            IList<Texture2D> tileTextures = AssetsManager.Instance.LoadFromBundleWithSubResources<Texture2D>("turf_texture");
+            
+            IList<Texture2D> tileTextures = AssetsManager.Instance.LoadFromBundleWithSubResources<Texture2D>(Game_turpworld_map.BundleName);
             foreach (var texture in tileTextures)
             {
                 if (texture.name.StartsWith("_"))
