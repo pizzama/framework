@@ -15,16 +15,14 @@ public class SEditorControlCreator : EditorWindow
     [MenuItem("SFrameWork/Editor/SFramework Control Creator", false, 100)]
     public static void Open()
     {
-        var window = GetWindow<SControlCreator>($"Control Creator");
+        var window = GetWindow<SEditorControlCreator>($"Control Creator");
         window.Show();
     }
 
 
     private void OnGUI()
     {
-        _selectIndex = EditorGUI.Popup(
-            new Rect(0, 0, position.width, 20),
-            "ViewType:",
+        _selectIndex = SEditorGUI.Popup("ViewType:",
             _selectIndex,
             options);
         EditorGUILayout.Space();
