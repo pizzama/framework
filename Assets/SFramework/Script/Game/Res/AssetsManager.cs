@@ -23,8 +23,10 @@ namespace SFramework
         public void Destroy()
         {
             ABManager.Instance.Destroy();
-            _resCache.Clear();
-            _bundleCache.Clear();
+            if(_resCache != null)
+                _resCache.Clear();
+            if(_bundleCache != null)
+                _bundleCache.Clear();
             _instance = null;
         }
 

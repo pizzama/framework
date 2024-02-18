@@ -356,11 +356,16 @@ namespace SFramework
         {
             UninstallAllBundle();
             AssetsManager.Instance.Destroy();
-            _bundleObserverMap.Clear();
-            _bundleMap.Clear();
-            _messageParams.Clear();
-            _bundleInspector.Clear();
-            _openSequenceParams.Clear();
+            if(_bundleObserverMap != null)
+                _bundleObserverMap.Clear();
+            if(_bundleMap != null)
+                _bundleMap.Clear();
+            if(_messageParams != null)
+                _messageParams.Clear();
+            if(_bundleInspector != null)
+                _bundleInspector.Clear();
+            if(_openSequenceParams != null)
+                _openSequenceParams.Clear();
             _instance = null;
         }
 

@@ -23,7 +23,8 @@ namespace SFramework
         public void Destroy()
         {
             UnloadAllAssets();
-            _abCache.Clear();
+            if(_abCache != null)
+                _abCache.Clear();
             _instance = null;
         }
 
