@@ -25,7 +25,7 @@ public static class SEditorGUI
         if (displayedOptions == null || displayedOptions.Length == 0)
             return 0;
 
-        int contrelId = GUIUtility.GetControlID(FocusType.Passive);
+        int controlId = GUIUtility.GetControlID(FocusType.Passive);
 
         string display = "(Empty)";
 
@@ -40,9 +40,9 @@ public static class SEditorGUI
             CustomPopup popup = new CustomPopup();
             popup.select = selectIndex;
             popup.displayedOptions = displayedOptions;
-            popup.info = new CustomPopupInfo(contrelId, selectIndex);
+            popup.info = new CustomPopupInfo(controlId, selectIndex);
             CustomPopupInfo.instance = popup.info;
-            PopupWindow.Show(CustomPopupTempStyle.Get(contrelId).rect, popup);
+            PopupWindow.Show(CustomPopupTempStyle.Get(controlId).rect, popup);
         }
 
         GUILayout.EndHorizontal();
@@ -51,9 +51,9 @@ public static class SEditorGUI
         {
             CustomPopupTempStyle style = new CustomPopupTempStyle();
             style.rect = GUILayoutUtility.GetLastRect();
-            CustomPopupTempStyle.Set(contrelId, style);
+            CustomPopupTempStyle.Set(controlId, style);
         }
-        return CustomPopupInfo.Get(contrelId, selectIndex);
+        return CustomPopupInfo.Get(controlId, selectIndex);
     }
 
 }
@@ -121,20 +121,20 @@ public class CustomPopupTempStyle
 
     static Dictionary<int, CustomPopupTempStyle> temp = new();
 
-    public static CustomPopupTempStyle Get(int contrelId)
+    public static CustomPopupTempStyle Get(int controlId)
     {
-        if (!temp.ContainsKey(contrelId))
+        if (!temp.ContainsKey(controlId))
         {
             return null;
         }
         CustomPopupTempStyle t;
-        temp.Remove(contrelId, out t);
+        temp.Remove(controlId, out t);
         return t;
     }
 
-    public static void Set(int contrelId, CustomPopupTempStyle style)
+    public static void Set(int controlId, CustomPopupTempStyle style)
     {
-        temp[contrelId] = style;
+        temp[controlId] = style;
     }
 }
 
@@ -144,13 +144,13 @@ public class CustomPopupTempStyle
 public class CustomPopupInfo
 {
     public int SelectIndex { get; private set; }
-    public int contrelId;
+    public int controlId;
     public bool used;
     public static CustomPopupInfo instance;
 
-    public CustomPopupInfo(int contrelId, int selectIndex)
+    public CustomPopupInfo(int controlId, int selectIndex)
     {
-        this.contrelId = contrelId;
+        this.controlId = controlId;
         this.SelectIndex = selectIndex;
     }
 
@@ -161,7 +161,7 @@ public class CustomPopupInfo
             return selected;
         }
 
-        if (instance.contrelId == controlID && instance.used)
+        if (instance.controlId == controlID && instance.used)
         {
             GUI.changed = selected != instance.SelectIndex;
             selected = instance.SelectIndex;
