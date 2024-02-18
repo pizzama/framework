@@ -23,7 +23,7 @@ public class SControlCreator : EditorWindow
     private void OnGUI()
     {
         _selectIndex = EditorGUI.Popup(
-            new Rect(0, 0, position.width, 120),
+            new Rect(0, 0, position.width, 20),
             "ViewType:",
             _selectIndex,
             options);

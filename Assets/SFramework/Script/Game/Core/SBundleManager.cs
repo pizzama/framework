@@ -305,7 +305,7 @@ namespace SFramework
 
         public void CloseAllControl(List<ISBundle> excludeBundles = default)
         {
-            if(_bundleMap == null)
+            if (_bundleMap == null)
                 return;
             foreach (KeyValuePair<string, Dictionary<string, ISBundle>> result in _bundleMap)
             {
@@ -325,7 +325,7 @@ namespace SFramework
 
         public void UninstallAllBundle(List<ISBundle> excludeBundles = default)
         {
-            if(_bundleMap == null)
+            if (_bundleMap == null)
                 return;
             //first close bundle
             CloseAllControl(excludeBundles);
@@ -347,7 +347,12 @@ namespace SFramework
             }
         }
 
-        public void OnDestroy()
+        private void OnApplicationQuit()
+        {
+            Destroy();
+        }
+
+        public void Destroy()
         {
             UninstallAllBundle();
             AssetsManager.Instance.Destroy();
@@ -363,7 +368,7 @@ namespace SFramework
         {
             string nameSpace;
             string className;
-            if(alias == string.Empty)
+            if (alias == string.Empty)
             {
                 StringTools.PrefixClassName(fullPath, out nameSpace, out className);
                 alias = className;
