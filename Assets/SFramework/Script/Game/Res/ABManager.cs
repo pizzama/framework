@@ -36,10 +36,12 @@ namespace SFramework
             _abCache = new Dictionary<string, ABInfo>();
         }
         private ABManifest _manifest;
+
+        #region 同步加载的三个重载
         //加载AB包
         private ABInfo LoadABPackage(string abName)
         {
-            ABInfo maininfo = new ABInfo();
+            ABInfo mainInfo = new ABInfo();
             AssetBundle ab = null;
             //根据manifest获取所有依赖包的名称 固定API
             string[] dependencies = _manifest.GetDependencies(abName);
@@ -57,14 +59,14 @@ namespace SFramework
                         ABInfo info = new ABInfo();
                         info.HashName = dependencies[i];
                         info.AssetBundle = ab;
-                        maininfo.AddDepends(info);
+                        mainInfo.AddDepends(info);
                         _abCache.Add(dependencies[i], info);
                     }
                 }
                 else
                 {
                     ABInfo info = _abCache[dependencies[i]];
-                    maininfo.AddDepends(info);
+                    mainInfo.AddDepends(info);
                 }
             }
             //加载目标包
@@ -72,25 +74,22 @@ namespace SFramework
             else
             {
                 ab = AssetBundle.LoadFromFile(ABPathHelper.GetResPathInPersistentOrStream(abName));
-                maininfo.HashName = abName;
+                mainInfo.HashName = abName;
                 if (ab != null)
                 {
-                    maininfo.AssetBundle = ab;
-                    maininfo.AddRef();
-                    _abCache.Add(abName, maininfo);
+                    mainInfo.AssetBundle = ab;
+                    mainInfo.AddRef();
+                    _abCache.Add(abName, mainInfo);
                 }
                 else
                 {
-                    maininfo = null;
+                    mainInfo = null;
                 }
 
-                return maininfo;
+                return mainInfo;
             }
         }
-
-
-        #region 同步加载的三个重载
-        // 同步加载资源---泛型加载 简单直观 无需显示转换
+        // 同步加载资源---泛型加载
         //Sprite sp = abManager.LoadResource<Sprite>("a_png", "a");
         public T LoadResource<T>(string abName, string resName) where T : Object
         {
@@ -153,11 +152,13 @@ namespace SFramework
             ABInfo ab = LoadABPackage(abName);
             return new List<T>(ab.AssetBundle.LoadAllAssets<T>());
         }
+        #endregion
 
-        //加载AB包
+        #region async加载的三个重载
+        //异步加载AB包
         private async UniTask<ABInfo> LoadABPackageAsync(string abName)
         {
-            ABInfo maininfo = new ABInfo();
+            ABInfo mainInfo = new ABInfo();
             AssetBundle ab = null;
             //根据manifest获取所有依赖包的名称 固定API
             string[] dependencies = _manifest.GetDependencies(abName);
@@ -176,14 +177,14 @@ namespace SFramework
                         ABInfo info = new ABInfo();
                         info.HashName = dependencies[i];
                         info.AssetBundle = ab;
-                        maininfo.AddDepends(info);
+                        mainInfo.AddDepends(info);
                         _abCache.Add(dependencies[i], info);
                     }
                 }
                 else
                 {
                     ABInfo info = _abCache[dependencies[i]];
-                    maininfo.AddDepends(info);
+                    mainInfo.AddDepends(info);
                 }
             }
             //加载目标包
@@ -193,25 +194,21 @@ namespace SFramework
                 ab = await AssetBundle.LoadFromFileAsync(ABPathHelper.GetResPathInPersistentOrStream(abName));
                 if (ab != null)
                 {
-                    maininfo.AssetBundle = ab;
-                    maininfo.HashName = abName;
-                    maininfo.AddRef();
-                    _abCache.Add(abName, maininfo);
+                    mainInfo.AssetBundle = ab;
+                    mainInfo.HashName = abName;
+                    mainInfo.AddRef();
+                    _abCache.Add(abName, mainInfo);
                 }
                 else
                 {
-                    maininfo = null;
+                    mainInfo = null;
                 }
 
-                return maininfo;
+                return mainInfo;
             }
         }
-
-        #endregion
-
-        #region async加载的三个重载
-        // 同步加载资源---泛型加载 简单直观 无需显示转换
-        //Sprite sp = abManager.LoadResource<Sprite>("a_png", "a");
+        // 异步加载资源---泛型加载
+        //Sprite sp = await abManager.LoadResourceAsync<Sprite>("a_png", "a");
         public async UniTask<T> LoadResourceAsync<T>(string abName, string resName, CancellationToken token = default) where T : UnityEngine.Object
         {
             T res = default;
@@ -270,6 +267,19 @@ namespace SFramework
                 Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
             return res;
         }
+
+        public async UniTask<List<T>> LoadResourceWithSubResourceAsync<T>(string abName) where T : Object
+        {
+            if (ABPathHelper.SimulationMode)
+            {
+                List<T> rt = editorLoadResourceWithSubResource<T>(abName);
+                return rt;
+            }
+            //加载目标包
+            ABInfo ab = await LoadABPackageAsync(abName);
+            return new List<T>(ab.AssetBundle.LoadAllAssets<T>());
+        }
+
         #endregion
 
         //单个包卸载
@@ -397,17 +407,34 @@ namespace SFramework
 
         private List<T> editorLoadResourceWithSubResource<T>(string abName) where T : Object
         {
-            List<T> Ress = new List<T>();
+            List<T> result = new List<T>();
 #if UNITY_EDITOR
             string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle(abName);
             for (int i = 0; i < assetPaths.Length; i++)
             {
                 T res = UnityEditor.AssetDatabase.LoadAssetAtPath<T>(assetPaths[i]);
                 if (res != null)
-                    Ress.Add(res);
+                    result.Add(res);
             }
 #endif
-            return Ress;
+            return result;
+        }
+
+        private async UniTask<List<T>> editorLoadResourceWithSubResourceAsync<T>(string abName, string resName) where T : Object
+        {
+            List<T> result = new List<T>();
+#if UNITY_EDITOR
+            string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle(abName);
+            for (int i = 0; i < assetPaths.Length; i++)
+            {
+                T res = UnityEditor.AssetDatabase.LoadAssetAtPath<T>(assetPaths[i]);
+                if (res != null)
+                    result.Add(res);
+            }
+
+            await UniTask.Delay(System.TimeSpan.FromSeconds(1), ignoreTimeScale: false);
+#endif
+            return result;
         }
 
         #endregion

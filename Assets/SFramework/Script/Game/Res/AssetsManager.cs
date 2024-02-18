@@ -74,7 +74,7 @@ namespace SFramework
         public T LoadFromBundle<T>(string path) where T : UnityEngine.Object
         {
             int index = path.LastIndexOf("/");
-            if(index > 0)
+            if (index > 0)
             {
                 string abName = path.Substring(0, index);
                 string resName = path.Substring(index + 1, path.Length - index - 1);
@@ -82,7 +82,7 @@ namespace SFramework
             }
 
             return default;
-            
+
         }
 
         public T LoadFromBundle<T>(string abName, string resName) where T : UnityEngine.Object
@@ -121,7 +121,7 @@ namespace SFramework
         public async UniTask<T> LoadFromBundleAsync<T>(string path) where T : UnityEngine.Object
         {
             int index = path.LastIndexOf("/");
-            if(index > 0)
+            if (index > 0)
             {
                 string abName = path.Substring(0, index);
                 string resName = path.Substring(index + 1, path.Length - index - 1);
@@ -156,6 +156,13 @@ namespace SFramework
             string path = FullPath(abName, resName);
 
             return await LoadFromBundleAsync<T>(path, resName, token);
+        }
+
+        public async UniTask<List<T>> LoadFromBundleWithSubResourcesAsync<T>(string abName) where T : UnityEngine.Object
+        {
+            abName = abName.ToLower();
+            List<T> result = await ABManager.Instance.LoadResourceWithSubResourceAsync<T>(abName);
+            return result;
         }
 
         public byte[] LoadData(string path)
