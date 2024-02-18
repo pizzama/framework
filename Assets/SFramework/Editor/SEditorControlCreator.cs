@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using SFramework.Extension;
 
-public class SControlCreator : EditorWindow
+public class SEditorControlCreator : EditorWindow
 {
     private string pathText = "";
     private List<string> _logTxts = new List<string>();

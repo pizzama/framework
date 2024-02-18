@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using UnityEditor;
 using UnityEngine;
+using SFramework.Tools.Math;
 
 public struct WorldGridData
 {
@@ -43,45 +43,45 @@ public class WorldGen : MonoBehaviour
    private TurfData[] turfData;
    [SerializeField]
    private Grid grid;
-//    [SerializeField]
-//    private WorldSpawnerController spawnerController;
+   [SerializeField]
+   private WorldSpawnerController spawnerController;
 
    public TurfData[,] TurfGrid { get; private set; }
 
    public void GenerateWorld()
    {
-    //    float worldHalfX = (mapSize.y / 2) * grid.cellSize.y;
-    //    float worldHalfY = (mapSize.y / 2) * grid.cellSize.y;
-    //    WorldGridData worldGridData = new WorldGridData()
-    //    {
-    //        CellSize = grid.cellSize,
-    //        GridSize = mapSize,
-    //        MinWorldPos = new Vector3(-worldHalfX, -worldHalfY, 0),
-    //        MaxWorldPos = new Vector3(worldHalfX, worldHalfY, 0),
-    //        WorldSize = new Vector2Int(mapSize.x * (int)grid.cellSize.x, mapSize.y * (int)grid.cellSize.y)
-    //    };
+       float worldHalfX = (mapSize.y / 2) * grid.cellSize.y;
+       float worldHalfY = (mapSize.y / 2) * grid.cellSize.y;
+       WorldGridData worldGridData = new WorldGridData()
+       {
+           CellSize = grid.cellSize,
+           GridSize = mapSize,
+           MinWorldPos = new Vector3(-worldHalfX, -worldHalfY, 0),
+           MaxWorldPos = new Vector3(worldHalfX, worldHalfY, 0),
+           WorldSize = new Vector2Int(mapSize.x * (int)grid.cellSize.x, mapSize.y * (int)grid.cellSize.y)
+       };
 
-    //    MinMax noiseOffset = new MinMax(-5000, 5000);
-    //    float[,] noiseGrid = GenerateNoiseGrid(mapSize.x, mapSize.y, noiseScale, noiseOffset.RandomVector2());
-    //    TurfGrid = new TurfData[mapSize.x, mapSize.y];
-    //    noiseGrid.ForEachParallel((x, y, noise) =>
-    //    {
-    //        for (int i = 0; i < turfData.Length; i++)
-    //        {
-    //            TurfData current = turfData[i];
-    //            if (current.Min <= noise && noise <= current.Max)
-    //            {
-    //                TurfGrid[x, y] = current;
-    //                return;
-    //            }
-    //        }
-    //        Debug.LogError($"No turf found for noise: {noise}");
-    //    });
+       MinMax noiseOffset = new MinMax(-5000, 5000);
+       float[,] noiseGrid = GenerateNoiseGrid(mapSize.x, mapSize.y, noiseScale, noiseOffset.RandomVector2());
+       TurfGrid = new TurfData[mapSize.x, mapSize.y];
+       noiseGrid.ForEachParallel((x, y, noise) =>
+       {
+           for (int i = 0; i < turfData.Length; i++)
+           {
+               TurfData current = turfData[i];
+               if (current.Min <= noise && noise <= current.Max)
+               {
+                   TurfGrid[x, y] = current;
+                   return;
+               }
+           }
+           Debug.LogError($"No turf found for noise: {noise}");
+       });
 
 
-    //    WorldTiler worldTiler = GetComponent<WorldTiler>();
-    //    worldTiler.TileWorld(turfData, grid, worldGridData, TurfGrid);
-    // //    spawnerController.SpawnWorldObjects(worldGridData, TurfGrid);
+       WorldTiler worldTiler = GetComponent<WorldTiler>();
+       worldTiler.TileWorld(turfData, grid, worldGridData, TurfGrid);
+       spawnerController.SpawnWorldObjects(worldGridData, TurfGrid);
    }
 
    public static float[,] GenerateNoiseGrid(int sizeX, int sizeY, float noiseScale, Vector2 noiseOffset)

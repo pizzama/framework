@@ -37,7 +37,7 @@ public abstract class NoiseSpawner : MonoBehaviour
         float objectCellSize = objectCellSizeInMeters;
 
         //synology load prefab from path；
-        List<GameObject> prefabs = ABManager.Instance.LoadResourceWithSubResource<GameObject>(prefabFolder);
+        List<GameObject> prefabs = AssetsManager.Instance.LoadFromBundleWithSubResources<GameObject>(prefabFolder);
         float[,] noiseGrid = WorldGen.GenerateNoiseGrid(worldSizeX, worldSizeY, noiseScale, noiseOffset);
 
 #if UNITY_EDITOR
