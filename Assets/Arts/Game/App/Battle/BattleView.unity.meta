@@ -3,5 +3,5 @@ guid: 4801d1c94e423d849b62fca326d9e4bd
 DefaultImporter:
   externalObjects: {}
   userData: 
-  assetBundleName: game/app/battle
-  assetBundleVariant: sf
+  assetBundleName: game_app_battle
+  assetBundleVariant: sfs

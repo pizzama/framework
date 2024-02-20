@@ -74,15 +74,15 @@ namespace SFramework
 				}
 				else
 				{
-					SetLables(fileInfo, sceneNama, namePathDictionary);
+					SetLabels(fileInfo, sceneNama, namePathDictionary);
 				}
 			}
 		}
 
 		/// <summary>
-		/// ÐÞ¸Ä×ÊÔ´ assetbundle lables
+		/// setting assetBundle labels
 		/// </summary>
-		private static void SetLables(FileInfo fileInfo, string sceneName, Dictionary<string, string> namePathDictionary)
+		private static void SetLabels(FileInfo fileInfo, string sceneName, Dictionary<string, string> namePathDictionary)
 		{
 			int index = fileInfo.FullName.IndexOf("Assets");
 			string assetPath = fileInfo.FullName.Substring(index);

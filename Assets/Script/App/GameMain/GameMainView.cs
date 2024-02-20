@@ -14,8 +14,8 @@ namespace Game
 
         protected override void SetViewPrefabPath(out string prefabPath, out string prefabName)
         {
-            prefabPath = Game_scenes_sf.BundleName;
-            prefabName = Game_scenes_sf.RES_BaseScene_unity;
+            prefabPath = Game_scenes_sfs.BundleName;
+            prefabName = Game_scenes_sfs.RES_BaseScene_unity;
         }
 
         public override void Open()
@@ -43,12 +43,12 @@ namespace Game
             //Debug.Log("gamemainview loading finish");
             Control.OpenControl("Game.NormalLoadingControl", "End");
 
-            Texture tx = assetManager.LoadFromBundle<Texture>(Pic_sf.BundleName, Pic_sf.RES_haipa_png);
+            Texture tx = assetManager.LoadFromBundle<Texture>(Pic_sfp.BundleName, Pic_sfp.RES_haipa_png);
             Debug.Log(tx);
 
             Transform ga = getSceneObject<Transform>("Env");
 
-            GameObject aa = CreateGameObjectUsingPool(Model_avatar_role_carrota_sf.BundleName, Model_avatar_role_carrota_sf.RES_Character_Carrot_prefab);
+            GameObject aa = CreateGameObjectUsingPool(Model_avatar_role_carrota_sfp.BundleName, Model_avatar_role_carrota_sfp.RES_Character_Carrot_prefab);
             Debug.Log(aa);
         }
     }

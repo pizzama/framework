@@ -11,7 +11,7 @@ namespace SFramework
 	{
 		private static List<string> noticeExtension = new List<string> { ".prefab", ".unity", ".png", ".jpg" };
 		private static List<string> ignoreExtension = new List<string> { ".meta" };
-		private const string StaticlNameSpace = "SFramework.Statics";
+		private const string StaticNameSpace = "SFramework.Statics";
 		private const string Mark_AssetBundle = "Assets/SFramework/AssetBundle All Folder On Assets_Arts";
 		private const string StaticClassName = "SFResAssets";
 		private const string StaticPath = "SFStaticAsset";
@@ -55,7 +55,7 @@ namespace SFramework
 			if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 			path = path + "/" + StaticClassName + ".cs";
 			var writer = new StreamWriter(File.Open(path, FileMode.Create));
-			ResDataCodeGenerator.WriteClass(writer, StaticlNameSpace, StaticClassName);
+			ResDataCodeGenerator.WriteClass(writer, StaticNameSpace, StaticClassName);
 			writer.Close();
 			AssetDatabase.Refresh();
 		}
@@ -80,15 +80,15 @@ namespace SFramework
 				}
 				else
 				{
-					SetLables(fileInfo, sceneNama, namePathDictionary);
+					SetLabels(fileInfo, sceneNama, namePathDictionary);
 				}
 			}
 		}
 
 		/// <summary>
-		/// ÐÞ¸Ä×ÊÔ´ assetbundle lables
+		/// setting assetBundle labels
 		/// </summary>
-		private static void SetLables(FileInfo fileInfo, string sceneName, Dictionary<string, string> namePathDictionary)
+		private static void SetLabels(FileInfo fileInfo, string sceneName, Dictionary<string, string> namePathDictionary)
 		{
 			if (ignoreExtension.Contains(fileInfo.Extension))
 				return;
@@ -100,7 +100,14 @@ namespace SFramework
 			string assetPath = fileInfo.FullName.Substring(index);
 			AssetImporter assetImporter = AssetImporter.GetAtPath(assetPath);
 			assetImporter.assetBundleName = bundleName;
-            assetImporter.assetBundleVariant = "sf";
+			if(fileInfo.Extension.Contains(".unity"))
+			{
+				assetImporter.assetBundleVariant = "sfs";
+			}
+			else
+			{
+            	assetImporter.assetBundleVariant = "sfp";
+			}
 			string folderName;
 			if (bundleName.Contains("/"))
 				folderName = bundleName.Split('/')[1];
@@ -123,7 +130,7 @@ namespace SFramework
 				string all = sceneName;
 				for (int i = 0; i < tmp.Length - 1; i++)
 				{
-					all += "/" + tmp[i];
+					all += "_" + tmp[i];
 				}
 
 				return all;

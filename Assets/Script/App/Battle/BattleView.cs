@@ -26,7 +26,7 @@ namespace Game.App.Battle
             Transform parent = getSceneObject<Transform>("Actors");
             if (parent != null)
             {
-                Hero rt = CreateSEntity<Hero>("1", SFResAssets.Model_avatar_role_carrota_sf_Character_Carrot_prefab, parent);
+                Hero rt = CreateSEntity<Hero>("1", SFResAssets.Model_avatar_role_carrota_sfp_Character_Carrot_prefab, parent);
                 if (rt != null)
                 {
                     rt.transform.localPosition = new Vector3(0f, 0.5f, 0f);
@@ -38,7 +38,7 @@ namespace Game.App.Battle
 
         private async UniTaskVoid readPro()
         {
-            List<GameObject> results = await assetManager.LoadFromBundleWithSubResourcesAsync<GameObject>(Game_turpworld_map_sf.BundleName);
+            List<GameObject> results = await assetManager.LoadFromBundleWithSubResourcesAsync<GameObject>(Game_turpworld_map_sfp.BundleName);
             for (int i = 0; i < results.Count; i++)
             {
                 Debug.Log("load complete:" + results[i].name);
