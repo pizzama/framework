@@ -5,12 +5,12 @@ using UnityEditor.UIElements;
 
 namespace SFramework
 {
-    public class SEditorAssetsBundle : EditorWindow
+    public class SEditorResAssets : EditorWindow
     {
-        [MenuItem("SFrameWork/Editor/SFramework Assets Bundle Manager", false, 100)]
+        [MenuItem("SFrameWork/Editor/SFramework Assets Manager", false, 100)]
         public static void Open()
         {
-            var window = GetWindow<SEditorAssetsBundle>($"Assets Bundle Manager");
+            var window = GetWindow<SEditorResAssets>($"Assets Bundle Manager");
             window.Show();
         }
 
@@ -24,6 +24,11 @@ namespace SFramework
             }
 
             if (GUILayout.Button("Clean All AssetBundle From Assets/Arts Folder"))
+            {
+                cleanAssetBundleFromArtsFolder();
+            }
+
+            if (GUILayout.Button("Collect All Controls"))
             {
                 cleanAssetBundleFromArtsFolder();
             }

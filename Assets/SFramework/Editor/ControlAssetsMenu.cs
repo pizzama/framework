@@ -30,7 +30,7 @@ namespace SFramework
 			var codeType = new CodeTypeDeclaration(StaticControlClassName);
 			codeNamespace.Types.Add(codeType);
 
-			//add memeber
+			//add member
 			List<Type> controls = ReflectionTools.GetTypesFormTypeWithAllAssembly(typeof(SControl));
 			for (int i = 0; i < controls.Count; i++)
 			{
