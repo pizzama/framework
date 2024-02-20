@@ -9,7 +9,7 @@ namespace SFramework
 	[InitializeOnLoad]
 	public class ResAssetsMenu
 	{
-		private static List<string> noticeExtension = new List<string> { ".prefab", ".unity", ".png", ".jpg" };
+		private static List<string> noticeExtension = new List<string> { ".prefab", ".unity", ".png", ".jpg", ".asset", ".psd", ".mat", ".shader", ".controller", ".fbx", ".anim"};
 		private static List<string> ignoreExtension = new List<string> { ".meta" };
 		private const string StaticNameSpace = "SFramework.Statics";
 		private const string Mark_AssetBundle = "Assets/SFramework/AssetBundle All Folder On Assets_Arts";
@@ -22,8 +22,8 @@ namespace SFramework
 			var selectedObject = Selection.activeObject;
 			string assetPath = AssetDatabase.GetAssetPath(selectedObject);
 			//string assetDirectory = Path.GetDirectoryName(assetPath);
-            string assetDirectory = "Assets/Arts";
-            DirectoryInfo directoryInfo = new DirectoryInfo(assetDirectory);
+			string assetDirectory = "Assets/Arts";
+			DirectoryInfo directoryInfo = new DirectoryInfo(assetDirectory);
 			DirectoryInfo[] scenesDirectories = directoryInfo.GetDirectories();
 			foreach (var tempDir in scenesDirectories)
 			{
@@ -50,7 +50,7 @@ namespace SFramework
 		}
 
 		private static void WriteDataConfig()
-        {
+		{
 			var path = Path.GetFullPath(Application.dataPath + Path.DirectorySeparatorChar + StaticPath);
 			if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 			path = path + "/" + StaticClassName + ".cs";
@@ -94,19 +94,19 @@ namespace SFramework
 				return;
 
 			if (!noticeExtension.Contains(fileInfo.Extension))
-                	return;
-            string bundleName = GetBundleName(fileInfo, sceneName);
+				return;
+			string bundleName = GetBundleName(fileInfo, sceneName);
 			int index = fileInfo.FullName.IndexOf("Assets");
 			string assetPath = fileInfo.FullName.Substring(index);
 			AssetImporter assetImporter = AssetImporter.GetAtPath(assetPath);
 			assetImporter.assetBundleName = bundleName;
-			if(fileInfo.Extension.Contains(".unity"))
+			if (fileInfo.Extension.Contains(".unity"))
 			{
 				assetImporter.assetBundleVariant = "sfs";
 			}
 			else
 			{
-            	assetImporter.assetBundleVariant = "sfp";
+				assetImporter.assetBundleVariant = "sfp";
 			}
 			string folderName;
 			if (bundleName.Contains("/"))

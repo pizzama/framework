@@ -23,18 +23,58 @@ namespace SFramework.Statics
         public const string Game_app_battle_sfs_BattleView_unity = "game_app_battle.sfs/BattleView";
         public const string Game_scenes_sfs_BaseScene_unity = "game_scenes.sfs/BaseScene";
         public const string Game_turpworld_sfs_TurpWorld_unity = "game_turpworld.sfs/TurpWorld";
+        public const string Game_turpworld_map_sfp_dirtbrushes_psd = "game_turpworld_map.sfp/dirt-brushes";
         public const string Game_turpworld_map_sfp_dirt_prefab = "game_turpworld_map.sfp/dirt";
+        public const string Game_turpworld_map_sfp_dirt_psd = "game_turpworld_map.sfp/dirt";
+        public const string Game_turpworld_map_sfp_forrestbrushes_psd = "game_turpworld_map.sfp/forrest-brushes";
         public const string Game_turpworld_map_sfp_forrest_prefab = "game_turpworld_map.sfp/forrest";
+        public const string Game_turpworld_map_sfp_forrest_psd = "game_turpworld_map.sfp/forrest";
+        public const string Game_turpworld_map_sfp_meadowbrushes_psd = "game_turpworld_map.sfp/meadow-brushes";
         public const string Game_turpworld_map_sfp_meadow_prefab = "game_turpworld_map.sfp/meadow";
+        public const string Game_turpworld_map_sfp_meadow_psd = "game_turpworld_map.sfp/meadow";
+        public const string Game_turpworld_map_sfp_rockbrushes_psd = "game_turpworld_map.sfp/rock-brushes";
         public const string Game_turpworld_map_sfp_rock_prefab = "game_turpworld_map.sfp/rock";
-        public const string Gametexture_sfp_grass_png = "gametexture.sfp/grass";
+        public const string Game_turpworld_map_sfp_rock_psd = "game_turpworld_map.sfp/rock";
+        public const string Game_turpworld_map_dirt_tiles_sfp_dirtbrushes_0_asset = "game_turpworld_map_dirt_tiles.sfp/dirt-brushes_0";
+        public const string Game_turpworld_map_dirt_tiles_sfp_dirtbrushes_1_asset = "game_turpworld_map_dirt_tiles.sfp/dirt-brushes_1";
+        public const string Game_turpworld_map_dirt_tiles_sfp_dirtbrushes_2_asset = "game_turpworld_map_dirt_tiles.sfp/dirt-brushes_2";
+        public const string Game_turpworld_map_dirt_tiles_sfp_dirtbrushes_3_asset = "game_turpworld_map_dirt_tiles.sfp/dirt-brushes_3";
+        public const string Game_turpworld_map_forrest_tiles_sfp_forrestbrushes_0_asset = "game_turpworld_map_forrest_tiles.sfp/forrest-brushes_0";
+        public const string Game_turpworld_map_forrest_tiles_sfp_forrestbrushes_1_asset = "game_turpworld_map_forrest_tiles.sfp/forrest-brushes_1";
+        public const string Game_turpworld_map_forrest_tiles_sfp_forrestbrushes_2_asset = "game_turpworld_map_forrest_tiles.sfp/forrest-brushes_2";
+        public const string Game_turpworld_map_forrest_tiles_sfp_forrestbrushes_3_asset = "game_turpworld_map_forrest_tiles.sfp/forrest-brushes_3";
+        public const string Game_turpworld_map_meadow_tiles_sfp_meadowbrushes_0_asset = "game_turpworld_map_meadow_tiles.sfp/meadow-brushes_0";
+        public const string Game_turpworld_map_meadow_tiles_sfp_meadowbrushes_1_asset = "game_turpworld_map_meadow_tiles.sfp/meadow-brushes_1";
+        public const string Game_turpworld_map_meadow_tiles_sfp_meadowbrushes_2_asset = "game_turpworld_map_meadow_tiles.sfp/meadow-brushes_2";
+        public const string Game_turpworld_map_meadow_tiles_sfp_meadowbrushes_3_asset = "game_turpworld_map_meadow_tiles.sfp/meadow-brushes_3";
+        public const string Game_turpworld_map_rock_tiles_sfp_rockbrushes_0_asset = "game_turpworld_map_rock_tiles.sfp/rock-brushes_0";
+        public const string Game_turpworld_map_rock_tiles_sfp_rockbrushes_1_asset = "game_turpworld_map_rock_tiles.sfp/rock-brushes_1";
+        public const string Game_turpworld_map_rock_tiles_sfp_rockbrushes_2_asset = "game_turpworld_map_rock_tiles.sfp/rock-brushes_2";
+        public const string Game_turpworld_map_rock_tiles_sfp_rockbrushes_3_asset = "game_turpworld_map_rock_tiles.sfp/rock-brushes_3";
+        public const string Gtexture_sfp_Grass_mat = "gtexture.sfp/Grass";
+        public const string Gtexture_sfp_grass_png = "gtexture.sfp/grass";
+        public const string Gtexture_effect_sfp_FlashCard_mat = "gtexture_effect.sfp/FlashCard";
+        public const string Gtexture_effect_sfp_FlashCard_shader = "gtexture_effect.sfp/FlashCard";
+        public const string Gtexture_effect_sfp_FlashCard1_mat = "gtexture_effect.sfp/FlashCard1";
+        public const string Gtexture_effect_sfp_FlashCard1_shader = "gtexture_effect.sfp/FlashCard1";
         public const string Loading_sfp_BarLoading_prefab = "loading.sfp/BarLoading";
+        public const string Loading_sfp_BaseLoading_controller = "loading.sfp/BaseLoading";
         public const string Loading_sfp_BaseLoading_prefab = "loading.sfp/BaseLoading";
         public const string Loading_sfp_effect_jpg = "loading.sfp/effect";
         public const string Loading_sfp_effect1_png = "loading.sfp/effect1";
         public const string Loading_sfp_GameMainView_prefab = "loading.sfp/GameMainView";
+        public const string Model_avatar_role_carrota_sfp_Carrot_BaseColor_mat = "model_avatar_role_carrota.sfp/Carrot_BaseColor";
         public const string Model_avatar_role_carrota_sfp_Carrot_BaseColor_png = "model_avatar_role_carrota.sfp/Carrot_BaseColor";
         public const string Model_avatar_role_carrota_sfp_Character_Carrot_prefab = "model_avatar_role_carrota.sfp/Character_Carrot";
+        public const string Model_avatar_role_carrota_sfp_MixCarrotControl_controller = "model_avatar_role_carrota.sfp/MixCarrotControl";
+        public const string Model_avatar_role_carrota_sfp_Role_mat = "model_avatar_role_carrota.sfp/Role";
+        public const string Model_avatar_role_carrota_sfp_Role_CarrotA_controller = "model_avatar_role_carrota.sfp/Role_CarrotA";
+        public const string Model_avatar_role_carrota_sfp_test2_fbx = "model_avatar_role_carrota.sfp/test2";
+        public const string Model_avatar_role_carrota_ani_materials_sfp_Character_ColorMap_mat = "model_avatar_role_carrota_ani_materials.sfp/Character_ColorMap";
+        public const string Model_avatar_role_carrota_ani_materials_sfp_Clothing_mat = "model_avatar_role_carrota_ani_materials.sfp/Clothing";
+        public const string Model_material_sfp_RoleBlinn_shader = "model_material.sfp/RoleBlinn";
+        public const string Model_material_sfp_RoleBlinnPhong_shader = "model_material.sfp/RoleBlinnPhong";
+        public const string Model_material_sfp_Test_shader = "model_material.sfp/Test";
         public const string Pic_sfp_haipa_png = "pic.sfp/haipa";
         public const string Pic_sfp_haipa_normal_png = "pic.sfp/haipa_normal";
         public const string Pic_sfp_jusang_png = "pic.sfp/jusang";
@@ -43,16 +83,14 @@ namespace SFramework.Statics
         public const string Pic_tree_sfp_5104206_png = "pic_tree.sfp/5104206";
         public const string Pic_tree_sfp_5104309_png = "pic_tree.sfp/5104309";
         public const string Pic_tree_sfp_5104413_png = "pic_tree.sfp/5104413";
+        public const string Pic_tree_materials_sfp_5103524_mat = "pic_tree_materials.sfp/5103524";
+        public const string Pic_tree_materials_sfp_5104413_mat = "pic_tree_materials.sfp/5104413";
         public const string Ss_test_Test_prefab = "ss/test/Test";
     }
     public class Activity_btn_arrow
     {
         public const string BundleName = "activity_btn_arrow";
         public const string RES_activity_btn_arrow_png = "activity_btn_arrow";
-    }
-    public class Game_app_battle
-    {
-        public const string BundleName = "game_app_battle";
     }
     public class Game_app_battle_sfp
     {
@@ -69,44 +107,77 @@ namespace SFramework.Statics
         public const string BundleName = "game_app_battle.sfs";
         public const string RES_BattleView_unity = "BattleView";
     }
-    public class Game_scenes
-    {
-        public const string BundleName = "game_scenes";
-    }
     public class Game_scenes_sfs
     {
         public const string BundleName = "game_scenes.sfs";
         public const string RES_BaseScene_unity = "BaseScene";
-    }
-    public class Game_turpworld
-    {
-        public const string BundleName = "game_turpworld";
     }
     public class Game_turpworld_sfs
     {
         public const string BundleName = "game_turpworld.sfs";
         public const string RES_TurpWorld_unity = "TurpWorld";
     }
-    public class Game_turpworld_map
-    {
-        public const string BundleName = "game_turpworld_map";
-    }
     public class Game_turpworld_map_sfp
     {
         public const string BundleName = "game_turpworld_map.sfp";
+        public const string RES_dirtbrushes_psd = "dirt-brushes";
         public const string RES_dirt_prefab = "dirt";
+        public const string RES_dirt_psd = "dirt";
+        public const string RES_forrestbrushes_psd = "forrest-brushes";
         public const string RES_forrest_prefab = "forrest";
+        public const string RES_forrest_psd = "forrest";
+        public const string RES_meadowbrushes_psd = "meadow-brushes";
         public const string RES_meadow_prefab = "meadow";
+        public const string RES_meadow_psd = "meadow";
+        public const string RES_rockbrushes_psd = "rock-brushes";
         public const string RES_rock_prefab = "rock";
+        public const string RES_rock_psd = "rock";
     }
-    public class Gametexture
+    public class Game_turpworld_map_dirt_tiles_sfp
     {
-        public const string BundleName = "gametexture";
+        public const string BundleName = "game_turpworld_map_dirt_tiles.sfp";
+        public const string RES_dirtbrushes_0_asset = "dirt-brushes_0";
+        public const string RES_dirtbrushes_1_asset = "dirt-brushes_1";
+        public const string RES_dirtbrushes_2_asset = "dirt-brushes_2";
+        public const string RES_dirtbrushes_3_asset = "dirt-brushes_3";
     }
-    public class Gametexture_sfp
+    public class Game_turpworld_map_forrest_tiles_sfp
     {
-        public const string BundleName = "gametexture.sfp";
+        public const string BundleName = "game_turpworld_map_forrest_tiles.sfp";
+        public const string RES_forrestbrushes_0_asset = "forrest-brushes_0";
+        public const string RES_forrestbrushes_1_asset = "forrest-brushes_1";
+        public const string RES_forrestbrushes_2_asset = "forrest-brushes_2";
+        public const string RES_forrestbrushes_3_asset = "forrest-brushes_3";
+    }
+    public class Game_turpworld_map_meadow_tiles_sfp
+    {
+        public const string BundleName = "game_turpworld_map_meadow_tiles.sfp";
+        public const string RES_meadowbrushes_0_asset = "meadow-brushes_0";
+        public const string RES_meadowbrushes_1_asset = "meadow-brushes_1";
+        public const string RES_meadowbrushes_2_asset = "meadow-brushes_2";
+        public const string RES_meadowbrushes_3_asset = "meadow-brushes_3";
+    }
+    public class Game_turpworld_map_rock_tiles_sfp
+    {
+        public const string BundleName = "game_turpworld_map_rock_tiles.sfp";
+        public const string RES_rockbrushes_0_asset = "rock-brushes_0";
+        public const string RES_rockbrushes_1_asset = "rock-brushes_1";
+        public const string RES_rockbrushes_2_asset = "rock-brushes_2";
+        public const string RES_rockbrushes_3_asset = "rock-brushes_3";
+    }
+    public class Gtexture_sfp
+    {
+        public const string BundleName = "gtexture.sfp";
+        public const string RES_Grass_mat = "Grass";
         public const string RES_grass_png = "grass";
+    }
+    public class Gtexture_effect_sfp
+    {
+        public const string BundleName = "gtexture_effect.sfp";
+        public const string RES_FlashCard_mat = "FlashCard";
+        public const string RES_FlashCard_shader = "FlashCard";
+        public const string RES_FlashCard1_mat = "FlashCard1";
+        public const string RES_FlashCard1_shader = "FlashCard1";
     }
     public class Loading
     {
@@ -116,6 +187,7 @@ namespace SFramework.Statics
     {
         public const string BundleName = "loading.sfp";
         public const string RES_BarLoading_prefab = "BarLoading";
+        public const string RES_BaseLoading_controller = "BaseLoading";
         public const string RES_BaseLoading_prefab = "BaseLoading";
         public const string RES_effect_jpg = "effect";
         public const string RES_effect1_png = "effect1";
@@ -128,12 +200,26 @@ namespace SFramework.Statics
     public class Model_avatar_role_carrota_sfp
     {
         public const string BundleName = "model_avatar_role_carrota.sfp";
+        public const string RES_Carrot_BaseColor_mat = "Carrot_BaseColor";
         public const string RES_Carrot_BaseColor_png = "Carrot_BaseColor";
         public const string RES_Character_Carrot_prefab = "Character_Carrot";
+        public const string RES_MixCarrotControl_controller = "MixCarrotControl";
+        public const string RES_Role_mat = "Role";
+        public const string RES_Role_CarrotA_controller = "Role_CarrotA";
+        public const string RES_test2_fbx = "test2";
     }
-    public class Pic
+    public class Model_avatar_role_carrota_ani_materials_sfp
     {
-        public const string BundleName = "pic";
+        public const string BundleName = "model_avatar_role_carrota_ani_materials.sfp";
+        public const string RES_Character_ColorMap_mat = "Character_ColorMap";
+        public const string RES_Clothing_mat = "Clothing";
+    }
+    public class Model_material_sfp
+    {
+        public const string BundleName = "model_material.sfp";
+        public const string RES_RoleBlinn_shader = "RoleBlinn";
+        public const string RES_RoleBlinnPhong_shader = "RoleBlinnPhong";
+        public const string RES_Test_shader = "Test";
     }
     public class Pic_sfp
     {
@@ -141,10 +227,6 @@ namespace SFramework.Statics
         public const string RES_haipa_png = "haipa";
         public const string RES_haipa_normal_png = "haipa_normal";
         public const string RES_jusang_png = "jusang";
-    }
-    public class Pic_tree
-    {
-        public const string BundleName = "pic_tree";
     }
     public class Pic_tree_sfp
     {
@@ -154,6 +236,12 @@ namespace SFramework.Statics
         public const string RES_5104206_png = "5104206";
         public const string RES_5104309_png = "5104309";
         public const string RES_5104413_png = "5104413";
+    }
+    public class Pic_tree_materials_sfp
+    {
+        public const string BundleName = "pic_tree_materials.sfp";
+        public const string RES_5103524_mat = "5103524";
+        public const string RES_5104413_mat = "5104413";
     }
     public class Ss_test
     {
