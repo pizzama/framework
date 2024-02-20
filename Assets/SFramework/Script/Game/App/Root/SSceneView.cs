@@ -122,8 +122,8 @@ namespace SFramework.Game
         {
             System.Type tp = GetType();
             string path = tp.Namespace;
-            path = path.Replace('.', '/');
-            prefabPath = path + ".sf";
+            path = path.Replace('.', '_');
+            prefabPath = path + ".sfs";
             prefabName = tp.Name;
         }
 

@@ -55,7 +55,7 @@ namespace SFramework.Game
         {
             Type tp = GetType();
             string path = tp.Namespace;
-            path = path.Replace('.', '/');
+            path = path.Replace('.', '_');
             prefabPath = path + "." + defaultVariantName;
             prefabName = tp.Name;
             position = new Vector3(0, 0, 0);
