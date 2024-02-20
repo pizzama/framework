@@ -1,7 +1,5 @@
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEditor.UIElements;
 
 namespace SFramework
 {
@@ -13,7 +11,6 @@ namespace SFramework
             var window = GetWindow<SEditorResAssets>($"Assets Bundle Manager");
             window.Show();
         }
-
 
         private void OnGUI()
         {
