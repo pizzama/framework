@@ -15,7 +15,7 @@ namespace SFramework
 		private const string StaticPath = "SFStaticAsset";
 
 		[MenuItem(Mark_AssetBundle)]
-		public static void MarkPTABDir()
+		public static void MarkPathABDir()
 		{
 			string assetDirectory = "Assets/Arts";
 			DirectoryInfo directoryInfo = new DirectoryInfo(assetDirectory);
@@ -40,7 +40,6 @@ namespace SFramework
 			}
 			AssetDatabase.Refresh();
 			AssetDatabase.RemoveUnusedAssetBundleNames();
-			Debug.Log("bundle setting over...");
 		}
 
 		private static void WriteDataConfig()

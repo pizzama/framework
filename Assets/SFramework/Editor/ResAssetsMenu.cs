@@ -17,7 +17,7 @@ namespace SFramework
 		private const string StaticPath = "SFStaticAsset";
 
 		[MenuItem(Mark_AssetBundle)]
-		public static void MarkPTABDir()
+		public static void MarkPathABDir()
 		{
 			var selectedObject = Selection.activeObject;
 			string assetPath = AssetDatabase.GetAssetPath(selectedObject);
@@ -46,7 +46,6 @@ namespace SFramework
 			WriteDataConfig();
 			AssetDatabase.Refresh();
 			AssetDatabase.RemoveUnusedAssetBundleNames();
-			Debug.Log("bundle setting over...");
 		}
 
 		private static void WriteDataConfig()

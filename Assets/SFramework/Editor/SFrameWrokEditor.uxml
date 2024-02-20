@@ -1,7 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="Root" style="flex-direction: column; height: 173px; flex-grow: 1;">
-        <ui:TextField picking-mode="Ignore" label="FilePath" value="filler text" name="FilePath" />
-        <ui:TextField picking-mode="Ignore" label="FileName" name="FileName" value="filler text" />
-        <ui:Button text="CreateFile" display-tooltip-when-elided="true" name="FileCreate" />
-    </ui:VisualElement>
-</ui:UXML>
