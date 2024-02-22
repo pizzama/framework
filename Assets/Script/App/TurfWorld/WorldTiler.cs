@@ -32,12 +32,13 @@ namespace App.TurfWorld
             for (int i = childCount - 1; i >= 0; i--)
                 DestroyImmediate(grid.transform.GetChild(i).gameObject);
             
-            IList<Texture2D> tileTextures = AssetsManager.Instance.LoadFromBundleWithSubResources<Texture2D>(Game_turpworld_map.BundleName);
+            IList<Texture> tileTextures = AssetsManager.Instance.LoadFromBundleWithSubResources<Texture>(Game_turpworld_map_sfp.BundleName);
             foreach (var texture in tileTextures)
             {
                 if (texture.name.StartsWith("_"))
                     continue;
-
+                if (!nameToSortOrder.ContainsKey(texture.name))
+                    continue;
                 GameObject turfGo = new GameObject($"{texture.name}_tilemap");
                 Tilemap turfMap = turfGo.AddComponent<Tilemap>();
                 TilemapRenderer tilemapRend = turfGo.AddComponent<TilemapRenderer>();

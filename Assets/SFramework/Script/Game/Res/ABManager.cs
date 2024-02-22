@@ -406,11 +406,11 @@ namespace SFramework
 #endif
         }
 
-        private List<T> editorLoadResourceWithSubResource<T>(string abName) where T : Object
+        private List<T> editorLoadResourceWithSubResource<T>(string abPath) where T : Object
         {
             List<T> result = new List<T>();
 #if UNITY_EDITOR
-            string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle(abName);
+            string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle(abPath);
             for (int i = 0; i < assetPaths.Length; i++)
             {
                 T res = UnityEditor.AssetDatabase.LoadAssetAtPath<T>(assetPaths[i]);
@@ -421,11 +421,11 @@ namespace SFramework
             return result;
         }
 
-        private async UniTask<List<T>> editorLoadResourceWithSubResourceAsync<T>(string abName, string resName) where T : Object
+        private async UniTask<List<T>> editorLoadResourceWithSubResourceAsync<T>(string abPath) where T : Object
         {
             List<T> result = new List<T>();
 #if UNITY_EDITOR
-            string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle(abName);
+            string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle(abPath);
             for (int i = 0; i < assetPaths.Length; i++)
             {
                 T res = UnityEditor.AssetDatabase.LoadAssetAtPath<T>(assetPaths[i]);

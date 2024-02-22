@@ -30,6 +30,12 @@ namespace SFramework
                 cleanAssetBundleFromArtsFolder();
             }
 
+            if (GUILayout.Button("test"))
+            {
+                test();
+            }
+
+
             EditorGUILayout.EndVertical();
         }
 
@@ -59,6 +65,19 @@ namespace SFramework
             }
 
             EditorUtility.DisplayDialog("Success", "Clean All AssetBundle From Assets/Arts Folder is done", "OK");
+        }
+
+        private void test()
+        {
+            try
+            {
+                string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle("game_turpworld_map.sfp");
+                Debug.Log(assetPaths);
+            }
+            catch (System.Exception err)
+            {
+                EditorUtility.DisplayDialog("Error", err.ToString(), "OK");
+            }
         }
     }
 }
