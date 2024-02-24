@@ -47,7 +47,7 @@ namespace App.TurfWorld
                 tilemapRend.sortingLayerName = "Terrain";
                 tilemapRend.sortingOrder = nameToSortOrder[texture.name];
                 turfGo.transform.SetParent(grid.transform, false);
-                IList<Tile> tiles =  AssetsManager.Instance.LoadFromBundleWithSubResources<Tile>($"{Game_turpworld_map.BundleName}_{texture.name}_tiles.sfp");  //Addressables.LoadAssetsAsync<Tile>($"{texture.name}_tiles", null).WaitForCompletion();
+                IList<Tile> tiles =  AssetsManager.Instance.LoadFromBundleWithSubResources<Tile>($"{Game_turpworld_map.BundleName}_{texture.name}_tiles.sfp");
                 TilemapBrush tilemapBrush = new TilemapBrush();
                 tilemapBrush.Tilemap = turfMap;
                 tilemapBrush.TurfTiles.AddRange(tiles);

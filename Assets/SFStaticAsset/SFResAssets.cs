@@ -22,6 +22,7 @@ namespace SFramework.Statics
         public const string Game_app_battle_sfp_cardbg_png = "game_app_battle.sfp/cardbg";
         public const string Game_app_battle_sfs_BattleView_unity = "game_app_battle.sfs/BattleView";
         public const string Game_scenes_sfs_BaseScene_unity = "game_scenes.sfs/BaseScene";
+        public const string Game_turpworld_sfp_Turf_mat = "game_turpworld.sfp/Turf";
         public const string Game_turpworld_sfs_TurpWorld_unity = "game_turpworld.sfs/TurpWorld";
         public const string Game_turpworld_map_sfp_dirtbrushes_psd = "game_turpworld_map.sfp/dirt-brushes";
         public const string Game_turpworld_map_sfp_dirt_prefab = "game_turpworld_map.sfp/dirt";
@@ -51,6 +52,19 @@ namespace SFramework.Statics
         public const string Game_turpworld_map_rock_tiles_sfp_rockbrushes_1_asset = "game_turpworld_map_rock_tiles.sfp/rock-brushes_1";
         public const string Game_turpworld_map_rock_tiles_sfp_rockbrushes_2_asset = "game_turpworld_map_rock_tiles.sfp/rock-brushes_2";
         public const string Game_turpworld_map_rock_tiles_sfp_rockbrushes_3_asset = "game_turpworld_map_rock_tiles.sfp/rock-brushes_3";
+        public const string Game_turpworld_worldobjects_sfp_WorldObject_prefab = "game_turpworld_worldobjects.sfp/WorldObject";
+        public const string Game_turpworld_worldobjects_rocks_sfp_CoalRock_prefab = "game_turpworld_worldobjects_rocks.sfp/CoalRock";
+        public const string Game_turpworld_worldobjects_rocks_sfp_GoldRock_prefab = "game_turpworld_worldobjects_rocks.sfp/GoldRock";
+        public const string Game_turpworld_worldobjects_rocks_sfp_IronRock_prefab = "game_turpworld_worldobjects_rocks.sfp/IronRock";
+        public const string Game_turpworld_worldobjects_rocks_sfp_StoneRock_prefab = "game_turpworld_worldobjects_rocks.sfp/StoneRock";
+        public const string Game_turpworld_worldobjects_sprites_sfp_Birchnut_png = "game_turpworld_worldobjects_sprites.sfp/Birchnut";
+        public const string Game_turpworld_worldobjects_sprites_sfp_CoalRock_png = "game_turpworld_worldobjects_sprites.sfp/CoalRock";
+        public const string Game_turpworld_worldobjects_sprites_sfp_Evergreen_png = "game_turpworld_worldobjects_sprites.sfp/Evergreen";
+        public const string Game_turpworld_worldobjects_sprites_sfp_GoldRock_png = "game_turpworld_worldobjects_sprites.sfp/GoldRock";
+        public const string Game_turpworld_worldobjects_sprites_sfp_IronRock_png = "game_turpworld_worldobjects_sprites.sfp/IronRock";
+        public const string Game_turpworld_worldobjects_sprites_sfp_StoneRock_png = "game_turpworld_worldobjects_sprites.sfp/StoneRock";
+        public const string Game_turpworld_worldobjects_trees_sfp_Birchnut_prefab = "game_turpworld_worldobjects_trees.sfp/Birchnut";
+        public const string Game_turpworld_worldobjects_trees_sfp_Evergreen_prefab = "game_turpworld_worldobjects_trees.sfp/Evergreen";
         public const string Gtexture_sfp_Grass_mat = "gtexture.sfp/Grass";
         public const string Gtexture_sfp_grass_png = "gtexture.sfp/grass";
         public const string Gtexture_effect_sfp_FlashCard_mat = "gtexture_effect.sfp/FlashCard";
@@ -128,6 +142,11 @@ namespace SFramework.Statics
     {
         public const string BundleName = "game_turpworld";
     }
+    public class Game_turpworld_sfp
+    {
+        public const string BundleName = "game_turpworld.sfp";
+        public const string RES_Turf_mat = "Turf";
+    }
     public class Game_turpworld_sfs
     {
         public const string BundleName = "game_turpworld.sfs";
@@ -200,6 +219,51 @@ namespace SFramework.Statics
         public const string RES_rockbrushes_1_asset = "rock-brushes_1";
         public const string RES_rockbrushes_2_asset = "rock-brushes_2";
         public const string RES_rockbrushes_3_asset = "rock-brushes_3";
+    }
+    public class Game_turpworld_worldobjects
+    {
+        public const string BundleName = "game_turpworld_worldobjects";
+    }
+    public class Game_turpworld_worldobjects_sfp
+    {
+        public const string BundleName = "game_turpworld_worldobjects.sfp";
+        public const string RES_WorldObject_prefab = "WorldObject";
+    }
+    public class Game_turpworld_worldobjects_rocks
+    {
+        public const string BundleName = "game_turpworld_worldobjects_rocks";
+    }
+    public class Game_turpworld_worldobjects_rocks_sfp
+    {
+        public const string BundleName = "game_turpworld_worldobjects_rocks.sfp";
+        public const string RES_CoalRock_prefab = "CoalRock";
+        public const string RES_GoldRock_prefab = "GoldRock";
+        public const string RES_IronRock_prefab = "IronRock";
+        public const string RES_StoneRock_prefab = "StoneRock";
+    }
+    public class Game_turpworld_worldobjects_sprites
+    {
+        public const string BundleName = "game_turpworld_worldobjects_sprites";
+    }
+    public class Game_turpworld_worldobjects_sprites_sfp
+    {
+        public const string BundleName = "game_turpworld_worldobjects_sprites.sfp";
+        public const string RES_Birchnut_png = "Birchnut";
+        public const string RES_CoalRock_png = "CoalRock";
+        public const string RES_Evergreen_png = "Evergreen";
+        public const string RES_GoldRock_png = "GoldRock";
+        public const string RES_IronRock_png = "IronRock";
+        public const string RES_StoneRock_png = "StoneRock";
+    }
+    public class Game_turpworld_worldobjects_trees
+    {
+        public const string BundleName = "game_turpworld_worldobjects_trees";
+    }
+    public class Game_turpworld_worldobjects_trees_sfp
+    {
+        public const string BundleName = "game_turpworld_worldobjects_trees.sfp";
+        public const string RES_Birchnut_prefab = "Birchnut";
+        public const string RES_Evergreen_prefab = "Evergreen";
     }
     public class Gtexture
     {
