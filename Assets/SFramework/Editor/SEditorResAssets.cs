@@ -27,7 +27,7 @@ namespace SFramework
 
             if (GUILayout.Button("Collect All Controls"))
             {
-                cleanAssetBundleFromArtsFolder();
+                collectControls();
             }
 
             if (GUILayout.Button("test"))
@@ -50,7 +50,7 @@ namespace SFramework
                 EditorUtility.DisplayDialog("Error", err.ToString(), "OK");
             }
 
-            EditorUtility.DisplayDialog("Success", "Set All AssetBundle From Assets/Arts Folder is done", "OK");
+            EditorUtility.DisplayDialog("Success", "Collect All Controls From Scripts", "OK");
         }
 
         private void cleanAssetBundleFromArtsFolder()
@@ -65,6 +65,21 @@ namespace SFramework
             }
 
             EditorUtility.DisplayDialog("Success", "Clean All AssetBundle From Assets/Arts Folder is done", "OK");
+        }
+
+        private void collectControls()
+        {
+            try
+            {
+                ControlAssetsMenu.MarkPTABDir();
+            }
+            catch (System.Exception err)
+            {
+                EditorUtility.DisplayDialog("Error", err.ToString(), "OK");
+            }
+
+            EditorUtility.DisplayDialog("Success", "Clean All AssetBundle From Assets/Arts Folder is done", "OK");
+
         }
 
         private void test()

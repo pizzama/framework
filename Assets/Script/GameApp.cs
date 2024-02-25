@@ -29,7 +29,7 @@ namespace Game
             // BundleManager.Instance.InstallBundle(new GameMainControl(), "", true);
             initAllControl();
             //BundleManager.Instance.OpenControl(SFStaticsControl.Game_GameMainControl);
-            SBundleManager.Instance.OpenControl(SFStaticsControl.Game_App_Battle_BattleControl);
+            SBundleManager.Instance.OpenControl(SFStaticsControl.App_TurfWorld_TurfWorldControl);
         }
     }
 }

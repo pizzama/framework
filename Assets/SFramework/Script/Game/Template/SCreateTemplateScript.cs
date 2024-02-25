@@ -75,11 +75,11 @@ public class SCreateTemplateScript
         writer.AppendLine(
             $"namespace {((string.IsNullOrWhiteSpace(_nameSpace)) ? "Game" : _nameSpace)}");
         writer.AppendLine("{");
-        if(index == 1)
+        if(index == 0)
         {
             writer.AppendLine($"\tpublic class {_name}View : SSCENEView");
         }
-        else if(index == 2)
+        else if(index == 1)
         {
             writer.AppendLine($"\tpublic class {_name}View : SUIView");
         }

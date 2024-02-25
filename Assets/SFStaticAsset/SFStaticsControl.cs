@@ -14,10 +14,10 @@ namespace SFramework.Statics
     public class SFStaticsControl
     {
         public const string SFramework_Game_RootControl = "SFramework.Game.RootControl";
+        public const string App_TurfWorld_TurfWorldControl = "App.TurfWorld.TurfWorldControl";
         public const string Game_GameMainControl = "Game.GameMainControl";
         public const string Game_InputControl = "Game.InputControl";
         public const string Game_NormalLoadingControl = "Game.NormalLoadingControl";
-        public const string Game_TestControl = "Game.TestControl";
         public const string Game_App_Battle_BattleControl = "Game.App.Battle.BattleControl";
         public const string Game_App_Battle_BattleUIControl = "Game.App.Battle.BattleUIControl";
     }

@@ -29,7 +29,7 @@ public class SEditorControlCreator : EditorWindow
         EditorGUILayout.BeginVertical();
         EditorGUILayout.Space();
         EditorGUILayout.HelpBox("Input path example:App/Test", MessageType.Info);
-        pathText = EditorGUILayout.TextField("Input path£º", "");
+        pathText = EditorGUILayout.TextField("Input path:", pathText);
         EditorGUILayout.Space();
         if (GUILayout.Button("Create"))
         {
@@ -59,7 +59,7 @@ public class SEditorControlCreator : EditorWindow
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
-        catch(Exception err)
+        catch (Exception err)
         {
             logInfo(err.ToString());
             return;
@@ -102,9 +102,9 @@ public class SEditorControlCreator : EditorWindow
     private void createControl(string parentPath, SCreateTemplateScript script)
     {
         var scriptFile = string.Format(parentPath + "/{0}Control.cs", (script.GetName()));
-            
+
         string content = script.CreateTemplateControl();
-        
+
         if (!File.Exists(scriptFile))
         {
             scriptFile.GetFolderPath().CreateDirIfNotExists();
