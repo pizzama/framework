@@ -129,6 +129,7 @@ namespace SFramework.StateMachine
     {
         protected Dictionary<string, IFSMState> mStates;
         private IFSMState _activeState;
+        public UnityEngine.Object Owner { get; set; } //状态机的使用者
 
         public UnityEngine.Object BlackBoard { get; set; } //状态机黑板
 

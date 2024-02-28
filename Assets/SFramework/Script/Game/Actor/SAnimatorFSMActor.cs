@@ -7,25 +7,15 @@ using SFramework;
 
 namespace SFramework.Actor
 {
-    public class SActor : SEntity
+    public class SAnimatorFSMActor : SFSMActor
     {
-        public enum SFActorFacingDirections {Left, Right, Up, Down }
-
-        [SerializeField]
-        [SFInformation("Actor's direction", SFInformationAttribute.InformationType.Info, false)] 
-        private SFActorFacingDirections _direction;
         [SerializeField]
         private Animator _animator;
         [SerializeField]
         private Transform _mainCameraTransform;
+        [SerializeField]
         public Transform MainCameraTransform {get {return _mainCameraTransform;} private set {_mainCameraTransform = value;}}
 
-        private FSM _fsm;
-
-        public FSM GetFSM()
-        {
-            return _fsm;
-        }
 
         protected virtual void Awake()
         {
@@ -35,11 +25,7 @@ namespace SFramework.Actor
         protected virtual void init()
         {
             findAnimator();
-            if (_fsm == null)
-            {
-                _fsm = new FSM();
-                _fsm.BlackBoard = this;
-            }
+            CreateFSM();
 
             if(_mainCameraTransform == null)
             {
@@ -52,16 +38,6 @@ namespace SFramework.Actor
             _animator = GetComponent<Animator>();
             if(_animator == null)
                 _animator = FindFirstObjectByType<Animator>();
-        }
-
-        public void AddFSMState(IFSMState state)
-        {
-            _fsm?.AddState(state);
-        }
-
-        public void Update()
-        {
-            _fsm?.Update();
         }
 
         private void ForceCrossFade(Animator animator, string name, float transitionDuration, int layer = 0, float normalizedTime = float.NegativeInfinity, bool changeImmediately = false)
