@@ -17,6 +17,7 @@ namespace SFramework
             EditorGUILayout.BeginVertical();
             if (GUILayout.Button("Set All AssetBundle From Assets/Arts Folder"))
             {
+                cleanAssetBundleFromArtsFolder();
                 dealWithAllAssetBundleFromArtsFolder();
             }
 

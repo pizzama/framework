@@ -1,5 +1,6 @@
 using SFramework.Tools.Math;
 using UnityEngine;
+using SFramework.Extension;
 namespace App.TurfWorld
 {
     public class TreeSpawner : NoiseSpawner
@@ -14,12 +15,22 @@ namespace App.TurfWorld
             {
                 case "forrest":
                     if (noise < forrestEvergreenFreq + (globalSpawnModifier * forrestEvergreenFreq))
-                        return Instantiate(nameToPrefab["evergreen"]);
+                    {
+                        if (noise < forrestEvergreenFreq + (globalSpawnModifier * forrestEvergreenFreq))
+                        {
+                                var dict = nameToPrefab.RandomValue();
+                                return Instantiate(dict.Item2);
+                        }
+                    }
+                    // return Instantiate(nameToPrefab["evergreen"]);
                     break;
                 case "meadow":
                     noise = MathTools.GetRandomFloat(0, 1);
                     if (noise < meadowBirchnutFreq + (globalSpawnModifier * meadowBirchnutFreq))
-                        return Instantiate(nameToPrefab["birchnut"]);
+                    {
+                        return Instantiate(nameToPrefab.RandomValue().Item2);
+                    }
+                    // return Instantiate(nameToPrefab["birchnut"]);
                     break;
                 default: return null;
             }

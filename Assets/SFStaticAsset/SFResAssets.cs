@@ -73,8 +73,6 @@ namespace SFramework.Statics
         public const string Game_turpworld_worldobjects_trees_sfp_5103499_prefab = "game_turpworld_worldobjects_trees.sfp/5103499";
         public const string Game_turpworld_worldobjects_trees_sfp_5103599_prefab = "game_turpworld_worldobjects_trees.sfp/5103599";
         public const string Game_turpworld_worldobjects_trees_sfp_5105422_prefab = "game_turpworld_worldobjects_trees.sfp/5105422";
-        public const string Game_turpworld_worldobjects_trees_sfp_Birchnut_prefab = "game_turpworld_worldobjects_trees.sfp/Birchnut";
-        public const string Game_turpworld_worldobjects_trees_sfp_Evergreen_prefab = "game_turpworld_worldobjects_trees.sfp/Evergreen";
         public const string Gtexture_sfp_Grass_mat = "gtexture.sfp/Grass";
         public const string Gtexture_sfp_grass_png = "gtexture.sfp/grass";
         public const string Gtexture_effect_sfp_FlashCard_mat = "gtexture_effect.sfp/FlashCard";
@@ -283,8 +281,6 @@ namespace SFramework.Statics
         public const string RES_5103499_prefab = "5103499";
         public const string RES_5103599_prefab = "5103599";
         public const string RES_5105422_prefab = "5105422";
-        public const string RES_Birchnut_prefab = "Birchnut";
-        public const string RES_Evergreen_prefab = "Evergreen";
     }
     public class Gtexture
     {
