@@ -57,12 +57,22 @@ namespace SFramework.Statics
         public const string Game_turpworld_worldobjects_rocks_sfp_GoldRock_prefab = "game_turpworld_worldobjects_rocks.sfp/GoldRock";
         public const string Game_turpworld_worldobjects_rocks_sfp_IronRock_prefab = "game_turpworld_worldobjects_rocks.sfp/IronRock";
         public const string Game_turpworld_worldobjects_rocks_sfp_StoneRock_prefab = "game_turpworld_worldobjects_rocks.sfp/StoneRock";
+        public const string Game_turpworld_worldobjects_sprites_sfp_5102103_png = "game_turpworld_worldobjects_sprites.sfp/5102103";
+        public const string Game_turpworld_worldobjects_sprites_sfp_5102207_png = "game_turpworld_worldobjects_sprites.sfp/5102207";
+        public const string Game_turpworld_worldobjects_sprites_sfp_5103499_png = "game_turpworld_worldobjects_sprites.sfp/5103499";
+        public const string Game_turpworld_worldobjects_sprites_sfp_5103599_png = "game_turpworld_worldobjects_sprites.sfp/5103599";
+        public const string Game_turpworld_worldobjects_sprites_sfp_5105422_png = "game_turpworld_worldobjects_sprites.sfp/5105422";
         public const string Game_turpworld_worldobjects_sprites_sfp_Birchnut_png = "game_turpworld_worldobjects_sprites.sfp/Birchnut";
         public const string Game_turpworld_worldobjects_sprites_sfp_CoalRock_png = "game_turpworld_worldobjects_sprites.sfp/CoalRock";
         public const string Game_turpworld_worldobjects_sprites_sfp_Evergreen_png = "game_turpworld_worldobjects_sprites.sfp/Evergreen";
         public const string Game_turpworld_worldobjects_sprites_sfp_GoldRock_png = "game_turpworld_worldobjects_sprites.sfp/GoldRock";
         public const string Game_turpworld_worldobjects_sprites_sfp_IronRock_png = "game_turpworld_worldobjects_sprites.sfp/IronRock";
         public const string Game_turpworld_worldobjects_sprites_sfp_StoneRock_png = "game_turpworld_worldobjects_sprites.sfp/StoneRock";
+        public const string Game_turpworld_worldobjects_trees_sfp_5102103_prefab = "game_turpworld_worldobjects_trees.sfp/5102103";
+        public const string Game_turpworld_worldobjects_trees_sfp_5102207_prefab = "game_turpworld_worldobjects_trees.sfp/5102207";
+        public const string Game_turpworld_worldobjects_trees_sfp_5103499_prefab = "game_turpworld_worldobjects_trees.sfp/5103499";
+        public const string Game_turpworld_worldobjects_trees_sfp_5103599_prefab = "game_turpworld_worldobjects_trees.sfp/5103599";
+        public const string Game_turpworld_worldobjects_trees_sfp_5105422_prefab = "game_turpworld_worldobjects_trees.sfp/5105422";
         public const string Game_turpworld_worldobjects_trees_sfp_Birchnut_prefab = "game_turpworld_worldobjects_trees.sfp/Birchnut";
         public const string Game_turpworld_worldobjects_trees_sfp_Evergreen_prefab = "game_turpworld_worldobjects_trees.sfp/Evergreen";
         public const string Gtexture_sfp_Grass_mat = "gtexture.sfp/Grass";
@@ -104,6 +114,7 @@ namespace SFramework.Statics
         public const string Pic_tree_materials_sfp_5103524_mat = "pic_tree_materials.sfp/5103524";
         public const string Pic_tree_materials_sfp_5104413_mat = "pic_tree_materials.sfp/5104413";
         public const string Ss_test_Test_prefab = "ss/test/Test";
+        public const string Suiroot_sfp_SUIROOT_prefab = "suiroot.sfp/SUIROOT";
     }
     public class Activity_btn_arrow
     {
@@ -248,6 +259,11 @@ namespace SFramework.Statics
     public class Game_turpworld_worldobjects_sprites_sfp
     {
         public const string BundleName = "game_turpworld_worldobjects_sprites.sfp";
+        public const string RES_5102103_png = "5102103";
+        public const string RES_5102207_png = "5102207";
+        public const string RES_5103499_png = "5103499";
+        public const string RES_5103599_png = "5103599";
+        public const string RES_5105422_png = "5105422";
         public const string RES_Birchnut_png = "Birchnut";
         public const string RES_CoalRock_png = "CoalRock";
         public const string RES_Evergreen_png = "Evergreen";
@@ -262,6 +278,11 @@ namespace SFramework.Statics
     public class Game_turpworld_worldobjects_trees_sfp
     {
         public const string BundleName = "game_turpworld_worldobjects_trees.sfp";
+        public const string RES_5102103_prefab = "5102103";
+        public const string RES_5102207_prefab = "5102207";
+        public const string RES_5103499_prefab = "5103499";
+        public const string RES_5103599_prefab = "5103599";
+        public const string RES_5105422_prefab = "5105422";
         public const string RES_Birchnut_prefab = "Birchnut";
         public const string RES_Evergreen_prefab = "Evergreen";
     }
@@ -379,5 +400,10 @@ namespace SFramework.Statics
     {
         public const string BundleName = "ss/test";
         public const string RES_Test_prefab = "Test";
+    }
+    public class Suiroot_sfp
+    {
+        public const string BundleName = "suiroot.sfp";
+        public const string RES_SUIROOT_prefab = "SUIROOT";
     }
 }

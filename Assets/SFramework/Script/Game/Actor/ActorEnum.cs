@@ -37,4 +37,6 @@ namespace SFramework.Actor
         Move,
         Jump,
     }
+
+    public enum SFActorFacingDirections { Left, Right, Up, Down }
 }
