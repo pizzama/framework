@@ -49,7 +49,7 @@ namespace SFramework.StateMachine
 
     public abstract class FSMState : IFSMState
     {
-        protected bool couldTransition = true; //是否可以开始转换检查的开关，默认打开，每帧检查一次
+        protected bool couldTransition = true; //状态条件检查的开关，默认打开，每帧检查一次
         public FSM Machine;
         private List<IFSMTransition> _transitions = new List<IFSMTransition>();
         public virtual void InitState()
@@ -74,7 +74,7 @@ namespace SFramework.StateMachine
 
         public virtual void HandleInput()
         {
-            
+
         }
 
         public void SetFSM(FSM value)
@@ -127,7 +127,18 @@ namespace SFramework.StateMachine
 
     public class FSM
     {
-        protected Dictionary<string, IFSMState> mStates = new Dictionary<string, IFSMState>();
+        protected Dictionary<string, IFSMState> mStates;
+        private IFSMState _activeState;
+
+        public UnityEngine.Object BlackBoard { get; set; } //状态机黑板
+
+        public IFSMState CurrentState => _activeState;
+
+        public FSM()
+        {
+            mStates = new Dictionary<string, IFSMState>();
+        }
+
         //状态id，可以定义成枚举
         public void AddState(IFSMState state)
         {
@@ -150,19 +161,10 @@ namespace SFramework.StateMachine
             return state;
         }
 
-        private IFSMState _activeState;
-
-        public UnityEngine.Object BlackBoard { get; set; } //状态机黑板
-
-        public IFSMState CurrentState => _activeState;
-
-        public FSM()
-        {}
-
         //状态机有两种切换模式。 一种是状态机强制切换。另一种是每一个状态自己检查切换
         public void ChangeState(string id)
         {
-            if (_activeState != null && id.Equals(_activeState.ToName())) 
+            if (_activeState != null && id.Equals(_activeState.ToName()))
                 return;
             if (mStates.TryGetValue(id, out var state))
             {
@@ -192,11 +194,11 @@ namespace SFramework.StateMachine
 
         public void ChangeState<T>() where T : IFSMState
         {
-            foreach(var istate in mStates)
+            foreach (var state in mStates)
             {
-                if(istate.Value.GetType() == typeof(T))
+                if (state.Value.GetType() == typeof(T))
                 {
-                    ChangeState(istate.Value.ToName());
+                    ChangeState(state.Value.ToName());
                     return;
                 }
             }
@@ -211,7 +213,6 @@ namespace SFramework.StateMachine
 
         public void Update()
         {
-            // Debug.Log(_activeState.ToName());
             checkState();
             _activeState?.UpdateState();
         }
