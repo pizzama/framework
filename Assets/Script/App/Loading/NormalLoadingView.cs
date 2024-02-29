@@ -29,7 +29,7 @@ namespace Game
 
         protected override void opening()
         {
-            animator = getUIObject<Animator>("BaseLoading");
+            animator = getExportObject<Animator>("BaseLoading");
         }
 
         public void PlayAnimator(string name)

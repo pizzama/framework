@@ -23,7 +23,7 @@ namespace Game.App.Battle
             BattleModel mode = GetControl<BattleControl>().GetModel<BattleModel>();
             var input = SFInputManager.Instance;
             Debug.Log("load complete");
-            Transform parent = getSceneObject<Transform>("Actors");
+            Transform parent = getExportObject<Transform>("Actors");
             if (parent != null)
             {
                 Hero rt = CreateSEntity<Hero>("1", SFResAssets.Model_avatar_role_carrota_sfp_Character_Carrot_prefab, parent);

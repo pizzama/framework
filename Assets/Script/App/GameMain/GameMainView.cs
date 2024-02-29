@@ -46,7 +46,7 @@ namespace Game
             Texture tx = assetManager.LoadFromBundle<Texture>(Pic_sfp.BundleName, Pic_sfp.RES_haipa_png);
             Debug.Log(tx);
 
-            Transform ga = getSceneObject<Transform>("Env");
+            Transform ga = getExportObject<Transform>("Env");
 
             GameObject aa = CreateGameObjectUsingPool(Model_avatar_role_carrota_sfp.BundleName, Model_avatar_role_carrota_sfp.RES_Character_Carrot_prefab);
             Debug.Log(aa);

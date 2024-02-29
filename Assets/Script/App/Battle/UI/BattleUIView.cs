@@ -40,8 +40,8 @@ namespace Game.App.Battle
 
         protected override void opening()
         {
-            _cardHandsTransform = getUIObject<RectTransform>("CardHands");
-            _bezierCurve = getUIObject<BezierCurve>("BezierCurve");
+            _cardHandsTransform = getExportObject<RectTransform>("CardHands");
+            _bezierCurve = getExportObject<BezierCurve>("BezierCurve");
             _cardHands = new List<BattleCard>();
 
             for (int i = 0; i < 6; i++)

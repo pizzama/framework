@@ -68,5 +68,10 @@ namespace SFramework.Game
             result.SetEntityData(id, this);
             return result;
         }
+
+        protected virtual T getExportObject<T>(string key)
+        {
+            return default;
+        }
     }
 }

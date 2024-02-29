@@ -185,7 +185,7 @@ namespace SFramework.Game
             return sceneDict;
         }
 
-        protected T getSceneObject<T>(string key)
+        protected override T getExportObject<T>(string key)
         {
             GameObject go = null;
             goDict.TryGetValue(key, out go);

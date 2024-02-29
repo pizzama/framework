@@ -8,6 +8,7 @@ namespace App.TurfWorld
 {
 	public class TurfWorldView : SSCENEView
 	{
+		private WorldGen _worldGen;
 		protected override ViewOpenType GetViewOpenType()
 		{
 			return ViewOpenType.Single;
@@ -20,6 +21,8 @@ namespace App.TurfWorld
 		protected override void opening()
 		{
 			// Code Here
+			_worldGen = getExportObject<WorldGen>("WorldGen");
+			_worldGen.GenerateWorld();
 		}
 		protected override void closing()
 		{
