@@ -224,6 +224,11 @@ namespace SFramework.StateMachine
             mStates.Clear();
         }
 
+        public List<IFSMState> GetFSMStates()
+        {
+            return new List<IFSMState>(mStates.Values);
+        }
+
         private void checkState()
         {
             if (_activeState == null || !_activeState.CouldTransition())
