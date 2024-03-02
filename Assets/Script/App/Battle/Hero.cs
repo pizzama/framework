@@ -2,7 +2,7 @@ using SFramework.Actor;
 
 namespace Game.Character
 {
-    public class Hero : SFActor3D
+    public class Hero : SAnimatorFSMActor3D
     {
         protected override void Start()
         {

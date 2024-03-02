@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace SFramework.Actor
 {
+    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Collider2D))]
     public class SAnimatorFSMActor2D : SAnimatorFSMActor
     {
         [SerializeField] private Rigidbody2D _rigidBody;
