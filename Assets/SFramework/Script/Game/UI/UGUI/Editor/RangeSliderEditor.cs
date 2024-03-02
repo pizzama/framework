@@ -1,8 +1,6 @@
-/// Credit Ben MacKinnon @Dover8
-/// Sourced from - https://github.com/Dover8/Unity-UI-Extensions/tree/range-slider
 /// Usage: Extension of the standard slider. Two handles determine a low and high value between a Min and Max. 
 /// Raises a UnityEvent passing the low and high values
-/// 增加居中控制器
+/// Add middle transform to the slider to control the position
 
 using UnityEditor;
 using UnityEditor.UI;
