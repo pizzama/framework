@@ -8,6 +8,8 @@ namespace SFramework.Actor
     public class SAnimatorFSMActor2D : SAnimatorFSMActor
     {
         [SerializeField] private Rigidbody2D _rigidBody;
+
+        public Rigidbody2D ActorRigidBody {get {return _rigidBody;}}
         [SerializeField] private Collider2D _collider;
         public LayerMask GroundLayerMask = LayerManager.GroundLayerMask;
         private Vector3 _orientedMovement;

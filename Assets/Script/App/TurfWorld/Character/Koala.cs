@@ -14,6 +14,7 @@ namespace Game.Character
             base.InitEntity();
 
             AddFSMState(new HeroIdleState2D());
+            AddFSMState(new HeroMoveState2D());
             GetFSM().ChangeState<HeroIdleState2D>();
         }
     }

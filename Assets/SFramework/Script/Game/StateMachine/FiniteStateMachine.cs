@@ -231,22 +231,25 @@ namespace SFramework.StateMachine
 
         private void checkState()
         {
-            if (_activeState == null || !_activeState.CouldTransition())
+            if (_activeState == null)
                 return;
-            List<IFSMTransition> trans = _activeState.GetTransitions();
-            if (trans != null)
+            if (!_activeState.CouldTransition())
             {
-                for (var i = 0; i < trans.Count; i++)
+                List<IFSMTransition> trans = _activeState.GetTransitions();
+                if (trans != null)
                 {
-                    IFSMTransition tran = trans[i];
-                    if (tran.IsValid())
+                    for (var i = 0; i < trans.Count; i++)
                     {
-                        IFSMState state = tran.GetNextFSMState();
-                        Debug.Log("current state change to:" + state.ToName());
-                        _activeState?.ExitState();
-                        tran.Transition();
-                        _activeState = state;
-                        _activeState?.EnterState();
+                        IFSMTransition tran = trans[i];
+                        if (tran.IsValid())
+                        {
+                            IFSMState state = tran.GetNextFSMState();
+                            Debug.Log("current state change to:" + state.ToName());
+                            _activeState?.ExitState();
+                            tran.Transition();
+                            _activeState = state;
+                            _activeState?.EnterState();
+                        }
                     }
                 }
             }

@@ -7,26 +7,50 @@ namespace Game.Character
 {
     public class HeroIdleState2D : FSMState
     {
-        private SFInputManager _inputManager;
         private float _horizontalInput;
         private float _verticalInput;
+
+
+        public virtual void InitState()
+        {
+        }
 
         public override void EnterState()
         {
             base.EnterState();
-            Hero hero = (Hero)Machine.Owner;
+            Koala hero = (Koala)Machine.Owner;
             var animator = hero.GetComponent<Animator>();
             hero.PlayAnimation("Idle", () =>
             {
                 Debug.Log("idle complete!");
-                Machine.ChangeState<HeroMoveState>();
+                // Machine.ChangeState<HeroMoveState2D>();
             });
         }
 
         public override void HandleInput()
         {
-            _horizontalInput = _inputManager.PrimaryMovement.x;
-            _verticalInput = _inputManager.PrimaryMovement.y;
+            if (SFInputManager.Instance != null)
+            {
+                _horizontalInput = SFInputManager.Instance.PrimaryMovement.x;
+                _verticalInput = SFInputManager.Instance.PrimaryMovement.y;
+            }
+
+        }
+
+        public override void UpdateState()
+        {
+            HandleInput();
+            if (_horizontalInput != 0 || _verticalInput != 0)
+            {
+                Machine.ChangeState<HeroMoveState2D>();
+            }
+        }
+
+
+        public virtual void ResetInput()
+        {
+            _horizontalInput = 0f;
+            _verticalInput = 0f;
         }
     }
 }

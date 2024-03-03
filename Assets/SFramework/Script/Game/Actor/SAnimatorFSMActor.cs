@@ -23,7 +23,7 @@ namespace SFramework.Actor
             findAnimator();
             CreateFSM();
 
-            if(mMainCameraTransform == null)
+            if (mMainCameraTransform == null)
             {
                 mMainCameraTransform = Camera.main.transform;
             }
@@ -32,7 +32,7 @@ namespace SFramework.Actor
         private void findAnimator()
         {
             _animator = GetComponent<Animator>();
-            if(_animator == null)
+            if (_animator == null)
                 _animator = FindFirstObjectByType<Animator>();
         }
 
@@ -67,13 +67,16 @@ namespace SFramework.Actor
         public int PlayAnimation(string stateName, Action callback = null)
         {
             var animator = GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.Update(0f);
+                animator.Play(stateName, -1);
 
-            animator.Update(0f);
-            animator.Play(stateName, -1);
+                if (callback == null) return 0;
 
-            if (callback == null) return 0;
+                StartCoroutine(DelayRunEffectCallback(animator, stateName, callback));
+            }
 
-            StartCoroutine(DelayRunEffectCallback(animator, stateName, callback));
 
             return 0;
         }
