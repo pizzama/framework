@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using SFramework.Game.App;
 using UnityEngine;
 
 namespace SFramework.Actor
@@ -10,6 +9,7 @@ namespace SFramework.Actor
     {
         [SerializeField] private Rigidbody2D _rigidBody;
         [SerializeField] private Collider2D _collider;
+        public LayerMask GroundLayerMask = LayerManager.GroundLayerMask;
         private Vector3 _orientedMovement;
 
         protected override void Awake()
