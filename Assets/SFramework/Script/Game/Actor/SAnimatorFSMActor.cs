@@ -11,10 +11,6 @@ namespace SFramework.Actor
     {
         [SerializeField]
         private Animator _animator;
-        [SerializeField]
-        private Transform _mainCameraTransform;
-        [SerializeField]
-        public Transform MainCameraTransform {get {return _mainCameraTransform;} private set {_mainCameraTransform = value;}}
 
 
         protected virtual void Awake()
@@ -27,9 +23,9 @@ namespace SFramework.Actor
             findAnimator();
             CreateFSM();
 
-            if(_mainCameraTransform == null)
+            if(mMainCameraTransform == null)
             {
-                _mainCameraTransform = Camera.main.transform;
+                mMainCameraTransform = Camera.main.transform;
             }
         }
 

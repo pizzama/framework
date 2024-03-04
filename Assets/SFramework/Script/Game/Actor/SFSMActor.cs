@@ -11,8 +11,8 @@ namespace SFramework.Actor
         [SFInformation("Actor's direction", SFInformationAttribute.InformationType.Info, false)]
         private SFActorFacingDirections _direction;
 
-        [SerializeField] private Transform _mainCameraTransform;
-        public Transform MainCameraTransform { get { return _mainCameraTransform; } private set { _mainCameraTransform = value; } }
+        [SerializeField] protected Transform mMainCameraTransform;
+        public Transform MainCameraTransform { get { return mMainCameraTransform; } private set { mMainCameraTransform = value; } }
 
         [SerializeField] private string _currentStateName;
 
