@@ -9,8 +9,11 @@ namespace SFramework.Actor
     {
         [SerializeField] private Rigidbody2D _rigidBody;
 
-        public Rigidbody2D ActorRigidBody {get {return _rigidBody;}}
+        public Rigidbody2D ActorRigidBody { get { return _rigidBody; } }
         [SerializeField] private Collider2D _collider;
+        [SerializeField] private SFActorFacingDirections _initialFacingDirection = SFActorFacingDirections.Right; //init facing direction
+        [SerializeField] private SFActorFacingDirections _currentFacingDirection = SFActorFacingDirections.Right; //current facing direction
+        private int _direction;
         public LayerMask GroundLayerMask = LayerManager.GroundLayerMask;
         private Vector3 _orientedMovement;
 
@@ -45,19 +48,7 @@ namespace SFramework.Actor
                 return;
             }
 
-            if (Friction > 1)
-            {
-                CurrentMovement = CurrentMovement / Friction;
-            }
-
-            // if we have a low friction (ice, marbles...) we lerp the speed accordingly
-            if (Friction > 0 && Friction < 1)
-            {
-                CurrentMovement = Vector3.Lerp(mSpeed, CurrentMovement, Time.deltaTime * Friction);
-            }
-
-            Vector2 newMovement = _rigidBody.position + (Vector2)(CurrentMovement + AddedForce) * Time.fixedDeltaTime;
-            _rigidBody.MovePosition(newMovement);
+            moveUpdate();
         }
 
         public override void Impact(Vector3 direction, float force)
@@ -94,6 +85,23 @@ namespace SFramework.Actor
             {
                 CurrentDirection = CurrentMovement.normalized;
             }
+        }
+
+        private void moveUpdate()
+        {
+            if (Friction > 1)
+            {
+                CurrentMovement = CurrentMovement / Friction;
+            }
+
+            // if we have a low friction (ice, marbles...) we lerp the speed accordingly
+            if (Friction > 0 && Friction < 1)
+            {
+                CurrentMovement = Vector3.Lerp(mSpeed, CurrentMovement, Time.deltaTime * Friction);
+            }
+
+            Vector2 newMovement = _rigidBody.position + (Vector2)(CurrentMovement + AddedForce) * Time.fixedDeltaTime;
+            _rigidBody.MovePosition(newMovement);
         }
 
     }
