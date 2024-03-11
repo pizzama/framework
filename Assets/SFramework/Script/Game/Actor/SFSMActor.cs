@@ -11,6 +11,8 @@ namespace SFramework.Actor
         [SFInformation("Actor's direction", SFInformationAttribute.InformationType.Info, false)]
         private SFActorFacingDirections _direction;
 
+        [SerializeField] protected Transform mActorModel; //the parent of the actor model
+
         [SerializeField] protected Transform mMainCameraTransform;
         public Transform MainCameraTransform { get { return mMainCameraTransform; } private set { mMainCameraTransform = value; } }
 
@@ -68,6 +70,10 @@ namespace SFramework.Actor
 
         protected virtual void Update()
         {
+            if(!Checked())
+            {
+                return;
+            }
             mFsm?.Update();
             _currentStateName = mFsm.CurrentState?.ToName();
             checkIsGrounded();

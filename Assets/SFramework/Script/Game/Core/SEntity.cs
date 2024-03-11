@@ -40,7 +40,6 @@ namespace SFramework
 
         protected virtual void InitEntity()
         {
-
         }
 
         public void Attached(ISEntity childEntity)
@@ -64,9 +63,14 @@ namespace SFramework
         public void Recycle()
         {
         }
-
         public void Show()
         {
         }
+
+        public bool Checked()
+        {
+            return true;
+        }
+
     }
 }

@@ -13,6 +13,7 @@ namespace SFramework.Actor
         [SerializeField] private Collider2D _collider;
         [SerializeField] private SFActorFacingDirections _initialFacingDirection = SFActorFacingDirections.Right; //init facing direction
         [SerializeField] private SFActorFacingDirections _currentFacingDirection = SFActorFacingDirections.Right; //current facing direction
+        [SerializeField] bool _modelShouldFlip = false;
         private int _direction;
         public LayerMask GroundLayerMask = LayerManager.GroundLayerMask;
         private Vector3 _orientedMovement;
