@@ -1,6 +1,6 @@
 // Made with Amplify Shader Editor v1.9.1.8
 // Available at the Unity Asset Store - http://u3d.as/y3X 
-Shader "UIBase"
+Shader "SFrameWork/UI/FlashCard"
 {
 	Properties
 	{
@@ -169,7 +169,7 @@ Version=19108
 Node;AmplifyShaderEditor.TexturePropertyNode;8;-1081.5,104.5;Inherit;True;Property;_noiseTex;noiseTex;7;0;Create;True;0;0;0;False;0;False;None;5283be803190d6045aaa0b6b63cd9c6e;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
 Node;AmplifyShaderEditor.DynamicAppendNode;24;-191.8542,-279.8813;Inherit;False;FLOAT3;4;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;17;42.51367,-231.3251;Inherit;False;2;2;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;1;FLOAT3;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;468.4922,-61.54374;Float;False;True;-1;2;ASEMaterialInspector;0;3;UIBase;5056123faa0c79b47ab6ad7e8bf059a4;True;Default;0;0;Default;2;False;True;2;5;False;;10;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;True;True;True;True;True;0;True;_ColorMask;False;False;False;False;False;False;False;True;True;0;True;_Stencil;255;True;_StencilReadMask;255;True;_StencilWriteMask;0;True;_StencilComp;0;True;_StencilOp;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;0;True;unity_GUIZTestMode;False;True;5;Queue=Transparent=Queue=0;IgnoreProjector=True;RenderType=Transparent=RenderType;PreviewType=Plane;CanUseSpriteAtlas=True;False;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;0;;0;0;Standard;0;0;1;True;False;;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;468.4922,-61.54374;Float;False;True;-1;2;ASEMaterialInspector;0;3;SFrameWork/UI/FlashCard;5056123faa0c79b47ab6ad7e8bf059a4;True;Default;0;0;Default;2;False;True;2;5;False;;10;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;True;True;True;True;True;0;True;_ColorMask;False;False;False;False;False;False;False;True;True;0;True;_Stencil;255;True;_StencilReadMask;255;True;_StencilWriteMask;0;True;_StencilComp;0;True;_StencilOp;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;0;True;unity_GUIZTestMode;False;True;5;Queue=Transparent=Queue=0;IgnoreProjector=True;RenderType=Transparent=RenderType;PreviewType=Plane;CanUseSpriteAtlas=True;False;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;0;;0;0;Standard;0;0;1;True;False;;False;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;11;-1000.291,362.7222;Inherit;False;2;2;0;FLOAT2;0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.TextureCoordinatesNode;10;-1330.045,333.6507;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SamplerNode;9;-1383.267,491.3829;Inherit;True;Property;_normalTex;normalTex;3;0;Create;True;0;0;0;False;0;False;-1;None;0d498fdfe60ddf64a9ebd36b474650b2;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
@@ -206,4 +206,4 @@ WireConnection;23;3;2;4
 WireConnection;25;0;3;0
 WireConnection;2;0;1;0
 ASEEND*/
-//CHKSM=AC0360763AAC9C6D549723AE87993D986EC3B30B
+//CHKSM=F1874F54EB558F1A9627053E559B242AF03392AE
