@@ -35,8 +35,9 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMask: 15
-    - _DissolveSpeed: 0
-    - _EdgeWidth: 0.05
+    - _DissolveSpeed: 1.0258824
+    - _DissolveStrength: 0
+    - _EdgeWidth: 0.02
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -45,5 +46,5 @@ Material:
     - _UseUIAlphaClip: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EdgeColor: {r: 0.2679245, g: 0.49677664, b: 1, a: 0}
+    - _EdgeColor: {r: 0, g: 1.6383327, b: 5.047121, a: 0}
   m_BuildTextureStacks: []
