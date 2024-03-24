@@ -29,6 +29,8 @@ namespace SFramework.Actor
         public LayerMask GroundLayerMask = LayerManager.GroundLayerMask;
         private Vector3 _orientedMovement;
 
+        protected Vector3 _targetModelRotation;
+
         protected override void Awake()
         {
             base.Awake();
@@ -81,6 +83,31 @@ namespace SFramework.Actor
             _orientedMovement.z = 0f;
             CurrentMovement = _orientedMovement;
         }
+
+
+		public virtual void FlipModel(int direction)
+		{
+			if (mActorModel != null)
+			{
+				mActorModel.transform.localScale = (direction == 1) ? _modelFlipValueRight : _modelFlipValueLeft;
+			}
+			else
+			{
+                SpriteRenderer render = mActorModel.GetComponent<SpriteRenderer>();
+				render.flipX = (direction == -1);
+			}
+		}
+
+        public virtual void RotateModel(int direction)
+		{
+			if (mActorModel != null)
+			{
+				_targetModelRotation = (direction == 1) ? _modelRotationValueRight : _modelRotationValueLeft;
+				_targetModelRotation.x = _targetModelRotation.x % 360;
+				_targetModelRotation.y = _targetModelRotation.y % 360;
+				_targetModelRotation.z = _targetModelRotation.z % 360;
+			}
+		}
 
         protected virtual void applyImpact()
         {

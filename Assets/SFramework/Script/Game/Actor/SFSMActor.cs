@@ -75,7 +75,7 @@ namespace SFramework.Actor
                 return;
             }
             mFsm?.Update();
-            _currentStateName = mFsm.CurrentState?.ToName();
+            _currentStateName = mFsm?.CurrentState?.ToName();
             checkIsGrounded();
             handleFriction();
             determineDirection(); //collect direction info;
