@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UIFlowLight
+  m_Name: UIOutLine
   m_Shader: {fileID: 4800000, guid: d51f5ddbde8a7b6499628da3277a1e09, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -36,8 +36,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMask: 15
+    - _DefaultAlpha: 0.97
+    - _EdgeColorIndentify: 1
+    - _EdgeWidth: 0.68
     - _FlowSpeed: 1
     - _Keyword0: 0
+    - _RimMax: 2
+    - _RimMin: 0.56470567
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -46,4 +51,6 @@ Material:
     - _UseUIAlphaClip: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EdgeColor: {r: 1, g: 0.90943396, b: 0.90943396, a: 1}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

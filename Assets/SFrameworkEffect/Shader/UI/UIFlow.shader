@@ -136,9 +136,8 @@ Shader "UIFlow"
 				float2 panner8 = ( 1.0 * _Time.y * _DisturbanceTextureSpeed + texCoord6);
 				float2 temp_cast_0 = (tex2D( _DisturbanceTexture, panner8 ).r).xx;
 				float2 lerpResult11 = lerp( panner4 , temp_cast_0 , _DisturbanceValue);
-				float4 temp_output_14_0 = ( tex2DNode2.a * tex2D( _AttachTexture, lerpResult11 ) * _HighlightsColor );
 				
-				half4 color = ( ( tex2DNode2 * temp_output_14_0 ) * IN.color );
+				half4 color = ( ( tex2DNode2 + ( tex2DNode2.a * tex2D( _AttachTexture, lerpResult11 ) * _HighlightsColor ) ) * IN.color );
 				
 				#ifdef UNITY_UI_CLIP_RECT
                 color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
@@ -176,7 +175,6 @@ Node;AmplifyShaderEditor.SimpleMultiplyOpNode;14;-42.82692,189.9833;Inherit;Fals
 Node;AmplifyShaderEditor.VertexColorNode;17;188.573,239.1233;Inherit;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;18;354.9731,85.7233;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;560.2998,81.90002;Float;False;True;-1;2;ASEMaterialInspector;0;3;UIFlow;5056123faa0c79b47ab6ad7e8bf059a4;True;Default;0;0;Default;2;False;True;2;5;False;;10;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;True;True;True;True;True;0;True;_ColorMask;False;False;False;False;False;False;False;True;True;0;True;_Stencil;255;True;_StencilReadMask;255;True;_StencilWriteMask;0;True;_StencilComp;0;True;_StencilOp;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;0;True;unity_GUIZTestMode;False;True;5;Queue=Transparent=Queue=0;IgnoreProjector=True;RenderType=Transparent=RenderType;PreviewType=Plane;CanUseSpriteAtlas=True;False;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;0;;0;0;Standard;0;0;1;True;False;;False;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;19;84.57294,-182.5967;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;15;136.5732,26.18329;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 WireConnection;2;0;1;0
 WireConnection;4;0;3;0
@@ -191,12 +189,10 @@ WireConnection;12;1;11;0
 WireConnection;14;0;2;4
 WireConnection;14;1;12;0
 WireConnection;14;2;13;0
-WireConnection;18;0;19;0
+WireConnection;18;0;15;0
 WireConnection;18;1;17;0
 WireConnection;0;0;18;0
-WireConnection;19;0;2;0
-WireConnection;19;1;14;0
 WireConnection;15;0;2;0
 WireConnection;15;1;14;0
 ASEEND*/
-//CHKSM=48F8808FC17F46D09D57981F6369C9AC433D3CC7
+//CHKSM=D424A6F46C8DEDDB0D74761201D6BE346B1F820B
