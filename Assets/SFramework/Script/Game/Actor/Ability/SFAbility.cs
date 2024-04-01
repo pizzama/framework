@@ -3,6 +3,18 @@ using SFramework.StateMachine;
 
 namespace SFramework.Actor.Ability
 {
+    public interface ISFAbility
+    {
+        
+    }
+
+    [System.Serializable]
+    public class SFAbilityBase
+    {
+        
+    }
+
+
     public abstract class SFAbility : MonoBehaviour
     {
         [Header("Permission")]

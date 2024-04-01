@@ -14,16 +14,31 @@ namespace SFramework.Statics
     public class SFResAssets
     {
         public const string Activity_btn_arrow_activity_btn_arrow_png = "activity_btn_arrow/activity_btn_arrow";
-        public const string Game_app_battle_sfp_ArrowBody_prefab = "game_app_battle.sfp/ArrowBody";
-        public const string Game_app_battle_sfp_ArrowHead_prefab = "game_app_battle.sfp/ArrowHead";
-        public const string Game_app_battle_sfp_BattleUIView_prefab = "game_app_battle.sfp/BattleUIView";
-        public const string Game_app_battle_sfp_BezierCurve_prefab = "game_app_battle.sfp/BezierCurve";
-        public const string Game_app_battle_sfp_Card_prefab = "game_app_battle.sfp/Card";
-        public const string Game_app_battle_sfp_cardbg_png = "game_app_battle.sfp/cardbg";
-        public const string Game_app_battle_sfs_BattleView_unity = "game_app_battle.sfs/BattleView";
+        public const string App_battle_sfp_ArrowBody_prefab = "app_battle.sfp/ArrowBody";
+        public const string App_battle_sfp_ArrowHead_prefab = "app_battle.sfp/ArrowHead";
+        public const string App_battle_sfp_BattleUIView_prefab = "app_battle.sfp/BattleUIView";
+        public const string App_battle_sfp_BezierCurve_prefab = "app_battle.sfp/BezierCurve";
+        public const string App_battle_sfp_Card_prefab = "app_battle.sfp/Card";
+        public const string App_battle_sfp_cardbg_png = "app_battle.sfp/cardbg";
+        public const string App_battle_sfs_BattleView_unity = "app_battle.sfs/BattleView";
+        public const string App_farm_sfs_FarmView_unity = "app_farm.sfs/FarmView";
         public const string Game_scenes_sfs_BaseScene_unity = "game_scenes.sfs/BaseScene";
         public const string Game_turpworld_sfp_Turf_mat = "game_turpworld.sfp/Turf";
         public const string Game_turpworld_sfs_TurpWorld_unity = "game_turpworld.sfs/TurpWorld";
+        public const string Game_turpworld_anim_sfp_KoalaAnimator_controller = "game_turpworld_anim.sfp/KoalaAnimator";
+        public const string Game_turpworld_anim_sfp_KoalaIdle_anim = "game_turpworld_anim.sfp/KoalaIdle";
+        public const string Game_turpworld_character_sfp_Koala_prefab = "game_turpworld_character.sfp/Koala";
+        public const string Game_turpworld_character_sfp_KoalaDamage_png = "game_turpworld_character.sfp/KoalaDamage";
+        public const string Game_turpworld_character_sfp_KoalaDashParticle_png = "game_turpworld_character.sfp/KoalaDashParticle";
+        public const string Game_turpworld_character_sfp_KoalaDead_png = "game_turpworld_character.sfp/KoalaDead";
+        public const string Game_turpworld_character_sfp_KoalaFalling_png = "game_turpworld_character.sfp/KoalaFalling";
+        public const string Game_turpworld_character_sfp_KoalaIdle_png = "game_turpworld_character.sfp/KoalaIdle";
+        public const string Game_turpworld_character_sfp_KoalaJump_png = "game_turpworld_character.sfp/KoalaJump";
+        public const string Game_turpworld_character_sfp_KoalaRun_png = "game_turpworld_character.sfp/KoalaRun";
+        public const string Game_turpworld_character_sfp_KoalaSwordIdle_png = "game_turpworld_character.sfp/KoalaSwordIdle";
+        public const string Game_turpworld_character_sfp_KoalaSwordSlash1_png = "game_turpworld_character.sfp/KoalaSwordSlash1";
+        public const string Game_turpworld_character_sfp_KoalaSwordSlash2_png = "game_turpworld_character.sfp/KoalaSwordSlash2";
+        public const string Game_turpworld_character_sfp_KoalaSwordSlash3_png = "game_turpworld_character.sfp/KoalaSwordSlash3";
         public const string Game_turpworld_map_sfp_dirtbrushes_psd = "game_turpworld_map.sfp/dirt-brushes";
         public const string Game_turpworld_map_sfp_dirt_prefab = "game_turpworld_map.sfp/dirt";
         public const string Game_turpworld_map_sfp_dirt_psd = "game_turpworld_map.sfp/dirt";
@@ -119,13 +134,13 @@ namespace SFramework.Statics
         public const string BundleName = "activity_btn_arrow";
         public const string RES_activity_btn_arrow_png = "activity_btn_arrow";
     }
-    public class Game_app_battle
+    public class App_battle
     {
-        public const string BundleName = "game_app_battle";
+        public const string BundleName = "app_battle";
     }
-    public class Game_app_battle_sfp
+    public class App_battle_sfp
     {
-        public const string BundleName = "game_app_battle.sfp";
+        public const string BundleName = "app_battle.sfp";
         public const string RES_ArrowBody_prefab = "ArrowBody";
         public const string RES_ArrowHead_prefab = "ArrowHead";
         public const string RES_BattleUIView_prefab = "BattleUIView";
@@ -133,10 +148,19 @@ namespace SFramework.Statics
         public const string RES_Card_prefab = "Card";
         public const string RES_cardbg_png = "cardbg";
     }
-    public class Game_app_battle_sfs
+    public class App_battle_sfs
     {
-        public const string BundleName = "game_app_battle.sfs";
+        public const string BundleName = "app_battle.sfs";
         public const string RES_BattleView_unity = "BattleView";
+    }
+    public class App_farm
+    {
+        public const string BundleName = "app_farm";
+    }
+    public class App_farm_sfs
+    {
+        public const string BundleName = "app_farm.sfs";
+        public const string RES_FarmView_unity = "FarmView";
     }
     public class Game_scenes
     {
@@ -160,6 +184,36 @@ namespace SFramework.Statics
     {
         public const string BundleName = "game_turpworld.sfs";
         public const string RES_TurpWorld_unity = "TurpWorld";
+    }
+    public class Game_turpworld_anim
+    {
+        public const string BundleName = "game_turpworld_anim";
+    }
+    public class Game_turpworld_anim_sfp
+    {
+        public const string BundleName = "game_turpworld_anim.sfp";
+        public const string RES_KoalaAnimator_controller = "KoalaAnimator";
+        public const string RES_KoalaIdle_anim = "KoalaIdle";
+    }
+    public class Game_turpworld_character
+    {
+        public const string BundleName = "game_turpworld_character";
+    }
+    public class Game_turpworld_character_sfp
+    {
+        public const string BundleName = "game_turpworld_character.sfp";
+        public const string RES_Koala_prefab = "Koala";
+        public const string RES_KoalaDamage_png = "KoalaDamage";
+        public const string RES_KoalaDashParticle_png = "KoalaDashParticle";
+        public const string RES_KoalaDead_png = "KoalaDead";
+        public const string RES_KoalaFalling_png = "KoalaFalling";
+        public const string RES_KoalaIdle_png = "KoalaIdle";
+        public const string RES_KoalaJump_png = "KoalaJump";
+        public const string RES_KoalaRun_png = "KoalaRun";
+        public const string RES_KoalaSwordIdle_png = "KoalaSwordIdle";
+        public const string RES_KoalaSwordSlash1_png = "KoalaSwordSlash1";
+        public const string RES_KoalaSwordSlash2_png = "KoalaSwordSlash2";
+        public const string RES_KoalaSwordSlash3_png = "KoalaSwordSlash3";
     }
     public class Game_turpworld_map
     {

@@ -15,6 +15,7 @@ namespace SFramework.Statics
     {
         public const string SFramework_Game_RootControl = "SFramework.Game.RootControl";
         public const string App_TurfWorld_TurfWorldControl = "App.TurfWorld.TurfWorldControl";
+        public const string App_Farm_FarmControl = "App.Farm.FarmControl";
         public const string Game_GameMainControl = "Game.GameMainControl";
         public const string Game_InputControl = "Game.InputControl";
         public const string Game_NormalLoadingControl = "Game.NormalLoadingControl";

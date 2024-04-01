@@ -46,7 +46,7 @@ namespace Game.App.Battle
 
             for (int i = 0; i < 6; i++)
             {
-                BattleCard ctl = CreateSEntity<BattleCard>(i.ToString(), SFResAssets.Game_app_battle_sfp_Card_prefab, _cardHandsTransform);
+                BattleCard ctl = CreateSEntity<BattleCard>(i.ToString(), SFResAssets.App_battle_sfp_Card_prefab, _cardHandsTransform);
                 _cardHands.Add(ctl);
             }
 

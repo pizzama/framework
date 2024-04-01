@@ -45,10 +45,13 @@ public class SEditorControlCreator : EditorWindow
         try
         {
             int index = pathText.LastIndexOf("/");
-            string path = pathText.Substring(0, index);
+            string path = "";
+            if(index > 0)
+                path = pathText.Substring(0, index);
             string name = pathText.Substring(index + 1, pathText.Length - index - 1);
-            string parentPath = Application.dataPath + "/Script/" + path;
+            string parentPath = Application.dataPath + "/Script/App" + path;
             string nameSpace = path.Replace("/", ".");
+            nameSpace = "App." + nameSpace;
 
             SCreateTemplateScript sc = new SCreateTemplateScript(nameSpace, name);
             createControl(parentPath, sc);
