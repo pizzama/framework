@@ -7,10 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UIFlow
-  m_Shader: {fileID: 4800000, guid: 06472cd3371ebc843882ac2c72b16c46, type: 3}
+  m_Name: UIOutLine
+  m_Shader: {fileID: 4800000, guid: d51f5ddbde8a7b6499628da3277a1e09, type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _KEYWORD0_KEY0
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -20,15 +21,11 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AttachTexture:
-        m_Texture: {fileID: 2800000, guid: 397c4bf4f313866489a4437316bd0952, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DisturbanceTexture:
-        m_Texture: {fileID: 2800000, guid: 5283be803190d6045aaa0b6b63cd9c6e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -39,7 +36,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMask: 15
-    - _DisturbanceValue: 0.2
+    - _DefaultAlpha: 0.97
+    - _EdgeColorIndentify: 1
+    - _EdgeWidth: 0.68
+    - _FlowSpeed: 1
+    - _Keyword0: 0
+    - _RimMax: 2
+    - _RimMin: 0.56470567
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -47,8 +50,7 @@ Material:
     - _StencilWriteMask: 255
     - _UseUIAlphaClip: 0
     m_Colors:
-    - _AttachTextureSpeed: {r: 0, g: 1, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DisturbanceTextureSpeed: {r: 0, g: 0, b: 0, a: 0}
-    - _HighlightsColor: {r: 1, g: 1, b: 1, a: 0}
+    - _EdgeColor: {r: 1, g: 0.90943396, b: 0.90943396, a: 1}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
