@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.AnimatedValues;
 using UnityEditor.UI;
+#endif
 
 namespace SFramework.UI
 {
@@ -190,7 +192,8 @@ namespace SFramework.UI
             return border;
         }
     }
-
+    
+    #if UNITY_EDITOR
     [CustomEditor(typeof(SExtendImage), true), CanEditMultipleObjects]
     public class SExtendImageEditor : ImageEditor
     {
@@ -260,6 +263,7 @@ namespace SFramework.UI
             base.SetShowNativeSize(showNativeSize, instant);
         }
     }
+    #endif
 }
 
 
