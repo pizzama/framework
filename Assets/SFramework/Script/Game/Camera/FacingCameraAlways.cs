@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+﻿using SFramework.Tools.Attributes;
+using UnityEngine;
 
 namespace SFramework.CameraUtils
 {
     public class FacingCameraAlways : MonoBehaviour
     {
         private Transform[] _childs;
-        [SerializeField] private int _totalChildren;
-        [SerializeField] private Quaternion _rotation;
+        [SFReadOnly][SerializeField] private int _totalChildren;
+        [SFReadOnly][SerializeField] private Quaternion _rotation;
         private void Start()
         {
             Collect();
