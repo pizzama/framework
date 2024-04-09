@@ -22,6 +22,15 @@ namespace SFramework.Statics
         public const string App_battle_sfp_cardbg_png = "app_battle.sfp/cardbg";
         public const string App_battle_sfs_BattleView_unity = "app_battle.sfs/BattleView";
         public const string App_farm_sfs_FarmView_unity = "app_farm.sfs/FarmView";
+        public const string App_farm_ground_sfp_lvdi_001_png = "app_farm_ground.sfp/lvdi_001";
+        public const string App_farm_ground_sfp_lvdi_002_png = "app_farm_ground.sfp/lvdi_002";
+        public const string App_farm_ground_sfp_lvdi_003_png = "app_farm_ground.sfp/lvdi_003";
+        public const string App_farm_ground_sfp_lvdi_004_png = "app_farm_ground.sfp/lvdi_004";
+        public const string App_farm_ground_sfp_lvdi_005_png = "app_farm_ground.sfp/lvdi_005";
+        public const string App_farm_ground_sfp_lvdi_006_png = "app_farm_ground.sfp/lvdi_006";
+        public const string App_farm_ground_sfp_lvdi_008_png = "app_farm_ground.sfp/lvdi_008";
+        public const string App_farm_ground_sfp_lvdi_009_png = "app_farm_ground.sfp/lvdi_009";
+        public const string App_farm_ground_sfp_lvdi_010_png = "app_farm_ground.sfp/lvdi_010";
         public const string Game_scenes_sfs_BaseScene_unity = "game_scenes.sfs/BaseScene";
         public const string Game_turpworld_sfp_Turf_mat = "game_turpworld.sfp/Turf";
         public const string Game_turpworld_sfs_TurpWorld_unity = "game_turpworld.sfs/TurpWorld";
@@ -161,6 +170,23 @@ namespace SFramework.Statics
     {
         public const string BundleName = "app_farm.sfs";
         public const string RES_FarmView_unity = "FarmView";
+    }
+    public class App_farm_ground
+    {
+        public const string BundleName = "app_farm_ground";
+    }
+    public class App_farm_ground_sfp
+    {
+        public const string BundleName = "app_farm_ground.sfp";
+        public const string RES_lvdi_001_png = "lvdi_001";
+        public const string RES_lvdi_002_png = "lvdi_002";
+        public const string RES_lvdi_003_png = "lvdi_003";
+        public const string RES_lvdi_004_png = "lvdi_004";
+        public const string RES_lvdi_005_png = "lvdi_005";
+        public const string RES_lvdi_006_png = "lvdi_006";
+        public const string RES_lvdi_008_png = "lvdi_008";
+        public const string RES_lvdi_009_png = "lvdi_009";
+        public const string RES_lvdi_010_png = "lvdi_010";
     }
     public class Game_scenes
     {

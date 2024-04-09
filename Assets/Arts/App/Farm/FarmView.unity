@@ -740,9 +740,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1546781919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5abfc6c544ffc5641bc7d4241faf57dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 82e75d63afde6164586e44f9b87acb13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _totalChildren: 0
 --- !u!1 &1649917723
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,7 +1152,13 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2051197170}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2051197172
+--- !u!224 &2051197173 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6558228566262885047, guid: c70aac0028afd42eabc9e0c55824c824,
+    type: 3}
+  m_PrefabInstance: {fileID: 2051197170}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2051197178
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1160,24 +1167,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2051197171}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66591848f01d6a54cba677e1f111e926, type: 3}
+  m_Script: {fileID: 11500000, guid: 24fdd7eca3e6f8941b68f78a29b336de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2051197173}
-  xSpeed: 200
-  ySpeed: 200
-  mSpeed: 10
-  yMinLimit: 30
-  yMaxLimit: 40
-  distance: 24
-  minDistance: 2
-  maxDistance: 30
-  needDamping: 1
-  x: -75
-  y: 30
---- !u!224 &2051197173 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6558228566262885047, guid: c70aac0028afd42eabc9e0c55824c824,
-    type: 3}
-  m_PrefabInstance: {fileID: 2051197170}
-  m_PrefabAsset: {fileID: 0}
+  XSpeed: 200
+  YSpeed: 200
+  MSpeed: 10
+  YMinLimit: 30
+  YMaxLimit: 40
+  Distance: 20
+  MinDistance: 2
+  MaxDistance: 30
+  NeedDamping: 0
+  Damping: 0
+  X: 0
+  Y: 0
