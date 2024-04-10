@@ -1,3 +1,5 @@
+using System.Text;
+using System.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +13,7 @@ public class SEditorControlCreator : EditorWindow
     private List<string> _logTxts = new List<string>();
     private int _selectIndex;
     string[] options = { "SceneView", "UIView" };
+    private const string prefix = "App";
 
     [MenuItem("SFrameWork/Editor/SFramework Control Creator", false, 100)]
     public static void Open()
@@ -28,7 +31,7 @@ public class SEditorControlCreator : EditorWindow
         EditorGUILayout.Space();
         EditorGUILayout.BeginVertical();
         EditorGUILayout.Space();
-        EditorGUILayout.HelpBox("Input path example:App/Test", MessageType.Info);
+        EditorGUILayout.HelpBox("Input path example:App is default prefix you only need submit path as Test/Test1 to continue", MessageType.Info);
         pathText = EditorGUILayout.TextField("Input path:", pathText);
         EditorGUILayout.Space();
         if (GUILayout.Button("Create"))
@@ -49,15 +52,24 @@ public class SEditorControlCreator : EditorWindow
             if(index > 0)
                 path = pathText.Substring(0, index);
             string name = pathText.Substring(index + 1, pathText.Length - index - 1);
-            string parentPath = Application.dataPath + "/Script/App" + path;
+            string parentPath = Application.dataPath + "/Script/" + prefix + "/" + path;
             string nameSpace = path.Replace("/", ".");
-            nameSpace = "App." + nameSpace;
+            nameSpace = prefix + "." + nameSpace;
 
             SCreateTemplateScript sc = new SCreateTemplateScript(nameSpace, name);
             createControl(parentPath, sc);
             createModel(parentPath, sc);
             createView(parentPath, sc, viewType);
 
+            parentPath = Application.dataPath + "/Arts/" + prefix + "/" + path;
+            if(viewType == 0)
+            {
+                createScenePrefab(parentPath, sc);
+            }
+            else
+            {
+                createUIPrefab(parentPath, sc);
+            }
             EditorUtility.SetDirty(this);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
@@ -138,6 +150,28 @@ public class SEditorControlCreator : EditorWindow
         {
             scriptFile.GetFolderPath().CreateDirIfNotExists();
             File.WriteAllText(scriptFile, content);
+        }
+    }
+
+    private void createUIPrefab(string parentPath, SCreateTemplateScript script)
+    {
+        var prefabFile = string.Format(parentPath + "/{0}View.prefab", (script.GetName()));
+        if (!File.Exists(prefabFile))
+        {
+            PrefabUtility.CreateEmptyPrefab(prefabFile);
+            logInfo(string.Format("Create {0} Prefab Success", script.GetName()));
+        }
+    }
+
+    private void createScenePrefab(string parentPath, SCreateTemplateScript script)
+    {
+        var prefabFile = string.Format(parentPath + "/{0}View.unity", (script.GetName()));
+        if (!File.Exists(prefabFile))
+        {
+            // SceneTemplate.CreateSceneTemplate(string sceneTemplatePath)
+            // SceneTemplate.CreateTemplateFromScene(SceneAsset sourceSceneAsset, string sceneTemplatePath);
+            PrefabUtility.CreateEmptyPrefab(parentPath);
+            logInfo(string.Format("Create {0} Scene Success", script.GetName()));
         }
     }
 }
