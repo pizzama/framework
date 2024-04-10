@@ -6,21 +6,21 @@ using UnityEngine.Tilemaps;
 
 namespace SFramework.Sprites
 {
-  [ExecuteAlways]
-  public class SpriteShadow : MonoBehaviour
-  {
-    void OnEnable()
+    [ExecuteAlways]
+    public class SpriteShadow : MonoBehaviour
     {
-      if (TryGetComponent(out SpriteRenderer spriteRenderer))
-      {
-        spriteRenderer.receiveShadows = true;
-        spriteRenderer.shadowCastingMode = ShadowCastingMode.TwoSided;
-      }
-      else if (TryGetComponent(out TilemapRenderer tilemapRenderer))
-      {
-        tilemapRenderer.receiveShadows = true;
-        tilemapRenderer.shadowCastingMode = ShadowCastingMode.TwoSided;
-      }
+        private void OnEnable()
+        {
+            if (TryGetComponent(out SpriteRenderer spriteRenderer))
+            {
+                spriteRenderer.receiveShadows = true;
+                spriteRenderer.shadowCastingMode = ShadowCastingMode.TwoSided;
+            }
+            else if (TryGetComponent(out TilemapRenderer tilemapRenderer))
+            {
+                tilemapRenderer.receiveShadows = true;
+                tilemapRenderer.shadowCastingMode = ShadowCastingMode.TwoSided;
+            }
+        }
     }
-  }
 }
