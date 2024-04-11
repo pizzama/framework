@@ -1,8 +1,8 @@
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 using SFramework.Tools;
+using UnityEngine;
 using static SEnum;
-
 
 namespace SFramework
 {
@@ -13,9 +13,11 @@ namespace SFramework
         {
             get
             {
-                if (_instance != null) return _instance;
+                if (_instance != null)
+                    return _instance;
                 _instance = FindObjectOfType<SBundleManager>();
-                if (_instance != null) return _instance;
+                if (_instance != null)
+                    return _instance;
                 var obj = new GameObject();
                 obj.name = "BundleManager";
                 _instance = obj.AddComponent<SBundleManager>();
@@ -29,10 +31,13 @@ namespace SFramework
         private List<SBundleParams> _messageParams; //通知的消息队列
         private List<SBundleParams> _openSequenceParams; //执行打开操作的消息队列
         private SMemory<string, string, ISBundle> _bundleMap; //已经启动了的所有模块的管理器
-        private Dictionary<string, List<ISBundle>> _bundleObserverMap; //注册消息管理器 
-        [SerializeField] private List<string> _bundleInspector;
-        [SerializeField] private Performance _performance;
+        private Dictionary<string, List<ISBundle>> _bundleObserverMap; //注册消息管理器
 
+        [SerializeField]
+        private List<string> _bundleInspector;
+
+        [SerializeField]
+        private Performance _performance;
 
         protected virtual void Awake()
         {
@@ -103,6 +108,7 @@ namespace SFramework
 
             handleMessageParams();
         }
+
         private void init()
         {
             _bundleMap = new SMemory<string, string, ISBundle>();
@@ -181,7 +187,13 @@ namespace SFramework
                 value.Uninstall();
         }
 
-        public void OpenControl(string fullPath, object messageData = null, bool isSequence = false, string alias = "", int sort = 0)
+        public void OpenControl(
+            string fullPath,
+            object messageData = null,
+            bool isSequence = false,
+            string alias = "",
+            int sort = 0
+        )
         {
             SBundleParams bdParams = new SBundleParams()
             {
@@ -210,9 +222,14 @@ namespace SFramework
             ISBundle bd = manager.GetBundle(value.ClassPath, value.Alias);
             if (bd == null)
             {
-                SControl ctl = ObjectTools.CreateInstance<SControl>(value.NameSpace, value.ClassName);
+                SControl ctl = ObjectTools.CreateInstance<SControl>(
+                    value.NameSpace,
+                    value.ClassName
+                );
                 if (ctl == null)
-                    throw new NotFoundException($"class {value.NameSpace}.{value.ClassName} is miss!");
+                    throw new NotFoundException(
+                        $"class {value.NameSpace}.{value.ClassName} is miss!"
+                    );
                 InstallBundle(ctl, value.Alias);
                 ctl.Open(value);
             }
@@ -224,7 +241,9 @@ namespace SFramework
                 }
             }
         }
-        public T GetControl<T>() where T : ISBundle
+
+        public T GetControl<T>()
+            where T : ISBundle
         {
             T result = _bundleMap.GetValue<T>();
             return result;
@@ -281,7 +300,6 @@ namespace SFramework
 
         public void SubscribeMessage(string messageId, ISBundle bundle)
         {
-
             if (!_bundleObserverMap.ContainsKey(messageId))
             {
                 _bundleObserverMap[messageId] = new List<ISBundle>();
@@ -297,10 +315,13 @@ namespace SFramework
         {
             if (_bundleObserverMap.ContainsKey(messageId))
             {
-                _bundleObserverMap[messageId].RemoveAll((value) =>
-                {
-                    return value == bundle;
-                });
+                _bundleObserverMap[messageId]
+                    .RemoveAll(
+                        (value) =>
+                        {
+                            return value == bundle;
+                        }
+                    );
             }
         }
 
@@ -357,15 +378,15 @@ namespace SFramework
         {
             UninstallAllBundle();
             AssetsManager.Instance.Destroy();
-            if(_bundleObserverMap != null)
+            if (_bundleObserverMap != null)
                 _bundleObserverMap.Clear();
-            if(_bundleMap != null)
+            if (_bundleMap != null)
                 _bundleMap.Clear();
-            if(_messageParams != null)
+            if (_messageParams != null)
                 _messageParams.Clear();
-            if(_bundleInspector != null)
+            if (_bundleInspector != null)
                 _bundleInspector.Clear();
-            if(_openSequenceParams != null)
+            if (_openSequenceParams != null)
                 _openSequenceParams.Clear();
             _instance = null;
         }
@@ -384,14 +405,34 @@ namespace SFramework
             bundle.Close();
         }
 
-        public void SetPerformance(Performance value)
+        public Tuple<int, Performance> GetPerformance()
         {
-            _performance = value;
+            int frame = GetFrameRate();
+            return new Tuple<int, Performance>(frame, _performance);
         }
 
-        public Performance GetPerformance()
+        private int GetFrameRate()
         {
-            return _performance;
+            if (
+                SystemInfo.systemMemorySize >= 4096
+                && SystemInfo.processorFrequency >= 2048
+                && SystemInfo.processorCount >= 4
+            )
+            {
+                //"performance better";
+                _performance = Performance.High;
+                return 60;
+            }
+            else if (SystemInfo.systemMemorySize <= 2048)
+            {
+                _performance = Performance.Low;
+                return 30;
+            }
+            else
+            {
+                _performance = Performance.Middle;
+                return 30;
+            }
         }
     }
 }

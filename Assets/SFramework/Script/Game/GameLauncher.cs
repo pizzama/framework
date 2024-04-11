@@ -26,7 +26,9 @@ namespace SFramework
         private void initFrameworkBundle()
         {
             // init game framework bundle
-            Application.targetFrameRate = GetFrameRate();
+            Tuple<int, Performance> perFormance = SBundleManager.Instance.GetPerformance();
+            _targetFrameRate = perFormance.Item1;
+            Application.targetFrameRate = _targetFrameRate;
             Application.runInBackground = _runInBackground;
         }
 
@@ -60,30 +62,6 @@ namespace SFramework
         private void OnApplicationFocus(bool focus)
         {
             Debug.Log("focus");
-        }
-
-        private int GetFrameRate()
-        {
-            if (
-                SystemInfo.systemMemorySize >= 4096
-                && SystemInfo.processorFrequency >= 2048
-                && SystemInfo.processorCount >= 4
-            )
-            {
-                //"performance better";
-                SBundleManager.Instance.SetPerformance(Performance.High);
-                return 60;
-            }
-            else if (SystemInfo.systemMemorySize <= 2048)
-            {
-                SBundleManager.Instance.SetPerformance(Performance.Low);
-                return 30;
-            }
-            else
-            {
-                SBundleManager.Instance.SetPerformance(Performance.Middle);
-                return 30;
-            }
         }
     }
 }
