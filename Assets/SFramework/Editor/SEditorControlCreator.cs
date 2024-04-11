@@ -30,7 +30,7 @@ public class SEditorControlCreator : EditorWindow
         EditorGUILayout.Space();
         EditorGUILayout.BeginVertical();
         EditorGUILayout.Space();
-        EditorGUILayout.HelpBox("Input path example:App is default prefix you only need submit path as Test/Test1 to continue", MessageType.Info);
+        EditorGUILayout.HelpBox("Input path example:App is default prefix you only need submit path as namespace and name such as Test/Test1", MessageType.Info);
         pathText = EditorGUILayout.TextField("Input path:", pathText);
         EditorGUILayout.Space();
         if (GUILayout.Button("Create"))
