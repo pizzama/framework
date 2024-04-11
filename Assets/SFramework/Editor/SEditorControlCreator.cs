@@ -1,11 +1,10 @@
-using System.Text;
-using System.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
 using SFramework.Extension;
+using UnityEditor.SceneTemplate;
 
 public class SEditorControlCreator : EditorWindow
 {
@@ -57,9 +56,9 @@ public class SEditorControlCreator : EditorWindow
             nameSpace = prefix + "." + nameSpace;
 
             SCreateTemplateScript sc = new SCreateTemplateScript(nameSpace, name);
-            createControl(parentPath, sc);
-            createModel(parentPath, sc);
-            createView(parentPath, sc, viewType);
+            // createControl(parentPath, sc);
+            // createModel(parentPath, sc);
+            // createView(parentPath, sc, viewType);
 
             parentPath = Application.dataPath + "/Arts/" + prefix + "/" + path;
             if(viewType == 0)
@@ -158,19 +157,35 @@ public class SEditorControlCreator : EditorWindow
         var prefabFile = string.Format(parentPath + "/{0}View.prefab", (script.GetName()));
         if (!File.Exists(prefabFile))
         {
-            PrefabUtility.CreateEmptyPrefab(prefabFile);
-            logInfo(string.Format("Create {0} Prefab Success", script.GetName()));
+            GameObject gameObject = new GameObject("EmptyPrefab");
+            gameObject.AddComponent<RectTransform>();
+            bool result;
+            UnityEngine.Object obj = PrefabUtility.SaveAsPrefabAsset(gameObject, prefabFile, out result);
+            if(result)
+            {
+                logInfo(string.Format("Create {0} Prefab Success", script.GetName()));
+            }
+            else
+            {
+                logInfo(string.Format("Create {0} Prefab Error", script.GetName()));
+            }
+        }
+        else
+        {
+            logInfo(string.Format("{0} Prefab Has already exists", script.GetName()));
         }
     }
 
     private void createScenePrefab(string parentPath, SCreateTemplateScript script)
     {
-        var prefabFile = string.Format(parentPath + "/{0}View.unity", (script.GetName()));
-        if (!File.Exists(prefabFile))
+        var preSceneFile = string.Format(parentPath + "/{0}View.unity", (script.GetName()));
+        if (!File.Exists(preSceneFile))
         {
+            string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName("sfscene.sfs", "sfscene");
+            SceneAsset asset = UnityEditor.AssetDatabase.LoadAssetAtPath<SceneAsset>(assetPaths[0]);
             // SceneTemplate.CreateSceneTemplate(string sceneTemplatePath)
-            // SceneTemplate.CreateTemplateFromScene(SceneAsset sourceSceneAsset, string sceneTemplatePath);
-            PrefabUtility.CreateEmptyPrefab(parentPath);
+            preSceneFile.GetFolderPath().CreateDirIfNotExists();
+            // SceneTemplateService.CreateTemplateFromScene(asset,  preSceneFile);
             logInfo(string.Format("Create {0} Scene Success", script.GetName()));
         }
     }
