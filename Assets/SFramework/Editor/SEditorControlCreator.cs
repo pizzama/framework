@@ -161,6 +161,7 @@ public class SEditorControlCreator : EditorWindow
             gameObject.AddComponent<RectTransform>();
             bool result;
             UnityEngine.Object obj = PrefabUtility.SaveAsPrefabAsset(gameObject, prefabFile, out result);
+            Destroy(obj);
             if(result)
             {
                 logInfo(string.Format("Create {0} Prefab Success", script.GetName()));

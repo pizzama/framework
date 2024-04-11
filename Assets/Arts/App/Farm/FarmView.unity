@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: e9f38da6af7674d40b2896315096c896, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18019708, g: 0.22560975, b: 0.3068714, a: 1}
+  m_IndirectSpecularColor: {r: 0.28113332, g: 0.22954345, b: 0.20258106, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -313,7 +313,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1546781920}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &974816930
 SpriteRenderer:
@@ -520,9 +520,9 @@ Transform:
   - {fileID: 955651094}
   - {fileID: 1649917724}
   - {fileID: 284433472}
+  - {fileID: 974816929}
   - {fileID: 1067121637}
   - {fileID: 598784966}
-  - {fileID: 974816929}
   m_Father: {fileID: 436669112}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1002,6 +1002,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1549164137518465273, guid: cd83a151be708f74d94019a2c6f0c410,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -62
+      objectReference: {fileID: 0}
     - target: {fileID: 1549164137518465275, guid: cd83a151be708f74d94019a2c6f0c410,
         type: 3}
       propertyPath: m_Name
@@ -1020,6 +1025,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932534860159863804, guid: a62ddfb8ee44ac046a4f01df336b43e4,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -73
       objectReference: {fileID: 0}
     - target: {fileID: 1932534860159863805, guid: a62ddfb8ee44ac046a4f01df336b43e4,
         type: 3}
@@ -1085,6 +1095,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1546781920}
     m_Modifications:
+    - target: {fileID: 6795874251809382685, guid: ac1b33f89d40c5d43850c947ed17e3d7,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 79
+      objectReference: {fileID: 0}
     - target: {fileID: 6795874251809382686, guid: ac1b33f89d40c5d43850c947ed17e3d7,
         type: 3}
       propertyPath: m_RootOrder
@@ -1159,6 +1174,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grass
       objectReference: {fileID: 0}
+    - target: {fileID: 8350143430875686334, guid: ef7c1ae00d3ee83488e7c4bf9af32e87,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 8350143430875686335, guid: ef7c1ae00d3ee83488e7c4bf9af32e87,
         type: 3}
       propertyPath: m_RootOrder
@@ -1227,6 +1247,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Grass1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353126875840689822, guid: 86d6d350b4e4ed3499b32f89e10ee6ef,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8353126875840689823, guid: 86d6d350b4e4ed3499b32f89e10ee6ef,
         type: 3}
