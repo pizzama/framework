@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SFramework.Tools;
+using static SEnum;
 
 
 namespace SFramework
@@ -29,8 +30,8 @@ namespace SFramework
         private List<SBundleParams> _openSequenceParams; //执行打开操作的消息队列
         private SMemory<string, string, ISBundle> _bundleMap; //已经启动了的所有模块的管理器
         private Dictionary<string, List<ISBundle>> _bundleObserverMap; //注册消息管理器 
-        [SerializeField]
-        private List<string> _bundleInspector;
+        [SerializeField] private List<string> _bundleInspector;
+        [SerializeField] private Performance _performance;
 
 
         protected virtual void Awake()
@@ -381,6 +382,16 @@ namespace SFramework
 
             ISBundle bundle = GetBundle(fullPath, alias);
             bundle.Close();
+        }
+
+        public void SetPerformance(Performance value)
+        {
+            _performance = value;
+        }
+
+        public Performance GetPerformance()
+        {
+            return _performance;
         }
     }
 }

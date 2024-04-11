@@ -56,9 +56,9 @@ public class SEditorControlCreator : EditorWindow
             nameSpace = prefix + "." + nameSpace;
 
             SCreateTemplateScript sc = new SCreateTemplateScript(nameSpace, name);
-            // createControl(parentPath, sc);
-            // createModel(parentPath, sc);
-            // createView(parentPath, sc, viewType);
+            createControl(parentPath, sc);
+            createModel(parentPath, sc);
+            createView(parentPath, sc, viewType);
 
             parentPath = Application.dataPath + "/Arts/" + prefix + "/" + path;
             if(viewType == 0)
@@ -106,11 +106,6 @@ public class SEditorControlCreator : EditorWindow
     {
         string rt = string.Format("[{0:F}] {1}", System.DateTime.Now, content);
         _logTxts.Add(rt);
-    }
-
-    private string readTemplateFile()
-    {
-        return "";
     }
 
     private void createControl(string parentPath, SCreateTemplateScript script)

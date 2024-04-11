@@ -4,7 +4,7 @@ namespace SFramework.CameraUtils
 {
     public class CameraController : MonoBehaviour
     {
-
+        [SerializeField] private SEnum.MouseClick _mouseClick = SEnum.MouseClick.Left;
         public Transform target;
 
         public float XSpeed = 200;
@@ -31,7 +31,7 @@ namespace SFramework.CameraUtils
         {
             if (target)
             {
-                if (Input.GetMouseButton(1))
+                if (Input.GetMouseButton((int)_mouseClick))
                 {
                     X += Input.GetAxis("Mouse X") * XSpeed * 0.02f;
                     Y -= Input.GetAxis("Mouse Y") * XSpeed * 0.02f;

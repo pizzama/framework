@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.28113332, g: 0.22954345, b: 0.20258106, a: 1}
+  m_IndirectSpecularColor: {r: 0.3611716, g: 0.29468194, b: 0.26063517, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -170,6 +170,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 436669112}
+  - component: {fileID: 436669113}
   m_Layer: 0
   m_Name: Environments
   m_TagString: Untagged
@@ -196,6 +197,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &436669113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436669111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a9fef583e92c5d4dadf385f94caa37d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &598784966 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1549164137518465272, guid: cd83a151be708f74d94019a2c6f0c410,
