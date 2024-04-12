@@ -29,6 +29,7 @@ namespace SFramework.Statics
         public const string App_farm_sfp_Tree1_prefab = "app_farm.sfp/Tree1";
         public const string App_farm_sfp_Tree2_prefab = "app_farm.sfp/Tree2";
         public const string App_farm_sfs_FarmView_unity = "app_farm.sfs/FarmView";
+        public const string App_farm_farmview_sfp_Global_Volume_Profile_asset = "app_farm_farmview.sfp/Global Volume Profile";
         public const string App_farm_ground_sfp_building_farm_png = "app_farm_ground.sfp/building_farm";
         public const string App_farm_ground_sfp_Icon_ui_43050399_png = "app_farm_ground.sfp/Icon_ui_43050399";
         public const string App_farm_ground_sfp_lvdi_001_png = "app_farm_ground.sfp/lvdi_001";
@@ -40,6 +41,11 @@ namespace SFramework.Statics
         public const string App_farm_ground_sfp_lvdi_008_png = "app_farm_ground.sfp/lvdi_008";
         public const string App_farm_ground_sfp_lvdi_009_png = "app_farm_ground.sfp/lvdi_009";
         public const string App_farm_ground_sfp_lvdi_010_png = "app_farm_ground.sfp/lvdi_010";
+        public const string App_farm_house_sfp_PixelTextureGrid_256_png = "app_farm_house.sfp/PixelTextureGrid_256";
+        public const string App_farm_house_sfp_材质_mat = "app_farm_house.sfp/材质";
+        public const string App_farm_texture_sfp_btn_weiyang_01_a_png = "app_farm_texture.sfp/btn_weiyang_01_a";
+        public const string App_farm_texture_sfp_btn_weiyang_01_d_png = "app_farm_texture.sfp/btn_weiyang_01_d";
+        public const string App_pendtips_sfp_PendTipsView_prefab = "app_pendtips.sfp/PendTipsView";
         public const string Game_scenes_sfs_BaseScene_unity = "game_scenes.sfs/BaseScene";
         public const string Game_turpworld_sfp_Turf_mat = "game_turpworld.sfp/Turf";
         public const string Game_turpworld_sfs_TurpWorld_unity = "game_turpworld.sfs/TurpWorld";
@@ -145,7 +151,6 @@ namespace SFramework.Statics
         public const string Pic_tree_materials_sfp_5103524_mat = "pic_tree_materials.sfp/5103524";
         public const string Pic_tree_materials_sfp_5104413_mat = "pic_tree_materials.sfp/5104413";
         public const string Sfscene_sfs_SFSCENE_scenetemplate = "sfscene.sfs/SFSCENE";
-        public const string Sfscene_sfs_SFSCENE_unity = "sfscene.sfs/SFSCENE";
         public const string Ss_test_Test_prefab = "ss/test/Test";
         public const string Suiroot_sfp_SUIROOT_prefab = "suiroot.sfp/SUIROOT";
     }
@@ -193,6 +198,15 @@ namespace SFramework.Statics
         public const string BundleName = "app_farm.sfs";
         public const string RES_FarmView_unity = "FarmView";
     }
+    public class App_farm_farmview
+    {
+        public const string BundleName = "app_farm_farmview";
+    }
+    public class App_farm_farmview_sfp
+    {
+        public const string BundleName = "app_farm_farmview.sfp";
+        public const string RES_Global_Volume_Profile_asset = "Global Volume Profile";
+    }
     public class App_farm_ground
     {
         public const string BundleName = "app_farm_ground";
@@ -211,6 +225,35 @@ namespace SFramework.Statics
         public const string RES_lvdi_008_png = "lvdi_008";
         public const string RES_lvdi_009_png = "lvdi_009";
         public const string RES_lvdi_010_png = "lvdi_010";
+    }
+    public class App_farm_house
+    {
+        public const string BundleName = "app_farm_house";
+    }
+    public class App_farm_house_sfp
+    {
+        public const string BundleName = "app_farm_house.sfp";
+        public const string RES_PixelTextureGrid_256_png = "PixelTextureGrid_256";
+        public const string RES_材质_mat = "材质";
+    }
+    public class App_farm_texture
+    {
+        public const string BundleName = "app_farm_texture";
+    }
+    public class App_farm_texture_sfp
+    {
+        public const string BundleName = "app_farm_texture.sfp";
+        public const string RES_btn_weiyang_01_a_png = "btn_weiyang_01_a";
+        public const string RES_btn_weiyang_01_d_png = "btn_weiyang_01_d";
+    }
+    public class App_pendtips
+    {
+        public const string BundleName = "app_pendtips";
+    }
+    public class App_pendtips_sfp
+    {
+        public const string BundleName = "app_pendtips.sfp";
+        public const string RES_PendTipsView_prefab = "PendTipsView";
     }
     public class Game_scenes
     {
@@ -500,7 +543,6 @@ namespace SFramework.Statics
     {
         public const string BundleName = "sfscene.sfs";
         public const string RES_SFSCENE_scenetemplate = "SFSCENE";
-        public const string RES_SFSCENE_unity = "SFSCENE";
     }
     public class Ss_test
     {
