@@ -11,6 +11,10 @@ namespace App.PendTips
 		{
 			return ViewOpenType.Single;
 		}
+		protected override UILayer GetViewLayer()
+		{
+			return UILayer.Popup;
+		}
 		protected override void opening()
 		{
 			// Code Here

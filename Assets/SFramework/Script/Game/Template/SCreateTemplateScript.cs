@@ -93,7 +93,7 @@ public class SCreateTemplateScript
         writer.AppendLine("\t\t\treturn ViewOpenType.Single;");
         writer.AppendLine("\t\t}");
 
-        if (index == 2)
+        if (index == 1)
         {
             writer.AppendLine("\t\tprotected override UILayer GetViewLayer()");
             writer.AppendLine("\t\t{");
