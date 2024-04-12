@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
-using UnityEngine;
 using SFramework.Extension;
+using UnityEditor;
 using UnityEditor.SceneTemplate;
+using UnityEngine;
 
 public class SEditorControlCreator : EditorWindow
 {
@@ -21,16 +21,16 @@ public class SEditorControlCreator : EditorWindow
         window.Show();
     }
 
-
     private void OnGUI()
     {
-        _selectIndex = SEditorGUI.Popup("ViewType:",
-            _selectIndex,
-            options);
+        _selectIndex = SEditorGUI.Popup("ViewType:", _selectIndex, options);
         EditorGUILayout.Space();
         EditorGUILayout.BeginVertical();
         EditorGUILayout.Space();
-        EditorGUILayout.HelpBox("Input path example:App is default prefix you only need submit path as namespace and name such as Test/Test1", MessageType.Info);
+        EditorGUILayout.HelpBox(
+            "Input path example:App is default prefix you only need submit path as namespace and name such as Test/Test1",
+            MessageType.Info
+        );
         pathText = EditorGUILayout.TextField("Input path:", pathText);
         EditorGUILayout.Space();
         if (GUILayout.Button("Create"))
@@ -48,7 +48,7 @@ public class SEditorControlCreator : EditorWindow
         {
             int index = pathText.LastIndexOf("/");
             string path = "";
-            if(index > 0)
+            if (index > 0)
                 path = pathText.Substring(0, index);
             string name = pathText.Substring(index + 1, pathText.Length - index - 1);
             string parentPath = Application.dataPath + "/Script/" + prefix + "/" + path;
@@ -61,7 +61,7 @@ public class SEditorControlCreator : EditorWindow
             createView(parentPath, sc, viewType);
 
             parentPath = Application.dataPath + "/Arts/" + prefix + "/" + path;
-            if(viewType == 0)
+            if (viewType == 0)
             {
                 createScenePrefab(parentPath, sc);
             }
@@ -150,20 +150,34 @@ public class SEditorControlCreator : EditorWindow
     private void createUIPrefab(string parentPath, SCreateTemplateScript script)
     {
         var prefabFile = string.Format(parentPath + "/{0}View.prefab", (script.GetName()));
+        GameObject gameObject = null;
         if (!File.Exists(prefabFile))
         {
-            GameObject gameObject = new GameObject("EmptyPrefab");
-            gameObject.AddComponent<RectTransform>();
-            bool result;
-            UnityEngine.Object obj = PrefabUtility.SaveAsPrefabAsset(gameObject, prefabFile, out result);
-            Destroy(obj);
-            if(result)
+            prefabFile.GetFolderPath().CreateDirIfNotExists();
+            try
             {
-                logInfo(string.Format("Create {0} Prefab Success", script.GetName()));
+                gameObject = new GameObject("EmptyPrefab");
+                gameObject.AddComponent<RectTransform>();
+                bool result;
+                UnityEngine.Object obj = PrefabUtility.SaveAsPrefabAsset(
+                    gameObject,
+                    prefabFile,
+                    out result
+                );
+                Destroy(gameObject);
+                if (result)
+                {
+                    logInfo(string.Format("Create {0} Prefab Success", script.GetName()));
+                }
+                else
+                {
+                    logInfo(string.Format("Create {0} Prefab Error", script.GetName()));
+                }
             }
-            else
+            catch (System.Exception)
             {
-                logInfo(string.Format("Create {0} Prefab Error", script.GetName()));
+                if(gameObject != null)
+                    Destroy(gameObject);
             }
         }
         else
@@ -177,7 +191,11 @@ public class SEditorControlCreator : EditorWindow
         var preSceneFile = string.Format(parentPath + "/{0}View.unity", (script.GetName()));
         if (!File.Exists(preSceneFile))
         {
-            string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName("sfscene.sfs", "sfscene");
+            string[] assetPaths =
+                UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(
+                    "sfscene.sfs",
+                    "sfscene"
+                );
             SceneAsset asset = UnityEditor.AssetDatabase.LoadAssetAtPath<SceneAsset>(assetPaths[0]);
             // SceneTemplate.CreateSceneTemplate(string sceneTemplatePath)
             preSceneFile.GetFolderPath().CreateDirIfNotExists();

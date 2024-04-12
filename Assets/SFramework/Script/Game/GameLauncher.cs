@@ -34,6 +34,7 @@ namespace SFramework
 
         protected void initAllControl()
         {
+            //Otherwise you must init all control by manual 
             List<Type> controls = ReflectionTools.GetTypesFormTypeWithAllAssembly(typeof(SControl));
             for (int i = 0; i < controls.Count; i++)
             {
