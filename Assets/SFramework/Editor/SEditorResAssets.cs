@@ -51,7 +51,7 @@ namespace SFramework
                 EditorUtility.DisplayDialog("Error", err.ToString(), "OK");
             }
 
-            EditorUtility.DisplayDialog("Success", "Collect All Controls From Scripts", "OK");
+            EditorUtility.DisplayDialog("Success", "Deal All AssetBundle From Assets/Arts Folder is done", "OK");
         }
 
         private void cleanAssetBundleFromArtsFolder()
@@ -79,7 +79,7 @@ namespace SFramework
                 EditorUtility.DisplayDialog("Error", err.ToString(), "OK");
             }
 
-            EditorUtility.DisplayDialog("Success", "Clean All AssetBundle From Assets/Arts Folder is done", "OK");
+            EditorUtility.DisplayDialog("Success", "Collect All Controls From Scripts", "OK");
 
         }
 

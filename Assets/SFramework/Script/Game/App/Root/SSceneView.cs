@@ -9,6 +9,7 @@ namespace SFramework.Game
 {
     public abstract class SSCENEView : RootView
     {
+        private const string defaultVariantName = "sfs";
         private List<string> _buildInSceneNames;
         private Dictionary<string, GameObject> goDict;
         protected string mAbPath; //scene asset bundle path
@@ -123,7 +124,7 @@ namespace SFramework.Game
             System.Type tp = GetType();
             string path = tp.Namespace;
             path = path.Replace('.', '_');
-            prefabPath = path + ".sfs";
+            prefabPath = path + "." + defaultVariantName;
             prefabName = tp.Name;
         }
 

@@ -9,7 +9,7 @@ namespace SFramework.Game
 {
     public abstract class SUIView : RootView
     {
-        private const string defaultVariantName = "sf";
+        private const string defaultVariantName = "sfp";
         //set the ui in which layer
         protected abstract UILayer GetViewLayer();
         protected Dictionary<string, GameObject> goDict;

@@ -8,15 +8,15 @@ namespace Game
 {
     public class GameApp : GameLauncher
     {
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)] //not load unity logo
-        // [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)] //not load unity logo
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Initialize()
         {
-            // Scene scene = SceneManager.GetActiveScene();
-            // if (!scene.name.Equals("Loading"))
-            // {
-            //     SceneManager.LoadScene("Loading");
-            // }
+            Scene scene = SceneManager.GetActiveScene();
+            if (!scene.name.Equals("Loading"))
+            {
+                SceneManager.LoadScene("Loading");
+            }
         }
 
         protected override void installBundle()
@@ -30,7 +30,7 @@ namespace Game
             initAllControl();
             //BundleManager.Instance.OpenControl(SFStaticsControl.Game_GameMainControl);
             // SBundleManager.Instance.OpenControl(SFStaticsControl.App_TurfWorld_TurfWorldControl);
-            // SBundleManager.Instance.OpenControl(SFStaticsControl.App_Farm_FarmControl);
+            SBundleManager.Instance.OpenControl(SFStaticsControl.App_Loading_LoadingControl);
         }
     }
 }

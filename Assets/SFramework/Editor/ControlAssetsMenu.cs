@@ -56,7 +56,6 @@ namespace SFramework
 			if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 			path = path + "/" + StaticControlClassName + ".cs";
 			var writer = new StreamWriter(File.Open(path, FileMode.Create));
-
 			provider.GenerateCodeFromCompileUnit(compileUnit, writer, options);
 			writer.Close();
 			AssetDatabase.Refresh();
