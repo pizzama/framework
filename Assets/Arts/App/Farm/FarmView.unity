@@ -1056,7 +1056,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1639423694}
   - component: {fileID: 1639423695}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Global Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1091,7 +1091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsGlobal: 1
-  priority: 0
+  priority: 1
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 5364ca8e5e21b4c49a3f0c807e5003fd, type: 2}
@@ -1436,7 +1436,7 @@ PrefabInstance:
     - target: {fileID: 4399082311643781616, guid: c70aac0028afd42eabc9e0c55824c824,
         type: 3}
       propertyPath: m_Depth
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4399082311643781616, guid: c70aac0028afd42eabc9e0c55824c824,
         type: 3}
