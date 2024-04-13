@@ -26,6 +26,6 @@ Material:
     - _Saturation: 1
     - _ScreenSpace: 0
     m_Colors:
-    - _BottomColor: {r: 0, g: 0.29312822, b: 0.5283019, a: 0}
-    - _TopColor: {r: 1, g: 1, b: 1, a: 0}
+    - _BottomColor: {r: 1, g: 0.6431373, b: 0.3647059, a: 0}
+    - _TopColor: {r: 0, g: 0.8117647, b: 1, a: 0}
   m_BuildTextureStacks: []

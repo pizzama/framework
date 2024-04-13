@@ -9,8 +9,8 @@ namespace SFramework.Test
         // Start is called before the first frame update
         void Start()
         {
-            Application.targetFrameRate = 60;
-            Application.runInBackground = true;
+            Application.targetFrameRate = 100;
+            Debug.Log("Application target frame set rate 100");
         }
 
         // Update is called once per frame

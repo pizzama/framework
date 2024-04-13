@@ -1,5 +1,6 @@
 using UnityEngine;
 using SFramework;
+using SFramework.Statics;
 
 namespace App.Loading
 {
@@ -8,6 +9,7 @@ namespace App.Loading
 		protected override void opening()
 		{
 			// Code Here
+			OpenControl(SFStaticsControl.App_Farm_FarmControl);
 		}
 	}
 }

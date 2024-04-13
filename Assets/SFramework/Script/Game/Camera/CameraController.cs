@@ -5,6 +5,8 @@ namespace SFramework.CameraUtils
     public class CameraController : MonoBehaviour
     {
         [SerializeField] private SEnum.MouseClick _mouseClick = SEnum.MouseClick.Left;
+        [SerializeField] private Vector2 _lockX = new Vector2();
+        [SerializeField] private Vector2 _lockY = new Vector2();
         public Transform target;
 
         public float XSpeed = 200;
@@ -35,6 +37,22 @@ namespace SFramework.CameraUtils
                 {
                     X += Input.GetAxis("Mouse X") * XSpeed * 0.02f;
                     Y -= Input.GetAxis("Mouse Y") * XSpeed * 0.02f;
+                    // if (_lockX.x < _lockX.y)
+                    // {
+                    //     if (X < _lockX.x)
+                    //         X = _lockX.x;
+                    //     if (X > _lockX.y)
+                    //         X = _lockX.y;
+
+                    //     if (Y < _lockY.x)
+                    //         Y = _lockY.x;
+                    //     if (Y > _lockY.y)
+                    //         Y = _lockY.y;
+                    // }
+
+
+                    Debug.Log("lock x y" + X + ";" + Y);
+
                     Y = clampAngle(Y, YMinLimit, YMaxLimit);
                 }
 

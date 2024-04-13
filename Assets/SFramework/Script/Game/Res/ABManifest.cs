@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using System.Text;
+using Unity.VisualScripting;
 
 namespace SFramework
 {
@@ -34,7 +36,6 @@ namespace SFramework
         {
             if (ABPathHelper.SimulationMode)
                 return;
-            // string path = Path.Combine(Application.streamingAssetsPath, ABPathHelper.GetPlatformName());
             try
             {
                 string path = ABPathHelper.GetResPathInPersistentOrStream(ABPathHelper.GetPlatformName());
@@ -42,8 +43,16 @@ namespace SFramework
                 if (_mainBundle != null)
                 {
                     _manifest = _mainBundle.LoadAsset<AssetBundleManifest>("AssetBundleMainfest");
-                    _allBundleVariants = _manifest.GetAllAssetBundlesWithVariant().ToList();
-                    _allBundles = _manifest.GetAllAssetBundles().ToList();
+                    if (_manifest != null)
+                    {
+                        _allBundleVariants = _manifest.GetAllAssetBundlesWithVariant().ToList();
+                        _allBundles = _manifest.GetAllAssetBundles().ToList();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("AssetBundleMainfest not found");
+                    }
+
                 }
                 else
                 {

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1549164137518465272}
   - component: {fileID: 1549164137518465273}
   - component: {fileID: 3219984599733595519}
+  - component: {fileID: 2555210631641138423}
   m_Layer: 0
   m_Name: Tree2
   m_TagString: Untagged
@@ -41,8 +42,8 @@ SpriteRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1549164137518465275}
   m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
+  m_CastShadows: 2
+  m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -131
   m_Sprite: {fileID: 21300000, guid: bc3d7084b4994394383610b1f3004cf7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -95,5 +96,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2365e252a227471b985e90d6d0cbb645, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2555210631641138423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549164137518465275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a8337b854ec4a259bc9a08d019f5e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
