@@ -130,7 +130,7 @@ namespace SFramework.Build
                             {
                                 Debug.LogException(e);
 
-                                if (EditorUtility.DisplayDialog("提示", "游戏打包失败!", "确定"))
+                                if (EditorUtility.DisplayDialog("提示", string.Format("游戏打包失败!{0}", e.ToString()), "确定"))
                                 {
                                     //EditorUtility.RevealInFinder(Application.dataPath);
                                 }
