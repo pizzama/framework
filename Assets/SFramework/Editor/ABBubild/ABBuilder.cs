@@ -13,7 +13,7 @@ namespace SFramework.Build
         readonly string ConfigKey = "app_build_key";
         List<ABConfig> Configs = new List<ABConfig>();
 
-        [MenuItem("Tool/ABNew/Open Build Window", false, 100)]
+        [MenuItem("SFrameWork/Editor/Build Window", false, 100)]
         public static void Open()
         {
             var window = GetWindow<ABBuilder>($"打包工具");
