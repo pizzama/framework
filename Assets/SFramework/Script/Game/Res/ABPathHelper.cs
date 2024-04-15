@@ -12,6 +12,9 @@ namespace SFramework
 {
     public class ABPathHelper
     {
+        public const string LocalConfigUrl = "LocalConfig.ini";
+        public const string VersionUrl = "Version.txt";
+        public const string VersionConfigUrl = "VersionConfig.version";
         // 资源路径，优先返回外存资源路径
         public static string GetResPathInPersistentOrStream(string relativePath)
         {
@@ -38,7 +41,7 @@ namespace SFramework
 
         private static string _persistentDataPath;
         private static string _streamingAssetsPath;
-        // 外部目录  
+        // ExtApp Package Path
         public static string PersistentDataPath
         {
             get
@@ -52,7 +55,7 @@ namespace SFramework
             }
         }
 
-        // 内部目录
+        // InAPP Package Path 
         public static string StreamingAssetsPath
         {
             get
@@ -66,12 +69,30 @@ namespace SFramework
             }
         }
 
+        // ExtApp HotFix Package Path 
+        public static string HotFixResPath
+        {
+            get 
+            {
+                return StreamingAssetsPath + "Resources"; 
+            }
+        }
+        
         public static string GetPlatformName()
         {
 #if UNITY_EDITOR
             return GetPlatformForAssetBundles(EditorUserBuildSettings.activeBuildTarget);
 #else
 			return GetPlatformForAssetBundles(UnityEngine.Application.platform);
+#endif
+        }
+
+        public static BuildTarget GetPlatformBuildTarget()
+        {
+#if UNITY_EDITOR
+            return EditorUserBuildSettings.activeBuildTarget;
+#else
+			return UnityEngine.Application.platform;
 #endif
         }
 
@@ -193,6 +214,24 @@ namespace SFramework
             get { return false; }
             set {  }
 #endif
+        }
+
+        /// <summary>
+        /// 获取 所有的 Files
+        /// </summary>
+        /// <param name="directoryInfo"></param>
+        /// <param name="allFiles"></param>
+        public static void GetAllFiles(DirectoryInfo directoryInfo, List<FileInfo> allFiles)
+        {
+            foreach (var file in directoryInfo.GetFiles())
+            {
+                allFiles.Add(file);
+            }
+
+            foreach (var director in directoryInfo.GetDirectories())
+            {
+                GetAllFiles(director, allFiles);
+            }
         }
     }
 }
