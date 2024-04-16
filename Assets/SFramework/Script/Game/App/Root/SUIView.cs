@@ -9,7 +9,6 @@ namespace SFramework.Game
 {
     public abstract class SUIView : RootView
     {
-        private const string defaultVariantName = "sfp";
         //set the ui in which layer
         protected abstract UILayer GetViewLayer();
         protected Dictionary<string, GameObject> goDict;
@@ -56,7 +55,7 @@ namespace SFramework.Game
             Type tp = GetType();
             string path = tp.Namespace;
             path = path.Replace('.', '_');
-            prefabPath = path + "." + defaultVariantName;
+            prefabPath = path + "." + AssetsManager.PrefabExtendName;
             prefabName = tp.Name;
             position = new Vector3(0, 0, 0);
             rotation = Quaternion.Euler(0, 0, 0);

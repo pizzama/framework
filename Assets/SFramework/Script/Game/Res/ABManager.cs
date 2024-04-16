@@ -23,7 +23,7 @@ namespace SFramework
         public void Destroy()
         {
             UnloadAllAssets();
-            if(_abCache != null)
+            if (_abCache != null)
                 _abCache.Clear();
             _instance = null;
         }
@@ -90,6 +90,20 @@ namespace SFramework
                 return mainInfo;
             }
         }
+
+        public ABInfo LoadABInfo(string abName)
+        {
+            if (ABPathHelper.SimulationMode)
+            {
+                ABInfo info = new ABInfo();
+                info.HashName = abName;
+                return info;
+            }
+            //加载目标包
+            ABInfo ab = LoadABPackage(abName);
+            return ab;
+        }
+
         // 同步加载资源---泛型加载
         //Sprite sp = abManager.LoadResource<Sprite>("a_png", "a");
         public T LoadResource<T>(string abName, string resName) where T : Object
@@ -207,6 +221,19 @@ namespace SFramework
 
                 return mainInfo;
             }
+        }
+
+        public async UniTask<ABInfo> LoadABInfoAsync(string abName)
+        {
+            if (ABPathHelper.SimulationMode)
+            {
+                ABInfo info = new ABInfo();
+                info.HashName = abName;
+                return info;
+            }
+            //加载目标包
+            ABInfo ab = await LoadABPackageAsync(abName);
+            return ab;
         }
         // 异步加载资源---泛型加载
         //Sprite sp = await abManager.LoadResourceAsync<Sprite>("a_png", "a");

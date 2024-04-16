@@ -9,6 +9,8 @@ namespace SFramework
 {
     public class AssetsManager
     {
+        public const string PrefabExtendName = "sfp";
+        public const string SceneExtendName = "sfs";
         private static AssetsManager _instance;
         public static AssetsManager Instance
         {
@@ -23,9 +25,9 @@ namespace SFramework
         public void Destroy()
         {
             ABManager.Instance.Destroy();
-            if(_resCache != null)
+            if (_resCache != null)
                 _resCache.Clear();
-            if(_bundleCache != null)
+            if (_bundleCache != null)
                 _bundleCache.Clear();
             _instance = null;
         }
@@ -73,6 +75,11 @@ namespace SFramework
             }
         }
 
+        public ABInfo LoadBundle(string path)
+        {
+            return ABManager.Instance.LoadABInfo(path);
+        }
+
         public T LoadFromBundle<T>(string path) where T : UnityEngine.Object
         {
             int index = path.LastIndexOf("/");
@@ -118,6 +125,11 @@ namespace SFramework
             abName = abName.ToLower();
             List<T> result = ABManager.Instance.LoadResourceWithSubResource<T>(abName);
             return result;
+        }
+
+        public async UniTask<ABInfo> LoadBundleAsync(string path)
+        {
+           return await ABManager.Instance.LoadABInfoAsync(path);
         }
 
         public async UniTask<T> LoadFromBundleAsync<T>(string path) where T : UnityEngine.Object

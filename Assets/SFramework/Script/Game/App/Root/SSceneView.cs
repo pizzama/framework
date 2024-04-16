@@ -9,7 +9,6 @@ namespace SFramework.Game
 {
     public abstract class SSCENEView : RootView
     {
-        private const string defaultVariantName = "sfs";
         private List<string> _buildInSceneNames;
         private Dictionary<string, GameObject> goDict;
         protected string mAbPath; //scene asset bundle path
@@ -79,16 +78,16 @@ namespace SFramework.Game
             if (!_buildInSceneNames.Contains(scenePath))
             {
                 //load scene from ab bundle
-                UnityEngine.Object request = await assetManager.LoadFromBundleAsync<UnityEngine.Object>(scenePath, sceneName);
+                ABInfo request = await assetManager.LoadBundleAsync(scenePath);
                 if (request != null)
                 {
 #if UNITY_EDITOR
-                    if (request is not UnityEditor.SceneAsset)//check current assets is or not scene assets
-                    {
-                        return null;
-                    }
-                    string obj_path = UnityEditor.AssetDatabase.GetAssetPath(request);
-                    operation = UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(obj_path, new LoadSceneParameters(mode));
+                    // if (request.AssetBundle is not UnityEditor.SceneAsset)//check current assets is or not scene assets
+                    // {
+                    //     return null;
+                    // }
+                    // string obj_path = UnityEditor.AssetDatabase.GetAssetPath(request);
+                    operation = UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(scenePath, new LoadSceneParameters(mode));
 #else
 
 #endif
@@ -124,7 +123,7 @@ namespace SFramework.Game
             System.Type tp = GetType();
             string path = tp.Namespace;
             path = path.Replace('.', '_');
-            prefabPath = path + "." + defaultVariantName;
+            prefabPath = path + "." + AssetsManager.SceneExtendName;
             prefabName = tp.Name;
         }
 
