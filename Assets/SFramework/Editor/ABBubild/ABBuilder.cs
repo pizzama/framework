@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
-using UnityEditor;
+using System.Runtime.Serialization.Formatters.Binary;
 using Newtonsoft.Json;
-
+using UnityEditor;
+using UnityEngine;
 
 namespace SFramework.Build
 {
     public class ABBuilder : EditorWindow
     {
+        private const string ConfigPath = "/Library/ABBuilder.dat";
         readonly string ConfigKey = "app_build_key";
         List<ABConfig> Configs = new List<ABConfig>();
 
@@ -18,22 +19,23 @@ namespace SFramework.Build
         {
             var window = GetWindow<ABBuilder>($"打包工具");
             window.Show();
-            window.Load();
         }
 
-        void Load()
+        private void readConfig()
         {
-            Configs.Clear();
-            // <TestCode>
-            //PlayerPrefs.DeleteKey(ConfigKey);
-            if (PlayerPrefs.HasKey(ConfigKey))
+            var dataPath = System.IO.Path.GetFullPath(".");
+            dataPath = dataPath.Replace("\\", "/");
+            dataPath += ConfigPath;
+
+            if (File.Exists(dataPath))
             {
-                var json = PlayerPrefs.GetString(ConfigKey);
-                //Debug.LogError($"ab builder: load, {json}");
-                // Configs = JSON.Decode<List<BuildConfig>>(json);
-                Configs = JsonConvert.DeserializeObject<List<ABConfig>>(json);
+                FileStream file = File.Open(dataPath, FileMode.Open);
+                BinaryFormatter bf = new BinaryFormatter();
+                Configs = bf.Deserialize(file) as List<ABConfig>;
+                file.Close();
             }
-            else
+
+            if(Configs.Count == 0)
             {
                 Configs = new List<ABConfig>()
                 {
@@ -41,35 +43,42 @@ namespace SFramework.Build
                     ABConfig.Create(BuildTarget.Android, BuildType.Release),
                     ABConfig.Create(BuildTarget.Android, BuildType.Publish),
                 };
-                Save();
+
             }
         }
 
-        void Save()
+        private void writeConfig()
         {
-            // string json = JSON.Encode(Configs);
-            string json = JsonConvert.SerializeObject(Configs);
-            //Debug.LogError($"ab builder: save, {json}");
-            PlayerPrefs.SetString(ConfigKey, json);
-            PlayerPrefs.Save();
+            var dataPath = System.IO.Path.GetFullPath(".");
+            dataPath = dataPath.Replace("\\", "/");
+            dataPath += ConfigPath;
+
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(dataPath);
+            bf.Serialize(file, Configs);
+            file.Close();
         }
 
-        void Build(ABConfig config)
+        private void OnEnable()
         {
-            var text = File.ReadAllText($"Assets/StreamingAssets/{config.ProfileName}");
-            File.WriteAllText($"Assets/StreamingAssets/{ABPathHelper.LocalConfigUrl}", text);
+            readConfig();
+        }
 
-            ABBuildHelper.Build(new BuildSetting()
-            {
-                Version = config.MainVersion,
-                VersionCode = config.VersionCode,
-                buildAB = config.BuildAB,
-                IsDebug = config.IsDebug,
-                useObb = config.UseObb,
-                isBuildPackage = true,
-                assetsBuildPath = config.UploadRoot,
-                tempBuildPath = config.PackageRoot,
-            }, false, config.Version);
+        private void OnDisable()
+        {
+            if(Configs.Count > 0)
+                writeConfig();
+            else
+                Configs.Clear();
+        }
+
+        private void startBuild(ABConfig config)
+        {
+            ABBuildHelper.Build(
+                config,
+                false,
+                config.Version
+            );
         }
 
         //GUIStyle style = GUIStyle.none;
@@ -77,6 +86,7 @@ namespace SFramework.Build
         bool toggle = false;
         BuildTarget target = BuildTarget.Android;
         BuildType type = BuildType.Develop;
+
         //
         Vector2 scrollPosition = Vector2.zero;
 
@@ -93,7 +103,6 @@ namespace SFramework.Build
                 if (GUILayout.Button("创建配置"))
                 {
                     Configs.Add(ABConfig.Create(target, type));
-                    Save();
                 }
             }
 
@@ -105,32 +114,47 @@ namespace SFramework.Build
 
             for (int i = 0; i < Configs.Count; i++)
             {
-                bool foldout = EditorGUILayout.BeginFoldoutHeaderGroup(Configs[i].Foldout, $"{Configs[i].Key}");
+                bool foldout = EditorGUILayout.BeginFoldoutHeaderGroup(
+                    Configs[i].Foldout,
+                    $"{Configs[i].Key}"
+                );
 
                 if (Configs[i].Foldout != foldout)
                 {
                     Configs[i].Foldout = foldout;
-                    Save();
                 }
                 if (Configs[i].Foldout)
-                {    
+                {
                     Draw(Configs[i]);
 
                     EditorGUILayout.BeginHorizontal();
 
                     if (GUILayout.Button("开始打包"))
                     {
-                        if (EditorUtility.DisplayDialog("提示", "确定要开始打包么？如果是升了新版本号请确定对应的资源目录是否需要拷贝资源否则时间会过长！", "确定", "取消"))
+                        if (
+                            EditorUtility.DisplayDialog(
+                                "提示",
+                                "确定要开始打包么？如果是升了新版本号请确定对应的资源目录是否需要拷贝资源否则时间会过长！",
+                                "确定",
+                                "取消"
+                            )
+                        )
                         {
                             try
                             {
-                                Build(Configs[i]);
+                                startBuild(Configs[i]);
                             }
                             catch (Exception e)
                             {
                                 Debug.LogException(e);
 
-                                if (EditorUtility.DisplayDialog("提示", string.Format("游戏打包失败!{0}", e.ToString()), "确定"))
+                                if (
+                                    EditorUtility.DisplayDialog(
+                                        "提示",
+                                        string.Format("游戏打包失败!{0}", e.ToString()),
+                                        "确定"
+                                    )
+                                )
                                 {
                                     //EditorUtility.RevealInFinder(Application.dataPath);
                                 }
@@ -143,7 +167,6 @@ namespace SFramework.Build
                         if (EditorUtility.DisplayDialog("提示", "确定要删除这条打包配置么？", "确定", "取消"))
                         {
                             Configs.RemoveAt(i);
-                            Save();
                         }
                     }
 
@@ -165,17 +188,16 @@ namespace SFramework.Build
                 {
                     EditorGUI.BeginDisabledGroup(true);
                     //GUI.enabled = false;
-                    var target = (BuildTarget)EditorGUILayout.EnumPopup("BuildTarget: ", config.Target);
+                    var target = (BuildTarget)
+                        EditorGUILayout.EnumPopup("BuildTarget: ", config.Target);
                     if (config.Target != target)
                     {
                         config.Target = target;
-                        Save();
                     }
                     var type = (BuildType)EditorGUILayout.EnumPopup("BuildType: ", config.Type);
                     if (config.Type != type)
                     {
                         config.Type = type;
-                        Save();
                     }
                     //GUI.enabled = true;
                     EditorGUI.EndDisabledGroup();
@@ -192,14 +214,12 @@ namespace SFramework.Build
                 if (config.MainVersion != manor)
                 {
                     config.MainVersion = manor;
-                    Save();
                 }
                 EditorGUILayout.HelpBox("子版本号，即资源版本号", MessageType.Info);
                 int minor = EditorGUILayout.IntField("子版本号：", config.SubVersion);
                 if (config.SubVersion != minor)
                 {
                     config.SubVersion = minor;
-                    Save();
                 }
                 EditorGUILayout.LabelField("Version: ", config.Version);
                 EditorGUILayout.LabelField("VersionCode: ", config.VersionCode);
@@ -214,7 +234,6 @@ namespace SFramework.Build
                 if (config.BuildAB != buildAb)
                 {
                     config.BuildAB = buildAb;
-                    Save();
                 }
                 {
                     EditorGUI.BeginDisabledGroup(true);
@@ -243,8 +262,11 @@ namespace SFramework.Build
                 if (GUILayout.Button("选择目录"))
                 {
                     config.CheckUploadRoot();
-                    config.UploadRoot = EditorUtility.OpenFolderPanel("资源包导出目录", config.UploadRoot, config.DefaultUploadFolder);
-                    Save();
+                    config.UploadRoot = EditorUtility.OpenFolderPanel(
+                        "资源包导出目录",
+                        config.UploadRoot,
+                        config.DefaultUploadFolder
+                    );
                 }
                 EditorGUILayout.EndHorizontal();
             }
@@ -255,8 +277,11 @@ namespace SFramework.Build
                 if (GUILayout.Button("选择目录"))
                 {
                     config.CheckPackageRoot();
-                    config.PackageRoot = EditorUtility.OpenFolderPanel("游戏包导出目录", config.PackageRoot, config.DefaultPackageFolder);
-                    Save();
+                    config.PackageRoot = EditorUtility.OpenFolderPanel(
+                        "游戏包导出目录",
+                        config.PackageRoot,
+                        config.DefaultPackageFolder
+                    );
                 }
                 EditorGUILayout.EndHorizontal();
             }

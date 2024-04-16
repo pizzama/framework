@@ -134,20 +134,20 @@ namespace SFramework.Build
             MainVersion = "1.0.0",
             SubVersion = 0,
             BuildAB = true,
-            //
+            IsBuildPackage = true,
             Foldout = true,
-            //
-            //UploadRoot = DefaultUploadRoot,
-            //PackageRoot = DefaultPackageRoot,
         };
 
         #region Layout
 
         /// <summary>
-        /// 折叠开关
+        /// Whether Or Not BuildPackage
         /// </summary>
         [XmlElement]
-        public bool Foldout;
+        public bool IsBuildPackage;
+
+        [XmlElement]
+        public bool Foldout; //whether or not foldout tap
 
         #endregion
 
@@ -184,11 +184,8 @@ namespace SFramework.Build
                 MainVersion = PlayerSettings.bundleVersion,
                 SubVersion = 0,
                 BuildAB = true,
-                //
+                IsBuildPackage = true,
                 Foldout = true,
-                //
-                //UploadRoot = DefaultUploadRoot,
-                //PackageRoot = DefaultPackageRoot,
             };
             buildConfig.UploadRoot = buildConfig.DefaultUploadRoot;
             buildConfig.PackageRoot = buildConfig.DefaultPackageRoot;

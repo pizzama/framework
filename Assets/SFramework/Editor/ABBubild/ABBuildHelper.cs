@@ -16,7 +16,7 @@ namespace SFramework.Build
         /// <param name="platformType"> 平台 </param>
         /// <param name="buildSetting"> setting</param>
         public static void Build(
-            BuildSetting buildSetting,
+            ABConfig config,
             bool isHot = false,
             string AppVersion = ""
         )
@@ -25,20 +25,15 @@ namespace SFramework.Build
 
             BuildTarget buildTarget = ABPathHelper.GetPlatformBuildTarget();
 
-            var uploadRoot = string.IsNullOrEmpty(buildSetting.AssetsVersion)
-                ? $"Upload/{platformType}/{buildSetting.Version}/"
-                : $"Upload/{platformType}/{buildSetting.AssetsVersion}/";
+            string uploadRoot = $"Upload/{platformType}/{config.Version}/";
 
-            if (!string.IsNullOrEmpty(buildSetting.assetsBuildPath))
+            if (!string.IsNullOrEmpty(config.UploadRoot))
             {
-                //uploadRoot = string.IsNullOrEmpty(buildSetting.AssetsVersion)
-                //    ? $"{buildSetting.assetsBuildPath}/{platformType}/{buildSetting.Version}/"
-                //    : $"{buildSetting.assetsBuildPath}/{platformType}/{buildSetting.AssetsVersion}/";
                 uploadRoot =
-                    $"{buildSetting.assetsBuildPath}/{platformType}/{buildSetting.Version}/";
+                    $"{config.UploadRoot}/{platformType}/{config.Version}/";
             }
 
-            if (buildSetting.buildAB)
+            if (config.BuildAB)
             {
                 var uploadAbPath = $"{uploadRoot}{platformType}";
                 // 不能删除缓存（AB包缓存）
@@ -140,18 +135,18 @@ namespace SFramework.Build
                 }
             }
 
-            if (buildSetting.isBuildPackage)
+            if (config.IsBuildPackage)
             {
-                var packagePath = $"Package/{platformType}/{buildSetting.Version}/";
+                var packagePath = $"Package/{platformType}/{config.Version}/";
 
-                if (!string.IsNullOrEmpty(buildSetting.tempBuildPath))
+                if (!string.IsNullOrEmpty(config.PackageRoot))
                 {
                     packagePath =
-                        $"{buildSetting.tempBuildPath}/{platformType}/{buildSetting.Version}/";
+                        $"{config.PackageRoot}/{platformType}/{config.Version}/";
                 }
 
                 Debug.Log("======================Start  BuildPackage======================");
-                BuildPackage(buildSetting, packagePath);
+                BuildPackage(config, packagePath);
                 Debug.Log("======================BuildPackage  Success======================");
 
                 //if (EditorUtility.DisplayDialog("提示", "游戏打包成功!", "确定"))
@@ -364,26 +359,26 @@ namespace SFramework.Build
         /// <param name="setting"></param>
         /// <param name="rootUrl"></param>
         private static void BuildPackage(
-            BuildSetting setting,
+            ABConfig config,
             string rootUrl
         )
         {
             //SVNTools.SVNToolUpdateAll();
-            if (setting == null)
+            if (config == null)
             {
-                throw new ArgumentNullException(nameof(setting));
+                throw new ArgumentNullException(nameof(config));
             }
 
             var packageName =
                 PlayerSettings.productName.Replace(" ", "").Replace(":", "")
                 + "_"
-                + setting.Version
+                + config.Version
                 + "_"
-                + setting.VersionCode
-                + (setting.IsDebug ? "_Debug_" : "_Release_")
+                + config.VersionCode
+                + (config.IsDebug ? "_Debug_" : "_Release_")
                 + DateTime.Now.ToString("MMdd_HHmm");
 
-            rootUrl = $"{rootUrl}{(setting.IsDebug ? "DebugPackage" : "ReleasePackage")}/";
+            rootUrl = $"{rootUrl}{(config.IsDebug ? "DebugPackage" : "ReleasePackage")}/";
             var packageDirPath = (rootUrl + packageName);
             if (Directory.Exists(packageDirPath))
             {
@@ -418,13 +413,13 @@ namespace SFramework.Build
                 Directory.CreateDirectory(rootUrl);
             }
 
-            EditorUserBuildSettings.allowDebugging = setting.IsDebug;
-            EditorUserBuildSettings.development = setting.IsDebug;
+            EditorUserBuildSettings.allowDebugging = config.IsDebug;
+            EditorUserBuildSettings.development = config.IsDebug;
             // EditorUserBuildSettings.connectProfiler = setting.IsDebug;
-            EditorUserBuildSettings.buildWithDeepProfilingSupport = setting.IsDebug;
+            EditorUserBuildSettings.buildWithDeepProfilingSupport = config.IsDebug;
 
-            PlayerSettings.bundleVersion = setting.Version;
-            if (setting.IsDebug)
+            PlayerSettings.bundleVersion = config.Version;
+            if (config.IsDebug)
             {
                 playerOptions.options =
                     BuildOptions.Development
@@ -434,7 +429,7 @@ namespace SFramework.Build
             }
             try
             {
-                BuildAndroid(setting.IsDebug, playerOptions, setting.useObb, setting.VersionCode);
+                BuildAndroid(config.IsDebug, playerOptions, config.UseObb, config.VersionCode);
             }
             catch (Exception e)
             {
