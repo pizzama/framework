@@ -1,7 +1,7 @@
 using System;
 using System.Xml.Serialization;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 namespace SFramework.Build
 {
@@ -16,53 +16,12 @@ namespace SFramework.Build
         Publish,
     }
 
-    public class BuildSetting
-{
-    //版本号
-    public string Version = "";
-    /// <summary>
-    /// 资源版本号 1.0.0.0
-    /// </summary>
-    public string AssetsVersion = "";
-    //版本号
-    public string VersionCode = "";
-
-    //是否debug
-    public bool IsDebug = true;
-    
-    //是否打ab包
-    public bool buildAB = false;
-    
-    //是否分包
-    public bool useObb = false;
-
-    public string pckName = "";
-
-    public string tempBuildPath = "";
-    /// <summary>
-    /// 资源存放地址
-    /// </summary>
-    public string assetsBuildPath = "";
-
-    /// <summary>
-    /// 是否打包 Apk
-    /// </summary>
-    public bool isBuildPackage = false;
-
-    /// <summary>
-    /// 资源全进首包
-    /// </summary>
-    public bool isResourceAllInAPK = false;
-    //
-    // //是否IL2CPP
-    // public bool IL2CPP = false;
-    //
-    // //是否开启动态合批
-    // public bool DynamicBatching = false;
-    //
-    // //程序名称
-    // public string Name = "";
-}
+    [System.Serializable]
+    public class ABVersion
+    {
+        public string version;
+        public string versionCode;
+    }
 
     /// <summary>
     /// 打包配置
@@ -70,6 +29,10 @@ namespace SFramework.Build
     [Serializable]
     public class ABConfig
     {
+        public const string CompressFileName = "Assets.zip";
+        public const string LocalConfigUrl = "LocalConfig.ini";
+        public const string VersionUrl = "Version.txt";
+        public const string VersionConfigUrl = "VersionConfig.version";
         public string Key => $"{Target}-{Type}";
 
         /// <summary>
@@ -77,6 +40,7 @@ namespace SFramework.Build
         /// </summary>
         [XmlEnum]
         public BuildTarget Target;
+
         /// <summary>
         /// 编译类型
         /// </summary>
@@ -88,23 +52,26 @@ namespace SFramework.Build
         /// </summary>
         [XmlElement]
         public string MainVersion;
+
         /// <summary>
         /// 子版本号
         /// </summary>
         [XmlElement]
         public int SubVersion;
         public string Version => $"{MainVersion}.{SubVersion}";
-        public string VersionCode => MainVersion.Replace(".", "") + "000";// string.Format("{0:D03}", SubVersion);
+        public string VersionCode => MainVersion.Replace(".", "") + "000"; // string.Format("{0:D03}", SubVersion);
 
         /// <summary>
         /// 资源打包
         /// </summary>
         [XmlElement]
         public bool BuildAB;
+
         /// <summary>
         /// 调试开关
         /// </summary>
         public bool IsDebug => Type == BuildType.Develop;
+
         /// <summary>
         /// 正式发布
         /// </summary>
@@ -114,8 +81,11 @@ namespace SFramework.Build
         /// 配置文件名称
         /// </summary>
         public string ProfileName =>
-            Type == BuildType.Develop ? ProfileNames [0]:
-            Type == BuildType.Release ? ProfileNames[1] : ProfileNames[2];
+            Type == BuildType.Develop
+                ? ProfileNames[0]
+                : Type == BuildType.Release
+                    ? ProfileNames[1]
+                    : ProfileNames[2];
 
         public static readonly string[] ProfileNames = new string[]
         {
@@ -148,13 +118,13 @@ namespace SFramework.Build
 
         [XmlElement]
         public bool Foldout; //whether or not foldout tap
-
         #endregion
 
         [XmlElement]
         public string UploadRoot;
         public string DefaultUploadFolder => "Upload";
         public string DefaultUploadRoot => Application.dataPath.Replace("Assets", "");
+
         public void CheckUploadRoot()
         {
             if (string.IsNullOrEmpty(UploadRoot))
@@ -167,6 +137,7 @@ namespace SFramework.Build
         public string PackageRoot;
         public string DefaultPackageFolder => "Package";
         public string DefaultPackageRoot => Application.dataPath.Replace("Assets", "");
+
         public void CheckPackageRoot()
         {
             if (string.IsNullOrEmpty(PackageRoot))

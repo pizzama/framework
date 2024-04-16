@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using SFramework.Extension;
+using Newtonsoft.Json;
 
 namespace SFramework.Build
 {
@@ -76,7 +77,7 @@ namespace SFramework.Build
 
                 List<string> filterFiles = new List<string>();
                 filterFiles.AddRange(ABConfig.ProfileNames);
-                filterFiles.Add(ABPathHelper.LocalConfigUrl);
+                filterFiles.Add(ABConfig.LocalConfigUrl);
                 //filterFiles.Add(PathHelper.LocalLangUrl);
                 //filterFiles.Add(PathHelper.LocalMapUrl);
 
@@ -97,30 +98,29 @@ namespace SFramework.Build
                 //     "======================GenerateVersionConfigInfo  Success======================"
                 // );
 
-                // Debug.Log("======================Start  GenerateVersionInfo======================");
-                // GenerateVersionInfo(
-                //     buildSetting.AssetsVersion,
-                //     buildSetting.VersionCode,
-                //     uploadRoot,
-                //     AppVersion
-                // );
-                // Debug.Log(
-                //     "======================GenerateVersionInfo  Success======================"
-                // );
+                Debug.Log("======================Start  GenerateVersionInfo======================");
+                GenerateVersionInfo(
+                    config.VersionCode,
+                    AppVersion,
+                    uploadRoot
+                );
+                Debug.Log(
+                    "======================GenerateVersionInfo  Success======================"
+                );
 
                 // 从Upload拷贝到StreamingAssets
                 uploadAbPath.DirectoryCopy(localAbPath, null, "manifest");
                 //
                 File.Copy(
-                    $"{uploadRoot}/{ABPathHelper.VersionUrl}",
-                    $"{localRoot}/{ABPathHelper.VersionUrl}",
+                    $"{uploadRoot}/{ABConfig.VersionUrl}",
+                    $"{localRoot}/{ABConfig.VersionUrl}",
                     true
                 );
-                File.Copy(
-                    $"{uploadRoot}/{ABPathHelper.VersionConfigUrl}",
-                    $"{localRoot}/{ABPathHelper.VersionConfigUrl}",
-                    true
-                );
+                // File.Copy(
+                //     $"{uploadRoot}/{ABConfig.VersionConfigUrl}",
+                //     $"{localRoot}/{ABConfig.VersionConfigUrl}",
+                //     true
+                // );
 
                 AssetDatabase.Refresh();
 
@@ -129,10 +129,10 @@ namespace SFramework.Build
                 //File.Delete(Path.Combine(uploadRoot, PathHelper.LocalLangUrl));
 
                 //if (EditorUtility.DisplayDialog("提示", "资源打包成功!", "确定"))
-                {
+                //{
                     //EditorUtility.RevealInFinder(uploadAbPath);
                     //EditorUtility.RevealInFinder(localAbPath);
-                }
+                //}
             }
 
             if (config.IsBuildPackage)
@@ -156,65 +156,65 @@ namespace SFramework.Build
             }
         }
 
-        // /// <summary>
-        // ///  Compress streaming assets file .
-        // /// </summary>
-        // public static void CompressStreamingAssetsFile()
-        // {
-        //     var dirInfo = new DirectoryInfo(ABPathHelper.StreamingAssetsPath);
-        //     if (!dirInfo.Exists)
-        //     {
-        //         return;
-        //     }
+        /// <summary>
+        ///  Compress streaming assets file .
+        /// </summary>
+        public static void CompressStreamingAssetsFile()
+        {
+            // var dirInfo = new DirectoryInfo(ABPathHelper.StreamingAssetsPath);
+            // if (!dirInfo.Exists)
+            // {
+            //     return;
+            // }
 
-        //     var zipPath = $"{PathHelper.InAppResPath}/{PathHelper.CompressFileName}";
-        //     if (File.Exists(zipPath))
-        //     {
-        //         File.Delete(zipPath);
-        //     }
+            // var zipPath = $"{ABPathHelper.StreamingAssetsPath}/{ABConfig.CompressFileName}";
+            // if (File.Exists(zipPath))
+            // {
+            //     File.Delete(zipPath);
+            // }
 
-        //     var assetsBundleRoot = new DirectoryInfo(
-        //         PathHelper.InAppResPath + PathHelper.BundleDirName
-        //     );
-        //     if (!assetsBundleRoot.Exists)
-        //     {
-        //         throw new Exception("AssetsBundle folder is not exist.");
-        //     }
-        //     var allFiles = new List<FileInfo>();
-        //     ABPathHelper.GetAllFiles(assetsBundleRoot, allFiles);
+            // var assetsBundleRoot = new DirectoryInfo(
+            //     ABPathHelper.StreamingAssetsPath + ABPathHelper.GetPlatformName();
+            // );
+            // if (!assetsBundleRoot.Exists)
+            // {
+            //     throw new Exception("AssetsBundle folder is not exist.");
+            // }
+            // var allFiles = new List<FileInfo>();
+            // ABPathHelper.GetAllFiles(assetsBundleRoot, allFiles);
 
-        //     for (var i = 0; i < allFiles.Count; )
-        //     {
-        //         var file = allFiles[i];
-        //         if (file.Extension == "meta")
-        //         {
-        //             allFiles.RemoveAt(i);
-        //             continue;
-        //         }
-        //         i++;
-        //     }
-        //     ZIPHelper.ZipCompress(allFiles.Select(x => x.FullName).ToList(), zipPath);
-        //     foreach (var file in allFiles)
-        //     {
-        //         if (file.Name.Contains(PathHelper.VersionConfigUrl))
-        //         {
-        //             continue;
-        //         }
+            // for (var i = 0; i < allFiles.Count; )
+            // {
+            //     var file = allFiles[i];
+            //     if (file.Extension == "meta")
+            //     {
+            //         allFiles.RemoveAt(i);
+            //         continue;
+            //     }
+            //     i++;
+            // }
+            // ZIPHelper.ZipCompress(allFiles.Select(x => x.FullName).ToList(), zipPath);
+            // foreach (var file in allFiles)
+            // {
+            //     if (file.Name.Contains(ABConfig.VersionConfigUrl))
+            //     {
+            //         continue;
+            //     }
 
-        //         if (!file.Exists)
-        //         {
-        //             continue;
-        //         }
-        //         var fileDir = file.Directory;
-        //         file.Delete();
-        //         if (fileDir.Name != "StreamingAssets")
-        //         {
-        //             fileDir.Delete(true);
-        //         }
-        //     }
-        //     AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
-        //     Debug.Log("Compress Streaming Assets file Successful.");
-        // }
+            //     if (!file.Exists)
+            //     {
+            //         continue;
+            //     }
+            //     var fileDir = file.Directory;
+            //     file.Delete();
+            //     if (fileDir.Name != "StreamingAssets")
+            //     {
+            //         fileDir.Delete(true);
+            //     }
+            // }
+            // AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+            // Debug.Log("Compress Streaming Assets file Successful.");
+        }
 
     
 
@@ -266,28 +266,27 @@ namespace SFramework.Build
         //     }
         // }
 
-        // private static void GenerateVersionInfo(
-        //     string version,
-        //     string versionCode,
-        //     string dir,
-        //     string appVersion = ""
-        // )
-        // {
-        //     var v = new Version() { version = appVersion, versionCode = versionCode };
-        //     using (
-        //         FileStream fileStream = new FileStream(
-        //             $"{dir}/{PathHelper.VersionUrl}",
-        //             FileMode.Create
-        //         )
-        //     )
-        //     {
-        //         var json = JSON.Encode(v);
-        //         var bytes = System.Text.Encoding.Default.GetBytes(json);
-        //         fileStream.Write(bytes, 0, bytes.Length);
-        //         fileStream.Flush();
-        //         fileStream.Close();
-        //     }
-        // }
+        private static void GenerateVersionInfo(
+            string version,
+            string versionCode,
+            string dir
+        )
+        {
+            ABVersion v = new ABVersion() {version = version, versionCode = versionCode };
+            using (
+                FileStream fileStream = new FileStream(
+                    $"{dir}/{ABConfig.VersionUrl}",
+                    FileMode.Create
+                )
+            )
+            {
+                var json = JsonConvert.SerializeObject(v);
+                var bytes = System.Text.Encoding.Default.GetBytes(json);
+                fileStream.Write(bytes, 0, bytes.Length);
+                fileStream.Flush();
+                fileStream.Close();
+            }
+        }
 
         private static void EncryptionConfig()
         {

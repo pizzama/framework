@@ -12,9 +12,6 @@ namespace SFramework
 {
     public class ABPathHelper
     {
-        public const string LocalConfigUrl = "LocalConfig.ini";
-        public const string VersionUrl = "Version.txt";
-        public const string VersionConfigUrl = "VersionConfig.version";
         // 资源路径，优先返回外存资源路径
         public static string GetResPathInPersistentOrStream(string relativePath)
         {
