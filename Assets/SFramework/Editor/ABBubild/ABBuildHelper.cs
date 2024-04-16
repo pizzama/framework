@@ -24,7 +24,7 @@ namespace SFramework.Build
         {
             string platformType = ABPathHelper.GetPlatformName();
 
-            BuildTarget buildTarget = ABPathHelper.GetPlatformBuildTarget();
+            int buildTarget = ABPathHelper.GetPlatformBuildTarget();
 
             string uploadRoot = $"Upload/{platformType}/{config.Version}/";
 
@@ -38,10 +38,7 @@ namespace SFramework.Build
             {
                 var uploadAbPath = $"{uploadRoot}{platformType}";
                 // 不能删除缓存（AB包缓存）
-                if (!Directory.Exists(uploadAbPath))
-                {
-                    Directory.CreateDirectory(uploadAbPath);
-                }
+                uploadAbPath.CreateDirIfNotExists();
 
                 var localRoot = ABPathHelper.StreamingAssetsPath;
                 var localAbPath = $"{localRoot}/{platformType}";
@@ -51,7 +48,8 @@ namespace SFramework.Build
                     // 强制刷新工程
                     AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
                 }
-                //Directory.CreateDirectory(localAbPath);
+                
+                Directory.CreateDirectory(localAbPath);
 
                 // 打包图集
                 //Debug.Log("======================Start  PackAllAtlases======================");
@@ -68,7 +66,7 @@ namespace SFramework.Build
                         | BuildAssetBundleOptions.IgnoreTypeTreeChanges
                         | BuildAssetBundleOptions.None //暂时使用LZMA 等待压缩和分包在使用LZ4
                     ,
-                    buildTarget
+                    (UnityEditor.BuildTarget)buildTarget
                 );
                 Debug.Log("======================BuildAssetBundles  Success======================");
 

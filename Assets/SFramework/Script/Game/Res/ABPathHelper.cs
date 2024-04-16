@@ -84,12 +84,12 @@ namespace SFramework
 #endif
         }
 
-        public static BuildTarget GetPlatformBuildTarget()
+        public static int GetPlatformBuildTarget()
         {
 #if UNITY_EDITOR
-            return EditorUserBuildSettings.activeBuildTarget;
+            return (int)EditorUserBuildSettings.activeBuildTarget;
 #else
-			return UnityEngine.Application.platform;
+			return (int)UnityEngine.Application.platform;
 #endif
         }
 
