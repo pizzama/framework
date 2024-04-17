@@ -35,7 +35,7 @@ namespace SFramework.Build
                 file.Close();
             }
 
-            if(Configs.Count == 0)
+            if (Configs.Count == 0)
             {
                 Configs = new List<ABConfig>()
                 {
@@ -43,7 +43,6 @@ namespace SFramework.Build
                     ABConfig.Create(BuildTarget.Android, BuildType.Release),
                     ABConfig.Create(BuildTarget.Android, BuildType.Publish),
                 };
-
             }
         }
 
@@ -66,7 +65,7 @@ namespace SFramework.Build
 
         private void OnDisable()
         {
-            if(Configs.Count > 0)
+            if (Configs.Count > 0)
                 writeConfig();
             else
                 Configs.Clear();
@@ -74,11 +73,7 @@ namespace SFramework.Build
 
         private void startBuild(ABConfig config)
         {
-            ABBuildHelper.Build(
-                config,
-                false,
-                config.Version
-            );
+            ABBuildHelper.Build(config, false, config.Version);
         }
 
         //GUIStyle style = GUIStyle.none;
@@ -156,7 +151,7 @@ namespace SFramework.Build
                                     )
                                 )
                                 {
-                                    //EditorUtility.RevealInFinder(Application.dataPath);
+                                    // EditorUtility.RevealInFinder(Application.dataPath);
                                 }
                             }
                         }
@@ -235,6 +230,14 @@ namespace SFramework.Build
                 {
                     config.BuildAB = buildAb;
                 }
+                bool isCopyToStreamingAssets = EditorGUILayout.Toggle(
+                    "IsCopyToStreamingAssets: ",
+                    config.IsCopyToStreamingAssets
+                );
+                if (config.IsCopyToStreamingAssets != isCopyToStreamingAssets)
+                {
+                    config.IsCopyToStreamingAssets = isCopyToStreamingAssets;
+                }
                 {
                     EditorGUI.BeginDisabledGroup(true);
                     //GUI.enabled = false;
@@ -243,14 +246,6 @@ namespace SFramework.Build
                     //GUI.enabled = true;
                     EditorGUI.EndDisabledGroup();
                 }
-                EditorGUILayout.EndVertical();
-            }
-
-            //EditorGUILayout.Space();
-
-            {
-                EditorGUILayout.BeginVertical();
-                EditorGUILayout.LabelField("配置文件名称：", config.ProfileName);
                 EditorGUILayout.EndVertical();
             }
 

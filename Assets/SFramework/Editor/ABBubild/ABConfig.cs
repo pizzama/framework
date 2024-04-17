@@ -30,7 +30,6 @@ namespace SFramework.Build
     public class ABConfig
     {
         public const string CompressFileName = "Assets.zip";
-        public const string LocalConfigUrl = "LocalConfig.ini";
         public const string VersionUrl = "Version.txt";
         public const string VersionConfigUrl = "VersionConfig.version";
         public string Key => $"{Target}-{Type}";
@@ -68,6 +67,11 @@ namespace SFramework.Build
         public bool BuildAB;
 
         /// <summary>
+        /// wether or not copy to StreamingAssets
+        /// </summary>
+        public bool IsCopyToStreamingAssets;
+
+        /// <summary>
         /// 调试开关
         /// </summary>
         public bool IsDebug => Type == BuildType.Develop;
@@ -76,23 +80,6 @@ namespace SFramework.Build
         /// 正式发布
         /// </summary>
         public bool UseObb => Type == BuildType.Publish;
-
-        /// <summary>
-        /// 配置文件名称
-        /// </summary>
-        public string ProfileName =>
-            Type == BuildType.Develop
-                ? ProfileNames[0]
-                : Type == BuildType.Release
-                    ? ProfileNames[1]
-                    : ProfileNames[2];
-
-        public static readonly string[] ProfileNames = new string[]
-        {
-            "LocalConfig-dev.ini",
-            "LocalConfig-release.ini",
-            "LocalConfig-gp.ini",
-        };
 
         /// <summary>
         /// 配置模板
@@ -105,6 +92,7 @@ namespace SFramework.Build
             SubVersion = 0,
             BuildAB = true,
             IsBuildPackage = true,
+            IsCopyToStreamingAssets = false,
             Foldout = true,
         };
 
@@ -155,6 +143,7 @@ namespace SFramework.Build
                 MainVersion = PlayerSettings.bundleVersion,
                 SubVersion = 0,
                 BuildAB = true,
+                IsCopyToStreamingAssets = false,
                 IsBuildPackage = true,
                 Foldout = true,
             };

@@ -38,11 +38,17 @@ namespace SFramework
                 return;
             try
             {
-                string path = ABPathHelper.GetResPathInPersistentOrStream(ABPathHelper.GetPlatformName());
+                if(_manifest != null)
+                {
+                    return;
+                }
+                //Get main Manifest
+                string name = ABPathHelper.GetPlatformName();
+                string path = ABPathHelper.GetResPathInPersistentOrStream(name + "/" + name);
                 _mainBundle = AssetBundle.LoadFromFile(path);
                 if (_mainBundle != null)
                 {
-                    _manifest = _mainBundle.LoadAsset<AssetBundleManifest>("AssetBundleMainfest");
+                    _manifest = _mainBundle.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
                     if (_manifest != null)
                     {
                         _allBundleVariants = _manifest.GetAllAssetBundlesWithVariant().ToList();

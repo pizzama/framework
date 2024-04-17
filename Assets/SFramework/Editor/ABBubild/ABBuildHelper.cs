@@ -2,25 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
+using SFramework.Extension;
 using UnityEditor;
 using UnityEngine;
-using SFramework.Extension;
-using Newtonsoft.Json;
 
 namespace SFramework.Build
 {
     public static class ABBuildHelper
     {
         /// <summary>
-        /// 打包操作
+        /// Package Operate Helper
         /// </summary>
-        /// <param name="platformType"> 平台 </param>
-        /// <param name="buildSetting"> setting</param>
-        public static void Build(
-            ABConfig config,
-            bool isHot = false,
-            string AppVersion = ""
-        )
+        public static void Build(ABConfig config, bool isHot = false, string AppVersion = "")
         {
             string platformType = ABPathHelper.GetPlatformName();
 
@@ -30,8 +24,7 @@ namespace SFramework.Build
 
             if (!string.IsNullOrEmpty(config.UploadRoot))
             {
-                uploadRoot =
-                    $"{config.UploadRoot}/{platformType}/{config.Version}/";
+                uploadRoot = $"{config.UploadRoot}/{platformType}/{config.Version}/";
             }
 
             if (config.BuildAB)
@@ -41,15 +34,10 @@ namespace SFramework.Build
                 uploadAbPath.CreateDirIfNotExists();
 
                 var localRoot = ABPathHelper.StreamingAssetsPath;
-                var localAbPath = $"{localRoot}/{platformType}";
-                if (Directory.Exists(localAbPath))
-                {
-                    Directory.Delete(localAbPath, true);
-                    // 强制刷新工程
-                    AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
-                }
-                
-                Directory.CreateDirectory(localAbPath);
+                var localAbPath = $"{localRoot}/data";
+
+                localAbPath.EmptyDirIfExists();
+                AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
 
                 // 打包图集
                 //Debug.Log("======================Start  PackAllAtlases======================");
@@ -74,13 +62,11 @@ namespace SFramework.Build
                 //EncryptionConfig();
 
                 List<string> filterFiles = new List<string>();
-                filterFiles.AddRange(ABConfig.ProfileNames);
-                filterFiles.Add(ABConfig.LocalConfigUrl);
                 //filterFiles.Add(PathHelper.LocalLangUrl);
                 //filterFiles.Add(PathHelper.LocalMapUrl);
 
                 // 从StreamingAssets拷贝到Upload
-                localRoot.DirectoryCopy(uploadRoot, filterFiles, "meta");
+                // localRoot.DirectoryCopy(uploadRoot, filterFiles, "meta");
 
                 // // 生成资源清单文件
                 // Debug.Log(
@@ -97,17 +83,16 @@ namespace SFramework.Build
                 // );
 
                 Debug.Log("======================Start  GenerateVersionInfo======================");
-                GenerateVersionInfo(
-                    config.VersionCode,
-                    AppVersion,
-                    uploadRoot
-                );
+                GenerateVersionInfo(config.VersionCode, AppVersion, uploadRoot);
                 Debug.Log(
                     "======================GenerateVersionInfo  Success======================"
                 );
 
                 // 从Upload拷贝到StreamingAssets
-                uploadAbPath.DirectoryCopy(localAbPath, null, "manifest");
+                if (config.IsCopyToStreamingAssets)
+                {
+                    uploadAbPath.DirectoryCopy(localAbPath, null, "manifest");
+                }
                 //
                 File.Copy(
                     $"{uploadRoot}/{ABConfig.VersionUrl}",
@@ -128,8 +113,8 @@ namespace SFramework.Build
 
                 //if (EditorUtility.DisplayDialog("提示", "资源打包成功!", "确定"))
                 //{
-                    //EditorUtility.RevealInFinder(uploadAbPath);
-                    //EditorUtility.RevealInFinder(localAbPath);
+                //EditorUtility.RevealInFinder(uploadAbPath);
+                //EditorUtility.RevealInFinder(localAbPath);
                 //}
             }
 
@@ -139,8 +124,7 @@ namespace SFramework.Build
 
                 if (!string.IsNullOrEmpty(config.PackageRoot))
                 {
-                    packagePath =
-                        $"{config.PackageRoot}/{platformType}/{config.Version}/";
+                    packagePath = $"{config.PackageRoot}/{platformType}/{config.Version}/";
                 }
 
                 Debug.Log("======================Start  BuildPackage======================");
@@ -214,8 +198,6 @@ namespace SFramework.Build
             // Debug.Log("Compress Streaming Assets file Successful.");
         }
 
-    
-
         // private static void GenerateVersionConfigInfo(
         //     string version,
         //     string versionCode,
@@ -264,13 +246,9 @@ namespace SFramework.Build
         //     }
         // }
 
-        private static void GenerateVersionInfo(
-            string version,
-            string versionCode,
-            string dir
-        )
+        private static void GenerateVersionInfo(string version, string versionCode, string dir)
         {
-            ABVersion v = new ABVersion() {version = version, versionCode = versionCode };
+            ABVersion v = new ABVersion() { version = version, versionCode = versionCode };
             using (
                 FileStream fileStream = new FileStream(
                     $"{dir}/{ABConfig.VersionUrl}",
@@ -355,10 +333,7 @@ namespace SFramework.Build
         /// <param name="platformType"></param>
         /// <param name="setting"></param>
         /// <param name="rootUrl"></param>
-        private static void BuildPackage(
-            ABConfig config,
-            string rootUrl
-        )
+        private static void BuildPackage(ABConfig config, string rootUrl)
         {
             //SVNTools.SVNToolUpdateAll();
             if (config == null)
