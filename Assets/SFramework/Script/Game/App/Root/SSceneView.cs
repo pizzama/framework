@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using SFramework.Extension;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using SFramework.Extension;
 
 namespace SFramework.Game
 {
@@ -13,9 +13,10 @@ namespace SFramework.Game
         private Dictionary<string, GameObject> goDict;
         protected string mAbPath; //scene asset bundle path
         protected string mAbName; //scene asset bundle name
+
         protected override void initing()
         {
-            getBuildInSceneNames(out _buildInSceneNames);// init scene int editor buiding settings
+            getBuildInSceneNames(out _buildInSceneNames); // init scene int editor buiding settings
         }
 
         public override void Open()
@@ -31,9 +32,17 @@ namespace SFramework.Game
             return true;
         }
 
-        protected virtual async UniTaskVoid loadSceneProcessAsync(string scenePath, string sceneName, LoadSceneMode mode)
+        protected virtual async UniTaskVoid loadSceneProcessAsync(
+            string scenePath,
+            string sceneName,
+            LoadSceneMode mode
+        )
         {
-            AsyncOperation operation = await LoadSceneAsync(scenePath, sceneName, (LoadSceneMode)GetViewOpenType());
+            AsyncOperation operation = await LoadSceneAsync(
+                scenePath,
+                sceneName,
+                (LoadSceneMode)GetViewOpenType()
+            );
             if (operation == null)
             {
                 return;
@@ -41,15 +50,15 @@ namespace SFramework.Game
             operation.allowSceneActivation = false;
             if (operation != null)
             {
-                var progress = Progress.Create<float>((p) =>
-                {
-                    UniTask.Void(
-                        async () =>
+                var progress = Progress.Create<float>(
+                    (p) =>
+                    {
+                        UniTask.Void(async () =>
                         {
                             operation.allowSceneActivation = await loadingScene(p);
-                        }
-                    );
-                });
+                        });
+                    }
+                );
                 await operation.ToUniTask(progress);
             }
 
@@ -60,7 +69,11 @@ namespace SFramework.Game
             ViewCallback?.Invoke();
         }
 
-        public async UniTask<AsyncOperation> LoadSceneAsync(string scenePath, string sceneName, LoadSceneMode mode)
+        public async UniTask<AsyncOperation> LoadSceneAsync(
+            string scenePath,
+            string sceneName,
+            LoadSceneMode mode
+        )
         {
             Scene sc = SceneManager.GetActiveScene();
             if (sc.name == scenePath)
@@ -82,24 +95,32 @@ namespace SFramework.Game
                 if (request != null)
                 {
 #if UNITY_EDITOR
-                    // if (request.AssetBundle is not UnityEditor.SceneAsset)//check current assets is or not scene assets
-                    // {
-                    //     return null;
-                    // }
-                    // string obj_path = UnityEditor.AssetDatabase.GetAssetPath(request);
-                    operation = UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(scenePath, new LoadSceneParameters(mode));
+                    string[] guidIds = UnityEditor.AssetDatabase.FindAssets("t:Scene", null);
+                    for (int i = 0; i < guidIds.Length; i++)
+                    {
+                        string gid = guidIds[i];
+                        string path = UnityEditor.AssetDatabase.GUIDToAssetPath(gid);
+                        if (path.IndexOf(sceneName) >= 0)
+                        {
+                            operation =
+                                UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(
+                                    path,
+                                    new LoadSceneParameters(mode)
+                                );
+                            break;
+                        }
+                    }
 #else
-
-#endif
                 }
                 else
                 {
-                    operation = SceneManager.LoadSceneAsync(scenePath, mode);
+                    operation = SceneManager.LoadSceneAsync(sceneName, mode);
+#endif
                 }
             }
             else
             {
-                operation = SceneManager.LoadSceneAsync(scenePath, mode);
+                operation = SceneManager.LoadSceneAsync(sceneName, mode);
             }
 
             return operation;
@@ -166,7 +187,8 @@ namespace SFramework.Game
             return sceneDict;
         }
 
-        protected Dictionary<string, T> collectScene<T>() where T : UnityEngine.Object
+        protected Dictionary<string, T> collectScene<T>()
+            where T : UnityEngine.Object
         {
             Dictionary<string, T> sceneDict = new Dictionary<string, T>();
             T[] all = UnityEngine.Object.FindObjectsOfType<T>(true);
@@ -208,4 +230,3 @@ namespace SFramework.Game
         }
     }
 }
-
