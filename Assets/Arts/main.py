@@ -1,6 +1,7 @@
 import requests
 import os
 import sys
+import json
 from gevent import monkey,spawn,sleep, wait
 def main():
     fixUrl()
@@ -75,28 +76,30 @@ def fixUrl():
     errorTxt = "NoSuchKey"
     url = "https://static.fthformal.com/flower/flower_kk/ver/196/version.json"
     r = requests.get(url)
-    json = r.json()
-    temp = json["verDic"]
+    jj = json.loads(r.text)
+    temp = jj["verDic"]
     count = 0
+    check = 0
     for path in temp:
-        # sleep(1)
-        ver = temp[path]
-        index = path.rfind('/')
-        subpath = path[0: index]
-        out_path = folder_path + subpath
-        url = "https://static.fthformal.com/flower/flower_kk/ver/" + str(ver) + "/" + path
+        print(count)
         count += 1
-        # r = requests.get(url)
-        # if(r.text.find(errorTxt) != -1):
-        #     break
-        # try:
-        #     os.makedirs(out_path, exist_ok=True)
-        #     print(f"Folder '{out_path}' created successfully.")
-        # except OSError as error:
-        #     print(f"Error: {error}")
-        # with open(path, "wb") as f:
-        #     print("write file:" + path)
-        #     f.write(r.content)
+        if(count > check):
+            sleep(0.2)
+            ver = temp[path]
+            index = path.rfind('/')
+            subpath = path[0: index]
+            out_path = folder_path + subpath
+            url = "https://static.fthformal.com/flower/flower_kk/ver/" + str(ver) + "/" + path
+            r = requests.get(url)
+            if(r.text.find(errorTxt) == -1): 
+                try:
+                    os.makedirs(out_path, exist_ok=True)
+                    print(f"Folder '{out_path}' created successfully.")
+                except OSError as error:
+                    print(f"Error: {error}")
+                with open(path, "wb") as f:
+                    print("write file:" + path)
+                    f.write(r.content)
 
 if __name__ == '__main__':
     main()
