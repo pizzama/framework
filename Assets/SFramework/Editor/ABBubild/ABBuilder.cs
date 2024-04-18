@@ -173,7 +173,7 @@ namespace SFramework.Build
             }
 
             EditorGUILayout.EndScrollView();
-            
+            GUIUtility.ExitGUI();   
         }
 
         public void Draw(ABConfig config)
