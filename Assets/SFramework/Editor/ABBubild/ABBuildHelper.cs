@@ -424,7 +424,6 @@ namespace SFramework.Build
 
             PlayerSettings.Android.bundleVersionCode = int.Parse(versionCode.Trim());
             EditorUserBuildSettings.androidBuildSystem = AndroidBuildSystem.Gradle;
-            EditorUserBuildSettings.androidCreateSymbolsZip = !isDebug;
             if (isDebug)
             {
                 PlayerSettings.SetScriptingBackend(
@@ -432,6 +431,7 @@ namespace SFramework.Build
                     ScriptingImplementation.Mono2x
                 );
                 PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARMv7;
+                EditorUserBuildSettings.androidCreateSymbols  = AndroidCreateSymbols.Debugging;
             }
             else
             {
@@ -441,6 +441,7 @@ namespace SFramework.Build
                 );
                 AndroidArchitecture aac = AndroidArchitecture.ARM64 | AndroidArchitecture.ARMv7;
                 PlayerSettings.Android.targetArchitectures = aac;
+                EditorUserBuildSettings.androidCreateSymbols  = AndroidCreateSymbols.Public;
             }
             PlayerSettings.Android.keystorePass = "egame123";
             PlayerSettings.Android.keyaliasPass = "egame123";

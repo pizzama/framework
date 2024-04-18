@@ -44,7 +44,7 @@ namespace SFramework
                 }
                 //Get main Manifest
                 string name = ABPathHelper.GetPlatformName();
-                string path = ABPathHelper.GetResPathInPersistentOrStream(name + "/" + name);
+                string path = ABPathHelper.GetResPathInPersistentOrStream(name);
                 _mainBundle = AssetBundle.LoadFromFile(path);
                 if (_mainBundle != null)
                 {

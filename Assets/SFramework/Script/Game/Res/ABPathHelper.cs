@@ -12,11 +12,11 @@ namespace SFramework
 {
     public class ABPathHelper
     {
-        private const string defaultABPath = "data";
+        public const string DefaultABPath = "data";
         // 资源路径，优先返回外存资源路径
         public static string GetResPathInPersistentOrStream(string relativePath)
         {
-            string resPersistentPath = string.Format("{0}{1}/{2}", PersistentDataPath, defaultABPath, relativePath);
+            string resPersistentPath = string.Format("{0}{1}/{2}", PersistentDataPath, DefaultABPath, relativePath);
             if (File.Exists(resPersistentPath))
             {
                 // return "file://" + resPersistentPath;
@@ -24,7 +24,7 @@ namespace SFramework
             }
             else
             {
-                resPersistentPath = string.Format("{0}{1}/{2}", StreamingAssetsPath, defaultABPath, relativePath);
+                resPersistentPath = string.Format("{0}{1}/{2}", StreamingAssetsPath, DefaultABPath, relativePath);
                 if(File.Exists(resPersistentPath))
                 {
                     // return "file://" + resPersistentPath;

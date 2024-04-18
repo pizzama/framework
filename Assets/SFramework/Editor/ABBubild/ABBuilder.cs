@@ -104,7 +104,6 @@ namespace SFramework.Build
             EditorGUILayout.EndToggleGroup();
 
             EditorGUILayout.Space();
-
             scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, false, false);
 
             for (int i = 0; i < Configs.Count; i++)
@@ -174,6 +173,7 @@ namespace SFramework.Build
             }
 
             EditorGUILayout.EndScrollView();
+            
         }
 
         public void Draw(ABConfig config)
