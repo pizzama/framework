@@ -45,7 +45,7 @@ namespace SFramework
             ABInfo mainInfo = new ABInfo();
             AssetBundle ab = null;
             //根据manifest获取所有依赖包的名称 固定API
-            string[] dependencies = _manifest.GetDependencies(abName);
+            string[] dependencies = _manifest.GetDependencies(abName.ToLower());
             //循环加载所有依赖包
             for (int i = 0; i < dependencies.Length; i++)
             {
@@ -176,7 +176,7 @@ namespace SFramework
             ABInfo mainInfo = new ABInfo();
             AssetBundle ab = null;
             //根据manifest获取所有依赖包的名称 固定API
-            string[] dependencies = _manifest.GetDependencies(abName);
+            string[] dependencies = _manifest.GetDependencies(abName.ToLower());
             //循环加载所有依赖包
             for (int i = 0; i < dependencies.Length; i++)
             {
@@ -225,12 +225,6 @@ namespace SFramework
 
         public async UniTask<ABInfo> LoadABInfoAsync(string abName)
         {
-            if (ABPathHelper.SimulationMode)
-            {
-                ABInfo info = new ABInfo();
-                info.HashName = abName;
-                return info;
-            }
             //加载目标包
             ABInfo ab = await LoadABPackageAsync(abName);
             return ab;

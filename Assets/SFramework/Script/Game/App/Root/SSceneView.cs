@@ -90,29 +90,32 @@ namespace SFramework.Game
             AsyncOperation operation = null;
             if (!_buildInSceneNames.Contains(scenePath))
             {
-#if UNITY_EDITOR
-                string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle(scenePath.ToLower());
-                for (int i = 0; i < assetPaths.Length; i++)
+                if (ABPathHelper.SimulationMode)
                 {
-                    string path = assetPaths[i];
-                    if (path.IndexOf(sceneName) >= 0)
+                    string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle(scenePath.ToLower());
+                    for (int i = 0; i < assetPaths.Length; i++)
                     {
-                        operation =
-                            UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(
-                                path,
-                                new LoadSceneParameters(mode)
-                            );
-                        }
-                        break;
+                        string path = assetPaths[i];
+                        if (path.IndexOf(sceneName) >= 0)
+                        {
+                            operation =
+                                UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(
+                                    path,
+                                    new LoadSceneParameters(mode)
+                                );
+                            }
+                            break;
+                    }
                 }
-#else
-                //load scene from ab bundle
-                ABInfo request = await assetManager.LoadBundleAsync(scenePath);
-                if (request != null)
-                {
-                    operation = SceneManager.LoadSceneAsync(sceneName, mode);
+                else
+                {   
+                    //load scene from ab bundle
+                    ABInfo request = await assetManager.LoadBundleAsync(scenePath);
+                    if (request != null)
+                    {
+                        operation = SceneManager.LoadSceneAsync(sceneName, mode);
+                    }
                 }
-#endif
             }
             else
             {
