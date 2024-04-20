@@ -92,6 +92,7 @@ namespace SFramework.Game
             {
                 if (ABPathHelper.SimulationMode)
                 {
+#if UNITY_EDITOR
                     string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle(scenePath.ToLower());
                     for (int i = 0; i < assetPaths.Length; i++)
                     {
@@ -106,6 +107,7 @@ namespace SFramework.Game
                             }
                             break;
                     }
+#endif
                 }
                 else
                 {   
