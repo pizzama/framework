@@ -95,21 +95,20 @@ namespace SFramework.Game
                 if (request != null)
                 {
 #if UNITY_EDITOR
-                    string[] guidIds = UnityEditor.AssetDatabase.FindAssets("t:Scene", null);
-                    for (int i = 0; i < guidIds.Length; i++)
+                    string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle(scenePath.ToLower());
+                    for (int i = 0; i < assetPaths.Length; i++)
                     {
-                        string gid = guidIds[i];
-                        string path = UnityEditor.AssetDatabase.GUIDToAssetPath(gid);
+                        string path = assetPaths[i];
                         if (path.IndexOf(sceneName) >= 0)
                         {
                             operation =
                                 UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(
                                     path,
                                     new LoadSceneParameters(mode)
-                                );
-                            break;
-                        }
-                    }
+                               );
+                           }
+                           break;
+                       }
 #else
                 }
                 else
