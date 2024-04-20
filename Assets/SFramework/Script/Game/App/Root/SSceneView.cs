@@ -90,32 +90,29 @@ namespace SFramework.Game
             AsyncOperation operation = null;
             if (!_buildInSceneNames.Contains(scenePath))
             {
+#if UNITY_EDITOR
+                string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle(scenePath.ToLower());
+                for (int i = 0; i < assetPaths.Length; i++)
+                {
+                    string path = assetPaths[i];
+                    if (path.IndexOf(sceneName) >= 0)
+                    {
+                        operation =
+                            UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(
+                                path,
+                                new LoadSceneParameters(mode)
+                            );
+                        }
+                        break;
+                }
+#else
                 //load scene from ab bundle
                 ABInfo request = await assetManager.LoadBundleAsync(scenePath);
                 if (request != null)
                 {
-#if UNITY_EDITOR
-                    string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle(scenePath.ToLower());
-                    for (int i = 0; i < assetPaths.Length; i++)
-                    {
-                        string path = assetPaths[i];
-                        if (path.IndexOf(sceneName) >= 0)
-                        {
-                            operation =
-                                UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(
-                                    path,
-                                    new LoadSceneParameters(mode)
-                               );
-                           }
-                           break;
-                       }
-#else
-                }
-                else
-                {
                     operation = SceneManager.LoadSceneAsync(sceneName, mode);
-#endif
                 }
+#endif
             }
             else
             {
