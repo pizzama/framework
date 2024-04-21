@@ -36,7 +36,7 @@ namespace SFramework.CameraUtils
                     X += Input.GetAxis("Mouse X") * XSpeed * 0.02f;
                     Y -= Input.GetAxis("Mouse Y") * XSpeed * 0.02f;
 
-                    Debug.Log("lock x y" + X + ";" + Y);
+                    // Debug.Log("lock x y" + X + ";" + Y);
 
                     Y = clampAngle(Y, YMinLimit, YMaxLimit);
                 }
