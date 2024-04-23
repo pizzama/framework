@@ -9,10 +9,18 @@ namespace SFramework.UI
         
         private float _deltaTime;
 
-        void Update()
+        private float count = 0f;
+        private float num = 1f;
+
+        private void LateUpdate()
         {
             _deltaTime += (Time.deltaTime - _deltaTime) * 0.1f;
-            _framePerSecondText.text = "FPS " + Mathf.Ceil(1f / _deltaTime).ToString();
+            count += Time.deltaTime;
+            if(count > num)
+            {
+                count = 0;
+                _framePerSecondText.text = "FPS " + Mathf.Ceil(1f / _deltaTime).ToString();
+            }
         }
     }
 }
