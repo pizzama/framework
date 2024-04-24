@@ -2,6 +2,7 @@ using UnityEngine;
 using SFramework;
 using SFramework.Game;
 using UnityEngine.UI;
+using SFramework.Game.Map;
 
 namespace App.Farm
 {
@@ -14,6 +15,7 @@ namespace App.Farm
 		protected override void opening()
 		{
 			// Code Here
+			SMGrid grid = new SMGrid(10, 10, 3, new Vector3(0,0,0));
 		}
 		protected override void closing()
 		{
