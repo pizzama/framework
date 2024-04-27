@@ -39,7 +39,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Amount: 0.05
+    - ENABLE_BENDING: 0
+    - ENABLE_BENDING_PLANET: 0
+    - _Amount: 0.0052
     - _ENABLE: 0
     - _PLANET: 0
     m_Colors: []
