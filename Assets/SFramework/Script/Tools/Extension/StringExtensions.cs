@@ -4,22 +4,22 @@ namespace SFramework.Extension
 {
     public static class StringExtensions
     {
-        public static T ParseEnum<T>(string value)
-        {
-            return (T)Enum.Parse(typeof(T), value, true);
-        }
-
-        // public static T ToEnum<T>(this string value, T defaultValue)
-        //     where T : IComparable
+        // public static T ParseEnum<T>(string value)
         // {
-        //     if (string.IsNullOrEmpty(value))
-        //     {
-        //         return defaultValue;
-        //     }
-
-        //     T result;
-        //     return Enum.TryParse<T>(value, true, out result) ? result : defaultValue;
+        //     return (T)Enum.Parse(typeof(T), value, true);
         // }
+
+        public static T ToEnum<T>(this string value, T defaultValue)
+            where T : struct
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return defaultValue;
+            }
+
+            T result;
+            return Enum.TryParse<T>(value, true, out result) ? result : defaultValue;
+        }
 
         public static string RemoveInvalidateChars(this string name)
         {
