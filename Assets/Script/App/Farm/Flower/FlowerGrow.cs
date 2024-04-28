@@ -1,23 +1,25 @@
-using App.Farm;
 using SFramework.StateMachine;
 using UnityEngine;
 
-public class FlowerEmpty : SFSMState
+public class FlowerGrow : SFSMState
 {
-    private FlowerEntity _entity;
     public override void EnterState()
     {
+        throw new System.NotImplementedException();
     }
 
     public override void ExitState()
     {
+        throw new System.NotImplementedException();
     }
 
     public override void InitState()
     {
+        throw new System.NotImplementedException();
     }
 
     public override void UpdateState()
     {
+        throw new System.NotImplementedException();
     }
 }

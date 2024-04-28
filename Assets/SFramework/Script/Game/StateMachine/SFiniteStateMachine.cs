@@ -52,25 +52,13 @@ namespace SFramework.StateMachine
         protected bool couldTransition = true; //状态条件检查的开关，默认打开，每帧检查一次
         public SFSM Machine;
         private List<ISFSMTransition> _transitions = new List<ISFSMTransition>();
-        public virtual void InitState()
-        {
+        public abstract void InitState();
 
-        }
+        public abstract void EnterState();
 
-        public virtual void EnterState()
-        {
+        public abstract void UpdateState();
 
-        }
-
-        public virtual void UpdateState()
-        {
-
-        }
-
-        public virtual void ExitState()
-        {
-
-        }
+        public abstract void ExitState();
 
         public virtual void HandleInput()
         {
@@ -138,6 +126,12 @@ namespace SFramework.StateMachine
         public SFSM()
         {
             mStates = new Dictionary<string, ISFSMState>();
+            initFSM();
+        }
+
+        protected virtual void initFSM()
+        {
+
         }
 
         //状态id，可以定义成枚举
