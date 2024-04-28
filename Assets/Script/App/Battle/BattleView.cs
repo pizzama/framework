@@ -26,7 +26,7 @@ namespace Game.App.Battle
             Transform parent = getExportObject<Transform>("Actors");
             if (parent != null)
             {
-                Hero rt = CreateSEntity<Hero>("1", SFResAssets.Model_avatar_role_carrota_sfp_Character_Carrot_prefab, parent);
+                Hero rt = CreateSEntity<Hero>(SFResAssets.Model_avatar_role_carrota_sfp_Character_Carrot_prefab, parent);
                 if (rt != null)
                 {
                     rt.transform.localPosition = new Vector3(0f, 0.5f, 0f);

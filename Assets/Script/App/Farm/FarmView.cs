@@ -10,6 +10,7 @@ namespace App.Farm
 	public class FarmView : SSCENEView
 	{
 		private SMGrid _grid;
+		private Transform _gridParent;
 		protected override ViewOpenType GetViewOpenType()
 		{
 			return ViewOpenType.Single;
@@ -19,6 +20,8 @@ namespace App.Farm
 			// Code Here
 			_grid = new SMGrid(10, 10, 3, new Vector3(0,0,0));
 			// create farm
+			_gridParent = getExportObject<Transform>("FarmTile");
+			
 		}
 
 		protected override void closing()
@@ -34,6 +37,11 @@ namespace App.Farm
 				Debug.Log(vec);
 				_grid.SetValue(vec, 100);
 			}
+		}
+
+		private void createFlower()
+		{
+			// CreateSEntity(typeof(FlowerEntity), "FlowerEntity", new Vector3(0, 0, 0), _gridParent);
 		}
 	}
 }

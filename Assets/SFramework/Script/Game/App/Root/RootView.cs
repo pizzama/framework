@@ -1,6 +1,7 @@
 using SFramework.Pool;
 using UnityEngine;
 using SFramework.Extension;
+using SFramework.Tools;
 
 namespace SFramework.Game
 {
@@ -62,9 +63,11 @@ namespace SFramework.Game
             return result;
         }
 
-        public T CreateSEntity<T>(string instanceId, string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1) where T: SEntity
+        public T CreateSEntity<T>(string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1, string instanceId = "") where T: SEntity
         {
             T result = CreateComponent<T>(prefabFullPath, parent, pos, lifeTime);
+            if(string.IsNullOrEmpty(instanceId))
+                instanceId = StringTools.GenerateRandomNumber(5);
             result.SetEntityData(instanceId, this);
             return result;
         }
