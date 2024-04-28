@@ -5,39 +5,39 @@ using UnityEngine;
 namespace SFramework.StateMachine
 {
     //State切换条件，每一个状态都会持有一组切换到其它状态的条件
-    public interface IFSMTransition
+    public interface ISFSMTransition
     {
         bool IsValid(); //状态是否可以切换
-        IFSMState GetNextFSMState(); //通过状态检查进行条件切换
+        ISFSMState GetNextFSMState(); //通过状态检查进行条件切换
         void Transition(); //状态切换动作，做清理和准备工作
-        void SetFSM(FSM value);
+        void SetFSM(SFSM value);
     }
 
-    public interface IFSMState
+    public interface ISFSMState
     {
         void InitState(); //创建时执行一次
         void EnterState(); //每次进入状态执行
         void UpdateState(); //每次更新状态执行
         void ExitState(); //每次退出执行
         void HandleInput(); //处理输入操作
-        void SetFSM(FSM value);
-        List<IFSMTransition> GetTransitions();
-        public T AddTransition<T>() where T : IFSMTransition, new();
-        public T GetTransition<T>() where T : IFSMTransition;
+        void SetFSM(SFSM value);
+        List<ISFSMTransition> GetTransitions();
+        public T AddTransition<T>() where T : ISFSMTransition, new();
+        public T GetTransition<T>() where T : ISFSMTransition;
 
         public bool CouldTransition(); //状态是否启用trans的开关检查
 
         public string ToName();
     }
 
-    public abstract class FSMTransition : IFSMTransition
+    public abstract class SFSMTransition : ISFSMTransition
     {
-        public FSM Machine;
-        public abstract IFSMState GetNextFSMState();
+        public SFSM Machine;
+        public abstract ISFSMState GetNextFSMState();
 
         public abstract bool IsValid();
 
-        public void SetFSM(FSM value)
+        public void SetFSM(SFSM value)
         {
             Machine = value;
         }
@@ -47,11 +47,11 @@ namespace SFramework.StateMachine
         }
     }
 
-    public abstract class FSMState : IFSMState
+    public abstract class SFSMState : ISFSMState
     {
         protected bool couldTransition = true; //状态条件检查的开关，默认打开，每帧检查一次
-        public FSM Machine;
-        private List<IFSMTransition> _transitions = new List<IFSMTransition>();
+        public SFSM Machine;
+        private List<ISFSMTransition> _transitions = new List<ISFSMTransition>();
         public virtual void InitState()
         {
 
@@ -77,17 +77,17 @@ namespace SFramework.StateMachine
 
         }
 
-        public void SetFSM(FSM value)
+        public void SetFSM(SFSM value)
         {
             Machine = value;
         }
 
-        public List<IFSMTransition> GetTransitions()
+        public List<ISFSMTransition> GetTransitions()
         {
             return _transitions;
         }
 
-        public T AddTransition<T>() where T : IFSMTransition, new()
+        public T AddTransition<T>() where T : ISFSMTransition, new()
         {
             T rt = GetTransition<T>();
             if (rt == null)
@@ -99,11 +99,11 @@ namespace SFramework.StateMachine
             return rt;
         }
 
-        public T GetTransition<T>() where T : IFSMTransition
+        public T GetTransition<T>() where T : ISFSMTransition
         {
             for (var i = 0; i < _transitions.Count; i++)
             {
-                IFSMTransition tn = _transitions[i];
+                ISFSMTransition tn = _transitions[i];
                 if (tn.GetType() == typeof(T))
                 {
                     return (T)tn;
@@ -125,27 +125,27 @@ namespace SFramework.StateMachine
         }
     }
 
-    public class FSM
+    public class SFSM
     {
-        protected Dictionary<string, IFSMState> mStates;
-        private IFSMState _activeState;
+        protected Dictionary<string, ISFSMState> mStates;
+        private ISFSMState _activeState;
         public UnityEngine.Object Owner { get; set; } //状态机的使用者
 
         public UnityEngine.Object BlackBoard { get; set; } //状态机黑板
 
-        public IFSMState CurrentState => _activeState;
+        public ISFSMState CurrentState => _activeState;
 
-        public FSM()
+        public SFSM()
         {
-            mStates = new Dictionary<string, IFSMState>();
+            mStates = new Dictionary<string, ISFSMState>();
         }
 
         //状态id，可以定义成枚举
-        public void AddState(IFSMState state)
+        public void AddState(ISFSMState state)
         {
             AddState(state.ToName(), state);
         }
-        public void AddState(string id, IFSMState state)
+        public void AddState(string id, ISFSMState state)
         {
             mStates.Add(id, state);
             state.SetFSM(this);
@@ -153,9 +153,9 @@ namespace SFramework.StateMachine
             state.InitState();
         }
 
-        public IFSMState GetState(string id)
+        public ISFSMState GetState(string id)
         {
-            IFSMState state;
+            ISFSMState state;
             mStates.TryGetValue(id, out state);
             if (state == null)
                 throw new Exception("state id is not register:" + id);
@@ -178,7 +178,7 @@ namespace SFramework.StateMachine
             }
         }
 
-        public void ChangeState(IFSMState state)
+        public void ChangeState(ISFSMState state)
         {
             if (_activeState != null && state.ToName().Equals(_activeState.ToName())) return;
             if (mStates.ContainsKey(state.ToName()))
@@ -193,7 +193,7 @@ namespace SFramework.StateMachine
             ChangeState(state.ToName());
         }
 
-        public void ChangeState<T>() where T : IFSMState
+        public void ChangeState<T>() where T : ISFSMState
         {
             foreach (var state in mStates)
             {
@@ -224,9 +224,9 @@ namespace SFramework.StateMachine
             mStates.Clear();
         }
 
-        public List<IFSMState> GetFSMStates()
+        public List<ISFSMState> GetFSMStates()
         {
-            return new List<IFSMState>(mStates.Values);
+            return new List<ISFSMState>(mStates.Values);
         }
 
         private void checkState()
@@ -235,15 +235,15 @@ namespace SFramework.StateMachine
                 return;
             if (!_activeState.CouldTransition())
             {
-                List<IFSMTransition> trans = _activeState.GetTransitions();
+                List<ISFSMTransition> trans = _activeState.GetTransitions();
                 if (trans != null)
                 {
                     for (var i = 0; i < trans.Count; i++)
                     {
-                        IFSMTransition tran = trans[i];
+                        ISFSMTransition tran = trans[i];
                         if (tran.IsValid())
                         {
-                            IFSMState state = tran.GetNextFSMState();
+                            ISFSMState state = tran.GetNextFSMState();
                             Debug.Log("current state change to:" + state.ToName());
                             _activeState?.ExitState();
                             tran.Transition();
