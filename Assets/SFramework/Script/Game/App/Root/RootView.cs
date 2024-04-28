@@ -62,10 +62,10 @@ namespace SFramework.Game
             return result;
         }
 
-        public T CreateSEntity<T>(string id, string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1) where T: SEntity
+        public T CreateSEntity<T>(string instanceId, string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1) where T: SEntity
         {
             T result = CreateComponent<T>(prefabFullPath, parent, pos, lifeTime);
-            result.SetEntityData(id, this);
+            result.SetEntityData(instanceId, this);
             return result;
         }
 

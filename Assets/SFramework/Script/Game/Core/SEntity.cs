@@ -30,7 +30,7 @@ namespace SFramework
         public GameObject Instance => throw new System.NotImplementedException();
         protected virtual void Start()
         {
-            InitEntity();
+            initEntity();
         }
 
         private void OnDestroy()
@@ -38,7 +38,7 @@ namespace SFramework
             DestroyEntity();
         }
 
-        protected virtual void InitEntity()
+        protected virtual void initEntity()
         {
         }
 

@@ -9,9 +9,9 @@ namespace Game.Character
     public class Koala : SAnimatorFSMActor2D
     {
         // Start is called before the first frame update
-        protected override void InitEntity()
+        protected override void initEntity()
         {
-            base.InitEntity();
+            base.initEntity();
 
             AddFSMState(new HeroIdleState2D());
             AddFSMState(new HeroMoveState2D());

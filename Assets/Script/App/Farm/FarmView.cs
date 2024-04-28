@@ -18,6 +18,7 @@ namespace App.Farm
 		{
 			// Code Here
 			_grid = new SMGrid(10, 10, 3, new Vector3(0,0,0));
+			// create farm
 		}
 
 		protected override void closing()

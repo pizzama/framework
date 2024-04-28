@@ -29,9 +29,9 @@ public class SFAbilityActor : SEntity
         }
     }
 
-    protected override void InitEntity()
+    protected override void initEntity()
     {
-        base.InitEntity();
+        base.initEntity();
         actControl = GetComponent<SFActorController>();
         MovementMachine = new SimpleStateMachine<ActorStates>(gameObject, false);
         ConditionMachine = new SimpleStateMachine<ActorConditions>(gameObject, false);
