@@ -41,27 +41,27 @@ namespace SFramework.Actor
         private bool _groundedLastFrame;
 
 
-        protected FSM mFsm;
+        protected SFSM mFsm;
 
         public void CreateFSM()
         {
             if (mFsm == null)
             {
-                mFsm = new FSM();
+                mFsm = new SFSM();
                 mFsm.Owner = this;
             }
         }
 
-        public FSM GetFSM()
+        public SFSM GetFSM()
         {
             return mFsm;
         }
 
-        public void AddFSMState(IFSMState state)
+        public void AddFSMState(ISFSMState state)
         {
             mFsm?.AddState(state);
             _stateNames.Clear();
-            List<IFSMState> states = mFsm.GetFSMStates();
+            List<ISFSMState> states = mFsm.GetFSMStates();
             foreach (var tempState in states)
             {
                 _stateNames.Add(tempState.ToName());

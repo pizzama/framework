@@ -8,7 +8,7 @@ using SFramework.Actor;
 
 namespace Game.Character
 {
-    public class HeroMoveState2D : FSMState
+    public class HeroMoveState2D : SFSMState
     {
         private float _horizontalInput;
         private float _verticalInput;
@@ -17,12 +17,10 @@ namespace Game.Character
 
         public override void InitState()
         {
-            base.InitState();
         }
 
         public override void EnterState()
         {
-            base.EnterState();
             SAnimatorFSMActor2D hero = (SAnimatorFSMActor2D)Machine.Owner;
             var animator = hero.GetComponent<Animator>();
             hero.PlayAnimation("Move", () =>
@@ -47,7 +45,6 @@ namespace Game.Character
 
         public override void UpdateState()
         {
-            base.UpdateState();
             HandleInput();
             move();
         }
@@ -104,6 +101,11 @@ namespace Game.Character
             Vector3 vec = hero.ActorRigidBody.velocity;
             vec.y = 0f;
             return vec;
+        }
+
+        public override void ExitState()
+        {
+            throw new System.NotImplementedException();
         }
         #endregion
     }

@@ -6,7 +6,7 @@ using SFramework.Game.App;
 using SFramework.StateMachine;
 using Game.Character;
 
-public class HeroMoveState : FSMState
+public class HeroMoveState : SFSMState
 {
     private SFInputManager _inputManager;
     private float _horizontalInput;
@@ -16,13 +16,11 @@ public class HeroMoveState : FSMState
 
     public override void InitState()
     {
-        base.InitState();
         _inputManager = SFInputManager.Instance;
     }
 
     public override void EnterState()
     {
-        base.EnterState();
         Hero hero = (Hero)Machine.BlackBoard;
         var animator = hero.GetComponent<Animator>();
         hero.PlayAnimation("Move", () => {
@@ -38,7 +36,6 @@ public class HeroMoveState : FSMState
 
     public override void UpdateState()
     {
-        base.UpdateState();
         HandleInput();
         move();
     }
@@ -95,6 +92,10 @@ public class HeroMoveState : FSMState
         Vector3 vec = hero.ActorRigidBody.velocity;
         vec.y = 0f;
         return vec;
+    }
+
+    public override void ExitState()
+    {
     }
     #endregion
 }

@@ -5,7 +5,7 @@ using SFramework.StateMachine;
 using SFramework.Game.App;
 using Game.Character;
 
-public class HeroIdleState : FSMState
+public class HeroIdleState : SFSMState
 {
     private SFInputManager _inputManager;
     private float _horizontalInput;
@@ -13,7 +13,6 @@ public class HeroIdleState : FSMState
 
     public override void EnterState()
     {
-        base.EnterState();
         Hero hero = (Hero)Machine.BlackBoard;
         var animator = hero.GetComponent<Animator>();
         hero.PlayAnimation("Idle", ()=> {
@@ -22,9 +21,21 @@ public class HeroIdleState : FSMState
         });
     }
 
+    public override void ExitState()
+    {
+    }
+
     public override void HandleInput()
     {
         _horizontalInput = _inputManager.PrimaryMovement.x;
         _verticalInput = _inputManager.PrimaryMovement.y;
+    }
+
+    public override void InitState()
+    {
+    }
+
+    public override void UpdateState()
+    {
     }
 }
