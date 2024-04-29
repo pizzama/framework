@@ -23,13 +23,13 @@ public class SCreateTemplateScript
     {
         var writer = new StringBuilder();
         writer.AppendLine("using UnityEngine;");
-        writer.AppendLine("using SFramework;");
+        writer.AppendLine("using SFramework.Game;");
         writer.AppendLine();
 
         writer.AppendLine(
             $"namespace {((string.IsNullOrWhiteSpace(_nameSpace)) ? "Game" : _nameSpace)}");
         writer.AppendLine("{");
-        writer.AppendLine($"\tpublic class {_name}Control : SControl");
+        writer.AppendLine($"\tpublic class {_name}Control : RootControl");
         writer.AppendLine("\t{");
         writer.AppendLine("\t\tprotected override void opening()");
         writer.AppendLine("\t\t{");
@@ -44,14 +44,14 @@ public class SCreateTemplateScript
     public string CreateTemplateModel()
     {
         var writer = new StringBuilder();
-        writer.AppendLine("using SFramework;");
+        writer.AppendLine("using SFramework.Game;");
         writer.AppendLine("using Cysharp.Threading.Tasks;");
         writer.AppendLine();
 
         writer.AppendLine(
             $"namespace {((string.IsNullOrWhiteSpace(_nameSpace)) ? "Game" : _nameSpace)}");
         writer.AppendLine("{");
-        writer.AppendLine($"\tpublic class {_name}Model : SModel");
+        writer.AppendLine($"\tpublic class {_name}Model : RootModel");
         writer.AppendLine("\t{");
         writer.AppendLine("\t\tprotected override void opening()");
         writer.AppendLine("\t\t{");
