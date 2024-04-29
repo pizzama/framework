@@ -66,15 +66,15 @@ namespace SFramework
             Manager.UnSubscribeMessage(messageId, bundle);
         }
 
-        public void BroadcastMessage(string messageId, string fullPath, object messageData = null, string alias = "", int sort = 0, Action<object> callback = null)
+        public void BroadcastMessage(string messageId, string fullPath, object messageData = null, Action<object> callback = null, string alias = "", int sort = 0)
         {
             string nameSpace;
             string className;
             StringTools.PrefixClassName(fullPath, out nameSpace, out className);
-            this.BroadcastMessage(messageId, nameSpace, className, messageData, alias, sort, callback);
+            this.BroadcastMessage(messageId, nameSpace, className, messageData, callback, alias, sort);
         }
 
-        public void BroadcastMessage(string messageId, string nameSpace, string className, object messageData = null, string alias = "", int sort = 0, Action<object> callback = null)
+        public void BroadcastMessage(string messageId, string nameSpace, string className, object messageData, Action<object> callback, string alias, int sort)
         {
             SBundleParams bdParams = new SBundleParams()
             {
