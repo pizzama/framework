@@ -1,7 +1,7 @@
 color 2
 
 set target_path=D:\workcode\unity\framework\Document\Protobuf\c#protobuf
-set file_path=D:\workcode\unity\framework\Document\Protobuf
+set file_path=D:\workcode\unity\framework\Document\Protobuf\protobuf
 set tools_path=D:\workcode\unity\framework\tools
 
 for /r %file_path% %%i in (*.proto) do (

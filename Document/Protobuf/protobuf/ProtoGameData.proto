@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package ProtocolGameData;
+package ProtoGameData;
 
 message ProtoUserData{
 	uint32 Uid = 1;
@@ -13,11 +13,8 @@ message ProtoUserData{
 
 message ProtoItem
 {
-	
-}
-
-
-message ProtoPackage
-{
-	
+	uint32 Iid = 1;
+	string Name = 2;
+	string Icon = 3;
+	string Desc = 4;
 }
