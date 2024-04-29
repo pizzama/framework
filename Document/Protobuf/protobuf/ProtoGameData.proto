@@ -9,12 +9,12 @@ message ProtoUserData{
 	string IconBackGround = 4;
 	uint32 Level = 5;
 	uint32 Exp = 6;
+	repeated PotoItem Items = 7;
 }
 
 message ProtoItem
 {
-	uint32 Iid = 1;
-	string Name = 2;
-	string Icon = 3;
-	string Desc = 4;
+	uint32 Sid = 1;
+	uint32 Cid = 2;
+	uint32 Num = 3;
 }
