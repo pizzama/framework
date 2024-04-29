@@ -74,7 +74,7 @@ namespace SFramework
             this.BroadcastMessage(messageId, nameSpace, className, messageData, alias, sort);
         }
 
-        public void BroadcastMessage(string messageId, string nameSpace, string className, object messageData = null, string alias = "", int sort = 0)
+        public void BroadcastMessage(string messageId, string nameSpace, string className, object messageData = null, string alias = "", int sort = 0, Action<object> callback = null)
         {
             SBundleParams bdParams = new SBundleParams()
             {
@@ -84,6 +84,7 @@ namespace SFramework
                 MessageData = messageData,
                 Alias = alias,
                 MessageSender = this,
+                CallBack = callback,
                 Sort = sort,
             };
             SBundleManager.Instance.AddMessageParams(bdParams);

@@ -1,3 +1,4 @@
+using System;
 using SFramework.Tools;
 
 namespace SFramework
@@ -15,6 +16,7 @@ namespace SFramework
         public string ClassName;
         public object MessageData;
         private string _alias;
+        public Action<object> CallBack;
 
         public string Alias
         {

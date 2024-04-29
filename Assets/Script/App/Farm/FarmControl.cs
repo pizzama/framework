@@ -1,13 +1,14 @@
 using UnityEngine;
-using SFramework;
+using SFramework.Game;
 
 namespace App.Farm
 {
-	public class FarmControl : SControl
+	public class FarmControl : RootControl
 	{
 		protected override void opening()
 		{
 			// Code Here
+			
 		}
 	}
 }
