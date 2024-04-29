@@ -66,12 +66,12 @@ namespace SFramework
             Manager.UnSubscribeMessage(messageId, bundle);
         }
 
-        public void BroadcastMessage(string messageId, string fullPath, object messageData = null, string alias = "", int sort = 0)
+        public void BroadcastMessage(string messageId, string fullPath, object messageData = null, string alias = "", int sort = 0, Action<object> callback = null)
         {
             string nameSpace;
             string className;
             StringTools.PrefixClassName(fullPath, out nameSpace, out className);
-            this.BroadcastMessage(messageId, nameSpace, className, messageData, alias, sort);
+            this.BroadcastMessage(messageId, nameSpace, className, messageData, alias, sort, callback);
         }
 
         public void BroadcastMessage(string messageId, string nameSpace, string className, object messageData = null, string alias = "", int sort = 0, Action<object> callback = null)

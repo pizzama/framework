@@ -1,5 +1,6 @@
 using UnityEngine;
 using SFramework.Game;
+using SFramework;
 
 namespace App.Inventory
 {
@@ -9,5 +10,10 @@ namespace App.Inventory
 		{
 			// Code Here
 		}
-	}
+
+        public override void HandleMessage(SBundleParams value)
+        {
+            Debug.Log(value.ToString());
+        }
+    }
 }

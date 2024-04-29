@@ -1,5 +1,6 @@
 using UnityEngine;
 using SFramework.Game;
+using SFramework.Statics;
 
 namespace App.Farm
 {
@@ -8,7 +9,7 @@ namespace App.Farm
 		protected override void opening()
 		{
 			// Code Here
-			
+			BroadcastMessage("1111", SFStaticsControl.App_Inventory_InventoryControl, "1111");
 		}
 	}
 }
