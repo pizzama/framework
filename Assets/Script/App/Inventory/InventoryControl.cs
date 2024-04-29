@@ -13,7 +13,11 @@ namespace App.Inventory
 
         public override void HandleMessage(SBundleParams value)
         {
-            Debug.Log(value.ToString());
+			if(IsOpen)
+			{
+				Debug.Log(value.ToString());
+			}
+            
         }
     }
 }

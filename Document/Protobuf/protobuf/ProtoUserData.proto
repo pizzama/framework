@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package ProtocolGameData;
+
+message ProtoUserData{
+	uint32 Uid = 1;
+	string Name = 2;
+	string Icon = 3;
+	string IconBackGround = 4;
+	uint32 Level = 5;
+	uint32 Exp = 6;
+}
+
+message ProtoItem
+{
+	
+}
+
+
+message ProtoPackage
+{
+	
+}
