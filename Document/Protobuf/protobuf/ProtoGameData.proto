@@ -2,6 +2,13 @@ syntax = "proto3";
 
 package ProtoGameData;
 
+message ProtoItem
+{
+	uint32 Sid = 1;
+	uint32 Cid = 2;
+	uint32 Num = 3;
+}
+
 message ProtoUserData{
 	uint32 Uid = 1;
 	string Name = 2;
@@ -12,9 +19,4 @@ message ProtoUserData{
 	repeated PotoItem Items = 7;
 }
 
-message ProtoItem
-{
-	uint32 Sid = 1;
-	uint32 Cid = 2;
-	uint32 Num = 3;
-}
+
