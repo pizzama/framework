@@ -21,21 +21,49 @@ namespace SFramework.Statics
         public const string App_battle_sfp_Card_prefab = "app_battle.sfp/Card";
         public const string App_battle_sfp_cardbg_png = "app_battle.sfp/cardbg";
         public const string App_battle_sfs_BattleView_unity = "app_battle.sfs/BattleView";
+        public const string App_farm_sfp_21010001_prefab = "app_farm.sfp/21010001";
+        public const string App_farm_sfp_a40011411_2_prefab = "app_farm.sfp/a40011411_2";
         public const string App_farm_sfp_Fire_prefab = "app_farm.sfp/Fire";
+        public const string App_farm_sfp_FlowerTemplate_prefab = "app_farm.sfp/FlowerTemplate";
         public const string App_farm_sfp_Grass_mat = "app_farm.sfp/Grass";
         public const string App_farm_sfp_Grass_prefab = "app_farm.sfp/Grass";
         public const string App_farm_sfp_Grass1_prefab = "app_farm.sfp/Grass1";
+        public const string App_farm_sfp_GroundTile_prefab = "app_farm.sfp/GroundTile";
+        public const string App_farm_sfp_Lights_prefab = "app_farm.sfp/Lights";
         public const string App_farm_sfp_ParticlesDust_prefab = "app_farm.sfp/ParticlesDust";
         public const string App_farm_sfp_Tree_prefab = "app_farm.sfp/Tree";
         public const string App_farm_sfp_Tree1_prefab = "app_farm.sfp/Tree1";
         public const string App_farm_sfp_Tree2_prefab = "app_farm.sfp/Tree2";
         public const string App_farm_sfs_FarmView_unity = "app_farm.sfs/FarmView";
         public const string App_farm_anim_sfp_Anim_Light_anim = "app_farm_anim.sfp/Anim_Light";
+        public const string App_farm_farmview_sfp_CloudyOcean_png = "app_farm_farmview.sfp/CloudyOcean";
         public const string App_farm_farmview_sfp_Global_Volume_Profile_asset = "app_farm_farmview.sfp/Global Volume Profile";
-        public const string App_farm_ground_sfp_building_farm_png = "app_farm_ground.sfp/building_farm";
-        public const string App_farm_ground_sfp_FeelBounceGrass_png = "app_farm_ground.sfp/FeelBounceGrass";
+        public const string App_farm_farmview_sfp_LightingData_asset = "app_farm_farmview.sfp/LightingData";
+        public const string App_farm_farmview_sfp_Lightmap0_comp_dir_png = "app_farm_farmview.sfp/Lightmap-0_comp_dir";
+        public const string App_farm_farmview_sfp_Lightmap0_comp_shadowmask_png = "app_farm_farmview.sfp/Lightmap-0_comp_shadowmask";
+        public const string App_farm_ground_sfp_21010001_png = "app_farm_ground.sfp/21010001";
+        public const string App_farm_ground_sfp_a40011411_1_png = "app_farm_ground.sfp/a40011411_1";
+        public const string App_farm_ground_sfp_a40011411_2_png = "app_farm_ground.sfp/a40011411_2";
+        public const string App_farm_ground_sfp_a40011411_3_png = "app_farm_ground.sfp/a40011411_3";
+        public const string App_farm_ground_sfp_a40011412_1_png = "app_farm_ground.sfp/a40011412_1";
+        public const string App_farm_ground_sfp_a40011412_2_png = "app_farm_ground.sfp/a40011412_2";
+        public const string App_farm_ground_sfp_a40011412_3_png = "app_farm_ground.sfp/a40011412_3";
+        public const string App_farm_ground_sfp_a40011413_1_png = "app_farm_ground.sfp/a40011413_1";
+        public const string App_farm_ground_sfp_a40011413_2_png = "app_farm_ground.sfp/a40011413_2";
+        public const string App_farm_ground_sfp_a40011413_3_png = "app_farm_ground.sfp/a40011413_3";
+        public const string App_farm_ground_sfp_a40011414_1_png = "app_farm_ground.sfp/a40011414_1";
+        public const string App_farm_ground_sfp_a40011414_2_png = "app_farm_ground.sfp/a40011414_2";
+        public const string App_farm_ground_sfp_a40011414_3_png = "app_farm_ground.sfp/a40011414_3";
+        public const string App_farm_ground_sfp_a40011415_1_png = "app_farm_ground.sfp/a40011415_1";
+        public const string App_farm_ground_sfp_a40011415_2_png = "app_farm_ground.sfp/a40011415_2";
+        public const string App_farm_ground_sfp_a40011415_3_png = "app_farm_ground.sfp/a40011415_3";
+        public const string App_farm_ground_sfp_a40031378_2_png = "app_farm_ground.sfp/a40031378_2";
         public const string App_farm_ground_sfp_Fireplace_Burn_m_01_fbx = "app_farm_ground.sfp/Fireplace_Burn_m_01";
-        public const string App_farm_ground_sfp_Icon_ui_43050399_png = "app_farm_ground.sfp/Icon_ui_43050399";
+        public const string App_farm_ground_sfp_Grass_mat = "app_farm_ground.sfp/Grass";
+        public const string App_farm_ground_sfp_grass_1_Emission_png = "app_farm_ground.sfp/grass_1_Emission";
+        public const string App_farm_ground_sfp_land_png = "app_farm_ground.sfp/land";
+        public const string App_farm_ground_sfp_lightdots_prefab = "app_farm_ground.sfp/lightdots";
+        public const string App_farm_ground_sfp_lights_1_png = "app_farm_ground.sfp/lights_1";
         public const string App_farm_ground_sfp_lvdi_001_png = "app_farm_ground.sfp/lvdi_001";
         public const string App_farm_ground_sfp_lvdi_002_png = "app_farm_ground.sfp/lvdi_002";
         public const string App_farm_ground_sfp_lvdi_003_png = "app_farm_ground.sfp/lvdi_003";
@@ -50,9 +78,12 @@ namespace SFramework.Statics
         public const string App_farm_ground_sfp_Tex03_png = "app_farm_ground.sfp/Tex03";
         public const string App_farm_ground_sfp_Tex04_png = "app_farm_ground.sfp/Tex04";
         public const string App_farm_ground_sfp_Tex05_png = "app_farm_ground.sfp/Tex05";
+        public const string App_farm_ground_materials_sfp_21010001_mat = "app_farm_ground_materials.sfp/21010001";
         public const string App_farm_house_sfp_PixelTextureGrid_256_png = "app_farm_house.sfp/PixelTextureGrid_256";
         public const string App_farm_house_sfp_材质_mat = "app_farm_house.sfp/材质";
-        public const string App_farm_materials_sfp_Grass_mat = "app_farm_materials.sfp/Grass";
+        public const string App_farm_materials_sfp_lights_1_mat = "app_farm_materials.sfp/lights 1";
+        public const string App_farm_materials_sfp_lights_mat = "app_farm_materials.sfp/lights";
+        public const string App_farm_materials_sfp_Lizi_1_mat = "app_farm_materials.sfp/Lizi_1";
         public const string App_farm_materials_sfp_m01_mat = "app_farm_materials.sfp/m01";
         public const string App_farm_materials_sfp_m02_mat = "app_farm_materials.sfp/m02";
         public const string App_farm_materials_sfp_m03_mat = "app_farm_materials.sfp/m03";
@@ -62,6 +93,14 @@ namespace SFramework.Statics
         public const string App_farm_materials_sfp_M08_mat = "app_farm_materials.sfp/M08";
         public const string App_farm_materials_sfp_M09_mat = "app_farm_materials.sfp/M09";
         public const string App_farm_materials_sfp_M10_mat = "app_farm_materials.sfp/M10";
+        public const string App_farm_materials_sfp_Sand_mat = "app_farm_materials.sfp/Sand";
+        public const string App_farm_ordernpc_sfp_npc_0_ske_png = "app_farm_ordernpc.sfp/npc_0_ske";
+        public const string App_farm_ordernpc_sfp_npc_1_ske_png = "app_farm_ordernpc.sfp/npc_1_ske";
+        public const string App_farm_ordernpc_sfp_npc_2_ske_png = "app_farm_ordernpc.sfp/npc_2_ske";
+        public const string App_farm_ordernpc_sfp_npc_3_ske_png = "app_farm_ordernpc.sfp/npc_3_ske";
+        public const string App_farm_ordernpc_sfp_npc_4_ske_png = "app_farm_ordernpc.sfp/npc_4_ske";
+        public const string App_farm_ordernpc_sfp_npc_5_ske_png = "app_farm_ordernpc.sfp/npc_5_ske";
+        public const string App_farm_ordernpc_sfp_npc_6_ske_png = "app_farm_ordernpc.sfp/npc_6_ske";
         public const string App_farm_ui_sfp_btn_weiyang_01_a_png = "app_farm_ui.sfp/btn_weiyang_01_a";
         public const string App_farm_ui_sfp_btn_weiyang_01_d_png = "app_farm_ui.sfp/btn_weiyang_01_d";
         public const string App_loading_sfp_LoadingView_prefab = "app_loading.sfp/LoadingView";
@@ -205,10 +244,15 @@ namespace SFramework.Statics
     public class App_farm_sfp
     {
         public const string BundleName = "app_farm.sfp";
+        public const string RES_21010001_prefab = "21010001";
+        public const string RES_a40011411_2_prefab = "a40011411_2";
         public const string RES_Fire_prefab = "Fire";
+        public const string RES_FlowerTemplate_prefab = "FlowerTemplate";
         public const string RES_Grass_mat = "Grass";
         public const string RES_Grass_prefab = "Grass";
         public const string RES_Grass1_prefab = "Grass1";
+        public const string RES_GroundTile_prefab = "GroundTile";
+        public const string RES_Lights_prefab = "Lights";
         public const string RES_ParticlesDust_prefab = "ParticlesDust";
         public const string RES_Tree_prefab = "Tree";
         public const string RES_Tree1_prefab = "Tree1";
@@ -235,7 +279,11 @@ namespace SFramework.Statics
     public class App_farm_farmview_sfp
     {
         public const string BundleName = "app_farm_farmview.sfp";
+        public const string RES_CloudyOcean_png = "CloudyOcean";
         public const string RES_Global_Volume_Profile_asset = "Global Volume Profile";
+        public const string RES_LightingData_asset = "LightingData";
+        public const string RES_Lightmap0_comp_dir_png = "Lightmap-0_comp_dir";
+        public const string RES_Lightmap0_comp_shadowmask_png = "Lightmap-0_comp_shadowmask";
     }
     public class App_farm_ground
     {
@@ -244,10 +292,29 @@ namespace SFramework.Statics
     public class App_farm_ground_sfp
     {
         public const string BundleName = "app_farm_ground.sfp";
-        public const string RES_building_farm_png = "building_farm";
-        public const string RES_FeelBounceGrass_png = "FeelBounceGrass";
+        public const string RES_21010001_png = "21010001";
+        public const string RES_a40011411_1_png = "a40011411_1";
+        public const string RES_a40011411_2_png = "a40011411_2";
+        public const string RES_a40011411_3_png = "a40011411_3";
+        public const string RES_a40011412_1_png = "a40011412_1";
+        public const string RES_a40011412_2_png = "a40011412_2";
+        public const string RES_a40011412_3_png = "a40011412_3";
+        public const string RES_a40011413_1_png = "a40011413_1";
+        public const string RES_a40011413_2_png = "a40011413_2";
+        public const string RES_a40011413_3_png = "a40011413_3";
+        public const string RES_a40011414_1_png = "a40011414_1";
+        public const string RES_a40011414_2_png = "a40011414_2";
+        public const string RES_a40011414_3_png = "a40011414_3";
+        public const string RES_a40011415_1_png = "a40011415_1";
+        public const string RES_a40011415_2_png = "a40011415_2";
+        public const string RES_a40011415_3_png = "a40011415_3";
+        public const string RES_a40031378_2_png = "a40031378_2";
         public const string RES_Fireplace_Burn_m_01_fbx = "Fireplace_Burn_m_01";
-        public const string RES_Icon_ui_43050399_png = "Icon_ui_43050399";
+        public const string RES_Grass_mat = "Grass";
+        public const string RES_grass_1_Emission_png = "grass_1_Emission";
+        public const string RES_land_png = "land";
+        public const string RES_lightdots_prefab = "lightdots";
+        public const string RES_lights_1_png = "lights_1";
         public const string RES_lvdi_001_png = "lvdi_001";
         public const string RES_lvdi_002_png = "lvdi_002";
         public const string RES_lvdi_003_png = "lvdi_003";
@@ -262,6 +329,15 @@ namespace SFramework.Statics
         public const string RES_Tex03_png = "Tex03";
         public const string RES_Tex04_png = "Tex04";
         public const string RES_Tex05_png = "Tex05";
+    }
+    public class App_farm_ground_materials
+    {
+        public const string BundleName = "app_farm_ground_materials";
+    }
+    public class App_farm_ground_materials_sfp
+    {
+        public const string BundleName = "app_farm_ground_materials.sfp";
+        public const string RES_21010001_mat = "21010001";
     }
     public class App_farm_house
     {
@@ -280,7 +356,9 @@ namespace SFramework.Statics
     public class App_farm_materials_sfp
     {
         public const string BundleName = "app_farm_materials.sfp";
-        public const string RES_Grass_mat = "Grass";
+        public const string RES_lights_1_mat = "lights 1";
+        public const string RES_lights_mat = "lights";
+        public const string RES_Lizi_1_mat = "Lizi_1";
         public const string RES_m01_mat = "m01";
         public const string RES_m02_mat = "m02";
         public const string RES_m03_mat = "m03";
@@ -290,6 +368,22 @@ namespace SFramework.Statics
         public const string RES_M08_mat = "M08";
         public const string RES_M09_mat = "M09";
         public const string RES_M10_mat = "M10";
+        public const string RES_Sand_mat = "Sand";
+    }
+    public class App_farm_ordernpc
+    {
+        public const string BundleName = "app_farm_ordernpc";
+    }
+    public class App_farm_ordernpc_sfp
+    {
+        public const string BundleName = "app_farm_ordernpc.sfp";
+        public const string RES_npc_0_ske_png = "npc_0_ske";
+        public const string RES_npc_1_ske_png = "npc_1_ske";
+        public const string RES_npc_2_ske_png = "npc_2_ske";
+        public const string RES_npc_3_ske_png = "npc_3_ske";
+        public const string RES_npc_4_ske_png = "npc_4_ske";
+        public const string RES_npc_5_ske_png = "npc_5_ske";
+        public const string RES_npc_6_ske_png = "npc_6_ske";
     }
     public class App_farm_ui
     {

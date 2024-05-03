@@ -42,6 +42,7 @@ Material:
     - ENABLE_BENDING: 0
     - ENABLE_BENDING_PLANET: 0
     - _Amount: 0.0052
+    - _CoolDownCount: 1
     - _ENABLE: 0
     - _PLANET: 0
     m_Colors: []
