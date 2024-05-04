@@ -8,7 +8,7 @@ namespace SFramework.Sprites
     {
         [SerializeField] private Transform _cameraTransform;
 
-        private void Awake()
+        private void OnEnable()
         {
             if(_cameraTransform == null)
                 _cameraTransform = Camera.main.transform;

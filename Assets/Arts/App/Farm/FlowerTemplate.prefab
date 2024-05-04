@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 7398085672084091060}
   - component: {fileID: 7650202196465707262}
   - component: {fileID: 598621268805573678}
-  m_Layer: 0
+  - component: {fileID: 5461571271279084577}
+  m_Layer: 7
   m_Name: FlowerTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,3 +99,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraTransform: {fileID: 0}
+--- !u!65 &5461571271279084577
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9189714449137978117}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.76, y: 2.2, z: 0.2}
+  m_Center: {x: 0, y: 1.1, z: 0}

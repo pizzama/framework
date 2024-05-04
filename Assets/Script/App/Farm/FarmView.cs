@@ -6,14 +6,15 @@ using SFramework.Game.Map;
 using SFramework.Tools;
 using SFramework.Statics;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 namespace App.Farm
 {
 	public class FarmView : SSCENEView
 	{
 		private SMGrid _grid;
-		private Transform _gridParent;
 		private Transform _flowerParent;
+		private Ray _ray;
 		protected override ViewOpenType GetViewOpenType()
 		{
 			return ViewOpenType.Single;
@@ -23,7 +24,6 @@ namespace App.Farm
 			// Code Here
 			// _grid = new SMGrid(10, 10, 3, new Vector3(0, 0, 0));
 			// create farm
-			_gridParent = getExportObject<Transform>("FarmTile");
 			_flowerParent = getExportObject<Transform>("Flowers");
 
 			createFlower();
@@ -38,6 +38,27 @@ namespace App.Farm
 		{
 			if (Input.GetMouseButtonDown(0))
 			{
+// #if UNITY_ANDROID || UNITY_PHONE
+// 				if(EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+// #else
+// 				if (EventSystem.current.IsPointerOverGameObject())
+// #endif
+				{
+					//发送射线做碰撞检测
+					_ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+					RaycastHit hit;
+					int layerMask = 1 << 7;
+					layerMask += 1 << 6;
+					int mask = LayerMask.GetMask("ColliderLayer");
+					if(Physics.Raycast(_ray, out hit, Mathf.Infinity, mask))
+					{
+						Debug.Log("hit collider:" + hit.collider.tag + ";" + hit.collider.name);
+					}
+					Debug.DrawLine(_ray.origin, hit.point, Color.red, 2);	
+				}
+
+
+
 				// Vector3 vec = MapTools.GetMouseWorldPosition();
 				// Debug.Log(vec);
 				// _grid.SetValue(vec, 100);
