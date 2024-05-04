@@ -81,7 +81,7 @@ namespace App.Farm
 				Vector3 pos = flowerPos[i];
 				if (pos != null)
 				{
-					CreateComponent<FlowerEntity>(SFResAssets.App_farm_sfp_FlowerTemplate_prefab, _flowerParent, pos);
+					CreateEntity<FlowerEntity>(SFResAssets.App_farm_sfp_FlowerTemplate_prefab, _flowerParent, pos);
 				}
 
 			}

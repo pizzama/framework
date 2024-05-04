@@ -95,6 +95,11 @@ namespace SFramework.Tools.Math
             return (float)(random.NextDouble() * (maxValue - minValue + 1) + minValue);
         }
 
+        public static int RandomInt(int minValue, int maxValue)
+        {
+            return random.Next(minValue, maxValue);
+        }
+
         public static float MapToRange(float dvalue, float dmin, float dmax, float tmin, float tmax)
         {
             //tmin + (DVALUE - DMIN)(tmax - tmin) / (DMAX - DMIN)
