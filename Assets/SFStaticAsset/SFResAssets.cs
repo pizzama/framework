@@ -23,6 +23,7 @@ namespace SFramework.Statics
         public const string App_battle_sfs_BattleView_unity = "app_battle.sfs/BattleView";
         public const string App_farm_sfp_21010001_prefab = "app_farm.sfp/21010001";
         public const string App_farm_sfp_a40011411_2_prefab = "app_farm.sfp/a40011411_2";
+        public const string App_farm_sfp_FarmMenuView_prefab = "app_farm.sfp/FarmMenuView";
         public const string App_farm_sfp_Fire_prefab = "app_farm.sfp/Fire";
         public const string App_farm_sfp_FlowerTemplate_prefab = "app_farm.sfp/FlowerTemplate";
         public const string App_farm_sfp_Grass_mat = "app_farm.sfp/Grass";
@@ -246,6 +247,7 @@ namespace SFramework.Statics
         public const string BundleName = "app_farm.sfp";
         public const string RES_21010001_prefab = "21010001";
         public const string RES_a40011411_2_prefab = "a40011411_2";
+        public const string RES_FarmMenuView_prefab = "FarmMenuView";
         public const string RES_Fire_prefab = "Fire";
         public const string RES_FlowerTemplate_prefab = "FlowerTemplate";
         public const string RES_Grass_mat = "Grass";

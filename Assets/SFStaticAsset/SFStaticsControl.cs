@@ -19,6 +19,7 @@ namespace SFramework.Statics
         public const string App_Loading_LoadingControl = "App.Loading.LoadingControl";
         public const string App_Inventory_InventoryControl = "App.Inventory.InventoryControl";
         public const string App_Farm_FarmControl = "App.Farm.FarmControl";
+        public const string App_Farm_FarmMenuControl = "App.Farm.FarmMenuControl";
         public const string Game_GameMainControl = "Game.GameMainControl";
         public const string Game_InputControl = "Game.InputControl";
         public const string Game_NormalLoadingControl = "Game.NormalLoadingControl";
