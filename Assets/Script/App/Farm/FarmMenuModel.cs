@@ -1,5 +1,6 @@
 using SFramework.Game;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace App.Farm
 {
@@ -7,7 +8,8 @@ namespace App.Farm
 	{
 		protected override void opening()
 		{
-			 GetData("").Forget();
+			GetData("").Forget();
+			Debug.Log("opening:" + OpenParams.ToString());
 		}
 	}
 }

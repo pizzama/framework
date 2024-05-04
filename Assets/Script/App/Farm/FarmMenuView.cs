@@ -7,6 +7,7 @@ namespace App.Farm
 {
 	public class FarmMenuView : SUIView
 	{
+		private Button _closeBtn;
 		protected override ViewOpenType GetViewOpenType()
 		{
 			return ViewOpenType.Single;
@@ -18,10 +19,18 @@ namespace App.Farm
 		protected override void opening()
 		{
 			// Code Here
+			_closeBtn = getExportObject<Button>("CloseBtn");
+			_closeBtn.onClick.AddListener(CloseHandle);
 		}
 		protected override void closing()
 		{
 			// Code Here
+			_closeBtn.onClick.RemoveListener(CloseHandle);
+		}
+
+		private void CloseHandle()
+		{
+			GetControl<FarmMenuControl>().Close();
 		}
 	}
 }

@@ -11,5 +11,10 @@ namespace App.Farm
 			// Code Here
 			BroadcastMessage("1111", SFStaticsControl.App_Inventory_InventoryControl, "1111");
 		}
+
+		public void OpenFarmView(FlowerEntity entity)
+		{
+			OpenControl(SFStaticsControl.App_Farm_FarmMenuControl, entity);
+		}
 	}
 }

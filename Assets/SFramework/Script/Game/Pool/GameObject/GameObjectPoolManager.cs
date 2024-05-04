@@ -88,6 +88,8 @@ namespace SFramework.Pool
             }
             else
             {
+                if(!ob.activeSelf)
+                    ob.SetActive(true);
                 return ob;
             }
         }

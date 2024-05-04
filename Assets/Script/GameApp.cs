@@ -21,16 +21,24 @@ namespace Game
 
         protected override void installBundle()
         {
-            //var ioc = new IOCFactory();
-            //ioc.Register<SkillStrike>("test");
-            //var ii = ioc.Resolve<ISSkillScript>("test");
-            //ii.Create(null, "11");
-            //Debug.Log(ii);
-            // BundleManager.Instance.InstallBundle(new GameMainControl(), "", true);
-            initAllControl();
-            //BundleManager.Instance.OpenControl(SFStaticsControl.Game_GameMainControl);
-            SBundleManager.Instance.OpenControl(SFStaticsControl.App_Loading_LoadingControl);
-            // SBundleManager.Instance.OpenControl(SFStaticsControl.App_Inventory_InventoryControl);
+            try
+            {
+                //var ioc = new IOCFactory();
+                //ioc.Register<SkillStrike>("test");
+                //var ii = ioc.Resolve<ISSkillScript>("test");
+                //ii.Create(null, "11");
+                //Debug.Log(ii);
+                // BundleManager.Instance.InstallBundle(new GameMainControl(), "", true);
+                initAllControl();
+                //BundleManager.Instance.OpenControl(SFStaticsControl.Game_GameMainControl);
+                SBundleManager.Instance.OpenControl(SFStaticsControl.App_Loading_LoadingControl);
+                // SBundleManager.Instance.OpenControl(SFStaticsControl.App_Inventory_InventoryControl);
+            }
+            catch (System.Exception err)
+            {
+                Debug.LogError(err.ToString());
+            }
+
         }
     }
 }

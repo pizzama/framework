@@ -54,7 +54,10 @@ namespace SFramework.Pool
             if (_goList.Count > mMaxCount)
                 _goList.Remove(go);
             else
+            {
+                go.transform.SetParent(mTrans);
                 go.SetActive(false);
+            }
         }
 
     }

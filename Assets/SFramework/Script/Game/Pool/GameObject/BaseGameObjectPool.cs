@@ -106,6 +106,7 @@ namespace SFramework.Pool
         protected void SetDefaultPosition(Transform ta)
         {
             ta.localPosition = new Vector3(_defaultPosX, _defaultPosY, _defaultPosZ);
+            ta.transform.localScale = new Vector3(1,1,1);
         }
 
     }
