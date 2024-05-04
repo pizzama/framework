@@ -1,5 +1,6 @@
 public class SEnum
 {
+    public static string ExportTag = "$EXPORT$"; 
     public enum SafeModes
     {
         Nope,

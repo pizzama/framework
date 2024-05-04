@@ -47,12 +47,10 @@ namespace App.Farm
 					//发送射线做碰撞检测
 					_ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 					RaycastHit hit;
-					int layerMask = 1 << 7;
-					layerMask += 1 << 6;
 					int mask = LayerMask.GetMask("ColliderLayer");
 					if(Physics.Raycast(_ray, out hit, Mathf.Infinity, mask))
 					{
-						FlowerEntity entity = hit.collider.GetComponent<FlowerEntity>();
+						FlowerEntity entity = hit.collider.GetComponentInParent<FlowerEntity>();
 						if(entity != null)
 						{
 							GetControl<FarmControl>().OpenFarmView(entity);

@@ -6,12 +6,19 @@ namespace App.Farm
 {
     public class FlowerEntity : SEntity
     {
-        private SFSM _fSM;
+        private FlowerFSM _fSM;
         protected override void initEntity()
         {
             base.initEntity();
-            _fSM = new SFSM();
+            _fSM = new FlowerFSM();
             //init data
+            _fSM.ChangeState<FlowerEmpty>();
         }
+
+        public void Empty()
+        {
+            
+        }
+
     }
 }

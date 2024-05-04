@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SFS_Bending Master
+  m_Name: SFS_BendingGrass
   m_Shader: {fileID: -6465566751694194690, guid: 940d79357fd7a4f01a49e7247aeaa4da,
     type: 3}
   m_ValidKeywords: []
@@ -39,6 +39,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Indenty: 20
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
