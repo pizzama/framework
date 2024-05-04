@@ -50,7 +50,7 @@ namespace App.Farm
 					int mask = LayerMask.GetMask("ColliderLayer");
 					if(Physics.Raycast(_ray, out hit, Mathf.Infinity, mask))
 					{
-						FlowerEntity entity = hit.collider.GetComponentInParent<FlowerEntity>();
+						FlowerEntity entity = hit.collider.GetComponent<FlowerEntity>();
 						if(entity != null)
 						{
 							GetControl<FarmControl>().OpenFarmView(entity);

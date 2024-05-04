@@ -20,7 +20,7 @@ namespace SFramework
             return (T)_control;
         }
 
-        public delegate void DelegateModelCallback();
+        public delegate void DelegateModelCallback(int code);
         public DelegateModelCallback ModelCallback;
         public override void Install()
         {
@@ -79,25 +79,31 @@ namespace SFramework
         {
             if (url == "")
             {
-                ModelCallback?.Invoke();
+                ModelCallback?.Invoke(0);
                 return null;
             }
             try
             {
                 UnityWebRequest webRequest = UnityWebRequest.Get(url);
                 await webRequest.SendWebRequest().WithCancellation(cancelSource.Token);
-                ModelCallback?.Invoke();
+                ModelCallback?.Invoke(0);
                 return webRequest.downloadHandler.data;
             }
-            catch (OperationCanceledException ex)
+            catch (OperationCanceledException err)
             {
                 if (cancelSource.IsCancellationRequested)
                 {
-                    UnityEngine.Debug.Log("Timeout." + ex.ToString());
+                    ModelCallback?.Invoke(-1);
+                    UnityEngine.Debug.LogError("Timeout." + err.ToString());
                 }
                 else if (cancelSource.IsCancellationRequested)
                 {
-                    UnityEngine.Debug.Log("Cancel clicked." + ex.ToString());
+                    ModelCallback?.Invoke(-2);
+                    UnityEngine.Debug.LogError("Cancel clicked." + err.ToString());
+                }
+                else
+                {
+                    ModelCallback?.Invoke(-3);
                 }
 
                 return null;
@@ -110,26 +116,46 @@ namespace SFramework
         {
             if (url == "")
             {
-                ModelCallback?.Invoke();
+                ModelCallback?.Invoke(0);
                 return null;
             }
-            UnityWebRequest webRequest = UnityWebRequest.Get(url);
-            byte[] bytes = await requestData(webRequest);
-            ModelCallback?.Invoke();
-            return bytes;
+            try
+            {
+                UnityWebRequest webRequest = UnityWebRequest.Get(url);
+                byte[] bytes = await requestData(webRequest);
+                ModelCallback?.Invoke(0);
+                return bytes;
+            }
+            catch (System.Exception err)
+            {
+                ModelCallback?.Invoke(-3);
+                UnityEngine.Debug.LogError("Timeout." + err.ToString());
+                return null;
+            }
+
         }
 
         public async UniTask<byte[]> PostData(string url, object pars)
         {
             if (url == "")
             {
-                ModelCallback?.Invoke();
+                ModelCallback?.Invoke(0);
                 return null;
             }
-            UnityWebRequest webRequest = UnityWebRequest.Post(url, pars.ToString());
-            byte[] bytes = await requestData(webRequest);
-            ModelCallback?.Invoke();
-            return bytes;
+            try
+            {
+                UnityWebRequest webRequest = UnityWebRequest.Post(url, pars.ToString());
+                byte[] bytes = await requestData(webRequest);
+                ModelCallback?.Invoke(0);
+                return bytes;
+            }
+            catch (System.Exception err)
+            {
+                ModelCallback?.Invoke(-3);
+                UnityEngine.Debug.LogError("Timeout." + err.ToString());
+                return null;
+            }
+
         }
 
         private async UniTask<byte[]> requestData(UnityWebRequest webRequest)
@@ -149,17 +175,19 @@ namespace SFramework
 
                 if (!string.IsNullOrEmpty(webRequest.error))
                 {
+                    ModelCallback?.Invoke(-1);
                     throw new Exception($"you use Web Request Error.{webRequest.url} Message{webRequest.error}");
                 }
 
                 var result = webRequest.downloadHandler.data;
                 webRequest.Dispose();
-                ModelCallback?.Invoke();
+                ModelCallback?.Invoke(0);
                 return result;
             }
-            catch (Exception e)
+            catch (Exception err)
             {
-                throw new Exception($"you use Web Request Error.{webRequest.url} Message{e.Message}");
+                ModelCallback?.Invoke(-3);
+                throw new Exception($"you use Web Request Error.{webRequest.url} Message{err.Message}");
             }
         }
     }

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8941131719067693537}
   - component: {fileID: 8765935785502888019}
   - component: {fileID: 6327515878291924484}
-  - component: {fileID: 7580815504495179732}
   m_Layer: 7
   m_Name: Flower
   m_TagString: $EXPORT$
@@ -100,19 +99,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraTransform: {fileID: 0}
   _offset: 0
---- !u!65 &7580815504495179732
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 858764986355998446}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.76, y: 1.5, z: 0.2}
-  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!1 &1470887322360946126
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,6 +306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7398085672084091060}
   - component: {fileID: 1237104286260915762}
+  - component: {fileID: 7133954513352840279}
   m_Layer: 7
   m_Name: FlowerTemplate
   m_TagString: Untagged
@@ -361,3 +348,16 @@ MonoBehaviour:
   _useExportFlag: 1
   _rotation: {x: 0, y: 0, z: 0, w: 0}
   _camera: {fileID: 0}
+--- !u!65 &7133954513352840279
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9189714449137978117}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: -1, z: 0}

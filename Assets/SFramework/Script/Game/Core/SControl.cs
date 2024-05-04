@@ -40,6 +40,7 @@ namespace SFramework
 
         public override void Open(SBundleParams value)
         {
+            IsOpen = true;
             _model.Open(value);
         }
 
@@ -95,14 +96,21 @@ namespace SFramework
 
         }
 
-        public void HandleModelCallback()
+        public void HandleModelCallback(int code)
         {
-            _view.Open();
+            if (code != 0)
+            {
+                IsOpen = false;
+            }
+            else
+            {
+                _view.Open();
+            }
+
         }
 
         public void HandleViewCallback()
         {
-            IsOpen = true;
             this.Open();
         }
 
