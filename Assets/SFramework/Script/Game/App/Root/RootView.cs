@@ -23,6 +23,24 @@ namespace SFramework.Game
             base.Install();
         }
 
+        public T LoadFromBundle<T>(string path) where T : UnityEngine.Object
+        {
+            int index = path.LastIndexOf("/");
+            if (index > 0)
+            {
+                string abName = path.Substring(0, index);
+                string resName = path.Substring(index + 1, path.Length - index - 1);
+                return (T)LoadFromBundle<T>(abName, resName);
+            }
+
+            return null;
+        }
+
+        public T LoadFromBundle<T>(string abName, string resName) where T : UnityEngine.Object
+        {
+            return (T)assetManager.LoadFromBundle<T>(abName, resName);
+        }
+
         public GameObject CreateGameObjectUsingPool(string abName, string resName, float lifeTime = -1)
         {
             UnityEngine.GameObject prefab = assetManager.LoadFromBundle<UnityEngine.GameObject>(abName, resName);
