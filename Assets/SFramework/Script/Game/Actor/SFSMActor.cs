@@ -47,8 +47,7 @@ namespace SFramework.Actor
         {
             if (mFsm == null)
             {
-                mFsm = new SFSM();
-                mFsm.Owner = this;
+                mFsm = new SFSM(this);
             }
         }
 

@@ -1,8 +1,10 @@
+using App.Farm;
 using SFramework.StateMachine;
 using UnityEngine;
 
 public class FlowerSeed : SFSMState
 {
+    private FlowerEntity _entity;
     public override void EnterState()
     {
         

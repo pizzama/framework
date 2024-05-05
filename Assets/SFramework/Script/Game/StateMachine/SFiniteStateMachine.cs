@@ -123,9 +123,10 @@ namespace SFramework.StateMachine
 
         public ISFSMState CurrentState => _activeState;
 
-        public SFSM()
+        public SFSM(UnityEngine.Object owner)
         {
             mStates = new Dictionary<string, ISFSMState>();
+            Owner = owner;
             initFSM();
         }
 

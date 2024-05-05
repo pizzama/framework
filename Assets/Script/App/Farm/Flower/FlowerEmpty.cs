@@ -7,6 +7,7 @@ public class FlowerEmpty : SFSMState
     private FlowerEntity _entity;
     public override void EnterState()
     {
+        _entity?.Empty();
     }
 
     public override void ExitState()
@@ -15,6 +16,7 @@ public class FlowerEmpty : SFSMState
 
     public override void InitState()
     {
+        _entity = (FlowerEntity)Machine.Owner;
     }
 
     public override void UpdateState()

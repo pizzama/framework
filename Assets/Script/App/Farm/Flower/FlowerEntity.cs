@@ -14,7 +14,7 @@ namespace App.Farm
         protected override void initEntity()
         {
             base.initEntity();
-            _fSM = new FlowerFSM();
+            _fSM = new FlowerFSM(this);
             //init data
             _fSM.ChangeState<FlowerEmpty>();
         }
