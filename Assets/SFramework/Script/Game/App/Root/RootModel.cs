@@ -66,10 +66,16 @@ namespace SFramework.Game
 
         }
 
-        public T ReadData<T>() where T : Google.Protobuf.IMessage, new()
+        public void SaveData<T>(T data) where T : Google.Protobuf.IMessage, new()
         {
             Type tp = typeof(T);
-            return default;
+            SaveData(data, tp.FullName + ".bytes");
+        }
+
+        public T ReadData<T>() where T :Google.Protobuf.IMessage, new()
+        {
+            Type tp = typeof(T);
+            return ReadData<T>(tp.FullName + ".bytes");
         }
 
         private byte[] GetBytesFromProtoObject(Google.Protobuf.IMessage msg)
