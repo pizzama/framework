@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using SFramework.Game;
+using ProtoGameData;
 
 namespace App.Farm
 {
@@ -7,7 +8,8 @@ namespace App.Farm
 	{
 		protected override void opening()
 		{
-			 GetData("").Forget();
+			var t = ReadData<ProtoUserData>();
+			GetData("").Forget();
 		}
 	}
 }

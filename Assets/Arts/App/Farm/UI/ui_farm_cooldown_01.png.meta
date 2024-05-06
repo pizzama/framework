@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3b68bf8992d517342821579b3f50340d
+guid: 31ff71a767f94e74ab64126b124565a2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -131,5 +131,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: app_farm_ui
-  assetBundleVariant: sfp
+  assetBundleName: 
+  assetBundleVariant: 

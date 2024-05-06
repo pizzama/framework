@@ -17,7 +17,7 @@ namespace App.Inventory
 			{
 				Debug.Log(value.ToString());
 			}
-            
+			 
         }
     }
 }

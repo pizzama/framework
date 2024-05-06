@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Google.Protobuf;
 using System.IO;
+using System.Xml;
 
 namespace SFramework.Game
 {
@@ -63,6 +64,12 @@ namespace SFramework.Game
 
             return default;
 
+        }
+
+        public T ReadData<T>() where T : Google.Protobuf.IMessage, new()
+        {
+            Type tp = typeof(T);
+            return default;
         }
 
         private byte[] GetBytesFromProtoObject(Google.Protobuf.IMessage msg)
