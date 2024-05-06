@@ -60,6 +60,7 @@ namespace SFramework.Statics
         public const string App_farm_ground_sfp_a40011415_3_png = "app_farm_ground.sfp/a40011415_3";
         public const string App_farm_ground_sfp_a40031378_2_png = "app_farm_ground.sfp/a40031378_2";
         public const string App_farm_ground_sfp_Fireplace_Burn_m_01_fbx = "app_farm_ground.sfp/Fireplace_Burn_m_01";
+        public const string App_farm_ground_sfp_Forest_spriteatlasv2 = "app_farm_ground.sfp/Forest";
         public const string App_farm_ground_sfp_Grass_mat = "app_farm_ground.sfp/Grass";
         public const string App_farm_ground_sfp_grass_1_Emission_png = "app_farm_ground.sfp/grass_1_Emission";
         public const string App_farm_ground_sfp_land_png = "app_farm_ground.sfp/land";
@@ -79,6 +80,9 @@ namespace SFramework.Statics
         public const string App_farm_ground_sfp_Tex03_png = "app_farm_ground.sfp/Tex03";
         public const string App_farm_ground_sfp_Tex04_png = "app_farm_ground.sfp/Tex04";
         public const string App_farm_ground_sfp_Tex05_png = "app_farm_ground.sfp/Tex05";
+        public const string App_farm_ground_forest_sfp_5101410_png = "app_farm_ground_forest.sfp/5101410";
+        public const string App_farm_ground_forest_sfp_5103524_png = "app_farm_ground_forest.sfp/5103524";
+        public const string App_farm_ground_forest_sfp_5106510_png = "app_farm_ground_forest.sfp/5106510";
         public const string App_farm_ground_materials_sfp_21010001_mat = "app_farm_ground_materials.sfp/21010001";
         public const string App_farm_house_sfp_PixelTextureGrid_256_png = "app_farm_house.sfp/PixelTextureGrid_256";
         public const string App_farm_house_sfp_材质_mat = "app_farm_house.sfp/材质";
@@ -312,6 +316,7 @@ namespace SFramework.Statics
         public const string RES_a40011415_3_png = "a40011415_3";
         public const string RES_a40031378_2_png = "a40031378_2";
         public const string RES_Fireplace_Burn_m_01_fbx = "Fireplace_Burn_m_01";
+        public const string RES_Forest_spriteatlasv2 = "Forest";
         public const string RES_Grass_mat = "Grass";
         public const string RES_grass_1_Emission_png = "grass_1_Emission";
         public const string RES_land_png = "land";
@@ -331,6 +336,17 @@ namespace SFramework.Statics
         public const string RES_Tex03_png = "Tex03";
         public const string RES_Tex04_png = "Tex04";
         public const string RES_Tex05_png = "Tex05";
+    }
+    public class App_farm_ground_forest
+    {
+        public const string BundleName = "app_farm_ground_forest";
+    }
+    public class App_farm_ground_forest_sfp
+    {
+        public const string BundleName = "app_farm_ground_forest.sfp";
+        public const string RES_5101410_png = "5101410";
+        public const string RES_5103524_png = "5103524";
+        public const string RES_5106510_png = "5106510";
     }
     public class App_farm_ground_materials
     {

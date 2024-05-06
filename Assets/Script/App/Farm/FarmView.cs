@@ -7,6 +7,7 @@ using SFramework.Tools;
 using SFramework.Statics;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using UnityEngine.U2D;
 
 namespace App.Farm
 {
@@ -27,6 +28,7 @@ namespace App.Farm
 			_flowerParent = getExportObject<Transform>("Flowers");
 
 			createFlower();
+			createForest();
 		}
 
 		protected override void closing()
@@ -85,6 +87,14 @@ namespace App.Farm
 				}
 
 			}
+			
+		}
+
+		private void createForest()
+		{
+			SpriteAtlas atlas = LoadFromBundle<SpriteAtlas>(SFResAssets.App_farm_ground_sfp_Forest_spriteatlasv2);
+			Sprite sprite = atlas.GetSprite("5103524");
+			Debug.Log(sprite);
 		}
 	}
 }
