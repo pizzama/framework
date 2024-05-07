@@ -9,13 +9,14 @@ namespace App.Inventory
 		protected override void opening()
 		{
 			// read userData
-			_userData = ReadData<ProtoUserData>();
+			if(_userData == null)
+				_userData = ReadData<ProtoUserData>();
 			GetData("").Forget();
 		}
 
 		public void AddPackage(int cid, int num)
 		{
-			//
+			
 		}
 
 		public void SaveUserData()

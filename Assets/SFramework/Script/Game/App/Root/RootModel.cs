@@ -3,8 +3,6 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Google.Protobuf;
 using System.IO;
-using System.Xml;
-
 namespace SFramework.Game
 {
     public class RootModel : SModel
@@ -62,7 +60,7 @@ namespace SFramework.Game
                 Debug.LogError(e);
             }
 
-            return default(T);
+            return new T();
 
         }
 
