@@ -6,6 +6,7 @@ namespace SFramework.Game
 {
     public enum UILayer
     {
+        None,
         Tags,
         Pend,
         Hud,

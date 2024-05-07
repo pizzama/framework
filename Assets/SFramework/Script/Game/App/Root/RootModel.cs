@@ -62,7 +62,7 @@ namespace SFramework.Game
                 Debug.LogError(e);
             }
 
-            return default;
+            return default(T);
 
         }
 

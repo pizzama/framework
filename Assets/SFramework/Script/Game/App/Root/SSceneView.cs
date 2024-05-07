@@ -20,7 +20,7 @@ namespace SFramework.Game
         }
 
         public override void Open()
-        {
+        {   
             SetScenePath(out mAbPath, out mAbName);
             loadSceneProcessAsync(mAbPath, mAbName, (LoadSceneMode)GetViewOpenType()).Forget();
         }

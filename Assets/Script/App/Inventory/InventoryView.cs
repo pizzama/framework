@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace App.Inventory
 {
-	public class InventoryView : SSCENEView
+	public class InventoryView : SUIView
 	{
 		protected override ViewOpenType GetViewOpenType()
 		{
@@ -19,5 +19,10 @@ namespace App.Inventory
 		{
 			// Code Here
 		}
-	}
+
+        protected override UILayer GetViewLayer()
+        {
+            return UILayer.None;
+        }
+    }
 }

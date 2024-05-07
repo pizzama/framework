@@ -43,6 +43,11 @@ namespace SFramework.Game
 
         public override void Open()
         {
+            if(GetViewLayer() == UILayer.None)
+            {
+                return;
+            }
+            
             Vector3 position;
             Quaternion rotation;
             SetViewPrefabPath(out mAbName, out mResName, out position, out rotation);
