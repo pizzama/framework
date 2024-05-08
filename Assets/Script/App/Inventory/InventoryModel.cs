@@ -20,6 +20,11 @@ namespace App.Inventory
             GetData("").Forget();
         }
 
+        protected override void closing()
+        {
+            // Code Here
+        }
+
         public void AddPackageBySid(int sid, int num)
         {
             try
@@ -75,7 +80,7 @@ namespace App.Inventory
                     }
                     else
                     {
-						ProtoItem item = items[0];
+                        ProtoItem item = items[0];
                         int left = (int)item.Num;
                         left += num;
                         if (left < 0)

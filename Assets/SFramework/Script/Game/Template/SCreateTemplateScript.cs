@@ -35,6 +35,12 @@ public class SCreateTemplateScript
         writer.AppendLine("\t\t{");
         writer.AppendLine("\t\t\t// Code Here");
         writer.AppendLine("\t\t}");
+
+        writer.AppendLine("\t\tprotected override void closing()");
+        writer.AppendLine("\t\t{");
+        writer.AppendLine("\t\t\t// Code Here");
+        writer.AppendLine("\t\t}");
+
         writer.AppendLine("\t}");
         writer.AppendLine("}");
 
@@ -57,6 +63,12 @@ public class SCreateTemplateScript
         writer.AppendLine("\t\t{");
         writer.AppendLine("\t\t\t GetData(\"\").Forget();");
         writer.AppendLine("\t\t}");
+
+        writer.AppendLine("\t\tprotected override void closing()");
+        writer.AppendLine("\t\t{");
+        writer.AppendLine("\t\t\t// Code Here");
+        writer.AppendLine("\t\t}");
+
         writer.AppendLine("\t}");
         writer.AppendLine("}");
 

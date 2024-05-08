@@ -11,6 +11,11 @@ namespace App.Inventory
 			// Code Here
 		}
 
+		protected override void closing()
+		{
+			// Code Here
+		}
+
         public override void HandleMessage(SBundleParams value)
         {
 			if(IsOpen)
