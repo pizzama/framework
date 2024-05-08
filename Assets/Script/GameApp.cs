@@ -17,6 +17,8 @@ namespace Game
             {
                 SceneManager.LoadScene("Loading");
             }
+
+            Debug.unityLogger.logEnabled = true; // whether close log
         }
 
         protected override void installBundle()

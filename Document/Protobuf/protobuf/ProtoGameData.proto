@@ -16,7 +16,7 @@ message ProtoUserData{
 	string IconBackGround = 4;
 	uint32 Level = 5;
 	uint32 Exp = 6;
-	repeated PotoItem Items = 7;
+	repeated ProtoItem Items = 7;
 }
 
 
