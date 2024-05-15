@@ -31,7 +31,7 @@ namespace SFramework.SActor
             return _skeletonanimation;
         }
 
-        protected override void InitEntity()
+        protected override void initEntity()
         {
 
             if (_skeletonanimation == null)
