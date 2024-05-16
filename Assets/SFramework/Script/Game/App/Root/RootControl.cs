@@ -1,17 +1,22 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-using SFramework.Tools;
-using Unity.VisualScripting;
 
 namespace SFramework.Game
 {
     public class RootControl : SControl
     {
-        //
+        private long _timeStamp;
         private readonly Dictionary<int, STimeData> _countDownTimerDict =
             new Dictionary<int, STimeData>();
         private int _currentCountDownId = 0;
+
+        public override void Open(SBundleParams value)
+        {
+            base.Open(value);
+            _timeStamp = DateTime.Now.Ticks;
+        }
+        
 
         public int StartCountDownTimer(int countdown, Action<int, object> callback, bool isLoop = false)
         {
@@ -30,6 +35,15 @@ namespace SFramework.Game
             return 0;
         }
 
+        public void CloseTimerByID(int tid)
+        {
+            if (_countDownTimerDict.ContainsKey(tid))
+            {
+                _countDownTimerDict[tid].Stop();
+                _countDownTimerDict.Remove(tid);
+            }
+        }
+
         public void CloseAllTimer()
         {
             foreach (var item in _countDownTimerDict)
@@ -40,11 +54,18 @@ namespace SFramework.Game
             _countDownTimerDict.Clear();
         } 
 
-        protected override void controlUpdate()
+        public override void FixUpdate()
         {
+            _timeStamp += ToTicks(Time.fixedUnscaledDeltaTime);
+            base.FixUpdate();
+        }
+
+        public override void Update()
+        {
+            base.Update();
             foreach (var item in _countDownTimerDict)
             {
-                item.Value.Update((int)Time.deltaTime*1000);
+                item.Value.Update(_timeStamp);
             }
         }
 
@@ -52,6 +73,11 @@ namespace SFramework.Game
         {
             base.closing();
             CloseAllTimer();
+        }
+
+        private static long ToTicks(float second)
+        {
+            return (long) (second * 1000 * 10000);
         }
 
         

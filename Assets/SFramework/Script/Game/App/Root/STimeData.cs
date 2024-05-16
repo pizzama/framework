@@ -67,9 +67,9 @@ namespace SFramework.Game
             _state = TimeState.Stop;
         }
 
-        public void Update(int timePass)
+        public void Update(long timePass)
         {
-            
+
         }
     }
 }
