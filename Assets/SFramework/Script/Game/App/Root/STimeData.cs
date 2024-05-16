@@ -12,6 +12,8 @@ namespace SFramework.Game
             Stop
         };
 
+        public int Tid => _tid;
+
         private int _tid;
         private long _startTimeStamp;
         private long _endTimeStamp;
@@ -63,6 +65,11 @@ namespace SFramework.Game
         public void Stop()
         {
             _state = TimeState.Stop;
+        }
+
+        public void Update(int timePass)
+        {
+            
         }
     }
 }
