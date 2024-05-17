@@ -6,20 +6,15 @@ namespace SFramework.Game
 {
     public class RootControl : SControl
     {
-        private long _timeStamp;
+        private long _timeStamp = -1;
         private readonly Dictionary<int, STimeData> _countDownTimerDict =
             new Dictionary<int, STimeData>();
-        private int _currentCountDownId = 0;
-
-        public override void Open(SBundleParams value)
-        {
-            base.Open(value);
-            _timeStamp = DateTime.Now.Ticks;
-        }
-        
+        private int _currentCountDownId = 0;        
 
         public int StartCountDownTimer(int countdown, Action<int, object> callback, bool isLoop = false)
         {
+            if(_timeStamp == -1)
+                _timeStamp = DateTime.Now.Ticks;
             if (countdown <= 0)
                 return 0;
             _currentCountDownId++;
@@ -56,7 +51,8 @@ namespace SFramework.Game
 
         public override void FixUpdate()
         {
-            _timeStamp += ToTicks(Time.fixedUnscaledDeltaTime);
+            if(_timeStamp >= 0)
+                _timeStamp += ToTicks(Time.fixedUnscaledDeltaTime);
             base.FixUpdate();
         }
 

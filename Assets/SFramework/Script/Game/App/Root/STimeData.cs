@@ -29,7 +29,7 @@ namespace SFramework.Game
         )
         {
             _tid = tid;
-            _startTimeStamp = TimeTools.GetTimeStampSecond();
+            _startTimeStamp = TimeTools.GetTimeStampMilliSecond();
             _endTimeStamp = _startTimeStamp + coolDown;
             _isLoop = isLoop;
             _timeEndCallBack = timeEndCallBack;
@@ -48,7 +48,7 @@ namespace SFramework.Game
                 return;
             }
             long passTime = _endTimeStamp - _startTimeStamp;
-            _startTimeStamp = TimeTools.GetTimeStampSecond();
+            _startTimeStamp = TimeTools.GetTimeStampMilliSecond();
             _endTimeStamp = _startTimeStamp + passTime; 
         }
 
@@ -65,6 +65,16 @@ namespace SFramework.Game
         public void Stop()
         {
             _state = TimeState.Stop;
+        }
+
+        public bool IsAvailable()
+        {
+            if(_state != TimeState.Stop)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public void Update(long timePass)
