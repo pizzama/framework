@@ -17,28 +17,36 @@ namespace SFramework.Game
         private int _tid;
         private long _startTimeStamp;
         private long _endTimeStamp;
+        private long _currentTimeStamp;
+        private float _intervalTick; //second
+        private float _countTick; //second
+        private float _coolDown;
         private bool _isLoop;
         private TimeState _state;
-        private Action<int, object> _timeEndCallBack;
+        private Action<int> _timeEndCallBack;
+        private Action<int> _intervalCallBack;
 
         public STimeData(
             int tid,
-            int coolDown,
-            bool isLoop,
-            Action<int, object> timeEndCallBack
+            float coolDown,
+            float intervalTick,
+            Action<int> timeEndCallBack,
+            Action<int> intervalCallBack
         )
         {
             _tid = tid;
             _startTimeStamp = TimeTools.GetTimeStampMilliSecond();
-            _endTimeStamp = _startTimeStamp + coolDown;
-            _isLoop = isLoop;
+            _currentTimeStamp = _startTimeStamp;
+            _coolDown = coolDown;
+            _endTimeStamp = _startTimeStamp + (long)_coolDown * 1000;
+            _intervalTick = intervalTick;
+            if(_coolDown < 0)
+                _isLoop = true;
+            else
+                _isLoop = false;
             _timeEndCallBack = timeEndCallBack;
-            _state = TimeState.Stop;
-        }
-
-        public void TriggerTimeEndCallBack()
-        {
-            _timeEndCallBack?.Invoke(_tid, null);
+            _intervalCallBack = intervalCallBack;
+            _state = TimeState.Pause;
         }
 
         public void Reset()
@@ -49,7 +57,7 @@ namespace SFramework.Game
             }
             long passTime = _endTimeStamp - _startTimeStamp;
             _startTimeStamp = TimeTools.GetTimeStampMilliSecond();
-            _endTimeStamp = _startTimeStamp + passTime; 
+            _endTimeStamp = _startTimeStamp + passTime;
         }
 
         public void Pause()
@@ -69,7 +77,7 @@ namespace SFramework.Game
 
         public bool IsAvailable()
         {
-            if(_state != TimeState.Stop)
+            if (_state != TimeState.Stop)
             {
                 return true;
             }
@@ -77,9 +85,31 @@ namespace SFramework.Game
             return false;
         }
 
-        public void Update(long timePass)
+        public void Update(float timePass)
         {
+            if (_state == TimeState.Play)
+            {
+                _countTick += timePass;
+                _currentTimeStamp += (long)timePass * 1000;
+                if (_countTick > _intervalTick)
+                {
+                    _countTick = 0;
+                    _intervalCallBack?.Invoke(_tid);
+                }
 
+                if (_currentTimeStamp > _endTimeStamp)
+                {
+                    if(_isLoop)
+                    {
+                        Reset();
+                    }
+                    else
+                    {
+                        _state = TimeState.Stop;
+                    }
+                    _timeEndCallBack?.Invoke(_tid);
+                }
+            }
         }
     }
 }

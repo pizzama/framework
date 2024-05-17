@@ -1,31 +1,34 @@
-using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace SFramework.Game
 {
     public class RootControl : SControl
     {
-        private long _timeStamp = -1;
         private readonly Dictionary<int, STimeData> _countDownTimerDict =
             new Dictionary<int, STimeData>();
-        private int _currentCountDownId = 0;        
+        private int _currentCountDownId = 0;
 
-        public int StartCountDownTimer(int countdown, Action<int, object> callback, bool isLoop = false)
+        public int StartCountDownTimer(
+            int countdown,
+            Action<int> timeEndCallBack,
+            Action<int> intervalCallBack,
+            float intervalTick,
+            bool isLoop = false
+        )
         {
-            if(_timeStamp == -1)
-                _timeStamp = DateTime.Now.Ticks;
             if (countdown <= 0)
                 return 0;
             _currentCountDownId++;
             STimeData data;
             if (!_countDownTimerDict.TryGetValue(_currentCountDownId, out data))
             {
-                data = new STimeData(_currentCountDownId, countdown, isLoop, callback);
+                data = new STimeData(_currentCountDownId, countdown, intervalTick, timeEndCallBack, intervalCallBack);
                 _countDownTimerDict.Add(data.Tid, data);
             }
 
-            if(data != null)
+            if (data != null)
                 return data.Tid;
             return 0;
         }
@@ -47,22 +50,24 @@ namespace SFramework.Game
             }
 
             _countDownTimerDict.Clear();
-        } 
+        }
 
         public override void FixUpdate()
         {
-            if(_timeStamp >= 0)
-                _timeStamp += ToTicks(Time.fixedUnscaledDeltaTime);
             base.FixUpdate();
+            foreach (var item in _countDownTimerDict)
+            {
+                item.Value.Update(Time.fixedUnscaledDeltaTime);
+                if(!item.Value.IsAvailable())
+                {
+
+                }
+            }
         }
 
         public override void Update()
         {
             base.Update();
-            foreach (var item in _countDownTimerDict)
-            {
-                item.Value.Update(_timeStamp);
-            }
         }
 
         protected override void closing()
@@ -73,9 +78,7 @@ namespace SFramework.Game
 
         private static long ToTicks(float second)
         {
-            return (long) (second * 1000 * 10000);
+            return (long)(second * 1000 * 10000);
         }
-
-        
     }
 }
