@@ -11,11 +11,10 @@ namespace SFramework.Game
         private int _currentCountDownId = 0;
 
         public int StartCountDownTimer(
-            int countdown,
-            Action<int> timeEndCallBack,
-            Action<int> intervalCallBack,
+            float countdown,
             float intervalTick,
-            bool isLoop = false
+            Action<int> timeEndCallBack,
+            Action<int> intervalCallBack
         )
         {
             if (countdown <= 0)
@@ -48,19 +47,27 @@ namespace SFramework.Game
             {
                 item.Value.Stop();
             }
-
             _countDownTimerDict.Clear();
         }
 
         public override void FixUpdate()
         {
             base.FixUpdate();
+            List<int> needRemoveKeys = new List<int>();
             foreach (var item in _countDownTimerDict)
             {
                 item.Value.Update(Time.fixedUnscaledDeltaTime);
                 if(!item.Value.IsAvailable())
                 {
+                    needRemoveKeys.Add(item.Key);
+                }
+            }
 
+            foreach (var item in needRemoveKeys)
+            {
+                if(_countDownTimerDict.ContainsKey(item))
+                {
+                    _countDownTimerDict.Remove(item);
                 }
             }
         }
