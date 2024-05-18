@@ -73,10 +73,10 @@ namespace App.Farm
 		private void createFlower()
 		{
 			List<Vector3> flowerPos = new List<Vector3>();
-			flowerPos.Add(new Vector3() { x = 1, y = 0, z = 0 });
-			flowerPos.Add(new Vector3() { x = 2.5f, y = 0, z = 0 });
-			flowerPos.Add(new Vector3() { x = 4, y = 0, z = 0 });
-			flowerPos.Add(new Vector3() { x = 5.5f, y = 0, z = 0 });
+			flowerPos.Add(new Vector3() { x = 0, y = 0, z = 0 });
+			flowerPos.Add(new Vector3() { x = 3f, y = 0, z = 0 });
+			flowerPos.Add(new Vector3() { x = 6, y = 0, z = 0 });
+			flowerPos.Add(new Vector3() { x = 9f, y = 0, z = 0 });
 
 			for (var i = 0; i < flowerPos.Count; i++)
 			{
