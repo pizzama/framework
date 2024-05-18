@@ -53,9 +53,11 @@ namespace App.Farm
 					if(Physics.Raycast(_ray, out hit, Mathf.Infinity, mask))
 					{
 						FlowerEntity entity = hit.collider.GetComponent<FlowerEntity>();
+						Debug.Log("ddddd" + entity);
 						if(entity != null)
 						{
-							GetControl<FarmControl>().OpenFarmView(entity);
+							// GetControl<FarmControl>().OpenFarmView(entity);
+							entity.Grow();
 						}
 						Debug.Log("hit collider:" + hit.collider.tag + ";" + hit.collider.name);
 					}

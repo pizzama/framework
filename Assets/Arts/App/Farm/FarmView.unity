@@ -1811,7 +1811,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2075729901}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Flowers
   m_TagString: $EXPORT$
   m_Icon: {fileID: 0}
