@@ -6,7 +6,7 @@ namespace SFramework.Actor.Buff
     public class SBuffData : ScriptableObject
     {
         //base data
-        public int Id;
+        public string Id;
         public string Name;
         public string Desc;
         public string Icon;
