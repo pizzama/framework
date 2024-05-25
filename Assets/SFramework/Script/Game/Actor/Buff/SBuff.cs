@@ -18,17 +18,29 @@ namespace SFramework.Actor.Buff
 
     public class SBuff : ISBuff
     {
-        public int ID { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public int BuffId { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public float Duration { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public int CurStack { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public int MaxStack { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public string Src { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public string Target { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public float Value { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public int Sort { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public int Group { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public SBuffUpdateType BuffUpdateType { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public SBuffRemoveType BuffRemoveType { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        private int _id;
+        private int _buffId;
+        private float _duration;
+        private int _curStack;
+        private int _maxStack;
+        private string _src;
+        private string _target;
+        private float _value;
+        private int _sort;
+        private int _group;
+        private SBuffUpdateType _buffUpdateType;
+        private SBuffRemoveType _buffRemoveType;
+        public int ID { get => _id; set => _id = value; }
+        public int BuffId { get => _buffId; set => _buffId = value; }
+        public float Duration { get => _duration; set => _duration = value; }
+        public int CurStack { get => _curStack; set => _curStack = value; }
+        public int MaxStack { get => _maxStack; set => _maxStack = value; }
+        public string Src { get => _src; set => _src = value; }
+        public string Target { get => _target; set => _target = value; }
+        public float Value { get => _value; set => _value = value; }
+        public int Sort { get => _sort; set => _sort = value; }
+        public int Group { get => _group; set => _group = value; }
+        public SBuffUpdateType BuffUpdateType { get => _buffUpdateType; set => _buffUpdateType = value; }
+        public SBuffRemoveType BuffRemoveType { get => _buffRemoveType; set => _buffRemoveType = value; }
     }
 }

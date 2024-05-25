@@ -4,6 +4,7 @@ namespace SFramework.Actor.Buff
     {
         Add,
         Replace,
+        ReplaceUsingHigh,
         Keep,
     }
 

@@ -7,9 +7,10 @@ namespace SFramework.Actor.Buff
     {
         void AddBuff(ISBuff buff);
         void RemoveBuff(ISBuff buff);
+        void BuffUpdate();
     }
 
-    public class SBuffFactory
+    public class SBuffFactory : ISBuffFactory
     {
         private List<ISBuff> _buffs;
         public SBuffFactory()
@@ -23,6 +24,10 @@ namespace SFramework.Actor.Buff
             if(info == null)
             {
                 
+            }
+            else
+            {
+                //as group and type deal with buff
             }
             // if (info == null)
             // {
@@ -99,6 +104,11 @@ namespace SFramework.Actor.Buff
                 }
             }
             return null;
+        }
+
+        public void BuffUpdate()
+        {
+           
         }
     }
 }
