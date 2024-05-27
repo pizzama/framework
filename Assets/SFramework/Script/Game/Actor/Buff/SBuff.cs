@@ -11,12 +11,18 @@ namespace SFramework.Actor.Buff
         public string Target { get; set; }
         public float Value { get; set; }
         public int Sort { get; set; }
-        public int Group { get; set; }
+        public SBuffGroup Group { get; set; }
         public SBuffUpdateType BuffUpdateType { get; set; }
         public SBuffRemoveType BuffRemoveType { get; set; }
+        public void RemoveExecute();
+        public void AddExecute();
+        public void Execute();
+        public void Tick(float deltaTime);
+        public void Create();
+        public void Destroy();
     }
 
-    public class SBuff : ISBuff
+    public abstract class SBuff : ISBuff
     {
         private int _id;
         private int _buffId;
@@ -27,7 +33,7 @@ namespace SFramework.Actor.Buff
         private string _target;
         private float _value;
         private int _sort;
-        private int _group;
+        private SBuffGroup _group;
         private SBuffUpdateType _buffUpdateType;
         private SBuffRemoveType _buffRemoveType;
         public int ID { get => _id; set => _id = value; }
@@ -39,8 +45,14 @@ namespace SFramework.Actor.Buff
         public string Target { get => _target; set => _target = value; }
         public float Value { get => _value; set => _value = value; }
         public int Sort { get => _sort; set => _sort = value; }
-        public int Group { get => _group; set => _group = value; }
+        public SBuffGroup Group { get => _group; set => _group = value; }
         public SBuffUpdateType BuffUpdateType { get => _buffUpdateType; set => _buffUpdateType = value; }
         public SBuffRemoveType BuffRemoveType { get => _buffRemoveType; set => _buffRemoveType = value; }
+        public abstract void AddExecute();
+        public abstract void Execute();
+        public abstract void RemoveExecute();
+        public abstract void Tick(float deltaTime);
+        public abstract void Create();
+        public abstract void Destroy();
     }
 }

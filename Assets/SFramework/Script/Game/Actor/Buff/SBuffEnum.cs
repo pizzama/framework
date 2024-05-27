@@ -1,5 +1,10 @@
 namespace SFramework.Actor.Buff
 {
+    public enum SBuffGroup
+    {
+        None = 0,
+    }
+
     public enum SBuffUpdateType
     {
         Add,

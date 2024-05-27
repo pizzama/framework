@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 
 namespace SFramework.Actor.Buff
@@ -7,23 +6,29 @@ namespace SFramework.Actor.Buff
     {
         void AddBuff(ISBuff buff);
         void RemoveBuff(ISBuff buff);
-        void BuffUpdate();
+        void BuffTick();
     }
 
     public class SBuffFactory : ISBuffFactory
     {
         private List<ISBuff> _buffs;
+
         public SBuffFactory()
         {
             _buffs = new List<ISBuff>();
         }
 
+        public ISBuff CreateBuff()
+        {
+            return null;
+        }
+
         public void AddBuff(ISBuff buff)
         {
             ISBuff info = FindBuffByBuffId(buff.BuffId);
-            if(info == null)
+            if (info == null)
             {
-                
+                _buffs.Add(buff);
             }
             else
             {
@@ -106,9 +111,20 @@ namespace SFramework.Actor.Buff
             return null;
         }
 
-        public void BuffUpdate()
+        public List<ISBuff> FilterBuffByGroup(SBuffGroup group)
         {
-           
+            List<ISBuff> buffs = new List<ISBuff>();
+            foreach (ISBuff buff in _buffs)
+            {
+                if (buff.Group == group)
+                {
+                    buffs.Add(buff);
+                }
+            }
+
+            return buffs;
         }
+
+        public void BuffTick() { }
     }
 }
