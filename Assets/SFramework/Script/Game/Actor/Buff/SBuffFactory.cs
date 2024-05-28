@@ -28,63 +28,57 @@ namespace SFramework.Actor.Buff
             ISBuff info = FindBuffByBuffId(buff.BuffId);
             if (info == null)
             {
+                buff.AddExecute();
                 _buffs.Add(buff);
             }
             else
             {
                 //as group and type deal with buff
+                switch (info.BuffUpdateType)
+                {
+                    case SBuffUpdateType.Add:
+                        info.Duration += buff.Duration;
+                        break;
+                    case SBuffUpdateType.Replace:
+                        info.Duration = buff.Duration;
+                        break;
+                    case SBuffUpdateType.ReplaceUsingHigh:
+                        if (info.Value <= buff.Value)
+                        {
+                            info.Duration = buff.Duration;
+                            info.Value = buff.Value;
+                        }
+                        break;
+                    case SBuffUpdateType.Keep:
+                        break;
+                }
+
+                info.AddExecute();
             }
-            // if (info == null)
-            // {
-            //     info.Duration = info.BuffData.Duration;
-            //     info.BuffData.OnCreate.Apply(info);
-            //     BuffInfos.AddLast(buffInfo);
-            //     // sort list
-            // }
-            // else
-            // {
-            //     if(info.CurStack < buffInfo.BuffData.MaxStack)
-            //     {
-            //         info.CurStack++;
-            //     }
-
-            //     switch (buffInfo.BuffData.BuffUpdateTime)
-            //     {
-            //         case SBuffUpdateTime.Add:
-            //             info.BuffData.Duration += buffInfo.BuffData.Duration;
-            //             break;
-            //         case SBuffUpdateTime.Replace:
-            //             info.BuffData.Duration = buffInfo.BuffData.Duration;
-            //             break;
-            //         case SBuffUpdateTime.Keep:
-            //             break;
-            //     }
-
-            //     info.BuffData.OnCreate.Apply(info);
-            // }
         }
 
         public void RemoveBuff(ISBuff buff)
         {
-            // switch (buffInfo.BuffData.BuffRemoveTime)
-            // {
-            //     case SBuffRemoveTime.Clear:
-            //         buffInfo.BuffData.OnRemove.Apply(buffInfo);
-            //         BuffInfos.Remove(buffInfo);
-            //         break;
-            //     case SBuffRemoveTime.Reduce:
-            //         buffInfo.CurStack--;
-            //         buffInfo.BuffData.OnRemove.Apply(buffInfo);
-            //         if (buffInfo.CurStack <= 0)
-            //         {
-            //             BuffInfos.Remove(buffInfo);
-            //         }
-            //         else
-            //         {
-            //             buffInfo.Duration = buffInfo.BuffData.Duration;
-            //         }
-            //         break;
-            // }
+            ISBuff info = FindBuffByBuffId(buff.BuffId);
+            if (info == null)
+            {
+                //as group and type deal with buff
+                switch (buff.BuffRemoveType)
+                {
+                    case SBuffRemoveType.Clear:
+                        info.RemoveExecute();
+                        _buffs.Remove(info);
+                        break;
+                    case SBuffRemoveType.Reduce:
+                        info.RemoveExecute();
+                        info.CurStack--;
+                        if(info.CurStack <= 0)
+                        {
+                            _buffs.Remove(info);
+                        }
+                        break;
+                }
+            }
         }
 
         private ISBuff FindBuffInfoById(int id)
