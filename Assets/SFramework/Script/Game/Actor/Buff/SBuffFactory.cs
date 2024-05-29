@@ -34,25 +34,8 @@ namespace SFramework.Actor.Buff
             else
             {
                 //as group and type deal with buff
-                switch (info.BuffUpdateType)
-                {
-                    case SBuffUpdateType.Add:
-                        info.Duration += buff.Duration;
-                        break;
-                    case SBuffUpdateType.Replace:
-                        info.Duration = buff.Duration;
-                        break;
-                    case SBuffUpdateType.ReplaceUsingHigh:
-                        if (info.Value <= buff.Value)
-                        {
-                            info.Duration = buff.Duration;
-                            info.Value = buff.Value;
-                        }
-                        break;
-                    case SBuffUpdateType.Keep:
-                        break;
-                }
-
+                dealWithDuration(ref info, ref buff);
+                dealWithValue(ref info, ref buff);
                 info.AddExecute();
             }
         }
@@ -72,7 +55,7 @@ namespace SFramework.Actor.Buff
                     case SBuffRemoveType.Reduce:
                         info.RemoveExecute();
                         info.CurStack--;
-                        if(info.CurStack <= 0)
+                        if (info.CurStack <= 0)
                         {
                             _buffs.Remove(info);
                         }
@@ -81,19 +64,7 @@ namespace SFramework.Actor.Buff
             }
         }
 
-        private ISBuff FindBuffInfoById(int id)
-        {
-            foreach (ISBuff buff in _buffs)
-            {
-                if (buff.ID == id)
-                {
-                    return buff;
-                }
-            }
-            return null;
-        }
-
-        private ISBuff FindBuffByBuffId(int id)
+        public ISBuff FindBuffByBuffId(int id)
         {
             foreach (ISBuff buff in _buffs)
             {
@@ -120,5 +91,47 @@ namespace SFramework.Actor.Buff
         }
 
         public void BuffTick() { }
+
+        protected virtual void dealWithDuration(ref ISBuff srcBuff, ref ISBuff targetBuff)
+        {
+            switch (srcBuff.BuffDurationUpdateType)
+            {
+                case SBuffUpdateType.Add:
+                    srcBuff.Duration += targetBuff.Duration;
+                    break;
+                case SBuffUpdateType.Replace:
+                    srcBuff.Duration = targetBuff.Duration;
+                    break;
+                case SBuffUpdateType.ReplaceUsingHigh:
+                    if (srcBuff.Duration <= targetBuff.Duration)
+                    {
+                        srcBuff.Duration = targetBuff.Duration;
+                    }
+                    break;
+                case SBuffUpdateType.Keep:
+                    break;
+            }
+        }
+
+        protected virtual void dealWithValue(ref ISBuff srcBuff, ref ISBuff targetBuff)
+        {
+            switch (srcBuff.BuffValueUpdateType)
+            {
+                case SBuffUpdateType.Add:
+                    srcBuff.Value += targetBuff.Value;
+                    break;
+                case SBuffUpdateType.Replace:
+                    srcBuff.Value = targetBuff.Value;
+                    break;
+                case SBuffUpdateType.ReplaceUsingHigh:
+                    if (srcBuff.Value <= targetBuff.Value)
+                    {
+                        srcBuff.Value = targetBuff.Value;
+                    }
+                    break;
+                case SBuffUpdateType.Keep:
+                    break;
+            }
+        }
     }
 }
