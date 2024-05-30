@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using SFramework.System;
+using SFramework.Collections;
 
 namespace SFramework.Game.Map
 {
@@ -12,7 +12,7 @@ namespace SFramework.Game.Map
         private AStarNode mStart = null;
         private AStarNode mGoal = null;
         private readonly AStarNode[,] mNodes;
-        private readonly PriorityQueue<AStarNode, int> mOpenList = new PriorityQueue<AStarNode, int>();
+        private readonly PriorityQueue<AStarNode> mOpenList = new PriorityQueue<AStarNode>();
         private readonly HashSet<AStarNode> mCloseList = new HashSet<AStarNode>();
         private readonly bool[,] mWalls;
 
@@ -146,7 +146,7 @@ namespace SFramework.Game.Map
             {
                 return;
             }
-            mWalls[p.Y, p.X] = isWall;
+            mWalls[p.y, p.x] = isWall;
         }
 
         public bool ToggleWall(in Vector2Int pos)
@@ -155,7 +155,7 @@ namespace SFramework.Game.Map
             {
                 return false;
             }
-            mWalls[pos.Y, pos.X] = !mWalls[pos.Y, +pos.X];
+            mWalls[pos.y, pos.x] = !mWalls[pos.y, +pos.x];
             return true;
         }
 

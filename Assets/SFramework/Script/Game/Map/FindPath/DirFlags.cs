@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace SFramework.Game.Map
 {
@@ -69,19 +70,19 @@ namespace SFramework.Game.Map
             return EDirFlags.NONE;
         }
 
-        private static readonly Dictionary<EDirFlags, Int2> DirToPos = new Dictionary<EDirFlags, Int2>()
+        private static readonly Dictionary<EDirFlags, Vector2Int> DirToPos = new Dictionary<EDirFlags, Vector2Int>()
         {
-            { EDirFlags.NORTH,new Int2(0, -1) },
-            { EDirFlags.SOUTH,new Int2(0, 1) },
-            { EDirFlags.EAST,new Int2(1, 0) },
-            { EDirFlags.WEST,new Int2(-1, 0) },
-            { EDirFlags.NORTHEAST,new Int2(1, -1) },
-            { EDirFlags.NORTHWEST,new Int2(-1, -1) },
-            { EDirFlags.SOUTHEAST,new Int2(1, 1) },
-            { EDirFlags.SOUTHWEST,new Int2(-1, 1) },
+            { EDirFlags.NORTH,new Vector2Int(0, -1) },
+            { EDirFlags.SOUTH,new Vector2Int(0, 1) },
+            { EDirFlags.EAST,new Vector2Int(1, 0) },
+            { EDirFlags.WEST,new Vector2Int(-1, 0) },
+            { EDirFlags.NORTHEAST,new Vector2Int(1, -1) },
+            { EDirFlags.NORTHWEST,new Vector2Int(-1, -1) },
+            { EDirFlags.SOUTHEAST,new Vector2Int(1, 1) },
+            { EDirFlags.SOUTHWEST,new Vector2Int(-1, 1) },
         };
 
-        public static Int2 ToPos(EDirFlags dir)
+        public static Vector2Int ToPos(EDirFlags dir)
         {
             return DirToPos[dir];
         }
