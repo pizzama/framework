@@ -57,5 +57,5 @@ namespace SFramework.GameCamera
     /// <param name="isTouchUI">是否触摸到UI</param>
     /// <param name="keyCode">(PC端)0表示左键，1表示右键，2表示中键</param>
     /// <param name="clickCount">连续点次数</param>
-    public delegate void DelegateInputEventHandle(bool isTouchUI, SInputEventType enumInputEventType, Vector2 mousePosition, int clickCount, int keyCode);
+    public delegate void DelegateInputEventHandle(bool isTouchUI, SInputEventType enumInputEventType, Vector3 mousePosition, int clickCount, int keyCode);
 }

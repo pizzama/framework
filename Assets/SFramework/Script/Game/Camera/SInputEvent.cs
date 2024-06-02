@@ -10,6 +10,7 @@ namespace SFramework.GameCamera
     public class SInputEvent : MonoBehaviour
     {
         public DelegateInputEventHandle MouseEventHandle;
+        [SerializeField] private float moveSpeed = 1f;
 
         private SInputParam[] mouseParams = new SInputParam[] { new SInputParam(), new SInputParam(), new SInputParam() };
 
@@ -61,9 +62,9 @@ namespace SFramework.GameCamera
                     //偏差值
                     Vector3 offset = curPos - mouseParams[mouseKeyCode].PrevMousePos;
                     //瞬时速度
-                    Vector3 speed = offset / Time.deltaTime;
                     mouseParams[mouseKeyCode].PrevMousePos = curPos;
-                    MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.Move, speed, mouseParams[mouseKeyCode].ClickCount, mouseKeyCode);
+                    offset = offset * moveSpeed;
+                    MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.Move, offset, mouseParams[mouseKeyCode].ClickCount, mouseKeyCode);
                 }
 
             }
@@ -89,6 +90,16 @@ namespace SFramework.GameCamera
                 mouseParams[mouseKeyCode].T1 = mouseParams[mouseKeyCode].T2;
                 MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.Click, Input.mousePosition, mouseParams[mouseKeyCode].ClickCount, mouseKeyCode);
             }
+        }
+
+        public void HandleCameraMoveMent()
+        {
+
+        }
+
+        public void HandleCameraRotation()
+        {
+            
         }
 
         private void stopMove(int mouseKeyCode)
