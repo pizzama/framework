@@ -2,7 +2,7 @@
 using SFramework.Tools.Attributes;
 using UnityEngine;
 
-namespace SFramework.CameraUtils
+namespace SFramework.GameCamera
 {
     public class FacingCameraAlways : MonoBehaviour
     {

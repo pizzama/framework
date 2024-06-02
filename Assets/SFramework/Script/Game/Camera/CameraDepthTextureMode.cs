@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SFramework.CameraUtils
+namespace SFramework.GameCamera
 {
 
     //设置摄像机的纹理深度

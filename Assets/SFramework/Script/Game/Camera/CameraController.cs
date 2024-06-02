@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SFramework.CameraUtils
+namespace SFramework.GameCamera
 {
     public class CameraController : MonoBehaviour
     {
