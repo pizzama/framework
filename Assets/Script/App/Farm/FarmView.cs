@@ -28,7 +28,8 @@ namespace App.Farm
 			// _grid = new SMGrid(10, 10, 3, new Vector3(0, 0, 0));
 			// create farm
 			_flowerParent = getExportObject<Transform>("Flowers");
-			_cameraTarget = getExportObject<SInputEvent>("SInputEvent");
+			Camera cam = UIRoot.MainCamera;
+			_cameraTarget = cam.GetComponent<SInputEvent>();
 			_cameraTarget.MouseEventHandle = sceneMove;
 
 			createFlower();
@@ -105,7 +106,13 @@ namespace App.Farm
 
 		private void sceneMove(bool isTouchUI, SInputEventType enumInputEventType, Vector2 mousePosition, int clickCount, int keyCode)
 		{
-			
+			if(enumInputEventType == SInputEventType.Move)
+			{
+				Vector3 mv = Camera.main.ScreenToWorldPoint(mousePosition);
+				_cameraTarget.transform.position = mv;
+				Debug.Log("aaaa:" + mv + ";" + mousePosition);
+			}
+
 		}
 	}
 }

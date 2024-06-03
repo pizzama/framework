@@ -133,7 +133,8 @@ MonoBehaviour:
   _toast: {fileID: 7868510792190693485}
   _blocker: {fileID: 5801236626685409517}
   _uiCamera: {fileID: 6579511294249325029}
-  _canvasScaler: {fileID: 0}
+  _mainCamera: {fileID: 4399082311643781616}
+  _canvasScaler: {fileID: 114574186442532806}
 --- !u!114 &4210724624472533215
 MonoBehaviour:
   m_ObjectHideFlags: 0

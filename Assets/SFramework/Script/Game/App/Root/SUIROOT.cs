@@ -25,6 +25,7 @@ namespace SFramework.Game
         [SerializeField] private Transform _toast;
         [SerializeField] private Transform _blocker;
         [SerializeField] private Camera _uiCamera;
+        [SerializeField] private Camera _mainCamera;
         [SerializeField] private CanvasScaler _canvasScaler;
         const string uiName = "SUIROOT";
         public static SUIROOT Instance;
@@ -33,10 +34,17 @@ namespace SFramework.Game
             get { return _uiCamera; }
         }
 
+        public Camera MainCamera
+        {
+            get { return _mainCamera; }
+        }
+
         private void Awake()
         {
             this.name = uiName;
             SUIROOT.Instance = this;
+            if (_mainCamera == null)
+                _mainCamera = this.transform.Find("RotateCenter/MainCamera")?.GetComponent<Camera>();
             if (_uiCamera == null)
                 _uiCamera = this.transform.Find("UICamera").GetComponent<Camera>();
             if (_canvasScaler == null)

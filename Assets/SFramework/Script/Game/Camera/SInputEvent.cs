@@ -33,6 +33,7 @@ namespace SFramework.GameCamera
             //鼠标按下
             if (Input.GetMouseButtonDown(mouseKeyCode))
             {
+                stopMove(mouseKeyCode);
                 mouseParams[mouseKeyCode].StartTime = Time.realtimeSinceStartup;
                 Vector3 pos = Input.mousePosition;
                 mouseParams[mouseKeyCode].PrevMousePos = pos;
@@ -88,6 +89,11 @@ namespace SFramework.GameCamera
                 mouseParams[mouseKeyCode].T1 = mouseParams[mouseKeyCode].T2;
                 MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.Click, Input.mousePosition, mouseParams[mouseKeyCode].ClickCount, mouseKeyCode);
             }
+        }
+
+        private void stopMove(int mouseKeyCode)
+        {
+            mouseParams[mouseKeyCode].PrevMousePos = Vector3.zero;
         }
 
         public struct SInputParam
