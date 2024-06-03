@@ -8,11 +8,13 @@ using SFramework.Statics;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.U2D;
+using SFramework.GameCamera;
 
 namespace App.Farm
 {
 	public class FarmView : SSCENEView
 	{
+		private SInputEvent _cameraTarget;
 		private SMGrid _grid;
 		private Transform _flowerParent;
 		private Ray _ray;
@@ -26,6 +28,8 @@ namespace App.Farm
 			// _grid = new SMGrid(10, 10, 3, new Vector3(0, 0, 0));
 			// create farm
 			_flowerParent = getExportObject<Transform>("Flowers");
+			_cameraTarget = getExportObject<SInputEvent>("SInputEvent");
+			_cameraTarget.MouseEventHandle = sceneMove;
 
 			createFlower();
 			createForest();
@@ -97,6 +101,11 @@ namespace App.Farm
 			SpriteAtlas atlas = LoadFromBundle<SpriteAtlas>(SFResAssets.App_farm_ground_sfp_Forest_spriteatlasv2);
 			Sprite sprite = atlas.GetSprite("5103524");
 			Debug.Log(sprite);
+		}
+
+		private void sceneMove(bool isTouchUI, SInputEventType enumInputEventType, Vector2 mousePosition, int clickCount, int keyCode)
+		{
+			
 		}
 	}
 }

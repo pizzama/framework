@@ -6,7 +6,8 @@ namespace SFramework.GameCamera
 {
     public class SInputDefine
     {
-        public const float MOVE_THRESHOLD = 1;
+        ///<summary>移动的阈值</summary>
+        public const float MOVE_THRESHOLD = 10;
         /// <summary>两次点击的时间间隔</summary>
         public const float DOUBLE_CLICK_RATE = 0.3f;
         /// <summary>连续按住0.5s后判定为长按</summary>

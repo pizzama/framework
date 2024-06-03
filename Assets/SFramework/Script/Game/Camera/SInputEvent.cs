@@ -10,7 +10,6 @@ namespace SFramework.GameCamera
     public class SInputEvent : MonoBehaviour
     {
         public DelegateInputEventHandle MouseEventHandle;
-        
 
         private SInputParam[] mouseParams = new SInputParam[] { new SInputParam(), new SInputParam(), new SInputParam() };
 
@@ -34,31 +33,36 @@ namespace SFramework.GameCamera
             //鼠标按下
             if (Input.GetMouseButtonDown(mouseKeyCode))
             {
-                mouseParams[mouseKeyCode].startTime = Time.realtimeSinceStartup;
+                mouseParams[mouseKeyCode].StartTime = Time.realtimeSinceStartup;
                 Vector3 pos = Input.mousePosition;
-                mouseParams[mouseKeyCode].clickPos = pos;
-                MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.Down, pos, mouseParams[mouseKeyCode].clickCount, mouseKeyCode);
+                mouseParams[mouseKeyCode].PrevMousePos = pos;
+                MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.Down, pos, mouseParams[mouseKeyCode].ClickCount, mouseKeyCode);
             }
 
             //鼠标按住
             if (Input.GetMouseButton(mouseKeyCode))
             {
-                mouseParams[mouseKeyCode].holdTime = Time.realtimeSinceStartup - mouseParams[mouseKeyCode].startTime;
-                if (mouseParams[mouseKeyCode].holdTime >= SInputDefine.LONG_PRESS_SCALE)
+                mouseParams[mouseKeyCode].HoldTime = Time.realtimeSinceStartup - mouseParams[mouseKeyCode].StartTime;
+                if (mouseParams[mouseKeyCode].HoldTime >= SInputDefine.LONG_PRESS_SCALE)
                 {
-                    MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.LongPress, Input.mousePosition, mouseParams[mouseKeyCode].clickCount, mouseKeyCode);
+                    MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.LongPress, Input.mousePosition, mouseParams[mouseKeyCode].ClickCount, mouseKeyCode);
                 }
             }
 
             //鼠标移动
             if (Input.GetMouseButton(mouseKeyCode))
             {
-                Vector3 pos = mouseParams[mouseKeyCode].clickPos;
+                Vector3 pos = mouseParams[mouseKeyCode].PrevMousePos;
                 Vector3 curPos = Input.mousePosition;
                 float dis = (pos - curPos).sqrMagnitude;
                 if(dis > SInputDefine.MOVE_THRESHOLD)
                 {
-                    MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.Move, Input.mousePosition, mouseParams[mouseKeyCode].clickCount, mouseKeyCode);
+                    //偏差值
+                    Vector3 offset = curPos - mouseParams[mouseKeyCode].PrevMousePos;
+                    //瞬时速度
+                    Vector3 speed = offset / Time.deltaTime;
+                    mouseParams[mouseKeyCode].PrevMousePos = curPos;
+                    MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.Move, speed, mouseParams[mouseKeyCode].ClickCount, mouseKeyCode);
                 }
 
             }
@@ -66,34 +70,34 @@ namespace SFramework.GameCamera
             //鼠标抬起
             if (Input.GetMouseButtonUp(mouseKeyCode))
             {
-                if (mouseParams[mouseKeyCode].holdTime >= SInputDefine.LONG_PRESS_SCALE) return;
-                MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.Up, Input.mousePosition, mouseParams[mouseKeyCode].clickCount, mouseKeyCode);
+                if (mouseParams[mouseKeyCode].HoldTime >= SInputDefine.LONG_PRESS_SCALE) return;
+                MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.Up, Input.mousePosition, mouseParams[mouseKeyCode].ClickCount, mouseKeyCode);
 
-                mouseParams[mouseKeyCode].t2 = Time.realtimeSinceStartup;
-                if (mouseParams[mouseKeyCode].t2 - mouseParams[mouseKeyCode].t1 < SInputDefine.DOUBLE_CLICK_RATE)
+                mouseParams[mouseKeyCode].T2 = Time.realtimeSinceStartup;
+                if (mouseParams[mouseKeyCode].T2 - mouseParams[mouseKeyCode].T1 < SInputDefine.DOUBLE_CLICK_RATE)
                 {
                     //Debug.Log(mouseKeyCode + ":双击!");
-                    mouseParams[mouseKeyCode].clickCount++;
-                    MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.DoubleClick, Input.mousePosition, mouseParams[mouseKeyCode].clickCount, mouseKeyCode);
+                    mouseParams[mouseKeyCode].ClickCount++;
+                    MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.DoubleClick, Input.mousePosition, mouseParams[mouseKeyCode].ClickCount, mouseKeyCode);
                 }
                 else
                 {
-                    mouseParams[mouseKeyCode].clickCount = 1;
+                    mouseParams[mouseKeyCode].ClickCount = 1;
                 }
 
-                mouseParams[mouseKeyCode].t1 = mouseParams[mouseKeyCode].t2;
-                MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.Click, Input.mousePosition, mouseParams[mouseKeyCode].clickCount, mouseKeyCode);
+                mouseParams[mouseKeyCode].T1 = mouseParams[mouseKeyCode].T2;
+                MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.Click, Input.mousePosition, mouseParams[mouseKeyCode].ClickCount, mouseKeyCode);
             }
         }
 
         public struct SInputParam
         {
-            public Vector3 clickPos;
-            public float startTime;
-            public float holdTime;
-            public float t1;
-            public float t2;
-            public int clickCount;
+            public Vector3 PrevMousePos;
+            public float StartTime;
+            public float HoldTime;
+            public float T1;
+            public float T2;
+            public int ClickCount;
         }
 
     }
