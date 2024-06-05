@@ -48,7 +48,16 @@ namespace SFramework.GameCamera
         private bool _dragXY = true;
 
         [SerializeField]
-        private float _dragThreshold = 10f;
+        private float _dragThreshold = 0f;
+
+        [SerializeField]
+        private Vector2 _cameraMoveLimitX;
+
+        [SerializeField]
+        private Vector2 _cameraMoveLimitY;
+
+        [SerializeField]
+        private Vector2 _cameraMoveLimitZ;
         private bool _dragPanMoveActive;
         private float _targetFieldOfView = 20;
         private Vector2 _lastMousePosition;
@@ -63,6 +72,7 @@ namespace SFramework.GameCamera
                 HandleCameraMovementDragPan();
             HandleCameraRotation();
             HandleCameraZoom_FieldOfView();
+            limitCameraMove();
         }
 
         private void HandleCameraMovement()
@@ -111,6 +121,7 @@ namespace SFramework.GameCamera
 
             Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x;
             transform.position += moveDir * _moveSpeed * Time.deltaTime;
+            limitCameraMove();
         }
 
         private void HandleCameraMovementDragPan()
@@ -137,8 +148,7 @@ namespace SFramework.GameCamera
                     {
                         inputDir.x = mouseMovementDelta.x * _dragSpeed;
                         inputDir.y = mouseMovementDelta.y * _dragSpeed;
-                        Vector3 moveDir =
-                            transform.up * inputDir.y + transform.right * inputDir.x;
+                        Vector3 moveDir = transform.up * inputDir.y + transform.right * inputDir.x;
                         transform.position -= moveDir * _moveSpeed * Time.deltaTime;
                     }
                     else
@@ -221,6 +231,15 @@ namespace SFramework.GameCamera
 
             _virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset =
                 _followOffset;
+        }
+
+        private void limitCameraMove()
+        {
+            Vector3 target = transform.position;
+            target.x = Mathf.Clamp(target.x, _cameraMoveLimitX.x, _cameraMoveLimitX.y);
+            target.y = Mathf.Clamp(target.y, _cameraMoveLimitY.x, _cameraMoveLimitY.y);
+            target.z = Mathf.Clamp(target.z, _cameraMoveLimitZ.x, _cameraMoveLimitZ.y);
+            transform.position = target;
         }
     }
 }
