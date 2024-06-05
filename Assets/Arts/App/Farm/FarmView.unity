@@ -156,7 +156,7 @@ MonoBehaviour:
   _virtualCamera: {fileID: 1642649210}
   _useEdgeScrolling: 0
   _useDragPan: 1
-  _moveSpeed: 50
+  _moveSpeed: 10
   _edgeScrollSize: 20
   _rotateSpeed: 100
   _fieldOfViewMax: 50
@@ -2275,21 +2275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7588264fc211d8b4783d8924ef1f487c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mMouseState: 0
-  mCamera: {fileID: 0}
-  yRotationMinLimit: -20
-  yRotationMaxLimit: 80
-  xRotationSpeed: 250
-  yRotationSpeed: 120
-  xRotation: 0
-  yRotation: 0
-  fovMinLimit: 25
-  fovMaxLimit: 75
-  fovSpeed: 50
-  fov: 0
-  _mouseX: 0
-  _mouseY: 0
-  moveSpeed: 1
 --- !u!114 &2051197195
 MonoBehaviour:
   m_ObjectHideFlags: 0

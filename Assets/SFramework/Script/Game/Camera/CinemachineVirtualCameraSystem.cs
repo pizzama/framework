@@ -15,7 +15,7 @@ namespace SFramework.GameCamera
         private bool _useDragPan = false;
 
         [SerializeField]
-        private float _moveSpeed = 50;
+        private float _moveSpeed = 50f;
 
         [SerializeField]
         private int _edgeScrollSize = 20;
@@ -43,6 +43,12 @@ namespace SFramework.GameCamera
 
         [SerializeField]
         private float _dragSpeed = 1f;
+
+        [SerializeField]
+        private bool _dragXY = true;
+
+        [SerializeField]
+        private float _dragThreshold = 10f;
         private bool _dragPanMoveActive;
         private float _targetFieldOfView = 20;
         private Vector2 _lastMousePosition;
@@ -110,13 +116,13 @@ namespace SFramework.GameCamera
         private void HandleCameraMovementDragPan()
         {
             Vector3 inputDir = Vector3.zero;
-            if(Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 _dragPanMoveActive = true;
                 _lastMousePosition = Input.mousePosition;
             }
 
-            if(Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0))
             {
                 _dragPanMoveActive = false;
             }
@@ -124,12 +130,28 @@ namespace SFramework.GameCamera
             if (_dragPanMoveActive)
             {
                 Vector2 mouseMovementDelta = (Vector2)Input.mousePosition - _lastMousePosition;
-                inputDir.x = mouseMovementDelta.x * _dragSpeed;
-                inputDir.z = mouseMovementDelta.y * _dragSpeed;
+                if (mouseMovementDelta.magnitude > _dragThreshold)
+                {
+                    mouseMovementDelta.Normalize(); //只是获得方向
+                    if (_dragXY)
+                    {
+                        inputDir.x = mouseMovementDelta.x * _dragSpeed;
+                        inputDir.y = mouseMovementDelta.y * _dragSpeed;
+                        Vector3 moveDir =
+                            transform.up * inputDir.y + transform.right * inputDir.x;
+                        transform.position -= moveDir * _moveSpeed * Time.deltaTime;
+                    }
+                    else
+                    {
+                        inputDir.x = mouseMovementDelta.x * _dragSpeed;
+                        inputDir.z = mouseMovementDelta.y * _dragSpeed;
+                        Vector3 moveDir =
+                            transform.forward * inputDir.z + transform.right * inputDir.x;
+                        transform.position += moveDir * _moveSpeed * Time.deltaTime;
+                    }
+                }
+                _lastMousePosition = Input.mousePosition;
             }
-
-            Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x;
-            transform.position += moveDir * _moveSpeed * Time.deltaTime;
         }
 
         private void HandleCameraRotation()
@@ -191,9 +213,14 @@ namespace SFramework.GameCamera
                 _followOffset = zoomDir * _followOffsetMax;
             }
 
-            Vector3.Lerp(_virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset, _followOffset, Time.deltaTime * _zoomSpeed);
+            Vector3.Lerp(
+                _virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset,
+                _followOffset,
+                Time.deltaTime * _zoomSpeed
+            );
 
-            _virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = _followOffset;
+            _virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset =
+                _followOffset;
         }
     }
 }
