@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SFramework.GameCamera
 {
-    public class CinemachineVirtualCameraSystem : MonoBehaviour
+    public class CVCameraSystem3D : MonoBehaviour
     {
         [SerializeField]
         private CinemachineVirtualCamera _virtualCamera;
@@ -43,9 +43,6 @@ namespace SFramework.GameCamera
 
         [SerializeField]
         private float _dragSpeed = 1f;
-
-        [SerializeField]
-        private bool _dragXY = true;
 
         [SerializeField]
         private float _dragThreshold = 0f;
@@ -121,7 +118,6 @@ namespace SFramework.GameCamera
 
             Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x;
             transform.position += moveDir * _moveSpeed * Time.deltaTime;
-            limitCameraMove();
         }
 
         private void HandleCameraMovementDragPan()
@@ -143,22 +139,12 @@ namespace SFramework.GameCamera
                 Vector2 mouseMovementDelta = (Vector2)Input.mousePosition - _lastMousePosition;
                 if (mouseMovementDelta.magnitude > _dragThreshold)
                 {
-                    mouseMovementDelta.Normalize(); //只是获得方向
-                    if (_dragXY)
-                    {
-                        inputDir.x = mouseMovementDelta.x * _dragSpeed;
-                        inputDir.y = mouseMovementDelta.y * _dragSpeed;
-                        Vector3 moveDir = transform.up * inputDir.y + transform.right * inputDir.x;
-                        transform.position -= moveDir * _moveSpeed * Time.deltaTime;
-                    }
-                    else
-                    {
-                        inputDir.x = mouseMovementDelta.x * _dragSpeed;
-                        inputDir.z = mouseMovementDelta.y * _dragSpeed;
-                        Vector3 moveDir =
-                            transform.forward * inputDir.z + transform.right * inputDir.x;
-                        transform.position += moveDir * _moveSpeed * Time.deltaTime;
-                    }
+                    mouseMovementDelta.Normalize(); //only get direction
+
+                    inputDir.x = mouseMovementDelta.x * _dragSpeed;
+                    inputDir.z = mouseMovementDelta.y * _dragSpeed;
+                    Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x;
+                    transform.position += moveDir * _moveSpeed * Time.deltaTime;
                 }
                 _lastMousePosition = Input.mousePosition;
             }
