@@ -92,16 +92,6 @@ namespace SFramework.GameCamera
             }
         }
 
-        public void HandleCameraMoveMent()
-        {
-
-        }
-
-        public void HandleCameraRotation()
-        {
-            
-        }
-
         private void stopMove(int mouseKeyCode)
         {
             mouseParams[mouseKeyCode].PrevMousePos = Vector3.zero;

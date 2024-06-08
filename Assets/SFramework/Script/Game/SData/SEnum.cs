@@ -22,4 +22,11 @@ public class SEnum
         Middle = 1,
         High = 2,
     }
+
+    public enum SAxis
+    {
+        X,
+        Y,
+        Z
+    }
 }

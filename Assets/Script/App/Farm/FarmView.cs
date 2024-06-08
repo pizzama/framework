@@ -30,7 +30,7 @@ namespace App.Farm
 			_flowerParent = getExportObject<Transform>("Flowers");
 			Camera cam = UIRoot.MainCamera;
 			_cameraTarget = cam.GetComponent<SInputEvent>();
-			_cameraTarget.MouseEventHandle = sceneMove;
+			// _cameraTarget.MouseEventHandle = sceneMove;
 
 			createFlower();
 			createForest();

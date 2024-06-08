@@ -92,7 +92,7 @@ namespace SFramework.GameCamera
                 inputDir.x = 1f;
             }
 
-            Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x;
+            Vector3 moveDir = transform.forward * inputDir.y + transform.right * inputDir.x;
             transform.position += moveDir * _moveSpeed * Time.deltaTime;
         }
 
@@ -139,12 +139,11 @@ namespace SFramework.GameCamera
                 Vector2 mouseMovementDelta = (Vector2)Input.mousePosition - _lastMousePosition;
                 if (mouseMovementDelta.magnitude > _dragThreshold)
                 {
-                    mouseMovementDelta.Normalize(); //only get direction
-
-                    inputDir.x = mouseMovementDelta.x * _dragSpeed;
-                    inputDir.y = mouseMovementDelta.y * _dragSpeed;
-                    Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x;
-                    transform.position += moveDir * _moveSpeed * Time.deltaTime;
+                    // mouseMovementDelta.Normalize(); //only get direction
+                    inputDir.x = -mouseMovementDelta.x * _dragSpeed;
+                    inputDir.y = -mouseMovementDelta.y * _dragSpeed;
+                    Vector3 moveDir = transform.up * inputDir.y + transform.right * inputDir.x;
+                    transform.position += moveDir * Time.deltaTime;
                 }
                 _lastMousePosition = Input.mousePosition;
             }
