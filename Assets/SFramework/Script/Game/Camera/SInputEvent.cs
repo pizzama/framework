@@ -11,6 +11,7 @@ namespace SFramework.GameCamera
     {
         public DelegateInputEventHandle MouseEventHandle;
         [SerializeField] private float moveSpeed = 1f;
+        private bool isDrag = false;
 
         private SInputParam[] mouseParams = new SInputParam[] { new SInputParam(), new SInputParam(), new SInputParam() };
 
@@ -34,6 +35,7 @@ namespace SFramework.GameCamera
             //鼠标按下
             if (Input.GetMouseButtonDown(mouseKeyCode))
             {
+                isDrag = false;
                 stopMove(mouseKeyCode);
                 mouseParams[mouseKeyCode].StartTime = Time.realtimeSinceStartup;
                 Vector3 pos = Input.mousePosition;
@@ -57,8 +59,9 @@ namespace SFramework.GameCamera
                 Vector3 pos = mouseParams[mouseKeyCode].PrevMousePos;
                 Vector3 curPos = Input.mousePosition;
                 float dis = (pos - curPos).sqrMagnitude;
-                if(dis > SInputDefine.MOVE_THRESHOLD)
+                if (dis > SInputDefine.MOVE_THRESHOLD)
                 {
+                    isDrag = true;
                     //偏差值
                     Vector3 offset = curPos - mouseParams[mouseKeyCode].PrevMousePos;
                     //瞬时速度
@@ -75,20 +78,25 @@ namespace SFramework.GameCamera
                 if (mouseParams[mouseKeyCode].HoldTime >= SInputDefine.LONG_PRESS_SCALE) return;
                 MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.Up, Input.mousePosition, mouseParams[mouseKeyCode].ClickCount, mouseKeyCode);
 
-                mouseParams[mouseKeyCode].T2 = Time.realtimeSinceStartup;
-                if (mouseParams[mouseKeyCode].T2 - mouseParams[mouseKeyCode].T1 < SInputDefine.DOUBLE_CLICK_RATE)
+                if (isDrag == false)
                 {
-                    //Debug.Log(mouseKeyCode + ":双击!");
-                    mouseParams[mouseKeyCode].ClickCount++;
-                    MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.DoubleClick, Input.mousePosition, mouseParams[mouseKeyCode].ClickCount, mouseKeyCode);
-                }
-                else
-                {
-                    mouseParams[mouseKeyCode].ClickCount = 1;
+                    mouseParams[mouseKeyCode].T2 = Time.realtimeSinceStartup;
+                    if (mouseParams[mouseKeyCode].T2 - mouseParams[mouseKeyCode].T1 < SInputDefine.DOUBLE_CLICK_RATE)
+                    {
+                        //Debug.Log(mouseKeyCode + ":双击!");
+                        mouseParams[mouseKeyCode].ClickCount++;
+                        MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.DoubleClick, Input.mousePosition, mouseParams[mouseKeyCode].ClickCount, mouseKeyCode);
+                    }
+                    else
+                    {
+                        mouseParams[mouseKeyCode].ClickCount = 1;
+                    }
+
+                    mouseParams[mouseKeyCode].T1 = mouseParams[mouseKeyCode].T2;
+                    MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.Click, Input.mousePosition, mouseParams[mouseKeyCode].ClickCount, mouseKeyCode);
                 }
 
-                mouseParams[mouseKeyCode].T1 = mouseParams[mouseKeyCode].T2;
-                MouseEventHandle?.Invoke(SInputDefine.IsTouchUI(), SInputEventType.Click, Input.mousePosition, mouseParams[mouseKeyCode].ClickCount, mouseKeyCode);
+                isDrag = false;
             }
         }
 

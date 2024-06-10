@@ -50,7 +50,15 @@ namespace SFramework
         {
             base.LateUpdate();
             viewLastUpdate();
+        }
 
+        public void SendMessage(string key, object messageData = null)
+        {
+            SBundleParams param = new SBundleParams();
+            param.MessageId = key;
+            param.MessageData = messageData;
+            param.Alias = "selfview";
+            Control.HandleMessage(param);
         }
 
         protected virtual void viewUpdate()

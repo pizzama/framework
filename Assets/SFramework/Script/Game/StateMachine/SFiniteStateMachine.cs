@@ -157,6 +157,18 @@ namespace SFramework.StateMachine
             return state;
         }
 
+        public ISFSMState GetState<T>()
+        {
+            foreach (var state in mStates)
+            {
+                if (state.Value.GetType() == typeof(T))
+                {
+                    return state.Value;
+                }
+            }
+            return null;
+        }
+
         //状态机有两种切换模式。 一种是状态机强制切换。另一种是每一个状态自己检查切换
         public void ChangeState(string id)
         {
