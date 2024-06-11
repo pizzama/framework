@@ -268,7 +268,7 @@ namespace SFramework
                 i--;
 
                 ISBundle control = SBundleManager.Instance.GetBundle(pa.ClassPath, pa.Alias);
-                if (control != null)
+                if (control != null && control.IsOpen)
                     control.HandleMessage(pa);
                 else
                 {
@@ -279,7 +279,10 @@ namespace SFramework
                         for (int j = 0; j < bundles.Count; j++)
                         {
                             control = bundles[j];
-                            control.HandleMessage(pa);
+                            if(control != null && control.IsOpen)
+                            {
+                                control.HandleMessage(pa);
+                            }
                         }
                     }
                 }
