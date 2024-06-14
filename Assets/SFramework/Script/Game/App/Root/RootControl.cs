@@ -11,24 +11,27 @@ namespace SFramework.Game
         private int _currentCountDownId = 0;
 
         public int StartCountDownTimer(
-            float countdown,
+            float cooldown,
             float intervalTick,
             Action<int> timeEndCallBack,
             Action<int> intervalCallBack
         )
         {
-            if (countdown <= 0)
+            if (cooldown <= 0)
                 return 0;
             _currentCountDownId++;
             STimeData data;
             if (!_countDownTimerDict.TryGetValue(_currentCountDownId, out data))
             {
-                data = new STimeData(_currentCountDownId, countdown, intervalTick, timeEndCallBack, intervalCallBack);
+                data = new STimeData(_currentCountDownId, cooldown, intervalTick, timeEndCallBack, intervalCallBack);
                 _countDownTimerDict.Add(data.Tid, data);
             }
 
             if (data != null)
+            {
+                data.Play();
                 return data.Tid;
+            }
             return 0;
         }
 
