@@ -46,10 +46,10 @@ namespace SFramework
 
         }
 
-        public override void FixUpdate()
+        public override void FixedUpdate()
         {
-            base.FixUpdate();
-            modelFixUpdate();
+            base.FixedUpdate();
+            modelFixedUpdate();
 
         }
 
@@ -65,7 +65,7 @@ namespace SFramework
 
         }
 
-        protected virtual void modelFixUpdate()
+        protected virtual void modelFixedUpdate()
         {
 
         }

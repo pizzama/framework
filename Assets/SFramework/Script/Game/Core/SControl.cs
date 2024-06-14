@@ -150,14 +150,14 @@ namespace SFramework
                 _view.Update();
         }
 
-        public override void FixUpdate()
+        public override void FixedUpdate()
         {
-            base.FixUpdate();
-            controlFixUpdate();
+            base.FixedUpdate();
+            controlFixedUpdate();
             if (_model != null)
-                _model.FixUpdate();
+                _model.FixedUpdate();
             if (_view != null)
-                _view.FixUpdate();
+                _view.FixedUpdate();
         }
 
         public override void LateUpdate()
@@ -197,7 +197,7 @@ namespace SFramework
 
         }
 
-        protected virtual void controlFixUpdate()
+        protected virtual void controlFixedUpdate()
         {
 
         }

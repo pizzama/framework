@@ -39,10 +39,10 @@ namespace SFramework
 
         }
 
-        public override void FixUpdate()
+        public override void FixedUpdate()
         {
-            base.FixUpdate();
-            viewFixUpdate();
+            base.FixedUpdate();
+            viewFixedUpdate();
 
         }
 
@@ -66,7 +66,7 @@ namespace SFramework
 
         }
 
-        protected virtual void viewFixUpdate()
+        protected virtual void viewFixedUpdate()
         {
 
         }

@@ -82,7 +82,7 @@ namespace SFramework.Game
             return result;
         }
 
-        public T CreateEntity<T>(string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1, string instanceId = "") where T: SEntity
+        public T CreateEntity<T>(string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1, string instanceId = "") where T: RootEntity
         {
             T result = CreateComponent<T>(prefabFullPath, parent, pos, lifeTime);
             if(string.IsNullOrEmpty(instanceId))

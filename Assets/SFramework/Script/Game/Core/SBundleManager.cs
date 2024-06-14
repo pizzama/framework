@@ -74,7 +74,7 @@ namespace SFramework
             }
         }
 
-        private void FixUpdate()
+        private void FixedUpdate()
         {
             if (_bundleMap == null)
                 return;
@@ -82,7 +82,7 @@ namespace SFramework
             {
                 foreach (KeyValuePair<string, ISBundle> bundle in result.Value)
                 {
-                    bundle.Value.FixUpdate();
+                    bundle.Value.FixedUpdate();
                 }
             }
         }

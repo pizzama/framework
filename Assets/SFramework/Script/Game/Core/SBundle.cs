@@ -53,7 +53,7 @@ namespace SFramework
 
         }
 
-        public virtual void FixUpdate()
+        public virtual void FixedUpdate()
         {
 
         }

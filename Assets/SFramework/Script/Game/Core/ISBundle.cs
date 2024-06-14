@@ -10,7 +10,7 @@ namespace SFramework
         void Open(SBundleParams value);
         void Close();
         void Update();
-        void FixUpdate();
+        void FixedUpdate();
         void LateUpdate();
         void GetBundleName(out string fullName, out string nameSpace, out string className);
 

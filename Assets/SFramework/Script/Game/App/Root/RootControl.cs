@@ -50,14 +50,14 @@ namespace SFramework.Game
             _countDownTimerDict.Clear();
         }
 
-        public override void FixUpdate()
+        public override void FixedUpdate()
         {
-            base.FixUpdate();
+            base.FixedUpdate();
             List<int> needRemoveKeys = new List<int>();
             foreach (var item in _countDownTimerDict)
             {
                 item.Value.Update(Time.fixedUnscaledDeltaTime);
-                if(!item.Value.IsAvailable())
+                if (!item.Value.IsAvailable())
                 {
                     needRemoveKeys.Add(item.Key);
                 }
@@ -65,7 +65,7 @@ namespace SFramework.Game
 
             foreach (var item in needRemoveKeys)
             {
-                if(_countDownTimerDict.ContainsKey(item))
+                if (_countDownTimerDict.ContainsKey(item))
                 {
                     _countDownTimerDict.Remove(item);
                 }
@@ -75,6 +75,7 @@ namespace SFramework.Game
         public override void Update()
         {
             base.Update();
+
         }
 
         protected override void closing()
