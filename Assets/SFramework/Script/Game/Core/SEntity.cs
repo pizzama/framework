@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Google.Protobuf.WellKnownTypes;
 using UnityEngine;
 
 namespace SFramework
@@ -8,7 +9,6 @@ namespace SFramework
     {
         string EntityId { get; }
         GameObject Instance { get; }
-        void SetEntityData(string entityId, SView view);
         void Recycle();
         void Show();
         void DestroyEntity();
@@ -20,13 +20,7 @@ namespace SFramework
     {
         [SerializeField]
         private string _entityId;
-        public string EntityId { get => _entityId; }
-
-        [SerializeField]
-        private SView _parentView;
-
-        public SView ParentView { get => _parentView; }
-
+        public string EntityId { get => _entityId; set => _entityId = value; }
         public GameObject Instance => throw new System.NotImplementedException();
         protected virtual void Start()
         {
@@ -54,10 +48,10 @@ namespace SFramework
         {
         }
 
-        public void SetEntityData(string entityId, SView view)
+        public void SetEntity(string entityId)
         {
             _entityId = entityId;
-            _parentView = view;
+
         }
 
         public void Recycle()
