@@ -17,8 +17,6 @@ namespace SFramework.Game
             Action<int> intervalCallBack
         )
         {
-            if (cooldown <= 0)
-                return 0;
             _currentCountDownId++;
             STimeData data;
             if (!_countDownTimerDict.TryGetValue(_currentCountDownId, out data))
@@ -40,7 +38,6 @@ namespace SFramework.Game
             if (_countDownTimerDict.ContainsKey(tid))
             {
                 _countDownTimerDict[tid].Stop();
-                _countDownTimerDict.Remove(tid);
             }
         }
 

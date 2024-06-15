@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using SFramework.Tools;
 
 namespace SFramework.Game
@@ -20,7 +21,7 @@ namespace SFramework.Game
         private long _currentTimeStamp;
         private float _intervalTick; //second
         private float _countTick; //second
-        private float _coolDown;
+        private float _coolDown; //execute time
         private bool _isLoop;
         private TimeState _state;
         private Action<int> _timeEndCallBack;
@@ -90,14 +91,13 @@ namespace SFramework.Game
             if (_state == TimeState.Play)
             {
                 _countTick += timePass;
-                _currentTimeStamp += (long)timePass * 1000;
+                _currentTimeStamp += (long)(timePass * 1000);
                 if (_countTick > _intervalTick)
                 {
                     _countTick = 0;
                     _intervalCallBack?.Invoke(_tid);
                 }
-
-                if (_currentTimeStamp > _endTimeStamp)
+                if (_currentTimeStamp >= _endTimeStamp)
                 {
                     if(_isLoop)
                     {

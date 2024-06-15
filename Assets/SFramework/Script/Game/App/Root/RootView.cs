@@ -82,6 +82,16 @@ namespace SFramework.Game
             return result;
         }
 
+        public void ReleaseGameObjectUsingPool(GameObject obj)
+        {
+            poolManager.Return(obj);
+        }
+
+        public void ReleaseComponent(Component comp)
+        {
+            ReleaseGameObjectUsingPool(comp.gameObject);
+        }
+
         public T CreateEntity<T>(string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1, string instanceId = "") where T: RootEntity
         {
             T result = CreateComponent<T>(prefabFullPath, parent, pos, lifeTime);

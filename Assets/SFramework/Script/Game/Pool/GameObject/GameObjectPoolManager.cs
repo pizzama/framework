@@ -110,7 +110,15 @@ namespace SFramework.Pool
         public void Return(GameObject go)
         {
             GameObjectPoolInfo info = go.GetComponent<GameObjectPoolInfo>();
-            Return(info.PoolName, go);
+            if(info != null)
+            {
+                Return(info.PoolName, go);
+            }
+            else
+            {
+                GameObject.Destroy(go);
+            }
+
         }
 
         public int GetPoolCount()
