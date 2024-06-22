@@ -19,21 +19,17 @@ namespace SFramework
             string resPersistentPath = string.Format("{0}{1}/{2}", PersistentDataPath, DefaultABPath, relativePath);
             if (File.Exists(resPersistentPath))
             {
-                // return "file://" + resPersistentPath;
+                // return "file:///" + resPersistentPath;
                 return resPersistentPath;
             }
             else
             {
                 resPersistentPath = string.Format("{0}{1}/{2}", StreamingAssetsPath, DefaultABPath, relativePath);
-                if(File.Exists(resPersistentPath))
-                {
-                    // return "file://" + resPersistentPath;
+                #if UNITY_ANDROID
                     return resPersistentPath;
-                }
-                else
-                {
-                    throw new NotFoundException("not found file:" + resPersistentPath);
-                }
+                #else
+                    return "file:///" + resPersistentPath;
+                #endif
             }
         }
 

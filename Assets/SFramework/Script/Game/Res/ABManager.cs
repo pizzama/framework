@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using Cysharp.Threading.Tasks;
 using System.Threading;
+using UnityEngine.Networking;
 
 namespace SFramework
 {
@@ -184,8 +185,17 @@ namespace SFramework
                 if (!_abCache.ContainsKey(dependencies[i]))
                 {
                     //先加载外部地址在加载内部地址
-                    ab = await AssetBundle.LoadFromFileAsync(ABPathHelper.GetResPathInPersistentOrStream(dependencies[i]));
+                    string url = ABPathHelper.GetResPathInPersistentOrStream(dependencies[i]);
+                    ab = await AssetBundle.LoadFromFileAsync(url);
                     //注意添加进缓存 防止重复加载AB包
+                    if (ab == null)
+                    {
+                        //尝试从zip或者是远端获取
+                        UnityWebRequest abcR = UnityWebRequestAssetBundle.GetAssetBundle(url);
+                        await abcR.SendWebRequest();
+                        ab = DownloadHandlerAssetBundle.GetContent(abcR);
+                        abcR.Dispose();
+                    }
                     if (ab != null)
                     {
                         //注意添加进缓存 防止重复加载AB包
@@ -206,7 +216,16 @@ namespace SFramework
             if (_abCache.ContainsKey(abName)) return _abCache[abName];
             else
             {
-                ab = await AssetBundle.LoadFromFileAsync(ABPathHelper.GetResPathInPersistentOrStream(abName));
+                string url = ABPathHelper.GetResPathInPersistentOrStream(abName);
+                ab = await AssetBundle.LoadFromFileAsync(url);
+                if (ab == null)
+                {
+                    //尝试从zip或者是远端获取
+                    UnityWebRequest abcR = UnityWebRequestAssetBundle.GetAssetBundle(url);
+                    await abcR.SendWebRequest();
+                    ab = DownloadHandlerAssetBundle.GetContent(abcR);
+                    abcR.Dispose();
+                }
                 if (ab != null)
                 {
                     mainInfo.AssetBundle = ab;

@@ -112,7 +112,7 @@ namespace SFramework.Game
                 else
                 {   
                     //load scene from ab bundle
-                    ABInfo request = await assetManager.LoadBundleAsync(scenePath);
+                    ABInfo request = await assetManager.LoadBundleAsync(scenePath.ToLower());
                     if (request != null)
                     {
                         operation = SceneManager.LoadSceneAsync(sceneName, mode);

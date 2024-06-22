@@ -176,13 +176,20 @@ namespace SFramework.GameCamera
                 _targetFieldOfView -= _fieldOfViewStep;
             }
 
-            _targetFieldOfView = Mathf.Clamp(_targetFieldOfView, _fieldOfViewMin, _fieldOfViewMax);
+            if (Input.mouseScrollDelta.y != 0)
+            {
+                _targetFieldOfView = Mathf.Clamp(_targetFieldOfView, _fieldOfViewMin, _fieldOfViewMax);
+                if (_virtualCamera != null)
+                {
+                    _virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(
+                        _virtualCamera.m_Lens.FieldOfView,
+                        _targetFieldOfView,
+                        Time.deltaTime * _zoomSpeed
+                    );
+                }
+            }
 
-            _virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(
-                _virtualCamera.m_Lens.FieldOfView,
-                _targetFieldOfView,
-                Time.deltaTime * _zoomSpeed
-            );
+
         }
 
         private void HandleCameraZoom_MoveForward()

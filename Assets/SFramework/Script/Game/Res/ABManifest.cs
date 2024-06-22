@@ -131,7 +131,7 @@ namespace SFramework
 
         public string[] GetDependencies(string bundleName)
         {
-            string[] result = default;
+            string[] result;
             if (_cacheDependencies.TryGetValue(bundleName, out result))
             {
                 return result;
@@ -141,7 +141,7 @@ namespace SFramework
 #else
             if (_manifest == null)
             {
-                return default;
+                return new string[]{};
             }
 
             result = _manifest.GetAllDependencies(bundleName);
