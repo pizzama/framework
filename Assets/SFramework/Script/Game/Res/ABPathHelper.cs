@@ -25,11 +25,8 @@ namespace SFramework
             else
             {
                 resPersistentPath = string.Format("{0}{1}/{2}", StreamingAssetsPath, DefaultABPath, relativePath);
-                #if UNITY_ANDROID
-                    return resPersistentPath;
-                #else
-                    return "file:///" + resPersistentPath;
-                #endif
+                return resPersistentPath;
+                    // return "file:///" + resPersistentPath;
             }
         }
 

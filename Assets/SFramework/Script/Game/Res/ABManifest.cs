@@ -6,6 +6,8 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using System.Text;
+using Cysharp.Threading.Tasks;
+using UnityEngine.Networking;
 
 namespace SFramework
 {
@@ -37,7 +39,7 @@ namespace SFramework
                 return;
             try
             {
-                if(_manifest != null)
+                if (_manifest != null)
                 {
                     return;
                 }
@@ -86,6 +88,90 @@ namespace SFramework
 
             _allBundleVariants = _manifest.GetAllAssetBundlesWithVariant().ToList();
             _allBundles = _manifest.GetAllAssetBundles().ToList();
+        }
+
+        public async UniTaskVoid LoadAssetBundleManifestAsync()
+        {
+            if (ABPathHelper.SimulationMode)
+                return;
+            try
+            {
+                if (_manifest != null)
+                {
+                    return;
+                }
+                //Get main Manifest
+                string name = ABPathHelper.GetPlatformName();
+                string path = ABPathHelper.GetResPathInPersistentOrStream(name);
+                _mainBundle = await loadABFromPlantFromAsync(path);
+                if (_mainBundle != null)
+                {
+                    _manifest = _mainBundle.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
+                    if (_manifest != null)
+                    {
+                        _allBundleVariants = _manifest.GetAllAssetBundlesWithVariant().ToList();
+                        _allBundles = _manifest.GetAllAssetBundles().ToList();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("AssetBundleMainfest not found");
+                    }
+
+                }
+                else
+                {
+                    Debug.LogWarning("not found mainBundle at path:" + path);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning(e.ToString());
+            }
+        }
+
+        private async UniTask<AssetBundle> loadABFromPlantFromAsync(string url)
+        {
+            AssetBundle ab = null;
+            if (ABPathHelper.GetPlatformName() == "WebGL")
+            {
+                ab = await requestManifestFromUrlAsync(url, 0);
+            }
+            else
+            {
+                ab = await AssetBundle.LoadFromFileAsync(url);
+                if (ab == null)
+                {
+                    ab = await requestManifestFromUrlAsync(url, 0);
+                }
+            }
+
+            return ab;
+        }
+
+        private async UniTask<AssetBundle> requestManifestFromUrlAsync(string url, int index)
+        {
+            index++;
+            if (index > 3)
+            {
+                return null;
+            }
+            //尝试从zip或者是远端获取
+            UnityWebRequest abcR = UnityWebRequestAssetBundle.GetAssetBundle(url);
+            await abcR.SendWebRequest();
+            if (abcR.isDone)
+            {
+                AssetBundle ab = DownloadHandlerAssetBundle.GetContent(abcR);
+                Debug.Log("manifest:" + ab + ";" + abcR.isDone);
+                abcR.Dispose();
+
+                return ab;
+            }
+            else
+            {
+                AssetBundle tempAB = await requestManifestFromUrlAsync(url, index);
+                return tempAB;
+            }
+
         }
 
         public string ExistsBundleWithVariant(string bundleVariant)

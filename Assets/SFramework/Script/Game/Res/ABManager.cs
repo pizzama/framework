@@ -33,7 +33,7 @@ namespace SFramework
         private ABManager()
         {
             _manifest = new ABManifest(); //主包的Bundle和依赖关系
-            _manifest.LoadAssetBundleManifest();
+            _manifest.LoadAssetBundleManifestAsync().Forget();
             //初始化字典
             _abCache = new Dictionary<string, ABInfo>();
         }
@@ -186,16 +186,7 @@ namespace SFramework
                 {
                     //先加载外部地址在加载内部地址
                     string url = ABPathHelper.GetResPathInPersistentOrStream(dependencies[i]);
-                    ab = await AssetBundle.LoadFromFileAsync(url);
-                    //注意添加进缓存 防止重复加载AB包
-                    if (ab == null)
-                    {
-                        //尝试从zip或者是远端获取
-                        UnityWebRequest abcR = UnityWebRequestAssetBundle.GetAssetBundle(url);
-                        await abcR.SendWebRequest();
-                        ab = DownloadHandlerAssetBundle.GetContent(abcR);
-                        abcR.Dispose();
-                    }
+                    ab = await loadABFromPlantFromAsync(url);
                     if (ab != null)
                     {
                         //注意添加进缓存 防止重复加载AB包
@@ -213,19 +204,15 @@ namespace SFramework
                 }
             }
             //加载目标包
-            if (_abCache.ContainsKey(abName)) return _abCache[abName];
+            if (_abCache.ContainsKey(abName)) 
+                return _abCache[abName];
             else
             {
                 string url = ABPathHelper.GetResPathInPersistentOrStream(abName);
-                ab = await AssetBundle.LoadFromFileAsync(url);
-                if (ab == null)
-                {
-                    //尝试从zip或者是远端获取
-                    UnityWebRequest abcR = UnityWebRequestAssetBundle.GetAssetBundle(url);
-                    await abcR.SendWebRequest();
-                    ab = DownloadHandlerAssetBundle.GetContent(abcR);
-                    abcR.Dispose();
-                }
+                Debug.Log("0000:" + url);
+                ab = await loadABFromPlantFromAsync(url);
+                Debug.Log("11111:" + ab);
+                //注意添加进缓存 防止重复加载AB包
                 if (ab != null)
                 {
                     mainInfo.AssetBundle = ab;
@@ -240,6 +227,51 @@ namespace SFramework
 
                 return mainInfo;
             }
+        }
+
+        private async UniTask<AssetBundle> loadABFromPlantFromAsync(string url)
+        {
+            AssetBundle ab = null;
+            if (ABPathHelper.GetPlatformName() == "WebGL")
+            {
+                ab = await requestAssetBundleFromUrl(url, 0);
+            }
+            else
+            {
+                ab = await AssetBundle.LoadFromFileAsync(url);
+                if (ab == null)
+                {
+                    ab = await requestAssetBundleFromUrl(url, 0);
+                }
+            }
+
+            return ab;
+        }
+
+        private async UniTask<AssetBundle> requestAssetBundleFromUrl(string url, int index)
+        {
+            index++;
+            if (index > 3)
+            {
+                return null;
+            }
+            //尝试从zip或者是远端获取
+            UnityWebRequest abcR = UnityWebRequestAssetBundle.GetAssetBundle(url);
+            await abcR.SendWebRequest();
+            if (abcR.isDone)
+            {
+                AssetBundle ab = DownloadHandlerAssetBundle.GetContent(abcR);
+                Debug.Log("222222:" + ab + ";" + abcR.isDone);
+                abcR.Dispose();
+
+                return ab;
+            }
+            else
+            {
+                AssetBundle tempAB = await requestAssetBundleFromUrl(url, index);
+                return tempAB;
+            }
+
         }
 
         public async UniTask<ABInfo> LoadABInfoAsync(string abName)
