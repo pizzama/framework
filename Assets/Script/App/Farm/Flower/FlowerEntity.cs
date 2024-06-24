@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace App.Farm
 {
-    public class FlowerEntity : SEntity
+    public class FlowerEntity : RootEntity
     {
         private FlowerFSM _fSM;
         [SerializeField] private SpriteRenderer _flower;

@@ -1,14 +1,13 @@
-using SFramework;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using SFramework.Extension;
+using SFramework.Game;
 
 namespace Game.App.Battle
 {
     //deal with card operation
-    public class BattleCard : SEntity, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class BattleCard : RootEntity, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         [SerializeField]
         private float _moveTime = 0.2f;

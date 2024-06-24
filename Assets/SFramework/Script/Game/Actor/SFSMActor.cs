@@ -2,10 +2,11 @@ using SFramework.Tools.Attributes;
 using UnityEngine;
 using SFramework.StateMachine;
 using System.Collections.Generic;
+using SFramework.Game;
 
 namespace SFramework.Actor
 {
-    public class SFSMActor : SEntity
+    public class SFSMActor : RootEntity
     {
         [SerializeField]
         [SFInformation("Actor's direction", SFInformationAttribute.InformationType.Info, false)]
