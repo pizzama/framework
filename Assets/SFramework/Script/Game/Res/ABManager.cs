@@ -232,18 +232,18 @@ namespace SFramework
         private async UniTask<AssetBundle> loadABFromPlantFromAsync(string url)
         {
             AssetBundle ab = null;
-            if (ABPathHelper.GetPlatformName() == "WebGL")
-            {
-                ab = await requestAssetBundleFromUrl(url, 0);
-            }
-            else
-            {
-                ab = await AssetBundle.LoadFromFileAsync(url);
-                if (ab == null)
-                {
-                    ab = await requestAssetBundleFromUrl(url, 0);
-                }
-            }
+            // if (ABPathHelper.GetPlatformName() == "WebGL")
+            // {
+            ab = await requestAssetBundleFromUrl(url, 0);
+            // }
+            // else
+            // {
+            //     ab = await AssetBundle.LoadFromFileAsync(url);
+            //     if (ab == null)
+            //     {
+            //         ab = await requestAssetBundleFromUrl(url, 0);
+            //     }
+            // }
 
             return ab;
         }
@@ -261,13 +261,14 @@ namespace SFramework
             if (abcR.isDone)
             {
                 AssetBundle ab = DownloadHandlerAssetBundle.GetContent(abcR);
-                Debug.Log("222222:" + ab + ";" + abcR.isDone);
                 abcR.Dispose();
 
                 return ab;
             }
             else
             {
+                //delay 0.5 try next
+                await UniTask.Delay(System.TimeSpan.FromSeconds(0.5f));
                 AssetBundle tempAB = await requestAssetBundleFromUrl(url, index);
                 return tempAB;
             }
