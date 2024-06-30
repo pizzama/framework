@@ -204,7 +204,7 @@ namespace SFramework
                 }
             }
             //加载目标包
-            if (_abCache.ContainsKey(abName)) 
+            if (_abCache.ContainsKey(abName))
                 return _abCache[abName];
             else
             {
@@ -231,21 +231,30 @@ namespace SFramework
 
         private async UniTask<AssetBundle> loadABFromPlantFromAsync(string url)
         {
-            AssetBundle ab = null;
-            // if (ABPathHelper.GetPlatformName() == "WebGL")
-            // {
-            ab = await requestAssetBundleFromUrl(url, 0);
-            // }
-            // else
-            // {
-            //     ab = await AssetBundle.LoadFromFileAsync(url);
-            //     if (ab == null)
-            //     {
-            //         ab = await requestAssetBundleFromUrl(url, 0);
-            //     }
-            // }
+            try
+            {
+                AssetBundle ab = null;
+                // if (ABPathHelper.GetPlatformName() == "WebGL")
+                // {
+                ab = await requestAssetBundleFromUrl(url, 0);
+                // }
+                // else
+                // {
+                //     ab = await AssetBundle.LoadFromFileAsync(url);
+                //     if (ab == null)
+                //     {
+                //         ab = await requestAssetBundleFromUrl(url, 0);
+                //     }
+                // }
 
-            return ab;
+                return ab;
+            }
+            catch (System.Exception err)
+            {
+                Debug.LogError(err);
+                return null;
+            }
+
         }
 
         private async UniTask<AssetBundle> requestAssetBundleFromUrl(string url, int index)
@@ -261,14 +270,13 @@ namespace SFramework
             if (abcR.isDone)
             {
                 AssetBundle ab = DownloadHandlerAssetBundle.GetContent(abcR);
+                Debug.Log("222222:" + ab + ";" + abcR.isDone);
                 abcR.Dispose();
 
                 return ab;
             }
             else
             {
-                //delay 0.5 try next
-                await UniTask.Delay(System.TimeSpan.FromSeconds(0.5f));
                 AssetBundle tempAB = await requestAssetBundleFromUrl(url, index);
                 return tempAB;
             }

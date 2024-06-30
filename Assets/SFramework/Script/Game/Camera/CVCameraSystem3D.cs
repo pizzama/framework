@@ -3,76 +3,9 @@ using UnityEngine;
 
 namespace SFramework.GameCamera
 {
-    public class CVCameraSystem3D : MonoBehaviour
+    public class CVCameraSystem3D : CVCameraSystem
     {
-        [SerializeField]
-        private CinemachineVirtualCamera _virtualCamera;
-
-        [SerializeField]
-        private bool _useEdgeScrolling = false;
-
-        [SerializeField]
-        private bool _useDragPan = false;
-
-        [SerializeField]
-        private float _moveSpeed = 50f;
-
-        [SerializeField]
-        private int _edgeScrollSize = 20;
-
-        [SerializeField]
-        private float _rotateSpeed = 100f;
-
-        [SerializeField]
-        private float _fieldOfViewMax = 50f;
-
-        [SerializeField]
-        private float _fieldOfViewMin = 10f;
-
-        [SerializeField]
-        private float _fieldOfViewStep = 5f;
-
-        [SerializeField]
-        private float _followOffsetMax = 50f;
-
-        [SerializeField]
-        private float _followOffsetMin = 10f;
-
-        [SerializeField]
-        private float _zoomSpeed = 10f;
-
-        [SerializeField]
-        private float _dragSpeed = 1f;
-
-        [SerializeField]
-        private float _dragThreshold = 0f;
-
-        [SerializeField]
-        private Vector2 _cameraMoveLimitX;
-
-        [SerializeField]
-        private Vector2 _cameraMoveLimitY;
-
-        [SerializeField]
-        private Vector2 _cameraMoveLimitZ;
-        private bool _dragPanMoveActive;
-        private float _targetFieldOfView = 20;
-        private Vector2 _lastMousePosition;
-        private Vector3 _followOffset;
-
-        private void Update()
-        {
-            HandleCameraMovement();
-            if (_useEdgeScrolling)
-                HandleCameraMovementEdgeScrolling();
-            if (_useDragPan)
-                HandleCameraMovementDragPan();
-            HandleCameraRotation();
-            HandleCameraZoom_FieldOfView();
-            limitCameraMove();
-        }
-
-        private void HandleCameraMovement()
+        protected override void HandleCameraMovement()
         {
             Vector3 inputDir = new Vector3(0, 0, 0);
             if (Input.GetKey(KeyCode.W))
@@ -93,64 +26,64 @@ namespace SFramework.GameCamera
             }
 
             Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x;
-            transform.position += moveDir * _moveSpeed * Time.deltaTime;
+            transform.position += moveDir * moveSpeed * Time.deltaTime;
         }
 
-        private void HandleCameraMovementEdgeScrolling()
+        protected override void HandleCameraMovementEdgeScrolling()
         {
             Vector3 inputDir = new Vector3(0, 0, 0);
-            if (Input.mousePosition.x < _edgeScrollSize)
+            if (Input.mousePosition.x < edgeScrollSize)
             {
                 inputDir.x = -1f;
             }
-            if (Input.mousePosition.y < _edgeScrollSize)
+            if (Input.mousePosition.y < edgeScrollSize)
             {
                 inputDir.z = -1f;
             }
-            if (Input.mousePosition.x > Screen.width - _edgeScrollSize)
+            if (Input.mousePosition.x > Screen.width - edgeScrollSize)
             {
                 inputDir.x = 1f;
             }
-            if (Input.mousePosition.y > Screen.height - _edgeScrollSize)
+            if (Input.mousePosition.y > Screen.height - edgeScrollSize)
             {
                 inputDir.z = 1f;
             }
 
             Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x;
-            transform.position += moveDir * _moveSpeed * Time.deltaTime;
+            transform.position += moveDir * moveSpeed * Time.deltaTime;
         }
 
-        private void HandleCameraMovementDragPan()
+        protected override void HandleCameraMovementDragPan()
         {
             Vector3 inputDir = Vector3.zero;
             if (Input.GetMouseButtonDown(0))
             {
-                _dragPanMoveActive = true;
-                _lastMousePosition = Input.mousePosition;
+                dragPanMoveActive = true;
+                lastMousePosition = Input.mousePosition;
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-                _dragPanMoveActive = false;
+                dragPanMoveActive = false;
             }
 
-            if (_dragPanMoveActive)
+            if (dragPanMoveActive)
             {
-                Vector2 mouseMovementDelta = (Vector2)Input.mousePosition - _lastMousePosition;
-                if (mouseMovementDelta.magnitude > _dragThreshold)
+                Vector2 mouseMovementDelta = (Vector2)Input.mousePosition - lastMousePosition;
+                if (mouseMovementDelta.magnitude > dragThreshold)
                 {
                     mouseMovementDelta.Normalize(); //only get direction
 
-                    inputDir.x = mouseMovementDelta.x * _dragSpeed;
-                    inputDir.z = mouseMovementDelta.y * _dragSpeed;
+                    inputDir.x = mouseMovementDelta.x * dragSpeed;
+                    inputDir.z = mouseMovementDelta.y * dragSpeed;
                     Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x;
-                    transform.position += moveDir * _moveSpeed * Time.deltaTime;
+                    transform.position += moveDir * moveSpeed * Time.deltaTime;
                 }
-                _lastMousePosition = Input.mousePosition;
+                lastMousePosition = Input.mousePosition;
             }
         }
 
-        private void HandleCameraRotation()
+        protected override void HandleCameraRotation()
         {
             float rotateDir = 0f;
             if (Input.GetKey(KeyCode.Q))
@@ -162,70 +95,61 @@ namespace SFramework.GameCamera
                 rotateDir = -1f;
             }
 
-            transform.eulerAngles += new Vector3(0, rotateDir * _rotateSpeed * Time.deltaTime, 0);
+            transform.eulerAngles += new Vector3(0, rotateDir * rotateSpeed * Time.deltaTime, 0);
         }
 
-        private void HandleCameraZoom_FieldOfView()
+        protected override void HandleCameraZoom_FieldOfView()
         {
             if (Input.mouseScrollDelta.y > 0)
             {
-                _targetFieldOfView += _fieldOfViewStep;
+                targetFieldOfView += fieldOfViewStep;
             }
 
             if (Input.mouseScrollDelta.y < 0)
             {
-                _targetFieldOfView -= _fieldOfViewStep;
+                targetFieldOfView -= fieldOfViewStep;
             }
 
-            _targetFieldOfView = Mathf.Clamp(_targetFieldOfView, _fieldOfViewMin, _fieldOfViewMax);
+            targetFieldOfView = Mathf.Clamp(targetFieldOfView, fieldOfViewMin, fieldOfViewMax);
 
-            _virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(
-                _virtualCamera.m_Lens.FieldOfView,
-                _targetFieldOfView,
-                Time.deltaTime * _zoomSpeed
+            virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(
+                virtualCamera.m_Lens.FieldOfView,
+                targetFieldOfView,
+                Time.deltaTime * zoomSpeed
             );
         }
 
-        private void HandleCameraZoom_MoveForward()
+        protected override void HandleCameraZoom_MoveForward()
         {
-            Vector3 zoomDir = _followOffset.normalized;
+            Vector3 zoomDir = followOffset.normalized;
             if (Input.mouseScrollDelta.y > 0)
             {
-                _followOffset += zoomDir * _zoomSpeed;
+                followOffset += zoomDir * zoomSpeed;
             }
 
             if (Input.mouseScrollDelta.y < 0)
             {
-                _followOffset -= zoomDir * _zoomSpeed;
+                followOffset -= zoomDir * zoomSpeed;
             }
 
-            if (_followOffset.magnitude < _followOffsetMin)
+            if (followOffset.magnitude < followOffsetMin)
             {
-                _followOffset = zoomDir * _followOffsetMin;
+                followOffset = zoomDir * followOffsetMin;
             }
 
-            if (_followOffset.magnitude > _followOffsetMax)
+            if (followOffset.magnitude > followOffsetMax)
             {
-                _followOffset = zoomDir * _followOffsetMax;
+                followOffset = zoomDir * followOffsetMax;
             }
 
             Vector3.Lerp(
-                _virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset,
-                _followOffset,
-                Time.deltaTime * _zoomSpeed
+                virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset,
+                followOffset,
+                Time.deltaTime * zoomSpeed
             );
 
-            _virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset =
-                _followOffset;
-        }
-
-        private void limitCameraMove()
-        {
-            Vector3 target = transform.position;
-            target.x = Mathf.Clamp(target.x, _cameraMoveLimitX.x, _cameraMoveLimitX.y);
-            target.y = Mathf.Clamp(target.y, _cameraMoveLimitY.x, _cameraMoveLimitY.y);
-            target.z = Mathf.Clamp(target.z, _cameraMoveLimitZ.x, _cameraMoveLimitZ.y);
-            transform.position = target;
+            virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset =
+                followOffset;
         }
     }
 }

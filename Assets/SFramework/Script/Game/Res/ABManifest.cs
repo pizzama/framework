@@ -1,25 +1,23 @@
+using System.IO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using Cysharp.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
+using System.Text;
+using Cysharp.Threading.Tasks;
 using UnityEngine.Networking;
 
 namespace SFramework
 {
     public class ABManifest : System.IDisposable
     {
-        private readonly Dictionary<string, string[]> _cacheDependencies =
-            new Dictionary<string, string[]>();
+        private readonly Dictionary<string, string[]> _cacheDependencies = new Dictionary<string, string[]>();
         private AssetBundleManifest _manifest;
         private AssetBundle _mainBundle;
         private List<string> _allBundleVariants;
         private List<string> _allBundles;
-
         public void Dispose()
         {
             if (_mainBundle != null)
@@ -61,6 +59,7 @@ namespace SFramework
                     {
                         Debug.LogWarning("AssetBundleMainfest not found");
                     }
+
                 }
                 else
                 {
@@ -117,6 +116,7 @@ namespace SFramework
                     {
                         Debug.LogWarning("AssetBundleMainfest not found");
                     }
+
                 }
                 else
                 {
@@ -131,21 +131,30 @@ namespace SFramework
 
         private async UniTask<AssetBundle> loadABFromPlantFromAsync(string url)
         {
-            AssetBundle ab = null;
-            // if (ABPathHelper.GetPlatformName() == "WebGL")
-            // {
-            ab = await requestManifestFromUrlAsync(url, 0);
-            // }
-            // else
-            // {
-            //     ab = await AssetBundle.LoadFromFileAsync(url);
-            //     if (ab == null)
-            //     {
-            //         ab = await requestManifestFromUrlAsync(url, 0);
-            //     }
-            // }
+            try
+            {
+                AssetBundle ab = null;
+                // if (ABPathHelper.GetPlatformName() == "WebGL")
+                // {
+                    ab = await requestManifestFromUrlAsync(url, 0);
+                // }
+                // else
+                // {
+                //     ab = await AssetBundle.LoadFromFileAsync(url);
+                //     if (ab == null)
+                //     {
+                //         ab = await requestManifestFromUrlAsync(url, 0);
+                //     }
+                // }
 
-            return ab;
+                return ab;
+            }
+            catch (System.Exception err)
+            {
+                Debug.LogError(err);
+                return null;
+            }
+
         }
 
         private async UniTask<AssetBundle> requestManifestFromUrlAsync(string url, int index)
@@ -161,17 +170,17 @@ namespace SFramework
             if (abcR.isDone)
             {
                 AssetBundle ab = DownloadHandlerAssetBundle.GetContent(abcR);
+                Debug.Log("manifest:" + ab + ";" + abcR.isDone);
                 abcR.Dispose();
 
                 return ab;
             }
             else
             {
-                //delay 0.5 try next
-                await UniTask.Delay(System.TimeSpan.FromSeconds(0.5f));
                 AssetBundle tempAB = await requestManifestFromUrlAsync(url, index);
                 return tempAB;
             }
+
         }
 
         public string ExistsBundleWithVariant(string bundleVariant)
@@ -192,7 +201,7 @@ namespace SFramework
                 return bundleVariant;
             else
                 return "";
-#endif
+#endif      
         }
 
         public string ExistsBundle(string bundlePath)
@@ -203,7 +212,7 @@ namespace SFramework
                 return result[0];
             else
                 return "";
-#else
+#else   
             if (_allBundles == null || _allBundles.Count <= 0)
             {
                 return "";
@@ -227,7 +236,7 @@ namespace SFramework
 #else
             if (_manifest == null)
             {
-                return new string[] { };
+                return new string[]{};
             }
 
             result = _manifest.GetAllDependencies(bundleName);
@@ -236,4 +245,5 @@ namespace SFramework
             return result;
         }
     }
+
 }
