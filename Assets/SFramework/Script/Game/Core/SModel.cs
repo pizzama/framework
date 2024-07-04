@@ -1,5 +1,6 @@
 using System.Threading;
 using UnityEngine.Networking;
+using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System;
 
@@ -144,7 +145,7 @@ namespace SFramework
             }
             try
             {
-                UnityWebRequest webRequest = UnityWebRequest.PostWwwForm(url, pars.ToString());
+                UnityWebRequest webRequest = UnityWebRequest.Post(url, pars.ToString());
                 byte[] bytes = await requestData(webRequest);
                 ModelCallback?.Invoke(0);
                 return bytes;
