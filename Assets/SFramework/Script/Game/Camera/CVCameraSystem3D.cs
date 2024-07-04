@@ -112,11 +112,14 @@ namespace SFramework.GameCamera
 
             targetFieldOfView = Mathf.Clamp(targetFieldOfView, fieldOfViewMin, fieldOfViewMax);
 
-            virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(
-                virtualCamera.m_Lens.FieldOfView,
-                targetFieldOfView,
-                Time.deltaTime * zoomSpeed
-            );
+            if (virtualCamera != null)
+            {
+                virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(
+                    virtualCamera.m_Lens.FieldOfView,
+                    targetFieldOfView,
+                    Time.deltaTime * zoomSpeed
+                );
+            }
         }
 
         protected override void HandleCameraZoom_MoveForward()
@@ -142,14 +145,17 @@ namespace SFramework.GameCamera
                 followOffset = zoomDir * followOffsetMax;
             }
 
-            Vector3.Lerp(
-                virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset,
-                followOffset,
-                Time.deltaTime * zoomSpeed
-            );
+            if (virtualCamera != null)
+            {
+                Vector3.Lerp(
+                    virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset,
+                    followOffset,
+                    Time.deltaTime * zoomSpeed
+                );
 
-            virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset =
-                followOffset;
+                virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset =
+                    followOffset;
+            }
         }
     }
 }
