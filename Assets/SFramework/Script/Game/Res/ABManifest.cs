@@ -45,7 +45,8 @@ namespace SFramework
                 }
                 //Get main Manifest
                 string name = ABPathHelper.GetPlatformName();
-                string path = ABPathHelper.GetResPathInPersistentOrStream(name);
+                string defaultName = ABPathHelper.DefaultABPath + "/" + name;
+                string path = ABPathHelper.GetResPathInPersistentOrStream(defaultName);
                 _mainBundle = AssetBundle.LoadFromFile(path);
                 if (_mainBundle != null)
                 {
@@ -102,7 +103,8 @@ namespace SFramework
                 }
                 //Get main Manifest
                 string name = ABPathHelper.GetPlatformName();
-                string path = ABPathHelper.GetResPathInPersistentOrStream(name);
+                string defaultName = ABPathHelper.DefaultABPath + "/" + name;
+                string path = ABPathHelper.GetResPathInPersistentOrStream(defaultName);
                 _mainBundle = await loadABFromPlantFromAsync(path);
                 if (_mainBundle != null)
                 {

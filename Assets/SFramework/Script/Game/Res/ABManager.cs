@@ -53,6 +53,7 @@ namespace SFramework
                 //如果不在缓存则加入,防止重复加载
                 if (!_abCache.ContainsKey(dependencies[i]))
                 {
+                    string defaultName = ABPathHelper.DefaultABPath + "/" + dependencies[i];
                     //先加载外部地址在加载内部地址
                     ab = AssetBundle.LoadFromFile(ABPathHelper.GetResPathInPersistentOrStream(dependencies[i]));
                     if (ab != null)
@@ -75,7 +76,8 @@ namespace SFramework
             if (_abCache.ContainsKey(abName)) return _abCache[abName];
             else
             {
-                ab = AssetBundle.LoadFromFile(ABPathHelper.GetResPathInPersistentOrStream(abName));
+                string defaultName = ABPathHelper.DefaultABPath + "/" + abName;
+                ab = AssetBundle.LoadFromFile(ABPathHelper.GetResPathInPersistentOrStream(defaultName));
                 mainInfo.HashName = abName;
                 if (ab != null)
                 {
@@ -184,8 +186,9 @@ namespace SFramework
                 //如果不在缓存则加入,防止重复加载
                 if (!_abCache.ContainsKey(dependencies[i]))
                 {
+                    string defaultName = ABPathHelper.DefaultABPath + "/" + dependencies[i];
                     //先加载外部地址在加载内部地址
-                    string url = ABPathHelper.GetResPathInPersistentOrStream(dependencies[i]);
+                    string url = ABPathHelper.GetResPathInPersistentOrStream(defaultName);
                     ab = await loadABFromPlantFromAsync(url);
                     if (ab != null)
                     {
@@ -208,7 +211,8 @@ namespace SFramework
                 return _abCache[abName];
             else
             {
-                string url = ABPathHelper.GetResPathInPersistentOrStream(abName);
+                string defaultName = ABPathHelper.DefaultABPath + "/" + abName;
+                string url = ABPathHelper.GetResPathInPersistentOrStream(defaultName);
                 Debug.Log("0000:" + url);
                 ab = await loadABFromPlantFromAsync(url);
                 Debug.Log("11111:" + ab);

@@ -59,9 +59,9 @@ namespace SFramework.Game
                     return dt;
                 }
             }
-            catch (System.Exception e)
+            catch (System.Exception)
             {
-                Debug.LogError(e);
+                return new T();
             }
 
             return new T();
@@ -104,7 +104,7 @@ namespace SFramework.Game
             }
             catch (System.Exception e)
             {
-                Debug.LogError(e);
+                return new T();
             }
 
             return new T();
