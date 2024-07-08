@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
 
 namespace SFramework
@@ -31,11 +34,10 @@ namespace SFramework
                 collectControls();
             }
 
-            if (GUILayout.Button("test"))
+            if (GUILayout.Button("Add Default Using Tag"))
             {
-                test();
+                AddOrCreateSFrameworkUsingNewTag();
             }
-
 
             EditorGUILayout.EndVertical();
         }
@@ -51,7 +53,11 @@ namespace SFramework
                 EditorUtility.DisplayDialog("Error", err.ToString(), "OK");
             }
 
-            EditorUtility.DisplayDialog("Success", "Deal All AssetBundle From Assets/Arts Folder is done", "OK");
+            EditorUtility.DisplayDialog(
+                "Success",
+                "Deal All AssetBundle From Assets/Arts Folder is done",
+                "OK"
+            );
         }
 
         private void cleanAssetBundleFromArtsFolder()
@@ -65,7 +71,11 @@ namespace SFramework
                 EditorUtility.DisplayDialog("Error", err.ToString(), "OK");
             }
 
-            EditorUtility.DisplayDialog("Success", "Clean All AssetBundle From Assets/Arts Folder is done", "OK");
+            EditorUtility.DisplayDialog(
+                "Success",
+                "Clean All AssetBundle From Assets/Arts Folder is done",
+                "OK"
+            );
         }
 
         private void collectControls()
@@ -80,19 +90,45 @@ namespace SFramework
             }
 
             EditorUtility.DisplayDialog("Success", "Collect All Controls From Scripts", "OK");
-
         }
 
-        private void test()
+        private void AddOrCreateSFrameworkUsingNewTag()
         {
-            try
+            UnityEngine.Object[] asset = AssetDatabase.LoadAllAssetsAtPath(
+                "ProjectSettings/TagManager.asset"
+            );
+            if ((asset != null) && (asset.Length > 0))
             {
-                string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle("game_turpworld_map.sfp");
-                Debug.Log(assetPaths);
-            }
-            catch (System.Exception err)
-            {
-                EditorUtility.DisplayDialog("Error", err.ToString(), "OK");
+                SerializedObject so = new SerializedObject(asset[0]);
+                SerializedProperty tags = so.FindProperty("tags");
+                List<string> newTags = new List<string>() { "$EXPORT$", "$UICamera$" };
+                for (int i = 0; i < newTags.Count; i++)
+                {
+                    bool isFind = false;
+                    string tagName = newTags[i];
+                    for (int j = 0; j < tags.arraySize; ++j)
+                    {
+                        if (tags.GetArrayElementAtIndex(j).stringValue == tagName)
+                        {
+                            isFind = true;
+                            continue; // Tag already present, nothing to do.
+                        }
+                    }
+
+                    if(isFind == false)
+                    {
+                        tags.InsertArrayElementAtIndex(0); //可能会打印提示信息”Default GameObject Tag: xxx already registered“
+                        tags.GetArrayElementAtIndex(0).stringValue = tagName;
+                        so.ApplyModifiedProperties();
+                        so.Update();
+                    }
+                }
+
+                EditorUtility.DisplayDialog(
+                    "Success",
+                    "Add Or Create SFramework Using NewTag is Done",
+                    "OK"
+                );
             }
         }
     }
