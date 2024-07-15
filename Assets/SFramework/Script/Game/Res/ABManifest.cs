@@ -136,18 +136,18 @@ namespace SFramework
             try
             {
                 AssetBundle ab = null;
-                // if (ABPathHelper.GetPlatformName() == "WebGL")
-                // {
+                if (ABPathHelper.GetPlatformName() == "WebGL")
+                {
                     ab = await requestManifestFromUrlAsync(url, 0);
-                // }
-                // else
-                // {
-                //     ab = await AssetBundle.LoadFromFileAsync(url);
-                //     if (ab == null)
-                //     {
-                //         ab = await requestManifestFromUrlAsync(url, 0);
-                //     }
-                // }
+                }
+                else
+                {
+                    ab = await AssetBundle.LoadFromFileAsync(url);
+                    if (ab == null)
+                    {
+                        ab = await requestManifestFromUrlAsync(url, 0);
+                    }
+                }
 
                 return ab;
             }

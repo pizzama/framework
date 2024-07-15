@@ -1,15 +1,17 @@
-using System.Collections.Generic;
-using UnityEngine;
 using System.Collections;
-using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
 using System.Threading;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.Networking;
 
 namespace SFramework
 {
     public delegate void ABLoadCallBack(AssetBundle ab);
+
     public class ABManager
     {
+        private List<string> _abLoadQueue = new List<string>(); //记录正在加载的abName保证在异步环境下，ab重复加载的问题。
         private static ABManager _instance;
         public static ABManager Instance
         {
@@ -30,6 +32,7 @@ namespace SFramework
         }
 
         private Dictionary<string, ABInfo> _abCache;
+
         private ABManager()
         {
             _manifest = new ABManifest(); //主包的Bundle和依赖关系
@@ -37,6 +40,7 @@ namespace SFramework
             //初始化字典
             _abCache = new Dictionary<string, ABInfo>();
         }
+
         private ABManifest _manifest;
 
         #region 同步加载的三个重载
@@ -50,40 +54,63 @@ namespace SFramework
             //循环加载所有依赖包
             for (int i = 0; i < dependencies.Length; i++)
             {
+                string dependencyName = dependencies[i];
                 //如果不在缓存则加入,防止重复加载
-                if (!_abCache.ContainsKey(dependencies[i]))
+                if (!_abCache.ContainsKey(dependencyName))
                 {
                     string defaultName = ABPathHelper.DefaultABPath + "/" + dependencies[i];
                     //先加载外部地址在加载内部地址
-                    ab = AssetBundle.LoadFromFile(ABPathHelper.GetResPathInPersistentOrStream(dependencies[i]));
+                    if (!_abLoadQueue.Contains(dependencyName)) //锁定检查
+                        _abLoadQueue.Add(dependencyName);
+                    else
+                    {
+                        Debug.LogWarning("ab has in loading queue:" + dependencyName);
+                        continue;
+                    }
+                    ab = AssetBundle.LoadFromFile(
+                        ABPathHelper.GetResPathInPersistentOrStream(defaultName)
+                    );
                     if (ab != null)
                     {
                         //注意添加进缓存 防止重复加载AB包
                         ABInfo info = new ABInfo();
-                        info.HashName = dependencies[i];
+                        info.HashName = dependencyName;
                         info.AssetBundle = ab;
                         mainInfo.AddDepends(info);
-                        _abCache.Add(dependencies[i], info);
+                        _abCache.Add(dependencyName, info);
+                        _abLoadQueue.Remove(dependencyName); //加载完成后解除锁定
                     }
                 }
                 else
                 {
-                    ABInfo info = _abCache[dependencies[i]];
+                    ABInfo info = _abCache[dependencyName];
                     mainInfo.AddDepends(info);
                 }
             }
+
             //加载目标包
-            if (_abCache.ContainsKey(abName)) return _abCache[abName];
+            if (_abCache.ContainsKey(abName))
+                return _abCache[abName];
             else
             {
+                if (!_abLoadQueue.Contains(abName)) //锁定检查
+                    _abLoadQueue.Add(abName);
+                else
+                {
+                    Debug.LogWarning("ab has in loading queue:" + abName);
+                    return null;
+                }
                 string defaultName = ABPathHelper.DefaultABPath + "/" + abName;
-                ab = AssetBundle.LoadFromFile(ABPathHelper.GetResPathInPersistentOrStream(defaultName));
+                ab = AssetBundle.LoadFromFile(
+                    ABPathHelper.GetResPathInPersistentOrStream(defaultName)
+                );
                 mainInfo.HashName = abName;
                 if (ab != null)
                 {
                     mainInfo.AssetBundle = ab;
                     mainInfo.AddRef();
                     _abCache.Add(abName, mainInfo);
+                    _abLoadQueue.Remove(abName); //加载完成后解除锁定
                 }
                 else
                 {
@@ -109,7 +136,8 @@ namespace SFramework
 
         // 同步加载资源---泛型加载
         //Sprite sp = abManager.LoadResource<Sprite>("a_png", "a");
-        public T LoadResource<T>(string abName, string resName) where T : Object
+        public T LoadResource<T>(string abName, string resName)
+            where T : Object
         {
             if (ABPathHelper.SimulationMode)
             {
@@ -141,7 +169,6 @@ namespace SFramework
             return ab.AssetBundle.LoadAsset(resName);
         }
 
-
         //利用参数传递类型，适合对泛型不支持的语言调用，使用时需强转类型
         //Object sp = abManager.LoadResource("a_png", "a", typeof(Texture2D));
         public Object LoadResource(string abName, string resName, System.Type type)
@@ -159,7 +186,8 @@ namespace SFramework
             return ab.AssetBundle.LoadAsset(resName, type);
         }
 
-        public List<T> LoadResourceWithSubResource<T>(string abName) where T : Object
+        public List<T> LoadResourceWithSubResource<T>(string abName)
+            where T : Object
         {
             if (ABPathHelper.SimulationMode)
             {
@@ -183,26 +211,34 @@ namespace SFramework
             //循环加载所有依赖包
             for (int i = 0; i < dependencies.Length; i++)
             {
+                string dependencyName = dependencies[i];
                 //如果不在缓存则加入,防止重复加载
-                if (!_abCache.ContainsKey(dependencies[i]))
+                if (!_abCache.ContainsKey(dependencyName))
                 {
-                    string defaultName = ABPathHelper.DefaultABPath + "/" + dependencies[i];
+                    string defaultName = ABPathHelper.DefaultABPath + "/" + dependencyName;
                     //先加载外部地址在加载内部地址
+                    if (!_abLoadQueue.Contains(dependencyName)) //锁定检查
+                        _abLoadQueue.Add(dependencyName);
+                    else
+                    {
+                        Debug.LogWarning("ab has in loading queue:" + dependencyName);
+                        continue;
+                    }
                     string url = ABPathHelper.GetResPathInPersistentOrStream(defaultName);
                     ab = await loadABFromPlantFromAsync(url);
                     if (ab != null)
                     {
                         //注意添加进缓存 防止重复加载AB包
                         ABInfo info = new ABInfo();
-                        info.HashName = dependencies[i];
+                        info.HashName = dependencyName;
                         info.AssetBundle = ab;
                         mainInfo.AddDepends(info);
-                        _abCache.Add(dependencies[i], info);
+                        _abCache.Add(dependencyName, info);
                     }
                 }
                 else
                 {
-                    ABInfo info = _abCache[dependencies[i]];
+                    ABInfo info = _abCache[dependencyName];
                     mainInfo.AddDepends(info);
                 }
             }
@@ -211,11 +247,16 @@ namespace SFramework
                 return _abCache[abName];
             else
             {
+                if (!_abLoadQueue.Contains(abName)) //锁定检查
+                    _abLoadQueue.Add(abName);
+                else
+                {
+                    Debug.LogWarning("ab has in loading queue:" + abName);
+                    return null;
+                }
                 string defaultName = ABPathHelper.DefaultABPath + "/" + abName;
                 string url = ABPathHelper.GetResPathInPersistentOrStream(defaultName);
-                Debug.Log("0000:" + url);
                 ab = await loadABFromPlantFromAsync(url);
-                Debug.Log("11111:" + ab);
                 //注意添加进缓存 防止重复加载AB包
                 if (ab != null)
                 {
@@ -238,18 +279,18 @@ namespace SFramework
             try
             {
                 AssetBundle ab = null;
-                // if (ABPathHelper.GetPlatformName() == "WebGL")
-                // {
-                ab = await requestAssetBundleFromUrl(url, 0);
-                // }
-                // else
-                // {
-                //     ab = await AssetBundle.LoadFromFileAsync(url);
-                //     if (ab == null)
-                //     {
-                //         ab = await requestAssetBundleFromUrl(url, 0);
-                //     }
-                // }
+                if (ABPathHelper.GetPlatformName() == "WebGL")
+                {
+                    ab = await requestAssetBundleFromUrl(url, 0);
+                }
+                else
+                {
+                    ab = await AssetBundle.LoadFromFileAsync(url);
+                    if (ab == null)
+                    {
+                        ab = await requestAssetBundleFromUrl(url, 0);
+                    }
+                }
 
                 return ab;
             }
@@ -258,7 +299,6 @@ namespace SFramework
                 Debug.LogError(err);
                 return null;
             }
-
         }
 
         private async UniTask<AssetBundle> requestAssetBundleFromUrl(string url, int index)
@@ -284,7 +324,6 @@ namespace SFramework
                 AssetBundle tempAB = await requestAssetBundleFromUrl(url, index);
                 return tempAB;
             }
-
         }
 
         public async UniTask<ABInfo> LoadABInfoAsync(string abName)
@@ -293,9 +332,15 @@ namespace SFramework
             ABInfo ab = await LoadABPackageAsync(abName);
             return ab;
         }
+
         // 异步加载资源---泛型加载
         //Sprite sp = await abManager.LoadResourceAsync<Sprite>("a_png", "a");
-        public async UniTask<T> LoadResourceAsync<T>(string abName, string resName, CancellationToken token = default) where T : UnityEngine.Object
+        public async UniTask<T> LoadResourceAsync<T>(
+            string abName,
+            string resName,
+            CancellationToken token = default
+        )
+            where T : UnityEngine.Object
         {
             T res = default;
             if (ABPathHelper.SimulationMode)
@@ -317,7 +362,11 @@ namespace SFramework
 
         //不指定类型 有重名情况下不建议使用 使用时需显示转换类型
         //Object sp = abManager.LoadResource("a_png", "a");
-        public async UniTask<Object> LoadResourceAsync(string abName, string resName, CancellationToken token = default)
+        public async UniTask<Object> LoadResourceAsync(
+            string abName,
+            string resName,
+            CancellationToken token = default
+        )
         {
             Object res = null;
             if (ABPathHelper.SimulationMode)
@@ -334,10 +383,14 @@ namespace SFramework
             return res;
         }
 
-
         //利用参数传递类型，适合对泛型不支持的语言调用，使用时需强转类型
         //Object sp = abManager.LoadResource("a_png", "a", typeof(Texture2D));
-        public async UniTask<Object> LoadResourceAsync(string abName, string resName, System.Type type, CancellationToken token = default)
+        public async UniTask<Object> LoadResourceAsync(
+            string abName,
+            string resName,
+            System.Type type,
+            CancellationToken token = default
+        )
         {
             Object res = null;
             if (ABPathHelper.SimulationMode)
@@ -354,7 +407,8 @@ namespace SFramework
             return res;
         }
 
-        public async UniTask<List<T>> LoadResourceWithSubResourceAsync<T>(string abName) where T : Object
+        public async UniTask<List<T>> LoadResourceWithSubResourceAsync<T>(string abName)
+            where T : Object
         {
             if (ABPathHelper.SimulationMode)
             {
@@ -401,11 +455,13 @@ namespace SFramework
         }
 
         #region 编辑器处理资源
-        private T editorLoadResource<T>(string abName, string resName) where T : Object
+        private T editorLoadResource<T>(string abName, string resName)
+            where T : Object
         {
 #if UNITY_EDITOR
             T res = null;
-            string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(abName, resName);
+            string[] assetPaths =
+                UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(abName, resName);
             for (int i = 0; i < assetPaths.Length; i++)
             {
                 if (res == null)
@@ -427,7 +483,8 @@ namespace SFramework
         {
 #if UNITY_EDITOR
             Object res = null;
-            string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(abName, resName);
+            string[] assetPaths =
+                UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(abName, resName);
             for (int i = 0; i < assetPaths.Length; i++)
             {
                 if (res == null)
@@ -445,11 +502,13 @@ namespace SFramework
 #endif
         }
 
-        private async UniTask<T> editorLoadResourceAsync<T>(string abName, string resName) where T : Object
+        private async UniTask<T> editorLoadResourceAsync<T>(string abName, string resName)
+            where T : Object
         {
 #if UNITY_EDITOR
             T res = default;
-            string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(abName, resName);
+            string[] assetPaths =
+                UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(abName, resName);
             for (int i = 0; i < assetPaths.Length; i++)
             {
                 if (res == null)
@@ -468,11 +527,16 @@ namespace SFramework
 #endif
         }
 
-        private async UniTask<Object> editorLoadResourceAsync(string abName, string resName, System.Type type)
+        private async UniTask<Object> editorLoadResourceAsync(
+            string abName,
+            string resName,
+            System.Type type
+        )
         {
 #if UNITY_EDITOR
             Object res = default;
-            string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(abName, resName);
+            string[] assetPaths =
+                UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(abName, resName);
             for (int i = 0; i < assetPaths.Length; i++)
             {
                 if (res == null)
@@ -491,7 +555,8 @@ namespace SFramework
 #endif
         }
 
-        private List<T> editorLoadResourceWithSubResource<T>(string abPath) where T : Object
+        private List<T> editorLoadResourceWithSubResource<T>(string abPath)
+            where T : Object
         {
             List<T> result = new List<T>();
 #if UNITY_EDITOR
@@ -506,7 +571,8 @@ namespace SFramework
             return result;
         }
 
-        private async UniTask<List<T>> editorLoadResourceWithSubResourceAsync<T>(string abPath) where T : Object
+        private async UniTask<List<T>> editorLoadResourceWithSubResourceAsync<T>(string abPath)
+            where T : Object
         {
             List<T> result = new List<T>();
 #if UNITY_EDITOR
@@ -532,7 +598,11 @@ namespace SFramework
         /// </summary>
         /// <param name="abName">ab包名称</param>
         /// <param name="resName">资源名称</param>
-        public void LoadResourceCoroutine(string abName, string resName, System.Action<Object> finishLoadObjectHandler)
+        public void LoadResourceCoroutine(
+            string abName,
+            string resName,
+            System.Action<Object> finishLoadObjectHandler
+        )
         {
             ABInfo ab = LoadABPackage(abName);
             //开启协程 提供资源加载成功后的委托
@@ -540,10 +610,14 @@ namespace SFramework
             LoadResCoroutine(ab.AssetBundle, resName, finishLoadObjectHandler).ToUniTask();
         }
 
-
-        private IEnumerator LoadResCoroutine(AssetBundle ab, string resName, System.Action<Object> finishLoadObjectHandler)
+        private IEnumerator LoadResCoroutine(
+            AssetBundle ab,
+            string resName,
+            System.Action<Object> finishLoadObjectHandler
+        )
         {
-            if (ab == null) yield break;
+            if (ab == null)
+                yield break;
             //异步加载资源API
             AssetBundleRequest abr = ab.LoadAssetAsync(resName);
             yield return abr;
@@ -551,19 +625,28 @@ namespace SFramework
             finishLoadObjectHandler(abr.asset);
         }
 
-
         //根据Type异步加载资源
-        public void LoadResourceCoroutine(string abName, string resName, System.Type type, System.Action<Object> finishLoadObjectHandler)
+        public void LoadResourceCoroutine(
+            string abName,
+            string resName,
+            System.Type type,
+            System.Action<Object> finishLoadObjectHandler
+        )
         {
             ABInfo ab = LoadABPackage(abName);
             // StartCoroutine(LoadResCoroutine(ab, resName, type, finishLoadObjectHandler));
             LoadResCoroutine(ab.AssetBundle, resName, type, finishLoadObjectHandler).ToUniTask();
         }
 
-
-        private IEnumerator LoadResCoroutine(AssetBundle ab, string resName, System.Type type, System.Action<Object> finishLoadObjectHandler)
+        private IEnumerator LoadResCoroutine(
+            AssetBundle ab,
+            string resName,
+            System.Type type,
+            System.Action<Object> finishLoadObjectHandler
+        )
         {
-            if (ab == null) yield break;
+            if (ab == null)
+                yield break;
             AssetBundleRequest abr = ab.LoadAssetAsync(resName, type);
             yield return abr;
             //委托调用处理逻辑
@@ -571,16 +654,28 @@ namespace SFramework
         }
 
         //泛型加载
-        public void LoadResourceCoroutine<T>(string abName, string resName, System.Action<Object> finishLoadObjectHandler) where T : Object
+        public void LoadResourceCoroutine<T>(
+            string abName,
+            string resName,
+            System.Action<Object> finishLoadObjectHandler
+        )
+            where T : Object
         {
             ABInfo ab = LoadABPackage(abName);
             // StartCoroutine(LoadResCoroutine<T>(ab, resName, finishLoadObjectHandler));
-            LoadResCoroutine<T>(ab.AssetBundle, resName, finishLoadObjectHandler).ToUniTask();
+            LoadResCoroutine<T>(ab.AssetBundle, resName, finishLoadObjectHandler)
+                .ToUniTask();
         }
 
-        private IEnumerator LoadResCoroutine<T>(AssetBundle ab, string resName, System.Action<Object> finishLoadObjectHandler) where T : Object
+        private IEnumerator LoadResCoroutine<T>(
+            AssetBundle ab,
+            string resName,
+            System.Action<Object> finishLoadObjectHandler
+        )
+            where T : Object
         {
-            if (ab == null) yield break;
+            if (ab == null)
+                yield break;
             AssetBundleRequest abr = ab.LoadAssetAsync<T>(resName);
             yield return abr;
             //委托调用处理逻辑
@@ -588,7 +683,5 @@ namespace SFramework
         }
 
         #endregion
-
     }
-
 }
