@@ -38,7 +38,7 @@ namespace SFramework.GameCamera
             }
             if (Input.mousePosition.y < edgeScrollSize)
             {
-                inputDir.z = -1f;
+                inputDir.y = -1f;
             }
             if (Input.mousePosition.x > Screen.width - edgeScrollSize)
             {
@@ -46,7 +46,7 @@ namespace SFramework.GameCamera
             }
             if (Input.mousePosition.y > Screen.height - edgeScrollSize)
             {
-                inputDir.z = 1f;
+                inputDir.y = 1f;
             }
 
             Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x;
@@ -72,9 +72,10 @@ namespace SFramework.GameCamera
                 Vector2 mouseMovementDelta = (Vector2)Input.mousePosition - lastMousePosition;
                 if (mouseMovementDelta.magnitude > dragThreshold)
                 {
-                    // mouseMovementDelta.Normalize(); //only get direction
+                    mouseMovementDelta.Normalize(); //only get direction
                     inputDir.x = -mouseMovementDelta.x * dragSpeed;
                     inputDir.y = -mouseMovementDelta.y * dragSpeed;
+                    inputDir.z = 0;
                     Vector3 moveDir = transform.up * inputDir.y + transform.right * inputDir.x;
                     transform.position += moveDir * Time.deltaTime;
                 }

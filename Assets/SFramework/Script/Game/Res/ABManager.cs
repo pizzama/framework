@@ -11,6 +11,7 @@ namespace SFramework
 
     public class ABManager
     {
+        private const float _editorTestLoaderTime = 0.1f;
         private List<string> _abLoadQueue = new List<string>(); //记录正在加载的abName保证在异步环境下，ab重复加载的问题。
         private static ABManager _instance;
         public static ABManager Instance
@@ -517,12 +518,13 @@ namespace SFramework
                 }
             }
 
-            await UniTask.Delay(System.TimeSpan.FromSeconds(1), ignoreTimeScale: false);
+            await UniTask.Delay(System.TimeSpan.FromSeconds(_editorTestLoaderTime), ignoreTimeScale: false);
             if (res == null)
                 Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
 
             return res;
 #else
+            await UniTask.Delay(System.TimeSpan.FromSeconds(_editorTestLoaderTime), ignoreTimeScale: false);
             return null;
 #endif
         }
@@ -545,12 +547,13 @@ namespace SFramework
                 }
             }
 
-            await UniTask.Delay(System.TimeSpan.FromSeconds(1), ignoreTimeScale: false);
+            await UniTask.Delay(System.TimeSpan.FromSeconds(_editorTestLoaderTime), ignoreTimeScale: false);
             if (res == null)
                 Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
 
             return res;
 #else
+            await UniTask.Delay(System.TimeSpan.FromSeconds(_editorTestLoaderTime), ignoreTimeScale: false);
             return null;
 #endif
         }
@@ -583,9 +586,8 @@ namespace SFramework
                 if (res != null)
                     result.Add(res);
             }
-
-            await UniTask.Delay(System.TimeSpan.FromSeconds(1), ignoreTimeScale: false);
 #endif
+            await UniTask.Delay(System.TimeSpan.FromSeconds(_editorTestLoaderTime), ignoreTimeScale: false);
             return result;
         }
 

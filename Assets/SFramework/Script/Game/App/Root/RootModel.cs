@@ -102,7 +102,7 @@ namespace SFramework.Game
                     return dt;
                 }
             }
-            catch (System.Exception e)
+            catch (System.Exception)
             {
                 return new T();
             }

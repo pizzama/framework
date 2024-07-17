@@ -93,7 +93,7 @@ namespace SFramework.Tools
         /// <returns>C#格式时间</returns>
         public static DateTime GetDateTime(string timeStamp)
         {
-            DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            DateTime dtStart = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             long lTime = long.Parse(timeStamp + "0000000");
             TimeSpan toNow = new TimeSpan(lTime);
             return dtStart.Add(toNow);
