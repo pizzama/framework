@@ -26,7 +26,7 @@ namespace SFramework.Actor.Ability
         private float _lastDirectionY;
         private float _horizontalDirection;
         private float _verticalDirection;
-        private float _directionFloat;
+        // private float _directionFloat;
         private Vector3 _targetModelRotation;
         private float _lastNonNullXMovement;
         protected override void init()
@@ -145,22 +145,22 @@ namespace SFramework.Actor.Ability
                 _verticalDirection = _lastDirectionY;
             }
 
-            switch (CurrentFacingDirection)
-            {
-                case SFActorFacingDirections.Left:
-                    _directionFloat = 0f;
-                    break;
-                case SFActorFacingDirections.Up:
-                    _directionFloat = 1f;
-                    break;
-                case SFActorFacingDirections.Right:
-                    _directionFloat = 2f;
-                    break;
-                case SFActorFacingDirections.Down:
-                    _directionFloat = 3f;
-                    break;
+            // switch (CurrentFacingDirection)
+            // {
+            //     case SFActorFacingDirections.Left:
+            //         _directionFloat = 0f;
+            //         break;
+            //     case SFActorFacingDirections.Up:
+            //         _directionFloat = 1f;
+            //         break;
+            //     case SFActorFacingDirections.Right:
+            //         _directionFloat = 2f;
+            //         break;
+            //     case SFActorFacingDirections.Down:
+            //         _directionFloat = 3f;
+            //         break;
                 
-            }
+            // }
 
             _lastDirectionX = _horizontalDirection;
             _lastDirectionY = _verticalDirection;

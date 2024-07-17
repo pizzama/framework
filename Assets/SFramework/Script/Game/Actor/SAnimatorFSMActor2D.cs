@@ -12,19 +12,19 @@ namespace SFramework.Actor
         public Rigidbody2D ActorRigidBody { get { return _rigidBody; } }
         [SerializeField] private Collider2D _collider;
         [Header("Horizontal Flip")]
-        [SerializeField] private bool _modelShouldFlip = false;
+        // [SerializeField] private bool _modelShouldFlip = false;
         [SerializeField] private Vector3 _modelFlipValueLeft = new Vector3(-1, 1, 1);
         [SerializeField] private Vector3 _modelFlipValueRight = new Vector3(1, 1, 1);
-        [SerializeField] private bool _modelShouldRotate = false;
+        // [SerializeField] private bool _modelShouldRotate = false;
         [SerializeField] private Vector3 _modelRotationValueLeft = new Vector3(0f, 180f, 0f);
         [SerializeField] private Vector3 _modelRotationValueRight = new Vector3(0f, 0f, 0f);
-        [SerializeField] private float _modelRotationSpeed = 0f;
+        // [SerializeField] private float _modelRotationSpeed = 0f;
         [Header("Direction")]
-        [SerializeField] private SFActorFacingDirections _initialFacingDirection = SFActorFacingDirections.Right; //init facing direction
-        [SerializeField] private SFActorFacingDirections _currentFacingDirection = SFActorFacingDirections.Right; //current facing direction
-        [SerializeField] private float _absoluteThresholdMovement = 0.5f;
-        [SerializeField] private float _absoluteThresholdWeapon = 0.5f;
-        [SerializeField] private bool _isFacingRight = true;
+        // [SerializeField] private SFActorFacingDirections _initialFacingDirection = SFActorFacingDirections.Right; //init facing direction
+        // [SerializeField] private SFActorFacingDirections _currentFacingDirection = SFActorFacingDirections.Right; //current facing direction
+        // [SerializeField] private float _absoluteThresholdMovement = 0.5f;
+        // [SerializeField] private float _absoluteThresholdWeapon = 0.5f;
+        // [SerializeField] private bool _isFacingRight = true;
         private int _direction;
         public LayerMask GroundLayerMask = LayerManager.GroundLayerMask;
         private Vector3 _orientedMovement;
