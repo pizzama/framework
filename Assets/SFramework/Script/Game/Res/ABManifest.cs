@@ -1,23 +1,25 @@
-using System.IO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using UnityEditor;
-using UnityEngine;
 using System.Text;
 using Cysharp.Threading.Tasks;
+using UnityEditor;
+using UnityEngine;
 using UnityEngine.Networking;
 
 namespace SFramework
 {
     public class ABManifest : System.IDisposable
     {
-        private readonly Dictionary<string, string[]> _cacheDependencies = new Dictionary<string, string[]>();
+        private readonly Dictionary<string, string[]> _cacheDependencies =
+            new Dictionary<string, string[]>();
         private AssetBundleManifest _manifest;
         private AssetBundle _mainBundle;
         private List<string> _allBundleVariants;
         private List<string> _allBundles;
+
         public void Dispose()
         {
             if (_mainBundle != null)
@@ -60,7 +62,6 @@ namespace SFramework
                     {
                         Debug.LogWarning("AssetBundleMainfest not found");
                     }
-
                 }
                 else
                 {
@@ -118,7 +119,6 @@ namespace SFramework
                     {
                         Debug.LogWarning("AssetBundleMainfest not found");
                     }
-
                 }
                 else
                 {
@@ -153,10 +153,9 @@ namespace SFramework
             }
             catch (System.Exception err)
             {
-                Debug.LogError(err);
+                Debug.LogError("load asset bundle error:" + url + ";" + err);
                 return null;
             }
-
         }
 
         private async UniTask<AssetBundle> requestManifestFromUrlAsync(string url, int index)
@@ -182,7 +181,6 @@ namespace SFramework
                 AssetBundle tempAB = await requestManifestFromUrlAsync(url, index);
                 return tempAB;
             }
-
         }
 
         public string ExistsBundleWithVariant(string bundleVariant)
@@ -203,7 +201,7 @@ namespace SFramework
                 return bundleVariant;
             else
                 return "";
-#endif      
+#endif
         }
 
         public string ExistsBundle(string bundlePath)
@@ -214,7 +212,7 @@ namespace SFramework
                 return result[0];
             else
                 return "";
-#else   
+#else
             if (_allBundles == null || _allBundles.Count <= 0)
             {
                 return "";
@@ -234,18 +232,21 @@ namespace SFramework
                 return result;
             }
 #if UNITY_EDITOR
-            result = AssetDatabase.GetAssetBundleDependencies(bundleName, true);
-#else
+            if (ABPathHelper.SimulationMode)
+            {
+                result = AssetDatabase.GetAssetBundleDependencies(bundleName, true);
+                return result;
+            }
+#endif
             if (_manifest == null)
             {
-                return new string[]{};
+                return new string[] { };
             }
 
             result = _manifest.GetAllDependencies(bundleName);
-#endif
+
             _cacheDependencies[bundleName] = result;
             return result;
         }
     }
-
 }
