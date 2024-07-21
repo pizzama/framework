@@ -13,6 +13,7 @@ namespace SFramework
 {
     public class ABManifest : System.IDisposable
     {
+        private List<string> _abLoadQueue = new List<string>(); //记录正在加载的abName保证在异步环境下，ab重复加载的问题。
         private readonly Dictionary<string, string[]> _cacheDependencies =
             new Dictionary<string, string[]>();
         private AssetBundleManifest _manifest;
@@ -106,6 +107,13 @@ namespace SFramework
                 string name = ABPathHelper.GetPlatformName();
                 string defaultName = ABPathHelper.DefaultABPath + "/" + name;
                 string path = ABPathHelper.GetResPathInPersistentOrStream(defaultName);
+                if (!_abLoadQueue.Contains(name)) //锁定检查
+                    _abLoadQueue.Add(name);
+                else
+                {
+                    Debug.LogWarning("ab has in loading queue:" + name);
+                    return;
+                }
                 _mainBundle = await loadABFromPlantFromAsync(path);
                 if (_mainBundle != null)
                 {
