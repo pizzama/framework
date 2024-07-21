@@ -25,7 +25,7 @@ namespace SFramework.GameCamera
                 inputDir.x = 1f;
             }
 
-            Vector3 moveDir = transform.forward * inputDir.y + transform.right * inputDir.x;
+            Vector3 moveDir = transform.up * inputDir.y + transform.right * inputDir.x;
             transform.position += moveDir * moveSpeed * Time.deltaTime;
         }
 
