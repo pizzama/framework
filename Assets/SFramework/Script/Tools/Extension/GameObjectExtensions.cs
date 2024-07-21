@@ -19,11 +19,11 @@ namespace SFramework.Extension
             if (objectMap.ContainsKey(gameObject.name))
             {
                 //Debug.LogWarning($"collect gameobject {gameObject.name} has already collected, it will be ignore:");
-                 objectMap[gameObject.name] = gameObject;
+                objectMap[gameObject.name] = gameObject;
             }
             else
             {
-                if(gameObject.tag == careTagName)
+                if (gameObject.tag == careTagName)
                     objectMap.Add(gameObject.name, gameObject);
             }
 
@@ -31,7 +31,31 @@ namespace SFramework.Extension
             {
                 GameObject go = gameObject.transform.GetChild(i).gameObject;
                 go.CollectAllGameObject(ref objectMap, careTagName);
-                
+
+            }
+        }
+
+        public static List<T> CollectAllComponent<T>(this Transform parent) where T : Component
+        {
+            List<T> compones = new List<T>();
+            if (parent.TryGetComponent(out T comp))
+            {
+                compones.Add(comp);
+            }
+            parent.CollectAllComponent<T>(compones);
+            return compones;
+        }
+
+        public static void CollectAllComponent<T>(this Transform parent, List<T> components)
+        {
+            for (int i = 0; i < parent.childCount; i++)
+            {
+                Transform child = parent.GetChild(i);
+                if (child.TryGetComponent(out T comp))
+                {
+                    components.Add(comp);
+                }
+                child.CollectAllComponent<T>(components);
             }
         }
     }

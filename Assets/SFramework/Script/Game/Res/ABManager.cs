@@ -234,6 +234,7 @@ namespace SFramework
                         info.HashName = dependencyName;
                         info.AssetBundle = ab;
                         mainInfo.AddDepends(info);
+                        _abLoadQueue.Remove(dependencyName);
                         _abCache.Add(dependencyName, info);
                     }
                 }
@@ -265,6 +266,7 @@ namespace SFramework
                     mainInfo.HashName = abName;
                     mainInfo.AddRef();
                     _abCache.Add(abName, mainInfo);
+                    _abLoadQueue.Remove(abName);
                 }
                 else
                 {

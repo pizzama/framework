@@ -15,7 +15,7 @@ namespace SFramework
         [SerializeField]
         private bool _runInBackground = true;
 
-        private void Awake()
+        private void Start()
         {
             //Hold GameLauncher all the time
             DontDestroyOnLoad(transform.gameObject);
