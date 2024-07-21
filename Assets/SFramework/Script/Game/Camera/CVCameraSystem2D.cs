@@ -1,4 +1,5 @@
 using Cinemachine;
+using SFramework.Tools;
 using UnityEngine;
 
 namespace SFramework.GameCamera
@@ -55,7 +56,7 @@ namespace SFramework.GameCamera
 
         protected override void HandleCameraMovementDragPan()
         {
-            Vector3 inputDir = Vector3.zero;
+            // Vector3 inputDir = Vector3.zero;
             if (Input.GetMouseButtonDown(0))
             {
                 dragPanMoveActive = true;
@@ -69,12 +70,13 @@ namespace SFramework.GameCamera
 
             if (dragPanMoveActive)
             {
-                Vector2 mouseMovementDelta = (Vector2)Input.mousePosition - lastMousePosition;
+                Vector3 m1 = MapTools.Screen2WorldPos(Input.mousePosition, Camera.main);
+                Vector3 m2 = MapTools.Screen2WorldPos(lastMousePosition, Camera.main);
+                Vector3 mouseMovementDelta = m2 - m1;
                 if (mouseMovementDelta.magnitude > dragThreshold)
                 {
-                    mouseMovementDelta.Normalize(); //only get direction
-                    inputDir.x = -mouseMovementDelta.x * dragSpeed;
-                    inputDir.y = -mouseMovementDelta.y * dragSpeed;
+                    //使用偏差值计算瞬时速度
+                    Vector3 inputDir = mouseMovementDelta / Time.deltaTime;
                     inputDir.z = 0;
                     Vector3 moveDir = transform.up * inputDir.y + transform.right * inputDir.x;
                     transform.position += moveDir * Time.deltaTime;

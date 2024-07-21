@@ -40,12 +40,8 @@ namespace SFramework.GameCamera
 
         [SerializeField]
         protected float zoomSpeed = 10f;
-
         [SerializeField]
-        protected float dragSpeed = 1f;
-
-        [SerializeField]
-        protected float dragThreshold = 0f;
+        protected float dragThreshold = 1f;//拖拽阈值
 
         [SerializeField]
         protected Vector2 cameraMoveLimitX = new Vector2(-10, 10);
