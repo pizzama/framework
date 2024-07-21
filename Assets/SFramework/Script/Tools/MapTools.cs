@@ -34,6 +34,11 @@ namespace SFramework.Tools
             return (mouseWorldPosition - fromPosition).normalized;
         }
 
+        public static Vector3 Screen2WorldPos(Vector3 pos)
+        {
+            return Screen2WorldPos(pos, Camera.main);
+        }
+
         public static Vector3 Screen2WorldPos(Vector3 pos, Camera worldCamera)
         {
             pos.z = 0;
