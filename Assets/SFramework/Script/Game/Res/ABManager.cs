@@ -307,6 +307,7 @@ namespace SFramework
         private async UniTask<AssetBundle> requestAssetBundleFromUrl(string url, int index)
         {
             index++;
+            await UniTask.Delay(System.TimeSpan.FromSeconds(1), ignoreTimeScale: false); //wait 1s
             if (index > 3)
             {
                 return null;
