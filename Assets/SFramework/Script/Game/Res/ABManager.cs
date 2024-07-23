@@ -263,7 +263,8 @@ namespace SFramework
                 else
                 {
                     Debug.LogWarning("ab has in loading queue:" + abName);
-                    return null;
+                    await UniTask.Delay(System.TimeSpan.FromSeconds(1), ignoreTimeScale: false); //wait 1s
+                    return await LoadABPackageAsync(abName);
                 }
                 string defaultName = ABPathHelper.DefaultABPath + "/" + abName;
                 string url = ABPathHelper.GetResPathInPersistentOrStream(defaultName);
@@ -290,6 +291,7 @@ namespace SFramework
         {
             try
             {
+                var utcs = new UniTaskCompletionSource<AssetBundle>();
                 AssetBundle ab = null;
                 if (ABPathHelper.GetPlatformName() == "WebGL")
                 {
@@ -303,8 +305,8 @@ namespace SFramework
                         ab = await requestAssetBundleFromUrl(url, 0);
                     }
                 }
-
-                return ab;
+                utcs.TrySetResult(ab);
+                return await utcs.Task;
             }
             catch (System.Exception err)
             {

@@ -3,6 +3,7 @@ using UnityEngine;
 using SFramework.Extension;
 using SFramework.Tools;
 using SFramework.Tools.Math;
+using Cysharp.Threading.Tasks;
 
 namespace SFramework.Game
 {
@@ -41,6 +42,25 @@ namespace SFramework.Game
             return (T)assetManager.LoadFromBundle<T>(abName, resName);
         }
 
+
+        public async UniTask<T> LoadBundleAsync<T>(string path) where T : UnityEngine.Object
+        {
+            int index = path.LastIndexOf("/");
+            if (index > 0)
+            {
+                string abName = path.Substring(0, index);
+                string resName = path.Substring(index + 1, path.Length - index - 1);
+                return await LoadBundleAsync<T>(abName, resName);
+            }
+
+            return null;
+        }
+
+        public async UniTask<T> LoadBundleAsync<T>(string abName, string resName) where T : UnityEngine.Object
+        {
+            return await assetManager.LoadFromBundleAsync<T>(abName, resName);
+        }
+
         public GameObject CreateGameObjectUsingPool(string abName, string resName, float lifeTime = -1)
         {
             UnityEngine.GameObject prefab = assetManager.LoadFromBundle<UnityEngine.GameObject>(abName, resName);
@@ -63,7 +83,7 @@ namespace SFramework.Game
             return null;
         }
 
-        public T CreateComponent<T>(string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1) where T: Component 
+        public T CreateComponent<T>(string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1) where T : Component
         {
             GameObject obj = CreateGameObjectUsingPool(prefabFullPath, lifeTime);
             if (obj == null)
@@ -75,8 +95,8 @@ namespace SFramework.Game
             {
                 if (parent == null)
                     throw new NotFoundException("Couldn't find parent as " + prefabFullPath);
-         
-                result.transform.SetParent(parent, false);    
+
+                result.transform.SetParent(parent, false);
                 result.transform.localPosition = pos;
             }
             return result;
@@ -92,11 +112,11 @@ namespace SFramework.Game
             ReleaseGameObjectUsingPool(comp.gameObject);
         }
 
-        public T CreateEntity<T>(string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1, string instanceId = "") where T: RootEntity
+        public T CreateEntity<T>(string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1, string instanceId = "") where T : RootEntity
         {
             T result = CreateComponent<T>(prefabFullPath, parent, pos, lifeTime);
-            if(string.IsNullOrEmpty(instanceId))
-                instanceId = MathTools.RandomInt(1000000,9999999).ToString();
+            if (string.IsNullOrEmpty(instanceId))
+                instanceId = MathTools.RandomInt(1000000, 9999999).ToString();
             result.SetEntityData(instanceId, this);
             return result;
         }
