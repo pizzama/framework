@@ -6,7 +6,7 @@ namespace SFramework.GameCamera
 {
     public class CVCameraSystem3D : CVCameraSystem
     {
-        protected override void HandleCameraMovement()
+        protected override void handleCameraMovement()
         {
             Vector3 inputDir = new Vector3(0, 0, 0);
             if (Input.GetKey(KeyCode.W))
@@ -30,7 +30,7 @@ namespace SFramework.GameCamera
             transform.position += moveDir * moveSpeed * Time.deltaTime;
         }
 
-        protected override void HandleCameraMovementEdgeScrolling()
+        protected override void handleCameraMovementEdgeScrolling()
         {
             Vector3 inputDir = new Vector3(0, 0, 0);
             if (Input.mousePosition.x < edgeScrollSize)
@@ -54,7 +54,7 @@ namespace SFramework.GameCamera
             transform.position += moveDir * moveSpeed * Time.deltaTime;
         }
 
-        protected override void HandleCameraMovementDragPan()
+        protected override void handleCameraMovementDragPan()
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -84,7 +84,7 @@ namespace SFramework.GameCamera
             }
         }
 
-        protected override void HandleCameraRotation()
+        protected override void handleCameraRotation()
         {
             float rotateDir = 0f;
             if (Input.GetKey(KeyCode.Q))
@@ -99,7 +99,7 @@ namespace SFramework.GameCamera
             transform.eulerAngles += new Vector3(0, rotateDir * rotateSpeed * Time.deltaTime, 0);
         }
 
-        protected override void HandleCameraZoom_FieldOfView()
+        protected override void handleCameraZoom_FieldOfView()
         {
             if (Input.mouseScrollDelta.y > 0)
             {
@@ -123,7 +123,7 @@ namespace SFramework.GameCamera
             }
         }
 
-        protected override void HandleCameraZoom_MoveForward()
+        protected override void handleCameraZoom_MoveForward()
         {
             Vector3 zoomDir = followOffset.normalized;
             if (Input.mouseScrollDelta.y > 0)

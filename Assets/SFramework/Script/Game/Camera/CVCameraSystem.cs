@@ -40,8 +40,9 @@ namespace SFramework.GameCamera
 
         [SerializeField]
         protected float zoomSpeed = 10f;
+
         [SerializeField]
-        protected float dragThreshold = 0f;//拖拽阈值
+        protected float dragThreshold = 0f; //拖拽阈值
 
         [SerializeField]
         protected Vector2 cameraMoveLimitX = new Vector2(-10, 10);
@@ -50,7 +51,7 @@ namespace SFramework.GameCamera
         protected Vector2 cameraMoveLimitY = new Vector2(-10, 10);
 
         [SerializeField]
-        protected Vector2 cameraMoveLimitZ =  new Vector2(-10, 10);
+        protected Vector2 cameraMoveLimitZ = new Vector2(-10, 10);
         protected bool dragPanMoveActive;
         protected float targetFieldOfView = 20;
         protected Vector2 lastMousePosition;
@@ -58,6 +59,9 @@ namespace SFramework.GameCamera
 
         [SerializeField]
         protected bool validOnUI = false;
+
+        protected Touch oldTouch1;
+        protected Touch oldTouch2;
 
         private void Start()
         {
@@ -73,56 +77,39 @@ namespace SFramework.GameCamera
 
             if (virtualCamera == null)
             {
-                throw new NotFoundException("Not Found CinemachineVirtualCamera on this transform:" + this.name);
+                throw new NotFoundException(
+                    "Not Found CinemachineVirtualCamera on this transform:" + this.name
+                );
             }
-
         }
 
         protected void Update()
         {
-            if(validOnUI == false && SInputDefine.IsTouchUI())
+            if (validOnUI == false && SInputDefine.IsTouchUI())
             {
                 return;
             }
-            HandleCameraMovement();
+            handleCameraMovement();
             if (useEdgeScrolling)
-                HandleCameraMovementEdgeScrolling();
+                handleCameraMovementEdgeScrolling();
             if (useDragPan)
-                HandleCameraMovementDragPan();
-            HandleCameraRotation();
-            HandleCameraZoom_FieldOfView();
+                handleCameraMovementDragPan();
+            handleCameraRotation();
+            handleCameraZoom_FieldOfView();
             limitCameraMove();
         }
 
-        protected virtual void HandleCameraMovement()
-        {
+        protected virtual void handleCameraMovement() { }
 
-        }
+        protected virtual void handleCameraMovementEdgeScrolling() { }
 
-        protected virtual void HandleCameraMovementEdgeScrolling()
-        {
+        protected virtual void handleCameraMovementDragPan() { }
 
-        }
+        protected virtual void handleCameraRotation() { }
 
-        protected virtual void HandleCameraMovementDragPan()
-        {
+        protected virtual void handleCameraZoom_FieldOfView() { }
 
-        }
-
-        protected virtual void HandleCameraRotation()
-        {
-
-        }
-
-        protected virtual void HandleCameraZoom_FieldOfView()
-        {
-
-        }
-
-        protected virtual void HandleCameraZoom_MoveForward()
-        {
-
-        }
+        protected virtual void handleCameraZoom_MoveForward() { }
 
         protected virtual void limitCameraMove()
         {
