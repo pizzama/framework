@@ -59,7 +59,6 @@ namespace SFramework.GameCamera
 
         [SerializeField]
         protected bool validOnUI = false;
-
         protected Touch oldTouch1;
         protected Touch oldTouch2;
 
@@ -95,7 +94,10 @@ namespace SFramework.GameCamera
             if (useDragPan)
                 handleCameraMovementDragPan();
             handleCameraRotation();
+
             handleCameraZoom_FieldOfView();
+            handleCameraZoomOnByTouch();
+
             limitCameraMove();
         }
 
@@ -106,7 +108,7 @@ namespace SFramework.GameCamera
         protected virtual void handleCameraMovementDragPan() { }
 
         protected virtual void handleCameraRotation() { }
-
+        protected virtual void handleCameraZoomOnByTouch() {}
         protected virtual void handleCameraZoom_FieldOfView() { }
 
         protected virtual void handleCameraZoom_MoveForward() { }

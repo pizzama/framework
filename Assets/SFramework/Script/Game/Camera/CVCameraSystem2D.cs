@@ -100,41 +100,47 @@ namespace SFramework.GameCamera
             transform.eulerAngles += new Vector3(0, rotateDir * rotateSpeed * Time.deltaTime, 0);
         }
 
-        private void handleCameraZoomOnByTouch()
+        protected override void handleCameraZoomOnByTouch()
         {
-            Vector3 zoomDir = followOffset.normalized;
-            Touch newTouch1 = Input.GetTouch(0);
-            Touch newTouch2 = Input.GetTouch(1);
-
-            if (newTouch2.phase == TouchPhase.Began) //.Phase描述触摸的阶段  .Began当一个手指触碰了屏幕的时候
+            if (Input.touchCount > 1)
             {
-                oldTouch2 = newTouch2;
-                oldTouch1 = newTouch1;
-                return;
-            }
+                Touch newTouch1 = Input.GetTouch(0);
+                Touch newTouch2 = Input.GetTouch(1);
 
-            float oldDistance = Vector2.Distance(oldTouch1.position, oldTouch2.position);
-            float newDistance = Vector2.Distance(newTouch1.position, newTouch2.position);
-            float offset = newDistance - oldDistance;
-            //放大因子，一个像素按0.1倍来计算（范围10）
-            float speed = offset / Time.deltaTime;
-            
-            if(speed != 0)
-            {
-                targetFieldOfView += speed;
-                targetFieldOfView = Mathf.Clamp(targetFieldOfView, fieldOfViewMin, fieldOfViewMax);
-                if (virtualCamera != null)
+                if (newTouch2.phase == TouchPhase.Began) //.Phase描述触摸的阶段  .Began当一个手指触碰了屏幕的时候
                 {
-                    virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(
-                        virtualCamera.m_Lens.FieldOfView,
-                        targetFieldOfView,
-                        Time.deltaTime * zoomSpeed
-                    );
+                    oldTouch2 = newTouch2;
+                    oldTouch1 = newTouch1;
+                    return;
                 }
-            } 
-            //记住新的触摸点，下次使用
-            oldTouch1 = newTouch1;
-            oldTouch2 = newTouch2;
+
+                float oldDistance = Vector2.Distance(oldTouch1.position, oldTouch2.position);
+                float newDistance = Vector2.Distance(newTouch1.position, newTouch2.position);
+                float offset = newDistance - oldDistance;
+                //放大因子，一个像素按0.1倍来计算（范围10）
+                float speed = offset / Time.deltaTime;
+
+                if (speed != 0)
+                {
+                    targetFieldOfView += speed;
+                    targetFieldOfView = Mathf.Clamp(
+                        targetFieldOfView,
+                        fieldOfViewMin,
+                        fieldOfViewMax
+                    );
+                    if (virtualCamera != null)
+                    {
+                        virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(
+                            virtualCamera.m_Lens.FieldOfView,
+                            targetFieldOfView,
+                            Time.deltaTime * zoomSpeed
+                        );
+                    }
+                }
+                //记住新的触摸点，下次使用
+                oldTouch1 = newTouch1;
+                oldTouch2 = newTouch2;
+            }
         }
 
         protected override void handleCameraZoom_FieldOfView()
