@@ -122,7 +122,7 @@ namespace SFramework.GameCamera
 
                 if (speed != 0)
                 {
-                    targetFieldOfView += speed;
+                    targetFieldOfView -= speed;
                     targetFieldOfView = Mathf.Clamp(
                         targetFieldOfView,
                         fieldOfViewMin,

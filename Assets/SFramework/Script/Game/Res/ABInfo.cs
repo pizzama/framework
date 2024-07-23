@@ -71,12 +71,24 @@ namespace SFramework
         {
             if (!_depends.Contains(info))
             {
+                info.AddRef();
                 _depends.Add(info);
             }
         }
 
+        public void RemoveDepends()
+        {
+            for (int i = 0; i < _depends.Count; i++)
+            {
+                _depends[i].DelRef();
+            }
+
+            _depends.Clear();
+        }
+
         public void Unload(bool value = false)
         {
+            RemoveDepends();
             DelRef();
             AssetBundle.Unload(value);
         }
