@@ -36,10 +36,19 @@ namespace SFramework
 
         private ABManager()
         {
-            _manifest = new ABManifest(); //主包的Bundle和依赖关系
-            _manifest.LoadAssetBundleManifestAsync().Forget();
+            _manifest = new ABManifest(); //主包的Bundle和依赖关系            
             //初始化字典
             _abCache = new Dictionary<string, ABInfo>();
+        }
+
+        public void Init()
+        {
+            _manifest.LoadAssetBundleManifest();
+        }
+
+        public async UniTask InitAsync()
+        {
+            await _manifest.LoadAssetBundleManifestAsync();
         }
 
         private ABManifest _manifest;
@@ -318,9 +327,7 @@ namespace SFramework
             if (abcR.isDone)
             {
                 AssetBundle ab = DownloadHandlerAssetBundle.GetContent(abcR);
-                Debug.Log("222222:" + ab + ";" + abcR.isDone);
                 abcR.Dispose();
-
                 return ab;
             }
             else

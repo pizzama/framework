@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using SFramework.Tools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,6 +20,12 @@ namespace SFramework
         {
             //Hold GameLauncher all the time
             DontDestroyOnLoad(transform.gameObject);
+            initGameLauncher().Forget();
+        }
+
+        private async UniTaskVoid initGameLauncher()
+        {
+            await ABManager.Instance.InitAsync();
             initFrameworkBundle();
             installBundle();
         }

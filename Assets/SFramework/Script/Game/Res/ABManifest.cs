@@ -21,6 +21,8 @@ namespace SFramework
         private List<string> _allBundleVariants;
         private List<string> _allBundles;
 
+        public bool HasAlreadyLoadedManifest => _manifest != null;
+
         public void Dispose()
         {
             if (_mainBundle != null)
@@ -93,7 +95,7 @@ namespace SFramework
             _allBundles = _manifest.GetAllAssetBundles().ToList();
         }
 
-        public async UniTaskVoid LoadAssetBundleManifestAsync()
+        public async UniTask LoadAssetBundleManifestAsync()
         {
             if (ABPathHelper.SimulationMode)
                 return;
@@ -249,6 +251,7 @@ namespace SFramework
 #endif
             if (_manifest == null)
             {
+                Debug.LogWarning("manifest is null, please check your loading process");
                 return new string[] { };
             }
 
