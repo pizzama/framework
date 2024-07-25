@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Cysharp.Threading.Tasks;
 using Google.Protobuf;
+using NativeHelper;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -10,7 +11,7 @@ namespace SFramework.Game
     public class RootModel : SModel
     {
         protected ConfigManager configManager;
-
+        private INativeHelper _nativeHelper = NativeHelperFactory.Create();
         public override void Install()
         {
             configManager = ConfigManager.Instance;
@@ -22,9 +23,14 @@ namespace SFramework.Game
         {
             try
             {
+#if UNITY_WEBGL && !UNITY_EDITOR
+                string fileFullPath = Application.persistentDataPath + "/idbfs/" + fileName;
+#else
+                string fileFullPath = Application.persistentDataPath + "/" + fileName;
+#endif
                 byte[] bytes = GetBytesFromProtoObject(data);
                 FileStream stream = null;
-                string fileFullPath = Application.persistentDataPath + "/" + fileName;
+
                 if (File.Exists(fileFullPath))
                 {
                     stream = new FileStream(fileFullPath, FileMode.Open);
@@ -36,6 +42,9 @@ namespace SFramework.Game
 
                 stream.Write(bytes);
                 stream.Close();
+#if UNITY_WEBGL && !UNITY_EDITOR
+                _nativeHelper.SyncDB();
+#endif
             }
             catch (System.Exception e)
             {
@@ -48,7 +57,12 @@ namespace SFramework.Game
         {
             try
             {
+#if UNITY_WEBGL
+                string fileFullPath = Application.persistentDataPath + "/idbfs/" + fileName;
+#else
                 string fileFullPath = Application.persistentDataPath + "/" + fileName;
+                _nativeHelper.SyncDB();
+#endif
                 if (File.Exists(fileFullPath))
                 {
                     FileStream stream = new FileStream(fileFullPath, FileMode.Open);
