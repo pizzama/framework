@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.U2D;
 using SFramework.GameCamera;
+using NativeHelper;
 
 namespace App.Farm
 {
@@ -18,6 +19,8 @@ namespace App.Farm
 		private SMGrid _grid;
 		private Transform _flowerParent;
 		private Ray _ray;
+
+		private INativeHelper _nativeHelper = NativeHelperFactory.Create();
 		protected override ViewOpenType GetViewOpenType()
 		{
 			return ViewOpenType.Single;
@@ -34,6 +37,8 @@ namespace App.Farm
 
 			createFlower();
 			createForest();
+
+			_nativeHelper.Alert("hahah");
 		}
 
 		protected override void closing()
