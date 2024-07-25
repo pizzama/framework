@@ -28,5 +28,10 @@ namespace NativeHelper
             JSSyncDB();
 #endif
         }
+
+        public override string GetApplicationPersistentDataPath()
+        {
+                return Application.persistentDataPath + "/idbfs/";
+        }
     }
 }

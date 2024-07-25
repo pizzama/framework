@@ -23,11 +23,8 @@ namespace SFramework.Game
         {
             try
             {
-#if UNITY_WEBGL && !UNITY_EDITOR
-                string fileFullPath = Application.persistentDataPath + "/idbfs/" + fileName;
-#else
-                string fileFullPath = Application.persistentDataPath + "/" + fileName;
-#endif
+
+                string fileFullPath = _nativeHelper.GetApplicationPersistentDataPath() + "/" + fileName;
                 byte[] bytes = GetBytesFromProtoObject(data);
                 FileStream stream = null;
 
@@ -42,9 +39,8 @@ namespace SFramework.Game
 
                 stream.Write(bytes);
                 stream.Close();
-#if UNITY_WEBGL && !UNITY_EDITOR
                 _nativeHelper.SyncDB();
-#endif
+
             }
             catch (System.Exception e)
             {
@@ -57,12 +53,9 @@ namespace SFramework.Game
         {
             try
             {
-#if UNITY_WEBGL
-                string fileFullPath = Application.persistentDataPath + "/idbfs/" + fileName;
-#else
-                string fileFullPath = Application.persistentDataPath + "/" + fileName;
+
+                string fileFullPath = _nativeHelper.GetApplicationPersistentDataPath() + fileName;
                 _nativeHelper.SyncDB();
-#endif
                 if (File.Exists(fileFullPath))
                 {
                     FileStream stream = new FileStream(fileFullPath, FileMode.Open);
