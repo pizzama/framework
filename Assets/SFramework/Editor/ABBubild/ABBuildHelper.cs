@@ -410,6 +410,7 @@ namespace SFramework.Build
                         BuildAndroid(config.IsDebug, playerOptions, config.UseObb, config.VersionCode);
                         break;
                     case "WebGL":
+                        BuildWebGl(config.IsDebug, playerOptions, config.VersionCode);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException(
@@ -511,6 +512,29 @@ namespace SFramework.Build
                 File.Move(dirFileInfo.FullName, newName);
                 break;
             }
+        }
+
+        private static void BuildWebGl( bool isDebug,
+            BuildPlayerOptions playerOptions,
+            string versionCode)
+        {
+            playerOptions.target = BuildTarget.WebGL;
+            playerOptions.targetGroup = BuildTargetGroup.WebGL;
+
+            PlayerSettings.SetApiCompatibilityLevel(BuildTargetGroup.WebGL, ApiCompatibilityLevel.NET_4_6);
+            if (isDebug)
+            {
+                
+            }
+            else
+            {
+                
+            }
+            
+
+            Debug.Log("开始打包");
+            Debug.Log("输出路径：" + playerOptions.locationPathName);
+            BuildPipeline.BuildPlayer(playerOptions);
         }
     }
 }
