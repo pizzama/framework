@@ -78,7 +78,7 @@ namespace SFramework.Build
 
         //GUIStyle style = GUIStyle.none;
         //
-        bool toggle = false;
+        bool toggle = true;
         BuildTarget target = BuildTarget.Android;
         BuildType type = BuildType.Develop;
 
