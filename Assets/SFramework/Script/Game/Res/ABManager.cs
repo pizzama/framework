@@ -290,9 +290,10 @@ namespace SFramework
 
         private async UniTask<AssetBundle> loadABFromPlantFromAsync(string url)
         {
+            UniTaskCompletionSource<AssetBundle> uniTaskCompletionSource =
+                new UniTaskCompletionSource<AssetBundle>();
             try
             {
-                var utcs = new UniTaskCompletionSource<AssetBundle>();
                 AssetBundle ab = null;
                 if (ABPathHelper.GetPlatformName() == "WebGL")
                 {
@@ -306,14 +307,15 @@ namespace SFramework
                         ab = await requestAssetBundleFromUrl(url, 0);
                     }
                 }
-                utcs.TrySetResult(ab);
-                return await utcs.Task;
+                uniTaskCompletionSource.TrySetResult(ab);
             }
             catch (System.Exception err)
             {
-                Debug.LogError(err);
-                return null;
+                Debug.LogError("loadABFromPlantFromAsync error:" + url + ";" + err);
+                uniTaskCompletionSource.TrySetResult(null);
             }
+
+            return await uniTaskCompletionSource.Task;
         }
 
         private async UniTask<AssetBundle> requestAssetBundleFromUrl(string url, int index)
@@ -459,7 +461,7 @@ namespace SFramework
             }
             //加载目标包
             ABInfo ab = await LoadABPackageAsync(abName);
-            if(ab == null)
+            if (ab == null)
             {
                 Debug.LogWarning("Failed LoadResourceWithSubResourceAsync Asset:" + abName);
                 await UniTask.Delay(

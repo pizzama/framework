@@ -145,6 +145,7 @@ namespace SFramework
 
         private async UniTask<AssetBundle> loadABFromPlantFromAsync(string url)
         {
+            UniTaskCompletionSource<AssetBundle> uniTaskCompletionSource = new UniTaskCompletionSource<AssetBundle>();
             try
             {
                 AssetBundle ab = null;
@@ -161,13 +162,15 @@ namespace SFramework
                     }
                 }
 
-                return ab;
+                uniTaskCompletionSource.TrySetResult(ab);
             }
             catch (System.Exception err)
             {
-                Debug.LogError("load asset bundle error:" + url + ";" + err);
-                return null;
+                Debug.LogError("loadABFromPlantFromAsync error:" + url + ";" + err);
+                uniTaskCompletionSource.TrySetResult(null);
             }
+
+            return await uniTaskCompletionSource.Task;
         }
 
         private async UniTask<AssetBundle> requestManifestFromUrlAsync(string url, int index)
