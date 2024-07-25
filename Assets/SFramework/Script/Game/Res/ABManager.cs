@@ -11,6 +11,8 @@ namespace SFramework
 
     public class ABManager
     {
+        private const float _tryAgainTime = 0.2f;
+        private const int _maxRetryCount = 10;
         private const float _editorTestLoaderTime = 0.1f;
         private List<string> _abLoadQueue = new List<string>(); //记录正在加载的abName保证在异步环境下，ab重复加载的问题。
         private static ABManager _instance;
@@ -263,8 +265,7 @@ namespace SFramework
                 else
                 {
                     Debug.LogWarning("ab has in loading queue:" + abName);
-                    await UniTask.Delay(System.TimeSpan.FromSeconds(1), ignoreTimeScale: false); //wait 1s
-                    return await LoadABPackageAsync(abName);
+                    return null;
                 }
                 string defaultName = ABPathHelper.DefaultABPath + "/" + abName;
                 string url = ABPathHelper.GetResPathInPersistentOrStream(defaultName);
@@ -318,8 +319,8 @@ namespace SFramework
         private async UniTask<AssetBundle> requestAssetBundleFromUrl(string url, int index)
         {
             index++;
-            await UniTask.Delay(System.TimeSpan.FromSeconds(1), ignoreTimeScale: false); //wait 1s
-            if (index > 3)
+            await UniTask.Delay(System.TimeSpan.FromSeconds(_tryAgainTime), ignoreTimeScale: false); //wait 1s
+            if (index > _maxRetryCount)
             {
                 return null;
             }
@@ -343,6 +344,11 @@ namespace SFramework
         {
             //加载目标包
             ABInfo ab = await LoadABPackageAsync(abName);
+            if(ab == null) //
+            {
+                await UniTask.Delay(System.TimeSpan.FromSeconds(_tryAgainTime), ignoreTimeScale: false); //wait some second
+                return await LoadABInfoAsync(abName);
+            }
             return ab;
         }
 

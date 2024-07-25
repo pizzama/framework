@@ -13,6 +13,8 @@ namespace SFramework
 {
     public class ABManifest : System.IDisposable
     {
+        private const float _tryAgainTime = 0.2f;
+        private const int _maxRetryCount = 10;
         private List<string> _abLoadQueue = new List<string>(); //记录正在加载的abName保证在异步环境下，ab重复加载的问题。
         private readonly Dictionary<string, string[]> _cacheDependencies =
             new Dictionary<string, string[]>();
@@ -171,8 +173,8 @@ namespace SFramework
         private async UniTask<AssetBundle> requestManifestFromUrlAsync(string url, int index)
         {
             index++;
-            await UniTask.Delay(System.TimeSpan.FromSeconds(1), ignoreTimeScale: false); //wait 1s
-            if (index > 3)
+            await UniTask.Delay(System.TimeSpan.FromSeconds(_tryAgainTime), ignoreTimeScale: false); //wait 1s
+            if (index > _maxRetryCount)
             {
                 return null;
             }
