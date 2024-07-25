@@ -11,7 +11,7 @@ namespace SFramework.Build
     public class ABBuilder : EditorWindow
     {
         private const string ConfigPath = "/Library/ABBuilder.dat";
-        readonly string ConfigKey = "app_build_key";
+        // readonly string ConfigKey = "app_build_key";
         List<ABConfig> Configs = new List<ABConfig>();
 
         [MenuItem("SFrameWork/Editor/Build Window", false, 100)]
