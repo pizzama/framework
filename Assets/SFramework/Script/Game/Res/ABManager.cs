@@ -38,7 +38,7 @@ namespace SFramework
 
         private ABManager()
         {
-            _manifest = new ABManifest(); //主包的Bundle和依赖关系            
+            _manifest = new ABManifest(); //主包的Bundle和依赖关系
             //初始化字典
             _abCache = new Dictionary<string, ABInfo>();
         }
@@ -344,9 +344,12 @@ namespace SFramework
         {
             //加载目标包
             ABInfo ab = await LoadABPackageAsync(abName);
-            if(ab == null) //
+            if (ab == null) //
             {
-                await UniTask.Delay(System.TimeSpan.FromSeconds(_tryAgainTime), ignoreTimeScale: false); //wait some second
+                await UniTask.Delay(
+                    System.TimeSpan.FromSeconds(_tryAgainTime),
+                    ignoreTimeScale: false
+                ); //wait some second
                 return await LoadABInfoAsync(abName);
             }
             return ab;
@@ -373,8 +376,14 @@ namespace SFramework
             if (ab != null)
                 res = (T)await ab.AssetBundle.LoadAssetAsync<T>(resName).WithCancellation(token);
             else
-                Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
-
+            {
+                Debug.LogWarning("Failed LoadResourceAsync Asset:" + abName + ":" + resName);
+                await UniTask.Delay(
+                    System.TimeSpan.FromSeconds(_tryAgainTime),
+                    ignoreTimeScale: false
+                ); //wait some second
+                return await LoadResourceAsync<T>(abName, resName, token);
+            }
             //返回资源
             return res;
         }
@@ -398,7 +407,14 @@ namespace SFramework
             if (ab != null)
                 res = await ab.AssetBundle.LoadAssetAsync(resName).WithCancellation(token);
             else
-                Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
+            {
+                Debug.LogWarning("Failed LoadResourceAsync Asset:" + abName + ":" + resName);
+                await UniTask.Delay(
+                    System.TimeSpan.FromSeconds(_tryAgainTime),
+                    ignoreTimeScale: false
+                ); //wait some second
+                return await LoadResourceAsync(abName, resName, token);
+            }
             return res;
         }
 
@@ -422,7 +438,14 @@ namespace SFramework
             if (ab != null)
                 res = await ab.AssetBundle.LoadAssetAsync(resName).WithCancellation(token);
             else
-                Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
+            {
+                Debug.LogWarning("Failed LoadResourceAsync Asset:" + abName + ":" + resName);
+                await UniTask.Delay(
+                    System.TimeSpan.FromSeconds(_tryAgainTime),
+                    ignoreTimeScale: false
+                ); //wait some second
+                return await LoadResourceAsync(abName, resName, token);
+            }
             return res;
         }
 
@@ -436,6 +459,15 @@ namespace SFramework
             }
             //加载目标包
             ABInfo ab = await LoadABPackageAsync(abName);
+            if(ab == null)
+            {
+                Debug.LogWarning("Failed LoadResourceWithSubResourceAsync Asset:" + abName);
+                await UniTask.Delay(
+                    System.TimeSpan.FromSeconds(_tryAgainTime),
+                    ignoreTimeScale: false
+                ); //wait some second
+                return await LoadResourceWithSubResourceAsync<T>(abName);
+            }
             return new List<T>(ab.AssetBundle.LoadAllAssets<T>());
         }
 
@@ -536,13 +568,19 @@ namespace SFramework
                 }
             }
 
-            await UniTask.Delay(System.TimeSpan.FromSeconds(_editorTestLoaderTime), ignoreTimeScale: false);
+            await UniTask.Delay(
+                System.TimeSpan.FromSeconds(_editorTestLoaderTime),
+                ignoreTimeScale: false
+            );
             if (res == null)
                 Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
 
             return res;
 #else
-            await UniTask.Delay(System.TimeSpan.FromSeconds(_editorTestLoaderTime), ignoreTimeScale: false);
+            await UniTask.Delay(
+                System.TimeSpan.FromSeconds(_editorTestLoaderTime),
+                ignoreTimeScale: false
+            );
             return null;
 #endif
         }
@@ -565,13 +603,19 @@ namespace SFramework
                 }
             }
 
-            await UniTask.Delay(System.TimeSpan.FromSeconds(_editorTestLoaderTime), ignoreTimeScale: false);
+            await UniTask.Delay(
+                System.TimeSpan.FromSeconds(_editorTestLoaderTime),
+                ignoreTimeScale: false
+            );
             if (res == null)
                 Debug.LogError("Failed Load Asset:" + abName + ":" + resName);
 
             return res;
 #else
-            await UniTask.Delay(System.TimeSpan.FromSeconds(_editorTestLoaderTime), ignoreTimeScale: false);
+            await UniTask.Delay(
+                System.TimeSpan.FromSeconds(_editorTestLoaderTime),
+                ignoreTimeScale: false
+            );
             return null;
 #endif
         }
@@ -605,7 +649,10 @@ namespace SFramework
                     result.Add(res);
             }
 #endif
-            await UniTask.Delay(System.TimeSpan.FromSeconds(_editorTestLoaderTime), ignoreTimeScale: false);
+            await UniTask.Delay(
+                System.TimeSpan.FromSeconds(_editorTestLoaderTime),
+                ignoreTimeScale: false
+            );
             return result;
         }
 
