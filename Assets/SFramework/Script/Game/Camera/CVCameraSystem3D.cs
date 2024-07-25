@@ -56,6 +56,10 @@ namespace SFramework.GameCamera
 
         protected override void handleCameraMovementDragPan()
         {
+            if (zoomMoveActive)
+            {
+                return;
+            }
             if (Input.GetMouseButtonDown(0))
             {
                 dragPanMoveActive = true;
@@ -99,13 +103,73 @@ namespace SFramework.GameCamera
             transform.eulerAngles += new Vector3(0, rotateDir * rotateSpeed * Time.deltaTime, 0);
         }
 
+        protected override void handleCameraZoomOnByTouch()
+        {
+            if (Input.touchCount > 1)
+            {
+                if (targetFieldOfView == -1)
+                {
+                    targetFieldOfView = virtualCamera.m_Lens.FieldOfView;
+                }
+                Touch newTouch1 = Input.GetTouch(0);
+                Touch newTouch2 = Input.GetTouch(1);
+
+                if (newTouch2.phase == TouchPhase.Began) //.Phase描述触摸的阶段  .Began当一个手指触碰了屏幕的时候
+                {
+                    zoomMoveActive = true;
+                    oldTouch2 = newTouch2;
+                    oldTouch1 = newTouch1;
+                    return;
+                }
+
+                float oldDistance = Vector2.Distance(oldTouch1.position, oldTouch2.position);
+                float newDistance = Vector2.Distance(newTouch1.position, newTouch2.position);
+                float offset = newDistance - oldDistance;
+                Debug.Log("camerazoom:" + offset + ";" + newDistance + ";" + oldDistance);
+
+                //放大因子，一个像素按0.1倍来计算（范围10）
+                float speed = offset / Time.deltaTime;
+
+                if (speed != 0)
+                {
+                    targetFieldOfView -= speed;
+                    targetFieldOfView = Mathf.Clamp(
+                        targetFieldOfView,
+                        fieldOfViewMin,
+                        fieldOfViewMax
+                    );
+                    if (virtualCamera != null)
+                    {
+                        virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(
+                            virtualCamera.m_Lens.FieldOfView,
+                            targetFieldOfView,
+                            Time.deltaTime * zoomSpeed
+                        );
+                    }
+                }
+
+                //记住新的触摸点，下次使用
+                oldTouch1 = newTouch1;
+                oldTouch2 = newTouch2;
+            }
+
+            if (zoomMoveActive)
+            {
+                Touch newTouch1 = Input.GetTouch(0);
+                if (newTouch1.phase == TouchPhase.Ended)
+                {
+                    zoomMoveActive = false;
+                }
+            }
+        }
+
         protected override void handleCameraZoom_FieldOfView()
         {
             if (targetFieldOfView == -1)
             {
                 targetFieldOfView = virtualCamera.m_Lens.FieldOfView;
             }
-            
+
             if (Input.mouseScrollDelta.y > 0)
             {
                 targetFieldOfView += fieldOfViewStep;

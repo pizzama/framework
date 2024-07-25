@@ -58,11 +58,12 @@ namespace SFramework.GameCamera
         [SerializeField]
         protected Vector2 cameraMoveLimitZ = new Vector2(-10, 10);
 
-        protected bool dragPanMoveActive;
+        protected bool dragPanMoveActive = false;
         protected float targetFieldOfView = -1;
         protected Vector2 lastMousePosition;
         protected Vector3 followOffset;
 
+        protected bool zoomMoveActive = false;
         protected Touch oldTouch1;
         protected Touch oldTouch2;
 
@@ -98,9 +99,8 @@ namespace SFramework.GameCamera
             if (useDragPan)
                 handleCameraMovementDragPan();
             handleCameraRotation();
-
-            handleCameraZoom_FieldOfView();
             handleCameraZoomOnByTouch();
+            handleCameraZoom_FieldOfView();
 
             limitCameraMove();
         }
