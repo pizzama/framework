@@ -6,5 +6,5 @@ using UnityEngine;
 public class JsNativeHelper
 {
     [DllImport("__Internal")]
-    private static extern void JSAlert(string content);
+    public static extern void JSAlert(string content);
 }
