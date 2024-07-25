@@ -364,6 +364,8 @@ namespace SFramework.Build
                 case "Android":
                     packageName += ".apk";
                     break;
+                case "WebGL":
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(platformType), platformType, null);
             }
@@ -399,9 +401,23 @@ namespace SFramework.Build
                     // | BuildOptions.ConnectWithProfiler
                     | BuildOptions.AllowDebugging;
             }
+
             try
             {
-                BuildAndroid(config.IsDebug, playerOptions, config.UseObb, config.VersionCode);
+                switch (platformType)
+                {
+                    case "Android":
+                        BuildAndroid(config.IsDebug, playerOptions, config.UseObb, config.VersionCode);
+                        break;
+                    case "WebGL":
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(
+                            nameof(platformType),
+                            platformType,
+                            null
+                        );
+                }
             }
             catch (Exception e)
             {
@@ -431,7 +447,7 @@ namespace SFramework.Build
                     ScriptingImplementation.Mono2x
                 );
                 PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARMv7;
-                EditorUserBuildSettings.androidCreateSymbols  = AndroidCreateSymbols.Debugging;
+                EditorUserBuildSettings.androidCreateSymbols = AndroidCreateSymbols.Debugging;
             }
             else
             {
@@ -441,7 +457,7 @@ namespace SFramework.Build
                 );
                 AndroidArchitecture aac = AndroidArchitecture.ARM64 | AndroidArchitecture.ARMv7;
                 PlayerSettings.Android.targetArchitectures = aac;
-                EditorUserBuildSettings.androidCreateSymbols  = AndroidCreateSymbols.Public;
+                EditorUserBuildSettings.androidCreateSymbols = AndroidCreateSymbols.Public;
             }
             PlayerSettings.Android.keystorePass = "egame123";
             PlayerSettings.Android.keyaliasPass = "egame123";
