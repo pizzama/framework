@@ -20,7 +20,7 @@ namespace SFramework.Game
         }
 
         public override void Open()
-        {   
+        {
             SetScenePath(out mAbPath, out mAbName);
             loadSceneProcessAsync(mAbPath, mAbName, (LoadSceneMode)GetViewOpenType()).Forget();
         }
@@ -93,10 +93,11 @@ namespace SFramework.Game
                 if (ABPathHelper.SimulationMode)
                 {
 #if UNITY_EDITOR
-                    string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle(scenePath.ToLower());
-                    for (int i = 0; i < assetPaths.Length; i++)
+                    string[] assetPaths = UnityEditor.AssetDatabase.GetAssetPathsFromAssetBundle(
+                        scenePath.ToLower()
+                    );
+                    foreach (string path in assetPaths)
                     {
-                        string path = assetPaths[i];
                         if (path.IndexOf(sceneName) >= 0)
                         {
                             operation =
@@ -104,13 +105,13 @@ namespace SFramework.Game
                                     path,
                                     new LoadSceneParameters(mode)
                                 );
-                            }
-                            break;
+                        }
+                        break;
                     }
 #endif
                 }
                 else
-                {   
+                {
                     //load scene from ab bundle
                     ABInfo request = await assetManager.LoadBundleAsync(scenePath.ToLower());
                     if (request != null)
