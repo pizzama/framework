@@ -6,7 +6,7 @@ namespace NativeHelper
     {
         void Alert(string content);
 
-        void SyncDB();
+        void SyncDB();//special WebGl platform need data refresh 
 
         string GetApplicationPersistentDataPath();
     }

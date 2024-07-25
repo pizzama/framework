@@ -53,7 +53,6 @@ namespace SFramework.Game
         {
             try
             {
-
                 string fileFullPath = _nativeHelper.GetApplicationPersistentDataPath() + fileName;
                 _nativeHelper.SyncDB();
                 if (File.Exists(fileFullPath))
