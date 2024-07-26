@@ -56,7 +56,12 @@ namespace SFramework.Tools
         }
 
         //UIpos using local position to deal with
-        public static Vector3 WorldToUIPos(Vector3 worldPos, Camera worldCamera, Camera uiCamera, RectTransform trans)
+        public static Vector3 WorldToUIPos(
+            Vector3 worldPos,
+            Camera worldCamera,
+            Camera uiCamera,
+            RectTransform trans
+        )
         {
             Vector3 screenPos = worldCamera.WorldToScreenPoint(worldPos);
             return ScreenPosToUIPos(screenPos, trans, uiCamera);
@@ -90,6 +95,14 @@ namespace SFramework.Tools
                 out pos
             );
             return pos;
+        }
+
+        public static Vector2 UIToScreenPos(Vector3 uiPos, Canvas canvas)
+        {
+            var canvasPixelRect = canvas.pixelRect; //canvas pixel
+            float canvasWidth = canvasPixelRect.width / canvas.scaleFactor; //calculate canvas real pixel width and height
+            float canvasHeight = canvasPixelRect.height / canvas.scaleFactor;
+            return new Vector2(uiPos.x + canvasWidth / 2, uiPos.y + canvasHeight / 2);
         }
     }
 }
