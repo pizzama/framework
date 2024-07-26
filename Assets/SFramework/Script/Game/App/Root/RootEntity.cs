@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SFramework.Game
 {
-    public class RootEntity : SEntity
+    public abstract class RootEntity : SEntity
     {
         [SerializeField]
         private RootView _parentView;

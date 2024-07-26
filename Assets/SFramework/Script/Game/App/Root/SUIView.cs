@@ -28,26 +28,38 @@ namespace SFramework.Game
             GameObject go = null;
             goDict.TryGetValue(key, out go);
             if (go != null)
-                return go.GetComponent<T>();
+            {
+                T rt = go.GetComponent<T>();
+                if (rt is RootEntity root)
+                {
+                    root.SetParentView(this);
+                }
+                return rt;
+            }
             else
             {
                 goDict.TryGetValue(key + "(Clone)", out go);
-                if(go != null)
+                if (go != null)
                 {
-                    return go.GetComponent<T>();
+                    T rt = go.GetComponent<T>();
+                    if (rt is RootEntity root)
+                    {
+                        root.SetParentView(this);
+                    }
+                    return rt;
                 }
             }
- 
+
             return default(T);
         }
 
         public override void Open()
         {
-            if(GetViewLayer() == UILayer.None)
+            if (GetViewLayer() == UILayer.None)
             {
                 return;
             }
-            
+
             Vector3 position;
             Quaternion rotation;
             SetViewPrefabPath(out mAbName, out mResName, out position, out rotation);
@@ -71,7 +83,7 @@ namespace SFramework.Game
             if (!string.IsNullOrEmpty(mAbName) && !string.IsNullOrEmpty(mResName))
             {
                 GameObject prefab = assetManager.LoadFromBundle<GameObject>(mAbName, mResName);
-                if(prefab == null)
+                if (prefab == null)
                     throw new NotFoundException("not found uiview prefab:" + mAbName + ";" + mResName);
                 string fullPath = assetManager.FullPath(mAbName, mResName);
                 GameObject ob = poolManager.Request<ListGameObjectPool>(fullPath, prefab, -1);
@@ -116,7 +128,7 @@ namespace SFramework.Game
 
         public override void Close()
         {
-            if(mViewTransform != null && poolManager != null)
+            if (mViewTransform != null && poolManager != null)
             {
                 string fullPath = assetManager.FullPath(mAbName, mResName);
                 poolManager.Return(fullPath, mViewTransform.gameObject);

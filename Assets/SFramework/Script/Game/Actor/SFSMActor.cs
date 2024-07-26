@@ -149,6 +149,18 @@ namespace SFramework.Actor
             CurrentDirection = Vector3.zero;
             AddedForce = Vector3.zero;
         }
+
+        public override void DestroyEntity()
+        {
+        }
+
+        public override void Recycle()
+        {
+        }
+
+        public override void Show()
+        {
+        }
     }
 
 }

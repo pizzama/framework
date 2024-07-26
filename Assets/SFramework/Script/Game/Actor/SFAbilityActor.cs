@@ -40,7 +40,6 @@ public class SFAbilityActor : SEntity
 
     public override void DestroyEntity()
     {
-        base.DestroyEntity();
     }
 
     public void TriggerEvent(ActorAction actionName, object value)
@@ -82,5 +81,13 @@ public class SFAbilityActor : SEntity
         {
             TriggerEvent(ActorAction.Move, SFInputManager.Instance.PrimaryMovement);
         }
+    }
+
+    public override void Recycle()
+    {
+    }
+
+    public override void Show()
+    {
     }
 }

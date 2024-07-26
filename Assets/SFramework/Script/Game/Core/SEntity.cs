@@ -16,7 +16,7 @@ namespace SFramework
         void Detached(ISEntity childEntity);
     }
 
-    public class SEntity : MonoBehaviour, ISEntity
+    public abstract class SEntity : MonoBehaviour, ISEntity
     {
         [SerializeField]
         private string _entityId;
@@ -44,9 +44,7 @@ namespace SFramework
         {
         }
 
-        public virtual void DestroyEntity()
-        {
-        }
+        public abstract void DestroyEntity();
 
         public void SetEntity(string entityId)
         {
@@ -54,12 +52,8 @@ namespace SFramework
 
         }
 
-        public void Recycle()
-        {
-        }
-        public void Show()
-        {
-        }
+        public abstract void Recycle();
+        public abstract void Show();
 
         public bool Checked()
         {
