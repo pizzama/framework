@@ -8,6 +8,8 @@ set copy_path=D:\workcode\unity\framework\Assets\Script\Config
 for /r %file_path% %%i in (*.proto) do (
     set filename=%%i       
     %tools_path%\protoc-23.0\win\bin\protoc.exe --csharp_out=%target_path% --proto_path=%file_path% %%~ni.proto
-    copy %target_path%\%%~ni.cs %copy_path%
 )
+
+
+xcopy %target_path% %copy_path% /s /e
 pause
