@@ -9,6 +9,9 @@ namespace SFramework.GameCamera
         protected CinemachineVirtualCamera virtualCamera;
 
         [SerializeField]
+        protected bool validOnUI = false;
+
+        [SerializeField]
         protected bool useEdgeScrolling = false;
 
         [SerializeField]
@@ -23,6 +26,10 @@ namespace SFramework.GameCamera
         [SerializeField]
         protected float rotateSpeed = 100f;
 
+        [SerializeField]
+        protected float dragThreshold = 0f; //drag thread
+
+        [Header("Camera Zoom Params")]
         [SerializeField]
         protected float fieldOfViewMax = 50f;
 
@@ -41,9 +48,7 @@ namespace SFramework.GameCamera
         [SerializeField]
         protected float zoomSpeed = 10f;
 
-        [SerializeField]
-        protected float dragThreshold = 0f; //拖拽阈值
-
+        [Header("Camera direction Limit Params")]
         [SerializeField]
         protected Vector2 cameraMoveLimitX = new Vector2(-10, 10);
 
@@ -52,13 +57,12 @@ namespace SFramework.GameCamera
 
         [SerializeField]
         protected Vector2 cameraMoveLimitZ = new Vector2(-10, 10);
+
         protected bool dragPanMoveActive;
-        protected float targetFieldOfView = 20;
+        protected float targetFieldOfView = -1;
         protected Vector2 lastMousePosition;
         protected Vector3 followOffset;
 
-        [SerializeField]
-        protected bool validOnUI = false;
         protected Touch oldTouch1;
         protected Touch oldTouch2;
 
@@ -108,7 +112,9 @@ namespace SFramework.GameCamera
         protected virtual void handleCameraMovementDragPan() { }
 
         protected virtual void handleCameraRotation() { }
-        protected virtual void handleCameraZoomOnByTouch() {}
+
+        protected virtual void handleCameraZoomOnByTouch() { }
+
         protected virtual void handleCameraZoom_FieldOfView() { }
 
         protected virtual void handleCameraZoom_MoveForward() { }

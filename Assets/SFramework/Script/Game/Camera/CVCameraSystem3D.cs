@@ -101,6 +101,11 @@ namespace SFramework.GameCamera
 
         protected override void handleCameraZoom_FieldOfView()
         {
+            if (targetFieldOfView == -1)
+            {
+                targetFieldOfView = virtualCamera.m_Lens.FieldOfView;
+            }
+            
             if (Input.mouseScrollDelta.y > 0)
             {
                 targetFieldOfView += fieldOfViewStep;

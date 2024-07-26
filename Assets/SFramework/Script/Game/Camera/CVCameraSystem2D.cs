@@ -145,23 +145,28 @@ namespace SFramework.GameCamera
 
         protected override void handleCameraZoom_FieldOfView()
         {
-            if (Input.mouseScrollDelta.y > 0)
+            if(targetFieldOfView == -1)
             {
-                targetFieldOfView += fieldOfViewStep;
+                targetFieldOfView = virtualCamera.m_Lens.OrthographicSize;
             }
-
-            if (Input.mouseScrollDelta.y < 0)
+            // 2d using OrthographicSize zoom camera
+            if (Input.mouseScrollDelta.y > 0)
             {
                 targetFieldOfView -= fieldOfViewStep;
             }
 
+            if (Input.mouseScrollDelta.y < 0)
+            {
+                targetFieldOfView += fieldOfViewStep;
+            }
             if (Input.mouseScrollDelta.y != 0)
             {
                 targetFieldOfView = Mathf.Clamp(targetFieldOfView, fieldOfViewMin, fieldOfViewMax);
+                Debug.Log("camera zoom field of view:" + targetFieldOfView + ";" + virtualCamera.m_Lens.OrthographicSize + ";" + fieldOfViewStep + ";" + Time.deltaTime * zoomSpeed);
                 if (virtualCamera != null)
                 {
-                    virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(
-                        virtualCamera.m_Lens.FieldOfView,
+                    virtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(
+                        virtualCamera.m_Lens.OrthographicSize,
                         targetFieldOfView,
                         Time.deltaTime * zoomSpeed
                     );
