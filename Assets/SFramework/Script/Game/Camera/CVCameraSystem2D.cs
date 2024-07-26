@@ -56,7 +56,7 @@ namespace SFramework.GameCamera
 
         protected override void handleCameraMovementDragPan()
         {
-            if (zoomMoveActive)
+            if (zoomMoveActive || Input.touchCount > 1)
             {
                 return;
             }
