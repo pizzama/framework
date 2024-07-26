@@ -22,7 +22,7 @@ namespace NativeHelper
 #endif
         }
 
-        public void SyncDB()
+        public override void SyncDB()
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             JSSyncDB();
