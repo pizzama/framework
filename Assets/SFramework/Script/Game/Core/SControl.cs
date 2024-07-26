@@ -41,6 +41,7 @@ namespace SFramework
         public override void Open(SBundleParams value)
         {
             IsOpen = true;
+            Open();
             _model.Open(value);
         }
 
@@ -55,6 +56,8 @@ namespace SFramework
         {
             _model.ModelCallback = null;
             _view.ViewCallback = null;
+            _model.Uninstall();
+            _view.Uninstall();
         }
 
         public void SubscribeMessage(string messageId, ISBundle bundle)
@@ -111,7 +114,7 @@ namespace SFramework
 
         public void HandleViewCallback()
         {
-            this.Open();
+            alreadyOpened();
         }
 
         public T GetControl<T>() where T : SControl
@@ -203,6 +206,11 @@ namespace SFramework
         }
 
         protected virtual void controlLastUpdate()
+        {
+
+        }
+
+        protected virtual void alreadyOpened()
         {
 
         }

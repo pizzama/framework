@@ -36,6 +36,11 @@ public class SCreateTemplateScript
         writer.AppendLine("\t\t\t// Code Here");
         writer.AppendLine("\t\t}");
 
+        writer.AppendLine("\t\tprotected override void alreadyOpened()");
+        writer.AppendLine("\t\t{");
+        writer.AppendLine("\t\t\t// Code Here");
+        writer.AppendLine("\t\t}");
+
         writer.AppendLine("\t\tprotected override void closing()");
         writer.AppendLine("\t\t{");
         writer.AppendLine("\t\t\t// Code Here");
@@ -87,11 +92,11 @@ public class SCreateTemplateScript
         writer.AppendLine(
             $"namespace {((string.IsNullOrWhiteSpace(_nameSpace)) ? "Game" : _nameSpace)}");
         writer.AppendLine("{");
-        if(index == 0)
+        if (index == 0)
         {
             writer.AppendLine($"\tpublic class {_name}View : SSCENEView");
         }
-        else if(index == 1)
+        else if (index == 1)
         {
             writer.AppendLine($"\tpublic class {_name}View : SUIView");
         }
