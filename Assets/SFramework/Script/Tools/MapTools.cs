@@ -34,17 +34,62 @@ namespace SFramework.Tools
             return (mouseWorldPosition - fromPosition).normalized;
         }
 
-        public static Vector3 Screen2WorldPos(Vector3 pos)
+        public static Vector3 ScreenToWorldPos(Vector3 pos)
         {
-            return Screen2WorldPos(pos, Camera.main);
+            return ScreenToWorldPos(pos, Camera.main);
         }
 
-        public static Vector3 Screen2WorldPos(Vector3 pos, Camera worldCamera)
+        public static Vector3 ScreenToWorldPos(Vector3 screenPos, Camera worldCamera)
         {
-            pos.z = 0;
-            var viewRay = worldCamera.ScreenPointToRay(pos);
+            screenPos.z = 0;
+            var viewRay = worldCamera.ScreenPointToRay(screenPos);
             var worldPos = viewRay.GetPoint(-viewRay.origin.z / viewRay.direction.z);
             return worldPos;
+        }
+
+        public static Vector3 WorldToUIPos(Vector3 worldPos, Camera worldCamera, Canvas canvas)
+        {
+            if (worldCamera == null)
+                return Vector3.zero;
+            Vector3 screenPos = worldCamera.WorldToScreenPoint(worldPos);
+            return ScreenToUIPos(screenPos, canvas);
+        }
+
+        //UIpos using local position to deal with
+        public static Vector3 WorldToUIPos(Vector3 worldPos, Camera worldCamera, Camera uiCamera, RectTransform trans)
+        {
+            Vector3 screenPos = worldCamera.WorldToScreenPoint(worldPos);
+            return ScreenPosToUIPos(screenPos, trans, uiCamera);
+        }
+
+        // Screen axis to UI axis, need covert world camera to ui camera
+        public static Vector2 ScreenToUIPos(Vector3 screenPos, Canvas canvas)
+        {
+            Vector2 pos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                canvas.transform as RectTransform,
+                screenPos,
+                canvas.worldCamera,
+                out pos
+            );
+            return pos;
+        }
+
+        //Screen axis to UI axis
+        public static Vector2 ScreenPosToUIPos(
+            Vector3 screenPos,
+            RectTransform rectTransform,
+            Camera uiCamera
+        )
+        {
+            Vector2 pos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                rectTransform,
+                screenPos,
+                uiCamera,
+                out pos
+            );
+            return pos;
         }
     }
 }

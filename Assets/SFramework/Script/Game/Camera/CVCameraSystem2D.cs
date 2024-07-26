@@ -70,8 +70,8 @@ namespace SFramework.GameCamera
 
             if (dragPanMoveActive)
             {
-                Vector3 m1 = MapTools.Screen2WorldPos(Input.mousePosition);
-                Vector3 m2 = MapTools.Screen2WorldPos(lastMousePosition);
+                Vector3 m1 = MapTools.ScreenToWorldPos(Input.mousePosition);
+                Vector3 m2 = MapTools.ScreenToWorldPos(lastMousePosition);
                 Vector3 mouseMovementDelta = m2 - m1;
                 if (mouseMovementDelta.magnitude > dragThreshold)
                 {
