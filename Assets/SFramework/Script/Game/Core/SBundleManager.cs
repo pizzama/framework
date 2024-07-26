@@ -192,7 +192,8 @@ namespace SFramework
             object messageData = null,
             bool isSequence = false,
             string alias = "",
-            int sort = 0
+            int sort = 0,
+            Action<object> callback = null
         )
         {
             SBundleParams bdParams = new SBundleParams()
@@ -203,6 +204,7 @@ namespace SFramework
                 Alias = alias,
                 MessageSender = this,
                 Sort = 0,
+                CallBack = callback,
             };
 
             if (isSequence)

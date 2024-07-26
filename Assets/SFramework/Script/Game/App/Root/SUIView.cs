@@ -57,6 +57,7 @@ namespace SFramework.Game
         {
             if (GetViewLayer() == UILayer.None)
             {
+                ViewCallback?.Invoke();
                 return;
             }
 

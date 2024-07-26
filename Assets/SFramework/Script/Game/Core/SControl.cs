@@ -115,6 +115,7 @@ namespace SFramework
         public void HandleViewCallback()
         {
             alreadyOpened();
+            _model.OpenParams.CallBack?.Invoke(this);
         }
 
         public T GetControl<T>() where T : SControl
@@ -173,9 +174,9 @@ namespace SFramework
                 _view.LateUpdate();
         }
 
-        public void OpenControl(string fullPath, object messageData = null, bool isSequence = false, string alias = "", int sort = 0)
+        public void OpenControl(string fullPath, object messageData = null, bool isSequence = false, string alias = "", int sort = 0, Action<Object> callback = null)
         {
-            Manager.OpenControl(fullPath, messageData, isSequence, alias, sort);
+            Manager.OpenControl(fullPath, messageData, isSequence, alias, sort, callback);
         }
 
         public void CloseAllControl(List<ISBundle> excludeBundles)
