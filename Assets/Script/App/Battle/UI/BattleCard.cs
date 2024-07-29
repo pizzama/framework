@@ -147,5 +147,17 @@ namespace Game.App.Battle
         private void UseCard()
         {
         }
+
+        public override void DestroyEntity()
+        {
+        }
+
+        public override void Recycle()
+        {
+        }
+
+        public override void Show()
+        {
+        }
     }
 }
