@@ -21,20 +21,6 @@ namespace SFramework.Statics
         public const string App_battle_sfp_Card_prefab = "app_battle.sfp/Card";
         public const string App_battle_sfp_cardbg_png = "app_battle.sfp/cardbg";
         public const string App_battle_sfs_BattleView_unity = "app_battle.sfs/BattleView";
-        public const string App_farm_sfp_21010001_prefab = "app_farm.sfp/21010001";
-        public const string App_farm_sfp_a40011411_2_prefab = "app_farm.sfp/a40011411_2";
-        public const string App_farm_sfp_FarmMenuView_prefab = "app_farm.sfp/FarmMenuView";
-        public const string App_farm_sfp_Fire_prefab = "app_farm.sfp/Fire";
-        public const string App_farm_sfp_FlowerTemplate_prefab = "app_farm.sfp/FlowerTemplate";
-        public const string App_farm_sfp_Grass_mat = "app_farm.sfp/Grass";
-        public const string App_farm_sfp_Grass_prefab = "app_farm.sfp/Grass";
-        public const string App_farm_sfp_Grass1_prefab = "app_farm.sfp/Grass1";
-        public const string App_farm_sfp_GroundTile_prefab = "app_farm.sfp/GroundTile";
-        public const string App_farm_sfp_Lights_prefab = "app_farm.sfp/Lights";
-        public const string App_farm_sfp_ParticlesDust_prefab = "app_farm.sfp/ParticlesDust";
-        public const string App_farm_sfp_Tree_prefab = "app_farm.sfp/Tree";
-        public const string App_farm_sfp_Tree1_prefab = "app_farm.sfp/Tree1";
-        public const string App_farm_sfp_Tree2_prefab = "app_farm.sfp/Tree2";
         public const string App_farm_sfs_FarmView_unity = "app_farm.sfs/FarmView";
         public const string App_farm_anim_sfp_Anim_Light_anim = "app_farm_anim.sfp/Anim_Light";
         public const string App_farm_farmview_sfp_CloudyOcean_png = "app_farm_farmview.sfp/CloudyOcean";
@@ -42,6 +28,9 @@ namespace SFramework.Statics
         public const string App_farm_farmview_sfp_LightingData_asset = "app_farm_farmview.sfp/LightingData";
         public const string App_farm_farmview_sfp_Lightmap0_comp_dir_png = "app_farm_farmview.sfp/Lightmap-0_comp_dir";
         public const string App_farm_farmview_sfp_Lightmap0_comp_shadowmask_png = "app_farm_farmview.sfp/Lightmap-0_comp_shadowmask";
+        public const string App_farm_fbx_sfp_floor_fbx = "app_farm_fbx.sfp/floor";
+        public const string App_farm_fbx_sfp_Plane_fbx = "app_farm_fbx.sfp/Plane";
+        public const string App_farm_fbx_sfp_test_fbx = "app_farm_fbx.sfp/test";
         public const string App_farm_ground_sfp_21010001_png = "app_farm_ground.sfp/21010001";
         public const string App_farm_ground_sfp_a40011411_1_png = "app_farm_ground.sfp/a40011411_1";
         public const string App_farm_ground_sfp_a40011411_2_png = "app_farm_ground.sfp/a40011411_2";
@@ -60,11 +49,11 @@ namespace SFramework.Statics
         public const string App_farm_ground_sfp_a40011415_3_png = "app_farm_ground.sfp/a40011415_3";
         public const string App_farm_ground_sfp_a40031378_2_png = "app_farm_ground.sfp/a40031378_2";
         public const string App_farm_ground_sfp_Fireplace_Burn_m_01_fbx = "app_farm_ground.sfp/Fireplace_Burn_m_01";
+        public const string App_farm_ground_sfp_floor_jpg = "app_farm_ground.sfp/floor";
         public const string App_farm_ground_sfp_Forest_spriteatlasv2 = "app_farm_ground.sfp/Forest";
         public const string App_farm_ground_sfp_Grass_mat = "app_farm_ground.sfp/Grass";
         public const string App_farm_ground_sfp_grass_1_Emission_png = "app_farm_ground.sfp/grass_1_Emission";
         public const string App_farm_ground_sfp_land_png = "app_farm_ground.sfp/land";
-        public const string App_farm_ground_sfp_lightdots_prefab = "app_farm_ground.sfp/lightdots";
         public const string App_farm_ground_sfp_lights_1_png = "app_farm_ground.sfp/lights_1";
         public const string App_farm_ground_sfp_lvdi_001_png = "app_farm_ground.sfp/lvdi_001";
         public const string App_farm_ground_sfp_lvdi_002_png = "app_farm_ground.sfp/lvdi_002";
@@ -84,6 +73,7 @@ namespace SFramework.Statics
         public const string App_farm_ground_forest_sfp_5103524_png = "app_farm_ground_forest.sfp/5103524";
         public const string App_farm_ground_forest_sfp_5106510_png = "app_farm_ground_forest.sfp/5106510";
         public const string App_farm_ground_materials_sfp_21010001_mat = "app_farm_ground_materials.sfp/21010001";
+        public const string App_farm_ground_materials_sfp_SFS_BendingFloor_mat = "app_farm_ground_materials.sfp/SFS_BendingFloor";
         public const string App_farm_house_sfp_PixelTextureGrid_256_png = "app_farm_house.sfp/PixelTextureGrid_256";
         public const string App_farm_house_sfp_材质_mat = "app_farm_house.sfp/材质";
         public const string App_farm_materials_sfp_lights_1_mat = "app_farm_materials.sfp/lights 1";
@@ -106,9 +96,28 @@ namespace SFramework.Statics
         public const string App_farm_ordernpc_sfp_npc_4_ske_png = "app_farm_ordernpc.sfp/npc_4_ske";
         public const string App_farm_ordernpc_sfp_npc_5_ske_png = "app_farm_ordernpc.sfp/npc_5_ske";
         public const string App_farm_ordernpc_sfp_npc_6_ske_png = "app_farm_ordernpc.sfp/npc_6_ske";
-        public const string App_farm_ui_sfp_btn_weiyang_01_a_png = "app_farm_ui.sfp/btn_weiyang_01_a";
-        public const string App_farm_ui_sfp_btn_weiyang_01_d_png = "app_farm_ui.sfp/btn_weiyang_01_d";
+        public const string App_farm_prefab_sfp_21010001_prefab = "app_farm_prefab.sfp/21010001";
+        public const string App_farm_prefab_sfp_a40011411_2_prefab = "app_farm_prefab.sfp/a40011411_2";
+        public const string App_farm_prefab_sfp_FarmMenuView_prefab = "app_farm_prefab.sfp/FarmMenuView";
+        public const string App_farm_prefab_sfp_Fire_prefab = "app_farm_prefab.sfp/Fire";
+        public const string App_farm_prefab_sfp_Floor_mat = "app_farm_prefab.sfp/Floor";
+        public const string App_farm_prefab_sfp_FlowerTemplate_prefab = "app_farm_prefab.sfp/FlowerTemplate";
+        public const string App_farm_prefab_sfp_Grass_mat = "app_farm_prefab.sfp/Grass";
+        public const string App_farm_prefab_sfp_Grass_prefab = "app_farm_prefab.sfp/Grass";
+        public const string App_farm_prefab_sfp_Grass1_prefab = "app_farm_prefab.sfp/Grass1";
+        public const string App_farm_prefab_sfp_GroundTile_prefab = "app_farm_prefab.sfp/GroundTile";
+        public const string App_farm_prefab_sfp_lightdots_prefab = "app_farm_prefab.sfp/lightdots";
+        public const string App_farm_prefab_sfp_Lights_prefab = "app_farm_prefab.sfp/Lights";
+        public const string App_farm_prefab_sfp_NpcPrefab_prefab = "app_farm_prefab.sfp/NpcPrefab";
+        public const string App_farm_prefab_sfp_ParticlesDust_prefab = "app_farm_prefab.sfp/ParticlesDust";
+        public const string App_farm_prefab_sfp_Tree_prefab = "app_farm_prefab.sfp/Tree";
+        public const string App_farm_prefab_sfp_Tree1_prefab = "app_farm_prefab.sfp/Tree1";
+        public const string App_farm_prefab_sfp_Tree2_prefab = "app_farm_prefab.sfp/Tree2";
+        public const string App_farm_ui_sfp_ui_farm_cooldown_01_png = "app_farm_ui.sfp/ui_farm_cooldown_01";
+        public const string App_farm_ui_sfp_ui_farm_cooldown_02_png = "app_farm_ui.sfp/ui_farm_cooldown_02";
+        public const string App_farm_ui_sfp_ui_farm_menu_01_png = "app_farm_ui.sfp/ui_farm_menu_01";
         public const string App_loading_sfp_LoadingView_prefab = "app_loading.sfp/LoadingView";
+        public const string App_loading_ui_sfp_Ui_shadow_png = "app_loading_ui.sfp/Ui_shadow";
         public const string App_pendtips_sfp_PendTipsView_prefab = "app_pendtips.sfp/PendTipsView";
         public const string Game_scenes_sfs_BaseScene_unity = "game_scenes.sfs/BaseScene";
         public const string Game_turpworld_sfp_Turf_mat = "game_turpworld.sfp/Turf";
@@ -223,10 +232,6 @@ namespace SFramework.Statics
         public const string BundleName = "activity_btn_arrow";
         public const string RES_activity_btn_arrow_png = "activity_btn_arrow";
     }
-    public class App_battle
-    {
-        public const string BundleName = "app_battle";
-    }
     public class App_battle_sfp
     {
         public const string BundleName = "app_battle.sfp";
@@ -242,45 +247,19 @@ namespace SFramework.Statics
         public const string BundleName = "app_battle.sfs";
         public const string RES_BattleView_unity = "BattleView";
     }
-    public class App_farm
-    {
-        public const string BundleName = "app_farm";
-    }
     public class App_farm_sfp
     {
         public const string BundleName = "app_farm.sfp";
-        public const string RES_21010001_prefab = "21010001";
-        public const string RES_a40011411_2_prefab = "a40011411_2";
-        public const string RES_FarmMenuView_prefab = "FarmMenuView";
-        public const string RES_Fire_prefab = "Fire";
-        public const string RES_FlowerTemplate_prefab = "FlowerTemplate";
-        public const string RES_Grass_mat = "Grass";
-        public const string RES_Grass_prefab = "Grass";
-        public const string RES_Grass1_prefab = "Grass1";
-        public const string RES_GroundTile_prefab = "GroundTile";
-        public const string RES_Lights_prefab = "Lights";
-        public const string RES_ParticlesDust_prefab = "ParticlesDust";
-        public const string RES_Tree_prefab = "Tree";
-        public const string RES_Tree1_prefab = "Tree1";
-        public const string RES_Tree2_prefab = "Tree2";
     }
     public class App_farm_sfs
     {
         public const string BundleName = "app_farm.sfs";
         public const string RES_FarmView_unity = "FarmView";
     }
-    public class App_farm_anim
-    {
-        public const string BundleName = "app_farm_anim";
-    }
     public class App_farm_anim_sfp
     {
         public const string BundleName = "app_farm_anim.sfp";
         public const string RES_Anim_Light_anim = "Anim_Light";
-    }
-    public class App_farm_farmview
-    {
-        public const string BundleName = "app_farm_farmview";
     }
     public class App_farm_farmview_sfp
     {
@@ -291,9 +270,12 @@ namespace SFramework.Statics
         public const string RES_Lightmap0_comp_dir_png = "Lightmap-0_comp_dir";
         public const string RES_Lightmap0_comp_shadowmask_png = "Lightmap-0_comp_shadowmask";
     }
-    public class App_farm_ground
+    public class App_farm_fbx_sfp
     {
-        public const string BundleName = "app_farm_ground";
+        public const string BundleName = "app_farm_fbx.sfp";
+        public const string RES_floor_fbx = "floor";
+        public const string RES_Plane_fbx = "Plane";
+        public const string RES_test_fbx = "test";
     }
     public class App_farm_ground_sfp
     {
@@ -316,11 +298,11 @@ namespace SFramework.Statics
         public const string RES_a40011415_3_png = "a40011415_3";
         public const string RES_a40031378_2_png = "a40031378_2";
         public const string RES_Fireplace_Burn_m_01_fbx = "Fireplace_Burn_m_01";
+        public const string RES_floor_jpg = "floor";
         public const string RES_Forest_spriteatlasv2 = "Forest";
         public const string RES_Grass_mat = "Grass";
         public const string RES_grass_1_Emission_png = "grass_1_Emission";
         public const string RES_land_png = "land";
-        public const string RES_lightdots_prefab = "lightdots";
         public const string RES_lights_1_png = "lights_1";
         public const string RES_lvdi_001_png = "lvdi_001";
         public const string RES_lvdi_002_png = "lvdi_002";
@@ -337,10 +319,6 @@ namespace SFramework.Statics
         public const string RES_Tex04_png = "Tex04";
         public const string RES_Tex05_png = "Tex05";
     }
-    public class App_farm_ground_forest
-    {
-        public const string BundleName = "app_farm_ground_forest";
-    }
     public class App_farm_ground_forest_sfp
     {
         public const string BundleName = "app_farm_ground_forest.sfp";
@@ -348,28 +326,17 @@ namespace SFramework.Statics
         public const string RES_5103524_png = "5103524";
         public const string RES_5106510_png = "5106510";
     }
-    public class App_farm_ground_materials
-    {
-        public const string BundleName = "app_farm_ground_materials";
-    }
     public class App_farm_ground_materials_sfp
     {
         public const string BundleName = "app_farm_ground_materials.sfp";
         public const string RES_21010001_mat = "21010001";
-    }
-    public class App_farm_house
-    {
-        public const string BundleName = "app_farm_house";
+        public const string RES_SFS_BendingFloor_mat = "SFS_BendingFloor";
     }
     public class App_farm_house_sfp
     {
         public const string BundleName = "app_farm_house.sfp";
         public const string RES_PixelTextureGrid_256_png = "PixelTextureGrid_256";
         public const string RES_材质_mat = "材质";
-    }
-    public class App_farm_materials
-    {
-        public const string BundleName = "app_farm_materials";
     }
     public class App_farm_materials_sfp
     {
@@ -388,10 +355,6 @@ namespace SFramework.Statics
         public const string RES_M10_mat = "M10";
         public const string RES_Sand_mat = "Sand";
     }
-    public class App_farm_ordernpc
-    {
-        public const string BundleName = "app_farm_ordernpc";
-    }
     public class App_farm_ordernpc_sfp
     {
         public const string BundleName = "app_farm_ordernpc.sfp";
@@ -403,46 +366,53 @@ namespace SFramework.Statics
         public const string RES_npc_5_ske_png = "npc_5_ske";
         public const string RES_npc_6_ske_png = "npc_6_ske";
     }
-    public class App_farm_ui
+    public class App_farm_prefab_sfp
     {
-        public const string BundleName = "app_farm_ui";
+        public const string BundleName = "app_farm_prefab.sfp";
+        public const string RES_21010001_prefab = "21010001";
+        public const string RES_a40011411_2_prefab = "a40011411_2";
+        public const string RES_FarmMenuView_prefab = "FarmMenuView";
+        public const string RES_Fire_prefab = "Fire";
+        public const string RES_Floor_mat = "Floor";
+        public const string RES_FlowerTemplate_prefab = "FlowerTemplate";
+        public const string RES_Grass_mat = "Grass";
+        public const string RES_Grass_prefab = "Grass";
+        public const string RES_Grass1_prefab = "Grass1";
+        public const string RES_GroundTile_prefab = "GroundTile";
+        public const string RES_lightdots_prefab = "lightdots";
+        public const string RES_Lights_prefab = "Lights";
+        public const string RES_NpcPrefab_prefab = "NpcPrefab";
+        public const string RES_ParticlesDust_prefab = "ParticlesDust";
+        public const string RES_Tree_prefab = "Tree";
+        public const string RES_Tree1_prefab = "Tree1";
+        public const string RES_Tree2_prefab = "Tree2";
     }
     public class App_farm_ui_sfp
     {
         public const string BundleName = "app_farm_ui.sfp";
-        public const string RES_btn_weiyang_01_a_png = "btn_weiyang_01_a";
-        public const string RES_btn_weiyang_01_d_png = "btn_weiyang_01_d";
-    }
-    public class App_loading
-    {
-        public const string BundleName = "app_loading";
+        public const string RES_ui_farm_cooldown_01_png = "ui_farm_cooldown_01";
+        public const string RES_ui_farm_cooldown_02_png = "ui_farm_cooldown_02";
+        public const string RES_ui_farm_menu_01_png = "ui_farm_menu_01";
     }
     public class App_loading_sfp
     {
         public const string BundleName = "app_loading.sfp";
         public const string RES_LoadingView_prefab = "LoadingView";
     }
-    public class App_pendtips
+    public class App_loading_ui_sfp
     {
-        public const string BundleName = "app_pendtips";
+        public const string BundleName = "app_loading_ui.sfp";
+        public const string RES_Ui_shadow_png = "Ui_shadow";
     }
     public class App_pendtips_sfp
     {
         public const string BundleName = "app_pendtips.sfp";
         public const string RES_PendTipsView_prefab = "PendTipsView";
     }
-    public class Game_scenes
-    {
-        public const string BundleName = "game_scenes";
-    }
     public class Game_scenes_sfs
     {
         public const string BundleName = "game_scenes.sfs";
         public const string RES_BaseScene_unity = "BaseScene";
-    }
-    public class Game_turpworld
-    {
-        public const string BundleName = "game_turpworld";
     }
     public class Game_turpworld_sfp
     {
@@ -454,19 +424,11 @@ namespace SFramework.Statics
         public const string BundleName = "game_turpworld.sfs";
         public const string RES_TurpWorld_unity = "TurpWorld";
     }
-    public class Game_turpworld_anim
-    {
-        public const string BundleName = "game_turpworld_anim";
-    }
     public class Game_turpworld_anim_sfp
     {
         public const string BundleName = "game_turpworld_anim.sfp";
         public const string RES_KoalaAnimator_controller = "KoalaAnimator";
         public const string RES_KoalaIdle_anim = "KoalaIdle";
-    }
-    public class Game_turpworld_character
-    {
-        public const string BundleName = "game_turpworld_character";
     }
     public class Game_turpworld_character_sfp
     {
@@ -484,10 +446,6 @@ namespace SFramework.Statics
         public const string RES_KoalaSwordSlash2_png = "KoalaSwordSlash2";
         public const string RES_KoalaSwordSlash3_png = "KoalaSwordSlash3";
     }
-    public class Game_turpworld_map
-    {
-        public const string BundleName = "game_turpworld_map";
-    }
     public class Game_turpworld_map_sfp
     {
         public const string BundleName = "game_turpworld_map.sfp";
@@ -504,10 +462,6 @@ namespace SFramework.Statics
         public const string RES_rock_prefab = "rock";
         public const string RES_rock_psd = "rock";
     }
-    public class Game_turpworld_map_dirt_tiles
-    {
-        public const string BundleName = "game_turpworld_map_dirt_tiles";
-    }
     public class Game_turpworld_map_dirt_tiles_sfp
     {
         public const string BundleName = "game_turpworld_map_dirt_tiles.sfp";
@@ -515,10 +469,6 @@ namespace SFramework.Statics
         public const string RES_dirtbrushes_1_asset = "dirt-brushes_1";
         public const string RES_dirtbrushes_2_asset = "dirt-brushes_2";
         public const string RES_dirtbrushes_3_asset = "dirt-brushes_3";
-    }
-    public class Game_turpworld_map_forrest_tiles
-    {
-        public const string BundleName = "game_turpworld_map_forrest_tiles";
     }
     public class Game_turpworld_map_forrest_tiles_sfp
     {
@@ -528,10 +478,6 @@ namespace SFramework.Statics
         public const string RES_forrestbrushes_2_asset = "forrest-brushes_2";
         public const string RES_forrestbrushes_3_asset = "forrest-brushes_3";
     }
-    public class Game_turpworld_map_meadow_tiles
-    {
-        public const string BundleName = "game_turpworld_map_meadow_tiles";
-    }
     public class Game_turpworld_map_meadow_tiles_sfp
     {
         public const string BundleName = "game_turpworld_map_meadow_tiles.sfp";
@@ -539,10 +485,6 @@ namespace SFramework.Statics
         public const string RES_meadowbrushes_1_asset = "meadow-brushes_1";
         public const string RES_meadowbrushes_2_asset = "meadow-brushes_2";
         public const string RES_meadowbrushes_3_asset = "meadow-brushes_3";
-    }
-    public class Game_turpworld_map_rock_tiles
-    {
-        public const string BundleName = "game_turpworld_map_rock_tiles";
     }
     public class Game_turpworld_map_rock_tiles_sfp
     {
@@ -552,18 +494,10 @@ namespace SFramework.Statics
         public const string RES_rockbrushes_2_asset = "rock-brushes_2";
         public const string RES_rockbrushes_3_asset = "rock-brushes_3";
     }
-    public class Game_turpworld_worldobjects
-    {
-        public const string BundleName = "game_turpworld_worldobjects";
-    }
     public class Game_turpworld_worldobjects_sfp
     {
         public const string BundleName = "game_turpworld_worldobjects.sfp";
         public const string RES_WorldObject_prefab = "WorldObject";
-    }
-    public class Game_turpworld_worldobjects_rocks
-    {
-        public const string BundleName = "game_turpworld_worldobjects_rocks";
     }
     public class Game_turpworld_worldobjects_rocks_sfp
     {
@@ -572,10 +506,6 @@ namespace SFramework.Statics
         public const string RES_GoldRock_prefab = "GoldRock";
         public const string RES_IronRock_prefab = "IronRock";
         public const string RES_StoneRock_prefab = "StoneRock";
-    }
-    public class Game_turpworld_worldobjects_sprites
-    {
-        public const string BundleName = "game_turpworld_worldobjects_sprites";
     }
     public class Game_turpworld_worldobjects_sprites_sfp
     {
@@ -592,10 +522,6 @@ namespace SFramework.Statics
         public const string RES_IronRock_png = "IronRock";
         public const string RES_StoneRock_png = "StoneRock";
     }
-    public class Game_turpworld_worldobjects_trees
-    {
-        public const string BundleName = "game_turpworld_worldobjects_trees";
-    }
     public class Game_turpworld_worldobjects_trees_sfp
     {
         public const string BundleName = "game_turpworld_worldobjects_trees.sfp";
@@ -605,19 +531,11 @@ namespace SFramework.Statics
         public const string RES_5103599_prefab = "5103599";
         public const string RES_5105422_prefab = "5105422";
     }
-    public class Gtexture
-    {
-        public const string BundleName = "gtexture";
-    }
     public class Gtexture_sfp
     {
         public const string BundleName = "gtexture.sfp";
         public const string RES_Grass_mat = "Grass";
         public const string RES_grass_png = "grass";
-    }
-    public class Gtexture_effect
-    {
-        public const string BundleName = "gtexture_effect";
     }
     public class Gtexture_effect_sfp
     {
@@ -626,10 +544,6 @@ namespace SFramework.Statics
         public const string RES_FlashCard_shader = "FlashCard";
         public const string RES_FlashCard1_mat = "FlashCard1";
         public const string RES_FlashCard1_shader = "FlashCard1";
-    }
-    public class Loading
-    {
-        public const string BundleName = "loading";
     }
     public class Loading_sfp
     {
@@ -645,10 +559,6 @@ namespace SFramework.Statics
         public const string RES_LoadingEnd_anim = "LoadingEnd";
         public const string RES_LoadingStart_anim = "LoadingStart";
     }
-    public class Model_avatar_role_carrota
-    {
-        public const string BundleName = "model_avatar_role_carrota";
-    }
     public class Model_avatar_role_carrota_sfp
     {
         public const string BundleName = "model_avatar_role_carrota.sfp";
@@ -660,19 +570,11 @@ namespace SFramework.Statics
         public const string RES_Role_CarrotA_controller = "Role_CarrotA";
         public const string RES_test2_fbx = "test2";
     }
-    public class Model_avatar_role_carrota_ani_materials
-    {
-        public const string BundleName = "model_avatar_role_carrota_ani_materials";
-    }
     public class Model_avatar_role_carrota_ani_materials_sfp
     {
         public const string BundleName = "model_avatar_role_carrota_ani_materials.sfp";
         public const string RES_Character_ColorMap_mat = "Character_ColorMap";
         public const string RES_Clothing_mat = "Clothing";
-    }
-    public class Model_material
-    {
-        public const string BundleName = "model_material";
     }
     public class Model_material_sfp
     {
@@ -681,20 +583,12 @@ namespace SFramework.Statics
         public const string RES_RoleBlinnPhong_shader = "RoleBlinnPhong";
         public const string RES_Test_shader = "Test";
     }
-    public class Pic
-    {
-        public const string BundleName = "pic";
-    }
     public class Pic_sfp
     {
         public const string BundleName = "pic.sfp";
         public const string RES_haipa_png = "haipa";
         public const string RES_haipa_normal_png = "haipa_normal";
         public const string RES_jusang_png = "jusang";
-    }
-    public class Pic_tree
-    {
-        public const string BundleName = "pic_tree";
     }
     public class Pic_tree_sfp
     {
@@ -704,10 +598,6 @@ namespace SFramework.Statics
         public const string RES_5104206_png = "5104206";
         public const string RES_5104309_png = "5104309";
         public const string RES_5104413_png = "5104413";
-    }
-    public class Pic_tree_materials
-    {
-        public const string BundleName = "pic_tree_materials";
     }
     public class Pic_tree_materials_sfp
     {

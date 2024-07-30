@@ -132,7 +132,7 @@ namespace App.Farm
                 if (pos != null)
                 {
                     CreateEntity<FlowerEntity>(
-                        SFResAssets.App_farm_sfp_FlowerTemplate_prefab,
+                        SFResAssets.App_farm_prefab_sfp_FlowerTemplate_prefab,
                         _flowerParent,
                         pos
                     );
