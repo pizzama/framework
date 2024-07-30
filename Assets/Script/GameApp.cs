@@ -2,7 +2,7 @@ using SFramework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using SFramework.Statics;
-using SFramework.Game.SActor.Skill;
+ 
 
 namespace Game
 {
