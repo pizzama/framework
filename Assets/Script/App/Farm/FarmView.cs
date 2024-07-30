@@ -19,6 +19,7 @@ namespace App.Farm
         private SInputEvent _cameraTarget;
         private SMGrid _grid;
         private Transform _flowerParent;
+        private Transform _spawner;
         private Ray _ray;
 
         private float _minDelay = 0.1f;
@@ -37,6 +38,7 @@ namespace App.Farm
             // _grid = new SMGrid(10, 10, 3, new Vector3(0, 0, 0));
             // create farm
             _flowerParent = getExportObject<Transform>("Flowers");
+            _spawner = getExportObject<Transform>("Spawner");
             Camera cam = UIRoot.MainCamera;
             _cameraTarget = cam.GetComponent<SInputEvent>();
             // _cameraTarget.MouseEventHandle = sceneMove;
@@ -45,6 +47,8 @@ namespace App.Farm
             createForest();
 
             _nativeHelper.Alert("hahah");
+
+            spawnFlower().Forget();
         }
 
         protected override void closing()
@@ -166,7 +170,8 @@ namespace App.Farm
             {
                 float delay = Random.Range(_minDelay, _maxDelay);
 				await UniTask.Delay(System.TimeSpan.FromSeconds(delay));
-				
+                NpcEntity entity = CreateComponent<NpcEntity>(SFResAssets.App_farm_ordernpc_sfp_npc_0_ske_png, _spawner);
+                entity.Show();
                 // int spawnIndex = Random.Range(0, spawnpoints.Length);
                 // Transform spawnpoint = spawnpoints[spawnIndex];
                 // GameObject spawnedFruit = Instantiate(
