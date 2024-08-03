@@ -1,9 +1,10 @@
 using Cinemachine;
+using SFramework.Tools;
 using UnityEngine;
 
 namespace SFramework.GameCamera
 {
-    public class CVCameraSystem : MonoBehaviour
+    public abstract class CVCameraSystem : MonoBehaviour
     {
         [SerializeField]
         protected CinemachineVirtualCamera virtualCamera;
@@ -67,6 +68,10 @@ namespace SFramework.GameCamera
         protected Touch oldTouch1;
         protected Touch oldTouch2;
 
+        protected bool scopeDitry;
+
+        protected abstract void initCVCameraSystem();
+
         private void Start()
         {
             if (virtualCamera == null)
@@ -85,9 +90,15 @@ namespace SFramework.GameCamera
                     "Not Found CinemachineVirtualCamera on this transform:" + this.name
                 );
             }
+            initCVCameraSystem();
         }
 
-        protected void Update()
+        protected virtual float getCameraScaleSize()
+        {
+            return 1;
+        }
+
+        protected virtual void Update()
         {
             if (validOnUI == false && SInputDefine.IsTouchUI())
             {
@@ -127,5 +138,7 @@ namespace SFramework.GameCamera
             target.z = Mathf.Clamp(target.z, cameraMoveLimitZ.x, cameraMoveLimitZ.y);
             transform.position = target;
         }
+
+        
     }
 }

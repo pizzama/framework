@@ -6,6 +6,10 @@ namespace SFramework.GameCamera
 {
     public class CVCameraSystem3D : CVCameraSystem
     {
+        protected override void initCVCameraSystem()
+        {
+
+        }
         protected override void handleCameraMovement()
         {
             Vector3 inputDir = new Vector3(0, 0, 0);

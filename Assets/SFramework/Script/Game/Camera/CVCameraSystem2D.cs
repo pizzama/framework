@@ -6,6 +6,23 @@ namespace SFramework.GameCamera
 {
     public class CVCameraSystem2D : CVCameraSystem
     {
+        private float cameraOriginSize = 0;
+        [SerializeField] private PolygonCollider2D  _collider;
+
+        protected override void initCVCameraSystem()
+        {
+            CinemachineConfiner info = ComponentTools.GetOrAddComponent<CinemachineConfiner>(virtualCamera.transform);
+            info.m_BoundingShape2D = _collider;
+            // virtualCamera.AddExtension(info);
+            info.InvalidatePathCache();
+        }
+        protected override float getCameraScaleSize()
+        {
+            if(cameraOriginSize == 0)
+                cameraOriginSize = virtualCamera.m_Lens.OrthographicSize;
+            float target = virtualCamera.m_Lens.OrthographicSize;
+            return cameraOriginSize/target;
+        }
         protected override void handleCameraMovement()
         {
             Vector3 inputDir = new Vector3(0, 0, 0);

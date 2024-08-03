@@ -104,5 +104,15 @@ namespace SFramework.Tools
             float canvasHeight = canvasPixelRect.height / canvas.scaleFactor;
             return new Vector2(uiPos.x + canvasWidth / 2, uiPos.y + canvasHeight / 2);
         }
+
+        public static Vector3[] ScreenConers()
+        {
+            return new Vector3[]{
+                new Vector2(0,Screen.height),
+                new Vector2(Screen.width,Screen.height),
+                new Vector2(Screen.width,0),
+                new Vector2(0,0),
+                };
+        }
     }
 }
