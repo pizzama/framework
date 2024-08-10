@@ -170,7 +170,7 @@ namespace App.Farm
             {
                 float delay = Random.Range(_minDelay, _maxDelay);
 				await UniTask.Delay(System.TimeSpan.FromSeconds(delay));
-                NpcEntity entity = CreateComponent<NpcEntity>(SFResAssets.App_farm_ordernpc_sfp_npc_0_ske_png, _spawner);
+                NpcEntity entity = CreateComponent<NpcEntity>(SFResAssets.App_farm_prefab_sfp_NpcPrefab_prefab, _spawner);
                 entity.Show();
                 // int spawnIndex = Random.Range(0, spawnpoints.Length);
                 // Transform spawnpoint = spawnpoints[spawnIndex];

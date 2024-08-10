@@ -10,6 +10,8 @@ public class NpcEntity : RootEntity
 
     [SerializeField]
     private Rigidbody2D _rb;
+    [SerializeField]
+    private SpriteRenderer _spriteRender;
 
     public override void DestroyEntity() { }
 
