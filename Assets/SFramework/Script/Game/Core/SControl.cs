@@ -60,9 +60,19 @@ namespace SFramework
             _view.Uninstall();
         }
 
+        public void SubscribeMessage(string messageId)
+        {
+            SubscribeMessage(messageId, this);
+        }
+
         public void SubscribeMessage(string messageId, ISBundle bundle)
         {
             Manager.SubscribeMessage(messageId, bundle);
+        }
+
+        public void UnSubscribeMessage(string messageId)
+        {
+            Manager.UnSubscribeMessage(messageId, this);
         }
 
         public void UnSubscribeMessage(string messageId, ISBundle bundle)

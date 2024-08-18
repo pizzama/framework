@@ -15,7 +15,10 @@ namespace SFramework.Game
         protected GameObjectPoolManager poolManager; //pool manager
 
         public SUIROOT UIRoot { get { return SUIROOT.Instance; } }
-
+        public virtual Transform GetViewTransform()
+        {
+            return null;
+        }
         public override void Install()
         {
             assetManager = AssetsManager.Instance;

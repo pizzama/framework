@@ -23,6 +23,11 @@ namespace SFramework.Game
             goDict = new Dictionary<string, GameObject>();
         }
 
+        public override Transform GetViewTransform()
+        {
+            return mViewTransform;
+        }
+
         protected override T getExportObject<T>(string key)
         {
             GameObject go = null;

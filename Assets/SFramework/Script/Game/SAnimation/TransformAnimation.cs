@@ -9,21 +9,21 @@ namespace SFramework.Game.Animation
     */
     public class TransformAnimation: MonoBehaviour
     {
-        [Header("Vertical Shrink")]
+        [Header("Vertical Shrink")] //垂直收缩
         [SFInformation("Velocity and Phase only calculate Phase as result", SFInformationAttribute.InformationType.Info, false)] 
         [SerializeField] private float _verticalShrinkVelocity = 0;
         [SerializeField] private float _verticalShrinkPhase = 0;
         [SerializeField] private float _verticalShrink = 0;
-        [Header("Horizontal Shrink")]
+        [Header("Horizontal Shrink")] //水平收缩
         [SerializeField] private float _horizontalShrinkVelocity = 0;
         [SerializeField] private float _horizontalShrinkPhase = 0;
         [SerializeField] private float _horizontalShrink = 0;
 
-        [Header("Vertical Levitation")]
+        [Header("Vertical Levitation")] //垂直悬浮
         [SerializeField] private float _verticalLevitationVelocity = 0;
         [SerializeField] private float _verticalLevitationPhase = 0;
         [SerializeField] private float _verticalLevitation = 0;
-        [Header("Horizontal Rotate")]
+        [Header("Horizontal Rotate")] //左右旋转
         [SerializeField] private float _horizontalRotateVelocity = 0;
         [SerializeField] private float _horizontalRotatePhase = 0;
         [SerializeField] private float _horizontalRotate = 0; 
