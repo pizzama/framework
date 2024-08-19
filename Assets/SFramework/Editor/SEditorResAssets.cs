@@ -39,6 +39,11 @@ namespace SFramework
                 AddOrCreateSFrameworkUsingNewTag();
             }
 
+            if (GUILayout.Button("Add SFramework Using Scripting Defines Symbols"))
+            {
+                AddDefaultScriptingDefineSymbols();
+            }
+
             EditorGUILayout.EndVertical();
         }
 
@@ -115,7 +120,7 @@ namespace SFramework
                         }
                     }
 
-                    if(isFind == false)
+                    if (isFind == false)
                     {
                         tags.InsertArrayElementAtIndex(0); //可能会打印提示信息”Default GameObject Tag: xxx already registered“
                         tags.GetArrayElementAtIndex(0).stringValue = tagName;
@@ -130,6 +135,51 @@ namespace SFramework
                     "OK"
                 );
             }
+        }
+
+        public void AddDefaultScriptingDefineSymbols()
+        {           
+            try
+            {
+                BuildTarget buildTarget = EditorUserBuildSettings.activeBuildTarget;
+                BuildTargetGroup targetGroup = BuildPipeline.GetBuildTargetGroup(buildTarget);
+                var namedBuildTarget = UnityEditor.Build.NamedBuildTarget.FromBuildTargetGroup(targetGroup);
+                
+                string[] defaultNeedSymbols = {"SCinemachine"};
+                string[] definesSymbols;
+                PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup, out definesSymbols);
+                for (int i = 0; i < defaultNeedSymbols.Length; i++)
+                {
+                    string name = defaultNeedSymbols[i];
+                    bool isFind = false;
+                    for (int j = 0; j < definesSymbols.Length; j++)
+                    {
+                        if(name == definesSymbols[j])
+                        {
+                            isFind = true;
+                        }
+                    }
+
+                    if(!isFind)
+                    {
+
+                        PlayerSettings.SetScriptingDefineSymbols(namedBuildTarget, name);
+                    }
+                    
+                }
+                // PlayerSettings.SetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup, "SCinemachine");
+
+                EditorUtility.DisplayDialog(
+                    "Success",
+                    "Add Default Scripting Define Symbols is Done",
+                    "OK"
+                );
+            }
+            catch (System.Exception err)
+            {
+                Debug.LogError(err);
+            }
+           
         }
     }
 }

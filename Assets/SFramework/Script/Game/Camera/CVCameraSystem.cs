@@ -1,3 +1,4 @@
+#if SCinemachine
 using Cinemachine;
 using SFramework.Tools;
 using UnityEngine;
@@ -138,7 +139,6 @@ namespace SFramework.GameCamera
             target.z = Mathf.Clamp(target.z, cameraMoveLimitZ.x, cameraMoveLimitZ.y);
             transform.position = target;
         }
-
-        
     }
 }
+#endif

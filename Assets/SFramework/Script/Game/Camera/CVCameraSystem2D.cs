@@ -1,3 +1,4 @@
+#if SCinemachine
 using Cinemachine;
 using SFramework.Tools;
 using UnityEngine;
@@ -246,3 +247,4 @@ namespace SFramework.GameCamera
         }
     }
 }
+#endif
