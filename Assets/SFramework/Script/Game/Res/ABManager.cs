@@ -234,6 +234,10 @@ namespace SFramework
                     else
                     {
                         Debug.LogWarning("ab has in loading queue:" + dependencyName);
+                        //异步等待直到加载完成
+                        await UniTask.NextFrame();
+                        while (_abLoadQueue.Contains(dependencyName))
+                            await UniTask.NextFrame();
                         continue;
                     }
                     string url = ABPathHelper.GetResPathInPersistentOrStream(defaultName);
@@ -265,7 +269,12 @@ namespace SFramework
                 else
                 {
                     Debug.LogWarning("ab has in loading queue:" + abName);
-                    return null;
+                    //异步等待直到加载完成
+                    await UniTask.NextFrame();
+                    while (_abLoadQueue.Contains(abName))
+                        await UniTask.NextFrame();
+                    ABInfo info = _abCache[abName];
+                    return info;
                 }
                 string defaultName = ABPathHelper.DefaultABPath + "/" + abName;
                 string url = ABPathHelper.GetResPathInPersistentOrStream(defaultName);

@@ -116,6 +116,10 @@ namespace SFramework
                 else
                 {
                     Debug.LogWarning("ab has in loading queue:" + name);
+                    //异步等待直到加载完成
+                    await UniTask.NextFrame();
+                    while (_abLoadQueue.Contains(name))
+                        await UniTask.NextFrame();
                     return;
                 }
                 _mainBundle = await loadABFromPlantFromAsync(path);
@@ -145,7 +149,8 @@ namespace SFramework
 
         private async UniTask<AssetBundle> loadABFromPlantFromAsync(string url)
         {
-            UniTaskCompletionSource<AssetBundle> uniTaskCompletionSource = new UniTaskCompletionSource<AssetBundle>();
+            UniTaskCompletionSource<AssetBundle> uniTaskCompletionSource =
+                new UniTaskCompletionSource<AssetBundle>();
             try
             {
                 AssetBundle ab = null;
