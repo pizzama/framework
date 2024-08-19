@@ -19,6 +19,7 @@ namespace SFramework.Extension
                 list[n] = value;
             }
         }
+
         public static bool IsPrefab(this GameObject gameObject)
         {
             if (gameObject == null)
@@ -26,22 +27,30 @@ namespace SFramework.Extension
                 throw new NotFoundException("not found GameObject");
             }
 
-            return
-                !gameObject.scene.IsValid() &&
-                !gameObject.scene.isLoaded &&
-                gameObject.GetInstanceID() >= 0 &&
+            return !gameObject.scene.IsValid()
+                && !gameObject.scene.isLoaded
+                && gameObject.GetInstanceID() >= 0
+                &&
                 // I noticed that ones with IDs under 0 were objects I didn't recognize
                 !gameObject.hideFlags.HasFlag(HideFlags.HideInHierarchy);
-                // I don't care about GameObjects *inside* prefabs, just the overall prefab.
+            // I don't care about GameObjects *inside* prefabs, just the overall prefab.
         }
+
         // UI本地坐标转屏幕坐标
-        public static Vector2 UILocal2ScreenPoint(this Transform transform, Canvas canvas, Vector2 localPos)
+        public static Vector2 UILocal2ScreenPoint(
+            this Transform transform,
+            Canvas canvas,
+            Vector2 localPos
+        )
         {
             if (canvas.renderMode == RenderMode.WorldSpace && null != canvas.worldCamera)
             {
                 return transform.Local2ScreenPoint(canvas.worldCamera, localPos);
             }
-            else if (canvas.renderMode == RenderMode.ScreenSpaceCamera && null != canvas.worldCamera)
+            else if (
+                canvas.renderMode == RenderMode.ScreenSpaceCamera
+                && null != canvas.worldCamera
+            )
             {
                 return transform.Local2ScreenPoint(canvas.worldCamera, localPos);
             }
@@ -51,14 +60,18 @@ namespace SFramework.Extension
             }
         }
 
-        public static Vector2 Local2ScreenPoint(this Transform transform, Camera camera, Vector2 localPos)
+        public static Vector2 Local2ScreenPoint(
+            this Transform transform,
+            Camera camera,
+            Vector2 localPos
+        )
         {
             Vector2 worldPos = transform.TransformPoint(localPos);
             return camera.WorldToScreenPoint(worldPos);
         }
 
-
-        internal static T GetOrAddComponent<T>(this GameObject go) where T : UnityEngine.Component
+        internal static T GetOrAddComponent<T>(this GameObject go)
+            where T : UnityEngine.Component
         {
             if (go == null)
             {
@@ -70,13 +83,20 @@ namespace SFramework.Extension
         }
 
         //deep copy component
-        public static T GetCopyOf<T>(this Component component, T componentToCopy) where T : Component
+        public static T GetCopyOf<T>(this Component component, T componentToCopy)
+            where T : Component
         {
             System.Type type = component.GetType();
 
-            if (type != componentToCopy.GetType()) return null;
+            if (type != componentToCopy.GetType())
+                return null;
 
-            BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Default | BindingFlags.DeclaredOnly;
+            BindingFlags flags =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Default
+                | BindingFlags.DeclaredOnly;
 
             PropertyInfo[] propertyInformation = type.GetProperties(flags);
 
@@ -84,7 +104,11 @@ namespace SFramework.Extension
             {
                 if (information.CanWrite)
                 {
-                    information.SetValue(component, information.GetValue(componentToCopy, null), null);
+                    information.SetValue(
+                        component,
+                        information.GetValue(componentToCopy, null),
+                        null
+                    );
                 }
             }
 
@@ -97,5 +121,12 @@ namespace SFramework.Extension
 
             return component as T;
         }
+
+        /// <summary>
+        ///     当target完全在origin内的时候为true
+        /// </summary>
+        /// <returns></returns>
+        public static bool FullyInclusive(this Collider origin, Collider target) =>
+            origin.bounds.Contains(target.bounds.max) && origin.bounds.Contains(target.bounds.min);
     }
 }
