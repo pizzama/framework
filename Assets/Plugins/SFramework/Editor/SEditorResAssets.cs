@@ -145,7 +145,7 @@ namespace SFramework
                 BuildTargetGroup targetGroup = BuildPipeline.GetBuildTargetGroup(buildTarget);
                 var namedBuildTarget = UnityEditor.Build.NamedBuildTarget.FromBuildTargetGroup(targetGroup);
                 
-                string[] defaultNeedSymbols = {"SCinemachine"};
+                string[] defaultNeedSymbols = {"AMPLIFY_SHADER_EDITOR", "UNITY_POST_PROCESSING_STACK_V2", "SCINEMACHINE"};
                 string[] definesSymbols;
                 PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup, out definesSymbols);
                 for (int i = 0; i < defaultNeedSymbols.Length; i++)
