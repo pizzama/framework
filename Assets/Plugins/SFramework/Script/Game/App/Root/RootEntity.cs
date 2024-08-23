@@ -25,5 +25,20 @@ namespace SFramework.Game
             EntityId = eId;
             SetParentView(view);
         }
+
+        public void Attached(RootEntity childEntity)
+        {
+            SetParentView(childEntity.ParentView);
+        }
+
+        public void Attached(RootView childEntity)
+        {
+            SetParentView(childEntity);
+        }
+
+        public void DeAttached(RootEntity childEntity)
+        {
+
+        }
     }
 }

@@ -12,8 +12,6 @@ namespace SFramework
         void Recycle();
         void Show();
         void DestroyEntity();
-        void Attached(ISEntity childEntity);
-        void Detached(ISEntity childEntity);
     }
 
     public abstract class SEntity : MonoBehaviour, ISEntity
@@ -33,14 +31,6 @@ namespace SFramework
         }
 
         protected virtual void initEntity()
-        {
-        }
-
-        public void Attached(ISEntity childEntity)
-        {
-        }
-
-        public void Detached(ISEntity childEntity)
         {
         }
 
