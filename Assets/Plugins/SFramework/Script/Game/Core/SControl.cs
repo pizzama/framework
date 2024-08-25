@@ -80,15 +80,15 @@ namespace SFramework
             Manager.UnSubscribeBundleMessage(messageId, bundle);
         }
 
-        public void BroadcastControl(string messageId, string fullPath, object messageData = null, Action<object> callback = null, string alias = "", int sort = 0)
+        public void BroadcastControl(string messageId, object messageData = null, string fullPath = "", Action<object> callback = null, string alias = "", int sort = 0)
         {
             string nameSpace;
             string className;
             StringTools.PrefixClassName(fullPath, out nameSpace, out className);
-            this.BroadcastControl(messageId, nameSpace, className, messageData, callback, alias, sort);
+            this.BroadcastControl(messageId, messageData, nameSpace, className, callback, alias, sort);
         }
 
-        public void BroadcastControl(string messageId, string nameSpace, string className, object messageData, Action<object> callback, string alias, int sort)
+        public void BroadcastControl(string messageId, object messageData, string nameSpace, string className, Action<object> callback, string alias, int sort)
         {
             SBundleParams bdParams = new SBundleParams()
             {
