@@ -21,6 +21,11 @@ namespace SFramework
             return (T)_control;
         }
 
+        public T GetView<T>() where T : SView
+        {
+            return (T)_control.View;
+        }
+
         public delegate void DelegateModelCallback(int code);
         public DelegateModelCallback ModelCallback;
         public override void Install()

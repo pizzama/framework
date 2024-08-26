@@ -24,6 +24,11 @@ namespace SFramework
             return (T)_control;
         }
 
+        public T GetModel<T>() where T: SModel
+        {
+            return (T)Control.Model;
+        }
+
         public delegate void DelegateViewCallback();
         public DelegateViewCallback ViewCallback;
 
