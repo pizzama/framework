@@ -21,7 +21,7 @@ Shader "Artist/TintParticleUI" {
 		_Scrolls ("Scroll Speed (XY), Offset(ZW)", Vector) = (0, 0, 0, 0)
 		_Tiling ("_Tiling (XY)", Vector) = (1, 1, 0, 0)
 
-		_Flag("¿ªÆôºôÎüµÆ",Float) = 1.0
+		_Flag("是否开启色变",Float) = 1.0
 		[HideInInspector] _BlendMode ("__bmode", Float) = 0.0
 		[HideInInspector] _RenderMode ("__rmode", Float) = 0.0
 		[HideInInspector] _SrcBlend ("__src", Float) = 5.0
