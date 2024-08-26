@@ -60,24 +60,24 @@ namespace SFramework
             _view.Uninstall();
         }
 
-        public void SubscribeMessage(string messageId)
+        public void SubscribeBundleMessage(string messageId)
         {
-            SubscribeMessage(messageId, this);
+            SubscribeBundleMessage(messageId, this);
         }
 
-        public void SubscribeMessage(string messageId, ISBundle bundle)
+        public void SubscribeBundleMessage(string messageId, ISBundle bundle)
         {
-            Manager.SubscribeMessage(messageId, bundle);
+            Manager.SubscribeBundleMessage(messageId, bundle);
         }
 
-        public void UnSubscribeMessage(string messageId)
+        public void UnSubscribeBundleMessage(string messageId)
         {
-            Manager.UnSubscribeMessage(messageId, this);
+            Manager.UnSubscribeBundleMessage(messageId, this);
         }
 
-        public void UnSubscribeMessage(string messageId, ISBundle bundle)
+        public void UnSubscribeBundleMessage(string messageId, ISBundle bundle)
         {
-            Manager.UnSubscribeMessage(messageId, bundle);
+            Manager.UnSubscribeBundleMessage(messageId, bundle);
         }
 
         public void BroadcastControl(string messageId, string fullPath, object messageData = null, Action<object> callback = null, string alias = "", int sort = 0)

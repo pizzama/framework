@@ -303,7 +303,7 @@ namespace SFramework
             return null;
         }
 
-        public void SubscribeMessage(string messageId, ISBundle bundle)
+        public void SubscribeBundleMessage(string messageId, ISBundle bundle)
         {
             if (!_bundleObserverMap.ContainsKey(messageId))
             {
@@ -316,7 +316,7 @@ namespace SFramework
             }
         }
 
-        public void UnSubscribeMessage(string messageId, ISBundle bundle)
+        public void UnSubscribeBundleMessage(string messageId, ISBundle bundle)
         {
             if (_bundleObserverMap.ContainsKey(messageId))
             {

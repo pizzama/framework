@@ -17,7 +17,7 @@ namespace SFramework
         void OpenControl(string fullPath, object messageData, bool isSequence, string alias = "", int sort = 0, Action<object> callback = null);
         void CloseControl(string fullPath, string alias = "");
         void CloseAllControl(List<ISBundle> excludeBundles);
-        void SubscribeMessage(string messageId, ISBundle bundle);
-        void UnSubscribeMessage(string messageId, ISBundle bundle);
+        void SubscribeBundleMessage(string messageId, ISBundle bundle);
+        void UnSubscribeBundleMessage(string messageId, ISBundle bundle);
     }
 }
