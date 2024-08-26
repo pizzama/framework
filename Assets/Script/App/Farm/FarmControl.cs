@@ -9,7 +9,7 @@ namespace App.Farm
 		protected override void opening()
 		{
 			// Code Here
-			BroadcastMessage("1111", SFStaticsControl.App_Inventory_InventoryControl, "1111");
+			BroadcastControl("1111", SFStaticsControl.App_Inventory_InventoryControl, "1111");
 		}
 
 		public void OpenFarmView(FlowerEntity entity)
