@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using SFramework.Extension;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEditor.SceneTemplate;
 using UnityEngine;
 
@@ -196,9 +197,27 @@ public class SEditorControlCreator : EditorWindow
                     "sfscene.sfs",
                     "sfscene"
                 );
-            SceneAsset asset = UnityEditor.AssetDatabase.LoadAssetAtPath<SceneAsset>(assetPaths[0]);
-            // SceneTemplate.CreateSceneTemplate(string sceneTemplatePath)
+            string templatePath = assetPaths[0];
+            SceneTemplateAsset asset = UnityEditor.AssetDatabase.LoadAssetAtPath<SceneTemplateAsset>(templatePath);
             preSceneFile.GetFolderPath().CreateDirIfNotExists();
+            if (asset != null)
+            {
+                // 生成场景
+                var newScene = SceneTemplateService.Instantiate(asset, false, preSceneFile);
+            
+                if (newScene != null)
+                {
+                    Debug.Log("Scene created and saved successfully at: " + preSceneFile);
+                }
+                else
+                {
+                    Debug.LogError("Failed to save the scene.");
+                }
+            }
+            else
+            {
+                Debug.LogError("Scene Template not found at: " + templatePath);
+            }
             // SceneTemplateService.CreateTemplateFromScene(asset,  preSceneFile);
             logInfo(string.Format("Create {0} Scene Success", script.GetName()));
         }
