@@ -135,6 +135,7 @@ MonoBehaviour:
   _uiCamera: {fileID: 6579511294249325029}
   _mainCamera: {fileID: 4399082311643781616}
   _canvasScaler: {fileID: 114574186442532806}
+  _canvas: {fileID: 223938889282763000}
 --- !u!114 &4210724624472533215
 MonoBehaviour:
   m_ObjectHideFlags: 0

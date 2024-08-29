@@ -27,6 +27,7 @@ namespace SFramework.Game
         [SerializeField] private Camera _uiCamera;
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private CanvasScaler _canvasScaler;
+        [SerializeField] private Canvas _canvas;
         const string uiName = "SUIROOT";
         public static SUIROOT Instance;
         public Camera UICamera
@@ -37,6 +38,11 @@ namespace SFramework.Game
         public Camera MainCamera
         {
             get { return _mainCamera; }
+        }
+
+        public Canvas UICanvas
+        {
+            get { return _canvas; }
         }
 
         private void Awake()
@@ -63,6 +69,8 @@ namespace SFramework.Game
                 _toast = this.transform.Find("Toast").GetComponent<Transform>();
             if (_blocker == null)
                 _blocker = this.transform.Find("Blocker").GetComponent<Transform>();
+            if(_canvas == null)
+                _canvas = this.GetComponent<Canvas>();
         }
 
         public void OpenUI(UILayer layer, Transform result, Vector3 position = default, Quaternion rotation = default)
