@@ -34,7 +34,13 @@ namespace App.Alert
         protected override void opening()
 		{
 			// Code Here
+			AlertModel model = GetModel<AlertModel>();
+			AlertParams mData = (AlertParams)model.OpenParams.MessageData;
 			_textMeshGui = getExportObject<TextMeshProUGUI>("Content");
+			_textMeshGui.text = mData.Content;
+
+			//
+
 		}
 		protected override void closing()
 		{
