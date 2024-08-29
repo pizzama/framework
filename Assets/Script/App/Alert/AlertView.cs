@@ -2,11 +2,13 @@ using UnityEngine;
 using SFramework;
 using SFramework.Game;
 using UnityEngine.UI;
+using TMPro;
 
 namespace App.Alert
 {
 	public class AlertView : SUIView
 	{
+		private TextMeshProUGUI _textMeshGui;
 		protected override ViewOpenType GetViewOpenType()
 		{
 			return ViewOpenType.Single;
@@ -32,6 +34,7 @@ namespace App.Alert
         protected override void opening()
 		{
 			// Code Here
+			_textMeshGui = getExportObject<TextMeshProUGUI>("Content");
 		}
 		protected override void closing()
 		{

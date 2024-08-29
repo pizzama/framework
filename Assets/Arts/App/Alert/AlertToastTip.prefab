@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9115106431345130251}
   m_Layer: 0
-  m_Name: AlertView
+  m_Name: AlertToastTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3299640006550600130}
+  - {fileID: 2604149419492784079}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -37,7 +37,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &6866531651426936228
+--- !u!1 &6185915036893175617
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,23 +45,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3299640006550600130}
-  - component: {fileID: 310715230781755059}
-  - component: {fileID: 6185153631879521444}
+  - component: {fileID: 2604149419492784079}
+  - component: {fileID: 1289410693428348059}
+  - component: {fileID: 1556651638067776857}
   m_Layer: 5
   m_Name: Content
-  m_TagString: Untagged
+  m_TagString: $EXPORT$
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &3299640006550600130
+--- !u!224 &2604149419492784079
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6866531651426936228}
+  m_GameObject: {fileID: 6185915036893175617}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -75,21 +75,21 @@ RectTransform:
   m_AnchoredPosition: {x: 960, y: 540}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &310715230781755059
+--- !u!222 &1289410693428348059
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6866531651426936228}
+  m_GameObject: {fileID: 6185915036893175617}
   m_CullTransparentMesh: 1
---- !u!114 &6185153631879521444
+--- !u!114 &1556651638067776857
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6866531651426936228}
+  m_GameObject: {fileID: 6185915036893175617}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
