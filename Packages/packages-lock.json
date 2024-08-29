@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.code-philosophy.hybridclr": {
+      "version": "https://gitee.com/focus-creative-games/hybridclr_unity.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "3705ca6e1fd51256e23387fecbfb65b5783354a0"
+    },
     "com.unity.2d.animation": {
       "version": "7.0.11",
       "depth": 1,
