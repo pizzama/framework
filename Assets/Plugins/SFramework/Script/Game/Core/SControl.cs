@@ -12,6 +12,8 @@ namespace SFramework
         public SView View { get { return _view; } }
         public SModel Model { get { return _model; } }
 
+        private Dictionary<string, SBundleParams> _paramsCache;
+
         public T GetModel<T>() where T : SModel
         {
             return (T)_model;
@@ -26,6 +28,7 @@ namespace SFramework
         public override void Install()
         {
             base.Install();
+            _paramsCache = new Dictionary<string, SBundleParams>();
             initing();
             Type classType = this.GetType();
             _model = createBundle<SModel>(classType, "Model");
@@ -90,18 +93,31 @@ namespace SFramework
 
         public void BroadcastControl(string messageId, object messageData, string nameSpace, string className, Action<object> callback, string alias, int sort)
         {
-            SBundleParams bdParams = new SBundleParams()
+            string primaryKey = $"{nameSpace}.{className}.{alias}.{messageId}";
+            if(_paramsCache.ContainsKey(primaryKey))
             {
-                MessageId = messageId,
-                NameSpace = nameSpace,
-                ClassName = className,
-                MessageData = messageData,
-                Alias = alias,
-                MessageSender = this,
-                CallBack = callback,
-                Sort = sort,
-            };
-            SBundleManager.Instance.AddMessageParams(bdParams);
+                var bdParams = _paramsCache[primaryKey];
+                bdParams.MessageData = messageData;
+                bdParams.CallBack = callback;
+                bdParams.Sort = sort;  
+                SBundleManager.Instance.AddMessageParams(bdParams);
+            }
+            else
+            {
+                var bdParams = new SBundleParams()
+                {
+                    MessageId = messageId,
+                    NameSpace = nameSpace,
+                    ClassName = className,
+                    MessageData = messageData,
+                    Alias = alias,
+                    MessageSender = this,
+                    CallBack = callback,
+                    Sort = sort,
+                };
+
+                SBundleManager.Instance.AddMessageParams(bdParams);
+            }
         }
 
         public override void HandleMessage(SBundleParams value)

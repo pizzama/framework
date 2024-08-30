@@ -253,7 +253,22 @@ namespace SFramework
 
         public void AddMessageParams(SBundleParams value)
         {
-            _messageParams.Add(value);
+            bool isFind = false;
+            if (_messageParams.Count > 0)
+            {
+                for (int i = 0; i < _messageParams.Count; i++)
+                {
+                    SBundleParams pa = _messageParams[i];
+                    if(value.Equals(pa))
+                    {
+                        _messageParams[i] = pa;
+                        isFind = true;
+                    }
+                }
+            }
+
+            if(isFind == false)
+                _messageParams.Add(value);
         }
 
         public void AddOpenParams(SBundleParams value)

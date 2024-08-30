@@ -31,10 +31,27 @@ namespace SFramework
         public string ClassPath
         {
             get { return NameSpace + "." + ClassName; }
-            set
+            set { StringTools.PrefixClassName(value, out this.NameSpace, out this.ClassName); }
+        }
+
+        public string PrimaryKey()
+        {
+            if(MessageData == null)
+                return $"{NameSpace}.{ClassName}.{Alias}.{MessageId}";
+            else
+                return $"{NameSpace}.{ClassName}.{Alias}.{MessageId}.{MessageSender.ToString()}";
+        }
+
+        public bool Equals(SBundleParams other)
+        {
+            string aKey = PrimaryKey();
+            string bKey = other.PrimaryKey();
+            if(aKey == bKey)
             {
-                StringTools.PrefixClassName(value, out this.NameSpace, out this.ClassName);
+                return true;
             }
+
+            return false;
         }
     }
 }
