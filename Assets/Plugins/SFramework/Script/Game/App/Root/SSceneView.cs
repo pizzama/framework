@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using SFramework.Extension;
+using SFramework.Tools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -189,8 +191,7 @@ namespace SFramework.Game
             return sceneDict;
         }
 
-        protected Dictionary<string, T> collectScene<T>()
-            where T : UnityEngine.Object
+        protected Dictionary<string, T> collectScene<T>() where T : UnityEngine.Object
         {
             Dictionary<string, T> sceneDict = new Dictionary<string, T>();
             T[] all = UnityEngine.Object.FindObjectsOfType<T>(true);
@@ -229,6 +230,40 @@ namespace SFramework.Game
             }
 
             return default(T);
+        }
+
+        protected List<T> getExportObjectsWithChild<T>(Transform parent) where T: Component
+        {
+            List<T> result = new List<T>();
+            if (parent == null)
+                return result;
+            for (var i = 0; i < parent.childCount; i++)
+            {
+                Transform child = parent.GetChild(i);
+                T tchild = child.GetComponent<T>();
+                if (tchild != null)
+                {
+                    if (tchild is RootEntity root)
+                    {
+                        root.SetEntityData(StringTools.GenerateRandomNumber(5), this);
+                    }
+                    result.Add(tchild);
+                }
+                else
+                {
+                    List<T> temp = getExportObjectsWithChild<T>(child);
+                    result = result.Concat(temp).ToList();
+                }
+
+            }
+
+            return result;
+        }
+
+        protected List<T> getExportObjectsWithChild<T>(string key) where T: Component
+        {
+            Transform parent = getExportObject<Transform>(key);
+            return getExportObjectsWithChild<T>(parent);
         }
     }
 }

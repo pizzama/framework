@@ -116,6 +116,8 @@ namespace SFramework
                     Sort = sort,
                 };
 
+                _paramsCache[primaryKey] = bdParams;
+
                 SBundleManager.Instance.AddMessageParams(bdParams);
             }
         }
@@ -213,6 +215,7 @@ namespace SFramework
         protected override void closing()
         {
             base.closing();
+            _paramsCache.Clear();
             if (_model.OpenParams.OpenType == OpenType.Sequence)
             {
                 SBundleParams? value = SBundleManager.Instance.PopUpOpenParams();

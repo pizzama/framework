@@ -4,6 +4,7 @@ using SFramework.Pool;
 using System;
 using Cysharp.Threading.Tasks;
 using SFramework.Extension;
+using SFramework.Tools;
 
 namespace SFramework.Game
 {
@@ -37,7 +38,7 @@ namespace SFramework.Game
                 T rt = go.GetComponent<T>();
                 if (rt is RootEntity root)
                 {
-                    root.SetParentView(this);
+                    root.SetEntityData(StringTools.GenerateRandomNumber(5), this);
                 }
                 return rt;
             }
