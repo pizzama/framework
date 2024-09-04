@@ -10,6 +10,7 @@ namespace App.Farm
 		{
 			// Code Here
 			BroadcastControl("1111", SFStaticsControl.App_Inventory_InventoryControl, "1111");
+			OpenControl(SFStaticsControl.App_WorldTime_WorldTimeControl);
 		}
 
 		public void OpenFarmView(FlowerEntity entity)

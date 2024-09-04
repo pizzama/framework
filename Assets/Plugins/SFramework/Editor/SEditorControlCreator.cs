@@ -12,7 +12,7 @@ public class SEditorControlCreator : EditorWindow
     private string pathText = "";
     private List<string> _logTxts = new List<string>();
     private int _selectIndex;
-    string[] options = { "SceneView", "UIView" };
+    string[] options = { "SceneView", "UIView", "Empty"};
     private const string prefix = "App";
 
     [MenuItem("SFrameWork/Editor/SFramework Control Creator", false, 100)]
@@ -62,14 +62,16 @@ public class SEditorControlCreator : EditorWindow
             createView(parentPath, sc, viewType);
 
             parentPath = Application.dataPath + "/Arts/" + prefix + "/" + path;
-            if (viewType == 0)
+            switch (viewType)
             {
-                createScenePrefab(parentPath, sc);
+                case 0:
+                    createScenePrefab(parentPath, sc);
+                    break;
+                case 1:
+                    createUIPrefab(parentPath, sc);
+                    break;
             }
-            else
-            {
-                createUIPrefab(parentPath, sc);
-            }
+
             EditorUtility.SetDirty(this);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();

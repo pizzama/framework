@@ -14,16 +14,18 @@ namespace SFramework.Statics
     public class SFStaticsControl
     {
         public const string SFramework_Game_RootControl = "SFramework.Game.RootControl";
+        public const string Game_GameMainControl = "Game.GameMainControl";
+        public const string Game_InputControl = "Game.InputControl";
+        public const string Game_NormalLoadingControl = "Game.NormalLoadingControl";
+        public const string Game_App_Battle_BattleControl = "Game.App.Battle.BattleControl";
+        public const string Game_App_Battle_BattleUIControl = "Game.App.Battle.BattleUIControl";
+        public const string App_WorldTime_WorldTimeControl = "App.WorldTime.WorldTimeControl";
         public const string App_TurfWorld_TurfWorldControl = "App.TurfWorld.TurfWorldControl";
         public const string App_PendTips_PendTipsControl = "App.PendTips.PendTipsControl";
         public const string App_Loading_LoadingControl = "App.Loading.LoadingControl";
         public const string App_Inventory_InventoryControl = "App.Inventory.InventoryControl";
         public const string App_Farm_FarmControl = "App.Farm.FarmControl";
         public const string App_Farm_FarmMenuControl = "App.Farm.FarmMenuControl";
-        public const string Game_GameMainControl = "Game.GameMainControl";
-        public const string Game_InputControl = "Game.InputControl";
-        public const string Game_NormalLoadingControl = "Game.NormalLoadingControl";
-        public const string Game_App_Battle_BattleControl = "Game.App.Battle.BattleControl";
-        public const string Game_App_Battle_BattleUIControl = "Game.App.Battle.BattleUIControl";
+        public const string App_Alert_AlertControl = "App.Alert.AlertControl";
     }
 }

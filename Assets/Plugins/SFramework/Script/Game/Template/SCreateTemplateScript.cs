@@ -92,18 +92,19 @@ public class SCreateTemplateScript
         writer.AppendLine(
             $"namespace {((string.IsNullOrWhiteSpace(_nameSpace)) ? "Game" : _nameSpace)}");
         writer.AppendLine("{");
-        if (index == 0)
+        switch (index)
         {
-            writer.AppendLine($"\tpublic class {_name}View : SSCENEView");
+            case 0:
+                writer.AppendLine($"\tpublic class {_name}View : SSCENEView");
+                break;
+            case 1:
+                writer.AppendLine($"\tpublic class {_name}View : SUIView");
+                break;
+            default:
+                writer.AppendLine($"\tpublic class {_name}View : RootView");
+                break;
         }
-        else if (index == 1)
-        {
-            writer.AppendLine($"\tpublic class {_name}View : SUIView");
-        }
-        else
-        {
-            writer.AppendLine($"\tpublic class {_name}View : SView");
-        }
+        
         writer.AppendLine("\t{");
         writer.AppendLine("\t\tprotected override ViewOpenType GetViewOpenType()");
         writer.AppendLine("\t\t{");
