@@ -38,7 +38,7 @@ namespace SFramework.Game
                 T rt = go.GetComponent<T>();
                 if (rt is RootEntity root)
                 {
-                    root.SetEntityData(StringTools.GenerateRandomNumber(5), this);
+                    root.SetParentView(this);
                 }
                 return rt;
             }
