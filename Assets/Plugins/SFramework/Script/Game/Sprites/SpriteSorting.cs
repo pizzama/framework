@@ -66,19 +66,6 @@ namespace SFramework.Sprites
                     }
                 }
                 _worldPosition = pos;
-                // if (TryGetComponent(out SpriteRenderer spriteRenderer))
-                // {
-                //     float sort;
-                //     if(_sortAxis == SAxis.X)
-                //         sort = Mathf.Abs(_cameraTransform.position.x - transform.position.x) * 16;
-                //     else if(_sortAxis == SAxis.Y)
-                //         sort = Mathf.Abs(_cameraTransform.position.y - transform.position.y) * 16;
-                //     else
-                //         sort = Mathf.Abs(_cameraTransform.position.z - transform.position.z) * 16;
-
-                //     spriteRenderer.sortingOrder = Mathf.CeilToInt(-sort + _offset);
-                //     _worldPosition = pos;
-                // }
             }
         }
         
