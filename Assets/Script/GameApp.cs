@@ -1,3 +1,4 @@
+using System;
 using SFramework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,6 +20,7 @@ namespace Game
             }
             
             Debug.unityLogger.logEnabled = true; // whether close log
+            Application.logMessageReceivedThreaded += logMessageCallback;
         }
 
         protected override void installBundle()
@@ -33,7 +35,7 @@ namespace Game
                 // BundleManager.Instance.InstallBundle(new GameMainControl(), "", true);
                 initAllControl();
                 //BundleManager.Instance.OpenControl(SFStaticsControl.Game_GameMainControl);
-                SBundleManager.Instance.OpenControl(SFStaticsControl.App_Farm_FarmControl);
+                // SBundleManager.Instance.OpenControl(SFStaticsControl.App_Farm_FarmControl);
                 // SBundleManager.Instance.OpenControl(SFStaticsControl.App_Inventory_InventoryControl);
             }
             catch (System.Exception err)
@@ -41,6 +43,19 @@ namespace Game
                 Debug.LogError(err.ToString());
             }
 
+        }
+
+        private static void logMessageCallback(string condition, string stacktrace, LogType type)
+        {
+            if (type == LogType.Exception || type == LogType.Assert || type == LogType.Error)
+            {
+                //统计收集所有的错误信息。
+            }
+        }
+
+        private void OnDestroy()
+        {
+            Application.logMessageReceivedThreaded -= logMessageCallback;
         }
     }
 }
