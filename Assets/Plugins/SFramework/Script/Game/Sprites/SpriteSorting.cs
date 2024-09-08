@@ -16,6 +16,7 @@ namespace SFramework.Sprites
 
         [SerializeField] private SAxis _sortAxis = SAxis.Y;
 
+        private const int sorting = 16;
         private List<SpriteRenderer> _sprites;
         private List<ParticleSystemRenderer> _particleSystem;
         private List<SortingGroup> _sortingGroups;
@@ -25,7 +26,7 @@ namespace SFramework.Sprites
             if (_cameraTransform == null)
                 _cameraTransform = Camera.main.transform;
             _sortingGroups = this.transform.CollectAllComponent<SortingGroup>();
-            if (_sortingGroups.Count > 0)
+            if (_sortingGroups.Count == 0)
             {
                 _sprites = this.transform.CollectAllComponent<SpriteRenderer>();
                 _particleSystem = this.transform.CollectAllComponent<ParticleSystemRenderer>();
@@ -42,7 +43,7 @@ namespace SFramework.Sprites
                     {
                         SpriteRenderer render = _sprites[i];
                         float sort = caculateSort(_cameraTransform);
-                        render.sortingOrder = Mathf.CeilToInt(-sort + _offset);
+                        render.sortingOrder = Mathf.CeilToInt(sort + _offset);
                     }
                 }
 
@@ -52,7 +53,7 @@ namespace SFramework.Sprites
                     {
                         ParticleSystemRenderer render = _particleSystem[i];
                         float sort = caculateSort(_cameraTransform);
-                        render.sortingOrder = Mathf.CeilToInt(-sort + _offset);
+                        render.sortingOrder = Mathf.CeilToInt(sort + _offset);
                     }
                 }
                 
@@ -62,7 +63,7 @@ namespace SFramework.Sprites
                     {
                         SortingGroup render = _sortingGroups[i];
                         float sort = caculateSort(_cameraTransform);
-                        render.sortingOrder = Mathf.CeilToInt(-sort + _offset);
+                        render.sortingOrder = Mathf.CeilToInt(sort + _offset);
                     }
                 }
                 _worldPosition = pos;
@@ -73,11 +74,20 @@ namespace SFramework.Sprites
         {
             float sort;
             if (_sortAxis == SAxis.X)
-                sort = Mathf.Abs(_cameraTransform.position.x - transform.position.x) * 16;
+                sort = Mathf.Abs(_cameraTransform.position.x - transform.position.x) * sorting;
             else if (_sortAxis == SAxis.Y)
-                sort = Mathf.Abs(_cameraTransform.position.y - transform.position.y) * 16;
+            {
+                if (transform.position.y > 0)
+                {
+                    sort = -Mathf.Abs(_cameraTransform.position.y - transform.position.y) * sorting;
+                }
+                else
+                {
+                    sort = Mathf.Abs(_cameraTransform.position.y - transform.position.y) * sorting;
+                }
+            }
             else
-                sort = Mathf.Abs(_cameraTransform.position.z - transform.position.z) * 16;
+                sort = Mathf.Abs(_cameraTransform.position.z - transform.position.z) * sorting;
 
             return sort;
         }
