@@ -16,14 +16,14 @@ namespace SFramework.Extension
         // this method is too heavy, fist using FindGameObjectsWithTag instead
         public static void CollectAllGameObject(this GameObject gameObject, ref Dictionary<string, GameObject> objectMap, string careTagName = "Untagged")
         {
-            if (objectMap.ContainsKey(gameObject.name))
+            if (gameObject.tag == careTagName)
             {
-                //Debug.LogWarning($"collect gameobject {gameObject.name} has already collected, it will be ignore:");
-                objectMap[gameObject.name] = gameObject;
-            }
-            else
-            {
-                if (gameObject.tag == careTagName)
+                if (objectMap.ContainsKey(gameObject.name))
+                {
+                    Debug.LogWarning($"collect gameobject {gameObject.name} has already collected, it will be ignore:");
+                    // objectMap[gameObject.name] = gameObject;
+                }
+                else
                     objectMap.Add(gameObject.name, gameObject);
             }
 
@@ -31,7 +31,6 @@ namespace SFramework.Extension
             {
                 GameObject go = gameObject.transform.GetChild(i).gameObject;
                 go.CollectAllGameObject(ref objectMap, careTagName);
-
             }
         }
 
