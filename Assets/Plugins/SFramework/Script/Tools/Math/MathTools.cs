@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace SFramework.Tools.Math
 {
@@ -104,6 +105,11 @@ namespace SFramework.Tools.Math
         {
             //tmin + (DVALUE - DMIN)(tmax - tmin) / (DMAX - DMIN)
             return tmin + (dvalue - dmin) * (tmax - tmin) / (dmax - dmin);
+        }
+
+        public static List<float> Vecotr3ToProtoRepeat(Vector3 vec3)
+        {
+            return new List<float>{vec3.x, vec3.y, vec3.z};
         }
     }
 }
