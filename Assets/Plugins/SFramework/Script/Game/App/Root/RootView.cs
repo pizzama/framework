@@ -64,31 +64,31 @@ namespace SFramework.Game
             return await assetManager.LoadFromBundleAsync<T>(abName, resName);
         }
 
-        public GameObject CreateGameObjectUsingPool(string abName, string resName, float lifeTime = -1)
+        public GameObject CreateGameObjectUsingPool(string abName, string resName, float lifeTime = -1, int maxCount = 10)
         {
             UnityEngine.GameObject prefab = assetManager.LoadFromBundle<UnityEngine.GameObject>(abName, resName);
             if (prefab == null)
                 return null;
             string poolName = assetManager.FullPath(abName, resName);
-            return poolManager.Request<ListGameObjectPool>(poolName, prefab, lifeTime);
+            return poolManager.Request<ListGameObjectPool>(poolName, prefab, lifeTime, maxCount);
         }
 
-        public GameObject CreateGameObjectUsingPool(string path, float lifeTime = -1)
+        public GameObject CreateGameObjectUsingPool(string path, float lifeTime = -1, int maxCount = 10)
         {
             int index = path.LastIndexOf("/");
             if (index > 0)
             {
                 string abName = path.Substring(0, index);
                 string resName = path.Substring(index + 1, path.Length - index - 1);
-                return CreateGameObjectUsingPool(abName, resName, lifeTime);
+                return CreateGameObjectUsingPool(abName, resName, lifeTime, maxCount);
             }
 
             return null;
         }
 
-        public T CreateComponent<T>(string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1) where T : Component
+        public T CreateComponent<T>(string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1, int maxCount = 10) where T : Component
         {
-            GameObject obj = CreateGameObjectUsingPool(prefabFullPath, lifeTime);
+            GameObject obj = CreateGameObjectUsingPool(prefabFullPath, lifeTime, maxCount);
             if (obj == null)
                 throw new DataErrorException("Could not found component path is:" + prefabFullPath);
             T result = obj.GetOrAddComponent<T>();
