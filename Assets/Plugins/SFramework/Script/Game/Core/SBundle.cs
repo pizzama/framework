@@ -9,12 +9,26 @@ namespace SFramework
         private ISManager _manager;
         public ISManager Manager { get => _manager; set => _manager = value; }
 
-        public string _aliasName;
+        private string _aliasName;
         public string AliasName { get => _aliasName; set => _aliasName = value; }
 
         private bool _isOpen;
 
         public bool IsOpen { get => _isOpen; set => _isOpen = value; }
+
+        private string _fullName;
+        public string FullName { get => _fullName; set => _fullName = value; }
+
+        private string _nameSpace;
+        public string NameSpace { get => _nameSpace; set => _nameSpace = value; }
+
+        private string _className;
+        public string ClassName { get => _className; set => _className = value; }
+
+        public SBundle()
+        {
+            GetBundleName(out _fullName, out _nameSpace, out _className);
+        }
 
         public void GetBundleName(out string fullName, out string nameSpace, out string className)
         {

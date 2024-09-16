@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SFramework
 {
@@ -16,8 +15,10 @@ namespace SFramework
         void UninstallBundle(ISBundle bundle);
         void OpenControl(string fullPath, object messageData, bool isSequence, string alias = "", int sort = 0, Action<object> callback = null);
         void CloseControl(string fullPath, string alias = "");
+        void CloseControl(ISBundle bundle);
         void CloseAllControl(List<ISBundle> excludeBundles);
         void SubscribeBundleMessage(string messageId, ISBundle bundle);
         void UnSubscribeBundleMessage(string messageId, ISBundle bundle);
+        void AddMessageParams(SBundleParams param);
     }
 }

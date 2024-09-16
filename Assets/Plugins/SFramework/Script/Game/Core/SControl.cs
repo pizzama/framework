@@ -55,6 +55,11 @@ namespace SFramework
             IsOpen = false;
         }
 
+        public void CloseControl()
+        {
+            Manager.CloseControl(this);
+        }
+
         public override void Uninstall()
         {
             _model.ModelCallback = null;

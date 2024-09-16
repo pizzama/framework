@@ -17,6 +17,9 @@ namespace SFramework
         ISManager Manager {get; set;}
 
         string AliasName {get; set;}
+        string FullName {get; set;}
+        string NameSpace {get; set;}
+        string ClassName {get; set;}
         void HandleMessage(SBundleParams value);
         bool IsOpen {get; set;}
     }

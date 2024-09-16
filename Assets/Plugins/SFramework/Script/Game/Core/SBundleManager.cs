@@ -102,7 +102,7 @@ namespace SFramework
                 foreach (KeyValuePair<string, ISBundle> bundle in result.Value)
                 {
                     bundle.Value.LateUpdate();
-                    _bundleInspector.Add(bundle.Value.AliasName + ":" + bundle.Value.IsOpen);
+                    _bundleInspector.Add(bundle.Value.FullName + ":" + bundle.Value.AliasName + ":" + bundle.Value.IsOpen);
                 }
             }
 
@@ -222,6 +222,7 @@ namespace SFramework
         {
             SBundleManager manager = SBundleManager.Instance;
             ISBundle bd = manager.GetBundle(value.ClassPath, value.Alias);
+            Debug.Log("opencontrol::" + value.Alias + ";" + value.ClassPath + ";" + bd);
             if (bd == null)
             {
                 SControl ctl = ObjectTools.CreateInstance<SControl>(
@@ -422,7 +423,20 @@ namespace SFramework
             }
 
             ISBundle bundle = GetBundle(fullPath, alias);
-            bundle.Close();
+            if(bundle != null)
+            {
+                bundle.Close();
+                DeleteBundle(bundle);
+            }
+        }
+
+        public void CloseControl(ISBundle bundle)
+        {
+            if(bundle != null)
+            {
+                bundle.Close();
+                DeleteBundle(bundle);
+            }
         }
 
         public Tuple<int, Performance> GetPerformance()
