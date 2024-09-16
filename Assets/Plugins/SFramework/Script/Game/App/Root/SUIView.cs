@@ -93,7 +93,7 @@ namespace SFramework.Game
                 if (prefab == null)
                     throw new NotFoundException("not found uiview prefab:" + mAbName + ";" + mResName);
                 string fullPath = assetManager.FullPath(mAbName, mResName);
-                GameObject ob = poolManager.Request<ListGameObjectPool>(fullPath, prefab, -1);
+                GameObject ob = poolManager.Request<ListGameObjectPool>(fullPath, prefab, -1, 5);
                 mViewTransform = ob.transform;
             }
             openUI(mViewTransform, position, rotation);
@@ -107,7 +107,7 @@ namespace SFramework.Game
                 if (prefab == null)
                     throw new NotFoundException("not found uiView prefab:" + mAbName + ";" + mResName);
                 string fullPath = assetManager.FullPath(mAbName, mResName);
-                GameObject ob = poolManager.Request<ListGameObjectPool>(fullPath, prefab, -1);
+                GameObject ob = poolManager.Request<ListGameObjectPool>(fullPath, prefab, -1, 5);
                 mViewTransform = ob.transform;
             }
             openUI(mViewTransform, position, rotation);

@@ -435,6 +435,7 @@ namespace SFramework
             if(bundle != null)
             {
                 bundle.Close();
+                bundle.Uninstall();
                 DeleteBundle(bundle);
             }
         }

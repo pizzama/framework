@@ -75,7 +75,7 @@ namespace SFramework.Pool
             return null;
         }
 
-        public GameObject Request<T>(string poolName, GameObject prefab, float lifeTime) where T : BaseGameObjectPool, new()
+        public GameObject Request<T>(string poolName, GameObject prefab, float lifeTime, int maxCount = 10) where T : BaseGameObjectPool, new()
         {
             if (prefab == null)
                 throw new NotFoundException("Prefab Not be null");
@@ -84,6 +84,7 @@ namespace SFramework.Pool
             {
                 T pool = CreateGameObjectPool<T>(poolName);
                 pool.Prefab = prefab;
+                pool.Prewarm(maxCount);
                 return pool.Request(lifeTime);
             }
             else
