@@ -5,6 +5,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using SFramework.Extension;
 using UnityEditor;
+using UnityEditor.U2D;
 using UnityEngine;
 
 namespace SFramework.Build
@@ -16,12 +17,9 @@ namespace SFramework.Build
         /// </summary>
         public static void Build(ABConfig config, bool isHot = false, string AppVersion = "")
         {
-            string platformType = ABPathHelper.GetPlatformName();
-
-            int buildTarget = ABPathHelper.GetPlatformBuildTarget();
-
+            string platformType = config.Target.ToString();
+            BuildTarget buildTarget = config.Target;
             string uploadRoot = $"Upload/{platformType}/{config.Version}/";
-
             if (!string.IsNullOrEmpty(config.UploadRoot))
             {
                 uploadRoot = $"{config.UploadRoot}/{platformType}/{config.Version}/";
@@ -40,47 +38,28 @@ namespace SFramework.Build
                 AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
 
                 // 打包图集
-                //Debug.Log("======================Start  PackAllAtlases======================");
-                //SpriteAtlasUtility.PackAllAtlases(buildTarget, false);
-                //Debug.Log("======================PackAllAtlases  Success======================");
+                Debug.Log("======================Start  PackAllAtlases======================");
+                SpriteAtlasUtility.PackAllAtlases(buildTarget, false);
+                Debug.Log("======================PackAllAtlases  Success======================");
 
-                Debug.Log(
-                    "======================Start BuildAssetBundles======================\n"
-                        + uploadAbPath
+                Debug.Log("======================Start BuildAssetBundles======================\n" + uploadAbPath
                 );
-                var buildManifest = BuildPipeline.BuildAssetBundles(
-                    uploadAbPath,
-                    BuildAssetBundleOptions.DeterministicAssetBundle
+                var buildManifest = BuildPipeline.BuildAssetBundles(uploadAbPath, BuildAssetBundleOptions.DeterministicAssetBundle
                         | BuildAssetBundleOptions.IgnoreTypeTreeChanges
                         | BuildAssetBundleOptions.None //暂时使用LZMA 等待压缩和分包在使用LZ4
-                    ,
-                    (UnityEditor.BuildTarget)buildTarget
+                    , buildTarget
                 );
                 Debug.Log("======================BuildAssetBundles  Success======================");
 
                 // 文件加密
                 //EncryptionConfig();
 
-                List<string> filterFiles = new List<string>();
+                // List<string> filterFiles = new List<string>();
                 //filterFiles.Add(PathHelper.LocalLangUrl);
                 //filterFiles.Add(PathHelper.LocalMapUrl);
 
                 // 从StreamingAssets拷贝到Upload
                 // localRoot.DirectoryCopy(uploadRoot, filterFiles, "meta");
-
-                // // 生成资源清单文件
-                // Debug.Log(
-                //     "======================Start  GenerateVersionConfigInfo======================"
-                // );
-                // GenerateVersionConfigInfo(
-                //     buildSetting.AssetsVersion,
-                //     buildSetting.VersionCode,
-                //     uploadRoot,
-                //     isHot
-                // );
-                // Debug.Log(
-                //     "======================GenerateVersionConfigInfo  Success======================"
-                // );
 
                 Debug.Log("======================Start  GenerateVersionInfo======================");
                 GenerateVersionInfo(config.VersionCode, AppVersion, uploadRoot);

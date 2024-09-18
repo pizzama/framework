@@ -86,7 +86,7 @@ namespace SFramework.Build
         /// </summary>
         public static readonly ABConfig Default = new ABConfig()
         {
-            Target = BuildTarget.Android,
+            Target = BuildTarget.NoTarget,
             Type = BuildType.Develop,
             MainVersion = "1.0.0",
             SubVersion = 0,
