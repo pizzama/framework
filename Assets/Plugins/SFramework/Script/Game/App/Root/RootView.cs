@@ -46,20 +46,20 @@ namespace SFramework.Game
         }
 
 
-        public async UniTask<T> LoadBundleAsync<T>(string path) where T : UnityEngine.Object
+        public async UniTask<T> LoadFromBundleAsync<T>(string path) where T : UnityEngine.Object
         {
             int index = path.LastIndexOf("/");
             if (index > 0)
             {
                 string abName = path.Substring(0, index);
                 string resName = path.Substring(index + 1, path.Length - index - 1);
-                return await LoadBundleAsync<T>(abName, resName);
+                return await LoadFromBundleAsync<T>(abName, resName);
             }
 
             return null;
         }
 
-        public async UniTask<T> LoadBundleAsync<T>(string abName, string resName) where T : UnityEngine.Object
+        public async UniTask<T> LoadFromBundleAsync<T>(string abName, string resName) where T : UnityEngine.Object
         {
             return await assetManager.LoadFromBundleAsync<T>(abName, resName);
         }
