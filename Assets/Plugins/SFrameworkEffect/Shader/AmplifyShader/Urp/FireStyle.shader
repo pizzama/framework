@@ -1,4 +1,4 @@
-// Made with Amplify Shader Editor v1.9.2
+// Made with Amplify Shader Editor v1.9.1.8
 // Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "FireStyle"
 {
@@ -6,10 +6,9 @@ Shader "FireStyle"
 	{
 		[HideInInspector] _AlphaCutoff("Alpha Cutoff ", Range(0, 1)) = 0.5
 		[HideInInspector] _EmissionColor("Emission Color", Color) = (1,1,1,1)
-		_Texture0("Texture 0", 2D) = "white" {}
+		[ASEBegin]_Texture0("Texture 0", 2D) = "white" {}
 		_MainTex("MainTex", 2D) = "white" {}
-		_TextureSample0("Texture Sample 0", 2D) = "white" {}
-		_Float0("Float 0", Range( 0 , 1)) = 0.04729601
+		[ASEEnd]_TextureSample0("Texture Sample 0", 2D) = "white" {}
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 
 
@@ -170,7 +169,7 @@ Shader "FireStyle"
 			HLSLPROGRAM
 
 			#pragma multi_compile_instancing
-			#define ASE_SRP_VERSION 120112
+			#define ASE_SRP_VERSION 140008
 
 
 			#pragma multi_compile _ _DBUFFER_MRT1 _DBUFFER_MRT2 _DBUFFER_MRT3
@@ -226,7 +225,6 @@ Shader "FireStyle"
 
 			CBUFFER_START(UnityPerMaterial)
 			float4 _TextureSample0_ST;
-			float _Float0;
 			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
@@ -400,14 +398,14 @@ Shader "FireStyle"
 				float2 panner5_g88 = ( 1.0 * _Time.y * appendResult4_g88 + ( 1.22 * texCoord7_g88 ));
 				float2 appendResult11_g88 = (float2(0.0 , -1.0));
 				float2 panner12_g88 = ( 1.0 * _Time.y * appendResult11_g88 + ( texCoord7_g88 * 0.54 ));
-				float temp_output_36_0 = step( _Float0 , ( tex2DNode22.r * ( tex2DNode22.r + ( tex2D( _MainTex, panner5_g88 ).r * tex2D( _MainTex, panner12_g88 ).r ) ) ) );
-				float2 temp_cast_0 = (temp_output_36_0).xx;
+				float temp_output_23_0 = ( tex2DNode22.r * ( tex2DNode22.r + ( tex2D( _MainTex, panner5_g88 ).r * tex2D( _MainTex, panner12_g88 ).r ) ) );
+				float2 temp_cast_0 = (temp_output_23_0).xx;
 				float4 tex2DNode16 = tex2D( _Texture0, temp_cast_0 );
 				
 				float3 BakedAlbedo = 0;
 				float3 BakedEmission = 0;
 				float3 Color = tex2DNode16.rgb;
-				float Alpha = tex2DNode16.a;
+				float Alpha = 1;
 				float AlphaClipThreshold = 0.5;
 				float AlphaClipThresholdShadow = 0.5;
 
@@ -451,7 +449,7 @@ Shader "FireStyle"
 			HLSLPROGRAM
 
 			#pragma multi_compile_instancing
-			#define ASE_SRP_VERSION 120112
+			#define ASE_SRP_VERSION 140008
 
 
 			#pragma vertex vert
@@ -472,7 +470,7 @@ Shader "FireStyle"
 			{
 				float4 vertex : POSITION;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -485,14 +483,13 @@ Shader "FireStyle"
 				#if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR) && defined(ASE_NEEDS_FRAG_SHADOWCOORDS)
 					float4 shadowCoord : TEXCOORD1;
 				#endif
-				float4 ase_texcoord2 : TEXCOORD2;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
 
 			CBUFFER_START(UnityPerMaterial)
 			float4 _TextureSample0_ST;
-			float _Float0;
 			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
@@ -503,10 +500,7 @@ Shader "FireStyle"
 			#endif
 			CBUFFER_END
 
-			sampler2D _Texture0;
-			sampler2D _TextureSample0;
-			sampler2D _MainTex;
-
+			
 
 			
 			float3 _LightDirection;
@@ -519,10 +513,7 @@ Shader "FireStyle"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO( o );
 
-				o.ase_texcoord2.xy = v.ase_texcoord.xy;
 				
-				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord2.zw = 0;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
@@ -579,8 +570,7 @@ Shader "FireStyle"
 			{
 				float4 vertex : INTERNALTESSPOS;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
-
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -597,7 +587,7 @@ Shader "FireStyle"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				o.vertex = v.vertex;
 				o.ase_normal = v.ase_normal;
-				o.ase_texcoord = v.ase_texcoord;
+				
 				return o;
 			}
 
@@ -636,7 +626,7 @@ Shader "FireStyle"
 				VertexInput o = (VertexInput) 0;
 				o.vertex = patch[0].vertex * bary.x + patch[1].vertex * bary.y + patch[2].vertex * bary.z;
 				o.ase_normal = patch[0].ase_normal * bary.x + patch[1].ase_normal * bary.y + patch[2].ase_normal * bary.z;
-				o.ase_texcoord = patch[0].ase_texcoord * bary.x + patch[1].ase_texcoord * bary.y + patch[2].ase_texcoord * bary.z;
+				
 				#if defined(ASE_PHONG_TESSELLATION)
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
@@ -673,19 +663,9 @@ Shader "FireStyle"
 					#endif
 				#endif
 
-				float2 uv_TextureSample0 = IN.ase_texcoord2.xy * _TextureSample0_ST.xy + _TextureSample0_ST.zw;
-				float4 tex2DNode22 = tex2D( _TextureSample0, uv_TextureSample0 );
-				float2 appendResult4_g88 = (float2(0.0 , -1.5));
-				float2 texCoord7_g88 = IN.ase_texcoord2.xy * float2( 1,1 ) + float2( 0,0 );
-				float2 panner5_g88 = ( 1.0 * _Time.y * appendResult4_g88 + ( 1.22 * texCoord7_g88 ));
-				float2 appendResult11_g88 = (float2(0.0 , -1.0));
-				float2 panner12_g88 = ( 1.0 * _Time.y * appendResult11_g88 + ( texCoord7_g88 * 0.54 ));
-				float temp_output_36_0 = step( _Float0 , ( tex2DNode22.r * ( tex2DNode22.r + ( tex2D( _MainTex, panner5_g88 ).r * tex2D( _MainTex, panner12_g88 ).r ) ) ) );
-				float2 temp_cast_0 = (temp_output_36_0).xx;
-				float4 tex2DNode16 = tex2D( _Texture0, temp_cast_0 );
 				
 
-				float Alpha = tex2DNode16.a;
+				float Alpha = 1;
 				float AlphaClipThreshold = 0.5;
 				float AlphaClipThresholdShadow = 0.5;
 
@@ -719,7 +699,7 @@ Shader "FireStyle"
 			HLSLPROGRAM
 
 			#pragma multi_compile_instancing
-			#define ASE_SRP_VERSION 120112
+			#define ASE_SRP_VERSION 140008
 
 
 			#pragma vertex vert
@@ -736,7 +716,7 @@ Shader "FireStyle"
 			{
 				float4 vertex : POSITION;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -749,14 +729,13 @@ Shader "FireStyle"
 				#if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR) && defined(ASE_NEEDS_FRAG_SHADOWCOORDS)
 				float4 shadowCoord : TEXCOORD1;
 				#endif
-				float4 ase_texcoord2 : TEXCOORD2;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
 
 			CBUFFER_START(UnityPerMaterial)
 			float4 _TextureSample0_ST;
-			float _Float0;
 			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
@@ -767,10 +746,7 @@ Shader "FireStyle"
 			#endif
 			CBUFFER_END
 
-			sampler2D _Texture0;
-			sampler2D _TextureSample0;
-			sampler2D _MainTex;
-
+			
 
 			
 			VertexOutput VertexFunction( VertexInput v  )
@@ -780,10 +756,7 @@ Shader "FireStyle"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				o.ase_texcoord2.xy = v.ase_texcoord.xy;
 				
-				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord2.zw = 0;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
@@ -823,8 +796,7 @@ Shader "FireStyle"
 			{
 				float4 vertex : INTERNALTESSPOS;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
-
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -841,7 +813,7 @@ Shader "FireStyle"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				o.vertex = v.vertex;
 				o.ase_normal = v.ase_normal;
-				o.ase_texcoord = v.ase_texcoord;
+				
 				return o;
 			}
 
@@ -880,7 +852,7 @@ Shader "FireStyle"
 				VertexInput o = (VertexInput) 0;
 				o.vertex = patch[0].vertex * bary.x + patch[1].vertex * bary.y + patch[2].vertex * bary.z;
 				o.ase_normal = patch[0].ase_normal * bary.x + patch[1].ase_normal * bary.y + patch[2].ase_normal * bary.z;
-				o.ase_texcoord = patch[0].ase_texcoord * bary.x + patch[1].ase_texcoord * bary.y + patch[2].ase_texcoord * bary.z;
+				
 				#if defined(ASE_PHONG_TESSELLATION)
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
@@ -917,19 +889,9 @@ Shader "FireStyle"
 					#endif
 				#endif
 
-				float2 uv_TextureSample0 = IN.ase_texcoord2.xy * _TextureSample0_ST.xy + _TextureSample0_ST.zw;
-				float4 tex2DNode22 = tex2D( _TextureSample0, uv_TextureSample0 );
-				float2 appendResult4_g88 = (float2(0.0 , -1.5));
-				float2 texCoord7_g88 = IN.ase_texcoord2.xy * float2( 1,1 ) + float2( 0,0 );
-				float2 panner5_g88 = ( 1.0 * _Time.y * appendResult4_g88 + ( 1.22 * texCoord7_g88 ));
-				float2 appendResult11_g88 = (float2(0.0 , -1.0));
-				float2 panner12_g88 = ( 1.0 * _Time.y * appendResult11_g88 + ( texCoord7_g88 * 0.54 ));
-				float temp_output_36_0 = step( _Float0 , ( tex2DNode22.r * ( tex2DNode22.r + ( tex2D( _MainTex, panner5_g88 ).r * tex2D( _MainTex, panner12_g88 ).r ) ) ) );
-				float2 temp_cast_0 = (temp_output_36_0).xx;
-				float4 tex2DNode16 = tex2D( _Texture0, temp_cast_0 );
 				
 
-				float Alpha = tex2DNode16.a;
+				float Alpha = 1;
 				float AlphaClipThreshold = 0.5;
 
 				#ifdef _ALPHATEST_ON
@@ -956,7 +918,7 @@ Shader "FireStyle"
 			HLSLPROGRAM
 
 			#pragma multi_compile_instancing
-			#define ASE_SRP_VERSION 120112
+			#define ASE_SRP_VERSION 140008
 
 
 			#pragma vertex vert
@@ -980,21 +942,20 @@ Shader "FireStyle"
 			{
 				float4 vertex : POSITION;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
 			struct VertexOutput
 			{
 				float4 clipPos : SV_POSITION;
-				float4 ase_texcoord : TEXCOORD0;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
 
 			CBUFFER_START(UnityPerMaterial)
 			float4 _TextureSample0_ST;
-			float _Float0;
 			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
@@ -1005,10 +966,7 @@ Shader "FireStyle"
 			#endif
 			CBUFFER_END
 
-			sampler2D _Texture0;
-			sampler2D _TextureSample0;
-			sampler2D _MainTex;
-
+			
 
 			
 			int _ObjectId;
@@ -1029,10 +987,7 @@ Shader "FireStyle"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				o.ase_texcoord.xy = v.ase_texcoord.xy;
 				
-				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord.zw = 0;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
@@ -1061,8 +1016,7 @@ Shader "FireStyle"
 			{
 				float4 vertex : INTERNALTESSPOS;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
-
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -1079,7 +1033,7 @@ Shader "FireStyle"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				o.vertex = v.vertex;
 				o.ase_normal = v.ase_normal;
-				o.ase_texcoord = v.ase_texcoord;
+				
 				return o;
 			}
 
@@ -1118,7 +1072,7 @@ Shader "FireStyle"
 				VertexInput o = (VertexInput) 0;
 				o.vertex = patch[0].vertex * bary.x + patch[1].vertex * bary.y + patch[2].vertex * bary.z;
 				o.ase_normal = patch[0].ase_normal * bary.x + patch[1].ase_normal * bary.y + patch[2].ase_normal * bary.z;
-				o.ase_texcoord = patch[0].ase_texcoord * bary.x + patch[1].ase_texcoord * bary.y + patch[2].ase_texcoord * bary.z;
+				
 				#if defined(ASE_PHONG_TESSELLATION)
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
@@ -1140,19 +1094,9 @@ Shader "FireStyle"
 			{
 				SurfaceDescription surfaceDescription = (SurfaceDescription)0;
 
-				float2 uv_TextureSample0 = IN.ase_texcoord.xy * _TextureSample0_ST.xy + _TextureSample0_ST.zw;
-				float4 tex2DNode22 = tex2D( _TextureSample0, uv_TextureSample0 );
-				float2 appendResult4_g88 = (float2(0.0 , -1.5));
-				float2 texCoord7_g88 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				float2 panner5_g88 = ( 1.0 * _Time.y * appendResult4_g88 + ( 1.22 * texCoord7_g88 ));
-				float2 appendResult11_g88 = (float2(0.0 , -1.0));
-				float2 panner12_g88 = ( 1.0 * _Time.y * appendResult11_g88 + ( texCoord7_g88 * 0.54 ));
-				float temp_output_36_0 = step( _Float0 , ( tex2DNode22.r * ( tex2DNode22.r + ( tex2D( _MainTex, panner5_g88 ).r * tex2D( _MainTex, panner12_g88 ).r ) ) ) );
-				float2 temp_cast_0 = (temp_output_36_0).xx;
-				float4 tex2DNode16 = tex2D( _Texture0, temp_cast_0 );
 				
 
-				surfaceDescription.Alpha = tex2DNode16.a;
+				surfaceDescription.Alpha = 1;
 				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
@@ -1179,7 +1123,7 @@ Shader "FireStyle"
 			HLSLPROGRAM
 
 			#pragma multi_compile_instancing
-			#define ASE_SRP_VERSION 120112
+			#define ASE_SRP_VERSION 140008
 
 
 			#pragma vertex vert
@@ -1203,21 +1147,20 @@ Shader "FireStyle"
 			{
 				float4 vertex : POSITION;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
 			struct VertexOutput
 			{
 				float4 clipPos : SV_POSITION;
-				float4 ase_texcoord : TEXCOORD0;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
 
 			CBUFFER_START(UnityPerMaterial)
 			float4 _TextureSample0_ST;
-			float _Float0;
 			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
@@ -1228,10 +1171,7 @@ Shader "FireStyle"
 			#endif
 			CBUFFER_END
 
-			sampler2D _Texture0;
-			sampler2D _TextureSample0;
-			sampler2D _MainTex;
-
+			
 
 			
 			float4 _SelectionID;
@@ -1252,10 +1192,7 @@ Shader "FireStyle"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				o.ase_texcoord.xy = v.ase_texcoord.xy;
 				
-				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord.zw = 0;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
 				#else
@@ -1279,8 +1216,7 @@ Shader "FireStyle"
 			{
 				float4 vertex : INTERNALTESSPOS;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
-
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -1297,7 +1233,7 @@ Shader "FireStyle"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				o.vertex = v.vertex;
 				o.ase_normal = v.ase_normal;
-				o.ase_texcoord = v.ase_texcoord;
+				
 				return o;
 			}
 
@@ -1336,7 +1272,7 @@ Shader "FireStyle"
 				VertexInput o = (VertexInput) 0;
 				o.vertex = patch[0].vertex * bary.x + patch[1].vertex * bary.y + patch[2].vertex * bary.z;
 				o.ase_normal = patch[0].ase_normal * bary.x + patch[1].ase_normal * bary.y + patch[2].ase_normal * bary.z;
-				o.ase_texcoord = patch[0].ase_texcoord * bary.x + patch[1].ase_texcoord * bary.y + patch[2].ase_texcoord * bary.z;
+				
 				#if defined(ASE_PHONG_TESSELLATION)
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
@@ -1358,19 +1294,9 @@ Shader "FireStyle"
 			{
 				SurfaceDescription surfaceDescription = (SurfaceDescription)0;
 
-				float2 uv_TextureSample0 = IN.ase_texcoord.xy * _TextureSample0_ST.xy + _TextureSample0_ST.zw;
-				float4 tex2DNode22 = tex2D( _TextureSample0, uv_TextureSample0 );
-				float2 appendResult4_g88 = (float2(0.0 , -1.5));
-				float2 texCoord7_g88 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				float2 panner5_g88 = ( 1.0 * _Time.y * appendResult4_g88 + ( 1.22 * texCoord7_g88 ));
-				float2 appendResult11_g88 = (float2(0.0 , -1.0));
-				float2 panner12_g88 = ( 1.0 * _Time.y * appendResult11_g88 + ( texCoord7_g88 * 0.54 ));
-				float temp_output_36_0 = step( _Float0 , ( tex2DNode22.r * ( tex2DNode22.r + ( tex2D( _MainTex, panner5_g88 ).r * tex2D( _MainTex, panner12_g88 ).r ) ) ) );
-				float2 temp_cast_0 = (temp_output_36_0).xx;
-				float4 tex2DNode16 = tex2D( _Texture0, temp_cast_0 );
 				
 
-				surfaceDescription.Alpha = tex2DNode16.a;
+				surfaceDescription.Alpha = 1;
 				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
@@ -1404,7 +1330,7 @@ Shader "FireStyle"
 			HLSLPROGRAM
 
 			#pragma multi_compile_instancing
-			#define ASE_SRP_VERSION 120112
+			#define ASE_SRP_VERSION 140008
 
 
 			#pragma vertex vert
@@ -1430,7 +1356,7 @@ Shader "FireStyle"
 			{
 				float4 vertex : POSITION;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -1438,14 +1364,13 @@ Shader "FireStyle"
 			{
 				float4 clipPos : SV_POSITION;
 				float3 normalWS : TEXCOORD0;
-				float4 ase_texcoord1 : TEXCOORD1;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
 
 			CBUFFER_START(UnityPerMaterial)
 			float4 _TextureSample0_ST;
-			float _Float0;
 			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
@@ -1456,10 +1381,7 @@ Shader "FireStyle"
 			#endif
 			CBUFFER_END
 
-			sampler2D _Texture0;
-			sampler2D _TextureSample0;
-			sampler2D _MainTex;
-
+			
 
 			
 			struct SurfaceDescription
@@ -1477,10 +1399,7 @@ Shader "FireStyle"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				o.ase_texcoord1.xy = v.ase_texcoord.xy;
 				
-				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord1.zw = 0;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
 				#else
@@ -1511,8 +1430,7 @@ Shader "FireStyle"
 			{
 				float4 vertex : INTERNALTESSPOS;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
-
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -1529,7 +1447,7 @@ Shader "FireStyle"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				o.vertex = v.vertex;
 				o.ase_normal = v.ase_normal;
-				o.ase_texcoord = v.ase_texcoord;
+				
 				return o;
 			}
 
@@ -1568,7 +1486,7 @@ Shader "FireStyle"
 				VertexInput o = (VertexInput) 0;
 				o.vertex = patch[0].vertex * bary.x + patch[1].vertex * bary.y + patch[2].vertex * bary.z;
 				o.ase_normal = patch[0].ase_normal * bary.x + patch[1].ase_normal * bary.y + patch[2].ase_normal * bary.z;
-				o.ase_texcoord = patch[0].ase_texcoord * bary.x + patch[1].ase_texcoord * bary.y + patch[2].ase_texcoord * bary.z;
+				
 				#if defined(ASE_PHONG_TESSELLATION)
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
@@ -1590,19 +1508,9 @@ Shader "FireStyle"
 			{
 				SurfaceDescription surfaceDescription = (SurfaceDescription)0;
 
-				float2 uv_TextureSample0 = IN.ase_texcoord1.xy * _TextureSample0_ST.xy + _TextureSample0_ST.zw;
-				float4 tex2DNode22 = tex2D( _TextureSample0, uv_TextureSample0 );
-				float2 appendResult4_g88 = (float2(0.0 , -1.5));
-				float2 texCoord7_g88 = IN.ase_texcoord1.xy * float2( 1,1 ) + float2( 0,0 );
-				float2 panner5_g88 = ( 1.0 * _Time.y * appendResult4_g88 + ( 1.22 * texCoord7_g88 ));
-				float2 appendResult11_g88 = (float2(0.0 , -1.0));
-				float2 panner12_g88 = ( 1.0 * _Time.y * appendResult11_g88 + ( texCoord7_g88 * 0.54 ));
-				float temp_output_36_0 = step( _Float0 , ( tex2DNode22.r * ( tex2DNode22.r + ( tex2D( _MainTex, panner5_g88 ).r * tex2D( _MainTex, panner12_g88 ).r ) ) ) );
-				float2 temp_cast_0 = (temp_output_36_0).xx;
-				float4 tex2DNode16 = tex2D( _Texture0, temp_cast_0 );
 				
 
-				surfaceDescription.Alpha = tex2DNode16.a;
+				surfaceDescription.Alpha = 1;
 				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
@@ -1634,7 +1542,7 @@ Shader "FireStyle"
 			HLSLPROGRAM
 
 			#pragma multi_compile_instancing
-			#define ASE_SRP_VERSION 120112
+			#define ASE_SRP_VERSION 140008
 
 
 			#pragma exclude_renderers glcore gles gles3 
@@ -1663,7 +1571,7 @@ Shader "FireStyle"
 			{
 				float4 vertex : POSITION;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -1671,14 +1579,13 @@ Shader "FireStyle"
 			{
 				float4 clipPos : SV_POSITION;
 				float3 normalWS : TEXCOORD0;
-				float4 ase_texcoord1 : TEXCOORD1;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
 
 			CBUFFER_START(UnityPerMaterial)
 			float4 _TextureSample0_ST;
-			float _Float0;
 			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
@@ -1688,10 +1595,7 @@ Shader "FireStyle"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			sampler2D _Texture0;
-			sampler2D _TextureSample0;
-			sampler2D _MainTex;
-
+			
 
 			
 			struct SurfaceDescription
@@ -1709,10 +1613,7 @@ Shader "FireStyle"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				o.ase_texcoord1.xy = v.ase_texcoord.xy;
 				
-				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord1.zw = 0;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
 				#else
@@ -1743,8 +1644,7 @@ Shader "FireStyle"
 			{
 				float4 vertex : INTERNALTESSPOS;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
-
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -1761,7 +1661,7 @@ Shader "FireStyle"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				o.vertex = v.vertex;
 				o.ase_normal = v.ase_normal;
-				o.ase_texcoord = v.ase_texcoord;
+				
 				return o;
 			}
 
@@ -1800,7 +1700,7 @@ Shader "FireStyle"
 				VertexInput o = (VertexInput) 0;
 				o.vertex = patch[0].vertex * bary.x + patch[1].vertex * bary.y + patch[2].vertex * bary.z;
 				o.ase_normal = patch[0].ase_normal * bary.x + patch[1].ase_normal * bary.y + patch[2].ase_normal * bary.z;
-				o.ase_texcoord = patch[0].ase_texcoord * bary.x + patch[1].ase_texcoord * bary.y + patch[2].ase_texcoord * bary.z;
+				
 				#if defined(ASE_PHONG_TESSELLATION)
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
@@ -1822,19 +1722,9 @@ Shader "FireStyle"
 			{
 				SurfaceDescription surfaceDescription = (SurfaceDescription)0;
 
-				float2 uv_TextureSample0 = IN.ase_texcoord1.xy * _TextureSample0_ST.xy + _TextureSample0_ST.zw;
-				float4 tex2DNode22 = tex2D( _TextureSample0, uv_TextureSample0 );
-				float2 appendResult4_g88 = (float2(0.0 , -1.5));
-				float2 texCoord7_g88 = IN.ase_texcoord1.xy * float2( 1,1 ) + float2( 0,0 );
-				float2 panner5_g88 = ( 1.0 * _Time.y * appendResult4_g88 + ( 1.22 * texCoord7_g88 ));
-				float2 appendResult11_g88 = (float2(0.0 , -1.0));
-				float2 panner12_g88 = ( 1.0 * _Time.y * appendResult11_g88 + ( texCoord7_g88 * 0.54 ));
-				float temp_output_36_0 = step( _Float0 , ( tex2DNode22.r * ( tex2DNode22.r + ( tex2D( _MainTex, panner5_g88 ).r * tex2D( _MainTex, panner12_g88 ).r ) ) ) );
-				float2 temp_cast_0 = (temp_output_36_0).xx;
-				float4 tex2DNode16 = tex2D( _Texture0, temp_cast_0 );
 				
 
-				surfaceDescription.Alpha = tex2DNode16.a;
+				surfaceDescription.Alpha = 1;
 				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
@@ -1861,7 +1751,7 @@ Shader "FireStyle"
 	Fallback Off
 }
 /*ASEBEGIN
-Version=19200
+Version=19108
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;1;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;ExtraPrePass;0;0;ExtraPrePass;5;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;3;True;12;all;0;False;True;1;1;False;;0;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;0;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;1;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;ShadowCaster;0;2;ShadowCaster;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;True;False;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;True;1;LightMode=ShadowCaster;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;4;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;1;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;DepthOnly;0;3;DepthOnly;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;True;False;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;False;False;True;1;LightMode=DepthOnly;False;False;0;;0;0;Standard;0;False;0
@@ -1872,27 +1762,28 @@ Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;8;0,0;Float;False;False;-1;
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;9;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;1;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;DepthNormals;0;8;DepthNormals;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;True;1;LightMode=DepthNormalsOnly;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;10;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;1;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;DepthNormalsOnly;0;9;DepthNormalsOnly;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;True;1;LightMode=DepthNormalsOnly;False;True;9;d3d11;metal;vulkan;xboxone;xboxseries;playstation;ps4;ps5;switch;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.SamplerNode;22;-876.1899,-420.6756;Inherit;True;Property;_TextureSample0;Texture Sample 0;2;0;Create;True;0;0;0;False;0;False;-1;1aefba7162b40bb4d9a62e6359ff4242;1aefba7162b40bb4d9a62e6359ff4242;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.SimpleAddOpNode;21;-473.1235,-208.1241;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;23;-299.4325,-239.576;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;1;False;1;FLOAT;0
-Node;AmplifyShaderEditor.TexturePropertyNode;14;-109.5677,1.594524;Inherit;True;Property;_Texture0;Texture 0;0;0;Create;True;0;0;0;False;0;False;8f46d92d160172e4b844ac0fb577fe81;8f46d92d160172e4b844ac0fb577fe81;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;719.1992,-204.0878;Float;False;True;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;13;FireStyle;2992e84f91cbeb14eab234972e07ea9d;True;Forward;0;1;Forward;8;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;3;True;12;all;0;False;True;1;1;False;;0;False;;1;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForwardOnly;False;False;0;;0;0;Standard;23;Surface;0;0;  Blend;0;0;Two Sided;1;0;Forward Only;0;0;Cast Shadows;1;0;  Use Shadow Threshold;0;0;Receive Shadows;1;0;GPU Instancing;1;0;LOD CrossFade;0;0;Built-in Fog;0;0;DOTS Instancing;0;0;Meta Pass;0;0;Extra Pre Pass;0;0;Tessellation;0;0;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;0;  Tess;16,False,;0;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;16,False,;0;  Max Displacement;25,False,;0;Vertex Position,InvertActionOnDeselection;1;0;0;10;False;True;True;True;False;False;True;True;True;True;False;;False;0
-Node;AmplifyShaderEditor.SamplerNode;16;375.4783,66.70052;Inherit;True;Property;_TextureSample2;Texture Sample 2;2;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.StepOpNode;36;86.83291,-276.5353;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;37;-206.2758,-352.5635;Inherit;False;Property;_Float0;Float 0;3;0;Create;True;0;0;0;False;0;False;0.04729601;0.04729601;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;21;-473.1235,-208.1241;Inherit;True;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RelayNode;24;290.0794,-343.2336;Inherit;True;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.TexturePropertyNode;18;-1219.454,-115.5472;Inherit;True;Property;_MainTex;MainTex;1;0;Create;True;0;0;0;False;0;False;3384e70de5b797d419c8aea80c4c54e1;3384e70de5b797d419c8aea80c4c54e1;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
 Node;AmplifyShaderEditor.FunctionNode;44;-862.7236,-209.3126;Inherit;False;AnimatedNoise;-1;;88;7fdb620e647d0434da5e79c0f990c011;0;5;18;FLOAT;-1.5;False;20;FLOAT;0.54;False;21;FLOAT;-1;False;19;FLOAT;1.22;False;22;SAMPLER2D;1,0,0,0,1,0,0,0,1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.TexturePropertyNode;14;-109.5677,1.594524;Inherit;True;Property;_Texture0;Texture 0;0;0;Create;True;0;0;0;False;0;False;8f46d92d160172e4b844ac0fb577fe81;8f46d92d160172e4b844ac0fb577fe81;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
+Node;AmplifyShaderEditor.SamplerNode;16;259.5783,-27.49947;Inherit;True;Property;_TextureSample2;Texture Sample 2;2;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;23;-248.7325,-270.7759;Inherit;True;2;2;0;FLOAT;0;False;1;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.StepOpNode;36;-26.2671,-333.7353;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;37;-385.676,-388.9635;Inherit;False;Property;_Float0;Float 0;3;0;Create;True;0;0;0;False;0;False;0.1089075;0.04729601;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;1049.999,-168.8878;Float;False;True;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;13;FireStyle;2992e84f91cbeb14eab234972e07ea9d;True;Forward;0;1;Forward;8;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;3;True;12;all;0;False;True;1;1;False;;0;False;;1;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForwardOnly;False;False;0;;0;0;Standard;23;Surface;0;0;  Blend;0;0;Two Sided;1;0;Forward Only;0;0;Cast Shadows;1;0;  Use Shadow Threshold;0;0;Receive Shadows;1;0;GPU Instancing;1;0;LOD CrossFade;0;0;Built-in Fog;0;0;DOTS Instancing;0;0;Meta Pass;0;0;Extra Pre Pass;0;0;Tessellation;0;0;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;0;  Tess;16,False,;0;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;16,False,;0;  Max Displacement;25,False,;0;Vertex Position,InvertActionOnDeselection;1;0;0;10;False;True;True;True;False;False;True;True;True;True;False;;False;0
+Node;AmplifyShaderEditor.RelayNode;45;660.5391,-324.7841;Inherit;True;1;0;COLOR;0,0,0,0;False;1;COLOR;0
 WireConnection;21;0;22;1
 WireConnection;21;1;44;0
-WireConnection;23;0;22;1
-WireConnection;23;1;21;0
-WireConnection;2;2;16;0
-WireConnection;2;3;16;4
-WireConnection;16;0;14;0
-WireConnection;16;1;36;0
-WireConnection;36;0;37;0
-WireConnection;36;1;23;0
 WireConnection;24;0;36;0
 WireConnection;44;22;18;0
+WireConnection;16;0;14;0
+WireConnection;16;1;23;0
+WireConnection;23;0;22;1
+WireConnection;23;1;21;0
+WireConnection;36;0;37;0
+WireConnection;36;1;23;0
+WireConnection;2;2;16;0
+WireConnection;45;0;16;0
 ASEEND*/
-//CHKSM=79764CAD22BEB85679793074F4CF5052514235B3
+//CHKSM=4371CB242D2B49E7611CC4E516A6612F64A1025A
