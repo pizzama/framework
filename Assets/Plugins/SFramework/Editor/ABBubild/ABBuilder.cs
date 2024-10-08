@@ -230,8 +230,13 @@ namespace SFramework.Build
                 {
                     config.BuildAB = buildAb;
                 }
+                bool buildPackage = EditorGUILayout.Toggle("BuildPackage: ", config.IsBuildPackage);
+                if (config.IsBuildPackage != buildPackage)
+                {
+                    config.BuildAB = buildAb;
+                }
                 bool isCopyToStreamingAssets = EditorGUILayout.Toggle(
-                    "IsCopyToStreamingAssets: ",
+                    "CopyToStreamingAssets: ",
                     config.IsCopyToStreamingAssets
                 );
                 if (config.IsCopyToStreamingAssets != isCopyToStreamingAssets)
@@ -241,7 +246,7 @@ namespace SFramework.Build
                 {
                     EditorGUI.BeginDisabledGroup(true);
                     //GUI.enabled = false;
-                    EditorGUILayout.Toggle("IsDebug: ", config.IsDebug);
+                    EditorGUILayout.Toggle("Debug: ", config.IsDebug);
                     EditorGUILayout.Toggle("UseObb: ", config.UseObb);
                     //GUI.enabled = true;
                     EditorGUI.EndDisabledGroup();
@@ -253,12 +258,12 @@ namespace SFramework.Build
 
             {
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("资源包导出路径：", config.UploadRoot);
+                EditorGUILayout.LabelField("游戏资源导出路径：", config.UploadRoot);
                 if (GUILayout.Button("选择目录"))
                 {
                     config.CheckUploadRoot();
                     config.UploadRoot = EditorUtility.OpenFolderPanel(
-                        "资源包导出目录",
+                        "游戏资源导出路径",
                         config.UploadRoot,
                         config.DefaultUploadFolder
                     );
@@ -268,12 +273,12 @@ namespace SFramework.Build
 
             {
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("游戏包导出路径：", config.PackageRoot);
+                EditorGUILayout.LabelField("发布包导出路径：", config.PackageRoot);
                 if (GUILayout.Button("选择目录"))
                 {
                     config.CheckPackageRoot();
                     config.PackageRoot = EditorUtility.OpenFolderPanel(
-                        "游戏包导出目录",
+                        "发布包导出目录",
                         config.PackageRoot,
                         config.DefaultPackageFolder
                     );

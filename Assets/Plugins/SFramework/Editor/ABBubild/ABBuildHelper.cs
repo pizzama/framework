@@ -44,11 +44,23 @@ namespace SFramework.Build
 
                 Debug.Log("======================Start BuildAssetBundles======================\n" + uploadAbPath
                 );
-                var buildManifest = BuildPipeline.BuildAssetBundles(uploadAbPath, BuildAssetBundleOptions.DeterministicAssetBundle
+                try
+                {
+                    var time = Time.realtimeSinceStartup;
+                    var buildManifest = BuildPipeline.BuildAssetBundles(uploadAbPath,
+                        BuildAssetBundleOptions.DeterministicAssetBundle
                         | BuildAssetBundleOptions.IgnoreTypeTreeChanges
                         | BuildAssetBundleOptions.None //暂时使用LZMA 等待压缩和分包在使用LZ4
-                    , buildTarget
-                );
+                        , buildTarget
+                    );
+                    Debug.Log($"完成资源打包，总耗时：{Time.realtimeSinceStartup - time}");
+                }
+                catch (Exception err)
+                {
+                    Debug.LogException(err);
+                    return;
+                }
+
                 Debug.Log("======================BuildAssetBundles  Success======================");
 
                 // 文件加密
