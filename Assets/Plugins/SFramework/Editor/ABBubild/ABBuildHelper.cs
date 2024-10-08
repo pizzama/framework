@@ -324,8 +324,7 @@ namespace SFramework.Build
         /// <summary>
         /// 打包
         /// </summary>
-        /// <param name="platformType"></param>
-        /// <param name="setting"></param>
+        /// <param name="config"></param>
         /// <param name="rootUrl"></param>
         private static void BuildPackage(ABConfig config, string rootUrl)
         {

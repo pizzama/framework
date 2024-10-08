@@ -243,14 +243,19 @@ namespace SFramework.Build
                 {
                     config.IsCopyToStreamingAssets = isCopyToStreamingAssets;
                 }
+                EditorGUI.BeginDisabledGroup(true);
+                EditorGUILayout.Toggle("Debug: ", config.IsDebug);
+                EditorGUI.EndDisabledGroup();
+
+                switch (config.Target)
                 {
-                    EditorGUI.BeginDisabledGroup(true);
-                    //GUI.enabled = false;
-                    EditorGUILayout.Toggle("Debug: ", config.IsDebug);
-                    EditorGUILayout.Toggle("UseObb: ", config.UseObb);
-                    //GUI.enabled = true;
-                    EditorGUI.EndDisabledGroup();
+                    case BuildTarget.Android:
+                        EditorGUI.BeginDisabledGroup(true);
+                        EditorGUILayout.Toggle("UseObb: ", config.UseObb);
+                        EditorGUI.EndDisabledGroup();
+                        break;
                 }
+                
                 EditorGUILayout.EndVertical();
             }
 
