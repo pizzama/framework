@@ -356,6 +356,7 @@ namespace SFramework.Build
                     packageName += ".apk";
                     break;
                 case (int)BuildTarget.WebGL:
+                    packageName = "";
                     break;
                 case (int)BuildTarget.iOS:
                     
