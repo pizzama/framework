@@ -133,6 +133,26 @@ namespace SFramework.Build
                 PackageRoot = DefaultPackageRoot;
             }
         }
+        
+        public string GetPackagePath()
+        {
+            var buildFolder = IsDebug ? "DebugPackage" : "ReleasePackage";
+            return $"{DefaultPackageRoot}/{Target}/{Version}/{buildFolder}/";
+        }
+
+        public string GetPackageName(string productName)
+        {
+            var packageName = productName.Replace(" ", "").Replace(":", "");
+            var buildType = IsDebug ? "Debug" : "Release";
+            var buildTime = DateTime.Now.ToString("MMdd_HHmm");
+            return $"{packageName}_{Version}_{VersionCode}_{buildType}_{buildTime}";
+        }
+
+        public string GetProjectPath()
+        {
+            var buildType = IsDebug ? "Debug" : "Release";
+            return $"{DefaultPackageRoot}/{Target}/{buildType}/";
+        }
 
         public static ABConfig Create(BuildTarget target, BuildType type)
         {

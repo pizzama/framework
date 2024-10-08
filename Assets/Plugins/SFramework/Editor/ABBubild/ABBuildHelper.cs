@@ -349,13 +349,16 @@ namespace SFramework.Build
             }
 
             Directory.CreateDirectory(packageDirPath);
-            string platformType = ABPathHelper.GetPlatformName();
+            int platformType = ABPathHelper.GetPlatformBuildTarget();
             switch (platformType)
             {
-                case "Android":
+                case (int)BuildTarget.Android:
                     packageName += ".apk";
                     break;
-                case "WebGL":
+                case (int)BuildTarget.WebGL:
+                    break;
+                case (int)BuildTarget.iOS:
+                    
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(platformType), platformType, null);
@@ -397,11 +400,14 @@ namespace SFramework.Build
             {
                 switch (platformType)
                 {
-                    case "Android":
+                    case (int)BuildTarget.Android:
                         BuildAndroid(config.IsDebug, playerOptions, config.UseObb, config.VersionCode);
                         break;
-                    case "WebGL":
+                    case (int)BuildTarget.WebGL:
                         BuildWebGl(config.IsDebug, playerOptions, config.VersionCode);
+                        break;
+                    case (int)BuildTarget.iOS:
+                        BuildIOS(config.IsDebug, playerOptions, config.VersionCode);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException(
@@ -513,6 +519,29 @@ namespace SFramework.Build
             playerOptions.targetGroup = BuildTargetGroup.WebGL;
 
             PlayerSettings.SetApiCompatibilityLevel(BuildTargetGroup.WebGL, ApiCompatibilityLevel.NET_4_6);
+            if (isDebug)
+            {
+                
+            }
+            else
+            {
+                
+            }
+            
+
+            Debug.Log("开始打包");
+            Debug.Log("输出路径：" + playerOptions.locationPathName);
+            BuildPipeline.BuildPlayer(playerOptions);
+        }
+        
+        private static void BuildIOS( bool isDebug,
+            BuildPlayerOptions playerOptions,
+            string versionCode)
+        {
+            playerOptions.target = BuildTarget.iOS;
+            playerOptions.targetGroup = BuildTargetGroup.iOS;
+
+            PlayerSettings.SetApiCompatibilityLevel(BuildTargetGroup.iOS, ApiCompatibilityLevel.NET_4_6);
             if (isDebug)
             {
                 
