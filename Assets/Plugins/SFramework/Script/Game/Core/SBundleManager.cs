@@ -102,7 +102,7 @@ namespace SFramework
                 foreach (KeyValuePair<string, ISBundle> bundle in result.Value)
                 {
                     bundle.Value.LateUpdate();
-                    _bundleInspector.Add(bundle.Value.FullName + ":" + bundle.Value.AliasName + ":" + bundle.Value.IsOpen);
+                    _bundleInspector.Add(bundle.Value.FullName + ":" + bundle.Value.AliasName + ":" + bundle.Value.ToLog());
                 }
             }
 
@@ -242,6 +242,10 @@ namespace SFramework
                 {
                     bd.Open(value);
                 }
+                else
+                {
+                    Debug.Log("opencontrol is not close::" + value.Alias + ";" + value.ClassPath + ";" + bd.ToLog());
+                }
             }
         }
 
@@ -260,7 +264,7 @@ namespace SFramework
                 for (int i = 0; i < _messageParams.Count; i++)
                 {
                     SBundleParams pa = _messageParams[i];
-                    if(value.Equals(pa))
+                    if(value.Equals(pa) && value.UseCache)
                     {
                         _messageParams[i] = pa;
                         isFind = true;

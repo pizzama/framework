@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using Cysharp.Threading.Tasks;
-using Google.Protobuf;
 using NativeHelper;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -11,41 +10,32 @@ namespace SFramework.Game
     public class RootModel : SModel
     {
         protected ConfigManager configManager;
-        private INativeHelper _nativeHelper = NativeHelperFactory.Create();
         public override void Install()
         {
             configManager = ConfigManager.Instance;
             base.Install();
         }
 
-        protected void SaveData<T>(T data, string fileName)
+        public void SaveData<T>(T data, string fileName)
             where T : Google.Protobuf.IMessage
         {
             try
             {
-
-                string fileFullPath = _nativeHelper.GetApplicationPersistentDataPath() + "/" + fileName;
                 byte[] bytes = GetBytesFromProtoObject(data);
-                FileStream stream = null;
-
-                if (File.Exists(fileFullPath))
-                {
-                    stream = new FileStream(fileFullPath, FileMode.Open);
-                }
-                else
-                {
-                    stream = new FileStream(fileFullPath, FileMode.Create);
-                }
-
-                stream.Write(bytes);
-                stream.Close();
-                _nativeHelper.SyncDB();
-
+                Debug.Log("will save name:" + fileName);
+                NativeHelperFactory.Instance.Save(bytes, fileName);
             }
             catch (System.Exception e)
             {
                 Debug.LogError(e);
             }
+        }
+        
+        public void SaveData<T>(T data)
+            where T : Google.Protobuf.IMessage, new()
+        {
+            Type tp = typeof(T);
+            SaveData(data, tp.FullName + ".bytes");
         }
 
         public T ReadData<T>(string fileName)
@@ -53,24 +43,19 @@ namespace SFramework.Game
         {
             try
             {
-                string fileFullPath = _nativeHelper.GetApplicationPersistentDataPath() + fileName;
-                _nativeHelper.SyncDB();
-                if (File.Exists(fileFullPath))
+                byte[] bytes = NativeHelperFactory.Instance.Read(fileName);
+                if (bytes != null)
                 {
-                    FileStream stream = new FileStream(fileFullPath, FileMode.Open);
-                    byte[] bytes = new byte[stream.Length];
-                    stream.Read(bytes, 0, bytes.Length);
-                    stream.Close();
                     T dt = GetProtobufObjectFromBytes<T>(bytes);
                     return dt;
                 }
+
+                return new T();
             }
             catch (System.Exception)
             {
                 return new T();
             }
-
-            return new T();
         }
 
         public T ReadData<T>()
@@ -78,13 +63,6 @@ namespace SFramework.Game
         {
             Type tp = typeof(T);
             return ReadData<T>(tp.FullName + ".bytes");
-        }
-
-        public void SaveData<T>(T data)
-            where T : Google.Protobuf.IMessage, new()
-        {
-            Type tp = typeof(T);
-            SaveData(data, tp.FullName + ".bytes");
         }
 
         public async UniTask<T> ReadDataAsync<T>()
@@ -114,6 +92,17 @@ namespace SFramework.Game
             }
 
             return new T();
+        }
+
+        public void Delete<T>() where T : Google.Protobuf.IMessage, new()
+        {
+            Type tp = typeof(T);
+            Delete(tp.FullName + ".bytes");
+        }
+
+        public void Delete(string fileName)
+        {
+           NativeHelperFactory.Instance.Delete(fileName); 
         }
 
         private byte[] GetBytesFromProtoObject(Google.Protobuf.IMessage msg)

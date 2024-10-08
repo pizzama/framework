@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace SFramework
 {
@@ -42,6 +43,11 @@ namespace SFramework
             if (GUILayout.Button("Add SFramework Using Scripting Defines Symbols"))
             {
                 AddDefaultScriptingDefineSymbols();
+            }
+            
+            if (GUILayout.Button("Check for missing scripts"))
+            {
+                CheckForMissingScripts();
             }
 
             EditorGUILayout.EndVertical();
@@ -180,6 +186,22 @@ namespace SFramework
                 Debug.LogError(err);
             }
            
+        }
+        
+        public void CheckForMissingScripts()
+        {
+            Object[] allObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject));
+            foreach (GameObject obj in allObjects)
+            {
+                Component[] components = obj.GetComponents<Component>();
+                foreach (Component component in components)
+                {
+                    if (component == null)
+                    {
+                        Debug.LogError($"Missing script on object: {obj.name}", obj);
+                    }
+                }
+            }
         }
     }
 }

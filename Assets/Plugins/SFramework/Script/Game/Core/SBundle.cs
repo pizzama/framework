@@ -39,6 +39,11 @@ namespace SFramework
             className = classType.Name;
         }
 
+        public virtual string ToLog()
+        {
+            return "";
+        }
+
         public virtual void Install()
         {
         }

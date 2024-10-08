@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
@@ -23,8 +22,26 @@ namespace SFramework.Game
 
         public override void Open()
         {
+            ViewOpenType tp = Control.GetViewOpenType();
+            if (tp == ViewOpenType.SingleNone || tp == ViewOpenType.SingleNeverClose)
+            {
+                ViewCallback?.Invoke();
+                return;
+            }
             SetScenePath(out mAbPath, out mAbName);
-            loadSceneProcessAsync(mAbPath, mAbName, (LoadSceneMode)GetViewOpenType()).Forget();
+            if (tp == ViewOpenType.Single || tp == ViewOpenType.Additive)
+            {
+                loadSceneProcessAsync(mAbPath, mAbName, (LoadSceneMode)tp).Forget();
+            }
+            else
+            {
+                throw new NotFoundException("not found LoadSceneMode, please check GetViewOpenType");
+            }
+        }
+
+        public override void Close()
+        {
+            rootEntityRecycleTrigger(goDict);
         }
 
         //if you need control the loading progress you will override the method
@@ -40,10 +57,16 @@ namespace SFramework.Game
             LoadSceneMode mode
         )
         {
+            ViewOpenType tp = Control.GetViewOpenType();
+            if (!(tp == ViewOpenType.Single || tp == ViewOpenType.Additive))
+            {
+                throw new NotFoundException("not found LoadSceneMode, please check GetViewOpenType");
+            }
+
             AsyncOperation operation = await LoadSceneAsync(
                 scenePath,
                 sceneName,
-                (LoadSceneMode)GetViewOpenType()
+                (LoadSceneMode)tp
             );
             if (operation == null)
             {
@@ -68,6 +91,7 @@ namespace SFramework.Game
             goDict = collectSceneByTag();
             //loading scene success the view is open
             base.Open();
+            rootEntityShowTrigger(goDict);
             ViewCallback?.Invoke();
         }
 

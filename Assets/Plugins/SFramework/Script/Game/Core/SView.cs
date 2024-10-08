@@ -4,13 +4,7 @@ using UnityEngine;
 
 namespace SFramework
 {
-    public enum ViewOpenType
-    {
-        Single,
-        Multi
-    }
-
-    public abstract class SView : SBundle
+    public class SView : SBundle
     {
         private SControl _control;
         public SControl Control

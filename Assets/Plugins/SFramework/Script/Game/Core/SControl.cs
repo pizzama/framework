@@ -4,7 +4,14 @@ using SFramework.Tools;
 
 namespace SFramework
 {
-    public class SControl : SBundle
+    public enum ViewOpenType
+    {
+        Single,
+        Additive,
+        SingleNone,
+        SingleNeverClose,
+    }
+    public abstract class SControl : SBundle
     {
         private SModel _model;
         private SView _view;
@@ -23,6 +30,7 @@ namespace SFramework
         {
             return (T)_view;
         }
+        public abstract ViewOpenType GetViewOpenType();
 
         //when register control it will find model and view
         public override void Install()
@@ -50,9 +58,12 @@ namespace SFramework
 
         public override void Close()
         {
-            _model.Close();
-            _view.Close();
-            IsOpen = false;
+            if (GetViewOpenType() != ViewOpenType.SingleNeverClose)
+            {
+                _model.Close();
+                _view.Close();
+                IsOpen = false;
+            }
         }
 
         public void CloseControl()
@@ -88,24 +99,56 @@ namespace SFramework
             Manager.UnSubscribeBundleMessage(messageId, bundle);
         }
 
+        public void BroadcastControlWithOutCache(string messageId, object messageData = null, string fullPath = "",
+            Action<object> callback = null, string alias = "", int sort = 0)
+        {
+            string nameSpace;
+            string className;
+            StringTools.PrefixClassName(fullPath, out nameSpace, out className);
+            this.BroadcastControl(messageId, messageData, nameSpace, className, callback, alias, sort, false);
+        }
+
         public void BroadcastControl(string messageId, object messageData = null, string fullPath = "", Action<object> callback = null, string alias = "", int sort = 0)
         {
             string nameSpace;
             string className;
             StringTools.PrefixClassName(fullPath, out nameSpace, out className);
-            this.BroadcastControl(messageId, messageData, nameSpace, className, callback, alias, sort);
+            this.BroadcastControl(messageId, messageData, nameSpace, className, callback, alias, sort, true);
         }
 
-        public void BroadcastControl(string messageId, object messageData, string nameSpace, string className, Action<object> callback, string alias, int sort)
+        public void BroadcastControl(string messageId, object messageData, string nameSpace, string className, Action<object> callback, string alias, int sort, bool useCache)
         {
             string primaryKey = $"{nameSpace}.{className}.{alias}.{messageId}";
-            if(_paramsCache.ContainsKey(primaryKey))
+            if (useCache)
             {
-                var bdParams = _paramsCache[primaryKey];
-                bdParams.MessageData = messageData;
-                bdParams.CallBack = callback;
-                bdParams.Sort = sort;  
-                SBundleManager.Instance.AddMessageParams(bdParams);
+                if(_paramsCache.ContainsKey(primaryKey))
+                {
+                    var bdParams = _paramsCache[primaryKey];
+                    bdParams.MessageData = messageData;
+                    bdParams.CallBack = callback;
+                    bdParams.Sort = sort;
+                    bdParams.UseCache = true;
+                    SBundleManager.Instance.AddMessageParams(bdParams);
+                }
+                else
+                {
+                    var bdParams = new SBundleParams()
+                    {
+                        MessageId = messageId,
+                        NameSpace = nameSpace,
+                        ClassName = className,
+                        MessageData = messageData,
+                        Alias = alias,
+                        MessageSender = this,
+                        CallBack = callback,
+                        Sort = sort,
+                        UseCache = true,
+                    };
+
+                    _paramsCache[primaryKey] = bdParams;
+
+                    SBundleManager.Instance.AddMessageParams(bdParams);
+                }
             }
             else
             {
@@ -119,10 +162,8 @@ namespace SFramework
                     MessageSender = this,
                     CallBack = callback,
                     Sort = sort,
+                    UseCache = false,
                 };
-
-                _paramsCache[primaryKey] = bdParams;
-
                 SBundleManager.Instance.AddMessageParams(bdParams);
             }
         }
@@ -217,6 +258,11 @@ namespace SFramework
             Manager.CloseAllControl(excludeBundles);
         }
 
+        public override string ToLog()
+        {
+            return string.Format(@"{0};{1}", IsOpen.ToString(), GetViewOpenType().ToString());
+        }
+
         protected override void closing()
         {
             base.closing();
@@ -232,7 +278,6 @@ namespace SFramework
 
         protected virtual void controlUpdate()
         {
-
         }
 
         protected virtual void controlFixedUpdate()

@@ -150,7 +150,7 @@ namespace SFramework
             }
             try
             {
-                UnityWebRequest webRequest = UnityWebRequest.Post(url, pars.ToString());
+                UnityWebRequest webRequest = UnityWebRequest.PostWwwForm(url, pars.ToString());
                 byte[] bytes = await requestData(webRequest);
                 ModelCallback?.Invoke(0);
                 return bytes;

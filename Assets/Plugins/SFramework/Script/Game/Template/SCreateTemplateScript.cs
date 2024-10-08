@@ -31,6 +31,12 @@ public class SCreateTemplateScript
         writer.AppendLine("{");
         writer.AppendLine($"\tpublic class {_name}Control : RootControl");
         writer.AppendLine("\t{");
+        
+        writer.AppendLine("\t\tpublic override ViewOpenType GetViewOpenType()");
+        writer.AppendLine("\t\t{");
+        writer.AppendLine("\t\t\treturn ViewOpenType.Single;");
+        writer.AppendLine("\t\t}");
+        
         writer.AppendLine("\t\tprotected override void opening()");
         writer.AppendLine("\t\t{");
         writer.AppendLine("\t\t\t// Code Here");
@@ -106,11 +112,6 @@ public class SCreateTemplateScript
         }
         
         writer.AppendLine("\t{");
-        writer.AppendLine("\t\tprotected override ViewOpenType GetViewOpenType()");
-        writer.AppendLine("\t\t{");
-        writer.AppendLine("\t\t\treturn ViewOpenType.Single;");
-        writer.AppendLine("\t\t}");
-
         if (index == 1)
         {
             writer.AppendLine("\t\tprotected override UILayer GetViewLayer()");

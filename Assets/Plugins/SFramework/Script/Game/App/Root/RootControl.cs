@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SFramework.Game
 {
-    public class RootControl : SControl
+    public abstract class RootControl : SControl
     {
         private readonly Dictionary<int, STimeData> _countDownTimerDict =
             new Dictionary<int, STimeData>();

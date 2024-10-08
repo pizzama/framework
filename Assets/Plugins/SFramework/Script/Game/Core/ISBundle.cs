@@ -22,5 +22,6 @@ namespace SFramework
         string ClassName {get; set;}
         void HandleMessage(SBundleParams value);
         bool IsOpen {get; set;}
+        string ToLog();
     }
 }

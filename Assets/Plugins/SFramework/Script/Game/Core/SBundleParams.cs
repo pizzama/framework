@@ -15,9 +15,9 @@ namespace SFramework
         public string NameSpace;
         public string ClassName;
         public object MessageData;
+        public bool UseCache; 
         private string _alias;
         public Action<object> CallBack;
-
         public string Alias
         {
             get { return _alias == "" ? ClassName : _alias; }

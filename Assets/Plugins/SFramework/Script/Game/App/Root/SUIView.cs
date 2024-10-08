@@ -4,7 +4,6 @@ using SFramework.Pool;
 using System;
 using Cysharp.Threading.Tasks;
 using SFramework.Extension;
-using SFramework.Tools;
 
 namespace SFramework.Game
 {
@@ -61,12 +60,13 @@ namespace SFramework.Game
 
         public override void Open()
         {
-            if (GetViewLayer() == UILayer.None)
+            ViewOpenType tp = Control.GetViewOpenType();
+            if (tp == ViewOpenType.SingleNone || tp == ViewOpenType.SingleNeverClose)
             {
                 ViewCallback?.Invoke();
                 return;
             }
-
+            
             Vector3 position;
             Quaternion rotation;
             SetViewPrefabPath(out mAbName, out mResName, out position, out rotation);
@@ -130,11 +130,13 @@ namespace SFramework.Game
 
             }
             base.Open();
+            rootEntityShowTrigger(goDict);
             ViewCallback?.Invoke();
         }
 
         public override void Close()
         {
+            rootEntityRecycleTrigger(goDict);
             if (mViewTransform != null && poolManager != null)
             {
                 string fullPath = assetManager.FullPath(mAbName, mResName);
@@ -142,6 +144,7 @@ namespace SFramework.Game
                 base.Close();
             }
         }
+        
     }
 }
 
