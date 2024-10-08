@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using SFramework.Extension;
 using UnityEditor;
+using UnityEditor.Build.Reporting;
 using UnityEditor.U2D;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace SFramework.Build
 {
@@ -353,13 +356,17 @@ namespace SFramework.Build
             switch (platformType)
             {
                 case (int)BuildTarget.Android:
-                    packageName += ".apk";
+                    packageName += $"/{packageName}.apk";
                     break;
                 case (int)BuildTarget.WebGL:
                     packageName = "";
                     break;
                 case (int)BuildTarget.iOS:
-                    
+                    packageName = config.GetProjectPath();
+                    break;
+                case (int)BuildTarget.StandaloneWindows:
+                case (int)BuildTarget.StandaloneWindows64:
+                    packageName += $"/{packageName}.exe";
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(platformType), platformType, null);
@@ -402,13 +409,13 @@ namespace SFramework.Build
                 switch (platformType)
                 {
                     case (int)BuildTarget.Android:
-                        BuildAndroid(config.IsDebug, playerOptions, config.UseObb, config.VersionCode);
+                        BuildAndroid(config, playerOptions);
                         break;
                     case (int)BuildTarget.WebGL:
-                        BuildWebGl(config.IsDebug, playerOptions, config.VersionCode);
+                        BuildWebGl(config, playerOptions);
                         break;
                     case (int)BuildTarget.iOS:
-                        BuildIOS(config.IsDebug, playerOptions, config.VersionCode);
+                        BuildIOS(config, playerOptions);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException(
@@ -428,18 +435,16 @@ namespace SFramework.Build
         }
 
         private static void BuildAndroid(
-            bool isDebug,
-            BuildPlayerOptions playerOptions,
-            bool useObb,
-            string versionCode
+            ABConfig config,
+            BuildPlayerOptions playerOptions
         )
         {
             playerOptions.target = BuildTarget.Android;
             playerOptions.targetGroup = BuildTargetGroup.Android;
 
-            PlayerSettings.Android.bundleVersionCode = int.Parse(versionCode.Trim());
+            PlayerSettings.Android.bundleVersionCode = int.Parse(config.VersionCode.Trim());
             EditorUserBuildSettings.androidBuildSystem = AndroidBuildSystem.Gradle;
-            if (isDebug)
+            if (config.IsDebug)
             {
                 PlayerSettings.SetScriptingBackend(
                     BuildTargetGroup.Android,
@@ -462,7 +467,7 @@ namespace SFramework.Build
             PlayerSettings.Android.keyaliasPass = "egame123";
             PlayerSettings.Android.keystoreName = "./keystore/user.keystore";
             PlayerSettings.Android.keyaliasName = "pixieisland";
-            PlayerSettings.Android.useAPKExpansionFiles = useObb;
+            PlayerSettings.Android.useAPKExpansionFiles = config.UseObb;
             PlayerSettings.Android.buildApkPerCpuArchitecture = false;
             EditorUserBuildSettings.buildAppBundle = false;
             PlayerSettings.Android.targetSdkVersion = AndroidSdkVersions.AndroidApiLevelAuto;
@@ -491,7 +496,7 @@ namespace SFramework.Build
                     continue;
                 }
 
-                if (!useObb)
+                if (!config.UseObb)
                 {
                     continue;
                 }
@@ -506,21 +511,20 @@ namespace SFramework.Build
                     "dirFileInfo.Directory != null"
                 );
                 var newName =
-                    $"{dirFileInfo.Directory.FullName}/main.{versionCode}.{Application.identifier}.obb";
+                    $"{dirFileInfo.Directory.FullName}/main.{config.VersionCode}.{Application.identifier}.obb";
                 File.Move(dirFileInfo.FullName, newName);
                 break;
             }
         }
 
-        private static void BuildWebGl( bool isDebug,
-            BuildPlayerOptions playerOptions,
-            string versionCode)
+        private static void BuildWebGl( ABConfig config,
+            BuildPlayerOptions playerOptions)
         {
             playerOptions.target = BuildTarget.WebGL;
             playerOptions.targetGroup = BuildTargetGroup.WebGL;
 
             PlayerSettings.SetApiCompatibilityLevel(BuildTargetGroup.WebGL, ApiCompatibilityLevel.NET_4_6);
-            if (isDebug)
+            if (config.IsDebug)
             {
                 
             }
@@ -528,34 +532,180 @@ namespace SFramework.Build
             {
                 
             }
-            
-
             Debug.Log("开始打包");
             Debug.Log("输出路径：" + playerOptions.locationPathName);
             BuildPipeline.BuildPlayer(playerOptions);
         }
         
-        private static void BuildIOS( bool isDebug,
-            BuildPlayerOptions playerOptions,
-            string versionCode)
+        private static void BuildIOS( ABConfig config,
+            BuildPlayerOptions playerOptions)
         {
-            playerOptions.target = BuildTarget.iOS;
+             playerOptions.target = BuildTarget.iOS;
             playerOptions.targetGroup = BuildTargetGroup.iOS;
+            playerOptions.options = BuildOptions.None | BuildOptions.AcceptExternalModificationsToPlayer;
+            //playerOptions.options |= BuildOptions.AcceptExternalModificationsToPlayer;
+            //playerOptions.options = BuildOptions.StrictMode;
 
-            PlayerSettings.SetApiCompatibilityLevel(BuildTargetGroup.iOS, ApiCompatibilityLevel.NET_4_6);
-            if (isDebug)
+            EditorUserBuildSettings.iOSXcodeBuildConfig = config.IsDebug ? XcodeBuildConfig.Debug : XcodeBuildConfig.Release;
+            EditorUserBuildSettings.buildAppBundle = false;
+            // 不论是否是debug都打il2cpp
+            // if (setting.IsDebug)
+            // {
+            //     PlayerSettings.SetScriptingBackend(BuildTargetGroup.iOS, ScriptingImplementation.Mono2x);
+            // }
+            // else
             {
-                
+                PlayerSettings.SetScriptingBackend(BuildTargetGroup.iOS, ScriptingImplementation.IL2CPP);
             }
-            else
-            {
-                
-            }
-            
+            PlayerSettings.iOS.targetOSVersionString = "13.0";
 
             Debug.Log("开始打包");
             Debug.Log("输出路径：" + playerOptions.locationPathName);
-            BuildPipeline.BuildPlayer(playerOptions);
+            try
+            {
+                var time = Time.realtimeSinceStartup;
+                var report = BuildPipeline.BuildPlayer(playerOptions);
+                var summary = report.summary;
+                Debug.Log($"完成iOS打包，总耗时：{Time.realtimeSinceStartup - time}, result={summary.result}");
+                if (summary.result == BuildResult.Succeeded)
+                {
+                    var xcodeProjectPath = playerOptions.locationPathName;
+                    var packagePath = config.GetPackagePath();
+                    var packageName = config.GetPackageName(PlayerSettings.productName);
+                    packagePath += packageName;
+                    //var archiveName = $"{packageName}.xcarchive";
+                    //var ipaName = $"{packageName}.ipa";
+                    BuildIpa(config.IsDebug, xcodeProjectPath, packagePath, packageName);
+
+                    Debug.Log("打包成功");
+                    return;
+                }
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
+            
+        Debug.LogError("打包失败");
+        }
+        
+        private static void BuildIpa(bool debug, string xcodeProjectPath, string packagePath, string packageName)
+        {
+            var plistPath = Path.Combine(xcodeProjectPath, "Info.plist");
+            var podfilePath = Path.Combine(xcodeProjectPath, "Podfile");
+            
+    #if UNITY_IPHONE
+            // 修改xcode工程配置文件
+            // var pbxPath = Path.Combine(xcodeProjectPath, "Unity-iPhone.xcodeproj/project.pbxobject");
+            // var pbx = new PBXProject();
+            // var target = pbx.TargetGuidByName("Unity-iPhone");
+            // var targetGuid = pbx.GetUnityMainTargetGuid();
+            // pbx.ReadFromFile(pbxPath);
+            // pbx.Addxxx(target, );
+            // pbx.Getxxx(target, );
+            // pbx.Setxxx(target, );
+            // pbx.RemoveFrameworkFromProject(targetGuid, "Push Notifications");
+            // File.WriteAllText(pbxPath, pbx.WriteToString());
+            
+            // 修改plist文件
+            Debug.Log("modify plist");
+            var plist = new PlistDocument();
+            plist.ReadFromString(File.ReadAllText(plistPath));
+            var infoDict = plist.root;
+            infoDict.SetString("NSUserTrackingUsageDescription", "Your data will be used to deliver personalized ads to you.");
+            infoDict.SetString("NSAdvertisingAttributionReportEndpoint", "https://adjust-skadnetwork.com");
+            File.WriteAllText(plistPath, plist.WriteToString());
+            
+            // 修改podfile文件
+            Debug.Log("modify podfile");
+            //ExecuteCommand("python", pythonPath, null);
+            
+            var backupPath = Path.Combine(Application.dataPath, "../keystore/ioskeystore/Podfile");
+            var podfile = File.ReadAllText(backupPath);
+            File.WriteAllText(podfilePath, podfile);
+
+    #endif
+            
+            // 通过CocosPods下载第三方库
+            ExecuteCommand("pod install", xcodeProjectPath, null);
+            
+            // 暂时关闭后续功能（未完成）
+            return;
+            
+            Debug.Log("clean xcode project");
+            ExecuteCommand("xcodebuild", xcodeProjectPath, "clean -quiet");
+            
+            Debug.Log("export archive");
+            // if (Directory.Exists(packagePath))
+            //     Directory.Delete(packagePath, true);
+            // Directory.CreateDirectory(packagePath);
+            var workspace = Path.Combine(xcodeProjectPath, "Unity-iPhone.xcworkspace");
+            var archivePath = Path.Combine(packagePath, $"{packageName}.xcarchive");
+            var configuration = debug ? "Debug" : "Release";
+            var arguments = $"archive -workspace \"{workspace}\" -scheme \"Unity-iPhone\" -configuration \"{configuration}\" -sdk iphoneos -archivePath \"{archivePath}\" -quiet";
+            ExecuteCommand("xcodebuild", xcodeProjectPath, arguments);
+            
+            Debug.Log("export ipa");
+            //var ipaPath = Path.Combine(packagePath, $"{packageName}.ipa");
+            arguments = $"-exportArchive -archivePath \"{archivePath}\" -exportPath \"{packagePath}\" -exportOptionsPlist \"{plistPath}\" -quiet";
+            ExecuteCommand("xcodebuild", archivePath, arguments);
+            
+            Debug.Log("open dir");
+            Process.Start(packagePath);
+        }
+    
+        private static void ExecuteCommand(string filename, string workDirectory, string arguments)
+        {
+            Debug.Log($"process start, filename={filename}, workDirectory={workDirectory}, arguments={arguments}");
+
+            try
+            {
+    #if PROCESS_INFO
+                var info = new ProcessStartInfo
+                {
+                    FileName = filename,
+                    Arguments = arguments,
+                    WorkingDirectory = workDirectory,
+                    ErrorDialog = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
+                };
+                var process = Process.Start(info);
+                if (process == null)
+                {
+                    Debug.LogError($"process is null! filename={filename}, workDirectory={workDirectory}, arguments={arguments}");
+                    return;
+                }
+    #else
+                var process = new Process();
+                process.StartInfo.FileName = filename;
+                process.StartInfo.Arguments = arguments;
+                process.StartInfo.WorkingDirectory = workDirectory;
+                process.StartInfo.ErrorDialog = true;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.RedirectStandardError = true;
+                process.OutputDataReceived += (sender, e) => { Debug.Log($"sender={sender}, e={e.Data}"); };
+                process.ErrorDataReceived += (sender, e) => { Debug.LogError($"sender={sender}, e={e.Data}"); };
+                process.Start();
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
+    #endif
+                process.WaitForExit();
+                if (process.ExitCode != 0)
+                {
+                    Debug.LogError("process exit with error code " + process.ExitCode);
+                }
+                Debug.Log("StandardOutput.ReadToEnd() " + process.StandardOutput.ReadToEnd());
+                Debug.Log("StandardError.ReadToEnd() " + process.StandardError.ReadToEnd());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }
