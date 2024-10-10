@@ -16,7 +16,12 @@ namespace App.Inventory
 			// Code Here
 		}
 
-        public override void HandleMessage(SBundleParams value)
+		public override ViewOpenType GetViewOpenType()
+		{
+			return ViewOpenType.Single;
+		}
+
+		public override void HandleMessage(SBundleParams value)
         {
 			if(IsOpen)
 			{

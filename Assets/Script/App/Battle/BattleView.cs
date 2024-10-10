@@ -13,11 +13,6 @@ namespace Game.App.Battle
 {
     public class BattleView : SSCENEView
     {
-        protected override ViewOpenType GetViewOpenType()
-        {
-            return ViewOpenType.Single;
-        }
-
         protected override void opening()
         {
             BattleModel mode = GetControl<BattleControl>().GetModel<BattleModel>();

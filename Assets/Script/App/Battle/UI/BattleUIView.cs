@@ -32,12 +32,7 @@ namespace Game.App.Battle
         {
             return UILayer.Hud;
         }
-
-        protected override ViewOpenType GetViewOpenType()
-        {
-            return ViewOpenType.Single;
-        }
-
+        
         protected override void opening()
         {
             _cardHandsTransform = getExportObject<RectTransform>("CardHands");

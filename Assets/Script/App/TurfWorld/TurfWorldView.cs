@@ -9,10 +9,6 @@ namespace App.TurfWorld
 	public class TurfWorldView : SSCENEView
 	{
 		private WorldGen _worldGen;
-		protected override ViewOpenType GetViewOpenType()
-		{
-			return ViewOpenType.Single;
-		}
 		protected override void SetViewPrefabPath(out string prefabPath, out string prefabName)
 		{
 			prefabPath = Game_turpworld_sfs.BundleName;

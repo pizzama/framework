@@ -11,5 +11,10 @@ namespace App.Loading
 			// Code Here
 			OpenControl(SFStaticsControl.App_Farm_FarmControl);
 		}
+
+		public override ViewOpenType GetViewOpenType()
+		{
+			return ViewOpenType.Single;
+		}
 	}
 }

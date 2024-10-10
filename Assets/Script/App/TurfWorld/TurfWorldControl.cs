@@ -9,5 +9,10 @@ namespace App.TurfWorld
 		{
 			// Code Here
 		}
+
+		public override ViewOpenType GetViewOpenType()
+		{
+			return ViewOpenType.Single;
+		}
 	}
 }

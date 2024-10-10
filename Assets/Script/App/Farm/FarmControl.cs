@@ -1,4 +1,4 @@
-using UnityEngine;
+using SFramework;
 using SFramework.Game;
 using SFramework.Statics;
 
@@ -6,6 +6,10 @@ namespace App.Farm
 {
 	public class FarmControl : RootControl
 	{
+		public override ViewOpenType GetViewOpenType()
+		{
+			return ViewOpenType.Single;
+		}
 		protected override void opening()
 		{
 			// Code Here

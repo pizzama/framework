@@ -10,6 +10,11 @@ namespace Game
         {
         }
 
+        public override ViewOpenType GetViewOpenType()
+        {
+            return ViewOpenType.Single;
+        }
+
         public override void HandleMessage(SBundleParams value)
         {
         }

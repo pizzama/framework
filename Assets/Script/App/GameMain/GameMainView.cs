@@ -7,11 +7,6 @@ namespace Game
 {
     public class GameMainView : SSCENEView
     {
-        protected override ViewOpenType GetViewOpenType()
-        {
-            return ViewOpenType.Single;
-        }
-
         protected override void SetViewPrefabPath(out string prefabPath, out string prefabName)
         {
             prefabPath = Game_scenes_sfs.BundleName;

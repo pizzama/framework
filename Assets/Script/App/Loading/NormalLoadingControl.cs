@@ -10,6 +10,11 @@ namespace Game
             GetView<NormalLoadingView>().PlayAnimator(Model.OpenParams.MessageData.ToString());
         }
 
+        public override ViewOpenType GetViewOpenType()
+        {
+            return ViewOpenType.Single;
+        }
+
         public override void HandleMessage(SBundleParams value)
         {
             //switch(value.MessageId)

@@ -9,5 +9,10 @@ namespace App.PendTips
 		{
 			// Code Here
 		}
+
+		public override ViewOpenType GetViewOpenType()
+		{
+			return ViewOpenType.Single;
+		}
 	}
 }

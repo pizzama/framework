@@ -7,10 +7,6 @@ namespace App.Inventory
 {
 	public class InventoryView : SUIView
 	{
-		protected override ViewOpenType GetViewOpenType()
-		{
-			return ViewOpenType.Single;
-		}
 		protected override void opening()
 		{
 			// Code Here

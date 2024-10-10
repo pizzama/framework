@@ -7,11 +7,6 @@ namespace Game
 {
     public class NormalLoadingView : SUIView
     {
-        protected override ViewOpenType GetViewOpenType()
-        {
-            return ViewOpenType.Single;
-        }
-
         protected override UILayer GetViewLayer()
         {
             return UILayer.Toast;

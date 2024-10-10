@@ -1,3 +1,4 @@
+using SFramework;
 using UnityEngine;
 using SFramework.Game;
 
@@ -13,6 +14,12 @@ namespace App.Alert
 		{
 			// Code Here
 		}
+
+		public override ViewOpenType GetViewOpenType()
+		{
+			return ViewOpenType.Single;
+		}
+
 		protected override void closing()
 		{
 			// Code Here

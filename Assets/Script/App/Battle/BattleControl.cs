@@ -11,5 +11,9 @@ namespace Game.App.Battle
             //OpenControl(SFStaticsControl.Game_App_Battle_BattleUIControl);   
         }
 
+        public override ViewOpenType GetViewOpenType()
+        {
+            return ViewOpenType.Single;
+        }
     }
 }

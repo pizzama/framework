@@ -9,10 +9,6 @@ namespace App.Alert
 	public class AlertView : SUIView
 	{
 		private TextMeshProUGUI _textMeshGui;
-		protected override ViewOpenType GetViewOpenType()
-		{
-			return ViewOpenType.Single;
-		}
 		protected override UILayer GetViewLayer()
 		{
 			return UILayer.Popup;

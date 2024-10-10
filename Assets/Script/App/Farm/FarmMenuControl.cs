@@ -1,3 +1,4 @@
+using SFramework;
 using UnityEngine;
 using SFramework.Game;
 
@@ -8,6 +9,11 @@ namespace App.Farm
 		protected override void opening()
 		{
 			// Code Here
+		}
+
+		public override ViewOpenType GetViewOpenType()
+		{
+			return ViewOpenType.Single;
 		}
 	}
 }

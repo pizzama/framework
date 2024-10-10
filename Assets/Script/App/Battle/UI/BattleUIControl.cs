@@ -10,5 +10,9 @@ namespace Game.App.Battle
             Debug.Log("test control enter");
         }
 
+        public override ViewOpenType GetViewOpenType()
+        {
+            return ViewOpenType.Single;
+        }
     }
 }

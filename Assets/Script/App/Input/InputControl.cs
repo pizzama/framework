@@ -15,5 +15,10 @@ namespace Game
         {
             Debug.Log("test refresh");
         }
+
+        public override ViewOpenType GetViewOpenType()
+        {
+            return ViewOpenType.Single;
+        }
     }
 }
