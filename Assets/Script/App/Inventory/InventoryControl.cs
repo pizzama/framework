@@ -18,7 +18,7 @@ namespace App.Inventory
 
 		public override ViewOpenType GetViewOpenType()
 		{
-			return ViewOpenType.Single;
+			return ViewOpenType.SingleNeverClose;
 		}
 
 		public override void HandleMessage(SBundleParams value)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
@@ -73,19 +74,16 @@ namespace SFramework.Game
                 return;
             }
             operation.allowSceneActivation = false;
-            if (operation != null)
-            {
-                var progress = Progress.Create<float>(
-                    (p) =>
+            var progress = Progress.Create<float>(
+                (p) =>
+                {
+                    UniTask.Void(async () =>
                     {
-                        UniTask.Void(async () =>
-                        {
-                            operation.allowSceneActivation = await loadingScene(p);
-                        });
-                    }
-                );
-                await operation.ToUniTask(progress);
-            }
+                        operation.allowSceneActivation = await loadingScene(p);
+                    });
+                }
+            );
+            await operation.ToUniTask(progress);
 
             Control.CloseAllControl(new List<ISBundle>() { Control });
             goDict = collectSceneByTag();
@@ -124,7 +122,7 @@ namespace SFramework.Game
                     );
                     foreach (string path in assetPaths)
                     {
-                        if (path.IndexOf(sceneName) >= 0)
+                        if (path.IndexOf(sceneName, StringComparison.Ordinal) >= 0)
                         {
                             operation =
                                 UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(
@@ -185,7 +183,7 @@ namespace SFramework.Game
         {
             int i = 0;
             names = new List<string>();
-            var sceneName = string.Empty;
+            string sceneName;
             do
             {
                 sceneName = UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(i);

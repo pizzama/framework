@@ -131,6 +131,8 @@ namespace SFramework.Game
         
         protected void rootEntityShowTrigger(Dictionary<string, GameObject> goValue)
         {
+            if (goValue == null)
+                return;
             foreach (var item in goValue)
             {
                 ISEntity entity = item.Value.GetComponent<ISEntity>();
@@ -147,6 +149,8 @@ namespace SFramework.Game
         
         protected void rootEntityRecycleTrigger(Dictionary<string, GameObject> goValue)
         {
+            if (goValue == null)
+                return;
             foreach (var item in goValue)
             {
                 ISEntity entity = item.Value.GetComponent<ISEntity>();
