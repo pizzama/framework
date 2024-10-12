@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace SFramework.GameCamera
 {
@@ -31,8 +33,37 @@ namespace SFramework.GameCamera
 
             return false;
         }
+        /// <summary>通过layer名字判断是否点击在UI上面</summary>
+        public static bool IsTouchUI(Vector3 mousePosition, string layerName = "UI")
+        {
+            var result = ReturnTouchOnRaycastResults(mousePosition);
+            if (result == null)
+            {
+                return false;
+            }
 
+            var num = result.Select(r => r.gameObject).Count(go =>
+                LayerMask.LayerToName(go.layer) == layerName
+            );
+            return num > 0;
+        }
+        
+        public static List<RaycastResult> ReturnTouchOnRaycastResults(Vector3 mousePosition)
+        {
+            var rrList = new List<RaycastResult>();
+            if (UnityEngine.EventSystems.EventSystem.current == null)
+            {
+                return rrList;
+            }
+
+            var pointerEventData = new PointerEventData(UnityEngine.EventSystems.EventSystem.current);
+            var vector3 = pointerEventData.pressPosition = (pointerEventData.position = mousePosition);
+            UnityEngine.EventSystems.EventSystem.current.RaycastAll(pointerEventData, rrList);
+            return rrList;
+        }
     }
+    
+    
 
     /// <summary>输入事件类型</summary>
     public enum SInputEventType
