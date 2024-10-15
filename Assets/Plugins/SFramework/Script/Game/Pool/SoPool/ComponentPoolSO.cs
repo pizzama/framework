@@ -6,7 +6,7 @@ namespace SFramework.Pool
 	/// Implements a Pool for Component types.
 	/// </summary>
 	/// <typeparam name="T">Specifies the component to pool.</typeparam>
-	public abstract class ComponentPoolSO<T> : PoolSO<T> where T : Component
+	public abstract class ComponentPoolSO<T> : PoolSO<T> where T : UnityEngine.Component
 	{
 		private Transform _poolRoot;
 		private Transform PoolRoot

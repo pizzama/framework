@@ -1,7 +1,4 @@
 using System;
-
-using System.Collections;
-
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -25,8 +22,8 @@ namespace SFramework.Pool
 
     public class MonosPool : MonoBehaviour
     {
-        public static Dictionary<int, Stack<Component>> _poolGo = new Dictionary<int, Stack<Component>>();
-        public static List<Component> returnTransform = new List<Component>();
+        public static Dictionary<int, Stack<UnityEngine.Component>> _poolGo = new Dictionary<int, Stack<UnityEngine.Component>>();
+        public static List<UnityEngine.Component> returnTransform = new List<UnityEngine.Component>();
         public static List<PoolID> returnTime = new List<PoolID>();
         // Use this for initialization
         void Awake()
@@ -46,7 +43,7 @@ namespace SFramework.Pool
                     var pd = returnTime[i];
                     if (pd.time < Time.time)
                     {
-                        Component C = returnTransform[i];
+                        UnityEngine.Component C = returnTransform[i];
                         _poolGo[pd.id].Push(C);
                         C.gameObject.SetActive(false);
                         returnTransform.RemoveAt(i);
@@ -58,14 +55,14 @@ namespace SFramework.Pool
         }
 
         //根据需要初始化每个component对象池的大小
-        public static void Prewarm<T>(T key, int count) where T : Component
+        public static void Prewarm<T>(T key, int count) where T : UnityEngine.Component
         {
-            Stack<Component> temp;
+            Stack<UnityEngine.Component> temp;
             int name = key.GetHashCode();
             //int name = key.GetInstanceID();
             if (!_poolGo.TryGetValue(name, out temp))
             {
-                temp = new Stack<Component>(count);
+                temp = new Stack<UnityEngine.Component>(count);
                 _poolGo.Add(name, temp);
             }
 
@@ -80,7 +77,7 @@ namespace SFramework.Pool
             }
         }
 
-        public static T Request<T>(T key, Vector3 pos, Quaternion rot) where T : Component
+        public static T Request<T>(T key, Vector3 pos, Quaternion rot) where T : UnityEngine.Component
         {
             T go = Request(key);
             go.transform.SetPositionAndRotation(pos, rot);
@@ -89,7 +86,7 @@ namespace SFramework.Pool
         }
 
         //可以自动回收  设置自动回收的时间
-        public static T Request<T>(T key, Vector3 pos, Quaternion rot, float t) where T : Component
+        public static T Request<T>(T key, Vector3 pos, Quaternion rot, float t) where T : UnityEngine.Component
         {
             int name = key.GetHashCode();
             T go = Request(key, pos, rot);
@@ -102,9 +99,9 @@ namespace SFramework.Pool
         // 使用示例
         // Transform tf=MonoPool.Request<Transform>(keyTf);
 
-        public static T Request<T>(T key) where T : Component
+        public static T Request<T>(T key) where T : UnityEngine.Component
         {
-            Stack<Component> qc;
+            Stack<UnityEngine.Component> qc;
             T go;
             int name = key.GetHashCode();
             if (_poolGo.TryGetValue(name, out qc))
@@ -116,7 +113,7 @@ namespace SFramework.Pool
             }
             else
             {
-                qc = new Stack<Component>();
+                qc = new Stack<UnityEngine.Component>();
                 _poolGo.Add(name, qc);
                 go = Instantiate<T>(key);
                 // go.hideFlags = HideFlags.HideInHierarchy;
@@ -125,14 +122,14 @@ namespace SFramework.Pool
             return go;
         }
 
-        public static void Return<T>(T go, T key, Action act = null) where T : Component
+        public static void Return<T>(T go, T key, Action act = null) where T : UnityEngine.Component
         {
             if (act != null)
                 act();
             int name = key.GetHashCode();
             if (!_poolGo.ContainsKey(name))
             {
-                _poolGo.Add(name, new Stack<Component>());
+                _poolGo.Add(name, new Stack<UnityEngine.Component>());
             }
             _poolGo[name].Push(go);
             go.gameObject.SetActive(false);

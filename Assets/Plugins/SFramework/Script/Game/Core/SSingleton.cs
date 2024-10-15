@@ -5,7 +5,7 @@ namespace SFramework
     /// <summary>
     /// Singleton pattern.
     /// </summary>
-    public abstract class SSingletonMonoBehaviour<T> : MonoBehaviour where T : Component
+    public abstract class SSingletonMonoBehaviour<T> : MonoBehaviour where T : UnityEngine.Component
     {
         protected static T _instance;
 
