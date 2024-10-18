@@ -1,6 +1,6 @@
 using TMPro;
 
-namespace SFramework.Component
+namespace SFramework.Components
 {
     public class TMPTypeComponent : TypeComponent
     {

@@ -1,6 +1,6 @@
 using UnityEngine.UI;
 
-namespace SFramework.Component
+namespace SFramework.Components
 {
     public class TextTypeComponent : TypeComponent
     {
