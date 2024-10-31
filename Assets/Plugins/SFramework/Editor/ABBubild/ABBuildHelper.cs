@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
 using SFramework.Extension;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
@@ -250,7 +249,7 @@ namespace SFramework.Build
                 )
             )
             {
-                var json = JsonConvert.SerializeObject(v);
+                var json = JsonUtility.ToJson(v);
                 var bytes = System.Text.Encoding.Default.GetBytes(json);
                 fileStream.Write(bytes, 0, bytes.Length);
                 fileStream.Flush();
