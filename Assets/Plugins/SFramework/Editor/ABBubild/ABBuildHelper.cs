@@ -50,7 +50,7 @@ namespace SFramework.Build
                 {
                     var time = Time.realtimeSinceStartup;
                     var buildManifest = BuildPipeline.BuildAssetBundles(uploadAbPath,
-                        BuildAssetBundleOptions.DeterministicAssetBundle
+                        BuildAssetBundleOptions.ChunkBasedCompression
                         | BuildAssetBundleOptions.IgnoreTypeTreeChanges
                         | BuildAssetBundleOptions.None //暂时使用LZMA 等待压缩和分包在使用LZ4
                         , buildTarget
@@ -630,26 +630,26 @@ namespace SFramework.Build
             // 暂时关闭后续功能（未完成）
             return;
             
-            Debug.Log("clean xcode project");
-            ExecuteCommand("xcodebuild", xcodeProjectPath, "clean -quiet");
-            
-            Debug.Log("export archive");
-            // if (Directory.Exists(packagePath))
-            //     Directory.Delete(packagePath, true);
-            // Directory.CreateDirectory(packagePath);
-            var workspace = Path.Combine(xcodeProjectPath, "Unity-iPhone.xcworkspace");
-            var archivePath = Path.Combine(packagePath, $"{packageName}.xcarchive");
-            var configuration = debug ? "Debug" : "Release";
-            var arguments = $"archive -workspace \"{workspace}\" -scheme \"Unity-iPhone\" -configuration \"{configuration}\" -sdk iphoneos -archivePath \"{archivePath}\" -quiet";
-            ExecuteCommand("xcodebuild", xcodeProjectPath, arguments);
-            
-            Debug.Log("export ipa");
-            //var ipaPath = Path.Combine(packagePath, $"{packageName}.ipa");
-            arguments = $"-exportArchive -archivePath \"{archivePath}\" -exportPath \"{packagePath}\" -exportOptionsPlist \"{plistPath}\" -quiet";
-            ExecuteCommand("xcodebuild", archivePath, arguments);
-            
-            Debug.Log("open dir");
-            Process.Start(packagePath);
+            // Debug.Log("clean xcode project");
+            // ExecuteCommand("xcodebuild", xcodeProjectPath, "clean -quiet");
+            //
+            // Debug.Log("export archive");
+            // // if (Directory.Exists(packagePath))
+            // //     Directory.Delete(packagePath, true);
+            // // Directory.CreateDirectory(packagePath);
+            // var workspace = Path.Combine(xcodeProjectPath, "Unity-iPhone.xcworkspace");
+            // var archivePath = Path.Combine(packagePath, $"{packageName}.xcarchive");
+            // var configuration = debug ? "Debug" : "Release";
+            // var arguments = $"archive -workspace \"{workspace}\" -scheme \"Unity-iPhone\" -configuration \"{configuration}\" -sdk iphoneos -archivePath \"{archivePath}\" -quiet";
+            // ExecuteCommand("xcodebuild", xcodeProjectPath, arguments);
+            //
+            // Debug.Log("export ipa");
+            // //var ipaPath = Path.Combine(packagePath, $"{packageName}.ipa");
+            // arguments = $"-exportArchive -archivePath \"{archivePath}\" -exportPath \"{packagePath}\" -exportOptionsPlist \"{plistPath}\" -quiet";
+            // ExecuteCommand("xcodebuild", archivePath, arguments);
+            //
+            // Debug.Log("open dir");
+            // Process.Start(packagePath);
         }
     
         private static void ExecuteCommand(string filename, string workDirectory, string arguments)

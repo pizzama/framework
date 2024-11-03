@@ -28,7 +28,7 @@ namespace SFramework.Game
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private CanvasScaler _canvasScaler;
         [SerializeField] private Canvas _canvas;
-        const string uiName = "SUIROOT";
+        const string uiName = "SUIROOTMB";
         public static SUIROOT Instance;
         public Camera UICamera
         {
