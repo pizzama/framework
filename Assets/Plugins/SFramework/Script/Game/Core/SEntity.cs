@@ -11,7 +11,6 @@ namespace SFramework
         GameObject Instance { get; }
         void Recycle();
         void Show();
-        void DestroyEntity();
     }
 
     public abstract class SEntity : MonoBehaviour, ISEntity
@@ -20,26 +19,10 @@ namespace SFramework
         private string _entityId;
         public string EntityId { get => _entityId; set => _entityId = value; }
         public GameObject Instance => throw new System.NotImplementedException();
-        protected virtual void Start()
-        {
-            initEntity();
-        }
-
-        private void OnDestroy()
-        {
-            DestroyEntity();
-        }
-
-        protected virtual void initEntity()
-        {
-        }
-
-        public abstract void DestroyEntity();
 
         public void SetEntity(string entityId)
         {
             _entityId = entityId;
-
         }
 
         public abstract void Recycle();

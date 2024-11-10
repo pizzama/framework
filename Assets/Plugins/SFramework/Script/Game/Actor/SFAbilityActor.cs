@@ -29,17 +29,12 @@ public class SFAbilityActor : SEntity
         }
     }
 
-    protected override void initEntity()
+    protected void Start()
     {
-        base.initEntity();
         actControl = GetComponent<SFActorController>();
         MovementMachine = new SimpleStateMachine<ActorStates>(gameObject, false);
         ConditionMachine = new SimpleStateMachine<ActorConditions>(gameObject, false);
         initAbilities();
-    }
-
-    public override void DestroyEntity()
-    {
     }
 
     public void TriggerEvent(ActorAction actionName, object value)

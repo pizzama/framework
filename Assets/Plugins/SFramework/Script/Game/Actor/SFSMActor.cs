@@ -150,10 +150,6 @@ namespace SFramework.Actor
             AddedForce = Vector3.zero;
         }
 
-        public override void DestroyEntity()
-        {
-        }
-
         public override void Recycle()
         {
         }
