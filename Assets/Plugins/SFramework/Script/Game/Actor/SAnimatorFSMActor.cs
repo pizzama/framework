@@ -12,13 +12,7 @@ namespace SFramework.Actor
         [SerializeField]
         private Animator _animator;
 
-
         protected virtual void Awake()
-        {
-            init();
-        }
-
-        protected virtual void init()
         {
             findAnimator();
             CreateFSM();
@@ -83,7 +77,7 @@ namespace SFramework.Actor
 
         public IEnumerator DelayRunEffectCallback(Animator animator, string stateName, Action callback)
         {
-            // 状态机的切换发生在帧的结尾
+            // 鐘舵�佹満鐨勫垏鎹㈠彂鐢熷湪甯х殑缁撳熬
             yield return new WaitForEndOfFrame();
 
             var info = animator.GetCurrentAnimatorStateInfo(0);

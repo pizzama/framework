@@ -13,8 +13,6 @@ public class NpcEntity : RootEntity
     [SerializeField]
     private SpriteRenderer _spriteRender;
 
-    public override void DestroyEntity() { }
-
     public override void Recycle() { }
 
     public override void Show() 

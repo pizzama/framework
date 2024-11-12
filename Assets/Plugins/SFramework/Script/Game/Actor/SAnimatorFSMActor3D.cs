@@ -9,9 +9,9 @@ namespace SFramework.Actor
     public class SAnimatorFSMActor3D : SAnimatorFSMActor
     {
         public Rigidbody ActorRigidBody { get; private set; }
-        protected override void init()
+        protected override void Awake()
         {
-            base.init();
+            base.Awake();
             ActorRigidBody = GetComponent<Rigidbody>();
         }
     }

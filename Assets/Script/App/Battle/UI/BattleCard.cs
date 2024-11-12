@@ -148,10 +148,6 @@ namespace Game.App.Battle
         {
         }
 
-        public override void DestroyEntity()
-        {
-        }
-
         public override void Recycle()
         {
         }

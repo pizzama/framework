@@ -11,9 +11,8 @@ namespace App.Farm
         private FlowerFSM _fSM;
         [SerializeField] private SpriteRenderer _flower;
         [SerializeField] private Transform _land;
-        protected override void initEntity()
+        protected void Start()
         {
-            base.initEntity();
             _fSM = new FlowerFSM(this);
             //init data
             _fSM.ChangeState<FlowerEmpty>();
@@ -52,10 +51,6 @@ namespace App.Farm
             {
                 _flower.sprite = sp;
             }
-        }
-
-        public override void DestroyEntity()
-        {
         }
 
         public override void Recycle()

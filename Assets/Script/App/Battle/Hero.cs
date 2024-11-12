@@ -4,7 +4,7 @@ namespace Game.Character
 {
     public class Hero : SAnimatorFSMActor3D
     {
-        protected override void Start()
+        protected void Start()
         {
             AddFSMState(new HeroIdleState());
             AddFSMState(new HeroMoveState());
