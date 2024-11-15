@@ -107,9 +107,28 @@ namespace SFramework.Tools.Math
             return tmin + (dvalue - dmin) * (tmax - tmin) / (dmax - dmin);
         }
 
-        public static List<float> Vecotr3ToProtoRepeat(Vector3 vec3)
+        /// <summary>
+        /// 将x和y坐标打包成一个整数
+        /// </summary>
+        /// <param name="x">x坐标 (-32768 到 32767)</param>
+        /// <param name="y">y坐标 (-32768 到 32767)</param>
+        /// <returns>打包后的整数</returns>
+        public static int PackCoordinates(short x, short y)
         {
-            return new List<float>{vec3.x, vec3.y, vec3.z};
+            return (x << 16) | (y & 0xFFFF);
         }
+
+        /// <summary>
+        /// 从打包的整数中解析出x和y坐标
+        /// </summary>
+        /// <param name="packed">打包的整数</param>
+        /// <returns>包含x和y坐标的Vector2</returns>
+        public static Vector2 UnpackCoordinates(int packed)
+        {
+            short x = (short)(packed >> 16);
+            short y = (short)(packed & 0xFFFF);
+            return new Vector2(x, y);
+        }
+
     }
 }
