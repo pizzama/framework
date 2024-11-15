@@ -196,6 +196,13 @@ namespace SFramework
                 ModelCallback?.Invoke(-3);
                 throw new Exception($"you use Web Request Error.{webRequest.url} Message{err.Message}");
             }
+            finally
+            {
+                if (webRequest != null)
+                {
+                    webRequest.Dispose();
+                }
+            }
         }
     }
 }
