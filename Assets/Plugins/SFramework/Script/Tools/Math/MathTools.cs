@@ -101,6 +101,15 @@ namespace SFramework.Tools.Math
             return random.Next(minValue, maxValue);
         }
 
+        /// <summary>
+        /// 将一个范围的值映射到另一个范围
+        /// </summary>
+        /// <param name="dvalue">源范围的值</param>
+        /// <param name="dmin">源范围的最小值</param>
+        /// <param name="dmax">源范围的最大值</param>
+        /// <param name="tmin">目标范围的最小值</param>
+        /// <param name="tmax">目标范围的最大值</param>
+        /// <returns>映射后的值</returns>
         public static float MapToRange(float dvalue, float dmin, float dmax, float tmin, float tmax)
         {
             //tmin + (DVALUE - DMIN)(tmax - tmin) / (DMAX - DMIN)
