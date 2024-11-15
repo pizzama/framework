@@ -150,7 +150,8 @@ namespace SFramework
             }
             try
             {
-                UnityWebRequest webRequest = UnityWebRequest.PostWwwForm(url, pars.ToString());
+                string paramsJson = JsonUtility.ToJson(pars);
+                UnityWebRequest webRequest = UnityWebRequest.PostWwwForm(url, paramsJson);
                 byte[] bytes = await requestData(webRequest);
                 ModelCallback?.Invoke(0);
                 return bytes;
