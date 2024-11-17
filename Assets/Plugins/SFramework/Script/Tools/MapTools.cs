@@ -41,7 +41,9 @@ namespace SFramework.Tools
 
         public static Vector3 ScreenToWorldPos(Vector3 screenPos, Camera worldCamera)
         {
-            screenPos.z = 0;
+            if (worldCamera == null)
+                return Vector3.zero;
+            
             var viewRay = worldCamera.ScreenPointToRay(screenPos);
             var worldPos = viewRay.GetPoint(-viewRay.origin.z / viewRay.direction.z);
             return worldPos;
@@ -113,6 +115,14 @@ namespace SFramework.Tools
                 new Vector2(Screen.width,0),
                 new Vector2(0,0),
                 };
+        }
+
+        public static Vector3 WorldToScreenPoint(Vector3 worldPos, Camera worldCamera)
+        {
+            if (worldCamera == null)
+                return Vector3.zero;
+            
+            return worldCamera.WorldToScreenPoint(worldPos);
         }
     }
 }
