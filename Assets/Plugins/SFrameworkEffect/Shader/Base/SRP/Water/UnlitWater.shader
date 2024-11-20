@@ -1,4 +1,4 @@
-﻿Shader "Unlit/UnlitWater"
+﻿Shader "SFramework/Base/SRP/UnlitWater"
 {
 	Properties
 	{
