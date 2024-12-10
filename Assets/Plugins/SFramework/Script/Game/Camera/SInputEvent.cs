@@ -15,6 +15,14 @@ namespace SFramework.GameCamera
 
         [SerializeField]
         private bool _ignoreTouchOnUI = true;
+
+        [SerializeField] private bool _isLocked = false;
+        public bool IsLocked
+        {
+            get { return _isLocked; }
+            set { _isLocked = value; }
+        }
+        
         private bool isDrag = false;
 
         private SInputParam[] mouseParams = new SInputParam[]
@@ -41,6 +49,8 @@ namespace SFramework.GameCamera
         /// <summary>鼠标左键输入事件判定</summary>
         private void mouseInputEventTypeJudge(int mouseKeyCode)
         {
+            if (_isLocked)
+                return;
             bool isTouchOnUI = SInputDefine.IsTouchUI();
             //鼠标按下
             if (Input.GetMouseButtonDown(mouseKeyCode))

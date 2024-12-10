@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Text;
-using UnityEngine;
 
 public class SCreateTemplateScript
 {
@@ -22,7 +19,7 @@ public class SCreateTemplateScript
     public string CreateTemplateControl()
     {
         var writer = new StringBuilder();
-        writer.AppendLine("using UnityEngine;");
+        writer.AppendLine("using SFramework;");
         writer.AppendLine("using SFramework.Game;");
         writer.AppendLine();
 

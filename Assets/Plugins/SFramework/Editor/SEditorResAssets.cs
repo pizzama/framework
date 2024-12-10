@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 namespace SFramework
@@ -45,9 +47,14 @@ namespace SFramework
                 AddDefaultScriptingDefineSymbols();
             }
             
-            if (GUILayout.Button("Check for missing scripts"))
+            if (GUILayout.Button("Check Missing Scripts In All Projects"))
             {
-                CheckForMissingScripts();
+                CheckMissingScriptsInProjects();
+            }
+
+            if (GUILayout.Button("Check Missing Scripts In Selected"))
+            {
+                CheckMissingScriptsInSelected();
             }
 
             EditorGUILayout.EndVertical();
@@ -112,7 +119,7 @@ namespace SFramework
             {
                 SerializedObject so = new SerializedObject(asset[0]);
                 SerializedProperty tags = so.FindProperty("tags");
-                List<string> newTags = new List<string>() { "$EXPORT$", "$UICamera$" };
+                List<string> newTags = new List<string>() { "$EXPORT$"};
                 for (int i = 0; i < newTags.Count; i++)
                 {
                     bool isFind = false;
@@ -188,20 +195,60 @@ namespace SFramework
            
         }
         
-        public void CheckForMissingScripts()
+        private static void CheckMissingScriptsInSelected()
         {
-            Object[] allObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject));
-            foreach (GameObject obj in allObjects)
+            GameObject[] go = Selection.gameObjects;
+            int count = 0;
+            foreach (GameObject g in go)
             {
-                Component[] components = obj.GetComponents<Component>();
-                foreach (Component component in components)
+                count += FindMissingScriptsInGO(g);
+            }
+            Debug.Log("Found " + count + " missing scripts in selected objects.");
+        }
+        
+        private static void CheckMissingScriptsInProjects()
+        {
+            string[] guids = AssetDatabase.FindAssets("t:Prefab t:Scene");
+            int count = 0;
+            foreach (string guid in guids)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                if (path.EndsWith(".prefab"))
                 {
-                    if (component == null)
+                    GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                    count += FindMissingScriptsInGO(prefab);
+                }
+                else if (path.EndsWith(".unity"))
+                {
+                    EditorSceneManager.OpenScene(path);
+                    GameObject[] rootObjects = SceneManager.GetActiveScene().GetRootGameObjects();
+                    foreach (GameObject root in rootObjects)
                     {
-                        Debug.LogError($"Missing script on object: {obj.name}", obj);
+                        count += FindMissingScriptsInGO(root);
                     }
+                    EditorSceneManager.CloseScene(SceneManager.GetActiveScene(), true);
                 }
             }
+            Debug.Log("Found " + count + " missing scripts in the project.");
+        }
+
+        private static int FindMissingScriptsInGO(GameObject g)
+        {
+            int count = 0;
+            Component[] components = g.GetComponents<Component>();
+            for (int i = 0; i < components.Length; i++)
+            {
+                if (components[i] == null)
+                {
+                    count++;
+                    Debug.Log(g.name + " has an empty script attached in position: " + i, g);
+                }
+            }
+            foreach (Transform childT in g.transform)
+            {
+                count += FindMissingScriptsInGO(childT.gameObject);
+            }
+            return count;
         }
     }
 }

@@ -99,6 +99,16 @@ namespace SFramework.Tools
             return pos;
         }
 
+        // public static Vector2 UIToScreenPos(Vector3 uiPos, Canvas canvas)
+        // {
+        //     RectTransform canvasRect = canvas.transform.GetComponent<RectTransform>();
+        //     //自身相对于canvas的位置
+        //     Vector3 loadpos = canvas.transform.InverseTransformPoint(uiPos);
+        //     // 屏幕位置
+        //     Vector3 screenPoint = loadpos + new Vector3(canvasRect.sizeDelta.x, canvasRect.sizeDelta.y, 0) / 2;
+        //     return screenPoint;
+        // }
+
         public static Vector2 UIToScreenPos(Vector3 uiPos, Canvas canvas)
         {
             var canvasPixelRect = canvas.pixelRect; //canvas pixel
@@ -123,6 +133,29 @@ namespace SFramework.Tools
                 return Vector3.zero;
             
             return worldCamera.WorldToScreenPoint(worldPos);
+        }
+
+        public static Vector3 UIToWorldPosition(RectTransform trans, Canvas canvas)
+        {
+            Vector3 ptScreen = RectTransformUtility.WorldToScreenPoint(canvas.worldCamera, trans.position);
+            ptScreen.z = 0;
+            ptScreen.z = Mathf.Abs(canvas.worldCamera.transform.position.z - trans.position.z);
+            Vector3 ptWorld = canvas.worldCamera.ScreenToWorldPoint(ptScreen);
+            return ptWorld;
+        }
+        
+        public static Vector3 LocalToGlobal(Transform transform, Canvas canvas)
+        {
+            // 局部转世界
+            // 方法1: obj.transform.position 可以直接拿到世界坐标
+            // 方法2: 需要有父对象，用父对象来操作
+            return canvas.transform.TransformPoint(transform.localPosition);
+        }
+
+        public static Vector3 GlobalToLocal(Transform transfom, Canvas canvas)
+        {
+            //世界转局部, 也是通过父类转变换
+            return canvas.transform.InverseTransformPoint(transfom.position);
         }
     }
 }

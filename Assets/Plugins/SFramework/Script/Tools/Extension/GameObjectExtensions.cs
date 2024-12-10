@@ -57,5 +57,16 @@ namespace SFramework.Extension
                 child.CollectAllComponent<T>(components);
             }
         }
+
+        public static T GetEntityComponent<T>(this Component component) where T : Component
+        {
+            T tcompoent = component.GetComponent<T>();
+            if (tcompoent is ISEntity root)
+            {
+                root.Show();
+            }
+
+            return tcompoent;
+        }
     }
 }

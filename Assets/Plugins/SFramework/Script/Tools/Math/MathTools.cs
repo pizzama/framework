@@ -138,6 +138,5 @@ namespace SFramework.Tools.Math
             short y = (short)(packed & 0xFFFF);
             return new Vector2(x, y);
         }
-
     }
 }

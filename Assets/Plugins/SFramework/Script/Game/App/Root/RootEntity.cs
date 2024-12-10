@@ -8,6 +8,8 @@ namespace SFramework.Game
         [SerializeField]
         private RootView _parentView;
 
+        protected RootEntity parentEntity;
+
         public RootView ParentView { get => _parentView; }
         [SerializeField]
         private RootControl _parentControl;
@@ -28,17 +30,12 @@ namespace SFramework.Game
 
         public void Attached(RootEntity childEntity)
         {
-            SetParentView(childEntity.ParentView);
+            parentEntity = childEntity;
         }
 
-        public void Attached(RootView childEntity)
+        public void DeAttached()
         {
-            SetParentView(childEntity);
-        }
-
-        public void DeAttached(RootEntity childEntity)
-        {
-
+            parentEntity = null;
         }
     }
 }

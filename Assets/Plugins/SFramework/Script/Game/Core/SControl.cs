@@ -194,7 +194,13 @@ namespace SFramework
 
         public T GetControl<T>() where T : SControl
         {
-            return SBundleManager.Instance.GetControl<T>();
+            T result = SBundleManager.Instance.GetControl<T>();
+            if (result.IsOpen)
+            {
+                return result;
+            }
+
+            return null;
         }
 
         private T createBundle<T>(Type classType, string name)

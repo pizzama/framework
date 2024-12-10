@@ -119,13 +119,13 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _Fresnel: 0.1
+    - _Fresnel: -5.2
     - _Gloss: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _NormalScale: 0.642
+    - _NormalScale: 0.827
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueOffset: 0

@@ -21,17 +21,24 @@ namespace SFramework.GameCamera
         {
             if (UnityEngine.EventSystems.EventSystem.current == null) return false;
 
-            if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer | Application.platform == RuntimePlatform.WebGLPlayer)
+            // if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer | Application.platform == RuntimePlatform.WebGLPlayer)
+            // {
+            //     if (Input.touchCount < 1) return false;
+            //     if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) return true;
+            // }
+            // else
+            // {
+            //     if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return true;
+            // }
+
+            if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             {
-                if (Input.touchCount < 1) return false;
-                if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) return true;
+                return true;
             }
             else
             {
-                if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return true;
+                return false;
             }
-
-            return false;
         }
         /// <summary>通过layer名字判断是否点击在UI上面</summary>
         public static bool IsTouchUI(Vector3 mousePosition, string layerName = "UI")

@@ -10,9 +10,9 @@ public class ParticleTargetMove : MonoBehaviour
     private int _arrCount;
     [SerializeField] private float _speed = 0.1f;
     [SerializeField] private float _delayTime = 1f;
-    private float _originEmissionRate;
-    private bool _isActive;
-    private float _speedAdd;
+    [SerializeField] private float _originEmissionRate;
+    [SerializeField] private bool _isActive;
+    [SerializeField] private float _speedAdd;
     [SerializeField] private float _speedAddDelta = 2f;
     public bool OncePar = false;
     private Vector3 _wPos;
@@ -85,6 +85,7 @@ public class ParticleTargetMove : MonoBehaviour
             var b = _par.emission.GetBurst(0);
             b.count = new ParticleSystem.MinMaxCurve(_originEmissionRate);
             _par.emission.SetBurst(0, b);
+            OncePar = false;
         }
         _speedAdd = 0;
         _isActive = false;
