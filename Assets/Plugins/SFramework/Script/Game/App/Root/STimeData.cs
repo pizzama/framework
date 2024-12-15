@@ -21,7 +21,7 @@ namespace SFramework.Game
         private long _currentTimeStamp;
         private float _intervalTick; //second
         private float _countTick; //second
-        private float _coolDown; //execute time
+        private float _coolDown; //execute time second
         private bool _isLoop;
         private TimeState _state;
         private Action<int> _timeEndCallBack;

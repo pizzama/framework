@@ -11,6 +11,12 @@ namespace SFramework.Sprites
     public class SpriteSorting : MonoBehaviour
     {
         [SerializeField] private Transform _cameraTransform;
+
+        public Transform CameraTransform
+        {
+            get { return _cameraTransform; }
+            set { _cameraTransform = value; }
+        }
         [SerializeField] private int _offset;
         [SerializeField] private Vector3 _worldPosition;
 

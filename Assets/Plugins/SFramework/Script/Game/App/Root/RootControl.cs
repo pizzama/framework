@@ -72,12 +72,6 @@ namespace SFramework.Game
             }
         }
 
-        public override void Update()
-        {
-            base.Update();
-
-        }
-
         protected override void closing()
         {
             base.closing();
