@@ -21,7 +21,7 @@ namespace Game.App.Battle
             var (_languageConfig, _testConfig, _) = await UniTask.WhenAll(
                 ConfigManager.Instance.GetConfigAsync<Language_data_datas>(),
                 ConfigManager.Instance.GetConfigAsync<test_event_datas>(),
-                GetData(""));
+                GetData());
             Debug.Log("aaaa:" + _languageConfig + ";" + _testConfig);
         }
 

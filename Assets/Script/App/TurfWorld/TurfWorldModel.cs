@@ -7,7 +7,7 @@ namespace App.TurfWorld
 	{
 		protected override void opening()
 		{
-			 GetData("").Forget();
+			 GetData().Forget();
 		}
 	}
 }

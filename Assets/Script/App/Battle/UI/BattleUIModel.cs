@@ -8,7 +8,7 @@ namespace Game.App.Battle
     {
         protected override void opening()
         {
-            GetData("").Forget();
+            GetData().Forget();
         }
 
         //protected override async UniTaskVoid openingAsync()

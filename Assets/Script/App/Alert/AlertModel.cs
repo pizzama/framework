@@ -7,7 +7,7 @@ namespace App.Alert
 	{
 		protected override void opening()
 		{
-			 GetData("").Forget();
+			 GetData().Forget();
 		}
 		protected override void closing()
 		{

@@ -7,7 +7,7 @@ namespace App.PendTips
 	{
 		protected override void opening()
 		{
-			 GetData("").Forget();
+			 GetData().Forget();
 		}
 	}
 }

@@ -8,7 +8,7 @@ namespace App.Farm
 	{
 		protected override void opening()
 		{
-			GetData("").Forget();
+			GetData().Forget();
 		}
 	}
 }

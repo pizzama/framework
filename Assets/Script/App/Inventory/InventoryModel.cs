@@ -17,7 +17,7 @@ namespace App.Inventory
             // read userData
             if (_userData == null)
                 _userData = ReadData<ProtoUserData>();
-            GetData("").Forget();
+            GetData().Forget();
         }
 
         protected override void closing()

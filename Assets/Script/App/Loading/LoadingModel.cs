@@ -7,7 +7,7 @@ namespace App.Loading
 	{
 		protected override void opening()
 		{
-			 GetData("").Forget();
+			 GetData().Forget();
 		}
 	}
 }
