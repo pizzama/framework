@@ -69,7 +69,7 @@ public class SCreateTemplateScript
         writer.AppendLine("\t{");
         writer.AppendLine("\t\tprotected override void opening()");
         writer.AppendLine("\t\t{");
-        writer.AppendLine("\t\t\t GetData(\"\").Forget();");
+        writer.AppendLine("\t\t\t GetData().Forget();");
         writer.AppendLine("\t\t}");
 
         writer.AppendLine("\t\tprotected override void closing()");
