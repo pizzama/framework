@@ -64,6 +64,8 @@ namespace SFramework
                 _view.Close();
                 IsOpen = false;
             }
+
+            base.Close();
         }
 
         public void CloseControl()

@@ -9,6 +9,59 @@ namespace SFramework.Tools
 {
     public class StringTools
     {
+        // 中文数字字符串数组
+        private readonly static string[] chineseNumbers = { "零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十" };
+        /// <summary>
+        /// 将阿拉伯数字转换为中文数字
+        /// </summary>
+        /// <param name="number">要转换的阿拉伯数字</param>
+        /// <returns>转换后的中文数字</returns>
+        public static string ConvertNumberToChinese(int number)
+        {
+            if (number < 0)
+            {
+                return "不支持负数";
+            }
+
+            // 处理 0 到 10 的数字
+            if (number <= 10)
+            {
+                return chineseNumbers[number];
+            }
+
+            // 处理 11 到 99 的数字
+            if (number < 100)
+            {
+                int tens = number / 10;
+                int units = number % 10;
+
+                if (units == 0)
+                {
+                    return chineseNumbers[tens] + chineseNumbers[10]; // 例如：20 -> 二十
+                }
+                else
+                {
+                    return chineseNumbers[tens] + chineseNumbers[10] + chineseNumbers[units]; // 例如：23 -> 二十三
+                }
+            }
+
+            if (number < 1000)
+            {
+                int hundreds = number / 100;
+                int remainder = number % 100;
+                string result = chineseNumbers[hundreds] + "百";
+
+                if (remainder > 0)
+                {
+                    result += ConvertNumberToChinese(remainder);
+                }
+
+                return result;
+            }
+
+            // 处理 100 及以上的数字
+            return "不支持超过 1000 的数字";
+        }
         // static string[] unitList = new string[] { "", "K", "M", "B", "T", "AA", "AB", "AC", "AD" };
         static string[] unitList = new string[]
         {

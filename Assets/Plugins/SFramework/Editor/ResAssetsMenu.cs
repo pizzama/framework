@@ -9,7 +9,8 @@ namespace SFramework
 	[InitializeOnLoad]
 	public class ResAssetsMenu
 	{
-		private static List<string> noticeExtension = new List<string> { ".prefab", ".unity", ".png", ".jpg", ".asset", ".psd", ".mat", ".shader", ".controller", ".fbx", ".anim", ".spriteatlasv2", ".atlas", ".skel", ".bytes", ".txt"};
+		private static List<string> noticeExtension = new List<string> { ".prefab", ".unity", ".png", ".jpg", ".asset", ".psd", ".mat", ".shader", 
+			".controller", ".fbx", ".anim", ".spriteatlasv2", ".atlas", ".skel", ".bytes", ".txt", ".otf", ".ttf", ".mp3", ".json"};
 		private static List<string> ignoreExtension = new List<string> { ".meta" };
 		private const string StaticNameSpace = "SFramework.Statics";
 		private const string Mark_AssetBundle = "Assets/SFramework/AssetBundle All Folder On Assets_Arts";
@@ -89,10 +90,10 @@ namespace SFramework
 		/// </summary>
 		private static void SetLabels(FileInfo fileInfo, string sceneName, Dictionary<string, string> namePathDictionary)
 		{
-			if (ignoreExtension.Contains(fileInfo.Extension))
+			if (ignoreExtension.Contains(fileInfo.Extension.ToLower()))
 				return;
 
-			if (!noticeExtension.Contains(fileInfo.Extension))
+			if (!noticeExtension.Contains(fileInfo.Extension.ToLower()))
 				return;
 			string bundleName = GetBundleName(fileInfo, sceneName);
 			int index = fileInfo.FullName.IndexOf("Assets");
