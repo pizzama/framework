@@ -14,19 +14,31 @@ namespace SFramework
     {
         public const string DefaultABPath = "data";//设置统一默认的文件夹前缀
         // 资源路径，优先返回外存资源路径，路径有多余的/加路径的情况下在android和url环境下会加载不到资源
+        // 对于网络请求则不能加file:// 如果是本地则需要加 主要是给UnityWebRequest使用
         public static string GetResPathInPersistentOrStream(string relativePath)
         {
             string resPersistentPath = string.Format("{0}{1}", PersistentDataPath, relativePath);
+            RuntimePlatform name = UnityEngine.Application.platform;
             if (File.Exists(resPersistentPath))
             {
-                // return "file:///" + resPersistentPath;
-                return resPersistentPath;
+                switch (name)
+                {
+                    case RuntimePlatform.WebGLPlayer:
+                        return resPersistentPath;
+                        break;
+                }
+                return "file:///" + resPersistentPath;
             }
             else
             {
                 resPersistentPath = string.Format("{0}{1}", StreamingAssetsPath, relativePath);
-                return resPersistentPath;
-                    // return "file:///" + resPersistentPath;
+                switch (name)
+                {
+                    case RuntimePlatform.WebGLPlayer:
+                        return resPersistentPath;
+                        break;
+                }
+                return "file:///" + resPersistentPath;
             }
         }
 
