@@ -1,4 +1,5 @@
-using System.Collections;
+using System;
+using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -67,6 +68,107 @@ namespace SFramework.Extension
             }
 
             return tcompoent;
+        }
+
+        public static void UnRigistEventTrigger(this UIBehaviour _ui, EventTriggerType _eventTriggerType)
+        {
+            if (_ui == null)
+            {
+                Debug.LogError("invalid UIBehaviour can not be a trigger content.");
+                return;
+            }
+
+            EventTrigger eventTrigger = _ui.GetComponent<EventTrigger>();
+            if (eventTrigger == null)
+            {
+                return;
+            }
+
+            var entrys = eventTrigger.triggers;
+            for (int i = entrys.Count - 1; i > 0; i--)
+            {
+                var entry = entrys[i];
+                if (entry.eventID == _eventTriggerType)
+                    entrys.Remove(entry);
+            }
+
+        }
+
+        public static void UnRigistAllEventTrigger(this UIBehaviour _ui)
+        {
+            if (_ui == null)
+            {
+                Debug.LogError("invalid UIBehaviour can not be a trigger content.");
+                return;
+            }
+
+            EventTrigger eventTrigger = _ui.GetComponent<EventTrigger>();
+            if (eventTrigger == null)
+            {
+                return;
+            }
+
+            eventTrigger.triggers.Clear();
+        }
+
+        /// <summary>
+        /// 注册ui 增加eventtrigger的行为
+        /// 如按钮增加 btn.RigistEventTrigger(EventTriggerType.PointerDown, handle);
+        /// </summary>
+        /// <param name="_ui"></param>
+        /// <param name="_eventTriggerType"></param>
+        /// <param name="_callback"></param>
+        public static void RigistEventTrigger(this UIBehaviour _ui, EventTriggerType _eventTriggerType, Action<PointerEventData> _callback)
+        {
+            if (_ui == null)
+            {
+                Debug.LogError("invalid UIBehaviour can not be a trigger content.");
+                return;
+            }
+            else
+            {
+                EventTrigger eventTrigger = _ui.GetComponent<EventTrigger>();
+                if (eventTrigger == null)
+                {
+                    eventTrigger = _ui.gameObject.AddComponent<EventTrigger>();
+                }
+
+                EventTrigger.Entry entry = new EventTrigger.Entry();
+                entry.eventID = _eventTriggerType;
+                entry.callback.AddListener((_pointData) =>
+                {
+                    var baseData = _pointData as PointerEventData;
+                    _callback?.Invoke(baseData);
+                });
+                eventTrigger.triggers.Add(entry);
+            }
+        }
+        public static void RigistEventTrigger(this UIBehaviour _ui, EventTriggerType _eventTriggerType, Action _callback)
+        {
+            if (_ui == null)
+            {
+                Debug.LogError("invalid UIBehaviour can not be a trigger content.");
+                return;
+            }
+            else
+            {
+                EventTrigger eventTrigger = _ui.GetComponent<EventTrigger>();
+                if (eventTrigger == null)
+                {
+                    eventTrigger = _ui.gameObject.AddComponent<EventTrigger>();
+                }
+
+
+
+                EventTrigger.Entry entry = new EventTrigger.Entry();
+                entry.eventID = _eventTriggerType;
+                entry.callback.AddListener((_pointData) =>
+                {
+                    //var baseData = _pointData as PointerEventData;
+                    _callback?.Invoke();
+                });
+                eventTrigger.triggers.Add(entry);
+            }
         }
     }
 }
