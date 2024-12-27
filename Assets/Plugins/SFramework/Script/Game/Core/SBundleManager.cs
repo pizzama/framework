@@ -420,7 +420,7 @@ namespace SFramework
         {
             string nameSpace;
             string className;
-            if (alias == string.Empty)
+            if (string.IsNullOrEmpty(alias))
             {
                 StringTools.PrefixClassName(fullPath, out nameSpace, out className);
                 alias = className;

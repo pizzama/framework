@@ -68,9 +68,14 @@ namespace SFramework
             base.Close();
         }
 
-        public void CloseControl()
+        public void CloseControl(string fullPath = "", string alias = "")
         {
-            Manager.CloseControl(this);
+            if (string.IsNullOrEmpty(fullPath))
+                Manager.CloseControl(this);
+            else
+            {
+                Manager.CloseControl(fullPath, alias);
+            }
         }
 
         public override void Uninstall()

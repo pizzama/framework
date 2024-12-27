@@ -99,7 +99,7 @@ namespace SFramework.Game
             openUI(mViewTransform, position, rotation);
         }
 
-        protected async UniTaskVoid SetViewTransformAsync(Vector3 position, Quaternion rotation)
+        protected virtual async UniTaskVoid SetViewTransformAsync(Vector3 position, Quaternion rotation)
         {
             if (!string.IsNullOrEmpty(mAbName) && !string.IsNullOrEmpty(mResName))
             {
