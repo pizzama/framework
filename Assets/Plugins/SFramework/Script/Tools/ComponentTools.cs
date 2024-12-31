@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,6 +34,25 @@ namespace SFramework.Tools
             float height = tg.GetPreferredHeight(content, settings);
 
             return new UnityEngine.Vector2(width, height);
+        }
+        
+        public static IEnumerator Shake(Transform baseTransform, float duration, float magnitude)
+        {
+            Vector3 originalPos = baseTransform.localPosition;
+
+            float elapsed = 0.0f;
+
+            while (elapsed < duration) // TODO: Consider if game is paused
+            {
+                float x = originalPos.x + UnityEngine.Random.Range(-1f, 1f) * magnitude;
+                float y = originalPos.y + UnityEngine.Random.Range(-1f, 1f) * magnitude;
+                baseTransform.localPosition = new Vector3(x, y, originalPos.z);
+
+                elapsed += Time.deltaTime;
+
+                yield return null;
+            }
+            baseTransform.localPosition = originalPos;
         }
     }
 }

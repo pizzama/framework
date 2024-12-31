@@ -92,7 +92,7 @@ namespace SFramework.Tools
         }
 
         //Fischer-Yates shuffle
-        public static List<T> RandomArray<T>(List<T> array)
+        public static List<T> ShuffleList<T>(List<T> array)
         {
             for (var i = array.Count; i > 0; --i)
             {
@@ -106,7 +106,7 @@ namespace SFramework.Tools
         }
 
         //Fischer-Yates shuffle 洗牌算法
-        public static T[] RandomArray<T>(T[] array)
+        public static T[] ShuffleList<T>(T[] array)
         {
             for (var i = array.Length; i > 0; --i)
             {
@@ -119,31 +119,24 @@ namespace SFramework.Tools
             return array;
         }
 
-        public static IEnumerator Shake(Transform baseTransform, float duration, float magnitude)
-        {
-            Vector3 originalPos = baseTransform.localPosition;
-
-            float elapsed = 0.0f;
-
-            while (elapsed < duration) // TODO: Consider if game is paused
-            {
-                float x = originalPos.x + UnityEngine.Random.Range(-1f, 1f) * magnitude;
-                float y = originalPos.y + UnityEngine.Random.Range(-1f, 1f) * magnitude;
-                baseTransform.localPosition = new Vector3(x, y, originalPos.z);
-
-                elapsed += Time.deltaTime;
-
-                yield return null;
-            }
-            baseTransform.localPosition = originalPos;
-        }
-
         public static T[] CombineArray<T>(T[] a, T[] b)
         {
             T[] c = new T[a.Length + b.Length];
             Array.Copy(a, 0, c, 0, a.Length);
             Array.Copy(b, 0, c, a.Length, b.Length);
             return c;
+        }
+        
+        public bool HasStaticMethod(Type type, string methodName)
+        {
+            // 获取所有公共静态方法
+            MethodInfo methodInfo = type.GetMethod(
+                methodName,
+                BindingFlags.Public | BindingFlags.Static
+            );
+
+            // 如果找到方法且是静态的，返回 true
+            return methodInfo != null && methodInfo.IsStatic;
         }
 
     }
