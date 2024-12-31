@@ -33,4 +33,20 @@ public class CameraTools
             mainCamera.transform.localPosition = originalPos;
         }
     }
+    
+    public static float AdaptCameraSize(float originSize, float aspectWidth, float aspectHeight)
+    {
+        if (Screen.orientation == ScreenOrientation.Portrait)
+        {
+            float defaultAspect = aspectWidth / aspectHeight;
+            float currentAspect = (float)Screen.height/ Screen.width;
+            return originSize * (currentAspect / defaultAspect);
+        }
+        else
+        {
+            float defaultAspect = aspectWidth / aspectHeight;
+            float currentAspect = (float)Screen.width / Screen.height;
+            return originSize * (defaultAspect / currentAspect);
+        }
+    }
 }

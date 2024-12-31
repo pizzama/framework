@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -9,6 +8,10 @@ using UnityEditor.Build.Reporting;
 using UnityEditor.U2D;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+
+#if UNITY_IPHONE
+using UnityEditor.iOS.Xcode;
+#endif
 
 namespace SFramework.Build
 {
