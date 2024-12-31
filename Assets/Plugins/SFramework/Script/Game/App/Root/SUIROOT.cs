@@ -73,7 +73,7 @@ namespace SFramework.Game
                 _canvas = this.GetComponent<Canvas>();
         }
 
-        public void OpenUI(UILayer layer, Transform result, Vector3 position = default, Quaternion rotation = default)
+        public void OpenUI(UILayer layer, Transform result, Vector2 offsetMin = default, Vector2 offsetMax = default, Quaternion rotation = default)
         {
             Transform parent = null;
             switch (layer)
@@ -104,8 +104,14 @@ namespace SFramework.Game
             {
                 // Transform result = Instantiate(transPrefab, parent, false);
                 result.SetParent(parent, false);
-                result.position = position;
                 result.rotation = rotation;
+
+                var rectTransform = result.GetComponent<RectTransform>();
+                if (rectTransform != null)
+                {
+                    rectTransform.offsetMin = offsetMin;
+                    rectTransform.offsetMax = offsetMax;
+                }
             }
             else
             {

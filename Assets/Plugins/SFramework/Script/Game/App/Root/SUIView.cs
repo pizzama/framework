@@ -67,25 +67,27 @@ namespace SFramework.Game
                 return;
             }
             
-            Vector3 position;
+            Vector2 offsetMin;
+            Vector2 offsetMax;
             Quaternion rotation;
-            SetViewPrefabPath(out mAbName, out mResName, out position, out rotation);
+            SetViewPrefabPath(out mAbName, out mResName, out offsetMin, out offsetMax, out rotation);
             //SetViewTransform(out mViewTransform, position, rotation);
-            SetViewTransformAsync(position, rotation).Forget();
+            SetViewTransformAsync(offsetMin, offsetMax, rotation).Forget();
         }
 
-        protected virtual void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector3 position, out Quaternion rotation)
+        protected virtual void SetViewPrefabPath(out string prefabPath, out string prefabName, out Vector2 offsetMin, out Vector2 offsetMax, out Quaternion rotation)
         {
             Type tp = GetType();
             string path = tp.Namespace;
             path = path.Replace('.', '_');
             prefabPath = path + "." + AssetsManager.PrefabExtendName;
             prefabName = tp.Name;
-            position = new Vector3(0, 0, 0);
+            offsetMin = new Vector2(0, 0);
+            offsetMax = new Vector2(0, 0);
             rotation = Quaternion.Euler(0, 0, 0);
         }
 
-        protected virtual void SetViewTransform(Vector3 position, Quaternion rotation)
+        protected virtual void SetViewTransform(Vector2 offsetMin, Vector2 offsetMax, Quaternion rotation)
         {
             if (!string.IsNullOrEmpty(mAbName) && !string.IsNullOrEmpty(mResName))
             {
@@ -96,10 +98,10 @@ namespace SFramework.Game
                 GameObject ob = poolManager.Request<ListGameObjectPool>(fullPath, prefab, -1, 5);
                 mViewTransform = ob.transform;
             }
-            openUI(mViewTransform, position, rotation);
+            openUI(mViewTransform, offsetMin, offsetMax, rotation);
         }
 
-        protected virtual async UniTaskVoid SetViewTransformAsync(Vector3 position, Quaternion rotation)
+        protected virtual async UniTaskVoid SetViewTransformAsync(Vector2 offsetMin, Vector2 offsetMax, Quaternion rotation)
         {
             if (!string.IsNullOrEmpty(mAbName) && !string.IsNullOrEmpty(mResName))
             {
@@ -110,17 +112,17 @@ namespace SFramework.Game
                 GameObject ob = poolManager.Request<ListGameObjectPool>(fullPath, prefab, -1, 5);
                 mViewTransform = ob.transform;
             }
-            openUI(mViewTransform, position, rotation);
+            openUI(mViewTransform, offsetMin, offsetMax,rotation);
         }
 
-        protected virtual void openUI(Transform trans, Vector3 position, Quaternion rotation)
+        protected virtual void openUI(Transform trans, Vector2 offsetMin, Vector2 offsetMax, Quaternion rotation)
         {
             if (trans != null)
             {
                 if (UIRoot)
                 {
                     UILayer layer = GetViewLayer();
-                    UIRoot.OpenUI(layer, trans, position, rotation);
+                    UIRoot.OpenUI(layer, trans, offsetMin, offsetMax, rotation);
                     goDict = mViewTransform.gameObject.CollectAllGameObjects(findTag);
                 }
                 else
