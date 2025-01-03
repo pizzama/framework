@@ -50,7 +50,7 @@ namespace NativeHelper
         
         public void Delete(string fileName)
         {
-#if UNITY_IPHONE && !UNITY_EDITOR
+#if UNITY_ANDROID && !UNITY_EDITOR
             string fileFullPath = GetApplicationPersistentDataPath() + "/" + fileName;
             if (File.Exists(fileFullPath))
             {
@@ -69,6 +69,23 @@ namespace NativeHelper
         public string GetApplicationPersistentDataPath()
         {
             return Application.persistentDataPath;
+        }
+
+        public void SendEmail(string recipient, string subject, string body)
+        {
+            Application.OpenURL("mailto:" + recipient + "?subject=" + subject + "&body=" + body);
+        }
+
+        public void RestartGame()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Vibrate(float time)
+        {
+#if UNITY_ANDROID && !UNITY_EDITOR
+            Handheld.Vibrate();
+#endif
         }
     }
 }

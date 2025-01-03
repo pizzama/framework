@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.IO;
+using UnityEditor;
 
 namespace NativeHelper
 {
@@ -15,6 +16,12 @@ namespace NativeHelper
         void Delete(string fileName);
 
         string GetApplicationPersistentDataPath();
+
+        void SendEmail(string recipient, string subject, string body);
+
+        void RestartGame();
+
+        void Vibrate(float time);
     }
 
     public class NativeHelper : INativeHelper
@@ -76,6 +83,31 @@ namespace NativeHelper
         public virtual string GetApplicationPersistentDataPath()
         {
             return Application.persistentDataPath;
+        }
+        
+        /// <summary>
+        /// 打开邮箱 recipient: pizzaman@126.com
+        /// </summary>
+        public void SendEmail(string recipient, string subject, string body)
+        {
+            Application.OpenURL("mailto:" + recipient + "?subject=" + subject + "&body=" + body);
+        }
+        
+        public void RestartGame()
+        {
+#if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+#endif
+        }
+
+        public void PlayAudio()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Vibrate(float time)
+        {
+
         }
     }
 }

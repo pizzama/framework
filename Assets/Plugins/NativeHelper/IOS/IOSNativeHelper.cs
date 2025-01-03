@@ -1,3 +1,9 @@
+#if UNITY_IPHONE && !UNITY_EDITOR
+using System;
+using System.IO;
+#endif
+using UnityEngine;
+
 namespace NativeHelper
 {
     public class IOSNativeHelper : INativeHelper
@@ -67,6 +73,23 @@ namespace NativeHelper
         public string GetApplicationPersistentDataPath()
         {
             throw new System.NotImplementedException();
+        }
+
+        public void SendEmail(string recipient, string subject, string body)
+        {
+            Application.OpenURL("mailto:" + recipient + "?subject=" + subject + "&body=" + body);
+        }
+
+        public void RestartGame()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Vibrate(float time)
+        {
+#if UNITY_IPHONE && !UNITY_EDITOR
+            Handheld.Vibrate();
+#endif
         }
     }
 }

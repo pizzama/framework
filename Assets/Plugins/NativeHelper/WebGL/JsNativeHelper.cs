@@ -8,8 +8,9 @@ namespace NativeHelper
     public class JsNativeHelper : INativeHelper
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern void JSAlert(string content);
+        [DllImport("__Internal")] private static extern void JSAlert(string content);
+        [DllImport("__Internal")] private static extern void JSRestartGame();
+        [DllImport("__Internal")] private static extern void JSVibrate(float time); //震动时间秒
 #endif
 
         public void Alert(string content) 
@@ -54,6 +55,26 @@ namespace NativeHelper
                 return Application.persistentDataPath + "/idbfs/";
 #else
                 return Application.persistentDataPath;
+#endif
+        }
+
+        public void SendEmail(string recipient, string subject, string body)
+        {
+                Application.OpenURL("mailto:" + recipient + "?subject=" + subject + "&body=" + body);
+        }
+
+        public void RestartGame()
+        {
+#if UNITY_WEBGL && !UNITY_EDITOR
+                // 调用JavaScript的location.reload()方法
+                JSRestartGame();
+#endif   
+        }
+
+        public void Vibrate(float time)
+        {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        //     JSVibrate(time);
 #endif
         }
     }
