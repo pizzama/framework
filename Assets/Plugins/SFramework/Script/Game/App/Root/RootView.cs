@@ -106,9 +106,9 @@ namespace SFramework.Game
             poolManager.Return(obj);
         }
 
-        public void ReleaseComponent(Component comp)
+        public void ReleaseGameObjectDestroy(GameObject obj, bool isImmediate)
         {
-            ReleaseGameObjectUsingPool(comp.gameObject);
+            poolManager.DestroyGameObject(obj, isImmediate);
         }
 
         public T CreateEntity<T>(string prefabFullPath, Transform parent, Vector3 pos = default, float lifeTime = -1, string instanceId = "") where T : Component
