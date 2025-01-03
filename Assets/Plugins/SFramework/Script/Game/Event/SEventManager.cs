@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Google.Protobuf.WellKnownTypes;
 using UnityEngine;
+using Object = UnityEngine.Object;
+using Type = System.Type;
 
 namespace SFramework.Event
 {
@@ -11,6 +14,28 @@ namespace SFramework.Event
     public interface ISEventListener<T> : ISEventListenerBase
     {
         void TriggerEvent(T eventObject);
+    }
+
+    public class SEventListener<T>:ISEventListener<T>
+    {
+        private Action<SEventListener<T>, T> _triggerAction;
+        private Object _src;
+
+        public Object Src
+        {
+            get { return _src; }
+        }
+        private Object _target;
+        public SEventListener(Action<ISEventListener<T>, T> value, Object srcValue = null, Object targetValue = null)
+        {
+            _src = srcValue;
+            _target = targetValue;
+            _triggerAction = value;
+        }
+        public void TriggerEvent(T eventObject)
+        {
+            _triggerAction?.Invoke(this, eventObject);
+        }
     }
 
     public struct SGameEvent

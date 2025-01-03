@@ -126,19 +126,6 @@ namespace SFramework.Tools
             Array.Copy(b, 0, c, a.Length, b.Length);
             return c;
         }
-        
-        public bool HasStaticMethod(Type type, string methodName)
-        {
-            // 获取所有公共静态方法
-            MethodInfo methodInfo = type.GetMethod(
-                methodName,
-                BindingFlags.Public | BindingFlags.Static
-            );
-
-            // 如果找到方法且是静态的，返回 true
-            return methodInfo != null && methodInfo.IsStatic;
-        }
-
     }
 
 }

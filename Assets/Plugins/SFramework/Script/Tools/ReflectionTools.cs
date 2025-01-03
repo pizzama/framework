@@ -179,5 +179,32 @@ namespace SFramework.Tools
             return types;
         }
         
+        public static bool HasStaticMethod(Type type, string methodName)
+        {
+            // 获取所有公共静态方法
+            MethodInfo methodInfo = type.GetMethod(
+                methodName,
+                BindingFlags.Public | BindingFlags.Static
+            );
+
+            // 如果找到方法且是静态的，返回 true
+            return methodInfo != null && methodInfo.IsStatic;
+        }
+        
+        public static bool HasPublicConstString(Type type, string fieldName)
+        {
+            // 获取指定名称的字段
+            FieldInfo field = type.GetField(fieldName, BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+
+            // 检查字段是否存在，是否为 const 且类型为 string
+            if (field != null && field.IsLiteral && !field.IsInitOnly && field.FieldType == typeof(string))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        
     }
 }

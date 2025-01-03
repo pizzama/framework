@@ -119,7 +119,14 @@ namespace SFramework.Pool
             {
                 GameObject.Destroy(go);
             }
+        }
 
+        public void DestroyGameObject(GameObject go, bool isImmediate = false)
+        {
+            if (isImmediate)
+                GameObject.DestroyImmediate(go);
+            else
+                GameObject.Destroy(go);
         }
 
         public int GetPoolCount()
