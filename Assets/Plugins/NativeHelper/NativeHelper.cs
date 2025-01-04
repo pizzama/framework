@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEditor;
@@ -21,7 +22,14 @@ namespace NativeHelper
 
         void RestartGame();
 
-        void Vibrate(float time);
+        void Vibrate(float time); // 平台震动
+
+        // 平台支付相关
+        public void LoadProductsOrder(List<string> productids);
+        public string QueryProductsOrder(string productid);
+        public void ConsumePayOrder(string insideOrderId);
+        public void PayOrder(string orderid, string productid, string paytype);
+        public bool CheckLostOrder(string orderid, string productid, string paytype);
     }
 
     public class NativeHelper : INativeHelper
@@ -100,14 +108,36 @@ namespace NativeHelper
 #endif
         }
 
-        public void PlayAudio()
-        {
-            throw new NotImplementedException();
-        }
-
         public void Vibrate(float time)
         {
+            Debug.Log("Vibrate execute");
+        }
 
+        public void LoadProductsOrder(List<string> productids)
+        {
+            Debug.Log("LoadProductsOrder execute");
+        }
+
+        public string QueryProductsOrder(string productid)
+        {
+            Debug.Log("QueryProductsOrder execute");
+            return "";
+        }
+
+        public void ConsumePayOrder(string insideOrderId)
+        {
+            Debug.Log("ConsumePayOrder execute");
+        }
+
+        public void PayOrder(string orderid, string productid, string paytype)
+        {
+            Debug.Log("PayOrder execute");
+        }
+
+        public bool CheckLostOrder(string orderid, string productid, string paytype)
+        {
+            Debug.Log("CheckLostOrder execute");
+            return false;
         }
     }
 }

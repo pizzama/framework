@@ -1,13 +1,32 @@
-#if UNITY_IPHONE && !UNITY_EDITOR
-using System;
-using System.IO;
-#endif
+// #if UNITY_IPHONE && !UNITY_EDITOR
 using UnityEngine;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices;
+
+// #endif
 
 namespace NativeHelper
 {
     public class IOSNativeHelper : INativeHelper
     {
+#if UNITY_IPHONE && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern void AlertContentDll(string title, string content);
+        [DllImport("__Internal")]
+        private static extern void LoadProducts(string productids);
+        [DllImport("__Internal")]
+        private static extern string QueryProducts(string productids);
+        [DllImport("__Internal")]
+        private static extern void Pay(string productParams);
+        [DllImport("__Internal")]
+        private static extern void ConsumePay(string insideOrderId);
+        [DllImport("__Internal")]
+        private static extern void CheckLostOrder(string productParams); 
+        [DllImport("__Internal")]
+        private static extern void RestartApp();
+#endif
         public void Alert(string content)
         {
 #if UNITY_IPHONE && !UNITY_EDITOR
@@ -17,7 +36,6 @@ namespace NativeHelper
 
         public void Save(byte[] bytes, string fileName)
         {
-#if UNITY_IPHONE && !UNITY_EDITOR
             string fileFullPath = GetApplicationPersistentDataPath() + "/" + fileName;
 
             FileStream stream = null;
@@ -33,12 +51,10 @@ namespace NativeHelper
 
             stream.Write(bytes);
             stream.Close();
-#endif 
         }
 
         public byte[] Read(string fileName)
         {
-#if UNITY_IPHONE && !UNITY_EDITOR
             string fileFullPath = GetApplicationPersistentDataPath() + "/" + fileName;
             if (File.Exists(fileFullPath))
             {
@@ -48,13 +64,11 @@ namespace NativeHelper
                 stream.Close();
                 return bytes;
             }
-#endif    
             return null;
         }
         
         public void Delete(string fileName)
         {
-#if UNITY_IPHONE && !UNITY_EDITOR
             string fileFullPath = GetApplicationPersistentDataPath() + "/" + fileName;
             if (File.Exists(fileFullPath))
             {
@@ -67,12 +81,11 @@ namespace NativeHelper
                     Debug.LogError(e);
                 }
             }
-#endif   
         }
 
         public string GetApplicationPersistentDataPath()
         {
-            throw new System.NotImplementedException();
+            return Application.persistentDataPath;
         }
 
         public void SendEmail(string recipient, string subject, string body)
@@ -82,7 +95,9 @@ namespace NativeHelper
 
         public void RestartGame()
         {
-            throw new System.NotImplementedException();
+#if UNITY_IPHONE && !UNITY_EDITOR
+            RestartApp();
+#endif
         }
 
         public void Vibrate(float time)
@@ -91,5 +106,53 @@ namespace NativeHelper
             Handheld.Vibrate();
 #endif
         }
+
+        // 加载平台提供的支付项
+        public void LoadProductsOrder(List<string> productids)
+        {
+#if UNITY_IPHONE && !UNITY_EDITOR
+            // var inapps = new List<string>();
+            // inapps.Add("com.budda.assistant.coin1");
+            LoadProducts(string.Join(",", productids));
+#endif
+        }
+        
+        public string QueryProductsOrder(string productid)
+        {
+#if UNITY_IPHONE && !UNITY_EDITOR  
+            string rt = QueryProducts(productid);
+            Debug.Log(productid + ";" + rt);
+            return rt;
+#endif
+            return "";
+        }
+        
+        public void ConsumePayOrder(string insideOrderId)
+        {
+#if UNITY_IPHONE && !UNITY_EDITOR
+            ConsumePay(insideOrderId);
+#endif
+        }
+        
+        public void PayOrder(string orderid, string productid, string paytype)
+        {
+#if UNITY_IPHONE && !UNITY_EDITOR
+            var purchaseInfo = string.Format("{0}|{1}|{2}",orderid,productid, paytype);
+            Pay(purchaseInfo);
+#endif
+        }
+        
+        public bool CheckLostOrder(string orderid, string productid, string paytype)
+        {
+#if UNITY_IPHONE && !UNITY_EDITOR
+            bool isCheckLosting = false;
+            var purchaseInfo = string.Format("{0}|{1}|{2}",orderid,productid, paytype);
+            CheckLostOrder(purchaseInfo);
+            return isCheckLosting;
+#endif
+            return false;
+        }
+        
+        
     }
 }

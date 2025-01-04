@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 namespace NativeHelper
@@ -11,9 +14,8 @@ namespace NativeHelper
 #endif
         }
         
-        public void Save(byte[] data, string fileName)
+        public void Save(byte[] bytes, string fileName)
         {
-#if UNITY_ANDROID && !UNITY_EDITOR
             string fileFullPath = GetApplicationPersistentDataPath() + "/" + fileName;
 
             FileStream stream = null;
@@ -29,12 +31,10 @@ namespace NativeHelper
 
             stream.Write(bytes);
             stream.Close();
-#endif                
         }
         
         public byte[] Read(string fileName)
         {
-#if UNITY_ANDROID && !UNITY_EDITOR
             string fileFullPath = GetApplicationPersistentDataPath() + "/" + fileName;
             if (File.Exists(fileFullPath))
             {
@@ -44,13 +44,13 @@ namespace NativeHelper
                 stream.Close();
                 return bytes;
             }
-#endif    
+  
             return null;
         }
         
         public void Delete(string fileName)
         {
-#if UNITY_ANDROID && !UNITY_EDITOR
+// #if UNITY_ANDROID && !UNITY_EDITOR
             string fileFullPath = GetApplicationPersistentDataPath() + "/" + fileName;
             if (File.Exists(fileFullPath))
             {
@@ -63,7 +63,7 @@ namespace NativeHelper
                     Debug.LogError(e);
                 }
             }
-#endif   
+// #endif   
         }
 
         public string GetApplicationPersistentDataPath()
@@ -86,6 +86,31 @@ namespace NativeHelper
 #if UNITY_ANDROID && !UNITY_EDITOR
             Handheld.Vibrate();
 #endif
+        }
+
+        public void LoadProductsOrder(List<string> productids)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public string QueryProductsOrder(string productid)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ConsumePayOrder(string insideOrderId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void PayOrder(string orderid, string productid, string paytype)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool CheckLostOrder(string orderid, string productid, string paytype)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

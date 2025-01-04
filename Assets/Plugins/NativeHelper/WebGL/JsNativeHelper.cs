@@ -1,6 +1,7 @@
 #if UNITY_WEBGL && !UNITY_EDITOR
 using System.Runtime.InteropServices;
 #endif
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace NativeHelper
@@ -76,6 +77,33 @@ namespace NativeHelper
 #if UNITY_WEBGL && !UNITY_EDITOR
         //     JSVibrate(time);
 #endif
+        }
+
+        public void LoadProductsOrder(List<string> productids)
+        {
+                Debug.Log("LoadProductsOrder execute");
+        }
+
+        public string QueryProductsOrder(string productid)
+        {
+                Debug.Log("QueryProductsOrder execute");
+                return "";
+        }
+
+        public void ConsumePayOrder(string insideOrderId)
+        {
+                Debug.Log("ConsumePayOrder execute");
+        }
+
+        public void PayOrder(string orderid, string productid, string paytype)
+        {
+                Debug.Log("PayOrder execute");
+        }
+
+        public bool CheckLostOrder(string orderid, string productid, string paytype)
+        {
+                Debug.Log("CheckLostOrder execute");
+                return false;
         }
     }
 }
