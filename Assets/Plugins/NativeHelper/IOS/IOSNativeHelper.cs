@@ -134,19 +134,19 @@ namespace NativeHelper
 #endif
         }
         
-        public void PayOrder(string orderid, string productid, string paytype)
+        public void PayOrder(string insideOrderId, string insideSid, string productid, string paytype)
         {
 #if UNITY_IPHONE && !UNITY_EDITOR
-            var purchaseInfo = string.Format("{0}|{1}|{2}",orderid,productid, paytype);
+            var purchaseInfo = string.Format("{0}|{1}|{2}|{3}",insideOrderId, insideSid, productid, paytype);
             Pay(purchaseInfo);
 #endif
         }
         
-        public bool CheckLostOrder(string orderid, string productid, string paytype)
+        public bool CheckLostOrder(string insideOrderId, string insideSid, string productid, string paytype)
         {
 #if UNITY_IPHONE && !UNITY_EDITOR
             bool isCheckLosting = false;
-            var purchaseInfo = string.Format("{0}|{1}|{2}",orderid,productid, paytype);
+            var purchaseInfo = string.Format("{0}|{1}|{2}|{3}", insideOrderId, insideSid,productid, paytype);
             CheckLostOrder(purchaseInfo);
             return isCheckLosting;
 #endif

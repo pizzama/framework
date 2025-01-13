@@ -95,12 +95,12 @@ namespace NativeHelper
                 Debug.Log("ConsumePayOrder execute");
         }
 
-        public void PayOrder(string orderid, string productid, string paytype)
+        public void PayOrder(string insideOrderId, string insideSid, string productid, string paytype)
         {
                 Debug.Log("PayOrder execute");
         }
 
-        public bool CheckLostOrder(string orderid, string productid, string paytype)
+        public bool CheckLostOrder(string insideOrderId, string insideSid, string productid, string paytype)
         {
                 Debug.Log("CheckLostOrder execute");
                 return false;

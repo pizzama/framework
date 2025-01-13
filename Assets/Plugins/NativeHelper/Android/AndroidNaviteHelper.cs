@@ -103,12 +103,12 @@ namespace NativeHelper
             throw new System.NotImplementedException();
         }
 
-        public void PayOrder(string orderid, string productid, string paytype)
+        public void PayOrder(string orderid, string configId, string productid, string paytype)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool CheckLostOrder(string orderid, string productid, string paytype)
+        public bool CheckLostOrder(string orderid, string configId, string productid, string paytype)
         {
             throw new System.NotImplementedException();
         }
