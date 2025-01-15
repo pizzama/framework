@@ -305,18 +305,18 @@ namespace SFramework
             try
             {
                 AssetBundle ab = null;
-                if (ABPathHelper.GetPlatformName() == "WebGL")
-                {
+                // if (ABPathHelper.GetPlatformName() == "WebGL")
+                // {
                     ab = await requestAssetBundleFromUrl(url, 0);
-                }
-                else
-                {
-                    ab = await AssetBundle.LoadFromFileAsync(url);
-                    if (ab == null)
-                    {
-                        ab = await requestAssetBundleFromUrl(url, 0);
-                    }
-                }
+                // }
+                // else
+                // {
+                //     ab = await AssetBundle.LoadFromFileAsync(url);
+                //     if (ab == null)
+                //     {
+                //         ab = await requestAssetBundleFromUrl(url, 0);
+                //     }
+                // }
                 uniTaskCompletionSource.TrySetResult(ab);
             }
             catch (System.Exception err)
