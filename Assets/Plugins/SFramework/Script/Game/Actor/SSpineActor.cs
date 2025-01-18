@@ -19,9 +19,9 @@ namespace SFramework.SActor
         private SkeletonAnimation _skeletonanimation;
 
         
-        private FSM _fsm;
+        private SFSM _fsm;
 
-        public FSM GetFSM()
+        public SFSM GetFSM()
         {
             return _fsm;
         }
@@ -31,29 +31,39 @@ namespace SFramework.SActor
             return _skeletonanimation;
         }
 
-        protected override void initEntity()
-        {
+        // protected override void initEntity()
+        // {
 
-            if (_skeletonanimation == null)
-            {
-                _skeletonanimation = FindObjectOfType<SkeletonAnimation>();
-            }
+        //     if (_skeletonanimation == null)
+        //     {
+        //         _skeletonanimation = FindObjectOfType<SkeletonAnimation>();
+        //     }
 
-            if (_fsm == null)
-            {
-                _fsm = new FSM();
-                _fsm.BlackBoard = this;
-            }
-        }
+        //     if (_fsm == null)
+        //     {
+        //         _fsm = new SFSM();
+        //         _fsm.BlackBoard = this;
+        //     }
+        // }
 
-        public void AddFSMState(IFSMState state)
-        {
-            _fsm?.AddState(state);
-        }
+        // public void AddFSMState(IFSMState state)
+        // {
+        //     _fsm?.AddState(state);
+        // }
 
         public void Update()
         {
             _fsm?.Update();
+        }
+
+        public override void Recycle()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Show()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

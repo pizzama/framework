@@ -1,4 +1,4 @@
-﻿Shader "UI/Guide/CircleGuide"
+﻿Shader "UI/Guide/GuideRect"
 {
     Properties
     {
@@ -14,8 +14,10 @@
         _ColorMask ("Color Mask", Float) = 15
 
         [Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip ("Use Alpha Clip", Float) = 0
+
         _Center("Center",vector) = (0,0,0,0)
-        _Slider("Slider",Range(0,2500)) = 2500
+        _SliderX("SliderX",Range(0,1500)) = 1500
+        _SliderY("SliderY",Range(0,1500)) = 1500
     }
 
     SubShader
@@ -81,8 +83,10 @@
             fixed4 _TextureSampleAdd;
             float4 _ClipRect;
             float4 _MainTex_ST;
+
             float2 _Center;
-            float _Slider;
+            float _SliderX;
+            float _SliderY;
 
             v2f vert(appdata_t v)
             {
@@ -109,7 +113,8 @@
                 #ifdef UNITY_UI_ALPHACLIP
                 clip (color.a - 0.001);
                 #endif
-                color.a *= (distance(IN.worldPosition.xy,_Center.xy) > _Slider);
+                float2 dis = IN.worldPosition.xy - _Center.xy;
+                color.a *= (abs(dis.x)>_SliderX) || (abs(dis.y) > _SliderY);
                 color.rgb *= color.a;
 
                 return color;

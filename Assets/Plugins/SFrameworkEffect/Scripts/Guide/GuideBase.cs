@@ -79,11 +79,16 @@ public class GuideBase : MonoBehaviour, ICanvasRaycastFilter
         }
     }
 
-    public void MoveTarget(Vector3 move)
+    public void MoveHole(Vector3 move)
     {
         center = move;
-        target.localPosition = move;
         _isMoving = true;
+    }
+
+    public void MoveTarget(Vector3 move)
+    {
+        target.localPosition = move;
+        MoveHole(move);
     }
 
     // 引导
