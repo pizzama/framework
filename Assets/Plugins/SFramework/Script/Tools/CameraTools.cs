@@ -35,8 +35,8 @@ public class CameraTools
     }
     
     public static float AdaptCameraSize(float originSize, float aspectWidth, float aspectHeight)
-    {
-        if (Screen.orientation == ScreenOrientation.Portrait)
+    { 
+        if (Screen.width < Screen.height) //判断横竖屏
         {
             float defaultAspect = aspectWidth / aspectHeight;
             float currentAspect = (float)Screen.height/ Screen.width;

@@ -153,10 +153,13 @@ namespace SFramework.Game
                 return;
             foreach (var item in goValue)
             {
-                ISEntity entity = item.Value.GetComponent<ISEntity>();
-                if (entity != null)
+                if(item.Value != null)
                 {
-                    entity.Recycle();
+                    ISEntity entity = item.Value.GetComponent<ISEntity>();
+                    if (entity != null)
+                    {
+                        entity.Recycle();
+                    }
                 }
             }
         }
