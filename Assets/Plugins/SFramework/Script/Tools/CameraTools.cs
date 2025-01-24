@@ -39,14 +39,29 @@ public class CameraTools
         if (Screen.width < Screen.height) //判断横竖屏
         {
             float defaultAspect = aspectWidth / aspectHeight;
-            float currentAspect = (float)Screen.height/ Screen.width;
-            return originSize * (currentAspect / defaultAspect);
+            float currentAspect = (float)Screen.width/ Screen.height;
+            return originSize * (defaultAspect / currentAspect);
         }
         else
         {
             float defaultAspect = aspectWidth / aspectHeight;
-            float currentAspect = (float)Screen.width / Screen.height;
-            return originSize * (defaultAspect / currentAspect);
+            float currentAspect = (float)Screen.height / Screen.width;
+            return originSize * (currentAspect / defaultAspect);
+        }
+    }
+
+    public static bool JudgeScreenIsWide(float aspectWidth, float aspectHeight)
+    {
+        float defaultAspect = aspectWidth / aspectHeight;;
+        float currentAspect = (float)Screen.width/ Screen.height;
+        if (currentAspect > defaultAspect) // 是宽的
+        {
+            return true;
+        }
+        else
+        {
+            // 是细的
+            return false;
         }
     }
 }

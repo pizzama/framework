@@ -26,6 +26,7 @@ namespace SFramework.Game
         [SerializeField] private Transform _blocker;
         [SerializeField] private Camera _uiCamera;
         [SerializeField] private Camera _mainCamera;
+        [SerializeField] private float _mainCameraOriginSize;
         [SerializeField] private CanvasScaler _canvasScaler;
         [SerializeField] private Canvas _canvas;
         const string uiName = "SUIROOTMB";
@@ -50,7 +51,11 @@ namespace SFramework.Game
             this.name = uiName;
             SUIROOT.Instance = this;
             if (_mainCamera == null)
+            {
                 _mainCamera = this.transform.Find("RotateCenter/MainCamera")?.GetComponent<Camera>();
+            }
+            _mainCameraOriginSize = _mainCamera.orthographicSize;
+
             if (_uiCamera == null)
                 _uiCamera = this.transform.Find("UICamera").GetComponent<Camera>();
             if (_canvasScaler == null)
@@ -71,6 +76,18 @@ namespace SFramework.Game
                 _blocker = this.transform.Find("Blocker").GetComponent<Transform>();
             if(_canvas == null)
                 _canvas = this.GetComponent<Canvas>();
+            // deal with camera
+            if (_canvasScaler != null)
+            {
+                Vector2 design = _canvasScaler.referenceResolution;
+                float aspect = CameraTools.AdaptCameraSize(_mainCameraOriginSize, design.x, design.y);
+                MainCamera.orthographicSize = aspect;
+                bool rt = CameraTools.JudgeScreenIsWide(design.x, design.y);
+                if (rt)
+                    _canvasScaler.matchWidthOrHeight = 1;
+                else
+                    _canvasScaler.matchWidthOrHeight = 0;
+            }
         }
 
         public void OpenUI(UILayer layer, Transform result, Vector2 offsetMin = default, Vector2 offsetMax = default, Quaternion rotation = default)
