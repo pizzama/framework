@@ -167,7 +167,15 @@ public class SEditorControlCreator : EditorWindow
                     prefabFile,
                     out result
                 );
-                Destroy(gameObject);
+                
+                // 使用EditorApplication.delayCall在下一帧删除对象
+                EditorApplication.delayCall += () => 
+                {
+                    if (gameObject != null) // 再次检查确保对象未被删除
+                    {
+                        GameObject.DestroyImmediate(gameObject);
+                    }
+                };
                 if (result)
                 {
                     logInfo(string.Format("Create {0} Prefab Success", script.GetName()));
