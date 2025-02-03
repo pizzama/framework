@@ -1,10 +1,7 @@
 using UnityEngine;
-using System.Collections;
-using System.Xml;
 using System.IO;
 using System;
 using System.Text;
-using System.Collections.Generic;
 using System.Security.Cryptography;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Networking;
@@ -13,6 +10,82 @@ namespace SFramework.Tools
 {
     public class FileTools
     {
+        // AES加密密钥和IV（初始化向量）
+        private static readonly byte[] Key = Encoding.UTF8.GetBytes("Your32ByteKeyHere1234567890123456");
+        private static readonly byte[] IV = Encoding.UTF8.GetBytes("Your16ByteIVHere123");
+
+        // 加密AB包
+        public static void EncryptAssetBundle(string inputPath, string outputPath)
+        {
+            // 读取AB包的原始数据
+            byte[] originalData = File.ReadAllBytes(inputPath);
+
+            // 使用AES加密
+            byte[] encryptedData = EncryptData(originalData);
+
+            // 保存加密后的数据
+            File.WriteAllBytes(outputPath, encryptedData);
+        }
+
+        // AES加密方法
+        private static byte[] EncryptData(byte[] data)
+        {
+            using (Aes aesAlg = Aes.Create())
+            {
+                aesAlg.Key = Key;
+                aesAlg.IV = IV;
+
+                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+
+                using (var msEncrypt = new MemoryStream())
+                {
+                    using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                    {
+                        csEncrypt.Write(data, 0, data.Length);
+                        csEncrypt.FlushFinalBlock();
+                        return msEncrypt.ToArray();
+                    }
+                }
+            }
+        }
+
+        // 加载并解密AB包
+        public static AssetBundle LoadEncryptedAssetBundle(string path)
+        {
+            // 读取加密的AB包数据
+            byte[] encryptedData = File.ReadAllBytes(path);
+
+            // 使用AES解密
+            byte[] decryptedData = DecryptData(encryptedData);
+
+            // 从解密后的数据加载AB包
+            return AssetBundle.LoadFromMemory(decryptedData);
+        }
+
+        // AES解密方法
+        private static byte[] DecryptData(byte[] data)
+        {
+            using (Aes aesAlg = Aes.Create())
+            {
+                aesAlg.Key = Key;
+                aesAlg.IV = IV;
+
+                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+
+                using (var msDecrypt = new MemoryStream(data))
+                {
+                    using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                    {
+                        using (var msOutput = new MemoryStream())
+                        {
+                            csDecrypt.CopyTo(msOutput);
+                            return msOutput.ToArray();
+                        }
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// 把文件写到文档目录存起来
         /// </summary>
