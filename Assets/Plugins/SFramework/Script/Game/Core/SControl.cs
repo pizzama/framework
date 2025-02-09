@@ -234,31 +234,42 @@ namespace SFramework
         public override void Update()
         {
             base.Update();
-            controlUpdate();
-            if (_model != null)
-                _model.Update();
-            if (_view != null)
-                _view.Update();
+            if (IsOpen)
+            {
+                controlUpdate();
+                if (_model != null)
+                    _model.Update();
+                if (_view != null)
+                    _view.Update();
+            }
+
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            controlFixedUpdate();
-            if (_model != null)
-                _model.FixedUpdate();
-            if (_view != null)
-                _view.FixedUpdate();
+            if (IsOpen)
+            {
+                controlFixedUpdate();
+                if (_model != null)
+                    _model.FixedUpdate();
+                if (_view != null)
+                    _view.FixedUpdate();
+            }
         }
 
         public override void LateUpdate()
         {
             base.LateUpdate();
-            controlLastUpdate();
-            if (_model != null)
-                _model.LateUpdate();
-            if (_view != null)
-                _view.LateUpdate();
+            if (IsOpen)
+            {
+                controlLastUpdate();
+                if (_model != null)
+                    _model.LateUpdate();
+                if (_view != null)
+                    _view.LateUpdate();
+            }
+
         }
 
         public void OpenControl(string fullPath, object messageData = null, bool isSequence = false, string alias = "", int sort = 0, Action<Object> callback = null)

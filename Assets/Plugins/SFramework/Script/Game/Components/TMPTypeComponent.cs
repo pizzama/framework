@@ -1,7 +1,9 @@
 using TMPro;
+using UnityEngine;
 
 namespace SFramework.Components
 {
+    [RequireComponent(typeof(TMP_Text))]
     public class TMPTypeComponent : TypeComponent
     {
         private TextMeshProUGUI _label;

@@ -1,7 +1,9 @@
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace SFramework.Components
 {
+    [RequireComponent(typeof(Text))]
     public class TextTypeComponent : TypeComponent
     {
         private Text _label;

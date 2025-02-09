@@ -9,7 +9,6 @@ using UnityEngine.UI;
 /// </summary>
 namespace SFramework.Components
 {
-    [RequireComponent(typeof(TMP_Text))]
     public abstract class TypeComponent : MonoBehaviour
     {
         public delegate void OnComplete();
