@@ -25,7 +25,7 @@ namespace SFramework.Components
             return _label.fontSize;
         }
 
-        protected override void setText(string value)
+        protected override void changeText(string value)
         {
             _label.text = value;
         }
@@ -33,6 +33,12 @@ namespace SFramework.Components
         protected override void skipHandle()
         {
             _label.text = finalText;
+        }
+
+        public override void Clean()
+        {
+            base.Clean();
+            _label.text = "";
         }
     }
     

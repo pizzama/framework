@@ -31,6 +31,12 @@ namespace SFramework.Components
             Init();
         }
 
+        public virtual void Clean()
+        {
+            _currentText = "";
+            finalText = "";
+        }
+
         public virtual void SetText(string text, float speed = -1)
         {
             Init();
@@ -63,7 +69,7 @@ namespace SFramework.Components
 
         protected abstract float getSize();
 
-        protected abstract void setText(string value);
+        protected abstract void changeText(string value);
 
         public IEnumerator TypeText(string text)
         {
@@ -180,7 +186,7 @@ namespace SFramework.Components
                 if (symbolDetected) continue;
 
                 _currentText += text[i];
-                setText(_currentText + (tagOpened ? string.Format("</{0}>", tagType) : ""));
+                changeText(_currentText + (tagOpened ? string.Format("</{0}>", tagType) : ""));
                 yield return new WaitForSeconds(speed);
             }
 
