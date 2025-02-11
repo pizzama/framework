@@ -196,7 +196,6 @@ namespace SFramework
         public void HandleViewCallback()
         {
             alreadyOpened();
-            _model.OpenParams.CallBack?.Invoke(this);
         }
 
         public T GetControl<T>() where T : SControl
@@ -316,7 +315,7 @@ namespace SFramework
 
         protected virtual void alreadyOpened()
         {
-
+            _model.OpenParams.CallBack?.Invoke(this);
         }
     }
 }
