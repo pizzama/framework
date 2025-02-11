@@ -41,6 +41,7 @@ public class SCreateTemplateScript
 
         writer.AppendLine("\t\tprotected override void alreadyOpened()");
         writer.AppendLine("\t\t{");
+        writer.AppendLine("\t\t\tbase.alreadyOpened();");
         writer.AppendLine("\t\t\t// Code Here");
         writer.AppendLine("\t\t}");
 
