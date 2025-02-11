@@ -135,13 +135,15 @@ namespace SFramework.Tools
             return worldCamera.WorldToScreenPoint(worldPos);
         }
 
-        public static Vector3 UIToWorldPosition(RectTransform trans, Canvas canvas)
+        // uiElementPos 是 RectTransform的 position坐标
+        // 看转换的目标是在那个摄像机里，从ui的摄像机转换到目标摄像机的位置，要注意position和localPosition
+        public static Vector3 UIToWorldPosition(Vector3 uiElementPos, Camera uiCamera, Camera targetCamera)
         {
-            Vector3 ptScreen = RectTransformUtility.WorldToScreenPoint(canvas.worldCamera, trans.position);
-            ptScreen.z = 0;
-            ptScreen.z = Mathf.Abs(canvas.worldCamera.transform.position.z - trans.position.z);
-            Vector3 ptWorld = canvas.worldCamera.ScreenToWorldPoint(ptScreen);
-            return ptWorld;
+            // 获取UI元素的屏幕坐标
+            Vector2 screenPosition = RectTransformUtility.WorldToScreenPoint(uiCamera, uiElementPos);
+            // 将屏幕坐标转换为世界坐标
+            Vector3 worldPosition = targetCamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, targetCamera.nearClipPlane));
+            return worldPosition;
         }
         
         public static Vector3 LocalToGlobal(Transform transform, Canvas canvas)
