@@ -24,8 +24,8 @@ namespace SFramework
                 switch (name)
                 {
                     case RuntimePlatform.WebGLPlayer:
+                    case RuntimePlatform.Android:
                         return resPersistentPath;
-                        break;
                 }
                 return "file:///" + resPersistentPath;
             }
@@ -35,8 +35,8 @@ namespace SFramework
                 switch (name)
                 {
                     case RuntimePlatform.WebGLPlayer:
+                    case RuntimePlatform.Android:
                         return resPersistentPath;
-                        break;
                 }
                 return "file:///" + resPersistentPath;
             }
