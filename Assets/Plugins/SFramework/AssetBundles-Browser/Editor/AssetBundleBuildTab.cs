@@ -572,7 +572,21 @@ namespace AssetBundleBrowser
             N3DS = 35,
             WiiU = 36,
             tvOS = 37,
-            Switch = 38
+            Switch = 38,
+            Lumin = 39,
+            Stadia = 40,
+            CloudRendering = 41, //LinuxHeadlessSimulation
+            GameCoreScarlett = 42, //GameCoreXboxSeries
+            GameCoreXboxOne = 43,
+            PS5 = 44,
+            EmbeddedLinux = 45,
+            QNX = 46,
+            WeixinMiniGame = 47,
+            OpenHarmony = 48,
+            HMIAndroid = 49,
+            ArmLinux = 50,
+            ArmLinuxServer = 51,
+            VisionOS = 52,
         }
 
         [System.Serializable]
