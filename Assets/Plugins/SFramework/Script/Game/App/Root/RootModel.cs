@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Cysharp.Threading.Tasks;
 using NativeHelper;
@@ -125,6 +126,26 @@ namespace SFramework.Game
             T msg = new T();
             cis.ReadMessage(msg);
             return msg;
+        }
+
+        public async UniTask<byte[]> GetData(Dictionary<string, string> getParams, IProgress<float> progress, string endpoint = "")
+        {
+            string fullUrl = configManager.GetServerUrl();
+            if (string.IsNullOrWhiteSpace(endpoint) == false)
+            {
+                fullUrl = configManager.BuildApiUrl(endpoint);
+            }
+            return await GetRemoteData(fullUrl, getParams, progress, true);
+        }
+
+        public async UniTask<byte[]> GetNetData(Dictionary<string, string> getParams, IProgress<float> progress, string endpoint = "")
+        {
+            string fullUrl = configManager.GetServerUrl();
+            if (string.IsNullOrWhiteSpace(endpoint) == false)
+            {
+                fullUrl = configManager.BuildApiUrl(endpoint);
+            }
+            return await GetRemoteData(fullUrl, getParams, progress, false);
         }
     }
 }

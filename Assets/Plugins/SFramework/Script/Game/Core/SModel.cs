@@ -86,15 +86,15 @@ namespace SFramework
 
         public async UniTask<byte[]> GetData()
         {
-            return await GetData("", true);
-        }
-        
-        public async UniTask<byte[]> GetData(string url, IProgress<float> progress)
-        {
-            return await GetData(url, progress, true);
+            return await GetRemoteData("", true);
         }
 
-        public async UniTask<byte[]> GetData(string url, Dictionary<string, string> getParams,  bool isModelCallback = false)
+        public async UniTask<byte[]> GetRemoteData(string url, bool isModelCallback)
+        {
+            return await GetRemoteData(url, null, null, isModelCallback);
+        }
+
+        public async UniTask<byte[]> GetRemoteData(string url, Dictionary<string, string> getParams,  bool isModelCallback)
         {
             string pathurl = url;
             string urlparam = StringTools.BuildQueryString(getParams);
@@ -102,10 +102,10 @@ namespace SFramework
             {
                 pathurl = url + "?" + urlparam;
             }
-            return await GetData(pathurl, isModelCallback);
+            return await GetRemoteData(pathurl, isModelCallback);
         }
         
-        public async UniTask<byte[]> GetData(string url, Dictionary<string, string> getParams, IProgress<float> progress, bool isModelCallback = false)
+        public async UniTask<byte[]> GetRemoteData(string url, Dictionary<string, string> getParams, IProgress<float> progress, bool isModelCallback)
         {
             string pathurl = url;
             if (getParams != null)
@@ -117,15 +117,10 @@ namespace SFramework
                 }
             }
 
-            return await GetData(pathurl, progress, isModelCallback);
-        }
-
-        public async UniTask<byte[]> GetData(string url, bool isModelCallback)
-        {
-            return await GetData(url, null, null, isModelCallback);
+            return await GetRemoteData(pathurl, progress, isModelCallback);
         }
         
-        public async UniTask<byte[]> GetData(string url, IProgress<float> progress, bool isModelCallback)
+        public async UniTask<byte[]> GetRemoteData(string url, IProgress<float> progress, bool isModelCallback)
         {
             if (url == "")
             {
@@ -151,22 +146,22 @@ namespace SFramework
 
         }
 
-        public async UniTask<byte[]> PostData(string url, object pars, Dictionary<string, string> headParams = default)
+        public async UniTask<byte[]> PostRemoteData(string url, object pars, Dictionary<string, string> headParams = default)
         {
-            return await PostData(url, pars, headParams, false);
+            return await PostRemoteData(url, pars, headParams, false);
         }
         
-        public async UniTask<byte[]> PostData(string url, object pars, Dictionary<string, string> headParams, IProgress<float> progress)
+        public async UniTask<byte[]> PostRemoteData(string url, object pars, Dictionary<string, string> headParams, IProgress<float> progress)
         {
-            return await PostData(url, pars, headParams, true, progress);
+            return await PostRemoteData(url, pars, headParams, true, progress);
         }
 
-        public async UniTask<byte[]> PostData(string url, object pars, Dictionary<string, string> headParams = default, bool isModelCallback = true)
+        public async UniTask<byte[]> PostRemoteData(string url, object pars, Dictionary<string, string> headParams = default, bool isModelCallback = true)
         {
-            return await PostData(url, pars, headParams, isModelCallback, null);
+            return await PostRemoteData(url, pars, headParams, isModelCallback, null);
         }
         
-        public async UniTask<byte[]> PostData(string url, object pars, Dictionary<string, string> headParams = default, bool isModelCallback = true, IProgress<float> progress = null)
+        public async UniTask<byte[]> PostRemoteData(string url, object pars, Dictionary<string, string> headParams = default, bool isModelCallback = true, IProgress<float> progress = null)
         {
             if (url == "")
             {

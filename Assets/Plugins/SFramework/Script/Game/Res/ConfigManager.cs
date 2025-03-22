@@ -9,6 +9,7 @@ namespace SFramework
     {
         private static ConfigManager _instance;
         private Dictionary<System.Type, IMessage> _configDict;
+        private string _serverUrl = "";
         public static ConfigManager Instance
         {
             get
@@ -22,6 +23,22 @@ namespace SFramework
         private ConfigManager()
         {
             _configDict = new Dictionary<System.Type, IMessage>();
+        }
+
+        // 设置服务器URL的方法
+        public void SetServerUrl(string url)
+        {
+            _serverUrl = url;
+        }
+
+        public string GetServerUrl()
+        {
+            return _serverUrl;
+        }
+
+        public string BuildApiUrl(string endpoint)
+        {
+            return $"{_serverUrl.TrimEnd('/')}/{endpoint.TrimStart('/')}";
         }
 
         public T GetConfig<T>() where T: IMessage, new()
