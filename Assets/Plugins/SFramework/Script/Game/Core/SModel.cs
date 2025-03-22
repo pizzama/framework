@@ -84,6 +84,17 @@ namespace SFramework
 
         }
 
+        public T BytesToObject<T>(byte[] bytes) where T: new()
+        {
+            if (bytes == null || bytes.Length == 0)
+            {
+                return default(T);
+            }
+            // 方法1：如果是JSON格式数据
+            string jsonString = System.Text.Encoding.UTF8.GetString(bytes);
+            return JsonUtility.FromJson<T>(jsonString);
+        }
+
         public async UniTask<byte[]> GetData()
         {
             return await GetRemoteData("", true);
@@ -91,7 +102,7 @@ namespace SFramework
 
         public async UniTask<byte[]> GetRemoteData(string url, bool isModelCallback)
         {
-            return await GetRemoteData(url, null, null, isModelCallback);
+            return await GetRemoteData(url, null, null, null, 5, isModelCallback);
         }
 
         public async UniTask<byte[]> GetRemoteData(string url, Dictionary<string, string> getParams,  bool isModelCallback)
@@ -105,8 +116,15 @@ namespace SFramework
             return await GetRemoteData(pathurl, isModelCallback);
         }
         
-        public async UniTask<byte[]> GetRemoteData(string url, Dictionary<string, string> getParams, IProgress<float> progress, bool isModelCallback)
+        public async UniTask<byte[]> GetRemoteData(string url, Dictionary<string, string> getParams, Dictionary<string, string> headParams, IProgress<float> progress, int timeout, bool isModelCallback)
         {
+            if (url == "")
+            {
+                if(isModelCallback)
+                    ModelCallback?.Invoke(0);
+                return null;
+            }
+
             string pathurl = url;
             if (getParams != null)
             {
@@ -117,20 +135,18 @@ namespace SFramework
                 }
             }
 
-            return await GetRemoteData(pathurl, progress, isModelCallback);
-        }
-        
-        public async UniTask<byte[]> GetRemoteData(string url, IProgress<float> progress, bool isModelCallback)
-        {
-            if (url == "")
-            {
-                if(isModelCallback)
-                    ModelCallback?.Invoke(0);
-                return null;
-            }
             try
             {
-                UnityWebRequest webRequest = UnityWebRequest.Get(url);
+                UnityWebRequest webRequest = UnityWebRequest.Get(pathurl);
+                webRequest.timeout = timeout;
+                if (webRequest != null)
+                {
+                    foreach (var head in headParams)
+                    {
+                        webRequest.SetRequestHeader(head.Key,head.Value);
+                    }
+                }
+
                 byte[] bytes = await requestData(webRequest, isModelCallback, progress);
                 if(isModelCallback)
                     ModelCallback?.Invoke(0);
@@ -145,23 +161,8 @@ namespace SFramework
             }
 
         }
-
-        public async UniTask<byte[]> PostRemoteData(string url, object pars, Dictionary<string, string> headParams = default)
-        {
-            return await PostRemoteData(url, pars, headParams, false);
-        }
         
-        public async UniTask<byte[]> PostRemoteData(string url, object pars, Dictionary<string, string> headParams, IProgress<float> progress)
-        {
-            return await PostRemoteData(url, pars, headParams, true, progress);
-        }
-
-        public async UniTask<byte[]> PostRemoteData(string url, object pars, Dictionary<string, string> headParams = default, bool isModelCallback = true)
-        {
-            return await PostRemoteData(url, pars, headParams, isModelCallback, null);
-        }
-        
-        public async UniTask<byte[]> PostRemoteData(string url, object pars, Dictionary<string, string> headParams = default, bool isModelCallback = true, IProgress<float> progress = null)
+        public async UniTask<byte[]> PostRemoteData(string url, object pars, Dictionary<string, string> getParams, Dictionary<string, string> headParams, IProgress<float> progress, int timeout, bool isModelCallback)
         {
             if (url == "")
             {
@@ -169,6 +170,17 @@ namespace SFramework
                     ModelCallback?.Invoke(0);
                 return null;
             }
+
+            string pathurl = url;
+            if (getParams != null)
+            {
+                string urlparam = StringTools.BuildQueryString(getParams);
+                if (!string.IsNullOrEmpty(urlparam))
+                {
+                    pathurl = url + "?" + urlparam;
+                }
+            }
+
             try
             {
                 string paramsJson = "";
@@ -181,7 +193,7 @@ namespace SFramework
                     paramsJson = JsonUtility.ToJson(pars);
                 }
                 
-                UnityWebRequest webRequest = new UnityWebRequest(url, "POST");
+                UnityWebRequest webRequest = new UnityWebRequest(pathurl, "POST");
                 // 将 JSON 数据作为请求体
                 byte[] bodyRaw = new System.Text.UTF8Encoding().GetBytes(paramsJson);
                 webRequest.uploadHandler = new UploadHandlerRaw(bodyRaw);

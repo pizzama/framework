@@ -128,24 +128,106 @@ namespace SFramework.Game
             return msg;
         }
 
-        public async UniTask<byte[]> GetData(Dictionary<string, string> getParams, IProgress<float> progress, string endpoint = "")
+        public async UniTask<T> GetData<T>(Dictionary<string, string> getParams, IProgress<float> progress, string endpoint = "") where T: new()
         {
-            string fullUrl = configManager.GetServerUrl();
+            string fullUrl = configManager.ServerUrl;
             if (string.IsNullOrWhiteSpace(endpoint) == false)
             {
                 fullUrl = configManager.BuildApiUrl(endpoint);
             }
-            return await GetRemoteData(fullUrl, getParams, progress, true);
+            Dictionary<string, string> headParams = configManager.GetGlobalHeaders();
+            int timeout = configManager.Timeout;
+            byte[] bytes = await GetRemoteData(fullUrl, getParams, headParams, progress, timeout, true);
+            return BytesToObject<T>(bytes);
         }
 
-        public async UniTask<byte[]> GetNetData(Dictionary<string, string> getParams, IProgress<float> progress, string endpoint = "")
+        public async UniTask<byte[]> GetData(Dictionary<string, string> getParams, Dictionary<string, string> headParams, IProgress<float> progress, int timeout, string endpoint = "")
         {
-            string fullUrl = configManager.GetServerUrl();
+            string fullUrl = configManager.ServerUrl;
             if (string.IsNullOrWhiteSpace(endpoint) == false)
             {
                 fullUrl = configManager.BuildApiUrl(endpoint);
             }
-            return await GetRemoteData(fullUrl, getParams, progress, false);
+            return await GetRemoteData(fullUrl, getParams, headParams, progress, timeout, true);
+        }
+
+        public async UniTask<T> GetNetData<T>(Dictionary<string, string> getParams, IProgress<float> progress, string endpoint = "") where T: new()
+        {
+            string fullUrl = configManager.ServerUrl;
+            if (string.IsNullOrWhiteSpace(endpoint) == false)
+            {
+                fullUrl = configManager.BuildApiUrl(endpoint);
+            }
+            Dictionary<string, string> headParams = configManager.GetGlobalHeaders();
+            int timeout = configManager.Timeout;
+            byte[] bytes = await GetRemoteData(fullUrl, getParams, headParams, progress, timeout, false);
+            return BytesToObject<T>(bytes);
+        }
+
+        public async UniTask<byte[]> GetNetData(Dictionary<string, string> getParams, Dictionary<string, string> headParams, IProgress<float> progress, int timeout, string endpoint = "")
+        {
+            string fullUrl = configManager.ServerUrl;
+            if (string.IsNullOrWhiteSpace(endpoint) == false)
+            {
+                fullUrl = configManager.BuildApiUrl(endpoint);
+            }
+            return await GetRemoteData(fullUrl, getParams, headParams, progress, timeout, false);
+        }
+
+        public async UniTask<T> PostData<T>(object postParams, IProgress<float> progress, string endpoint = "") where T: new()
+        {
+            return await PostData<T>(postParams, null, progress, endpoint); //TODO: add defaul
+        }
+
+        public async UniTask<T> PostData<T>(object postParams, Dictionary<string, string> getParams, IProgress<float> progress, string endpoint = "") where T: new()
+        {
+            string fullUrl = configManager.ServerUrl;
+            if (string.IsNullOrWhiteSpace(endpoint) == false)
+            {
+                fullUrl = configManager.BuildApiUrl(endpoint);
+            }
+            Dictionary<string, string> headParams = configManager.GetGlobalHeaders();
+            int timeout = configManager.Timeout;
+            byte[] bytes = await PostRemoteData(fullUrl, postParams, getParams, headParams, progress, timeout, true);
+            return BytesToObject<T>(bytes);
+        }
+
+        public async UniTask<byte[]> PostData(object postParams, Dictionary<string, string> getParams, Dictionary<string, string> headParams, IProgress<float> progress, int timeout, string endpoint = "")
+        {
+            string fullUrl = configManager.ServerUrl;
+            if (string.IsNullOrWhiteSpace(endpoint) == false)
+            {
+                fullUrl = configManager.BuildApiUrl(endpoint);
+            }
+            return await PostRemoteData(fullUrl, postParams, getParams, headParams, progress, timeout, true);
+        }
+
+        public async UniTask<T> PostNetData<T>(object postParams, IProgress<float> progress, string endpoint = "") where T: new()
+        {
+            return await PostNetData<T>(postParams, null, progress, endpoint); //TODO: add defaul
+        }
+
+        public async UniTask<T> PostNetData<T>(object postParams, Dictionary<string, string> getParams, IProgress<float> progress, string endpoint = "") where T: new()
+        {
+            string fullUrl = configManager.ServerUrl;
+            if (string.IsNullOrWhiteSpace(endpoint) == false)
+            {
+                fullUrl = configManager.BuildApiUrl(endpoint);
+            }
+            Dictionary<string, string> headParams = configManager.GetGlobalHeaders();
+            int timeout = configManager.Timeout;
+            byte[] bytes = await PostRemoteData(fullUrl, postParams, getParams, headParams, progress, timeout, false);
+            return BytesToObject<T>(bytes);
+        }
+
+        public async UniTask<byte[]> PostNetData(object postParams, Dictionary<string, string> getParams, Dictionary<string, string> headParams, IProgress<float> progress, int timeout, string endpoint = "")
+        {
+            string fullUrl = configManager.ServerUrl;
+            if (string.IsNullOrWhiteSpace(endpoint) == false)
+            {
+                fullUrl = configManager.BuildApiUrl(endpoint);
+            }
+            return await PostRemoteData(fullUrl, postParams, getParams, headParams, progress, timeout, false);
         }
     }
 }
