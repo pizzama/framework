@@ -88,41 +88,11 @@ namespace SFramework
         {
             return await GetData("", true);
         }
-
-        // public async UniTask<byte[]> GetData(string url, IProgress<float> progress, CancellationTokenSource cancelSource)
-        // {
-        //     if (url == "")
-        //     {
-        //         ModelCallback?.Invoke(0);
-        //         return null;
-        //     }
-        //     try
-        //     {
-        //         UnityWebRequest webRequest = UnityWebRequest.Get(url);
-        //         await webRequest.SendWebRequest().WithCancellation(cancelSource.Token);
-        //         ModelCallback?.Invoke(0);
-        //         return webRequest.downloadHandler.data;
-        //     }
-        //     catch (OperationCanceledException err)
-        //     {
-        //         if (cancelSource.IsCancellationRequested)
-        //         {
-        //             ModelCallback?.Invoke(-1);
-        //             UnityEngine.Debug.LogError("Timeout." + err.ToString());
-        //         }
-        //         else if (cancelSource.IsCancellationRequested)
-        //         {
-        //             ModelCallback?.Invoke(-2);
-        //             UnityEngine.Debug.LogError("Cancel clicked." + err.ToString());
-        //         }
-        //         else
-        //         {
-        //             ModelCallback?.Invoke(-3);
-        //         }
-        //
-        //         return null;
-        //     }
-        // }
+        
+        public async UniTask<byte[]> GetData(string url, IProgress<float> progress)
+        {
+            return await GetData(url, progress, true);
+        }
 
         public async UniTask<byte[]> GetData(string url, Dictionary<string, string> getParams,  bool isModelCallback = false)
         {
@@ -134,8 +104,28 @@ namespace SFramework
             }
             return await GetData(pathurl, isModelCallback);
         }
+        
+        public async UniTask<byte[]> GetData(string url, Dictionary<string, string> getParams, IProgress<float> progress, bool isModelCallback = false)
+        {
+            string pathurl = url;
+            if (getParams != null)
+            {
+                string urlparam = StringTools.BuildQueryString(getParams);
+                if (!string.IsNullOrEmpty(urlparam))
+                {
+                    pathurl = url + "?" + urlparam;
+                }
+            }
+
+            return await GetData(pathurl, progress, isModelCallback);
+        }
 
         public async UniTask<byte[]> GetData(string url, bool isModelCallback)
+        {
+            return await GetData(url, null, null, isModelCallback);
+        }
+        
+        public async UniTask<byte[]> GetData(string url, IProgress<float> progress, bool isModelCallback)
         {
             if (url == "")
             {
@@ -146,7 +136,7 @@ namespace SFramework
             try
             {
                 UnityWebRequest webRequest = UnityWebRequest.Get(url);
-                byte[] bytes = await requestData(webRequest, isModelCallback);
+                byte[] bytes = await requestData(webRequest, isModelCallback, progress);
                 if(isModelCallback)
                     ModelCallback?.Invoke(0);
                 return bytes;
@@ -165,8 +155,18 @@ namespace SFramework
         {
             return await PostData(url, pars, headParams, false);
         }
+        
+        public async UniTask<byte[]> PostData(string url, object pars, Dictionary<string, string> headParams, IProgress<float> progress)
+        {
+            return await PostData(url, pars, headParams, true, progress);
+        }
 
         public async UniTask<byte[]> PostData(string url, object pars, Dictionary<string, string> headParams = default, bool isModelCallback = true)
+        {
+            return await PostData(url, pars, headParams, isModelCallback, null);
+        }
+        
+        public async UniTask<byte[]> PostData(string url, object pars, Dictionary<string, string> headParams = default, bool isModelCallback = true, IProgress<float> progress = null)
         {
             if (url == "")
             {
@@ -195,7 +195,7 @@ namespace SFramework
                 {
                     webRequest.SetRequestHeader(head.Key,head.Value);
                 }
-                byte[] bytes = await requestData(webRequest, isModelCallback);
+                byte[] bytes = await requestData(webRequest, isModelCallback, progress);
                 if(isModelCallback)
                     ModelCallback?.Invoke(0);
                 return bytes;
@@ -210,7 +210,7 @@ namespace SFramework
 
         }
 
-        private async UniTask<byte[]> requestData(UnityWebRequest webRequest, bool isModelCallback)
+        private async UniTask<byte[]> requestData(UnityWebRequest webRequest, bool isModelCallback, IProgress<float> progress = null)
         {
             try
             {
@@ -221,6 +221,12 @@ namespace SFramework
                     {
                         break;
                     }
+                    
+                    // Report progress if progress callback is provided
+                    if (progress != null)
+                    {
+                        progress.Report(webRequest.downloadProgress);
+                    }
 
                     await UniTask.Yield();
                 }
@@ -230,6 +236,12 @@ namespace SFramework
                     if(isModelCallback)
                         ModelCallback?.Invoke(-1);
                     throw new Exception($"you use Web Request Error.{webRequest.url} Message{webRequest.error}");
+                }
+
+                // Report 100% completion if progress callback is provided
+                if (progress != null)
+                {
+                    progress.Report(1.0f);
                 }
 
                 var result = webRequest.downloadHandler.data;
