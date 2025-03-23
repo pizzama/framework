@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SFramework.Game
 {
-    public abstract class RootEntity : SEntity
+    public abstract class RootEntity : SEntity, ILinker
     {
         [SerializeField]
         private RootView _parentView;
@@ -28,12 +28,18 @@ namespace SFramework.Game
             SetParentView(view);
         }
 
-        public void Attached(RootEntity childEntity)
+        public void Attache(ISEntity entity)
         {
-            parentEntity = childEntity;
+            if(entity is RootEntity root)
+            {
+                parentEntity = root;
+                _parentView = root.ParentView;
+                _parentControl = root.ParentControl;
+            }
+
         }
 
-        public void DeAttached()
+        public void DeAttache()
         {
             parentEntity = null;
         }

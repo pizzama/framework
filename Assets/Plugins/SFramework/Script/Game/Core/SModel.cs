@@ -261,7 +261,7 @@ namespace SFramework
             {
                 if(isModelCallback)
                     ModelCallback?.Invoke(-3);
-                throw new Exception($"you use Web Request Error.{webRequest.url} Message{err.Message}");
+                throw new Exception($"Remote Request Error.{webRequest.url} Message{err.Message}");
             }
             finally
             {

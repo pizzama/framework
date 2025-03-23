@@ -5,6 +5,12 @@ using UnityEngine;
 
 namespace SFramework
 {
+    public interface ILinker
+    {
+        void Attache(ISEntity entity);
+        void DeAttache();
+    }
+
     public interface ISEntity
     {
         string EntityId { get; }
@@ -32,6 +38,5 @@ namespace SFramework
         {
             return true;
         }
-
     }
 }
